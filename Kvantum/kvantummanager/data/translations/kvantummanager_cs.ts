@@ -43,22 +43,22 @@ může Kvantum použít.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="117"/>
         <source>Install this theme</source>
-        <translation>Nainstalovat motiv</translation>
+        <translation>Nainstalovat tento vzhled</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="138"/>
         <source>Change/Delete Theme</source>
-        <translation>Zvolit motiv</translation>
+        <translation>Změnit/Odstranit motiv vzhledu</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="144"/>
         <source>Select a theme:</source>
-        <translation>Zvolte nainstalovaný motiv:</translation>
+        <translation>Vybrat motiv vzhledu:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="191"/>
         <source>Delete this theme</source>
-        <translation>Odstranit</translation>
+        <translation>Smazat tento motiv vzhledu</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="198"/>
@@ -71,7 +71,7 @@ the theme is already used.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="204"/>
         <source>Use this theme</source>
-        <translation>Použít</translation>
+        <translation>Použít tento motiv vzhledu</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="257"/>
@@ -104,7 +104,8 @@ settings of this theme.
         <location filename="../../kvantummanager.ui" line="342"/>
         <source>Save this configuration
 (Ctrl+S)</source>
-        <translation>Uložit nastavení</translation>
+        <translation>Uložit toto nastavení
+(Ctrl+S)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="346"/>
@@ -241,7 +242,7 @@ the highlight color!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="643"/>
         <source>Tint label icons on mouseover by </source>
-        <translation>Zabarvení ikon při najetí myší</translation>
+        <translation>Zabarvení ikon při najetí myší </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="657"/>
@@ -338,8 +339,7 @@ Miscellaneous → Respect current DE if possible</source>
     <message>
         <location filename="../../kvantummanager.ui" line="227"/>
         <source>&lt;br&gt;&lt;br&gt;Since &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; is independent of all desktop environments, you first need to &lt;i&gt;activate&lt;/i&gt; it with a Qt platform integration program. KDE and LXQt provide simple tools for changing the active Qt style plugin. With other platforms, you need a Qt configuration tool.&lt;br/&gt;&lt;br/&gt;Under KDE, also select and apply the color scheme of this theme because some KDE applications may get their colors directly from the KDE color scheme.&lt;br/&gt;&lt;br/&gt;Running applications will get the new theme after being closed and reopened. Logging out and in would be good for all KDE/LXQt parts to see it completely.</source>
-        <translation>&lt;br&gt;&lt;br&gt;Protože &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; je nezávislé na všech desktopových prostředích, musíte jej nejprve &lt;i&gt;aktivovat&lt;/i&gt; pomocí integračního programu platformy Qt. KDE a LXQt poskytují jednoduché nástroje pro změnu aktivního zásuvného modulu stylu Qt. U ostatních platforem potřebujete konfigurační nástroj Qt.&lt;br/&gt;&lt;br/&gt;V prostředí KDE také vyberte a použijte barevné schéma tohoto motivu, protože některé aplikace KDE mohou získávat barvy přímo z barevného schématu KDE.&lt;br/&gt;&lt;br/&gt;Běžící aplikace získají nový motiv po zavření a opětovném otevření. Odhlášení a přihlášení by bylo dobré pro všechny části KDE/LXQt, aby se zobrazilo kompletně.
-</translation>
+        <translation>&lt;br&gt;&lt;br&gt;Protože &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; je nezávislé na všech desktopových prostředích, musíte jej nejprve &lt;i&gt;aktivovat&lt;/i&gt; pomocí integračního programu platformy Qt. KDE a LXQt poskytují jednoduché nástroje pro změnu aktivního zásuvného modulu stylu Qt. U ostatních platforem potřebujete konfigurační nástroj Qt.&lt;br/&gt;&lt;br/&gt;V prostředí KDE také vyberte a použijte barevné schéma tohoto motivu, protože některé aplikace KDE mohou získávat barvy přímo z barevného schématu KDE.&lt;br/&gt;&lt;br/&gt;Běžící aplikace získají nový motiv po zavření a opětovném otevření. Odhlášení a přihlášení by bylo dobré pro všechny části KDE/LXQt, aby se zobrazilo kompletně.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="520"/>
@@ -816,7 +816,7 @@ KDE apps get it from KDE setting.</source>
         <location filename="../../kvantummanager.ui" line="1429"/>
         <location filename="../../kvantummanager.ui" line="1442"/>
         <source>The minimum length of scrollbars.</source>
-        <translation>Minimální šírka scrollbárů</translation>
+        <translation>Minimální délka pruhů s posuvníky.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1432"/>
@@ -1133,7 +1133,7 @@ i.e., there is no border between them.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1768"/>
         <source>Join inactive tabs</source>
-        <translation>Připojte aktivní karty.</translation>
+        <translation>Připojte aktivní karty</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1955"/>
@@ -1275,7 +1275,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="380"/>
         <source>Open Kvantum Theme Folder...</source>
-        <translation>Otevřete umíštění pro motiv Kvantum</translation>
+        <translation>Otevřete umístění pro motiv Kvantum…</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="200"/>
