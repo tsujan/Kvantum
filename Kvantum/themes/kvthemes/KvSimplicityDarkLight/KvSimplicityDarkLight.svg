@@ -181,8 +181,8 @@
 <linearGradient gradientTransform="matrix(0.66666667,0,0,-0.66666667,375.83333,145.00105)" xlink:href="#linearGradient3837" id="linearGradient5197" y1="48.751606" x1="17.5" y2="47.345341" gradientUnits="userSpaceOnUse" x2="25.656292"/>
 <linearGradient gradientTransform="translate(0,-443)" xlink:href="#linearGradient5094" id="linearGradient5114" y1="752.5" x1="330" y2="734.5" x2="330" gradientUnits="userSpaceOnUse"/>
 <linearGradient id="linearGradient5116">
-<stop offset="0" style="stop-color:#646464"/>
-<stop offset="1" style="stop-color:#414141"/>
+<stop offset="0" style="stop-color:#616161"/>
+<stop offset="1" style="stop-color:#424242"/>
 </linearGradient>
 <linearGradient id="linearGradient1645">
 <stop offset="0" style="stop-color:#707070;stop-opacity:.19"/>
@@ -664,28 +664,28 @@
 <path style="fill:url(#linearGradient5335);fill-rule:evenodd" d="M 27,51.4998 27,19.5 l -8,0 0,32 z"/>
 <g style="color:#000">
 <path style="fill:url(#linearGradient5337)" d="m 15,19.5 0,32 4,0 0,-32 z"/>
-<path style="opacity:.09;fill:url(#linearGradient5431)" d="m 19,19.5 0,32 4,0 0,-32 z"/>
+<path style="opacity:.07;fill:url(#linearGradient5431)" d="m 19,19.5 0,32 4,0 0,-32 z"/>
 </g>
 </g>
 <g id="button-normal-topleft" transform="translate(6,0.5)">
 <path style="fill:url(#linearGradient5365);fill-rule:evenodd" d="m 27,11.5 c -4.5,0 -8,3.5 -8,8 h 8 z "/>
 <g style="color:#000">
 <path style="fill:url(#radialGradient5367)" d="m 27,7.5 c -6.6,0 -12,5.4 -12,12 h 4 c 0,-4.5 3.5,-8 8,-8 z "/>
-<path style="opacity:.09;fill:#fff" d="m 27,11.5 c -4.5,0 -8,3.5 -8,8 h 4 c 0,-2.5 1.5,-4 4,-4 z "/>
+<path style="opacity:.07;fill:#fff" d="m 27,11.5 c -4.5,0 -8,3.5 -8,8 h 4 c 0,-2.5 1.5,-4 4,-4 z "/>
 </g>
 </g>
 <g id="button-normal-top" transform="translate(6,0.5)">
 <path style="fill:url(#linearGradient5397);fill-rule:evenodd" d="m 27,19.5 32,0 0,-8 -32,0 z"/>
 <g style="color:#000">
 <path style="fill:url(#linearGradient5399)" d="m 59,7.5 -32,0 0,4 32,0 z"/>
-<path style="opacity:.09;fill:#fff" d="m 59,11.5001 -32,0 0,4 32,0 z"/>
+<path style="opacity:.07;fill:#fff" d="m 59,11.5001 -32,0 0,4 32,0 z"/>
 </g>
 </g>
 <g id="button-normal-topright" transform="translate(6,0.5)">
 <path style="fill:url(#linearGradient7601);fill-rule:evenodd" d="m 59,11.5 c 4.5,0 8,3.5 8,8 h -8 z "/>
 <g style="color:#000">
 <path style="fill:url(#radialGradient5142)" d="m 59,7.5 c 6.6,0 12,5.4 12,12 h -4 c 0,-4.5 -3.5,-8 -8,-8 z "/>
-<path style="opacity:.09;fill:#fff" d="m 59,11.5 c 4.5,0 8,3.5 8,8 0,-4.48215 -5.52324,-4 -8,-4 z "/>
+<path style="opacity:.07;fill:#fff" d="m 59,11.5 c 4.5,0 8,3.5 8,8 0,-4.48215 -5.52324,-4 -8,-4 z "/>
 </g>
 </g>
 <g id="button-focused-bottomleft" transform="matrix(0,-1.6,1.6,0,19.997494,98)">

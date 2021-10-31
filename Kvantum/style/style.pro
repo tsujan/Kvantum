@@ -17,7 +17,7 @@ greaterThan(QT_MAJOR_VERSION, 4) {
         error("Kvantum needs at least Qt 6.2.0.")
       }
     } else {
-      error("Kvantum cannot be compiled against this version.")
+      error("Kvantum cannot be compiled against this version of Qt.")
     }
   }
 }
