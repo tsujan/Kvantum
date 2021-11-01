@@ -8900,7 +8900,7 @@ void Style::drawControl(QStyle::ControlElement element,
                 if (comboTxtCol.isValid())
                 {
                   QColor comboDisabledTxtCol = comboTxtCol;
-                  comboDisabledTxtCol.setAlpha(102);
+                  comboDisabledTxtCol.setAlpha(102); // 0.4 * comboDisabledTxtCol.alpha()
                   opacifyColor(comboTxtCol);
                   opacifyColor(comboDisabledTxtCol);
                   const QList<QComboBox*> combos = widget->findChildren<QComboBox*>();
@@ -9067,7 +9067,7 @@ void Style::drawControl(QStyle::ControlElement element,
                 if (comboTxtCol.isValid())
                 {
                   QColor comboDisabledTxtCol = comboTxtCol;
-                  comboDisabledTxtCol.setAlpha(102);
+                  comboDisabledTxtCol.setAlpha(102); // 0.4 * comboDisabledTxtCol.alpha()
                   opacifyColor(comboTxtCol);
                   opacifyColor(comboDisabledTxtCol);
                   const QList<QComboBox*> combos = widget->findChildren<QComboBox*>();

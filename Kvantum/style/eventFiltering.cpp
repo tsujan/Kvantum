@@ -1315,7 +1315,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         col1.setAlpha(128);
         opacifyColor(col1);
         palette.setColor(QPalette::PlaceholderText, col1);
-        col.setAlpha(102); // 0.4 * disabledCol.alpha()
+        col.setAlpha(102); // 0.4 * col.alpha()
         opacifyColor(col);
         palette.setColor(QPalette::Disabled, QPalette::Text,col);
         forcePalette(w, palette);

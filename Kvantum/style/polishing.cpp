@@ -242,7 +242,7 @@ void Style::polish(QWidget *widget)
       if (tColor.isValid())
       {
         QColor disabledCol = tColor;
-        disabledCol.setAlpha(102);
+        disabledCol.setAlpha(102); // 0.4 * disabledCol.alpha()
         opacifyColor(tColor);
         opacifyColor(disabledCol);
         QPalette palette = widget->palette();
@@ -1477,6 +1477,10 @@ QPalette Style::standardPalette() const
     }
     else
       standardPalette_.setColor(QPalette::Inactive,QPalette::HighlightedText,col);
+    /* also, derive the disabled highlighted text color */
+    col.setAlpha(102); // 0.4 * col.alpha()
+    opacifyColor(col);
+    standardPalette_.setColor(QPalette::Disabled,QPalette::HighlightedText,col);
   }
 
   col = getFromRGBA(cspec_.linkColor);

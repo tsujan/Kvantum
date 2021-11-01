@@ -7,6 +7,7 @@ V1.0.0
  * Made Kvantum Manager a little more keyboard friendly.
  * Ensure that the left mouse button is pressed on starting window dragging (it may not be pressed in very rare cases, where a popup is shown after moving the cursor and closed before dragging).
  * Added a variant of KvCurves3d with light selection color.
+ * Derive the disabled highlighted text color from the active highlighted text color.
 
 V0.20.2
 ---------
