@@ -1001,6 +1001,12 @@ frame.expansion                   Integer             A positive value (in px) w
                                                       could also be a decimal (as in
                                                       "frame.expansion=2.8font").
 
+                                                      Note: Its value may be ignored with some
+                                                      widgets (like header sections of tables)
+                                                      or when there is something wrong with the
+                                                      style code of an app. Also, it is limited
+                                                      to half the widget height for view items.
+
 frame.patternsize                 Integer             The frame pattern size. Used for tiling
                                                       the frame of a widget with a pattern. A
                                                       value of zero means no pattern (default).
