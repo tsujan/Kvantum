@@ -627,12 +627,12 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2998"/>
         <source>Menu Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Menüünupp</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="3001"/>
         <source>Hold pressed to show a menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Menüü kuvamiseks hoia nupp sissevajutatuna</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="3012"/>

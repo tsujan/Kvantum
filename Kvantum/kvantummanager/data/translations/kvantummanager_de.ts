@@ -350,7 +350,7 @@ If this is disabled, see the above option.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="525"/>
         <source>Style vertical toolbars</source>
-        <translation type="unfinished"></translation>
+        <translation>Vertikale Werkzeugleisten gestalten</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="573"/>
@@ -1184,7 +1184,7 @@ the Ctrl key before pressing the button.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1969"/>
         <source>Allow dragging from buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>Ziehen aus Schaltflächen erlauben</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1992"/>

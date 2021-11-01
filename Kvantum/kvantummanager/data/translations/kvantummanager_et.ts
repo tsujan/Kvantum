@@ -24,7 +24,7 @@
     <message>
         <location filename="../../kvantummanager.ui" line="44"/>
         <source>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; comes with many themes but external themes can also be installed for being used by it. Here you could choose a theme folder and then press the button below to install it in your Home.&lt;/center&gt;</source>
-        <translation>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; sisaldab palju teemasid, kuid neid on võimalik ka ise paigaldada. Siin saab valida teemakataloogi ja allolevat nuppu kasutades selle paigaldada.&lt;/center&gt;</translation>
+        <translation>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; sisaldab palju teemasid, kuid neid on võimalik ka ise paigaldada. Siin saad valida teemakataloogi ja allolevat nuppu kasutades selle paigaldada.&lt;/center&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="76"/>
@@ -79,7 +79,7 @@ et teema on juba kasutuses.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="257"/>
         <source>Configure Active Theme</source>
-        <translation>Seadista aktiivne teema</translation>
+        <translation>Seadista hetkel kasutatavat teemat</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="321"/>
@@ -1035,7 +1035,11 @@ They usually take no extra space.</source>
 
 -1 means no popup (opening by clicking),
 while 0 means no delay.</source>
-        <translation></translation>
+        <translation>Viivitus millisekundites enne alammenüü avamist.
+Vaikimisi väärtus on 250 ms.
+
+-1 tähistab hüpikakna puudumist (klõpsimine tähendab avamist),
+0 tähistab viivituse puudumist.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1507"/>
@@ -1121,7 +1125,8 @@ for menubars by default.</source>
         <location filename="../../kvantummanager.ui" line="1706"/>
         <source>If checked, toolbar buttons will be drawn grouped and raised
 between toolbar separators.</source>
-        <translation></translation>
+        <translation>Kui see valik on kasutusel, siis nupud tööriistaribadel on rühmitatud
+ja tööriistaribade eraldajate vahel tõstetuna.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1710"/>
@@ -1582,13 +1587,13 @@ või uuenda seda.</translation>
         <location filename="../../KvantumManager.cpp" line="1399"/>
         <location filename="../../KvantumManager.cpp" line="1419"/>
         <source>These are the settings that can be safely changed.&lt;br&gt;For the others, click &lt;i&gt;Save&lt;/i&gt; and then edit this file:</source>
-        <translation>Need on sätted, mida võib ohutult muuta.&lt;br&gt;Ülejäänute puhul klõpsa &lt;i&gt;Salvesta&lt;/i&gt; ja muuda siis faili:</translation>
+        <translation>Need on sätted, mida sa võid ohutult muuta.&lt;br&gt;Ülejäänute puhul klõpsa &lt;i&gt;Salvesta&lt;/i&gt; ja muuda siis faili:</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="1415"/>
         <location filename="../../KvantumManager.cpp" line="2685"/>
         <source>These are the settings that can be safely changed.&lt;br&gt;For the others, edit this file:</source>
-        <translation>Need on sätted, mida võib ohutult muuta.&lt;br&gt;Ülejäänute puhul muuda faili:</translation>
+        <translation>Need on sätted, mida sa võid ohutult muuta.&lt;br&gt;Ülejäänute puhul muuda faili:</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="1813"/>
