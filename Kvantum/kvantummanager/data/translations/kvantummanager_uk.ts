@@ -363,7 +363,7 @@ Miscellaneous → Respect current DE if possible</source>
     <message>
         <location filename="../../kvantummanager.ui" line="227"/>
         <source>&lt;br&gt;&lt;br&gt;Since &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; is independent of all desktop environments, you first need to &lt;i&gt;activate&lt;/i&gt; it with a Qt platform integration program. KDE and LXQt provide simple tools for changing the active Qt style plugin. With other platforms, you need a Qt configuration tool.&lt;br/&gt;&lt;br/&gt;Under KDE, also select and apply the color scheme of this theme because some KDE applications may get their colors directly from the KDE color scheme.&lt;br/&gt;&lt;br/&gt;Running applications will get the new theme after being closed and reopened. Logging out and in would be good for all KDE/LXQt parts to see it completely.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br&gt;&lt;br&gt;Оскільки &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; не залежить від усіх середовищ робочого столу, вам спочатку потрібно його &lt;i&gt;активувати&lt;/i&gt; за допомогою програми інтеграції платформи Qt. KDE та LXQt надають прості інструменти для зміни активного плагіну стилю Qt. Для інших платформ вам потрібен інструмент налаштування Qt.&lt;br/&gt;&lt;br/&gt;У KDE виберіть та застосуйте колірну схему цієї теми, оскільки деякі програми KDE можуть отримувати кольори безпосередньо з колірної схеми KDE.&lt;br/&gt;&lt;br/&gt;Запущені програми отримають нову тему після закриття та повторного відкриття. Найкраще виконати Завершення сеансу та новий Вхід, щоб усі складові частини KDE/LXQt повністю побачили зміни.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="520"/>
@@ -412,7 +412,11 @@ when the scrollbar is left clicked.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation type="unfinished"></translation>
+        <translation>Типово повзунок прокручування переміщується на відповідну
+позицію, якщо клацнути лівою кнопкою миші на смузі прокрутки.
+
+Якщо вимкнено, перейдіть до:
+Різне → Дотримуватися параметрів стільниці, якщо можливо</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="629"/>
