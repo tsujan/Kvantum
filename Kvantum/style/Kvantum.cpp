@@ -6322,19 +6322,15 @@ void Style::drawControl(QStyle::ControlElement element,
           talign |= Qt::TextHideMnemonic;
         else
           talign |= Qt::TextShowMnemonic;
-        const KvIconMode iconmode =
-              (option->state & State_Enabled) ?
-              (option->state & State_Selected) ? Selected :
-              (option->state & State_Sunken) ? Active :
-              (option->state & State_MouseOver) ? Active : Normal
-            : Disabled;
+        int state = option->state & State_Enabled ? option->state & State_MouseOver ? 2 : 1 : 0;
+        bool isInactive(isWidgetInactive(widget));
         renderLabel(option,painter,
                     option->rect,
                     fspec,lspec,
                     talign,opt->text,QPalette::WindowText,
-                    option->state & State_Enabled ? option->state & State_MouseOver ? 2 : 1 : 0,
-                    isWidgetInactive(widget),
-                    getPixmapFromIcon(opt->icon,iconmode,iconstate,opt->iconSize),
+                    state,
+                    isInactive,
+                    getPixmapFromIcon(opt->icon, getIconMode(state,isInactive,lspec), iconstate, opt->iconSize),
                     opt->iconSize, Qt::ToolButtonTextBesideIcon, false);
       }
 
@@ -6365,19 +6361,15 @@ void Style::drawControl(QStyle::ControlElement element,
           talign |= Qt::TextHideMnemonic;
         else
           talign |= Qt::TextShowMnemonic;
-        const KvIconMode iconmode =
-              (option->state & State_Enabled) ?
-              (option->state & State_Selected) ? Selected :
-              (option->state & State_Sunken) ? Active :
-              (option->state & State_MouseOver) ? Active : Normal
-            : Disabled;
+        int state = option->state & State_Enabled ? option->state & State_MouseOver ? 2 : 1 : 0;
+        bool isInactive(isWidgetInactive(widget));
         renderLabel(option,painter,
                     option->rect,
                     fspec,lspec,
                     talign,opt->text,QPalette::WindowText,
-                    option->state & State_Enabled ? option->state & State_MouseOver ? 2 : 1 : 0,
-                    isWidgetInactive(widget),
-                    getPixmapFromIcon(opt->icon,iconmode,iconstate,opt->iconSize),
+                    state,
+                    isInactive,
+                    getPixmapFromIcon(opt->icon, getIconMode(state,isInactive,lspec), iconstate, opt->iconSize),
                     opt->iconSize, Qt::ToolButtonTextBesideIcon, false);
       }
 
