@@ -6,12 +6,12 @@
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="14"/>
         <source>Kvantum Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>תצוגה מקדימה של Kvantum</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="29"/>
         <source>Push buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>כפתורים לחיצים</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="77"/>
@@ -30,7 +30,7 @@ width</source>
         <location filename="../../KvantumPreviewBase.ui" line="95"/>
         <location filename="../../KvantumPreviewBase.ui" line="105"/>
         <source>Simple push button</source>
-        <translation type="unfinished"></translation>
+        <translation>כפתור לחיץ פשוט</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="112"/>
@@ -176,7 +176,7 @@ radio button</source>
         <location filename="../../KvantumPreviewBase.ui" line="927"/>
         <location filename="../../KvantumPreviewBase.ui" line="940"/>
         <source>Simple check box</source>
-        <translation type="unfinished"></translation>
+        <translation>תיבת סימון פשוטה</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="950"/>
@@ -248,7 +248,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1374"/>
         <location filename="../../KvantumPreviewBase.ui" line="1446"/>
         <source>Frameless 1</source>
-        <translation type="unfinished"></translation>
+        <translation>חסר־מסגרת 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1196"/>
@@ -256,7 +256,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1379"/>
         <location filename="../../KvantumPreviewBase.ui" line="1451"/>
         <source>Frameless 2</source>
-        <translation type="unfinished"></translation>
+        <translation>חסר־מסגרת 2</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1201"/>
@@ -264,7 +264,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1384"/>
         <location filename="../../KvantumPreviewBase.ui" line="1456"/>
         <source>Frameless 3</source>
-        <translation type="unfinished"></translation>
+        <translation>חסר־מסגרת 3</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1206"/>
@@ -272,43 +272,43 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1389"/>
         <location filename="../../KvantumPreviewBase.ui" line="1461"/>
         <source>Frameless 4</source>
-        <translation type="unfinished"></translation>
+        <translation>חסר־מסגרת 4</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1211"/>
         <location filename="../../KvantumPreviewBase.ui" line="1394"/>
         <source>Frameless 5</source>
-        <translation type="unfinished"></translation>
+        <translation>חסר־מסגרת 5</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1216"/>
         <location filename="../../KvantumPreviewBase.ui" line="1399"/>
         <source>Frameless 6</source>
-        <translation type="unfinished"></translation>
+        <translation>חסר־מסגרת 6</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1221"/>
         <location filename="../../KvantumPreviewBase.ui" line="1404"/>
         <source>Frameless 7</source>
-        <translation type="unfinished"></translation>
+        <translation>חסר־מסגרת 7</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1226"/>
         <location filename="../../KvantumPreviewBase.ui" line="1409"/>
         <source>Frameless 8</source>
-        <translation type="unfinished"></translation>
+        <translation>חסר־מסגרת 8</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1231"/>
         <location filename="../../KvantumPreviewBase.ui" line="1414"/>
         <source>Frameless 9</source>
-        <translation type="unfinished"></translation>
+        <translation>חסר־מסגרת 9</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1236"/>
         <location filename="../../KvantumPreviewBase.ui" line="1419"/>
         <source>Frameless 10</source>
-        <translation type="unfinished"></translation>
+        <translation>חסר־מסגרת 10</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1287"/>
@@ -359,17 +359,17 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2139"/>
         <source>Header 1</source>
-        <translation type="unfinished"></translation>
+        <translation>כותרת 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2148"/>
         <source>Header 2</source>
-        <translation type="unfinished"></translation>
+        <translation>כותרת 2</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2156"/>
         <source>Header 3</source>
-        <translation type="unfinished"></translation>
+        <translation>כותרת 3</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2161"/>
@@ -450,12 +450,12 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="2191"/>
         <location filename="../../KvantumPreviewBase.ui" line="2194"/>
         <source>Editable</source>
-        <translation type="unfinished"></translation>
+        <translation>ניתן לעריכה</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2221"/>
         <source>Non-Editable</source>
-        <translation type="unfinished"></translation>
+        <translation>בלתי ניתן לעריכה</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2269"/>
