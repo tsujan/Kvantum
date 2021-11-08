@@ -60,7 +60,7 @@ painike</translation>
         <source>Push button
 with 32px folder icon</source>
         <translation>Painike 32px
-   kansio kuvake</translation>
+kansio kuvakkeella</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="210"/>
