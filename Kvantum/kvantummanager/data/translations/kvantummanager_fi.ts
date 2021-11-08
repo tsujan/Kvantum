@@ -370,12 +370,14 @@ Muut → Kunnioita nykyistä työpöytää jos mahdollista</translation>
         <source>By default, vertical toolbars are not styled.
 
 If this is disabled, see the above option.</source>
-        <translation type="unfinished"></translation>
+        <translation>Oletuksena pystysuoria työkalupalkkeja ei muotoilla.
+
+Jos tämä on poistettuna käytöstä, huomaa yllä oleva asetus.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="525"/>
         <source>Style vertical toolbars</source>
-        <translation type="unfinished"></translation>
+        <translation>Muotoile pystysuorat työkalupalkit</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="573"/>
@@ -410,7 +412,11 @@ when the scrollbar is left clicked.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation type="unfinished"></translation>
+        <translation>Oletuksena vierityksen liukusäädin hyppää kohdalleen
+kun vierityspalkkia napsautetaan vasemmalla painikkeella.
+
+Jos tämä on poistettu käytöstä, katso:
+Muut → Kunnioita nykyistä työpöytää jos mahdollista</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="629"/>
@@ -627,7 +633,7 @@ passiivisen kanssa, jos tämä teema erottaa ne?</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1298"/>
         <source>Font size</source>
-        <translation type="unfinished"></translation>
+        <translation>Fontin koko</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1314"/>
@@ -1327,7 +1333,11 @@ only to translucent windows that support the blur
 effect (but the KDE blur effect can be disabled).
 
 A value of 1.00 means no change.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tämä vaatii KDE kontrasti efektin, ja vaikuttaa
+vain läpinäkyviin ikkunoihin jotka tukevat sumennus
+efektiä (KDE sumennus efektin voi poistaa käytöstä).
+
+Arvo 1.00 tarkoittaa ei muutosta.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1717"/>
@@ -1353,7 +1363,10 @@ Tällä valinnalla nämä piilotetaan.</translation>
 scroll arrows on their top and/or bottom?
 
 By default, big menus are scrollable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Voidaanko suuria valikoita vierittää, ja
+onko niissä nuolet ylhäällä ja/tai alhaalla?
+
+Oletuksena suuria valikoita voidaan vierittää.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1962"/>
@@ -1362,12 +1375,16 @@ By default, big menus are scrollable.</source>
 If you have enabled it, you could temporarily disable it
 for a button that can be dragged and dropped by pressing
 the Ctrl key before pressing the button.</source>
-        <translation type="unfinished"></translation>
+        <translation>Varoitus: Tämä voi olla aluksi hämmentävää.
+
+Jos se on otettu käyttöön, sen voisi ottaa pois käytöstä
+väliaikaisesti nappia varten, jota voidaan raahata ja
+pudottaa Ctrl näppäintä painaen.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1969"/>
         <source>Allow dragging from buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>Salli painikkeista raahaaminen</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1992"/>
