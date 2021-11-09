@@ -173,7 +173,7 @@ text.press.color=#000000d2
 inherits=PanelButtonCommand
 text.margin.left=5
 text.margin.right=5
-text.margin.top=2
+text.margin.top=0
 text.margin.bottom=2
 frame.top=5
 frame.bottom=3
@@ -191,7 +191,7 @@ text.shadow.yshift=1
 text.shadow.depth=1
 text.shadow.alpha=80
 indicator.size=12
-min_height=+0.05font
+min_height=0
 min_width=+0.12font
 frame.expansion=0
 

@@ -212,8 +212,8 @@ frame.expanded.top=1
 frame.expanded.bottom=1
 frame.expanded.left=1
 frame.expanded.right=1
-text.margin.left=5
-text.margin.right=5
+text.margin.left=4
+text.margin.right=4
 indicator.size=14
 indicator.element=carrow
 frame.expansion=3.4font
@@ -423,6 +423,8 @@ frame.expansion=0
 
 [ComboBox]
 inherits=LineEdit
+text.margin.left=6
+text.margin.right=6
 text.focus.color=black
 text.toggle.color=black
 text.press.color=black
