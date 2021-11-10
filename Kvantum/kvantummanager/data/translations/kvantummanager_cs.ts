@@ -1198,7 +1198,7 @@ the Ctrl key before pressing the button.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1998"/>
         <source>&lt;center&gt;Here you could assign themes to specific applications.&lt;/center&gt;&lt;br&gt;&lt;center&gt;For each theme, you could add a comma-separated list of executables whose applications should use that theme instead of the active theme. After doing so for all of your chosen themes, save the result by clicking on the &lt;i&gt;Save&lt;/i&gt; button!&lt;/center&gt;</source>
-        <translation>&lt;center&gt;&lt;b&gt;Zde můžete přiřadit motiv konkrétním aplikacím.&lt;/b&gt;&lt;/center&gt;&lt;br&gt;&lt;center&gt;Pro každý motiv můřete přidat čárkou oddělený seznam spustitelných souborů, jejichž aplikace by měly použít jiný motiv, místo motivu Kvantum. Poté, co tak učiníte pro všechna zvolená témata, uložte výsledek klepnutím na tlačítko &lt;i&gt;Uložit&lt;/i&gt;!&lt;/center&gt;</translation>
+        <translation>&lt;center&gt;&lt;b&gt;Zde můžete přiřadit motiv konkrétním aplikacím.&lt;/b&gt;&lt;/center&gt;&lt;br&gt;&lt;center&gt;Pro každý motiv můžete přidat čárkou oddělený seznam spustitelných souborů, jejichž aplikace by měly použít jiný motiv, místo motivu Kvantum. Poté, co tak učiníte pro všechna zvolená témata, uložte výsledek kliknutím na tlačítko &lt;i&gt;Uložit&lt;/i&gt;!&lt;/center&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2033"/>
