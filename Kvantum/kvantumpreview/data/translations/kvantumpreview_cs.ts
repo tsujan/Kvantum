@@ -216,7 +216,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="969"/>
         <location filename="../../KvantumPreviewBase.ui" line="982"/>
         <source>Tri-state check box</source>
-        <translation>Zaškrtávací třímístné tlačítko</translation>
+        <translation>Zaškrtávací třístavové tlačítko</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="992"/>
@@ -371,12 +371,12 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1469"/>
         <location filename="../../KvantumPreviewBase.ui" line="1482"/>
         <source>Line-edit</source>
-        <translation>Editace řádku</translation>
+        <translation>Úprava řádku</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1561"/>
         <source>Sliders/Scrolls/Progress/Dial</source>
-        <translation>Posuvníky/Rolovátka/Progesy/Volby</translation>
+        <translation>Posuvníky/Rolovátka/Ukazatele postupu/Volby</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2118"/>
@@ -436,12 +436,12 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2502"/>
         <source>Row 0</source>
-        <translation type="unfinished"></translation>
+        <translation>Řádek 0</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2507"/>
         <source>Row 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Řádek 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2512"/>
@@ -482,12 +482,12 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2221"/>
         <source>Non-Editable</source>
-        <translation type="unfinished"></translation>
+        <translation>Neupravovatelné</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2269"/>
         <source>Subwindow</source>
-        <translation type="unfinished"></translation>
+        <translation>Podokno</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2316"/>
@@ -568,7 +568,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2560"/>
         <source>Dock Widget</source>
-        <translation>Widget docku</translation>
+        <translation>Obslužný prvek doku</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2577"/>
@@ -593,17 +593,17 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2875"/>
         <source>&amp;File</source>
-        <translation>Soubor</translation>
+        <translation>&amp;Soubor</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2879"/>
         <source>&amp;Submenu</source>
-        <translation type="unfinished">Menu</translation>
+        <translation>&amp;Podnabídka</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2899"/>
         <source>toolBar</source>
-        <translation type="unfinished"></translation>
+        <translation>lišta nástrojů</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2919"/>
@@ -623,12 +623,12 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2947"/>
         <source>Ctrl+Q</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Q</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2955"/>
         <source>&amp;Checkbox</source>
-        <translation>&amp;Zaškrtávací políčko</translation>
+        <translation>&amp;Zaškrtávací kolonka</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2968"/>
@@ -638,22 +638,22 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2971"/>
         <source>Toggle layout direction</source>
-        <translation type="unfinished"></translation>
+        <translation>Směr přepnutí rozložení</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2983"/>
         <source>&amp;Doc Mode</source>
-        <translation>Režim docku</translation>
+        <translation>Režim &amp;doku</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2986"/>
         <source>Show tabs in the document mode</source>
-        <translation type="unfinished"></translation>
+        <translation>V režimu dokumentu zobrazovat karty</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2998"/>
         <source>Menu Button</source>
-        <translation>Tlačítko menu</translation>
+        <translation>Tlačítko nabídky</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="3001"/>
