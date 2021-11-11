@@ -581,19 +581,20 @@ windows if this theme distinguishes between them?</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1298"/>
         <source>Font size</source>
-        <translation type="unfinished"></translation>
+        <translation>Velikost písma</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1314"/>
         <location filename="../../kvantummanager.ui" line="1325"/>
         <source>The default value is 2 px but
 some apps set it themeselves.</source>
-        <translation type="unfinished"></translation>
+        <translation>Výchozí hodnota je 2 px, ale
+některé aplikace si nastavují samy.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1318"/>
         <source>Layout spacing:</source>
-        <translation>Roztěč rozložení:</translation>
+        <translation>Rozteč rozložení:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1342"/>
@@ -604,7 +605,7 @@ some apps set it themeselves.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1345"/>
         <source>Layout margin:</source>
-        <translation>Velikost Rozložení:</translation>
+        <translation>Okraj rozložení:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1368"/>
@@ -640,7 +641,7 @@ some apps set it themeselves.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1792"/>
         <source>Click behavior:</source>
-        <translation type="unfinished"></translation>
+        <translation>Chování při kliknutí:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1912"/>
@@ -832,7 +833,7 @@ KDE apps get it from KDE setting.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1480"/>
         <source>Delays</source>
-        <translation>Zpoždění</translation>
+        <translation>Prodlevy</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1486"/>
@@ -922,7 +923,7 @@ By default, combo popups do not cover the combo box.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1744"/>
         <source>In Kvantum, tabs are centered by default.</source>
-        <translation type="unfinished"></translation>
+        <translation>V Kvantum jsou karty ve výchozím stavu zarovnány na střed.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1493"/>
@@ -961,7 +962,7 @@ while 0 means no delay.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1507"/>
         <source>Submenu delay: </source>
-        <translation>Zpoždění podnabídky menu: </translation>
+        <translation>Zpoždění podnabídky: </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1521"/>
@@ -977,7 +978,7 @@ while 0 means no delay.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1782"/>
         <source>No arrows for scrollbars</source>
-        <translation type="unfinished"></translation>
+        <translation>Posuvníky bez šipek</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1877"/>
@@ -1021,7 +1022,8 @@ the frame, so that the frame isn&apos;t cut.</source>
         <location filename="../../kvantummanager.ui" line="1655"/>
         <source>Mouse tracking is enabled
 for menubars by default.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sledování myši je ve výchozím
+stavu pro lišty nabídek zapnuté.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1659"/>
@@ -1031,12 +1033,12 @@ for menubars by default.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1662"/>
         <source>Mouse tracking for menubars</source>
-        <translation type="unfinished"></translation>
+        <translation>Sledování myši pro lišty nabídek</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1687"/>
         <source>Merge menubar with toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Sloužit lištu nabídek s tou nástrojů</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1706"/>
@@ -1047,7 +1049,7 @@ between toolbar separators.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1710"/>
         <source>Group toolbar buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>Seskupit tlačítka na liště nástrojů</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1737"/>
@@ -1067,12 +1069,12 @@ between toolbar separators.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1754"/>
         <source>If unchecked, shortcuts will not be underlined at all.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokud není zaškrtnuto, zkratky nebudou vůbec podtržené.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1757"/>
         <source>Underline shortcuts with Alt</source>
-        <translation type="unfinished"></translation>
+        <translation>Podtrhnout zkratky s Alt</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1621"/>
@@ -1093,7 +1095,7 @@ line-edit with arrow (and icon, if it exists)?</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1676"/>
         <source>Editable combo as line-edit</source>
-        <translation>Upravitelná kombinace jako editace řádku</translation>
+        <translation>Upravitelná kombinace jako úprava řádku</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1648"/>
@@ -1112,7 +1114,7 @@ Uncheck it if you want to use those options!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1593"/>
         <source>Respect current DE if possible</source>
-        <translation>Je-li to možné, respektujte stávající DE</translation>
+        <translation>Je-li to možné, respektovat stávající DE</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1699"/>
@@ -1133,7 +1135,7 @@ i.e., there is no border between them.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1768"/>
         <source>Join inactive tabs</source>
-        <translation>Připojte aktivní karty</translation>
+        <translation>Připojit aktivní karty</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1955"/>
@@ -1218,12 +1220,12 @@ the Ctrl key before pressing the button.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2106"/>
         <source>Remove List</source>
-        <translation>Odstranit ze seznamu</translation>
+        <translation>Odstranit seznam</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2113"/>
         <source>Save the current list of apps</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložit stávající seznam aplikací</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2116"/>
@@ -1255,12 +1257,12 @@ or update its preview.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2170"/>
         <source>About</source>
-        <translation>O Kvantum</translation>
+        <translation>O aplikaci</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2193"/>
         <source>What&apos;s This?</source>
-        <translation type="unfinished"></translation>
+        <translation>Co je toto?</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2196"/>
@@ -1270,7 +1272,7 @@ or update its preview.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2199"/>
         <source>Help</source>
-        <translation>Pomoc</translation>
+        <translation>Nápověda</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="380"/>
@@ -1289,12 +1291,12 @@ or update its preview.</source>
         <location filename="../../KvantumManager.cpp" line="711"/>
         <location filename="../../KvantumManager.cpp" line="727"/>
         <source>Kvantum</source>
-        <translation type="unfinished"></translation>
+        <translation>Kvantum</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="651"/>
         <source>First you have to delete its modified version!</source>
-        <translation type="unfinished"></translation>
+        <translation>Nejprve je třeba smazat jeho upravenou verzi!</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="675"/>
@@ -1316,182 +1318,182 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="1014"/>
         <source>Theme changed to %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Motiv změněn na %1.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="568"/>
         <source>You have no permission to write here:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nemáte oprávnění sem zapisovat:</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="108"/>
         <location filename="../../KvantumManager.cpp" line="112"/>
         <location filename="../../KvantumManager.cpp" line="118"/>
         <source>Follow Style</source>
-        <translation type="unfinished"></translation>
+        <translation>Následovat styl</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="109"/>
         <source>Single Click</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknutí</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="110"/>
         <source>Double Click</source>
-        <translation>Dvojité kliknutí</translation>
+        <translation>Dvojklik</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="113"/>
         <source>Icon Only</source>
-        <translation>Jenom ikony</translation>
+        <translation>Pouze ikona</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="114"/>
         <source>Text Only</source>
-        <translation>Jenom Text</translation>
+        <translation>Pouze text</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="115"/>
         <source>Text Beside Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Text vedle ikony</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="116"/>
         <source>Text Under Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Text pod ikonou</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="119"/>
         <source>KDE Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozvržení KDE</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="120"/>
         <source>Gnome Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozvržení Gnome</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="121"/>
         <source>Mac Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozvržení Mac</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="122"/>
         <source>Windows Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozvržení Windows</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="123"/>
         <source>Android Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozvržení Android</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="125"/>
         <source>Titlebar</source>
-        <translation type="unfinished"></translation>
+        <translation>Lišta titulku</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="126"/>
         <source>Menubar</source>
-        <translation type="unfinished"></translation>
+        <translation>Lišta nástrojů</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="127"/>
         <source>Menubar and primary toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Lišta nabídek a hlavní lišta nástrojů</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="128"/>
         <source>Anywhere possible</source>
-        <translation type="unfinished"></translation>
+        <translation>Kdekoli je to možné</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="570"/>
         <source>Please fix that first!</source>
-        <translation type="unfinished"></translation>
+        <translation>Nejprve je třeba to opravit!</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="582"/>
         <source>This file cannot be removed:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tento soubor není možné odebrat:</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="601"/>
         <location filename="../../KvantumManager.cpp" line="612"/>
         <source>This is not an installable Kvantum theme!</source>
-        <translation type="unfinished"></translation>
+        <translation>Toto není Kvantum motiv, který by bylo možné nainstalovat!</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="602"/>
         <source>The name of an installable themes should not be &quot;Default&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Název motivů, které je možné instalovat, nemůže být „Default“ (výchozí).</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="603"/>
         <location filename="../../KvantumManager.cpp" line="614"/>
         <location filename="../../KvantumManager.cpp" line="624"/>
         <source>Please select another directory!</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyberte jinou složku!</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="613"/>
         <source>Installable themes should not have # in their names.</source>
-        <translation type="unfinished"></translation>
+        <translation>Motivy, které je možné instalovat, nemohou mít v názvu # (mřížka).</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="623"/>
         <source>This is not a Kvantum theme folder!</source>
-        <translation type="unfinished"></translation>
+        <translation>Toto není složka s Kvantum motivem!</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="650"/>
         <source>The theme already exists in modified form.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tento motiv už ve změněné podobě existuje.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="665"/>
         <source>You have selected an installed theme folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvolili jste složku s nainstalovaným motivem.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="666"/>
         <source>Please choose another directory!</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvolte jinou složku!</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="676"/>
         <source>The theme already exists.</source>
-        <translation type="unfinished"></translation>
+        <translation>Motiv vzhledu už existuje.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="677"/>
         <source>Do you want to overwrite it?</source>
-        <translation type="unfinished"></translation>
+        <translation>Chcete ho přebít?</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="712"/>
         <source>This theme is also installed as root in:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tento motiv je také nainstalován pod správcem v:</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="714"/>
         <source>The user installation will take priority.</source>
-        <translation type="unfinished"></translation>
+        <translation>Uživatelova instalace bude mít přednost.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="728"/>
         <source>This theme is also installed as user in:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tento motiv je také nainstalován pod uživatelem v:</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="730"/>
         <source>This installation will take priority.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tato instalace bude mít přednost.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="830"/>
         <source>Do you really want to delete &lt;i&gt;%1&lt;/i&gt;?</source>
-        <translation type="unfinished"></translation>
+        <translation>Opravdu chcete &lt;i&gt;%1&lt;/i&gt; smazat?</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="833"/>
@@ -1508,53 +1510,53 @@ or update its preview.</source>
         <location filename="../../KvantumManager.cpp" line="1415"/>
         <location filename="../../KvantumManager.cpp" line="2685"/>
         <source>These are the settings that can be safely changed.&lt;br&gt;For the others, edit this file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Toto jsou nastavení, která je možné bezpečně měnit.&lt;br&gt;Pokud potřebujete změnit nějaké další, upravte tento soubor:</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="1813"/>
         <source>No description</source>
-        <translation type="unfinished"></translation>
+        <translation>Žádný popis</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2270"/>
         <source>A copy of the root config is created.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopie nastavení uživatele root je vytvořena.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2281"/>
         <source>A copy was already created.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopie už byla vytvořena.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2671"/>
         <source>Configuration saved.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavení uložena.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2782"/>
         <source>Do you want to revert to the default (root) settings of this theme?</source>
-        <translation type="unfinished"></translation>
+        <translation>Chcete se vrátit k výchozím (kořenovým) nastavením tohoto motivu?</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2785"/>
         <source>You will lose the changes you might have made.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ztratíte veškeré případné změny.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2820"/>
         <source>Restored the root default settings of %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Obnovena výchozí kořenová nastavení %1</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2821"/>
         <source>the default theme</source>
-        <translation type="unfinished"></translation>
+        <translation>výchozí motiv vzhledu</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2981"/>
         <location filename="../../KvantumManager.cpp" line="2982"/>
         <source>About Kvantum Manager</source>
-        <translation>O Programu</translation>
+        <translation>O aplikaci</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2981"/>
@@ -1564,7 +1566,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="2979"/>
         <source>A tool for installing, selecting&lt;br&gt;and configuring &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt; themes</source>
-        <translation>Nástroj pro instalci &lt;br&gt;a úpravu motivů &lt;a&gt;&lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt; motivů</translation>
+        <translation>Nástroj pro instalaci &lt;br&gt;a úpravu motivů &lt;a&gt;&lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt; motivů</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2980"/>
@@ -1574,12 +1576,12 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="51"/>
         <source>modified</source>
-        <translation type="unfinished"></translation>
+        <translation>změněno</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="52"/>
         <source>default</source>
-        <translation>vývhozí</translation>
+        <translation>výchozí</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="580"/>
@@ -1589,7 +1591,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="587"/>
         <source>You might want to investigate the cause.</source>
-        <translation type="unfinished"></translation>
+        <translation>Možná chcete prozkoumat příčinu.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="1013"/>
@@ -1604,17 +1606,17 @@ or update its preview.</source>
     <message>
         <location filename="../../main.cpp" line="147"/>
         <source>Kvantum</source>
-        <translation type="unfinished"></translation>
+        <translation>Kvantum</translation>
     </message>
     <message>
         <location filename="../../main.cpp" line="148"/>
         <source>Kvantum is not installed on your system.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kvantum není na tomto systému nainstalované.</translation>
     </message>
     <message>
         <location filename="../../main.cpp" line="149"/>
         <source>Please first install the Kvantum style plugin!</source>
-        <translation type="unfinished"></translation>
+        <translation>Nejprve je třeba nainstalovat zásuvný modul Kvantum stylů!</translation>
     </message>
 </context>
 </TS>
