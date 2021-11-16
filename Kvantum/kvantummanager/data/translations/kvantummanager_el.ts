@@ -6,7 +6,7 @@
     <message>
         <location filename="../../about.ui" line="159"/>
         <source>License</source>
-        <translation type="unfinished"></translation>
+        <translation>Άδεια χρήσης</translation>
     </message>
 </context>
 <context>
@@ -14,12 +14,12 @@
     <message>
         <location filename="../../kvantummanager.ui" line="12"/>
         <source>Kvantum Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Διαχειριστής Kvantum</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="38"/>
         <source>Install/Update Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Εγκατάσταση/ενημέρωση του θέματος</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="44"/>

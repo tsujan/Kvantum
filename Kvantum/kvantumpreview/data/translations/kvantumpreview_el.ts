@@ -6,7 +6,7 @@
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="14"/>
         <source>Kvantum Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Προεπισκόπηση Kvantum</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="29"/>
