@@ -19,6 +19,9 @@
 #define KVANTUMPREVIEW_H
 
 #include "ui_KvantumPreviewBase.h"
+#include <QTableWidgetItem>
+#include <QHeaderView>
+#include <QHBoxLayout>
 #include <QActionGroup>
 #include <QScreen>
 #include <QWindow>
@@ -66,6 +69,23 @@ public:
     toolBar_2->addWidget (lineedit);
     toolBar_2->addSeparator();
     toolBar_2->addWidget (new QSpinBox());
+
+    /* add a progress-bar to the first cell of the table widget */
+    if (tableWidget->rowCount() > 0 && tableWidget->columnCount() > 0) {
+      QWidget *container = new QWidget();
+      QHBoxLayout *layout = new QHBoxLayout (container);
+      layout->setAlignment (Qt::AlignCenter);
+      layout->setContentsMargins (1, 1, 1, 1);
+      QProgressBar *pb = new QProgressBar();
+      pb->setValue (50);
+      layout->addWidget (pb);
+      container->setLayout (layout);
+      if (auto item = tableWidget->item (0, 0))
+        item->setText (QString());
+      tableWidget->setCellWidget (0, 0, container);
+      if (auto vh = tableWidget->verticalHeader())
+        vh->setMinimumSectionSize (qMax (layout->minimumSize().height(), vh->minimumSectionSize()));
+    }
 
     QSize ag;
     if (QWindow *win = windowHandle()) {

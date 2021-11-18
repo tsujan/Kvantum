@@ -78,7 +78,7 @@
 namespace Kvantum
 {
 
-// Taken from https://www.w3.org/TR/2008/REC-WCAG20-20081211/.
+// Taken from https://www.w3.org/TR/WCAG20/.
 // It isn't related to HSL lightness.
 static inline qreal luminance(const QColor &col)
 {

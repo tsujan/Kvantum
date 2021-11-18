@@ -9,6 +9,7 @@ V1.0.0
  * Added a variant of KvCurves3d with light selection color.
  * Derive the disabled highlighted text color from the active highlighted text color.
  * Consider the mouseover state for icons of check boxes and radio buttons if relevant.
+ * Added an example of progress-bar inside view-item to kvantumpreview.
 
 V0.20.2
 ---------
