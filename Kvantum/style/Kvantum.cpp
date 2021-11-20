@@ -9795,8 +9795,7 @@ void Style::drawControl(QStyle::ControlElement element,
                           (lspec.bottom-lspec.top)/2);
         }
 
-        if (pb && pb->isDefault() && (option->state & State_Enabled)
-            && (hspec_.normal_default_pushbutton || opt->text.isEmpty())) // only if there's no bold text
+        if (pb && pb->isDefault() && (option->state & State_Enabled))
         {
           QString di = "button-default-indicator";
           if (!((opt->features & QStyleOptionButton::Flat) && status.startsWith(QLatin1String("normal"))))

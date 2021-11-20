@@ -10,7 +10,6 @@ V1.0.0
  * Derive the disabled highlighted text color from the active highlighted text color.
  * Consider the mouseover state for icons of check boxes and radio buttons if relevant.
  * Added an example of progress-bar inside view-item to kvantumpreview.
- * Draw default push button indicator only if there's no bold text.
 
 V0.20.2
 ---------
