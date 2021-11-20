@@ -1099,7 +1099,7 @@
 <ellipse cx="199.5" cy="322.57571" rx="3" ry="1.975692" style="opacity:.785;fill:url(#radialGradient6660);color:#000"/>
 <circle cx="199.5" cy="324.5" style="opacity:.35;fill:none;stroke:url(#linearGradient5688);color:#000" r="7"/>
 </g>
-<path style="opacity:.3" id="button-default-indicator" d="m 442,133 h -25 c 0,0 9.9482,-4.65455 15.1555,-9.85578 5.20734,-5.20124 9.84393,-15.1441 9.84393,-15.1441 z"/>
+<path style="opacity:0" id="button-default-indicator" d="m 442,133 h -25 v -25 h 25 z "/>
 <path style="fill:url(#linearGradient5561)" id="window-normal" d="M 60,1317.5 H 92.5 V 1350 H 60 Z"/>
 <path style="fill:url(#linearGradient5595)" id="toolbar-normal" d="m 280,98 h 30 v 30 h -30 z"/>
 <path style="opacity:0" id="toolbar-normal-bottomright" d="m 315,128 h -5 v 5 h 5 z"/>
@@ -1553,4 +1553,19 @@
 <use width="100%" height="100%" xlink:href="#tbutton-pressed-bottomleft" id="tbutton-pressed-bottomright" transform="matrix(-1,0,0,1,550.5,0)"/>
 <use width="100%" height="100%" xlink:href="#tbutton-pressed-topleft" id="tbutton-pressed-topright" transform="matrix(-1,0,0,1,550.5,0)"/>
 <use width="100%" height="100%" xlink:href="#tbutton-pressed-left" id="tbutton-pressed-right" transform="matrix(-1,0,0,1,550.5,0)"/>
+<g id="button-default-topleft">
+<path style="opacity:0;fill-rule:evenodd" d="m 36.5,37.75 c -3.5,0 -6,2.75 -6,6 h 6 z"/>
+<path style="opacity:.3;fill-rule:evenodd" d="m 36.5,36.25 c -4.25,0 -7.5,3.25 -7.5,7.5 h 1.5 c 0,-3.25 2.5,-6 6,-6 z"/>
+</g>
+<g id="button-default-top">
+<path style="opacity:0;fill-rule:evenodd" d="m 36.5,37.75 v 6 H 69 v -6 z"/>
+<path style="opacity:.3;fill-rule:evenodd" d="m 36.5,36.25 v 1.5 H 69 v -1.5 z"/>
+</g>
+<use width="100%" height="100%" xlink:href="#button-default-topleft" id="button-default-topright" transform="matrix(-1,0,0,1,105.5,0)"/>
+<use width="100%" height="100%" xlink:href="#button-default-top" id="button-default-left" transform="rotate(-90,52.75,60)"/>
+<use width="100%" height="100%" xlink:href="#button-default-top" id="button-default-right" transform="rotate(90,52.75,60)"/>
+<use width="100%" height="100%" xlink:href="#button-default-topleft" id="button-default-bottomleft" transform="matrix(1,0,0,-1,0,120)"/>
+<use width="100%" height="100%" xlink:href="#button-default-top" id="button-default-bottom" transform="matrix(1,0,0,-1,0,120)"/>
+<use width="100%" height="100%" xlink:href="#button-default-topleft" id="button-default-bottomright" transform="rotate(180,52.75,60)"/>
+<path id="expand-button-default" d="m 0,5 h 5 v 5 H 0 Z"/>
 </svg>
