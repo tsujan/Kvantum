@@ -1062,7 +1062,7 @@ void Style::polish(QWidget *widget)
       }
     }
     else if (qobject_cast<QMenu*>(widget)) // for menubars and submenus (eventFilter -> case QEvent::Show)
-        widget->installEventFilter(this);
+      widget->installEventFilter(this);
   }
 }
 

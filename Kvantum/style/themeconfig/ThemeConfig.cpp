@@ -36,8 +36,6 @@ ThemeConfig::ThemeConfig(const QString& theme) :
   settings_(nullptr),
   parentConfig_(nullptr)
 {
-  /* For now, the lack of x11 means wayland.
-     Later, a better method should be found. */
 #if defined Q_WS_X11 || defined Q_OS_LINUX || defined Q_OS_FREEBSD || defined Q_OS_OPENBSD || defined Q_OS_NETBSD || defined Q_OS_HURD
   isX11_ = (QString::compare(QGuiApplication::platformName(), "xcb", Qt::CaseInsensitive) == 0);
 #else
@@ -590,20 +588,26 @@ theme_spec ThemeConfig::getCompositeSpec()
   if (isX11_)
   {
 #if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
-    Atom atom = XInternAtom (QX11Info::display(), "_NET_WM_CM_S0", False);
+    Atom atom = XInternAtom(QX11Info::display(), "_NET_WM_CM_S0", False);
     if (XGetSelectionOwner(QX11Info::display(), atom))
       compositing = true;
 #else
     if (auto x11NativeInterfce = qApp->nativeInterface<QNativeInterface::QX11Application>())
     {
-      Atom atom = XInternAtom (x11NativeInterfce->display(), "_NET_WM_CM_S0", False);
+      Atom atom = XInternAtom(x11NativeInterfce->display(), "_NET_WM_CM_S0", False);
       if (XGetSelectionOwner(x11NativeInterfce->display(), atom))
         compositing = true;
     }
 #endif
   }
-  else
-    compositing = true; // wayland is always composited
+  else if (QString::compare(QGuiApplication::platformName(), "wayland", Qt::CaseInsensitive) == 0)
+  {
+    /* Wayland is always composited.
+       NOTE: Even under Linux, there's at least one situation, where the lack of x11
+             doesn't mean Wayland: KWin-Wayland's menus and tooltips are polished
+             when the platform name isn't set to "wayland". */
+    compositing = true;
+  }
 #endif
 
   /* no blurring or window translucency without compositing */
