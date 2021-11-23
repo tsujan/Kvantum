@@ -721,7 +721,7 @@ on focused buttons and other widgets.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1905"/>
         <source>Remove focus rectangles</source>
-        <translation>Видалити фокусні прямокутники</translation>
+        <translation>Прибрати прямокутники фокусування</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2101"/>
@@ -740,12 +740,12 @@ from all user installation paths.
 The root installation will still be
 available if present; this button
 only removes user themes.</source>
-        <translation>Видаляє вибрану тему з усіх
-користувацьких шляхів встановлення.
+        <translation>Вилучає вибрану тему з усіх
+користувацьких шляхів установлення.
 
 Кореневе встановлення все одно буде
 доступне за наявності; ця кнопка
-видаляє лише тему користувача.</translation>
+вилучає лише користувацькі теми.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="392"/>
