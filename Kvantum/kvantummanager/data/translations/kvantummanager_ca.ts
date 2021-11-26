@@ -719,7 +719,7 @@ en botons enfocats i altres ginys.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1905"/>
         <source>Remove focus rectangles</source>
-        <translation type="unfinished">Elimina els rectangles de focus</translation>
+        <translation>Elimina els rectangles del focus</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2101"/>
@@ -1000,7 +1000,10 @@ un tot per l&apos;element SVG de la barra d&apos;eines si són adjacents.</trans
 
 By default, the contents are shifted by 1px
 both horizontally and vertically.</source>
-        <translation type="unfinished"></translation>
+        <translation>Voleu desplaçar el contingut dels botons en prémer-los?
+
+Per defecte, el contingut es desplaça 1px
+tant horitzontalment com verticalment.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1924"/>
@@ -1010,7 +1013,11 @@ or anywhere possible (and not only from their title bars)?
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation type="unfinished"></translation>
+        <translation>Vol arrossegar les finestres des de les seves barres de menús, barres d&apos;eines primàries
+o de qualsevol lloc possible (i no només de les seves barres de títol)?
+
+Si això està desactivat, vegeu:
+Miscel·lània → Respecteu l&apos;entorn d&apos;escriptori actual si és possible</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1835"/>
@@ -1019,7 +1026,10 @@ Miscellaneous → Respect current DE if possible</source>
 is not set by the app in its code.
 
 Default is &quot;Follow Style&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Només tindrà efecte si l&apos;estil
+no està definit per l&apos;aplicació en el seu codi.
+
+Per defecte és &quot;Segueix l&apos;estil&quot;.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1614"/>
