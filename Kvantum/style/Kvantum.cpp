@@ -409,7 +409,8 @@ Style::Style(bool useDark) : QCommonStyle()
       getShadow(QStringLiteral("ToolTip"), thickness);
     }
     blurHelper_ = new BlurHelper(this, menuShadow_, tooltipShadow_,
-                                 tspec_.contrast, tspec_.intensity, tspec_.saturation);
+                                 tspec_.contrast, tspec_.intensity, tspec_.saturation,
+                                 hspec_.blur_only_active_window);
   }
 
   cachedOption_ = nullptr;

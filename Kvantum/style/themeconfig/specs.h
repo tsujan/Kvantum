@@ -315,6 +315,8 @@ typedef struct {
   /* enable window translucency and gradient with
      non-integer scale factors? (disabled because of Qt's bugs) */
   bool noninteger_translucency;
+  /* no blurring for inactive windows? */
+  bool blur_only_active_window;
 } hacks_spec;
 
 /* Generic information about a frame */
@@ -581,6 +583,7 @@ static inline void default_hacks_spec(hacks_spec &hspec) {
   hspec.centered_forms = false;
   hspec.kinetic_scrolling = false;
   hspec.noninteger_translucency = false;
+  hspec.blur_only_active_window = false;
 }
 
 }

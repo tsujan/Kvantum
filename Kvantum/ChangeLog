@@ -11,6 +11,7 @@ V1.0.0
  * Consider the mouseover state for icons of check boxes and radio buttons if relevant.
  * Added an example of progress-bar inside view-item to kvantumpreview.
  * Added a workaround for KWin-Wayland's menus and tooltips (they're polished before the platform name is set to "wayland").
+ * Added an option (to Kvantum Manager) for not blurring inactive windows.
 
 V0.20.2
 ---------

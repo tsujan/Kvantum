@@ -42,7 +42,8 @@ class BlurHelper: public QObject
     BlurHelper (QObject*, QList<qreal> menuS, QList<qreal> tooltipS,
                 qreal contrast = static_cast<qreal>(1),
                 qreal intensity = static_cast<qreal>(1),
-                qreal saturation = static_cast<qreal>(1));
+                qreal saturation = static_cast<qreal>(1),
+                bool onlyActiveWindow = false);
 
     virtual ~BlurHelper (void) {}
 
@@ -93,6 +94,8 @@ class BlurHelper: public QObject
 
   private:
 
+    bool isWidgetActive (const QWidget *widget) const;
+
     /* List of widgets for which blur region must be updated. */
     typedef QPointer<QWidget> WidgetPointer;
     typedef QHash<QWidget*, WidgetPointer> WidgetSet;
@@ -107,6 +110,8 @@ class BlurHelper: public QObject
     QList<qreal> tooltipShadow_;
 
     qreal contrast_, intensity_, saturation_;
+
+    bool onlyActiveWindow_;
 };
 }
 

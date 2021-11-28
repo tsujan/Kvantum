@@ -1212,6 +1212,9 @@ hacks_spec ThemeConfig::getHacksSpec() const
   v = getValue(KSL("Hacks"),KSL("noninteger_translucency"));
   r.noninteger_translucency = v.toBool();
 
+  v = getValue(KSL("Hacks"),KSL("blur_only_active_window"));
+  r.blur_only_active_window = v.toBool();
+
   return r;
 }
 

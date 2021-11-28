@@ -516,7 +516,8 @@ void Style::polish(QWidget *widget)
                   getShadow(QStringLiteral("ToolTip"), thickness);
                 }
                 blurHelper_ = new BlurHelper(this, menuShadow_, tooltipShadow_,
-                                             tspec_.contrast, tspec_.intensity, tspec_.saturation);
+                                             tspec_.contrast, tspec_.intensity, tspec_.saturation,
+                                             hspec_.blur_only_active_window);
               }
               if (blurHelper_)
                 blurHelper_->registerWidget(widget);
@@ -1054,7 +1055,8 @@ void Style::polish(QWidget *widget)
             getShadow(QStringLiteral("ToolTip"), thickness);
           }
           blurHelper_ = new BlurHelper(this, menuShadow_, tooltipShadow_,
-                                       tspec_.contrast, tspec_.intensity, tspec_.saturation);
+                                       tspec_.contrast, tspec_.intensity, tspec_.saturation,
+                                       hspec_.blur_only_active_window);
         }
         /* blurHelper_ may exist because of blurring hard-coded translucency */
         if (blurHelper_ && tspec_now.popup_blurring)

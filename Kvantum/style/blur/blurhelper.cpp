@@ -31,7 +31,8 @@
 
 namespace Kvantum {
 BlurHelper::BlurHelper (QObject* parent, QList<qreal> menuS, QList<qreal> tooltipS,
-                        qreal contrast, qreal intensity, qreal saturation) : QObject (parent)
+                        qreal contrast, qreal intensity, qreal saturation,
+                        bool onlyActiveWindow) : QObject (parent)
 {
   contrast_ = qBound (static_cast<qreal>(0), contrast, static_cast<qreal>(2));
   intensity_ = qBound (static_cast<qreal>(0), intensity, static_cast<qreal>(2));
@@ -41,6 +42,8 @@ BlurHelper::BlurHelper (QObject* parent, QList<qreal> menuS, QList<qreal> toolti
     menuShadow_ = menuS;
   if (!tooltipS.isEmpty() && tooltipS.size() >= 4)
     tooltipShadow_ = tooltipS;
+
+  onlyActiveWindow_ = onlyActiveWindow;
 }
 /*************************/
 void BlurHelper::registerWidget (QWidget* widget)
@@ -68,6 +71,13 @@ void BlurHelper::unregisterWidget (QWidget* widget)
   }
 }
 /*************************/
+bool BlurHelper::isWidgetActive (const QWidget *widget) const
+{
+  return (widget->window()->windowFlags().testFlag(Qt::WindowDoesNotAcceptFocus)
+          || widget->window()->windowFlags().testFlag(Qt::X11BypassWindowManagerHint)
+          || widget->isActiveWindow());
+}
+/*************************/
 bool BlurHelper::eventFilter (QObject* object, QEvent* event)
 {
   switch (event->type())
@@ -81,8 +91,28 @@ bool BlurHelper::eventFilter (QObject* object, QEvent* event)
       QWidget* widget (qobject_cast<QWidget*>(object));
       /* take precautions */
       if (!widget || !widget->isWindow()) break;
-      pendingWidgets_.insert (widget, widget);
-      delayedUpdate();
+      if (!onlyActiveWindow_ || isWidgetActive (widget))
+      {
+        pendingWidgets_.insert (widget, widget);
+        delayedUpdate();
+      }
+      break;
+    }
+
+    case QEvent::WindowActivate:
+    case QEvent::WindowDeactivate: {
+      if (onlyActiveWindow_)
+      {
+        QWidget* widget (qobject_cast<QWidget*>(object));
+        if (!widget || !widget->isWindow()) break;
+        if (event->type() == QEvent::WindowDeactivate)
+          update (widget); // otherwise artifacts are possible
+        else
+        {
+          pendingWidgets_.insert (widget, widget);
+          delayedUpdate();
+        }
+      }
       break;
     }
 
@@ -104,6 +134,8 @@ static inline int ceilingInt (const qreal r)
 QRegion BlurHelper::blurRegion (QWidget* widget) const
 {
   if (!widget->isVisible()) return QRegion();
+
+  if (onlyActiveWindow_ && !isWidgetActive (widget)) return QRegion();
 
   QRect rect = widget->rect();
   QRegion wMask = widget->mask();

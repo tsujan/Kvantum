@@ -111,6 +111,7 @@ text.normal.inactive.color=#000000bf
 text.focus.color=black
 text.press.color=black
 text.toggle.color=white
+indicator.size=10
 frame.expansion=8
 
 [PanelButtonTool]
@@ -186,7 +187,7 @@ frame.left=1
 frame.right=1
 
 [TreeExpander]
-indicator.size=9
+indicator.size=10
 
 [HeaderSection]
 inherits=PanelButtonCommand
