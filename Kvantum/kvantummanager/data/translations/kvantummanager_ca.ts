@@ -138,7 +138,7 @@ els ginys aparèixer com són per defecte.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="373"/>
         <source>Hacks</source>
-        <translation>Funcions útils</translation>
+        <translation type="unfinished">Hacks</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="397"/>
@@ -1049,7 +1049,11 @@ two buttons with arrows or plus/minus signs.
 
 Checking this integrates the spin indicators
 into the spin line-edit..</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Per defecte, els indicadors de rotació es dibuixen com
+dos botons amb fletxes o signes més/menys.
+
+Si està activat, els indicadors de rotació s&apos;integren
+a l&apos;edició de línia de rotació.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1653"/>
@@ -1057,24 +1061,29 @@ into the spin line-edit..</source>
 
 Checking this puts the spin-up indicator above the
 spin-down one inside the spin line-edit.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Per defecte, els indicadors d&apos;espín es dibuixen en botons adjacents.
+
+Si està activat l&apos;indicador d&apos;espín màxima està per sobre 
+de la rotació mínima dins de la línia d&apos;edició d&apos;espín.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1705"/>
         <source>Draw combo popups as menu popups (i.e. like in Gtk)?
 
 By default, combo popups do not cover the combo box.</source>
-        <translation type="unfinished"></translation>
+        <translation>Voleu dibuixar les finestres emergents com a menús emergents (p. ex. com a Gtk)?
+
+Per defecte, les finestres emergents no cobreixen el quadre combinat.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1755"/>
         <source>In Kvantum, tabs are centered by default.</source>
-        <translation type="unfinished"></translation>
+        <translation>A Kvantum, les pestanyes estan centrades per defecte.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1504"/>
         <source>Tooltip delay:</source>
-        <translation type="unfinished"></translation>
+        <translation>Retard de l&apos;indicador de funció:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="943"/>
@@ -1084,7 +1093,11 @@ whose windows should not be translucent.
 
 (Some apps, like video players, may have
 problems with translucency!)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Una llista dels executables separada per comes ,
+les finestres de les quals no han de ser translúcides.
+
+(Algunes aplicacions, com reproductors de vídeo, poden tenir
+problemes amb la translucidesa!)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1141"/>
@@ -1093,7 +1106,11 @@ problems with translucency!)</source>
 Transient scrollbars appear on top of
 their scroll views only when needed.
 They usually take no extra space.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Feu que les barres de desplaçament siguin transitòries!
+
+Les barres de desplaçament transitòries apareixen a la part
+superior de les vistes de desplaçament només quan 
+sigui necessari. Normalment no prenen espai extra.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1511"/>
@@ -1103,28 +1120,32 @@ They usually take no extra space.</source>
 
 -1 means no popup (opening by clicking),
 while 0 means no delay.</source>
-        <translation type="unfinished"></translation>
+        <translation>El retard, en mil·lisegons, per esperar abans d&apos;obrir un submenú.
+250 per defecte.
+
+-1 significa que no hi ha cap finestra emergent (obrir fent clic),
+mentre 0 significa sense retard.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1518"/>
         <source>Submenu delay: </source>
-        <translation type="unfinished"></translation>
+        <translation>Retard del submenú: </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1532"/>
         <location filename="../../kvantummanager.ui" line="1555"/>
         <source> ms</source>
-        <translation type="unfinished"></translation>
+        <translation> ms</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1588"/>
         <source>Miscellaneous</source>
-        <translation type="unfinished"></translation>
+        <translation>Miscel·lània</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1793"/>
         <source>No arrows for scrollbars</source>
-        <translation type="unfinished"></translation>
+        <translation>Barres de desplaçament sense fletxes</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1888"/>
@@ -1133,17 +1154,21 @@ while 0 means no delay.</source>
 By default, scrollbars are drawn outide view frames.
 
 If disabled, see Compositing &amp; General Look → Transient scrollbars!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Voleu dibuixar barres de desplaçament dins dels marcs de visualització?
+
+Per defecte, les barres de desplaçament es dibuixen fora del marc de la visualització.
+
+Si està desactivat, vegeu Composició i aspecte general → barres de desplaçament transitòries!</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1895"/>
         <source>Scrollbars inside frames</source>
-        <translation type="unfinished"></translation>
+        <translation>Barres de desplaçament dins dels marcs</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1928"/>
         <source>Tree branch lines</source>
-        <translation type="unfinished"></translation>
+        <translation>Línies de branques de l&apos;arbre</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1611"/>
@@ -1152,100 +1177,107 @@ and the frame is cut to contain it.
 
 Checking this puts the label right above
 the frame, so that the frame isn&apos;t cut.</source>
-        <translation type="unfinished"></translation>
+        <translation>Per defecte, l&apos;etiqueta està en el marc
+i el marc es retalla per contenir-la.
+
+Si marqueu això, l&apos;etiqueta està just a sobre el marc,
+ de manera que el marc no es retalla.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1618"/>
         <source>Group-box label above frame</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiqueta grup per sobre del marc</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1646"/>
         <source>Fill rubber-band rectangles</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Emplena els rectangles de banda elàstica</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1666"/>
         <source>Mouse tracking is enabled
 for menubars by default.</source>
-        <translation type="unfinished"></translation>
+        <translation>El seguiment del ratolí està habilitat
+per defecte per a les barres de menús.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1670"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mouse tracking is enabled for menubars by default, i.e., after a menubar item is clicked and its menu is shown, the menus of the other menubar items will be shown if the cursor is put on them without clicking.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;El seguiment del ratolí està habilitat per defecte per a les barres de menús, és a dir, després de fer clic a un element de la barra de menús i es mostri el seu menú, els menús dels altres elements de la barra es mostraran si el cursor es posa sobre seu sense fer clic.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1673"/>
         <source>Mouse tracking for menubars</source>
-        <translation type="unfinished"></translation>
+        <translation>Seguiment del ratolí per a les barres de menú</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1698"/>
         <source>Merge menubar with toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Fusiona la barra de menús amb la barra d&apos;eines</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1717"/>
         <source>If checked, toolbar buttons will be drawn grouped and raised
 between toolbar separators.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Si està marcat, els botons de la barra d&apos;eines es dibuixaran agrupats 
+i s&apos;elevaran entre separadors de la barra.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1721"/>
         <source>Group toolbar buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>Agrupa els botons de la barra d&apos;eines</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1748"/>
         <source>Shift push-button contents</source>
-        <translation type="unfinished"></translation>
+        <translation>Desplaça el contingut del botons</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1942"/>
         <source>Drag from:</source>
-        <translation type="unfinished"></translation>
+        <translation>Arrossega des de:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1852"/>
         <source>Toolbutton style:</source>
-        <translation type="unfinished"></translation>
+        <translation>Estil del botó d&apos;eina:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1765"/>
         <source>If unchecked, shortcuts will not be underlined at all.</source>
-        <translation type="unfinished"></translation>
+        <translation>Si no està marcada, les dreceres no es subratllaran.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1768"/>
         <source>Underline shortcuts with Alt</source>
-        <translation type="unfinished"></translation>
+        <translation>Subratlla les dreceres amb Alt</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1632"/>
         <source>Inline spin indicators</source>
-        <translation type="unfinished"></translation>
+        <translation>Indicadors d&apos;espín en línia</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1680"/>
         <source>Draw the whole editable combo-box as a
 line-edit with arrow (and icon, if it exists)?</source>
-        <translation type="unfinished"></translation>
+        <translation>Voleu dibuixar tota la caixa combinada editable 
+com a línia d&apos;edició amb fletxa (i icona, si existeix)?</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1684"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Draw the whole editable combo-box as a line-edit with arrow (and icon, if it exists)?&lt;/p&gt;&lt;p&gt;By default, a combo-box consists of a line-edit, a button with arrow on one side and another button with icon on the other side.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Voleu dibuixar tota la caixa combinada editable com a línia d&apos;edició amb fletxa (i icona, si existeix)&lt;/p&gt;&lt;p&gt;Per defecte, una caixa combinada consisteix en una línia d&apos;edició, un botó amb fletxa a un costat i un altre botó amb icona a l&apos;altre costat.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1687"/>
         <source>Editable combo as line-edit</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Combinació editable com a línia d&apos;edició</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1659"/>
         <source>Vertical spin indicators</source>
-        <translation type="unfinished"></translation>
+        <translation>Indicadors d&apos;espín verticals</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1594"/>
@@ -1254,43 +1286,48 @@ respect some settings of the current desktop environment.
 
 This checkbox may disable some options.
 Uncheck it if you want to use those options!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Quan estigui habilitat i comprovat, Kvantum intentarà
+respecta alguns paràmetres de l&apos;entorn d&apos;escriptori actual.
+
+Aquesta casella de selecció pot desactivar algunes opcions.
+Desmarqueu-la si voleu utilitzar aquestes opcions!</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1604"/>
         <source>Respect current DE if possible</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Respecta l&apos;entorn d&apos;escriptori actual si és possible</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1710"/>
         <source>Combo popup as menu</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Menú desplegable combinat</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1758"/>
         <source>Left aligned tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>Pestanyes alineades a l&apos;esquerra</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1775"/>
         <source>Inactive tabs are joined together by default,
 i.e., there is no border between them.</source>
-        <translation type="unfinished"></translation>
+        <translation>Les pestanyes inactives s&apos;uneixen per defecte,
+És a dir, no hi ha vores entre elles.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1779"/>
         <source>Join inactive tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>Uneix les pestanyes inactives</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1966"/>
         <source>Scrollable menus</source>
-        <translation type="unfinished"></translation>
+        <translation>Menús desplaçables</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1601"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When this is enabled and checked, Kvantum will try to respect some settings of the current desktop environment if it is KDE, Unity, Gnome or Pantheon.&lt;/p&gt;&lt;p&gt;Under KDE, it makes Kvantum read KDE settings for small and large icon sizes and also single or double clicking.&lt;/p&gt;&lt;p&gt;Under Unity, Gnome and Pantheon, it removes icons from menus and push-buttons (even if the corresponding dconf keys are changed) and disables window translucency.&lt;/p&gt;&lt;p&gt;This checkbox may disable some options. Uncheck it if you want to use those options!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Quan la casella estigui habilitada, Kvantum intentarà respectar alguns ajustaments de l&apos;entorn d&apos;escriptori actual si és KDE, Unity, Gnome o Pantheon.&lt;/p&gt;&lt;p&gt;Sota el KDE, fa que Kvantum llegeixi els ajustaments del KDE per a mides d&apos;icones petites i grans i també per clic sol o doble.&lt;/p&gt;&lt;p&gt;A Unity, Gnome i Pantheon, elimina icones dels menús i botons (encara que es canviïn les tecles dconf corresponents) i desactiva la translucidència de la finestra.&lt;/p&gt;&lt;p&gt;Aquesta casella seleccionada pot desactivar algunes opcions. Desmarqueu-la si voleu utilitzar aquestes opcions!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="802"/>
@@ -1299,7 +1336,11 @@ only to translucent windows that support the blur
 effect (but the KDE blur effect can be disabled).
 
 A value of 1.00 means no change.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Això necessita l&apos;efecte de contrast KDE i s&apos;aplica
+només a finestres translúcides que admeten l&apos;efecte de desenfocament
+ (però l&apos;efecte de desenfocament de KDE es pot desactivar).
+
+Un valor de 1.00 significa que no hi ha canvis.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1728"/>
@@ -1308,12 +1349,16 @@ there will be a checkbox next to each entry
 (although Kvantum draws it as a radio button).
 
 This option will hide these.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Quan es dibuixen finestres emergents com a menús,
+hi haurà una casella de selecció al costat de cada entrada
+(tot i que Kvantum el dibuixa com un botó de ràdio)
+
+Aquesta opció els ocultarà.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1735"/>
         <source>Non-checkable combo menu</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Menú combinat sense casella de verificació</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1960"/>
@@ -1321,7 +1366,10 @@ This option will hide these.</source>
 scroll arrows on their top and/or bottom?
 
 By default, big menus are scrollable.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Els menús grans han de ser desplaçables i tenir
+fletxes de desplaçament a la part superior i/o inferior?
+
+Per defecte, els menús grans són desplaçables.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1973"/>
@@ -1330,99 +1378,105 @@ By default, big menus are scrollable.</source>
 If you have enabled it, you could temporarily disable it
 for a button that can be dragged and dropped by pressing
 the Ctrl key before pressing the button.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Avís: això pot ser molt confús al principi.
+
+Si ho ha habilitat, pot deshabilitar-ho temporalment
+per a un botó que permeti arrossegar i deixar anar pressionant
+la tecla Ctrl abans de prémer el botó.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1980"/>
         <source>Allow dragging from buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>Permet arrossegar des de botons</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2003"/>
         <source>Application Themes</source>
-        <translation type="unfinished"></translation>
+        <translation>Temes de l&apos;aplicació</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2009"/>
         <source>&lt;center&gt;Here you could assign themes to specific applications.&lt;/center&gt;&lt;br&gt;&lt;center&gt;For each theme, you could add a comma-separated list of executables whose applications should use that theme instead of the active theme. After doing so for all of your chosen themes, save the result by clicking on the &lt;i&gt;Save&lt;/i&gt; button!&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;center&gt;Aquí pot assignar temes a aplicacions específiques.&lt;/center&gt;&lt;br&gt;&lt;center&gt;Per a cada tema, pot afegir una llista d&apos;executables separats per comes les aplicacions de les quals haurien d&apos;usar aquest tema en comptes de l&apos;actiu. 
+Després de fer-ho amb tots els temes que hagi triat, guardi el resultat fent clic en el botó&lt;i&gt;Desa!&lt;/i&gt;&lt;/center&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2044"/>
         <source>Installed Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Tema instal·lat</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2060"/>
         <source>Application(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>Aplicacions</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2089"/>
         <source>app1,app2,app3</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">aplicació1, aplicació2, aplicació3</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2117"/>
         <source>Remove List</source>
-        <translation type="unfinished"></translation>
+        <translation>Suprimeix la llista</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2124"/>
         <source>Save the current list of apps</source>
-        <translation type="unfinished"></translation>
+        <translation>Desa la llista actual d&apos;aplicacions</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2127"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Save the current list of applications with their corresponding themes!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Desa la llista actual d&apos;aplicacions amb els seus temes corresponents!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2154"/>
         <location filename="../../kvantummanager.ui" line="2160"/>
         <source>Ctrl+Q</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Q</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2157"/>
         <source>Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>Surt</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2170"/>
         <source>Preview the active theme
 or update its preview.</source>
-        <translation type="unfinished"></translation>
+        <translation>Previsualitza el tema actiu
+o actualitza la seva previsualització.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2174"/>
         <source>Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Previsualització</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2181"/>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>Quant a</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2204"/>
         <source>What&apos;s This?</source>
-        <translation type="unfinished"></translation>
+        <translation>Què és això?</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2207"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click on this button and then click on a GUI element that has &amp;quot;What&apos;s This&amp;quot; tooltip  to get information about what it does.&lt;/p&gt;&lt;p&gt;There are also ordinary tooltips but this kind of tooltip will not disappear until you click somewhere.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Feu clic a aquest botó i després feu clic a un element de la interfície gràfica que tingui consells d&apos;eina &amp;quot;Què és això?&amp;quot; per obtenir informació sobre el que fa.&lt;/p&gt;&lt;p&gt;També hi ha consells d&apos;eina ordinaris però aquest tipus de consell d&apos;eina no desapareixerà fins que feu clic en qualsevol altre lloc.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2210"/>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajuda</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="380"/>
         <source>Open Kvantum Theme Folder...</source>
-        <translation type="unfinished"></translation>
+        <translation>Obre la carpeta dels temes de Kvantum...</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="200"/>
@@ -1436,314 +1490,314 @@ or update its preview.</source>
         <location filename="../../KvantumManager.cpp" line="711"/>
         <location filename="../../KvantumManager.cpp" line="727"/>
         <source>Kvantum</source>
-        <translation type="unfinished"></translation>
+        <translation>Kvantum</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="651"/>
         <source>First you have to delete its modified version!</source>
-        <translation type="unfinished"></translation>
+        <translation>Primer heu d&apos;eliminar la versió modificada!</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="675"/>
         <location filename="../../KvantumManager.cpp" line="829"/>
         <location filename="../../KvantumManager.cpp" line="2782"/>
         <source>Confirmation</source>
-        <translation type="unfinished"></translation>
+        <translation>Confirmació</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="790"/>
         <source>%1 installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>% 1 instal·lat.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="960"/>
         <source>%1 deleted.</source>
-        <translation type="unfinished"></translation>
+        <translation>% 1 suprimit.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="1014"/>
         <source>Theme changed to %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tema canviat a % 1.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="568"/>
         <source>You have no permission to write here:</source>
-        <translation type="unfinished"></translation>
+        <translation>No té permís per a escriure aquí:</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="108"/>
         <location filename="../../KvantumManager.cpp" line="112"/>
         <location filename="../../KvantumManager.cpp" line="118"/>
         <source>Follow Style</source>
-        <translation type="unfinished"></translation>
+        <translation>Segueix l&apos;estil</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="109"/>
         <source>Single Click</source>
-        <translation type="unfinished"></translation>
+        <translation>Un sol clic</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="110"/>
         <source>Double Click</source>
-        <translation type="unfinished"></translation>
+        <translation>Doble clic</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="113"/>
         <source>Icon Only</source>
-        <translation type="unfinished"></translation>
+        <translation>Només icona</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="114"/>
         <source>Text Only</source>
-        <translation type="unfinished"></translation>
+        <translation>Només text</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="115"/>
         <source>Text Beside Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Text al costat de la icona</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="116"/>
         <source>Text Under Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Text sota la icona</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="119"/>
         <source>KDE Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Disseny KDE</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="120"/>
         <source>Gnome Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Disseny Gnome</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="121"/>
         <source>Mac Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Disseny Mac</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="122"/>
         <source>Windows Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Disseny Windows</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="123"/>
         <source>Android Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Disseny Android</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="125"/>
         <source>Titlebar</source>
-        <translation type="unfinished"></translation>
+        <translation>Barra de títol</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="126"/>
         <source>Menubar</source>
-        <translation type="unfinished"></translation>
+        <translation>Barra de menú</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="127"/>
         <source>Menubar and primary toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Barra de menús i barra d&apos;eines principal</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="128"/>
         <source>Anywhere possible</source>
-        <translation type="unfinished"></translation>
+        <translation>Qualsevol lloc possible</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="570"/>
         <source>Please fix that first!</source>
-        <translation type="unfinished"></translation>
+        <translation>Arregleu-ho primer!</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="582"/>
         <source>This file cannot be removed:</source>
-        <translation type="unfinished"></translation>
+        <translation>Aquest fitxer no es pot eliminar:</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="601"/>
         <location filename="../../KvantumManager.cpp" line="612"/>
         <source>This is not an installable Kvantum theme!</source>
-        <translation type="unfinished"></translation>
+        <translation>No és un tema Kvantum instal·lable!</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="602"/>
         <source>The name of an installable themes should not be &quot;Default&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">El nom d&apos;un tema instal·lable no hauria de ser «Default».</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="603"/>
         <location filename="../../KvantumManager.cpp" line="614"/>
         <location filename="../../KvantumManager.cpp" line="624"/>
         <source>Please select another directory!</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccioneu un altre directori!</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="613"/>
         <source>Installable themes should not have # in their names.</source>
-        <translation type="unfinished"></translation>
+        <translation>Els temes instal·lables no haurien de tenir # en els seus noms.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="623"/>
         <source>This is not a Kvantum theme folder!</source>
-        <translation type="unfinished"></translation>
+        <translation>No és una carpeta de temes del Kvantum!</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="650"/>
         <source>The theme already exists in modified form.</source>
-        <translation type="unfinished"></translation>
+        <translation>El tema ja existeix en forma modificada.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="665"/>
         <source>You have selected an installed theme folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ha triat la carpeta d&apos;un tema instal·lat.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="666"/>
         <source>Please choose another directory!</source>
-        <translation type="unfinished"></translation>
+        <translation>Trieu un altre directori!</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="676"/>
         <source>The theme already exists.</source>
-        <translation type="unfinished"></translation>
+        <translation>El tema ja existeix.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="677"/>
         <source>Do you want to overwrite it?</source>
-        <translation type="unfinished"></translation>
+        <translation>Voleu sobreescriure&apos;l?</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="712"/>
         <source>This theme is also installed as root in:</source>
-        <translation type="unfinished"></translation>
+        <translation>Aquest tema també s&apos;instal·la com a root a:</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="714"/>
         <source>The user installation will take priority.</source>
-        <translation type="unfinished"></translation>
+        <translation>La instal·lació de l&apos;usuari tindrà prioritat.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="728"/>
         <source>This theme is also installed as user in:</source>
-        <translation type="unfinished"></translation>
+        <translation>Aquest tema també està instal·lat com a usuari a:</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="730"/>
         <source>This installation will take priority.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aquesta instal·lació tindrà prioritat.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="830"/>
         <source>Do you really want to delete &lt;i&gt;%1&lt;/i&gt;?</source>
-        <translation type="unfinished"></translation>
+        <translation>Esteu segur de voler suprimir &lt;i&gt;%1&lt;/i&gt;?</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="833"/>
         <source>It could not be restored unless you have a copy of it.</source>
-        <translation type="unfinished"></translation>
+        <translation>No es podrà restaurar si no en teniu una còpia.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="1400"/>
         <location filename="../../KvantumManager.cpp" line="1420"/>
         <source>These are the settings that can be safely changed.&lt;br&gt;For the others, click &lt;i&gt;Save&lt;/i&gt; and then edit this file:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Aquests són els paràmetres que es poden canviar de forma segura.&lt;br&gt;Per als altres, fes clic a&lt;i&gt;Desa&lt;/i&gt;i després editi aquest fitxer:</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="1416"/>
         <location filename="../../KvantumManager.cpp" line="2686"/>
         <source>These are the settings that can be safely changed.&lt;br&gt;For the others, edit this file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Aquests són els paràmetres que es poden canviar de forma segura. &lt;br&gt;Per als altres, editeu aquest fitxer:</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="1812"/>
         <source>No description</source>
-        <translation type="unfinished"></translation>
+        <translation>Sense descripció</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2269"/>
         <source>A copy of the root config is created.</source>
-        <translation type="unfinished"></translation>
+        <translation>S&apos;ha creat una còpia de la configuració root.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2280"/>
         <source>A copy was already created.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ja hi ha una còpia creada.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2672"/>
         <source>Configuration saved.</source>
-        <translation type="unfinished"></translation>
+        <translation>S&apos;ha desat la configuració.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2783"/>
         <source>Do you want to revert to the default (root) settings of this theme?</source>
-        <translation type="unfinished"></translation>
+        <translation>Voleu tornar als paràmetres per defecte (root) d&apos;aquest tema?</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2786"/>
         <source>You will lose the changes you might have made.</source>
-        <translation type="unfinished"></translation>
+        <translation>Perdrà els canvis que pugui haver fet.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2821"/>
         <source>Restored the root default settings of %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">S&apos;ha restaurat la configuració predeterminada de root del %1</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2822"/>
         <source>the default theme</source>
-        <translation type="unfinished"></translation>
+        <translation>el tema per defecte</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2982"/>
         <location filename="../../KvantumManager.cpp" line="2983"/>
         <source>About Kvantum Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Quant al gestor Kvantum</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2982"/>
         <source>Translators</source>
-        <translation type="unfinished"></translation>
+        <translation>Traductors</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2980"/>
         <source>A tool for installing, selecting&lt;br&gt;and configuring &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt; themes</source>
-        <translation type="unfinished"></translation>
+        <translation>Una eina per a instal·lar, seleccionar&lt;br&gt;i configurar els temes de &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2981"/>
         <source>Author: &lt;a href=&apos;mailto:tsujan2000@gmail.com?Subject=My%20Subject&apos;&gt;Pedram Pourang (aka. Tsu Jan)&lt;/a&gt; &lt;/center&gt;&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Autor: &lt;a href=&apos;mailto:tsujan2000@gmail.com?Subject=My%20Subject&apos;&gt;Pedram Pourang (alias Tsu Jan)&lt;/a&gt; &lt;/center&gt;&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="51"/>
         <source>modified</source>
-        <translation type="unfinished"></translation>
+        <translation>modificat</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="52"/>
         <source>default</source>
-        <translation type="unfinished"></translation>
+        <translation>per defecte</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="580"/>
         <source>This directory cannot be removed:</source>
-        <translation type="unfinished"></translation>
+        <translation>Aquest directori no es pot eliminar:</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="587"/>
         <source>You might want to investigate the cause.</source>
-        <translation type="unfinished"></translation>
+        <translation>És possible que vulgueu investigar la causa.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="1013"/>
         <location filename="../../KvantumManager.cpp" line="2212"/>
         <location filename="../../KvantumManager.cpp" line="2681"/>
         <source>Active theme:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tema actiu:</translation>
     </message>
 </context>
 <context>
@@ -1751,17 +1805,17 @@ or update its preview.</source>
     <message>
         <location filename="../../main.cpp" line="147"/>
         <source>Kvantum</source>
-        <translation type="unfinished"></translation>
+        <translation>Kvantum</translation>
     </message>
     <message>
         <location filename="../../main.cpp" line="148"/>
         <source>Kvantum is not installed on your system.</source>
-        <translation type="unfinished"></translation>
+        <translation>El Kvantum no està instal·lat al vostre sistema.</translation>
     </message>
     <message>
         <location filename="../../main.cpp" line="149"/>
         <source>Please first install the Kvantum style plugin!</source>
-        <translation type="unfinished"></translation>
+        <translation>Instal·leu primer el connector d&apos;estil del Kvantum!</translation>
     </message>
 </context>
 </TS>
