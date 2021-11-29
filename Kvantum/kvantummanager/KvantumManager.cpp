@@ -1671,10 +1671,8 @@ void KvantumManager::tabChanged (int index)
                 ui->checkBoxDolphin->setChecked (themeSettings.value ("transparent_dolphin_view").toBool());
                 ui->checkBoxPcmanfmSide->setChecked (themeSettings.value ("transparent_pcmanfm_sidepane").toBool());
                 ui->checkBoxPcmanfmView->setChecked (themeSettings.value ("transparent_pcmanfm_view").toBool());
-                ui->checkBoxBlurTranslucent->setChecked (themeSettings.contains ("blur_translucent")
-                                                         && themeSettings.value ("blur_translucent").toBool());
-                ui->checkBoxBlurActive->setChecked (themeSettings.contains ("blur_only_active_window")
-                                                    && themeSettings.value ("blur_only_active_window").toBool());
+                ui->checkBoxBlurTranslucent->setChecked (themeSettings.value ("blur_translucent").toBool());
+                ui->checkBoxBlurActive->setChecked (themeSettings.value ("blur_only_active_window").toBool());
                 ui->checkBoxKtitle->setChecked (themeSettings.value ("transparent_ktitle_label").toBool());
                 ui->checkBoxMenuTitle->setChecked (themeSettings.value ("transparent_menutitle").toBool());
                 ui->checkBoxDark->setChecked (themeSettings.value ("respect_darkness").toBool());

@@ -1508,7 +1508,7 @@ tai päivitä sen esikatselu.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="675"/>
         <location filename="../../KvantumManager.cpp" line="829"/>
-        <location filename="../../KvantumManager.cpp" line="2784"/>
+        <location filename="../../KvantumManager.cpp" line="2782"/>
         <source>Confirmation</source>
         <translation>Vahvistus</translation>
     </message>
@@ -1715,68 +1715,68 @@ tai päivitä sen esikatselu.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="1416"/>
-        <location filename="../../KvantumManager.cpp" line="2688"/>
+        <location filename="../../KvantumManager.cpp" line="2686"/>
         <source>These are the settings that can be safely changed.&lt;br&gt;For the others, edit this file:</source>
         <translation>Näitä asetuksia voi turvallisesti muuttaa.&lt;br&gt;Muokataksesi muita avaa tiedosto:</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1814"/>
+        <location filename="../../KvantumManager.cpp" line="1812"/>
         <source>No description</source>
         <translation>Ei kuvausta</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2271"/>
+        <location filename="../../KvantumManager.cpp" line="2269"/>
         <source>A copy of the root config is created.</source>
         <translation>Luotiin kopio juurikokoonpanosta.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2282"/>
+        <location filename="../../KvantumManager.cpp" line="2280"/>
         <source>A copy was already created.</source>
         <translation>Kopio oli jo luotu.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2674"/>
+        <location filename="../../KvantumManager.cpp" line="2672"/>
         <source>Configuration saved.</source>
         <translation>Kokoonpano on tallennettu.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2785"/>
+        <location filename="../../KvantumManager.cpp" line="2783"/>
         <source>Do you want to revert to the default (root) settings of this theme?</source>
         <translation>Haluatko palata teeman oletusasetuksiin?</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2788"/>
+        <location filename="../../KvantumManager.cpp" line="2786"/>
         <source>You will lose the changes you might have made.</source>
         <translation>Mahdolliset teeman muutokset menetetään.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2823"/>
+        <location filename="../../KvantumManager.cpp" line="2821"/>
         <source>Restored the root default settings of %1</source>
         <translation>Palautettiin teema %1 oletusasetuksiinsa</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2824"/>
+        <location filename="../../KvantumManager.cpp" line="2822"/>
         <source>the default theme</source>
         <translation>oletusteema</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2984"/>
-        <location filename="../../KvantumManager.cpp" line="2985"/>
+        <location filename="../../KvantumManager.cpp" line="2982"/>
+        <location filename="../../KvantumManager.cpp" line="2983"/>
         <source>About Kvantum Manager</source>
         <translation>Tietoa Kvantum Managerista</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2984"/>
+        <location filename="../../KvantumManager.cpp" line="2982"/>
         <source>Translators</source>
         <translation>Kääntäjät</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2982"/>
+        <location filename="../../KvantumManager.cpp" line="2980"/>
         <source>A tool for installing, selecting&lt;br&gt;and configuring &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt; themes</source>
         <translation>Työkalu &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt;-teemojen&lt;br&gt;asentamiseen, valintaan ja mukauttamiseen</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2983"/>
+        <location filename="../../KvantumManager.cpp" line="2981"/>
         <source>Author: &lt;a href=&apos;mailto:tsujan2000@gmail.com?Subject=My%20Subject&apos;&gt;Pedram Pourang (aka. Tsu Jan)&lt;/a&gt; &lt;/center&gt;&lt;br&gt;</source>
         <translation>Tekijä: &lt;a href=&apos;mailto:tsujan2000@gmail.com?Subject=My%20Subject&apos;&gt;Pedram Pourang (alias Tsu Jan)&lt;/a&gt; &lt;/center&gt;&lt;br&gt;</translation>
     </message>
@@ -1802,8 +1802,8 @@ tai päivitä sen esikatselu.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="1013"/>
-        <location filename="../../KvantumManager.cpp" line="2214"/>
-        <location filename="../../KvantumManager.cpp" line="2683"/>
+        <location filename="../../KvantumManager.cpp" line="2212"/>
+        <location filename="../../KvantumManager.cpp" line="2681"/>
         <source>Active theme:</source>
         <translation>Nykyinen teema:</translation>
     </message>
