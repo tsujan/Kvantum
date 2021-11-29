@@ -6,12 +6,12 @@
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="14"/>
         <source>Kvantum Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Previsualització del Kvantum</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="29"/>
         <source>Push buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>Botons per prémer</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="77"/>
@@ -24,19 +24,27 @@ height
 greater
 than
 width</source>
-        <translation type="unfinished"></translation>
+        <translation>Commuta
+botó 
+per prémer
+
+amb 
+l&apos;alçada 
+més gran 
+que 
+l&apos;amplada</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="95"/>
         <location filename="../../KvantumPreviewBase.ui" line="105"/>
         <source>Simple push button</source>
-        <translation type="unfinished"></translation>
+        <translation>Botó per prémer senzill</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="112"/>
         <location filename="../../KvantumPreviewBase.ui" line="128"/>
         <source>Toggle push button</source>
-        <translation type="unfinished"></translation>
+        <translation>Commuta botó per prémer</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="141"/>
@@ -50,19 +58,21 @@ width</source>
         <location filename="../../KvantumPreviewBase.ui" line="180"/>
         <source>Push button
 with 32px folder icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Botó per prémer
+amb la icona de carpeta 32px</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="210"/>
         <location filename="../../KvantumPreviewBase.ui" line="224"/>
         <source>Default
 push button</source>
-        <translation type="unfinished"></translation>
+        <translation>Botó per prémer
+per defecte</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="266"/>
         <source>Flat buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>Botons plans</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="279"/>
