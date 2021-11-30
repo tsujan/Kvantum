@@ -346,7 +346,7 @@ will be blurred if blurring is enabled.</source>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="536"/>
-        <source>No blurring for inactive wiindows</source>
+        <source>No blurring for inactive windows</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -30,7 +30,7 @@
         <location filename="../../kvantummanager.ui" line="76"/>
         <source>Select a Kvantum
 theme folder</source>
-        <translation>Selecciona carpeta 
+        <translation>Selecciona carpeta
 de tema de Kvantum</translation>
     </message>
     <message>
@@ -339,7 +339,7 @@ d&apos;estat sempre que sigui possible.</translation>
         <location filename="../../kvantummanager.ui" line="932"/>
         <source>Has effect only when there is a translucent SVG background
 for windows or the window opacity is reduced (see below).</source>
-        <translation>Només té efecte quan hi ha un fons SVG translúcid per a les finestres 
+        <translation>Només té efecte quan hi ha un fons SVG translúcid per a les finestres
 o l&apos;opacitat de la finestra està reduïda (vegeu a sota).</translation>
     </message>
     <message>
@@ -374,7 +374,7 @@ es difuminaran si el difuminat està habilitat.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="536"/>
-        <source>No blurring for inactive wiindows</source>
+        <source>No blurring for inactive windows</source>
         <translation>Sense difuminat per a finestres inactives</translation>
     </message>
     <message>
@@ -466,7 +466,7 @@ or through logging out and in again.</source>
 
 Els valors inferiors a 16 connota la mida predeterminada de la icona del menú.
 
-Necessita que el panell LXQt es reiniciï per «Ajusts de sessió» 
+Necessita que el panell LXQt es reiniciï per «Ajusts de sessió»
 o per tancar la sessió i tornar a entrar.</translation>
     </message>
     <message>
@@ -598,7 +598,7 @@ Desmarqueu-la si voleu que aquests patrons tornin!</translation>
         <location filename="../../kvantummanager.ui" line="1130"/>
         <source>Use the same colors and shapes with active and inactive
 windows if this theme distinguishes between them?</source>
-        <translation>Vol usar els mateixos colors i formes per a finestres actives 
+        <translation>Vol usar els mateixos colors i formes per a finestres actives
 i inactives si aquest tema distingeix entre elles?</translation>
     </message>
     <message>
@@ -651,7 +651,7 @@ i inactives si aquest tema distingeix entre elles?</translation>
         <location filename="../../kvantummanager.ui" line="1336"/>
         <source>The default value is 2 px but
 some apps set it themeselves.</source>
-        <translation>El valor per defecte és 2 px però algunes 
+        <translation>El valor per defecte és 2 px però algunes
 aplicacions ho defineixen per si soles.</translation>
     </message>
     <message>
@@ -815,7 +815,7 @@ translucent by their apps explicitly if possible.
 This needs the KDE blur effect.
 
 Konsole, QTerminal and LXQt panel are some examples.</source>
-        <translation>Difumina les àrees darrere de les finestres que les aplicacions 
+        <translation>Difumina les àrees darrere de les finestres que les aplicacions
 respectives han fet translúcides, si és possible.
 
 Necessita l&apos;efecte de difuminat del KDE.
@@ -1112,7 +1112,7 @@ They usually take no extra space.</source>
         <translation type="unfinished">Fes que les barres de desplaçament siguin transitòries!
 
 Les barres de desplaçament transitòries apareixen a la part
-superior de les vistes de desplaçament només quan 
+superior de les vistes de desplaçament només quan
 és necessari. Normalment no prenen espai extra.</translation>
     </message>
     <message>
@@ -1222,7 +1222,7 @@ per defecte per a les barres de menús.</translation>
         <location filename="../../kvantummanager.ui" line="1717"/>
         <source>If checked, toolbar buttons will be drawn grouped and raised
 between toolbar separators.</source>
-        <translation>Si està marcada, els botons de la barra d&apos;eines es dibuixaran agrupats 
+        <translation>Si està marcada, els botons de la barra d&apos;eines es dibuixaran agrupats
 i realçats entre separadors de la barra.</translation>
     </message>
     <message>
@@ -1264,7 +1264,7 @@ i realçats entre separadors de la barra.</translation>
         <location filename="../../kvantummanager.ui" line="1680"/>
         <source>Draw the whole editable combo-box as a
 line-edit with arrow (and icon, if it exists)?</source>
-        <translation>Voleu dibuixar tot el quadre combinat editable 
+        <translation>Voleu dibuixar tot el quadre combinat editable
 com a edició de línia amb fletxa (i icona, si existeix)?</translation>
     </message>
     <message>
@@ -1400,7 +1400,7 @@ la tecla Ctrl abans de prémer el botó.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="2009"/>
         <source>&lt;center&gt;Here you could assign themes to specific applications.&lt;/center&gt;&lt;br&gt;&lt;center&gt;For each theme, you could add a comma-separated list of executables whose applications should use that theme instead of the active theme. After doing so for all of your chosen themes, save the result by clicking on the &lt;i&gt;Save&lt;/i&gt; button!&lt;/center&gt;</source>
-        <translation>&lt;center&gt;Aquí pot assignar temes a aplicacions específiques.&lt;/center&gt;&lt;br&gt;&lt;center&gt;Per a cada tema, pot afegir una llista d&apos;executables separats per comes, les aplicacions de les quals haurien d&apos;usar aquest tema en comptes de l&apos;actiu. 
+        <translation>&lt;center&gt;Aquí pot assignar temes a aplicacions específiques.&lt;/center&gt;&lt;br&gt;&lt;center&gt;Per a cada tema, pot afegir una llista d&apos;executables separats per comes, les aplicacions de les quals haurien d&apos;usar aquest tema en comptes de l&apos;actiu.
 Després de fer-ho amb tots els temes que hagi triat, guardi el resultat fent clic en el botó&lt;i&gt;Desa!&lt;/i&gt;&lt;/center&gt;</translation>
     </message>
     <message>

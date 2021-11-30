@@ -375,7 +375,7 @@ estus nebuligitaj se la nebuligo ĉeestus.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="536"/>
-        <source>No blurring for inactive wiindows</source>
+        <source>No blurring for inactive windows</source>
         <translation>Neniu nebuligo por la neaktivaj fenestroj</translation>
     </message>
     <message>

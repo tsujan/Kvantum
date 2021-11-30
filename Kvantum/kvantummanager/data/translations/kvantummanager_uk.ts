@@ -374,7 +374,7 @@ will be blurred if blurring is enabled.</source>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="536"/>
-        <source>No blurring for inactive wiindows</source>
+        <source>No blurring for inactive windows</source>
         <translation>Неактивні вікна не розмиваються</translation>
     </message>
     <message>
@@ -1340,7 +1340,7 @@ effect (but the KDE blur effect can be disabled).
 
 A value of 1.00 means no change.</source>
         <translation>Для цього потрібен ефект контрасту KDE і застосовується
-лише для напівпрозорих вікон, які підтримують ефект 
+лише для напівпрозорих вікон, які підтримують ефект
 розмиття (але ефект розмиття KDE можна вимкнути).
 
 Значення 1,00 означає відсутність змін.</translation>
@@ -1369,7 +1369,7 @@ This option will hide these.</source>
 scroll arrows on their top and/or bottom?
 
 By default, big menus are scrollable.</source>
-        <translation>Чи має бути можливість прокручування у великому меню 
+        <translation>Чи має бути можливість прокручування у великому меню
 та чи має воно мати стрілки прокрутки зверху та/або знизу?
 
 Типово великі меню можна прокручувати.</translation>
@@ -1384,7 +1384,7 @@ the Ctrl key before pressing the button.</source>
         <translation>Попередження: спочатку це може збити з пантелику .
 
 Якщо ввімкнуто, то можна тимчасово вимкнути це
-для кнопки, яку можна перетягнути, натиснувши 
+для кнопки, яку можна перетягнути, натиснувши
 клавішу Ctrl перед натисканням кнопки.</translation>
     </message>
     <message>

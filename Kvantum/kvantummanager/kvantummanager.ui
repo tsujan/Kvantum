@@ -533,7 +533,7 @@ other position.</string>
 will be blurred if blurring is enabled.</string>
                  </property>
                  <property name="text">
-                  <string>No blurring for inactive wiindows</string>
+                  <string>No blurring for inactive windows</string>
                  </property>
                 </widget>
                </item>

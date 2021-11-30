@@ -371,7 +371,7 @@ will be blurred if blurring is enabled.</source>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="536"/>
-        <source>No blurring for inactive wiindows</source>
+        <source>No blurring for inactive windows</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1373,8 +1373,8 @@ for a button that can be dragged and dropped by pressing
 the Ctrl key before pressing the button.</source>
         <translation>경고: 이것은 처음에는 매우 혼란스러울 수 있습니다.
 
-이 기능을 활성화한 경우, 버튼을 누르기 전에 
-Ctrl 키를 눌러 드래그 앤 드롭할 수 있는 버튼에 대해 
+이 기능을 활성화한 경우, 버튼을 누르기 전에
+Ctrl 키를 눌러 드래그 앤 드롭할 수 있는 버튼에 대해
 일시적으로 비활성화할 수 있습니다.</translation>
     </message>
     <message>
