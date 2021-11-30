@@ -367,12 +367,13 @@ Divers → Respecter le DE actuel si possible</translation>
         <location filename="../../kvantummanager.ui" line="532"/>
         <source>By default, both active and inactive translucent windows
 will be blurred if blurring is enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Par défaut, les fenêtres translucides actives et inactives
+seront floues si le flou est activé.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="536"/>
         <source>No blurring for inactive wiindows</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas de flou pour les fenêtres inactives</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="543"/>
@@ -424,7 +425,7 @@ Miscellaneous → Respect current DE if possible</source>
         <translation>Par défaut, le curseur de défilement saute à une position
 lorsque la barre de défilement est cliqué avec le bouton gauche.
 
-Si cette option est désactivée, consulter&#xa0;:
+Si cette option est désactivée, consulter :
 Divers → Respecter le DE courant si possible</translation>
     </message>
     <message>
@@ -1365,7 +1366,7 @@ scroll arrows on their top and/or bottom?
 
 By default, big menus are scrollable.</source>
         <translation>Les grands menus devraient-ils être déroulants et avoir
-des flèches de défilement en haut et/ou en bas&#xa0;?
+des flèches de défilement en haut et/ou en bas ?
 
 Par défaut, les grands menus sont déroulants.</translation>
     </message>
@@ -1376,7 +1377,7 @@ Par défaut, les grands menus sont déroulants.</translation>
 If you have enabled it, you could temporarily disable it
 for a button that can be dragged and dropped by pressing
 the Ctrl key before pressing the button.</source>
-        <translation>Attention&#x202f;: cela peut être assez déroutant au début.
+        <translation>Attention : cela peut être assez déroutant au début.
 
 Si vous l&apos;avez activé, vous pouvez le désactiver temporairement
 pour un bouton qui peut être glissé et déposé en appuyant sur
