@@ -24,7 +24,13 @@ height
 greater
 than
 width</source>
-        <translation type="unfinished"></translation>
+        <translation>כפתור
+להפעלה/
+כיבוי
+
+שגובהו
+גדול
+מרוחבו</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="95"/>
@@ -36,7 +42,7 @@ width</source>
         <location filename="../../KvantumPreviewBase.ui" line="112"/>
         <location filename="../../KvantumPreviewBase.ui" line="128"/>
         <source>Toggle push button</source>
-        <translation type="unfinished"></translation>
+        <translation>כפתור להפעלה/כיבוי</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="141"/>
@@ -62,7 +68,7 @@ push button</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="266"/>
         <source>Flat buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>כפתורים שטוחים</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="279"/>
@@ -72,7 +78,7 @@ push button</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="361"/>
         <source>Tool buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>כפתורי כלים</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="369"/>
@@ -375,7 +381,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="2161"/>
         <location filename="../../KvantumPreviewBase.ui" line="2259"/>
         <source>3rd Item</source>
-        <translation type="unfinished"></translation>
+        <translation>פריט שלישי</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2169"/>
@@ -387,13 +393,13 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="2173"/>
         <location filename="../../KvantumPreviewBase.ui" line="2209"/>
         <source>2nd Child</source>
-        <translation type="unfinished"></translation>
+        <translation>פריט־מִשנה שני</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2178"/>
         <location filename="../../KvantumPreviewBase.ui" line="2214"/>
         <source>1st Child</source>
-        <translation type="unfinished"></translation>
+        <translation>פריט־מִשנה ראשון</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2184"/>
@@ -404,47 +410,47 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2204"/>
         <source>3rd Child</source>
-        <translation type="unfinished"></translation>
+        <translation>פריט־מִשנה שלישי</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2502"/>
         <source>Row 0</source>
-        <translation type="unfinished"></translation>
+        <translation>שורה 0</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2507"/>
         <source>Row 1</source>
-        <translation type="unfinished"></translation>
+        <translation>שורה 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2512"/>
         <source>Column 0</source>
-        <translation type="unfinished"></translation>
+        <translation>טור 0</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2520"/>
         <source>Column 1</source>
-        <translation type="unfinished"></translation>
+        <translation>טור 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2525"/>
         <source>0-0</source>
-        <translation type="unfinished"></translation>
+        <translation>0-0</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2533"/>
         <source>0-1</source>
-        <translation type="unfinished"></translation>
+        <translation>0-1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2541"/>
         <source>1-0</source>
-        <translation type="unfinished"></translation>
+        <translation>1-0</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2549"/>
         <source>1-1</source>
-        <translation type="unfinished"></translation>
+        <translation>1-1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2191"/>
@@ -481,7 +487,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="2778"/>
         <location filename="../../KvantumPreviewBase.ui" line="2826"/>
         <source>Tab 1</source>
-        <translation type="unfinished"></translation>
+        <translation>לשונית 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2361"/>
@@ -554,7 +560,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2707"/>
         <source>Document mode</source>
-        <translation type="unfinished"></translation>
+        <translation>מצב מסמך</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2745"/>
@@ -564,7 +570,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2875"/>
         <source>&amp;File</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;קובץ</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2879"/>
@@ -584,7 +590,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2941"/>
         <source>&amp;Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>י&amp;ציאה</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2944"/>
@@ -599,7 +605,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2955"/>
         <source>&amp;Checkbox</source>
-        <translation type="unfinished"></translation>
+        <translation>תיבת סימו&amp;ן</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2968"/>
