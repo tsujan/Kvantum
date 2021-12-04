@@ -356,9 +356,6 @@ class Style : public QCommonStyle {
       setSurfaceFormat(const_cast<QWidget*>(w));
     }
 
-    /* A workaround for Qt5's QMenu window type bug. */
-    void setMenuType(const QWidget *widget) const;
-
     /* A method for forcing (push and tool) button text colors. */
     void forceButtonTextColor(QWidget *widget, QColor col) const;
     void forceButtonTextColor(const QWidget *widget, QColor col) const
