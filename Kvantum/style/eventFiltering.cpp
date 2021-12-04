@@ -936,6 +936,30 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         //if (isLibreoffice_) break;
         if (w->testAttribute(Qt::WA_X11NetWmWindowTypeMenu)) break; // detached menu
         if (w->testAttribute(Qt::WA_StyleSheetTarget)) break; // not drawn by Kvantum (see PM_MenuHMargin)
+
+#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+        /*
+          This is a workaround for a fixed Qt5 bug (QTBUG-47043) that has reappeared
+          in Qt6 in another form but with almost the same result: _NET_WM_WINDOW_TYPE
+          is set to _NET_WM_WINDOW_TYPE_NORMAL for ordinary menus and combo popup menus.
+          "QXcbWindowFunctions::setWmWindowType()" doesn't exist in Qt6 but the window
+          type can be set by removing and resetting menu/combo attributes.
+        */
+        if (tspec_.isX11 && !e->spontaneous() && w->windowHandle() != nullptr)
+        {
+          if (w->testAttribute(Qt::WA_X11NetWmWindowTypeDropDownMenu))
+          {
+            w->setAttribute(Qt::WA_X11NetWmWindowTypeDropDownMenu, false);
+            w->setAttribute(Qt::WA_X11NetWmWindowTypeDropDownMenu, true);
+          }
+          else if (w->testAttribute(Qt::WA_X11NetWmWindowTypePopupMenu))
+          {
+            w->setAttribute(Qt::WA_X11NetWmWindowTypePopupMenu, false);
+            w->setAttribute(Qt::WA_X11NetWmWindowTypePopupMenu, true);
+          }
+        }
+#endif
+
         if (movedMenus.contains(w)) break; // already moved
         /* "magical" condition for a submenu */
         QPoint parentMenuCorner;
@@ -1261,6 +1285,19 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         }
         forcePalette(w, palette);
       }
+#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+      /* see the case of QMenu above */
+      else if (w->inherits("QComboBoxPrivateContainer"))
+      {
+        if (tspec_.combo_menu && tspec_.isX11
+            && !e->spontaneous() && w->windowHandle() != nullptr
+            && w->testAttribute(Qt::WA_X11NetWmWindowTypeCombo))
+        {
+          w->setAttribute(Qt::WA_X11NetWmWindowTypeCombo, false);
+          w->setAttribute(Qt::WA_X11NetWmWindowTypeCombo, true);
+        }
+      }
+#endif
       else if (gtkDesktop_
                && (!w->parent() || !qobject_cast<QWidget *>(w->parent())
                    || qobject_cast<QDialog *>(w) || qobject_cast<QMainWindow *>(w)))

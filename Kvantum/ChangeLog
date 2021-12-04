@@ -12,7 +12,7 @@ V1.0.0
  * Added an example of progress-bar inside view-item to kvantumpreview.
  * Added a workaround for KWin-Wayland's menus and tooltips (they're polished before the platform name is set to "wayland").
  * Added an option (to Kvantum Manager) for not blurring inactive windows.
- * Removed the workaround fo the fixed Qt5 bug QTBUG-47043.
+ * Removed the workaround fo the fixed Qt5 bug QTBUG-47043 but added another workaround for a similar Qt6 bug.
 
 V0.20.2
 ---------
