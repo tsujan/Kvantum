@@ -369,12 +369,13 @@ Overig → Huidige werkomgeving respecteren (indien mogelijk)</translation>
         <location filename="../../kvantummanager.ui" line="532"/>
         <source>By default, both active and inactive translucent windows
 will be blurred if blurring is enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Standaard worden zowel actieve als inactieve doorzichtige
+vensters vervaagd als vervagen is ingeschakeld.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="536"/>
         <source>No blurring for inactive windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Inactieve vensters niet vervagen</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="543"/>
