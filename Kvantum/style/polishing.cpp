@@ -563,7 +563,8 @@ void Style::polish(QWidget *widget)
     QWidget *gp = getParent(widget,2);
     if ((hspec_.transparent_pcmanfm_view
          && widget->autoFillBackground()
-         && (gp && gp->inherits("Fm::FolderView") && !gp->inherits("PCManFM::DesktopWindow")))
+         && (gp && gp->inherits("Fm::FolderView") && !gp->inherits("PCManFM::DesktopWindow")
+             && qobject_cast<QMainWindow*>(gp->window())))
         || (hspec_.transparent_pcmanfm_sidepane
             && ((pw && pw->inherits("Fm::DirTreeView"))
                 || (gp && gp->inherits("Fm::SidePane")))))

@@ -3308,7 +3308,8 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
                                                                : QPalette::Active,
                                                              QPalette::Base));
                 }
-                else break;
+                else if (qobject_cast<QMainWindow*>(pw->window()))
+                  break;
               }
               else if (hspec_.transparent_pcmanfm_sidepane && pw->inherits("Fm::SidePane"))
               {
