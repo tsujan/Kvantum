@@ -48,7 +48,7 @@ Kvantum kan gebruiken, naast de standaardthema&apos;s.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="138"/>
         <source>Change/Delete Theme</source>
-        <translation>Thema wijzigen/verwijderen</translation>
+        <translation>Thema kiezen/verwijderen</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="144"/>
@@ -66,7 +66,7 @@ Kvantum kan gebruiken, naast de standaardthema&apos;s.</translation>
 
 A disabled button means that
 the theme is already used.</source>
-        <translation>Laat Kvantum dit thema gebruiken!
+        <translation>Stel dit Kvantum-thema in!
 
 Als de knop is uitgeschakeld, dan
 is het thema al in gebruik.</translation>
@@ -79,7 +79,7 @@ is het thema al in gebruik.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="257"/>
         <source>Configure Active Theme</source>
-        <translation>Huidig thema instellen</translation>
+        <translation>Thema afstellen</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="321"/>
@@ -935,7 +935,11 @@ KDE apps get it from KDE setting.</source>
 Zero means tooltips are shown instantly.
 
 -1 means the default Qt behavior.</source>
-        <translation></translation>
+        <translation>De tijd, in milliseconden, alvorens hulpballonnen worden getoond.
+
+Nul = direct tonen.
+
+-1 = standaard Qt-instelling gebruiken.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1786"/>
@@ -1024,7 +1028,7 @@ By default, combo popups do not cover the combo box.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1504"/>
         <source>Tooltip delay:</source>
-        <translation></translation>
+        <translation>Hulpballonvertraging:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="943"/>
@@ -1057,12 +1061,16 @@ in beslag.</translation>
 
 -1 means no popup (opening by clicking),
 while 0 means no delay.</source>
-        <translation></translation>
+        <translation>De wachttijd, in milliseconden, alvorens een onderliggend menu wordt geopend.
+Standaard: 250.
+
+-1 = niet automatisch (openen door aanklikken);
+0 = geen wachttijd.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1518"/>
         <source>Submenu delay: </source>
-        <translation></translation>
+        <translation>Vertraging onderliggend menu: </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1532"/>
@@ -1152,7 +1160,7 @@ between toolbar separators.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1721"/>
         <source>Group toolbar buttons</source>
-        <translation></translation>
+        <translation>Werkbalkknoppen groeperen</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1748"/>
@@ -1217,28 +1225,29 @@ Uncheck it if you want to use those options!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1604"/>
         <source>Respect current DE if possible</source>
-        <translation></translation>
+        <translation>Huidige werkomgeving respecteren (indien mogelijk)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1710"/>
         <source>Combo popup as menu</source>
-        <translation></translation>
+        <translation>Aankruislijst openen als menu</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1758"/>
         <source>Left aligned tabs</source>
-        <translation></translation>
+        <translation>Tabbladen links uitlijnen</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1775"/>
         <source>Inactive tabs are joined together by default,
 i.e., there is no border between them.</source>
-        <translation></translation>
+        <translation>Inactieve tabbladen worden standaard samengevoegd,
+dus zonder rand ertussen.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1779"/>
         <source>Join inactive tabs</source>
-        <translation></translation>
+        <translation>Inactieve tabbladen samenvoegen</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1966"/>
@@ -1275,7 +1284,7 @@ This option will hide these.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1735"/>
         <source>Non-checkable combo menu</source>
-        <translation></translation>
+        <translation>Niet-aankruisbare uitklapmenu&apos;s</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1960"/>
@@ -1283,10 +1292,10 @@ This option will hide these.</source>
 scroll arrows on their top and/or bottom?
 
 By default, big menus are scrollable.</source>
-        <translation>Moeten lange menu&apos;s scrolbaar zijn en scrol-
+        <translation>Moeten lange menu&apos;s verschuifbaar zijn en verschuif-
 pijlen tonen aan de boven- en onderkant?
 
-Standaard zijn zulke menu&apos;s scrolbaar.</translation>
+Standaard zijn zulke menu&apos;s altijd verschuifbaar.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1973"/>
@@ -1309,42 +1318,42 @@ middels de Ctrl-toets.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="2003"/>
         <source>Application Themes</source>
-        <translation></translation>
+        <translation>Programmathema&apos;s</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2009"/>
         <source>&lt;center&gt;Here you could assign themes to specific applications.&lt;/center&gt;&lt;br&gt;&lt;center&gt;For each theme, you could add a comma-separated list of executables whose applications should use that theme instead of the active theme. After doing so for all of your chosen themes, save the result by clicking on the &lt;i&gt;Save&lt;/i&gt; button!&lt;/center&gt;</source>
-        <translation></translation>
+        <translation>&lt;center&gt;Hier kun je thema&apos;s toekennen aan specifieke programma&apos;s.&lt;/center&gt;&lt;br&gt;&lt;center&gt;Bij elk thema kun je een kommagescheiden lijst met uitvoerbare bestanden opmaken die dát thema dienen te gebruiken in plaats van het actieve. Als je alles hebt ingesteld, klik dan op de knop &lt;i&gt;Opslaan&lt;/i&gt;!&lt;/center&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2044"/>
         <source>Installed Theme</source>
-        <translation></translation>
+        <translation>Geïnstalleerd thema</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2060"/>
         <source>Application(s)</source>
-        <translation></translation>
+        <translation>Programma(&apos;s)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2089"/>
         <source>app1,app2,app3</source>
-        <translation></translation>
+        <translation>programma1,programma2,programma3</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2117"/>
         <source>Remove List</source>
-        <translation></translation>
+        <translation>Lijst wissen</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2124"/>
         <source>Save the current list of apps</source>
-        <translation></translation>
+        <translation>Huidige programmalijst opslaan</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2127"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Save the current list of applications with their corresponding themes!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Bewaar de huidige programmalijst en hun ingestelde thema&apos;s.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2154"/>
@@ -1355,23 +1364,24 @@ middels de Ctrl-toets.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="2157"/>
         <source>Quit</source>
-        <translation></translation>
+        <translation>Afsluiten</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2170"/>
         <source>Preview the active theme
 or update its preview.</source>
-        <translation></translation>
+        <translation>Bekijk het huidige thema of
+werk de voorvertoning bij.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2174"/>
         <source>Preview</source>
-        <translation></translation>
+        <translation>Voorvertonen</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2181"/>
         <source>About</source>
-        <translation></translation>
+        <translation>Over</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2204"/>
@@ -1381,17 +1391,17 @@ or update its preview.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2207"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click on this button and then click on a GUI element that has &amp;quot;What&apos;s This&amp;quot; tooltip  to get information about what it does.&lt;/p&gt;&lt;p&gt;There are also ordinary tooltips but this kind of tooltip will not disappear until you click somewhere.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Klik op deze knop en vervolgens op een item met de &amp;quot;Wat is dit?&amp;quot;-uitleg om meer te weten te komen over de functie in kwestie.&lt;/p&gt;&lt;p&gt;Dit soort hulpballonnen verdwijnen pas als je ergens buiten de ballon klikt.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2210"/>
         <source>Help</source>
-        <translation></translation>
+        <translation>Hulp</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="380"/>
         <source>Open Kvantum Theme Folder...</source>
-        <translation></translation>
+        <translation>Kvantum-themamap openen…</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="200"/>
@@ -1410,41 +1420,41 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="651"/>
         <source>First you have to delete its modified version!</source>
-        <translation></translation>
+        <translation>Verwijder eerst de aangepaste versie!</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="675"/>
         <location filename="../../KvantumManager.cpp" line="829"/>
         <location filename="../../KvantumManager.cpp" line="2782"/>
         <source>Confirmation</source>
-        <translation></translation>
+        <translation>Bevestigen</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="790"/>
         <source>%1 installed.</source>
-        <translation></translation>
+        <translation>‘%1’ is geïnstalleerd.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="960"/>
         <source>%1 deleted.</source>
-        <translation></translation>
+        <translation>‘%1’ is verwijderd.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="1014"/>
         <source>Theme changed to %1.</source>
-        <translation></translation>
+        <translation>Je hebt gekozen voor ‘%1’.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="568"/>
         <source>You have no permission to write here:</source>
-        <translation></translation>
+        <translation>Je bent niet bevoegd om hier te mogen schrijven:</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="108"/>
         <location filename="../../KvantumManager.cpp" line="112"/>
         <location filename="../../KvantumManager.cpp" line="118"/>
         <source>Follow Style</source>
-        <translation></translation>
+        <translation>Stijl volgen</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="109"/>
@@ -1454,27 +1464,27 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="110"/>
         <source>Double Click</source>
-        <translation>Dubbel klikken</translation>
+        <translation>Dubbelklikken</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="113"/>
         <source>Icon Only</source>
-        <translation></translation>
+        <translation>Alleen pictogrammen</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="114"/>
         <source>Text Only</source>
-        <translation></translation>
+        <translation>Alleen tekst</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="115"/>
         <source>Text Beside Icon</source>
-        <translation></translation>
+        <translation>Tekst naast pictogrammen</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="116"/>
         <source>Text Under Icon</source>
-        <translation></translation>
+        <translation>Tekst onder pictogrammen</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="119"/>
@@ -1504,173 +1514,173 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="125"/>
         <source>Titlebar</source>
-        <translation></translation>
+        <translation>Titelbalk</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="126"/>
         <source>Menubar</source>
-        <translation></translation>
+        <translation>Menubalk</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="127"/>
         <source>Menubar and primary toolbar</source>
-        <translation></translation>
+        <translation>Menubalk en hoofdwerkbalk</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="128"/>
         <source>Anywhere possible</source>
-        <translation></translation>
+        <translation>Overal</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="570"/>
         <source>Please fix that first!</source>
-        <translation></translation>
+        <translation>Los dat eerst op!</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="582"/>
         <source>This file cannot be removed:</source>
-        <translation></translation>
+        <translation>Het volgende bestand kan niet worden verwijderd:</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="601"/>
         <location filename="../../KvantumManager.cpp" line="612"/>
         <source>This is not an installable Kvantum theme!</source>
-        <translation></translation>
+        <translation>Deze map bevat geen Kvantum-thema!</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="602"/>
         <source>The name of an installable themes should not be &quot;Default&quot;.</source>
-        <translation></translation>
+        <translation>Themanamen mogen niet het woord ‘Default’ bevatten.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="603"/>
         <location filename="../../KvantumManager.cpp" line="614"/>
         <location filename="../../KvantumManager.cpp" line="624"/>
         <source>Please select another directory!</source>
-        <translation></translation>
+        <translation>Kies een andere map!</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="613"/>
         <source>Installable themes should not have # in their names.</source>
-        <translation></translation>
+        <translation>Themanamen mogen geen # bevatten.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="623"/>
         <source>This is not a Kvantum theme folder!</source>
-        <translation></translation>
+        <translation>Dit is géén Kvantum-themamap!</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="650"/>
         <source>The theme already exists in modified form.</source>
-        <translation></translation>
+        <translation>Dit thema is al geïnstalleerd, hetzij in aangepaste vorm.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="665"/>
         <source>You have selected an installed theme folder.</source>
-        <translation></translation>
+        <translation>Je hebt de map van een reeds geïnstalleerd thema gekozen.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="666"/>
         <source>Please choose another directory!</source>
-        <translation></translation>
+        <translation>Kies een andere map!</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="676"/>
         <source>The theme already exists.</source>
-        <translation></translation>
+        <translation>Dit thema is al geïnstalleerd.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="677"/>
         <source>Do you want to overwrite it?</source>
-        <translation></translation>
+        <translation>Wil je het overschrijven?</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="712"/>
         <source>This theme is also installed as root in:</source>
-        <translation></translation>
+        <translation>Dit thema is tevens als ‘root’ geïnstalleerd in:</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="714"/>
         <source>The user installation will take priority.</source>
-        <translation></translation>
+        <translation>Je eigen installatie geniet de voorkeur.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="728"/>
         <source>This theme is also installed as user in:</source>
-        <translation></translation>
+        <translation>Dit thema is tevens geïnstalleerd als gebruikersthema in:</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="730"/>
         <source>This installation will take priority.</source>
-        <translation></translation>
+        <translation>Deze installatie geniet de voorkeur.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="830"/>
         <source>Do you really want to delete &lt;i&gt;%1&lt;/i&gt;?</source>
-        <translation></translation>
+        <translation>Weet je zeker dat je &lt;i&gt;%1&lt;/i&gt; wilt verwijderen?</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="833"/>
         <source>It could not be restored unless you have a copy of it.</source>
-        <translation></translation>
+        <translation>Herstel is niet mogelijk, tenzij je een reservekopie hebt.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="1400"/>
         <location filename="../../KvantumManager.cpp" line="1420"/>
         <source>These are the settings that can be safely changed.&lt;br&gt;For the others, click &lt;i&gt;Save&lt;/i&gt; and then edit this file:</source>
-        <translation></translation>
+        <translation>Dit zijn de instellingen die veilig kunnen worden aangepast.&lt;br&gt;De rest kan worden aangepast door op &lt;i&gt;Opslaan&lt;/i&gt; te klikken en het bestand aan te passen:</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="1416"/>
         <location filename="../../KvantumManager.cpp" line="2686"/>
         <source>These are the settings that can be safely changed.&lt;br&gt;For the others, edit this file:</source>
-        <translation></translation>
+        <translation>Dit zijn de instellingen die veilig kunnen worden aangepast.&lt;br&gt;De rest kan worden aangepast door het bestand aan te passen:</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="1812"/>
         <source>No description</source>
-        <translation></translation>
+        <translation>Geen omschrijving</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2269"/>
         <source>A copy of the root config is created.</source>
-        <translation></translation>
+        <translation>Er is een kopie van de ‘root’-instellingen gemaakt.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2280"/>
         <source>A copy was already created.</source>
-        <translation></translation>
+        <translation>Er is al een kopie gemaakt.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2672"/>
         <source>Configuration saved.</source>
-        <translation></translation>
+        <translation>De instellingen zijn opgeslagen.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2783"/>
         <source>Do you want to revert to the default (root) settings of this theme?</source>
-        <translation></translation>
+        <translation>Weet je zeker dat je de standaardinstellingen (‘root’) van dit thema wilt terugzetten?</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2786"/>
         <source>You will lose the changes you might have made.</source>
-        <translation></translation>
+        <translation>Alle aangebrachte wijzigingen gaan verloren.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2821"/>
         <source>Restored the root default settings of %1</source>
-        <translation></translation>
+        <translation>De standaardinstellingen (‘root’) van %1 zijn hersteld.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2822"/>
         <source>the default theme</source>
-        <translation></translation>
+        <translation>het standaardthema</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2982"/>
         <location filename="../../KvantumManager.cpp" line="2983"/>
         <source>About Kvantum Manager</source>
-        <translation></translation>
+        <translation>Over Kvantum-beheer</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2982"/>
@@ -1680,7 +1690,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="2980"/>
         <source>A tool for installing, selecting&lt;br&gt;and configuring &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt; themes</source>
-        <translation></translation>
+        <translation>Een hulpprogramma voor het installeren, kiezen&lt;br&gt;en afstellen van &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt;-thema&apos;s</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2981"/>
@@ -1690,29 +1700,29 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="51"/>
         <source>modified</source>
-        <translation></translation>
+        <translation>aangepast</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="52"/>
         <source>default</source>
-        <translation></translation>
+        <translation>standaard</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="580"/>
         <source>This directory cannot be removed:</source>
-        <translation></translation>
+        <translation>De volgende map kan niet worden verwijderd:</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="587"/>
         <source>You might want to investigate the cause.</source>
-        <translation></translation>
+        <translation>Doe onderzoek naar dit probleem.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="1013"/>
         <location filename="../../KvantumManager.cpp" line="2212"/>
         <location filename="../../KvantumManager.cpp" line="2681"/>
         <source>Active theme:</source>
-        <translation></translation>
+        <translation>Huidig thema:</translation>
     </message>
 </context>
 <context>
@@ -1725,12 +1735,12 @@ or update its preview.</source>
     <message>
         <location filename="../../main.cpp" line="148"/>
         <source>Kvantum is not installed on your system.</source>
-        <translation></translation>
+        <translation>Kvantum is niet geïnstalleerd.</translation>
     </message>
     <message>
         <location filename="../../main.cpp" line="149"/>
         <source>Please first install the Kvantum style plugin!</source>
-        <translation></translation>
+        <translation>Installeer de Kvantum-stijlplug-in!</translation>
     </message>
 </context>
 </TS>
