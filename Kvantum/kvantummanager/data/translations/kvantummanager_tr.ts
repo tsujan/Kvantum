@@ -368,12 +368,13 @@ Bu devre dışı bırakılmışsa, bkz.
         <location filename="../../kvantummanager.ui" line="532"/>
         <source>By default, both active and inactive translucent windows
 will be blurred if blurring is enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Varsayılan olarak, hem etkin hem de etkin olmayan yarı saydam pencereler
+bulanıklaştırma etkinleştirilirse bulanıklaştırılacaktır.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="536"/>
         <source>No blurring for inactive windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Etkin olmayan pencereler için bulanıklık yok</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="543"/>
@@ -422,7 +423,11 @@ when the scrollbar is left clicked.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation type="unfinished"></translation>
+        <translation>Varsayılan olarak, kaydırma çubuğu, kaydırma
+ çubuğuna sol tıklandığında bir konuma atlar.
+
+Bu devre dışıysa, bkz.
+Çeşitli → Mümkünse mevcut DE&apos;ye uyun</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="683"/>
@@ -1331,7 +1336,12 @@ only to translucent windows that support the blur
 effect (but the KDE blur effect can be disabled).
 
 A value of 1.00 means no change.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu, KDE kontrast efektine ihtiyaç duyar ve yalnızca
+ bulanıklaştırma efektini destekleyen yarı saydam
+ pencerelere uygulanır (ancak KDE bulanıklaştırma
+ efekti devre dışı bırakılabilir).
+
+1.00 değeri, değişiklik olmadığı anlamına gelir.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1728"/>
@@ -1357,7 +1367,10 @@ Bu seçenek bunları gizleyecektir.</translation>
 scroll arrows on their top and/or bottom?
 
 By default, big menus are scrollable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Büyük menüler kaydırılabilir olmalı ve üstlerinde
+ ve/veya altlarında kaydırma okları olmalı mı?
+
+Varsayılan olarak, büyük menüler kaydırılabilir.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1973"/>
