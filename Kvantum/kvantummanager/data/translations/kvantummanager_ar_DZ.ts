@@ -6,7 +6,7 @@
     <message>
         <location filename="../../about.ui" line="159"/>
         <source>License</source>
-        <translation type="unfinished"></translation>
+        <translation>الرخصة</translation>
     </message>
 </context>
 <context>
@@ -14,49 +14,50 @@
     <message>
         <location filename="../../kvantummanager.ui" line="12"/>
         <source>Kvantum Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>مدير Kvantum</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="38"/>
         <source>Install/Update Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>تثبيت\تحديث الثيم</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="44"/>
         <source>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; comes with many themes but external themes can also be installed for being used by it. Here you could choose a theme folder and then press the button below to install it in your Home.&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; يأتي مع العديد من الثيمات لكن الثيمات الخارجية يمكن أن يتم تثبيتها لاستخدامها في التطبيق. هنا يمكنك أن تختار المجلد الذي تتواجد فيه الثيم و من ثم الضغط على الزر في الأسفل ليتم تثبيت الثيم في مجلد البداية الخاص بك.&lt;/center&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="76"/>
         <source>Select a Kvantum
 theme folder</source>
-        <translation type="unfinished"></translation>
+        <translation>اختر مجلد ثيم خاص بـ Kvantum</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="113"/>
         <source>Add this theme to the list of themes that
 Kvantum can use in addition to its own themes.</source>
-        <translation type="unfinished"></translation>
+        <translation>أضف هذه الثيم إلى قائمة الثيمات التي
+Kvantum يستطيع استخدامها بالإضافة إلى ثيماته الخاصة.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="117"/>
         <source>Install this theme</source>
-        <translation type="unfinished"></translation>
+        <translation>تثبيت هذه الثيم</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="138"/>
         <source>Change/Delete Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>تغيير\حذف ثيم</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="144"/>
         <source>Select a theme:</source>
-        <translation type="unfinished"></translation>
+        <translation>اختيار ثيم:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="191"/>
         <source>Delete this theme</source>
-        <translation type="unfinished"></translation>
+        <translation>احذف هذه الثيم</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="198"/>
@@ -64,82 +65,89 @@ Kvantum can use in addition to its own themes.</source>
 
 A disabled button means that
 the theme is already used.</source>
-        <translation type="unfinished"></translation>
+        <translation>دع Kvantum يستخدم هذه الثيم!
+
+إذا كان الزر معطلاً فهذا يعني أن
+الثيم قيد الاستخدام.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="204"/>
         <source>Use this theme</source>
-        <translation type="unfinished"></translation>
+        <translation>استخدم هذه الثيم</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="257"/>
         <source>Configure Active Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>ضبط الثيم المفعلة</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="321"/>
         <source>Revert to the default (root)
 settings of this theme.
 (Ctrl+Z)</source>
-        <translation type="unfinished"></translation>
+        <translation>العودة إلى الإعدادات (روت)
+الافتراضية لهذه الثيم.
+(Ctrl+Z)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="326"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Revert to the default (root) settings of this theme!&lt;/p&gt;&lt;p&gt;When clicked and confirmed, all changes to the configuration will be lost but the probable customized SVG file will remain intact.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;العودة إلى الإعدادات الافتراضية (روت) لهذه الثيم!&lt;/p&gt;&lt;p&gt;عند الضغط و التأكيد، كافة التغييرات التي تم اجراءها سيتم فقدانها لكن من المحتمل أن ملف SVG المخصص لن يتم المساس به.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="329"/>
         <source>Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>استعادة</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="332"/>
         <source>Ctrl+Z</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Z</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="342"/>
         <source>Save this configuration
 (Ctrl+S)</source>
-        <translation type="unfinished"></translation>
+        <translation>حفظ هذه الإعدادات
+(Ctrl+S)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="346"/>
         <location filename="../../kvantummanager.ui" line="2130"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>حفظ</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="349"/>
         <source>Ctrl+S</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+S</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="356"/>
         <source>Safe Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>إعدادات آمنة</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="369"/>
         <source>Uncheck all these boxes if you want all
 widgets to appear as they are by default.</source>
-        <translation type="unfinished"></translation>
+        <translation>أزل التحديد عن كافة هذه الصناديق إذا أردت أن كافة
+النوافذ المصغرة أن تظهر بشكلها الافتراضي.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="373"/>
         <source>Hacks</source>
-        <translation type="unfinished"></translation>
+        <translation>خدع</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="397"/>
         <source>Transparent Dolphin view</source>
-        <translation type="unfinished"></translation>
+        <translation>إضافة شفافية إلى Dolphin</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="425"/>
         <source>Normal font for default push buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>استخدام الخطوط العادية مع أزرار الضغط الافتراضية</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="445"/>
@@ -148,17 +156,21 @@ widgets to appear as they are by default.</source>
 Under LXQt, it needs logging out and in or closing
 PCManFM-qt and then, stopping and starting Desktop
 with LXQt Session Settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>دمج اللوحة الجانبية الخاصة ب PCManFM-qt مع محيطها.
+
+إذا كنت ضمن LXQT، فإنه من الضروري تسجيل الخروج و من ثم تسجيل الدخول أو إغلاق
+PCManFM-qt و من ثم، إغلاق و بدأ سطح المكتب
+مع إعدادات LXQT.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="452"/>
         <source>Transparent sidepane for PCManFM-qt</source>
-        <translation type="unfinished"></translation>
+        <translation>إضافة شفافية إلى اللوحة الجانبية الخاصة ب PCManFM-qt</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="467"/>
         <source>Iconless push buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>أزرار بدون أيقونات</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="474"/>
@@ -167,37 +179,41 @@ with LXQt Session Settings.</source>
 Under LXQt, it needs logging out and in or closing
 PCManFM-qt and then, stopping and starting Desktop
 with LXQt Session Settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>دمج النافذه الأساسية الخاصة ب PCManFM-qt مع محيطها.
+
+إذا كنت ضمن LXQT، فإنه من الضروري تسجيل الخروج و من ثم تسجيل الدخول أو إغلاق
+PCManFM-qt و من ثم، إغلاق و بدأ سطح المكتب
+مع إعدادات LXQT.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="481"/>
         <source>Transparent view for PCManFM-qt</source>
-        <translation type="unfinished"></translation>
+        <translation>إضافة شفافية إلى النافذه الأساسية الخاصة بـ PCManFM-qt</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="496"/>
         <source>Iconless menus</source>
-        <translation type="unfinished"></translation>
+        <translation>قوائم بدون أيقونات</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="511"/>
         <source>Blur explicitly translucent windows</source>
-        <translation type="unfinished"></translation>
+        <translation>إضافة ضبابية إلى النوافذ التي تحتوي على شفافية بشكل صريح</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="525"/>
         <source>Single top toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>شريط أدوات علوي منفرد</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="555"/>
         <source>Do not draw any background for KTitles.</source>
-        <translation type="unfinished"></translation>
+        <translation>لا تقم بوضع أية خلفية لـ KTiles.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="558"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do not draw any background for KTitles?&lt;/p&gt;&lt;p&gt;Ktitles are used by some KDE applications to show different sections in configuration dialogs.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;لا تقم بوضع أية خلفية لـ KTiles؟&lt;/p&gt;&lt;p&gt;KTiles يتم استخدامها من قبل بعض تطبيقات KDE لإظهار الأقسام المختلفة في مربعات حوار الإعدادات.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="561"/>
