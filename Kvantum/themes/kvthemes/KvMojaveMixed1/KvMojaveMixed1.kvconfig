@@ -154,7 +154,7 @@ text.margin.bottom=2
 text.margin.left=4
 text.margin.right=4
 frame.expansion=12
-min_width=+4
+min_width=+2
 
 [PanelButtonTool]
 inherits=PanelButtonCommand
