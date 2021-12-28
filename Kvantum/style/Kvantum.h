@@ -496,7 +496,7 @@ class Style : public QCommonStyle {
     mutable int ticklessSliderHandleSize_;
 
     /* For identifying KisSliderSpinBox */
-    bool isKisSlider_;
+    bool isKisSlider_, isKisSlider1_;
 
     /* Keep track of the sunken button (used instead of a private header for menu positioning). */
     //mutable KvPointer<QWidget> sunkenButton_;

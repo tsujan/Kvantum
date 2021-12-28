@@ -1,3 +1,7 @@
+V1.0.1
+---------
+ * Added a workaround for the wrong style code of "KisDoubleSliderSpinBox" in Krita 5.0.0.
+
 V1.0.0
 ---------
  * Enabled experimental compilation of Kvantum's plugin against Qt6. With cmake, "ENABLE_QT5" should be set to "OFF" (as in `cmake .. -DENABLE_QT5=OFF`) — it's "ON" by default.
