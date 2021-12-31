@@ -314,7 +314,6 @@ Style::Style(bool useDark) : QCommonStyle()
   isOpaque_ = false;
   ticklessSliderHandleSize_ = -1;
   isKisSlider_ = false;
-  isKisSlider1_ = false;
 
   connect(progressTimer_, &QTimer::timeout, this, &Style::advanceProgressbar);
 
@@ -3718,8 +3717,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
       const QStyleOptionSpinBox *sbOpt = qstyleoption_cast<const QStyleOptionSpinBox*>(option);
       bool insideSpinBox(sb || sbOpt
                          || (p && (p->inherits("KisAbstractSliderSpinBox")
-                                   || p->inherits("Digikam::DAbstractSliderSpinBox")
-                                   || p->inherits("KisDoubleSliderSpinBox")))
+                                   || p->inherits("Digikam::DAbstractSliderSpinBox")))
                          /*|| (isLibreoffice_ && sbOpt)*/);
 
       if (!widget) // WARNING: QML has anchoring!
@@ -3776,7 +3774,11 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         // the measure we used for CC_SpinBox at drawComplexControl()
         if (fspec.HPos == -1 && (tspec_.vertical_spin_indicators
                                  || (!widget && sbOpt && sbOpt->frame)
-                                 || isKisSlider1_))
+                                 // Krita 5.0.0
+                                 || (widget && (widget->inherits("KisIntParseSpinBox")
+                                                || widget->inherits("KisDoubleParseSpinBox")))
+                                 || (p && (p->inherits("KisIntParseSpinBox")
+                                           || p->inherits("KisDoubleParseSpinBox")))))
         {
           fspec.left = qMin(fspec.left,3);
           fspec.right = qMin(fspec.right,3);
@@ -3999,7 +4001,9 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
       // the measure we used in CC_SpinBox at drawComplexControl() (for QML)
       bool verticalIndicators(tspec_.vertical_spin_indicators
                               || (!widget && opt && opt->frame)
-                              || isKisSlider1_);
+                              // Krita 5.0.0
+                              || (widget && (widget->inherits("KisIntParseSpinBox")
+                                             || widget->inherits("KisDoubleParseSpinBox"))));
 
       frame_spec fspec;
       int vOffset = 0;
@@ -10796,16 +10800,18 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
         /* If a null widget is fed into this method but the spinbox
            has a frame (QML), we'll draw buttons vertically. Fortunately,
            KisSliderSpinBox never fulfills this condition. */
+        bool isKisSlider1((widget && (widget->inherits("KisIntParseSpinBox")
+                                      || widget->inherits("KisDoubleParseSpinBox")))); // Krita 5.0.0
         bool verticalIndicators(tspec_.vertical_spin_indicators
                                 || (!widget && opt->frame)
-                                || isKisSlider1_);
+                                || isKisSlider1);
         QRect editRect = subControlRect(CC_SpinBox,opt,SC_SpinBoxEditField,widget);
         QLineEdit *le = nullptr;
 
         /* The field is automatically drawn as lineedit at PE_PanelLineEdit.
            So, we don't duplicate it here but there are some exceptions. */
         if (/*isLibreoffice_
-            ||*/ ((!widget || isKisSlider1_) && opt->frame && (opt->subControls & SC_SpinBoxFrame)))
+            ||*/ ((!widget || isKisSlider1) && opt->frame && (opt->subControls & SC_SpinBoxFrame)))
         {
           o.rect = editRect;
           drawPrimitive(PE_PanelLineEdit,&o,painter,widget);
@@ -13590,7 +13596,9 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
       else if (opt && opt->buttonSymbols == QAbstractSpinBox::NoButtons)
         hasButtons = false;
       frame_spec fspec = getFrameSpec(QStringLiteral("LineEdit"));
-      if ((tspec_.vertical_spin_indicators || isKisSlider1_) && hasButtons)
+      bool isKisSlider1((widget && (widget->inherits("KisIntParseSpinBox")
+                                    || widget->inherits("KisDoubleParseSpinBox")))); // Krita 5.0.0
+      if ((tspec_.vertical_spin_indicators || isKisSlider1) && hasButtons)
       {
         fspec.left = qMin(fspec.left,3);
         fspec.right = qMin(fspec.right,3);
@@ -13610,7 +13618,7 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
           extraWidth = fspec.left + lspec.left + fspec.right + lspec.right
                        + (sspecLE.incrementW ? sspecLE.minW : 0);
         }
-        else if (tspec_.vertical_spin_indicators || isKisSlider1_)
+        else if (tspec_.vertical_spin_indicators || isKisSlider1)
           extraWidth = fspec.left + tspec_.spin_button_width + fspec.right;
         else
         {
@@ -13628,7 +13636,7 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
           s = txtSize
               + QSize(extraWidth,
                       lspec.top + lspec.bottom
-                      + (tspec_.vertical_spin_indicators || isKisSlider1_ || !hasButtons
+                      + (tspec_.vertical_spin_indicators || isKisSlider1 || !hasButtons
                          ? fspec.top + fspec.bottom
                          : (qMax(fspec1.top,fspec.top) + qMax(fspec1.bottom,fspec.bottom))));
         }
@@ -13636,7 +13644,7 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
         {
           /* This is for some apps (like Kdenlive with its
              TimecodeDisplay) that subclass only QAbstractSpinBox. */
-          if (tspec_.vertical_spin_indicators || isKisSlider1_ || !hasButtons)
+          if (tspec_.vertical_spin_indicators || isKisSlider1 || !hasButtons)
             s.rwidth() = sb->minimumWidth();
           else
             s.rwidth() = sb->minimumWidth() + tspec_.spin_button_width;
@@ -13655,7 +13663,7 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
         else
         {
           /* the measure we used in CC_SpinBox at drawComplexControl() (for QML) */
-          if (tspec_.vertical_spin_indicators || (!widget && opt->frame) || isKisSlider1_)
+          if (tspec_.vertical_spin_indicators || (!widget && opt->frame) || isKisSlider1)
             buttonWidth = tspec_.spin_button_width + qMin(fspec.right,3);
           else
             buttonWidth = 2*tspec_.spin_button_width + fspec1.right;
@@ -14704,7 +14712,11 @@ QRect Style::subElementRect(QStyle::SubElement element, const QStyleOption *opti
       if (sb)
       {
         lspec.right = 0;
-        if ((!tspec_.vertical_spin_indicators && !isKisSlider1_) || sb->buttonSymbols() == QAbstractSpinBox::NoButtons)
+        if ((!tspec_.vertical_spin_indicators
+             // Krita 5.0.0
+             && !sb->inherits("KisIntParseSpinBox")
+             && !sb->inherits("KisDoubleParseSpinBox"))
+            || sb->buttonSymbols() == QAbstractSpinBox::NoButtons)
         {
           QString maxTxt = spinMaxText(sb);
           if (maxTxt.isEmpty()
@@ -15414,7 +15426,9 @@ QRect Style::subControlRect(QStyle::ComplexControl control,
       // the measure we used in CC_SpinBox at drawComplexControl() (for QML)
       bool verticalIndicators(tspec_.vertical_spin_indicators
                               || (!widget && opt && opt->frame)
-                              || isKisSlider1_);
+                              // Krita 5.0.0
+                              || (widget && (widget->inherits("KisIntParseSpinBox")
+                                             || widget->inherits("KisDoubleParseSpinBox"))));
 
       bool hasButtons = true;
       if (sb)

@@ -206,8 +206,6 @@ bool Style::eventFilter(QObject *o, QEvent *e)
     {
       if (w->inherits("KisAbstractSliderSpinBox") || w->inherits("Digikam::DAbstractSliderSpinBox"))
         isKisSlider_ = true;
-      else if (w->inherits("KisDoubleSliderSpinBox"))
-        isKisSlider1_ = true; // Krita 5.0.0 (draws progressbar in its code)
       else if (QProgressBar *pb = qobject_cast<QProgressBar*>(o))
       {
         if (pb->maximum() == 0 && pb->minimum() == 0)

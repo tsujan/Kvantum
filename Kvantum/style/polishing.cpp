@@ -818,7 +818,6 @@ void Style::polish(QWidget *widget)
                its progressbar, so we can identify it only through eventFilter()
                (digiKam has its own version of it, called "DAbstractSliderSpinBox") */
            || widget->inherits("KisAbstractSliderSpinBox") || widget->inherits("Digikam::DAbstractSliderSpinBox")
-           || widget->inherits("KisDoubleSliderSpinBox") // Krita 5.0.0
            /* Although KMultiTabBarTab is a push button, it uses PE_PanelButtonTool
               for drawing its panel, but not if its state is normal. To force the
               normal text color on it, we need to make it use PE_PanelButtonTool
@@ -1169,7 +1168,6 @@ void Style::unpolish(QWidget *widget)
 
     if (widget->inherits("KisAbstractSliderSpinBox")
         || widget->inherits("Digikam::DAbstractSliderSpinBox")
-        || widget->inherits("KisDoubleSliderSpinBox")
         || widget->inherits("KMultiTabBarTab")
         || qobject_cast<QProgressBar*>(widget)
         || qobject_cast<QAbstractSpinBox*>(widget)
