@@ -4938,7 +4938,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           o.arrowType = Qt::LeftArrow;
         else
           o.arrowType = Qt::RightArrow;
-        if (option->state & State_Enabled)
+        if (tb->isEnabled())
         {
           o.state = State_Enabled;
           if (tb->isChecked())
@@ -4949,7 +4949,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
             o.state |= State_MouseOver;
         }
         else
-          o.state = option->state;
+          o.state = State_None;
         drawControl(CE_ToolButtonLabel,&o,painter,widget);
         break;
       }
