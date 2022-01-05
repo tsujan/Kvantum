@@ -4919,12 +4919,13 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
     case PE_IndicatorArrowDown :
     case PE_IndicatorArrowLeft :
     case PE_IndicatorArrowRight : {
-      if (qobject_cast<const QToolButton*>(widget))
+      if (const QToolButton *tb = qobject_cast<const QToolButton*>(widget))
       {
         /* if this is a tool button, the richer function
            drawControl(CE_ToolButtonLabel,...) should be called instead */
         QStyleOptionToolButton o;
         o.initFrom(widget);
+        o.rect = option->rect;
         o.toolButtonStyle = Qt::ToolButtonIconOnly;
         o.text = QString();
         o.icon = QIcon();
@@ -4937,7 +4938,18 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           o.arrowType = Qt::LeftArrow;
         else
           o.arrowType = Qt::RightArrow;
-        o.state = option->state;
+        if (option->state & State_Enabled)
+        {
+          o.state = State_Enabled;
+          if (tb->isChecked())
+            o.state |= State_On;
+          else if (tb->isDown())
+            o.state |= State_Sunken;
+          else if (tb->underMouse())
+            o.state |= State_MouseOver;
+        }
+        else
+          o.state = option->state;
         drawControl(CE_ToolButtonLabel,&o,painter,widget);
         break;
       }
