@@ -2,6 +2,7 @@ V1.0.1
 ---------
  * Added a workaround for the wrong style code of "KisDoubleSliderSpinBox" in Krita 5.0.0.
  * Fixed drawing of separate arrow indicators on tool buttons in rare cases.
+ * Give 16px to the width of vertical spinbox buttons.
 
 V1.0.0
 ---------

@@ -4205,16 +4205,11 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           painter->restore();
       }
 
-      Qt::Alignment align;
-      // horizontally center both indicators
-      if (!verticalIndicators)
-        align = Qt::AlignCenter;
-      else
+      if (verticalIndicators)
       {
         fspec.left = 0;
         if (up) fspec.bottom = 0;
         else fspec.top = 0;
-        align = Qt::AlignRight | Qt::AlignVCenter;
       }
       if ((verticalIndicators || tspec_.inline_spin_indicators)
           && themeRndr_ && themeRndr_->isValid())
@@ -4239,7 +4234,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
                       fspec,dspec,
                       dspec.element+iString+iStatus,
                       option->direction,
-                      align,
+                      Qt::AlignCenter, // horizontally center both indicators
                       vOffset);
 
       break;
@@ -15476,11 +15471,11 @@ QRect Style::subControlRect(QStyle::ComplexControl control,
           {
             sw = 16;
             // in this case, lineedit frame width is set to 3 at PE_PanelLineEdit
-            rightFrame = w-txtWidth-2*sw-3-2;
+            rightFrame = w - txtWidth - 2*sw - 3 - 2;
             if (fspec.right > rightFrame)
             {
               rightFrame = qMax(rightFrame,2);
-              if (rightFrame > 2 || w >= txtWidth+ 2*8 + 2) // otherwise wouldn't help
+              if (rightFrame > 2 || w >= txtWidth + 2*8 + 2) // otherwise wouldn't help
               {
                 if (rightFrame == 2) // see PE_IndicatorSpinUp
                   sw = 8;
@@ -15498,7 +15493,7 @@ QRect Style::subControlRect(QStyle::ComplexControl control,
       {
         fspecLE.right = qMin(fspecLE.right,3);
         fspec = fspecLE;
-        sw = 8;
+        sw = 16 - fspecLE.right; // give 16px to the total width
       }
 
       // take into account the right frame width
