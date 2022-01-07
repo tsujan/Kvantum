@@ -14,49 +14,49 @@
     <message>
         <location filename="../../kvantummanager.ui" line="12"/>
         <source>Kvantum Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Gestione di Kvantum</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="38"/>
         <source>Install/Update Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Install/Aggiorna Tema</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="44"/>
         <source>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; comes with many themes but external themes can also be installed for being used by it. Here you could choose a theme folder and then press the button below to install it in your Home.&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&gt;/b&gt;viene con molti temi ma temi esterni possono anche essere installati per farlo usare. Qui puoi scegliere una cartella del tema e premi il bottone di sotto per installarlo nella tua Home.&lt;/center&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="76"/>
         <source>Select a Kvantum
 theme folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Scegli una cartella tema Kvantum</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="113"/>
         <source>Add this theme to the list of themes that
 Kvantum can use in addition to its own themes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aggiungi questo tema alla lista dei temi che Kvantum può usare inoltre ai suoi temi.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="117"/>
         <source>Install this theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Installa questo tema</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="138"/>
         <source>Change/Delete Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Cambia/Rimuovi Tema</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="144"/>
         <source>Select a theme:</source>
-        <translation type="unfinished"></translation>
+        <translation>Scegli un tema:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="191"/>
         <source>Delete this theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Rimuovi questo tema</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="198"/>
@@ -64,24 +64,27 @@ Kvantum can use in addition to its own themes.</source>
 
 A disabled button means that
 the theme is already used.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fai che Kvantum usi questo tema!
+
+Un bottone disabilitato significa
+che il tema è già in uso.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="204"/>
         <source>Use this theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Usa questo tema</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="257"/>
         <source>Configure Active Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Configura il Tema Attivo</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="321"/>
         <source>Revert to the default (root)
 settings of this theme.
 (Ctrl+Z)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ritorna alle impostazioni originarie di questo tema (CTRL+Z)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="326"/>
@@ -91,34 +94,35 @@ settings of this theme.
     <message>
         <location filename="../../kvantummanager.ui" line="329"/>
         <source>Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>Ripristina</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="332"/>
         <source>Ctrl+Z</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Z</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="342"/>
         <source>Save this configuration
 (Ctrl+S)</source>
-        <translation type="unfinished"></translation>
+        <translation>Salva questa configurazione
+(Ctrl+S)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="346"/>
         <location filename="../../kvantummanager.ui" line="2130"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Salva</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="349"/>
         <source>Ctrl+S</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+S</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="356"/>
         <source>Safe Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Impostazioni Sicure</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="369"/>
@@ -129,17 +133,17 @@ widgets to appear as they are by default.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="373"/>
         <source>Hacks</source>
-        <translation type="unfinished"></translation>
+        <translation>Trucchi</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="397"/>
         <source>Transparent Dolphin view</source>
-        <translation type="unfinished"></translation>
+        <translation>Vista Trasparente di Dolphin</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="425"/>
         <source>Normal font for default push buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>Fonte Normale per i bottoni push di default</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="445"/>
@@ -158,7 +162,7 @@ with LXQt Session Settings.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="467"/>
         <source>Iconless push buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>Bottoni push senza icona</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="474"/>
@@ -177,22 +181,22 @@ with LXQt Session Settings.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="496"/>
         <source>Iconless menus</source>
-        <translation type="unfinished"></translation>
+        <translation>Menu senza icona</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="511"/>
         <source>Blur explicitly translucent windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Blurra specificamente finestre translucenti</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="525"/>
         <source>Single top toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Barra di menu singola</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="555"/>
         <source>Do not draw any background for KTitles.</source>
-        <translation type="unfinished"></translation>
+        <translation>Non disegnare nessun sottofondo per KTitles.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="558"/>
@@ -202,13 +206,13 @@ with LXQt Session Settings.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="561"/>
         <source>Transparent KTitle label</source>
-        <translation type="unfinished"></translation>
+        <translation>Testo KTitle Trasparente</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="568"/>
         <source>Do not tint selected label icons with
 the highlight color!</source>
-        <translation type="unfinished"></translation>
+        <translation>Non dipingere le icone di con il colore evidenziato!</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="572"/>
@@ -218,13 +222,14 @@ the highlight color!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="575"/>
         <source>No selection tint</source>
-        <translation type="unfinished"></translation>
+        <translation>Nessuna tinta di selezione</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="582"/>
         <source>Do not draw any background for (KDE) menu titles.
 (Needs Logging out and in for Plasma menus.)</source>
-        <translation type="unfinished"></translation>
+        <translation>Non dipingere nessun sottofondo per (KDE) title di menu
+(Richiede Reloggare per i Menu Plasma)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="586"/>
@@ -234,7 +239,7 @@ the highlight color!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="589"/>
         <source>Transparent menu title</source>
-        <translation type="unfinished"></translation>
+        <translation>Titolo di menu trasparente</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="652"/>
@@ -247,7 +252,7 @@ the highlight color!</source>
         <location filename="../../kvantummanager.ui" line="1037"/>
         <location filename="../../kvantummanager.ui" line="1070"/>
         <source> %</source>
-        <translation type="unfinished"></translation>
+        <translation> %</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="612"/>
