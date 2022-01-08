@@ -369,12 +369,13 @@ Muut → Kunnioita nykyistä työpöytää jos mahdollista</translation>
         <location filename="../../kvantummanager.ui" line="532"/>
         <source>By default, both active and inactive translucent windows
 will be blurred if blurring is enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Oletuksena aktiiviset ja epäaktiiviset läpikuultavat ikkunat
+sumennetaan jos sumennus on käytössä.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="536"/>
         <source>No blurring for inactive windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Ei sumennusta epäaktiivisille ikkunoille</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="543"/>
