@@ -24,7 +24,7 @@
     <message>
         <location filename="../../kvantummanager.ui" line="44"/>
         <source>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; comes with many themes but external themes can also be installed for being used by it. Here you could choose a theme folder and then press the button below to install it in your Home.&lt;/center&gt;</source>
-        <translation>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; wordt geleverd met diverse thema&apos;s, maar je kunt ook je eigen thema&apos;s installeren. Hier kun je een themamap kiezen. Klik daarna op de knop hieronder om het thema te installeren in je persoonlijke map.&lt;/center&gt;</translation>
+        <translation>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; wordt geleverd met diverse thema&apos;s, maar je kunt ook je eigen thema&apos;s installeren. Hier kun je een themamap kiezen. Klik daarna op de knop hieronder om het gekozen thema te installeren in je persoonlijke map.&lt;/center&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="76"/>
@@ -194,7 +194,7 @@ via de LXQt-sessie-instellingen.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="496"/>
         <source>Iconless menus</source>
-        <translation>Geen pictogrammen in menu&apos;s</translation>
+        <translation>Geen pictogrammen tonen in menu&apos;s</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="511"/>
@@ -466,7 +466,7 @@ or through logging out and in again.</source>
 
 Waarden lager dan 16 betekenen ‘standaard menupictogramgrootte’.
 
-Het LXQt-paneel moet worden herstart via de sessie-instellingen
+Herstart hiervoor het LXQt-paneel via de sessie-instellingen
 of meld af en weer aan.</translation>
     </message>
     <message>
@@ -799,9 +799,7 @@ By default, some of them may have icon.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation>Geen pictogram op menu-items?
-
-Standaard gebruiken sommige items een pictogram.
+        <translation>Standaard wordt naast sommige items een pictogram getoond.
 
 Indien uitgeschakeld:
 Overig → Huidige werkomgeving respecteren (indien mogelijk)</translation>
@@ -1018,12 +1016,14 @@ spin-down one inside the spin line-edit.</source>
         <source>Draw combo popups as menu popups (i.e. like in Gtk)?
 
 By default, combo popups do not cover the combo box.</source>
-        <translation></translation>
+        <translation>Moeten uitrolmenu&apos;s aankruisbaar worden gemaakt, zoals bijv. in GTK?
+
+Standaard is dit niet het geval.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1755"/>
         <source>In Kvantum, tabs are centered by default.</source>
-        <translation></translation>
+        <translation>Kvantum centreert standaard alle tabbladen.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1504"/>
@@ -1149,7 +1149,7 @@ for menubars by default.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1698"/>
         <source>Merge menubar with toolbar</source>
-        <translation></translation>
+        <translation>Menubalken samenvoegen met werkbalken</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1717"/>
@@ -1165,7 +1165,7 @@ between toolbar separators.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1748"/>
         <source>Shift push-button contents</source>
-        <translation></translation>
+        <translation>Knopinhoud licht verschuiven na aanklikken</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1942"/>
@@ -1196,7 +1196,8 @@ between toolbar separators.</source>
         <location filename="../../kvantummanager.ui" line="1680"/>
         <source>Draw the whole editable combo-box as a
 line-edit with arrow (and icon, if it exists)?</source>
-        <translation></translation>
+        <translation>Moeten bewerkbare uitrolmenu&apos;s worden getoond als
+regelbewerking met een pijl (en evt. een pictogram)?</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1684"/>
@@ -1230,7 +1231,7 @@ Uncheck it if you want to use those options!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1710"/>
         <source>Combo popup as menu</source>
-        <translation>Aankruislijst openen als menu</translation>
+        <translation>Uitrolmenu&apos;s aankruisbaar maken</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1758"/>
@@ -1279,12 +1280,14 @@ there will be a checkbox next to each entry
 (although Kvantum draws it as a radio button).
 
 This option will hide these.</source>
-        <translation></translation>
+        <translation>Als je dit inschakelt, dan tonen menu&apos;s geen
+keuzevakje naast ieder item
+(bij gebruik van Kvantum: keuzerondje).</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1735"/>
         <source>Non-checkable combo menu</source>
-        <translation>Niet-aankruisbare uitklapmenu&apos;s</translation>
+        <translation>Geen keuzevakjes tonen in uitrolmenu&apos;s</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1960"/>
