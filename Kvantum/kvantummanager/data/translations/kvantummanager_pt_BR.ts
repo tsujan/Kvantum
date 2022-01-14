@@ -369,12 +369,12 @@ Diversos → Respeitar o DE atual se possível</translation>
         <location filename="../../kvantummanager.ui" line="532"/>
         <source>By default, both active and inactive translucent windows
 will be blurred if blurring is enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Por padrão, ambas as janelas translúcidas ativas e inativas serão borradas caso o embaçamento esteja ativado.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="536"/>
         <source>No blurring for inactive windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Sem desfoque para janelas inativas</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="543"/>
