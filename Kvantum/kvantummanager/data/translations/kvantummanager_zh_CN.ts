@@ -359,12 +359,13 @@ Miscellaneous → Respect current DE if possible</source>
         <location filename="../../kvantummanager.ui" line="532"/>
         <source>By default, both active and inactive translucent windows
 will be blurred if blurring is enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>默认情况下，如果启用了模糊处理，
+活动和非活动的半透明窗口都会被模糊处理。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="536"/>
         <source>No blurring for inactive windows</source>
-        <translation type="unfinished"></translation>
+        <translation>非活动窗口禁用模糊处理</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="543"/>

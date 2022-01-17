@@ -369,12 +369,13 @@ Miscellaneous → Respect current DE if possible</source>
         <location filename="../../kvantummanager.ui" line="532"/>
         <source>By default, both active and inactive translucent windows
 will be blurred if blurring is enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>По умолчанию, как активные, так и неактивные полупрозрачные окна
+будут размытыми, если размытие включёно.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="536"/>
         <source>No blurring for inactive windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Не размывать неактивные окна</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="543"/>
