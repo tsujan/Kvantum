@@ -668,7 +668,7 @@ mige programma&apos;s negeren dit.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1356"/>
         <source>Layout margin:</source>
-        <translation>Rand van indeling:</translation>
+        <translation>Indelingsmarge:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1379"/>
@@ -714,14 +714,14 @@ Standaard: 0.</translation>
         <source>Draw tree branch lines?
 
 By default, tree branches have indicators but no line.</source>
-        <translation>Lijnen in boomweergave tekenen?
+        <translation>Moeten er lijnen worden getoond in boomweergaven?
 
-Standaard ziet u lijnloze indicatoren.</translation>
+Standaard zijn boomweergaven lijnloos.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1902"/>
         <source>Dialog button layout:</source>
-        <translation>Indeling van vensterknoppen:</translation>
+        <translation>Vensterknopvolgorde:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1912"/>
@@ -1081,12 +1081,12 @@ Standaard: 250.
     <message>
         <location filename="../../kvantummanager.ui" line="1588"/>
         <source>Miscellaneous</source>
-        <translation></translation>
+        <translation>Overig</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1793"/>
         <source>No arrows for scrollbars</source>
-        <translation>Geen pijlen op schuifbalken</translation>
+        <translation>Geen pijlen tonen op schuifbalken</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1888"/>
@@ -1099,17 +1099,17 @@ If disabled, see Compositing &amp; General Look → Transient scrollbars!</sourc
 
 Standaard worden ze erbuiten getoond.
 
-If disabled, see Hardwareversnelling en algemene vormgeving → Opduikende schuifbalken!</translation>
+Indien uitgeschakeld: Hardwareversnelling en algemene vormgeving → Opduikende schuifbalken!</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1895"/>
         <source>Scrollbars inside frames</source>
-        <translation>Schuifbalken in weergaven</translation>
+        <translation>Schuifbalken binnen weergaven tonen</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1928"/>
         <source>Tree branch lines</source>
-        <translation></translation>
+        <translation>Lijnen tonen in boomweergaven</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1611"/>
@@ -1118,33 +1118,38 @@ and the frame is cut to contain it.
 
 Checking this puts the label right above
 the frame, so that the frame isn&apos;t cut.</source>
-        <translation></translation>
+        <translation>Standaard worden labels op kaderlijnen getoond
+en is er een onderbreking zichtbaar op de kaderlijnen.
+
+Door dit aan te kruisen worden labels rechtboven
+kaders getoond zodat de lijnen niet onderbroken worden.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1618"/>
         <source>Group-box label above frame</source>
-        <translation></translation>
+        <translation>Groepslabels boven kaders tonen</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1646"/>
         <source>Fill rubber-band rectangles</source>
-        <translation></translation>
+        <translation>Ruimtes in flexibele rechthoeken opvullen</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1666"/>
         <source>Mouse tracking is enabled
 for menubars by default.</source>
-        <translation></translation>
+        <translation>Standaard wordt de cursor gevolgd
+op menubalken.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1670"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mouse tracking is enabled for menubars by default, i.e., after a menubar item is clicked and its menu is shown, the menus of the other menubar items will be shown if the cursor is put on them without clicking.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Standaard wordt de cursor gevolgd op menubalken. Dit houdt in dat na het aanklikken van een menu de menu&apos;s van andere items worden getoond door de cursor erboven te houden (dus zonder ze aan te klikken).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1673"/>
         <source>Mouse tracking for menubars</source>
-        <translation></translation>
+        <translation>Menubalkitems tonen door cursor erboven te houden</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1698"/>
@@ -1155,7 +1160,8 @@ for menubars by default.</source>
         <location filename="../../kvantummanager.ui" line="1717"/>
         <source>If checked, toolbar buttons will be drawn grouped and raised
 between toolbar separators.</source>
-        <translation></translation>
+        <translation>Kruis aan om werkbalkknoppen gegroepeerd en duidelijk tussen
+scheidingslijnen te tonen.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1721"/>
@@ -1170,27 +1176,27 @@ between toolbar separators.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1942"/>
         <source>Drag from:</source>
-        <translation></translation>
+        <translation>Vensters verslepen vanaf:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1852"/>
         <source>Toolbutton style:</source>
-        <translation></translation>
+        <translation>Werkbalkknopstijl:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1765"/>
         <source>If unchecked, shortcuts will not be underlined at all.</source>
-        <translation></translation>
+        <translation>Kruis af om sneltoetsen niet te onderstrepen.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1768"/>
         <source>Underline shortcuts with Alt</source>
-        <translation></translation>
+        <translation>Sneltoetsen onderstrepen met Alt-toets</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1632"/>
         <source>Inline spin indicators</source>
-        <translation></translation>
+        <translation>Getalkeuzevakjes in velden tonen</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1680"/>
@@ -1202,17 +1208,17 @@ regelbewerking met een pijl (en evt. een pictogram)?</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1684"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Draw the whole editable combo-box as a line-edit with arrow (and icon, if it exists)?&lt;/p&gt;&lt;p&gt;By default, a combo-box consists of a line-edit, a button with arrow on one side and another button with icon on the other side.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Moeten bewerkbare uitrolmenu&apos;s worden getoond als regelbewerking met een pijl (en evt. een pictogram)?&lt;/p&gt;&lt;p&gt;Standaard bestaan deze menu&apos;s uit een regelbewerking, knop met pijl aan de ene kant en knop met pictogram aan de andere kant.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1687"/>
         <source>Editable combo as line-edit</source>
-        <translation></translation>
+        <translation>Uitrolmenu&apos;s bewerken als tekstvelden</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1659"/>
         <source>Vertical spin indicators</source>
-        <translation></translation>
+        <translation>Verticale getalkeuzevakjes</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1594"/>
@@ -1221,7 +1227,11 @@ respect some settings of the current desktop environment.
 
 This checkbox may disable some options.
 Uncheck it if you want to use those options!</source>
-        <translation></translation>
+        <translation>Kruis aan om Kvantum enkele instellingen van de huidige
+werkomgeving te laten respecteren.
+
+Let op: hierdoor worden mogelijk enkele Kvantum-instellingen uitgeschakeld.
+Kruis af als je de betreffende instellingen wilt gebruiken!</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1604"/>
@@ -1316,7 +1326,7 @@ middels de Ctrl-toets.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1980"/>
         <source>Allow dragging from buttons</source>
-        <translation>Knopversleping inschakelen</translation>
+        <translation>Knoppen versleepbaar maken</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2003"/>
@@ -1492,27 +1502,27 @@ werk de voorvertoning bij.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="119"/>
         <source>KDE Layout</source>
-        <translation>KDE-indeling</translation>
+        <translation>KDE-volgorde</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="120"/>
         <source>Gnome Layout</source>
-        <translation>GNOME-indeling</translation>
+        <translation>GNOME-volgorde</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="121"/>
         <source>Mac Layout</source>
-        <translation>macOS-indeling</translation>
+        <translation>macOS-volgorde</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="122"/>
         <source>Windows Layout</source>
-        <translation>Windows-indeling</translation>
+        <translation>Windows-volgorde</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="123"/>
         <source>Android Layout</source>
-        <translation>Android-indeling</translation>
+        <translation>Android-volgorde</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="125"/>
