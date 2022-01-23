@@ -24,7 +24,7 @@
     <message>
         <location filename="../../kvantummanager.ui" line="44"/>
         <source>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; comes with many themes but external themes can also be installed for being used by it. Here you could choose a theme folder and then press the button below to install it in your Home.&lt;/center&gt;</source>
-        <translation>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; wordt geleverd met diverse thema&apos;s, maar je kunt ook je eigen thema&apos;s installeren. Hier kun je een themamap kiezen. Klik daarna op de knop hieronder om het gekozen thema te installeren in je persoonlijke map.&lt;/center&gt;</translation>
+        <translation>Bij &lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; heb je standaard al keuze uit diverse thema&apos;s, maar als je wilt kun je ook je eigen thema&apos;s installeren door hieronder een themamap te kiezen. Klik, na het kiezen, op de knop &lt;i&gt;Thema installeren&lt;/i&gt; om het gekozen thema te installeren in je persoonlijke map.&lt;/center&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="76"/>
@@ -357,8 +357,7 @@ Miscellaneous → Respect current DE if possible</source>
         <translation>Als dit wordt aangekruist, dan bevatten menu&apos;s, hulpballonnen
 en vensters geen doorzichtigheid of schaduw.
 
-Als dit wordt uitgeschakeld, bekijk dan:
-Overig → Huidige werkomgeving respecteren (indien mogelijk)</translation>
+Indien uitgeschakeld: Overig → Huidige werkomgeving respecteren (indien mogelijk)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="227"/>
@@ -427,8 +426,7 @@ Miscellaneous → Respect current DE if possible</source>
         <translation>Standaard verspringt de schuifbalk naar een positie
 als deze wordt aangeklikt.
 
-Als dit wordt uitgeschakeld, bekijk dan:
-Overig → Huidige werkomgeving respecteren (indien mogelijk)</translation>
+Indien uitgeschakeld: Overig → Huidige werkomgeving respecteren (indien mogelijk)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="683"/>
@@ -472,7 +470,7 @@ of meld af en weer aan.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="790"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If checked, menus, tooltips and windows will not have translucency or shadow.&lt;/p&gt;&lt;p&gt;When unchecked, translucency and shadow will be available if there are appropriate elements in the theme&apos;s SVG file.&lt;/p&gt;&lt;p&gt;If this is disabled, see Miscellaneous → Respect current DE if possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Als dit wordt aangekruist, dan bevatten menu&apos;s, hulpballonnen en vensters geen doorzichtigheid of schaduw.&lt;/p&gt;&lt;p&gt;Als dit wordt uitgeschakeld, dan zijn doorzichtigheid en schaduw beschikbaar als de daarvoor bestemde elementen aanwezig zijn in het svg-bestand van het thema.&lt;/p&gt;&lt;p&gt;Als dit wordt uitgeschakeld, bekijk dan Overig → Huidige werkomgeving respecteren (indien mogelijk)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Als dit wordt aangekruist, dan bevatten menu&apos;s, hulpballonnen en vensters geen doorzichtigheid of schaduw.&lt;/p&gt;&lt;p&gt;Als dit wordt uitgeschakeld, dan zijn doorzichtigheid en schaduw beschikbaar als de daarvoor bestemde elementen aanwezig zijn in het svg-bestand van het thema.&lt;/p&gt;&lt;p&gt;Indien uitgeschakeld: Overig → Huidige werkomgeving respecteren (indien mogelijk)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="793"/>
@@ -678,7 +676,7 @@ mige programma&apos;s negeren dit.</translation>
 0 by default.</source>
         <translation>De horizontale overlap tussen een onderliggend en hoofdmenu.
 
-Standaard: 0.</translation>
+Standaardwaarde: 0.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1384"/>
@@ -788,8 +786,7 @@ Miscellaneous → Respect current DE if possible</source>
 
 Standaard gebruiken de meeste een pictogram.
 
-Indien uitgeschakeld:
-Overig → Huidige werkomgeving respecteren (indien mogelijk)</translation>
+Indien uitgeschakeld: Overig → Huidige werkomgeving respecteren (indien mogelijk)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="488"/>
@@ -801,8 +798,7 @@ If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
         <translation>Standaard wordt naast sommige items een pictogram getoond.
 
-Indien uitgeschakeld:
-Overig → Huidige werkomgeving respecteren (indien mogelijk)</translation>
+Indien uitgeschakeld: Overig → Huidige werkomgeving respecteren (indien mogelijk)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="503"/>
@@ -923,7 +919,7 @@ KDE apps get it from KDE setting.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1491"/>
         <source>Delays</source>
-        <translation></translation>
+        <translation>Vertragingen</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1497"/>
@@ -933,10 +929,9 @@ KDE apps get it from KDE setting.</source>
 Zero means tooltips are shown instantly.
 
 -1 means the default Qt behavior.</source>
-        <translation>De tijd, in milliseconden, alvorens hulpballonnen worden getoond.
+        <translation>De wachttijd, in milliseconden, alvorens hulpballonnen worden getoond.
 
-Nul = direct tonen.
-
+0 = geen wachttijd (direct tonen);
 -1 = standaard Qt-instelling gebruiken.</translation>
     </message>
     <message>
@@ -950,7 +945,7 @@ If disabled, see Compositing &amp; General Look → Transient scrollbars!</sourc
 
 Kruis dit aan om alle pijlen zoveel mogelijk te verbergen.
 
-Indien uitgeschakeld, zie Hardwareversnelling en algemene vormgeving → Opduikende schuifbalken!</translation>
+Indien uitgeschakeld: Hardwareversnelling en algemene vormgeving → Opduikende schuifbalken!</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1639"/>
@@ -965,7 +960,8 @@ the highlight color.</source>
         <location filename="../../kvantummanager.ui" line="1694"/>
         <source>If checked, the menubar and toolbar will be drawn as a whole by
 the toolbar SVG element when they are adjacent to each another.</source>
-        <translation></translation>
+        <translation>Kruis aan om menu- en werkbalken één geheel te laten vormen.
+Het svg-element van werkbalken wordt dan ook voor menubalken gebruikt.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1742"/>
@@ -973,7 +969,9 @@ the toolbar SVG element when they are adjacent to each another.</source>
 
 By default, the contents are shifted by 1px
 both horizontally and vertically.</source>
-        <translation></translation>
+        <translation>Moet de inhoud van drukknoppen worden verschoven na het aanklikken ervan?
+
+Standaard wordt de inhoud 1 px horizontaal en verticaal verschoven.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1935"/>
@@ -983,7 +981,10 @@ or anywhere possible (and not only from their title bars)?
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation></translation>
+        <translation>Wil je vensters kunnen verslepen vanaf titelbalken, menubalken,
+werkbalken of vanaf alle vrije vensterruimte?
+
+Indien uitgeschakeld: Overig → Huidige werkomgeving respecteren (indien mogelijk)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1846"/>
@@ -992,7 +993,10 @@ Miscellaneous → Respect current DE if possible</source>
 is not set by the app in its code.
 
 Default is &quot;Follow Style&quot;.</source>
-        <translation></translation>
+        <translation>Dit werkt alleen als de indeling niet
+is ingesteld door programma&apos;s zelf.
+
+Standaardwaarde: ‘Thema-indeling’.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1625"/>
@@ -1038,7 +1042,11 @@ whose windows should not be translucent.
 
 (Some apps, like video players, may have
 problems with translucency!)</source>
-        <translation></translation>
+        <translation>Een kommagescheiden lijst met uitvoerbare bestanden.
+De vensters van deze programma&apos;s worden niet doorzichtig gemaakt.
+
+(let op: enkele programma&apos;s kunnen hier een probleem
+mee hebben, zoals videospelers!)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1141"/>
@@ -1062,10 +1070,10 @@ in beslag.</translation>
 -1 means no popup (opening by clicking),
 while 0 means no delay.</source>
         <translation>De wachttijd, in milliseconden, alvorens een onderliggend menu wordt geopend.
-Standaard: 250.
+Standaardwaarde: 250.
 
--1 = niet automatisch (openen door aanklikken);
-0 = geen wachttijd.</translation>
+-1 = openen na aanklikken;
+0 = geen wachttijd (direct openen).</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1518"/>
@@ -1121,7 +1129,7 @@ the frame, so that the frame isn&apos;t cut.</source>
         <translation>Standaard worden labels op kaderlijnen getoond
 en is er een onderbreking zichtbaar op de kaderlijnen.
 
-Door dit aan te kruisen worden labels rechtboven
+Door dit aan te kruisen, worden labels rechtboven
 kaders getoond zodat de lijnen niet onderbroken worden.</translation>
     </message>
     <message>
@@ -1138,18 +1146,18 @@ kaders getoond zodat de lijnen niet onderbroken worden.</translation>
         <location filename="../../kvantummanager.ui" line="1666"/>
         <source>Mouse tracking is enabled
 for menubars by default.</source>
-        <translation>Standaard wordt de cursor gevolgd
-op menubalken.</translation>
+        <translation>Standaard worden onderliggende
+menu&apos;s door de cursor geopend.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1670"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mouse tracking is enabled for menubars by default, i.e., after a menubar item is clicked and its menu is shown, the menus of the other menubar items will be shown if the cursor is put on them without clicking.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Standaard wordt de cursor gevolgd op menubalken. Dit houdt in dat na het aanklikken van een menu de menu&apos;s van andere items worden getoond door de cursor erboven te houden (dus zonder ze aan te klikken).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Standaard worden onderliggende menu&apos;s door de cursor geopend. Dit houdt in dat na het aanklikken van een menu de menu&apos;s van andere items worden getoond door de cursor erboven te houden (dus zonder ze aan te klikken).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1673"/>
         <source>Mouse tracking for menubars</source>
-        <translation>Menubalkitems tonen door cursor erboven te houden</translation>
+        <translation>Onderliggende menu&apos;s openen door cursor erboven te houden</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1698"/>
@@ -1268,7 +1276,7 @@ dus zonder rand ertussen.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1601"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When this is enabled and checked, Kvantum will try to respect some settings of the current desktop environment if it is KDE, Unity, Gnome or Pantheon.&lt;/p&gt;&lt;p&gt;Under KDE, it makes Kvantum read KDE settings for small and large icon sizes and also single or double clicking.&lt;/p&gt;&lt;p&gt;Under Unity, Gnome and Pantheon, it removes icons from menus and push-buttons (even if the corresponding dconf keys are changed) and disables window translucency.&lt;/p&gt;&lt;p&gt;This checkbox may disable some options. Uncheck it if you want to use those options!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Als je dit aankruist, dan zal Kvantum proberen om enkele instellingen van de huidige werkomgeving te respecteren. Kvantum respecteert KDE, Unity, Gnome en Pantheon.&lt;/p&gt;&lt;p&gt;Op KDE kan Kvantum hierdoor de instellingen omtrent pictogramgroottes en enkel-/dubbelklikken overnemen.&lt;/p&gt;&lt;p&gt;Op Unity, Gnome en Pantheon worden de pictogrammen op menu&apos;s en drukknoppen verborgen (zelfs als de bijbehorende dconf-sleutelwaarden worden aangepast) en vensterdoorzichtigheid uitgeschakeld.&lt;/p&gt;&lt;p&gt;Let op: hierdoor worden mogelijk enkele Kvantum-instellingen uitgeschakeld. Kruis af als je de betreffende instellingen wilt gebruiken!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="802"/>
@@ -1467,7 +1475,7 @@ werk de voorvertoning bij.</translation>
         <location filename="../../KvantumManager.cpp" line="112"/>
         <location filename="../../KvantumManager.cpp" line="118"/>
         <source>Follow Style</source>
-        <translation>Stijl volgen</translation>
+        <translation>Thema-indeling</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="109"/>
@@ -1728,7 +1736,7 @@ werk de voorvertoning bij.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="587"/>
         <source>You might want to investigate the cause.</source>
-        <translation>Doe onderzoek naar dit probleem.</translation>
+        <translation>Onderzoek dit probleem.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="1013"/>
