@@ -363,7 +363,7 @@ Diversos → Respeitar o DE atual se possível</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="227"/>
         <source>&lt;br&gt;&lt;br&gt;Since &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; is independent of all desktop environments, you first need to &lt;i&gt;activate&lt;/i&gt; it with a Qt platform integration program. KDE and LXQt provide simple tools for changing the active Qt style plugin. With other platforms, you need a Qt configuration tool.&lt;br/&gt;&lt;br/&gt;Under KDE, also select and apply the color scheme of this theme because some KDE applications may get their colors directly from the KDE color scheme.&lt;br/&gt;&lt;br/&gt;Running applications will get the new theme after being closed and reopened. Logging out and in would be good for all KDE/LXQt parts to see it completely.</source>
-        <translation>&lt;br&gt;&lt;br&gt;Como o &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; é independente de todos os ambientes de trabalho, primeiro precisa &lt;i&gt;ativá-lo&lt;/i&gt; com um programa de integração de plataforma Qt. O KDE e o LXQt fornecem ferramentas simples para alterar o plugin do estilo Qt ativo. Com outras plataformas, precisa de uma ferramenta de configuração do Qt.&lt;br/&gt;&lt;br/&gt;No KDE, também selecione e aplique o esquema de cores deste tema porque alguns aplicativos do KDE podem obter suas cores diretamente do esquema de cores do KDE.&lt;br/&gt;&lt;br/&gt;As aplicações em execução receberão o novo tema depois de serem fechados e reabertos. Sair e Entrar seria bom para todas as partes do KDE/LXQt para vê-lo completamente.</translation>
+        <translation>&lt;br&gt;&lt;br&gt;Como o &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; é independente de todos os ambientes gráficos, primeiro precisa &lt;i&gt;ativá-lo&lt;/i&gt; com um programa de integração de plataforma Qt. O KDE e o LXQt fornecem ferramentas simples para alterar o plugin do estilo Qt ativo. Com outras plataformas, precisa de uma ferramenta de configuração do Qt.&lt;br/&gt;&lt;br/&gt;No KDE, também selecione e aplique o esquema de cores deste tema porque algumas aplicações do KDE podem obter suas cores diretamente do esquema de cores do KDE.&lt;br/&gt;&lt;br/&gt;As aplicações em execução receberão o novo tema depois de serem fechados e reabertos. Sair e Entrar seria bom para todas as partes do KDE/LXQt para vê-lo completamente.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="532"/>
@@ -505,11 +505,11 @@ ou através do sair e entrar novamente.</translation>
 and translucent menu/tooltip SVG elements.
 
 Automatically checked if window blurring is enabled.</source>
-        <translation>Necessita do efeito de desfoque do KDE, de uma placa gráfica
-que ofereça suporte a ele e de elementos SVG translúcidos
+        <translation>Necessita do efeito de desfocagem do KDE, de uma placa gráfica
+que ofereça suporte e de elementos SVG translúcidos
 de menu/dicas de ferramentas.
 
-Verificado automaticamente se o desfoque da janela estiver habilitado.</translation>
+Verificado automaticamente se a desfocagem da janela estiver ativada.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="912"/>
@@ -652,8 +652,8 @@ se esse tema fizer distinção entre elas?</translation>
         <location filename="../../kvantummanager.ui" line="1336"/>
         <source>The default value is 2 px but
 some apps set it themeselves.</source>
-        <translation>O valor padrão é 2 px, mas alguns
-aplicativos definem temas próprios.</translation>
+        <translation>O valor padrão é 2 px, mas algumas
+aplicações definem temas próprios.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1329"/>
@@ -664,7 +664,7 @@ aplicativos definem temas próprios.</translation>
         <location filename="../../kvantummanager.ui" line="1353"/>
         <location filename="../../kvantummanager.ui" line="1363"/>
         <source>The default value is 4 px but some apps set it themeselves.</source>
-        <translation>O valor padrão é 4 px, mas alguns aplicativos definem temas próprios.</translation>
+        <translation>O valor padrão é 4 px, mas algumas aplicações definem temas próprios.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1356"/>
@@ -741,9 +741,9 @@ pontilhados em botões focados e outros widgets.</translation>
         <source>Use the active theme for all apps!
 
 This Needs saving to take effect.</source>
-        <translation>Use o tema ativo para todos os aplicativos!
+        <translation>Use o tema ativo para todos as aplicações!
 
-Isso Necessita ser salvo para entrar em vigor.</translation>
+Isto necessita ser gravado para entrar em vigor.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="183"/>
@@ -816,10 +816,10 @@ translucent by their apps explicitly if possible.
 This needs the KDE blur effect.
 
 Konsole, QTerminal and LXQt panel are some examples.</source>
-        <translation>Desfoque as regiões atrás de janelas que são tornadas
-translúcidas pelos seus aplicativos explicitamente, se possível.
+        <translation>Desfocar as regiões atrás de janelas que são tornadas
+translúcidas pelas suas aplicações explicitamente, se possível.
 
-Isso precisa do efeito de desfoque do KDE.
+Isto precisa do efeito de desfocagem do KDE.
 
 Konsole, QTerminal e painel LXQt são alguns exemplos.</translation>
     </message>
@@ -856,8 +856,8 @@ Isso é relevante principalmente com ícones monocromáticos.
         <source>Some apps may not respect dark themes.
 Kvantum can try to correct their behavior
 as far as possible.</source>
-        <translation>Alguns aplicativos podem não respeitar os
-temas escuros. Kvantum pode tentar corrigir
+        <translation>Algumas aplicações podem não respeitar os
+temas escuros. O Kvantum pode tentar corrigir
 o seu comportamento, tanto quanto possível.</translation>
     </message>
     <message>
@@ -865,7 +865,7 @@ o seu comportamento, tanto quanto possível.</translation>
         <source>Needs KDE blur effect, a graphic card
 that supports it, and a translucent
 window SVG background in the theme.</source>
-        <translation>Necessita do efeito de desfoque do KDE,
+        <translation>Necessita do efeito de desfocagem do KDE,
 uma placa gráfica que o suporta e um
 fundo SVG de janela translúcida no tema.</translation>
     </message>
@@ -893,10 +893,10 @@ If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
         <translation>Afeta itens de menu e cabeçalhos.
 
-O valor padrão é 16 px, mas alguns
-aplicativos podem defini-lo por conta própria.
+O valor padrão é 16 px, mas algumas
+aplicações podem defini-lo por conta própria.
 
-Se isso estiver desabilitado, consulte:
+Se isso estiver desativado, consulte:
 Diversos → Respeitar a DE atual se possível</translation>
     </message>
     <message>
@@ -911,8 +911,8 @@ If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
         <translation>Afeta as visualizações de ícones.
 
-O valor padrão é 32 px, mas alguns
-aplicativos podem defini-lo por conta própria.
+O valor padrão é 32 px, mas algumas
+aplicações podem defini-lo por conta própria.
 
 Se isso estiver desativado, consulte:
 Diversos → Respeitar a DE atual se possível</translation>
@@ -937,9 +937,9 @@ some apps set it themselves.
 KDE apps get it from KDE setting.</source>
         <translation>Afeta barras de ferramentas.
 
-O valor padrão é 22 px, mas alguns
-aplicativos podem defini-lo por conta própria.
-Os aplicativos do KDE obtêm isso da configuração do KDE.</translation>
+O valor padrão é 22 px, mas algumas
+aplicações podem defini-la por conta própria.
+as aplicações do KDE obtêm isso da configuração do KDE.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1440"/>
@@ -997,9 +997,9 @@ toolbars and dock widgets are hollow.
 
 This option fills drop rectangles with
 the highlight color.</source>
-        <translation>Por padrão, os retângulos de queda para
+        <translation>Por padrão, largar retângulos para
 barras de ferramentas móveis e widgets
-do dock são vazios.
+da doca são vazios.
 
 Essa opção preenche retângulos de queda
 com a cor de destaque.</translation>
@@ -1043,8 +1043,8 @@ Diversos → Respeitar a DE atual se possível</translation>
 is not set by the app in its code.
 
 Default is &quot;Follow Style&quot;.</source>
-        <translation>Terá efeito somente se o estilo
-não for definido pelo aplicativo em seu código.
+        <translation>Terá efeito apenas se o estilo
+não for definido pela aplicação no seu código.
 
 O Padrão é &quot;Seguir Estilo&quot;.</translation>
     </message>
@@ -1102,7 +1102,7 @@ problems with translucency!)</source>
         <translation>Uma lista separada por vírgula de executáveis,
 do qual as janelas não devem ser translúcidas.
 
-(Alguns aplicativos, como players de vídeo, podem ter
+(Algumas aplicações, como reprodutores de vídeo, podem ter
 problemas com a translucidez!)</translation>
     </message>
     <message>
@@ -1217,7 +1217,7 @@ para barras de menu por padrão.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1698"/>
         <source>Merge menubar with toolbar</source>
-        <translation>Mesclar barra de menu com barra de ferramenta</translation>
+        <translation>Unir barra de menu com barra de ferramenta</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1717"/>
@@ -1731,7 +1731,7 @@ ou atualizar a sua pré-visualização.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="2672"/>
         <source>Configuration saved.</source>
-        <translation>Configuração salva.</translation>
+        <translation>Configuração gravada.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2783"/>
@@ -1767,7 +1767,7 @@ ou atualizar a sua pré-visualização.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="2980"/>
         <source>A tool for installing, selecting&lt;br&gt;and configuring &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt; themes</source>
-        <translation>Uma ferramenta para instalar, selecionar&lt;br&gt;e configurar temas&lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt;</translation>
+        <translation>Uma ferramenta para instalar, selecionar&lt;br&gt;e configurar temas &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2981"/>
