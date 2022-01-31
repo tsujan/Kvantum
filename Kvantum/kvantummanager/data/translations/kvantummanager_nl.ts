@@ -24,14 +24,13 @@
     <message>
         <location filename="../../kvantummanager.ui" line="44"/>
         <source>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; comes with many themes but external themes can also be installed for being used by it. Here you could choose a theme folder and then press the button below to install it in your Home.&lt;/center&gt;</source>
-        <translation>Bij &lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; heb je standaard al keuze uit diverse thema&apos;s, maar als je wilt kun je ook je eigen thema&apos;s installeren door hieronder een themamap te kiezen. Klik, na het kiezen, op de knop &lt;i&gt;Thema installeren&lt;/i&gt; om het gekozen thema te installeren in je persoonlijke map.&lt;/center&gt;</translation>
+        <translation>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; geeft je standaard de keuze uit diverse thema&apos;s, maar als je wilt kun je ook je eigen thema&apos;s installeren door hieronder een themamap te kiezen. Klik, na het kiezen, op de knop &lt;i&gt;Thema installeren&lt;/i&gt; om het gekozen thema te installeren in je persoonlijke map.&lt;/center&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="76"/>
         <source>Select a Kvantum
 theme folder</source>
-        <translation>Kies een Kvantum-
-themamap</translation>
+        <translation>Kies een themamap</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="113"/>
@@ -132,8 +131,8 @@ dit thema terugzetten.
         <location filename="../../kvantummanager.ui" line="369"/>
         <source>Uncheck all these boxes if you want all
 widgets to appear as they are by default.</source>
-        <translation>Kruis alle vakjes af als je wilt dat widgets
-eruit zien zoals ze er standaard uit zien.</translation>
+        <translation>Schakel al deze opties uit af als je wilt dat widgets
+eruitzien zoals ze er standaard uitzien.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="373"/>
@@ -143,12 +142,12 @@ eruit zien zoals ze er standaard uit zien.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="397"/>
         <source>Transparent Dolphin view</source>
-        <translation>Doorzichtige Dolphin-weergave</translation>
+        <translation>Dolphin-weergave doorzichtig maken</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="425"/>
         <source>Normal font for default push buttons</source>
-        <translation>‘Normaal’ lettertype op standaard drukknoppen</translation>
+        <translation>‘Normaal’ lettertype gebruiken op standaard drukknoppen</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="445"/>
@@ -166,12 +165,12 @@ via de LXQt-sessie-instellingen.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="452"/>
         <source>Transparent sidepane for PCManFM-qt</source>
-        <translation>Doorzichtige PCManFM-qt-zijbalk</translation>
+        <translation>PCManFM-qt-zijbalk doorzichtig maken</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="467"/>
         <source>Iconless push buttons</source>
-        <translation>Geen pictogrammen op drukknoppen</translation>
+        <translation>Geen pictogrammen tonen op drukknoppen</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="474"/>
@@ -189,7 +188,7 @@ via de LXQt-sessie-instellingen.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="481"/>
         <source>Transparent view for PCManFM-qt</source>
-        <translation>Doorzichtige PCManFM-qt-weergave</translation>
+        <translation>PCManFM-qt-weergave doorzichtig maken</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="496"/>
@@ -204,7 +203,7 @@ via de LXQt-sessie-instellingen.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="525"/>
         <source>Single top toolbar</source>
-        <translation>Eén werkbalk</translation>
+        <translation>Alleen bovenste werkbalken stileren</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="555"/>
@@ -219,7 +218,7 @@ via de LXQt-sessie-instellingen.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="561"/>
         <source>Transparent KTitle label</source>
-        <translation>Doorzichtig KTitle-label</translation>
+        <translation>KTitle-labels doorzichtig maken</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="568"/>
@@ -236,7 +235,7 @@ niet met de markeerkleur!</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="575"/>
         <source>No selection tint</source>
-        <translation>Geen selectiemarkering</translation>
+        <translation>Geen selectiemarkering tonen</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="582"/>
@@ -253,7 +252,7 @@ niet met de markeerkleur!</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="589"/>
         <source>Transparent menu title</source>
-        <translation>Doorzichtige menutitel</translation>
+        <translation>Menutitels doorzichtig maken</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="652"/>
@@ -374,7 +373,7 @@ vensters vervaagd als vervagen is ingeschakeld.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="536"/>
         <source>No blurring for inactive windows</source>
-        <translation>Inactieve vensters niet vervagen</translation>
+        <translation>Geen inactieve vensters vervagen</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="543"/>
@@ -431,7 +430,7 @@ Indien uitgeschakeld: Overig → Huidige werkomgeving respecteren (indien mogeli
     <message>
         <location filename="../../kvantummanager.ui" line="683"/>
         <source>Scroll jump with middle click</source>
-        <translation>Schuifbalk verspringen met middelste muisknop</translation>
+        <translation>Schuifbalken verschuiven met middelste muisknop</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="726"/>
@@ -532,7 +531,7 @@ voorziet van schaduwen.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="936"/>
         <source>Translucent windows</source>
-        <translation>Doorzichtige vensters</translation>
+        <translation>Vensters doorzichtig maken</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1000"/>
@@ -561,7 +560,7 @@ achtergrond.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1085"/>
         <source>Blurring for translucent windows</source>
-        <translation>Vensterachtergronden van doorzichtige vensters vervagen</translation>
+        <translation>Achtergronden van doorzichtige vensters vervagen</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1105"/>
@@ -573,7 +572,7 @@ widgets wijzigt, meestal door muisbeweging.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1109"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A 200ms fading animation when the state of some widgets is changed, mostly by the mouse.&lt;/p&gt;&lt;p&gt;The CPU usage is negligible because often only one widget is animated. The resulting visual effect depends on the active theme.&lt;/p&gt;&lt;p&gt;These widgets are supported: buttons (including radio buttons and check boxes), combo boxes, spin boxes, slider handles, line-edits and scroll views.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Een vervaaganimatie van 200ms als de staat van sommige items wijzigt, vooral door de cursor.&lt;/p&gt;&lt;p&gt;Het extra cpu-verbruik is verwaarloosbaar, aangezien er doorgaans slechts één item tegelijk wordt geanimeerd. Het zichtbare effect is afhankelijk van het actieve thema.&lt;/p&gt;&lt;p&gt;De volgende items worden ondersteund: knoppen (inclusief keuzerondjes en aankruisvakjes), uitrolmenu&apos;s, getalkeuzevakjes, schuifbalkknoppen, regelbewerkers en schuivende weergaven.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1112"/>
@@ -622,22 +621,22 @@ inactieve vensters als dit thema daar onderscheid in maakt?</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1191"/>
         <source>Small icon:</source>
-        <translation>Klein pictogram:</translation>
+        <translation>Kleine pictogrammen:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1229"/>
         <source>Large icon:</source>
-        <translation>Groot pictogram:</translation>
+        <translation>Grote pictogrammen:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1263"/>
         <source>Button icon:</source>
-        <translation>Knoppictogram:</translation>
+        <translation>Knoppictogrammen:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1295"/>
         <source>Toolbar icon:</source>
-        <translation>Werkbalkpictogram:</translation>
+        <translation>Werkbalkpictogrammen:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1309"/>
@@ -666,7 +665,7 @@ mige programma&apos;s negeren dit.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1356"/>
         <source>Layout margin:</source>
-        <translation>Indelingsmarge:</translation>
+        <translation>Indelingsmarges:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1379"/>
@@ -681,7 +680,7 @@ Standaardwaarde: 0.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1384"/>
         <source>Submenu overlap: </source>
-        <translation>Overlap onderliggend menu: </translation>
+        <translation>Overlap onderliggende menu&apos;s: </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1409"/>
@@ -761,7 +760,7 @@ alleen gebruikersthema&apos;s worden verwijderd.</translation>
         <source>Merge Dolphin&apos;s view with its surroundings?
 
 By default, it has the base background.</source>
-        <translation>Dolphin&apos;s weergave samenvoegen met allen eromheen?
+        <translation>Dolphin&apos;s weergave samenvoegen met alles eromheen?
 
 Standaard gebruikt Dolphin de hoofdachtergrond.</translation>
     </message>
@@ -808,7 +807,12 @@ translucent by their apps explicitly if possible.
 This needs the KDE blur effect.
 
 Konsole, QTerminal and LXQt panel are some examples.</source>
-        <translation></translation>
+        <translation>Vervaag de delen achter vensters die doorzichtig zijn
+gemaakt (indien mogelijk).
+
+Hiervoor is het KDE-vervaageffect vereist.
+
+Konsole, QTerminal en het LXQt-paneel zijn voorbeelden hiervan.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="518"/>
@@ -817,7 +821,10 @@ Konsole, QTerminal and LXQt panel are some examples.</source>
 By default, all toolbars are styled,
 whether they are on the top or at any
 other position.</source>
-        <translation></translation>
+        <translation>Moet alleen de bovenste werkbalk worden opgemaakt?
+
+Standaard worden alle werkbalken opgemaakt,
+of ze nu bovenaan of op een positie staan.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="645"/>
@@ -827,7 +834,11 @@ other position.</source>
 This is mostly relevant with monochrome icons.
 
 Hard-coded icons/styles may not respect this key.</source>
-        <translation></translation>
+        <translation>De markeerkleur die gebruikt wordt als tint.
+
+Dit is vooral van toepassing op monochrome pictogrammen.
+
+Vaste pictogrammen/stijlen ondersteunen deze optie mogelijk niet.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="607"/>
@@ -843,7 +854,9 @@ dwingen.</translation>
         <source>Needs KDE blur effect, a graphic card
 that supports it, and a translucent
 window SVG background in the theme.</source>
-        <translation></translation>
+        <translation>Vereist: het KDE-vervaageffect, een ondersteunde
+grafische kaart en een doorzichtige svg-vensterachtergrond
+uit het thema.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1158"/>
@@ -855,7 +868,7 @@ groeven tonen (indien nodig)?</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1162"/>
         <source>Transient scrollbar grooves when needed</source>
-        <translation>Groeven op opduikende schuifbalken (indien nodig)</translation>
+        <translation>Groeven tonen op opduikende schuifbalken (indien nodig)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1182"/>
@@ -867,7 +880,13 @@ some apps may set it themselves.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation></translation>
+        <translation>Dit is van toepassing op menu-items en koppen.
+
+De standaardwaarde is 16 px, maar sommige
+programma&apos;s kiezen zelf een waarde.
+
+Indien uitgeschakeld: Overig → Huidige werkomgeving
+respecteren (indien mogelijk)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1220"/>
@@ -879,7 +898,13 @@ some apps set it themselves.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation></translation>
+        <translation>Dit is van toepassing op pictogramweergaven.
+
+De standaardwaarde is 32 px, maar sommige
+programma&apos;s kiezen zelf een waarde.
+
+Indien uitgeschakeld: Overig → Huidige werkomgeving
+respecteren (indien mogelijk)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1258"/>
@@ -887,7 +912,9 @@ Miscellaneous → Respect current DE if possible</source>
         <source>Affects buttons, tab-bars and list-views.
 
 The default value is 16 px.</source>
-        <translation></translation>
+        <translation>Dit is van toepassing op knoppen, tabbladbalken en lijstweergaven.
+
+De standaardwaarde is 16 px.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1288"/>
@@ -897,7 +924,12 @@ The default value is 16 px.</source>
 The default value is 22 px but
 some apps set it themselves.
 KDE apps get it from KDE setting.</source>
-        <translation></translation>
+        <translation>Dit is van toepassing op werkbalken.
+
+De standaardwaarde is 22 px, maar sommige
+programma&apos;s kiezen zelf een waarde.
+
+KDE-programma&apos;s volgen de KDE-instellingen.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1440"/>
@@ -954,7 +986,10 @@ toolbars and dock widgets are hollow.
 
 This option fills drop rectangles with
 the highlight color.</source>
-        <translation></translation>
+        <translation>Standaard zijn vallende rechthoeken van verplaats-
+bare werkbalken en paneelitems onopgevuld.
+
+Deze optie vult ze op met de markeerkleur.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1694"/>
@@ -1005,7 +1040,11 @@ two buttons with arrows or plus/minus signs.
 
 Checking this integrates the spin indicators
 into the spin line-edit..</source>
-        <translation></translation>
+        <translation>Standaard worden getalkeuzevakjes getoond als
+twee knoppen met pijlen of plus-/mintekens.
+
+Kruis dit aan om de vakjes te integreren op de
+regelbewerker.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1653"/>
@@ -1013,7 +1052,10 @@ into the spin line-edit..</source>
 
 Checking this puts the spin-up indicator above the
 spin-down one inside the spin line-edit.</source>
-        <translation></translation>
+        <translation>Standaard worden getalkeuzevakjes getoond op aangrenzende knoppen.
+
+Kruis dit aan om het vakje ‘Omhoog’ boven het vakje ‘Omlaag’
+te tonen op de regelbewerker.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1705"/>
@@ -1078,7 +1120,7 @@ Standaardwaarde: 250.
     <message>
         <location filename="../../kvantummanager.ui" line="1518"/>
         <source>Submenu delay: </source>
-        <translation>Vertraging onderliggend menu: </translation>
+        <translation>Vertraging van onderliggende menu&apos;s: </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1532"/>
@@ -1226,7 +1268,7 @@ regelbewerking met een pijl (en evt. een pictogram)?</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1659"/>
         <source>Vertical spin indicators</source>
-        <translation>Verticale getalkeuzevakjes</translation>
+        <translation>Getalkeuzevakjes verticaal tonen</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1594"/>
@@ -1271,7 +1313,7 @@ dus zonder rand ertussen.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1966"/>
         <source>Scrollable menus</source>
-        <translation>Scrolbare menu&apos;s</translation>
+        <translation>Menu&apos;s verschuifbaar maken</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1601"/>
@@ -1334,7 +1376,7 @@ middels de Ctrl-toets.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1980"/>
         <source>Allow dragging from buttons</source>
-        <translation>Knoppen versleepbaar maken</translation>
+        <translation>Vensters verslepen vanaf werkbalkknoppen</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2003"/>
@@ -1422,7 +1464,7 @@ werk de voorvertoning bij.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="380"/>
         <source>Open Kvantum Theme Folder...</source>
-        <translation>Kvantum-themamap openen…</translation>
+        <translation>Kies een Kvantum-themamap…</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="200"/>
