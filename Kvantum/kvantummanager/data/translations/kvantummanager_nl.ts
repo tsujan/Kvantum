@@ -1074,7 +1074,7 @@ Standaard is dit niet het geval.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1504"/>
         <source>Tooltip delay:</source>
-        <translation>Hulpballonvertraging:</translation>
+        <translation>Hulpballonnen:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="943"/>
@@ -1120,7 +1120,7 @@ Standaardwaarde: 250.
     <message>
         <location filename="../../kvantummanager.ui" line="1518"/>
         <source>Submenu delay: </source>
-        <translation>Vertraging van onderliggende menu&apos;s: </translation>
+        <translation>Onderliggende menu&apos;s: </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1532"/>
