@@ -218,17 +218,20 @@ Style::Style(bool useDark) : QCommonStyle()
         theme = themeChooser.value("theme").toString();
       /* check if this app has a specific theme assigned to it */
       QString appName = qApp->applicationName();
-      themeChooser.beginGroup("Applications");
-      QStringList list = themeChooser.childKeys();
-      for (int i = 0; i < list.count(); ++i)
+      if (appName != "kvantummanager" && appName != "kvantumpreview")
       {
-        if (themeChooser.value(list.at(i)).toStringList().contains(appName, Qt::CaseInsensitive))
+        themeChooser.beginGroup("Applications");
+        QStringList list = themeChooser.childKeys();
+        for (int i = 0; i < list.count(); ++i)
         {
-          theme = list.at(i);
-          break;
+          if (themeChooser.value(list.at(i)).toStringList().contains(appName, Qt::CaseInsensitive))
+          {
+            theme = list.at(i);
+            break;
+          }
         }
+        themeChooser.endGroup();
       }
-      themeChooser.endGroup();
     }
   }
 

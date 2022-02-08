@@ -149,15 +149,15 @@
 <stop offset="1" style="stop-color:#141414"/>
 </linearGradient>
 <linearGradient id="linearGradient5048">
-<stop offset="0" style="stop-color:#545454"/>
-<stop offset="1" style="stop-color:#545454"/>
+<stop offset="0" style="stop-color:#575757"/>
+<stop offset="1" style="stop-color:#575757"/>
 </linearGradient>
 <linearGradient id="linearGradient5012">
 <stop offset="0" style="stop-color:#fff"/>
 <stop offset="1" style="stop-color:#c0c0c2"/>
 </linearGradient>
 <linearGradient id="linearGradient5469">
-<stop offset="0" style="stop-color:#545454"/>
+<stop offset="0" style="stop-color:#575757"/>
 <stop offset="1" style="stop-color:#5a5a5a"/>
 </linearGradient>
 <linearGradient id="linearGradient5369">
@@ -177,7 +177,7 @@
 <stop offset="1" style="stop-color:#1488a1"/>
 </linearGradient>
 <linearGradient id="linearGradient2084">
-<stop offset="0" style="stop-color:#545454"/>
+<stop offset="0" style="stop-color:#575757"/>
 <stop offset="1" style="stop-color:#616161"/>
 </linearGradient>
 <linearGradient id="linearGradient1848">
@@ -196,7 +196,7 @@
 </linearGradient>
 <linearGradient id="linearGradient5116">
 <stop offset="0" style="stop-color:#696969"/>
-<stop offset="1" style="stop-color:#575757"/>
+<stop offset="1" style="stop-color:#5c5c5c"/>
 </linearGradient>
 <linearGradient xlink:href="#linearGradient4635" id="linearGradient5074" y1="48.751537" x1="58.750366" y2="48.751339" x2="22.75" gradientUnits="userSpaceOnUse"/>
 <linearGradient id="linearGradient6741-7">
@@ -863,7 +863,7 @@
 </g>
 <g id="tbutton-normal-bottom" transform="matrix(0,-1.3333333,0.98461538,0,31.998405,157.33333)">
 <path style="fill:url(#linearGradient2033)" d="M 28.75,81.2514 V 48.7516 h -9 v 32.5 z"/>
-<path style="fill:#545454;line-height:normal;color:#000" d="m 19.75,48.7516 v 32.5 h 1.5 v -32.5 z"/>
+<path style="fill:#575757;line-height:normal;color:#000" d="m 19.75,48.7516 v 32.5 h 1.5 v -32.5 z"/>
 </g>
 <path style="fill:url(#linearGradient2035)" id="tbutton-normal" d="M 80,87 V 119 h 32 V 87 Z"/>
 <g id="tbutton-normal-bottomright" transform="matrix(0,-1.3333227,-1.3333227,0,177.0016,157.33311)">
@@ -963,7 +963,7 @@
 </g>
 <g id="tbutton-focused-bottom" transform="matrix(0,-1.3333333,0.98461538,0,249.99841,157.33333)">
 <path style="fill:#6b6b6b;fill-rule:evenodd" d="M 28.75,81.2514 V 48.7516 h -9 v 32.5 z"/>
-<path style="fill:#545454;line-height:normal;color:#000" d="m 19.75,48.7516 v 32.5 h 1.5 v -32.5 z"/>
+<path style="fill:#575757;line-height:normal;color:#000" d="m 19.75,48.7516 v 32.5 h 1.5 v -32.5 z"/>
 </g>
 <g id="tbutton-focused-bottomright" transform="matrix(0,-1.3333227,-1.3333227,0,395.0016,157.33311)">
 <path style="fill:#6b6b6b;fill-rule:evenodd" d="m 28.75,41.2515 h -1.5 c -4.12503,0 -7.5,3.37505 -7.5,7.5 h 9 Z "/>
