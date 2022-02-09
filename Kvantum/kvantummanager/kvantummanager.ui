@@ -797,6 +797,50 @@ Miscellaneous → Respect current DE if possible</string>
                <item row="0" column="5" rowspan="12">
                 <layout class="QVBoxLayout" name="verticalLayout_2">
                  <item>
+                  <widget class="QGroupBox" name="blurBox">
+                   <property name="toolTip">
+                    <string>If blurring is enabled, these values set the corner
+radii for blurring translucent menus and tooltips
+that have rounded corners.
+
+Usually, a value of 2 is enough.</string>
+                   </property>
+                   <property name="title">
+                    <string>Blur Corner Radius</string>
+                   </property>
+                   <layout class="QGridLayout" name="gridLayout_14">
+                    <item row="0" column="1">
+                     <widget class="QSpinBox" name="spinMenuBlur">
+                      <property name="maximum">
+                       <number>10</number>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="0" column="0">
+                     <widget class="QLabel" name="label_11">
+                      <property name="text">
+                       <string>Menu:</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="1" column="0">
+                     <widget class="QLabel" name="label_12">
+                      <property name="text">
+                       <string>Tooltip:</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="1" column="1">
+                     <widget class="QSpinBox" name="spinTooltipBlur">
+                      <property name="maximum">
+                       <number>10</number>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                 <item>
                   <widget class="QGroupBox" name="contrastBox">
                    <property name="toolTip">
                     <string>This needs the KDE contrast effect and is applied

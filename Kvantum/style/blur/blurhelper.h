@@ -40,6 +40,7 @@ class BlurHelper: public QObject
   public:
 
     BlurHelper (QObject*, QList<qreal> menuS, QList<qreal> tooltipS,
+                int menuBlurRadius = 0, int toolTipBlurRadius = 0,
                 qreal contrast = static_cast<qreal>(1),
                 qreal intensity = static_cast<qreal>(1),
                 qreal saturation = static_cast<qreal>(1),
@@ -108,6 +109,9 @@ class BlurHelper: public QObject
        (left, top, right, bottom) */
     QList<qreal> menuShadow_;
     QList<qreal> tooltipShadow_;
+
+    int menuBlurRadius_;
+    int toolTipBlurRadius_;
 
     qreal contrast_, intensity_, saturation_;
 

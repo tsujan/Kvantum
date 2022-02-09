@@ -516,6 +516,7 @@ void Style::polish(QWidget *widget)
                   getShadow(QStringLiteral("ToolTip"), thickness);
                 }
                 blurHelper_ = new BlurHelper(this, menuShadow_, tooltipShadow_,
+                                             tspec_.menu_blur_radius, tspec_.tooltip_blur_radius,
                                              tspec_.contrast, tspec_.intensity, tspec_.saturation,
                                              hspec_.blur_only_active_window);
               }
@@ -1056,6 +1057,7 @@ void Style::polish(QWidget *widget)
             getShadow(QStringLiteral("ToolTip"), thickness);
           }
           blurHelper_ = new BlurHelper(this, menuShadow_, tooltipShadow_,
+                                       tspec_.menu_blur_radius, tspec_.tooltip_blur_radius,
                                        tspec_.contrast, tspec_.intensity, tspec_.saturation,
                                        hspec_.blur_only_active_window);
         }

@@ -113,7 +113,7 @@ settings of this theme.
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="346"/>
-        <location filename="../../kvantummanager.ui" line="2130"/>
+        <location filename="../../kvantummanager.ui" line="2174"/>
         <source>Save</source>
         <translation>저장</translation>
     </message>
@@ -262,8 +262,8 @@ the highlight color!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="666"/>
         <location filename="../../kvantummanager.ui" line="713"/>
-        <location filename="../../kvantummanager.ui" line="1037"/>
-        <location filename="../../kvantummanager.ui" line="1070"/>
+        <location filename="../../kvantummanager.ui" line="1081"/>
+        <location filename="../../kvantummanager.ui" line="1114"/>
         <source> %</source>
         <translation> %</translation>
     </message>
@@ -317,15 +317,15 @@ as far as possible.</source>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="763"/>
-        <location filename="../../kvantummanager.ui" line="1207"/>
-        <location filename="../../kvantummanager.ui" line="1245"/>
-        <location filename="../../kvantummanager.ui" line="1275"/>
-        <location filename="../../kvantummanager.ui" line="1312"/>
-        <location filename="../../kvantummanager.ui" line="1340"/>
-        <location filename="../../kvantummanager.ui" line="1366"/>
-        <location filename="../../kvantummanager.ui" line="1396"/>
-        <location filename="../../kvantummanager.ui" line="1424"/>
-        <location filename="../../kvantummanager.ui" line="1459"/>
+        <location filename="../../kvantummanager.ui" line="1251"/>
+        <location filename="../../kvantummanager.ui" line="1289"/>
+        <location filename="../../kvantummanager.ui" line="1319"/>
+        <location filename="../../kvantummanager.ui" line="1356"/>
+        <location filename="../../kvantummanager.ui" line="1384"/>
+        <location filename="../../kvantummanager.ui" line="1410"/>
+        <location filename="../../kvantummanager.ui" line="1440"/>
+        <location filename="../../kvantummanager.ui" line="1468"/>
+        <location filename="../../kvantummanager.ui" line="1503"/>
         <source> px</source>
         <translation> 픽셀</translation>
     </message>
@@ -335,14 +335,14 @@ as far as possible.</source>
         <translation>합성 &amp;&amp; 일반 모양</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="932"/>
+        <location filename="../../kvantummanager.ui" line="976"/>
         <source>Has effect only when there is a translucent SVG background
 for windows or the window opacity is reduced (see below).</source>
         <translation>창에 대한 반투명 SVG 배경이 있거나 창 불투명도가
 감소된 경우에만 효과가 있습니다(아래 참조).</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="950"/>
+        <location filename="../../kvantummanager.ui" line="994"/>
         <source>Opaque apps:</source>
         <translation>불투명 앱:</translation>
     </message>
@@ -476,27 +476,51 @@ or through logging out and in again.</source>
         <translation>복합 효과 사용안함</translation>
     </message>
     <message>
+        <location filename="../../kvantummanager.ui" line="802"/>
+        <source>If blurring is enabled, these values set the corner
+radii for blurring translucent menus and tooltips
+that have rounded corners.
+
+Usually, a value of 2 is enough.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../kvantummanager.ui" line="809"/>
+        <source>Blur Corner Radius</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../kvantummanager.ui" line="822"/>
+        <source>Menu:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../kvantummanager.ui" line="829"/>
+        <source>Tooltip:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../kvantummanager.ui" line="853"/>
         <source>Contrast Effect</source>
         <translation>대비 효과</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="815"/>
+        <location filename="../../kvantummanager.ui" line="859"/>
         <source>Saturation:</source>
         <translation>채도:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="822"/>
+        <location filename="../../kvantummanager.ui" line="866"/>
         <source>Intensity:</source>
         <translation>명도:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="829"/>
+        <location filename="../../kvantummanager.ui" line="873"/>
         <source>Contrast:</source>
         <translation>대비:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="906"/>
+        <location filename="../../kvantummanager.ui" line="950"/>
         <source>Needs KDE blur effect, a graphic card that supports it,
 and translucent menu/tooltip SVG elements.
 
@@ -507,12 +531,12 @@ Automatically checked if window blurring is enabled.</source>
 창 흐림이 활성화되어 있는지 자동으로 확인합니다.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="912"/>
+        <location filename="../../kvantummanager.ui" line="956"/>
         <source>Blurring for menus and tooltips</source>
         <translation>메뉴 및 풍선 도움말 흐리게</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="919"/>
+        <location filename="../../kvantummanager.ui" line="963"/>
         <source>Do not draw shadows for menus and tooltips.
 
 This may be useful under DEs that give
@@ -523,18 +547,18 @@ shadow to menus and tooltips.</source>
 그림자를 제공하는데 유용할 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="925"/>
+        <location filename="../../kvantummanager.ui" line="969"/>
         <source>Shadowless menus and tooltips</source>
         <translation>그림자 없는 메뉴 및 풍선 도움말</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="936"/>
+        <location filename="../../kvantummanager.ui" line="980"/>
         <source>Translucent windows</source>
         <translation>반투명 창</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1000"/>
-        <location filename="../../kvantummanager.ui" line="1030"/>
+        <location filename="../../kvantummanager.ui" line="1044"/>
+        <location filename="../../kvantummanager.ui" line="1074"/>
         <source>This will reduce the window opacity
 if window translucency is enabled.
 
@@ -547,129 +571,129 @@ needed for this key to work.</source>
 반투명 SVG 배경이 필요하지 않습니다.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1007"/>
+        <location filename="../../kvantummanager.ui" line="1051"/>
         <source>Reduce window opacity by</source>
         <translation>창 불투명도 감소</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1047"/>
+        <location filename="../../kvantummanager.ui" line="1091"/>
         <source>Reduce menu opacity by</source>
         <translation>메뉴 불투명도 감소</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1085"/>
+        <location filename="../../kvantummanager.ui" line="1129"/>
         <source>Blurring for translucent windows</source>
         <translation>반투명 창 흐리게</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1105"/>
+        <location filename="../../kvantummanager.ui" line="1149"/>
         <source>A 200ms fading animation when the state of
 some widgets is changed, mostly by the mouse.</source>
         <translation>일부 위젯의 상태가 주로 마우스에 의해 변경될 때
 200ms 페이딩 애니메이션입니다.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1109"/>
+        <location filename="../../kvantummanager.ui" line="1153"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A 200ms fading animation when the state of some widgets is changed, mostly by the mouse.&lt;/p&gt;&lt;p&gt;The CPU usage is negligible because often only one widget is animated. The resulting visual effect depends on the active theme.&lt;/p&gt;&lt;p&gt;These widgets are supported: buttons (including radio buttons and check boxes), combo boxes, spin boxes, slider handles, line-edits and scroll views.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;일부 위젯의 상태가 주로 마우스에 의해 변경될 때 200ms 페이딩 애니메이션입니다.&lt;/p&gt;&lt;p&gt;하나의 위젯만 애니메이션되기 때문에 CPU 사용량은 무시할 수 있습니다. 결과적으로 시각적 효과는 활성 테마에 따라 다릅니다.&lt;/p&gt;&lt;p&gt;버튼(라디오 버튼 및 확인란 포함), 콤보 박스, 회전 박스, 슬라이더 핸들, 라인 편집 및 스크롤 보기 등 이러한 위젯이 지원됩니다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1112"/>
+        <location filename="../../kvantummanager.ui" line="1156"/>
         <source>Animation for state change under mouse</source>
         <translation>마우스 아래 상태 변경에 대한 애니메이션</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1119"/>
+        <location filename="../../kvantummanager.ui" line="1163"/>
         <source>Check this to remove all window/dialog tiling patterns!
 Uncheck it if you want those patterns back!</source>
         <translation>모든 창/대화상자 타일링 패턴을 제거하려면 이 항목을 선택하십시오!
 해당 패턴을 다시 원한다면 선택을 취소하십시오!</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1123"/>
+        <location filename="../../kvantummanager.ui" line="1167"/>
         <source>Remove window/dialog tiling patterns</source>
         <translation>창/대화 바둑판식 배열 패턴 제거</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1130"/>
+        <location filename="../../kvantummanager.ui" line="1174"/>
         <source>Use the same colors and shapes with active and inactive
 windows if this theme distinguishes between them?</source>
         <translation>이 테마가 구별되는 경우 활성 및 비활성 창에
 동일한 색상과 모양을 사용하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1134"/>
+        <location filename="../../kvantummanager.ui" line="1178"/>
         <source>Ignore inactive state</source>
         <translation>비활성 상태 무시</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1148"/>
+        <location filename="../../kvantummanager.ui" line="1192"/>
         <source>Transient scrollbars</source>
         <translation>일시적인 스크롤막대</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1170"/>
+        <location filename="../../kvantummanager.ui" line="1214"/>
         <source>Sizes &amp;&amp; Delays</source>
         <translation>크기 &amp;&amp; 지연시간</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1176"/>
+        <location filename="../../kvantummanager.ui" line="1220"/>
         <source>Sizes</source>
         <translation>크기</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1191"/>
+        <location filename="../../kvantummanager.ui" line="1235"/>
         <source>Small icon:</source>
         <translation>작은 아이콘:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1229"/>
+        <location filename="../../kvantummanager.ui" line="1273"/>
         <source>Large icon:</source>
         <translation>큰 아이콘:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1263"/>
+        <location filename="../../kvantummanager.ui" line="1307"/>
         <source>Button icon:</source>
         <translation>버튼 아이콘:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1295"/>
+        <location filename="../../kvantummanager.ui" line="1339"/>
         <source>Toolbar icon:</source>
         <translation>도구모음 아이콘:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1309"/>
+        <location filename="../../kvantummanager.ui" line="1353"/>
         <source>Font size</source>
         <translation>글꼴 크기</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1325"/>
-        <location filename="../../kvantummanager.ui" line="1336"/>
+        <location filename="../../kvantummanager.ui" line="1369"/>
+        <location filename="../../kvantummanager.ui" line="1380"/>
         <source>The default value is 2 px but
 some apps set it themeselves.</source>
         <translation>기본값은 2필셀 이지만,
 일부 앱은 자체적으로 설정합니다.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1329"/>
+        <location filename="../../kvantummanager.ui" line="1373"/>
         <source>Layout spacing:</source>
         <translation>레이아웃 간격:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1353"/>
-        <location filename="../../kvantummanager.ui" line="1363"/>
+        <location filename="../../kvantummanager.ui" line="1397"/>
+        <location filename="../../kvantummanager.ui" line="1407"/>
         <source>The default value is 4 px but some apps set it themeselves.</source>
         <translation>기본값은 4픽셀 이지만,
 일부 앱은 자체적으로 설정합니다.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1356"/>
+        <location filename="../../kvantummanager.ui" line="1400"/>
         <source>Layout margin:</source>
         <translation>레이아웃 여백:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1379"/>
-        <location filename="../../kvantummanager.ui" line="1391"/>
+        <location filename="../../kvantummanager.ui" line="1423"/>
+        <location filename="../../kvantummanager.ui" line="1435"/>
         <source>The horizontal overlap between a submenu and its parent.
 
 0 by default.</source>
@@ -678,36 +702,36 @@ some apps set it themeselves.</source>
 기본값은 0 입니다.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1384"/>
+        <location filename="../../kvantummanager.ui" line="1428"/>
         <source>Submenu overlap: </source>
         <translation>하위메뉴 겹침: </translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1409"/>
-        <location filename="../../kvantummanager.ui" line="1420"/>
+        <location filename="../../kvantummanager.ui" line="1453"/>
+        <location filename="../../kvantummanager.ui" line="1464"/>
         <source>The width of horizontal spin buttons.
 (Has no effect when spin indicators are vertical.)</source>
         <translation>수평 회전 버튼의 너비입니다..
 (회전 표시도구가 수직일 경우 아무 영향 없음)</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1413"/>
+        <location filename="../../kvantummanager.ui" line="1457"/>
         <source>Spin button width: </source>
         <translation>회전 버튼 너비: </translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1800"/>
-        <location filename="../../kvantummanager.ui" line="1810"/>
+        <location filename="../../kvantummanager.ui" line="1844"/>
+        <location filename="../../kvantummanager.ui" line="1854"/>
         <source>How to activate view items?</source>
         <translation>보기 항목을 활성화하는 방법?</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1803"/>
+        <location filename="../../kvantummanager.ui" line="1847"/>
         <source>Click behavior:</source>
         <translation>클릭 동작:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1923"/>
+        <location filename="../../kvantummanager.ui" line="1967"/>
         <source>Draw tree branch lines?
 
 By default, tree branches have indicators but no line.</source>
@@ -716,24 +740,24 @@ By default, tree branches have indicators but no line.</source>
 기본적으로 트리 브랜치에는 표시도구가 있지만 선은 없습니다.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1902"/>
+        <location filename="../../kvantummanager.ui" line="1946"/>
         <source>Dialog button layout:</source>
         <translation>대화상자 버튼 레이아웃:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1912"/>
+        <location filename="../../kvantummanager.ui" line="1956"/>
         <source>They may look like dotted rectangles
 on focused buttons and other widgets.</source>
         <translation>초점이 있는 버튼 및 기타 위젯에서
 점선 사각형처럼 보일 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1916"/>
+        <location filename="../../kvantummanager.ui" line="1960"/>
         <source>Remove focus rectangles</source>
         <translation>초점 사각형 제거</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2112"/>
+        <location filename="../../kvantummanager.ui" line="2156"/>
         <source>Use the active theme for all apps!
 
 This Needs saving to take effect.</source>
@@ -853,7 +877,7 @@ as far as possible.</source>
 Kvantum은 가능한 한 그것들의 행동을 바로잡으려고 노력할 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1080"/>
+        <location filename="../../kvantummanager.ui" line="1124"/>
         <source>Needs KDE blur effect, a graphic card
 that supports it, and a translucent
 window SVG background in the theme.</source>
@@ -861,20 +885,20 @@ window SVG background in the theme.</source>
 테마의 반투명 창 SVG 배경이 필요합니다.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1158"/>
+        <location filename="../../kvantummanager.ui" line="1202"/>
         <source>Should transient scrollbars have
 semi-transparent grooves when needed?</source>
         <translation>필요할 때 일시적인 스크롤 막대에
 반투명 홈이 있어야 합니까?</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1162"/>
+        <location filename="../../kvantummanager.ui" line="1206"/>
         <source>Transient scrollbar grooves when needed</source>
         <translation>필요한 경우 일시적인 스크롤 막대를 홈으로 이동</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1182"/>
-        <location filename="../../kvantummanager.ui" line="1198"/>
+        <location filename="../../kvantummanager.ui" line="1226"/>
+        <location filename="../../kvantummanager.ui" line="1242"/>
         <source>Affects menu-items and headers.
 
 The default value is 16 px but
@@ -891,8 +915,8 @@ Miscellaneous → Respect current DE if possible</source>
 기타 → 가능하면 현재 DE 준수</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1220"/>
-        <location filename="../../kvantummanager.ui" line="1236"/>
+        <location filename="../../kvantummanager.ui" line="1264"/>
+        <location filename="../../kvantummanager.ui" line="1280"/>
         <source>Affects icon views.
 
 The default value is 32 px but
@@ -909,8 +933,8 @@ Miscellaneous → Respect current DE if possible</source>
 기타 → 가능하면 현재 DE 준수</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1258"/>
-        <location filename="../../kvantummanager.ui" line="1270"/>
+        <location filename="../../kvantummanager.ui" line="1302"/>
+        <location filename="../../kvantummanager.ui" line="1314"/>
         <source>Affects buttons, tab-bars and list-views.
 
 The default value is 16 px.</source>
@@ -919,8 +943,8 @@ The default value is 16 px.</source>
 기본값은 16픽셀입니다.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1288"/>
-        <location filename="../../kvantummanager.ui" line="1302"/>
+        <location filename="../../kvantummanager.ui" line="1332"/>
+        <location filename="../../kvantummanager.ui" line="1346"/>
         <source>Affects toolbars.
 
 The default value is 22 px but
@@ -933,30 +957,30 @@ KDE apps get it from KDE setting.</source>
 KDE 앱은 KDE 설정에서 가져옵니다.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1440"/>
-        <location filename="../../kvantummanager.ui" line="1453"/>
+        <location filename="../../kvantummanager.ui" line="1484"/>
+        <location filename="../../kvantummanager.ui" line="1497"/>
         <source>The minimum length of scrollbars.</source>
         <translation>스크롤바의 최소 길이입니다.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1443"/>
-        <location filename="../../kvantummanager.ui" line="1456"/>
+        <location filename="../../kvantummanager.ui" line="1487"/>
+        <location filename="../../kvantummanager.ui" line="1500"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The minimum height of vertical scrollbars and the minimum width of horizontal scrollbars.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;세로 스크롤 막대의 최소 높이와 가로 스크롤 막대의 최소 너비입니다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1446"/>
+        <location filename="../../kvantummanager.ui" line="1490"/>
         <source>Minimum scrollbar length: </source>
         <translation>최소 스크롤 막대 길이: </translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1491"/>
+        <location filename="../../kvantummanager.ui" line="1535"/>
         <source>Delays</source>
         <translation>지연시간</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1497"/>
-        <location filename="../../kvantummanager.ui" line="1525"/>
+        <location filename="../../kvantummanager.ui" line="1541"/>
+        <location filename="../../kvantummanager.ui" line="1569"/>
         <source>The delay, in milliseconds, before a tooltip is shown.
 
 Zero means tooltips are shown instantly.
@@ -969,7 +993,7 @@ Zero means tooltips are shown instantly.
 -1은 기본 Qt 동작을 의미합니다.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1786"/>
+        <location filename="../../kvantummanager.ui" line="1830"/>
         <source>Scrollbars have add-line and sub-line arrows by default.
 
 Checking this box removes arrows as far as possible.
@@ -982,7 +1006,7 @@ If disabled, see Compositing &amp; General Look → Transient scrollbars!</sourc
 비활성화된 경우, 참조: 합성 &amp; 일반 모습 → 일시적인 스크롤바!</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1639"/>
+        <location filename="../../kvantummanager.ui" line="1683"/>
         <source>By default, drop rectangles for movable
 toolbars and dock widgets are hollow.
 
@@ -994,14 +1018,14 @@ the highlight color.</source>
 이 옵션은 드롭 사각형을 강조표시 색상으로 채웁니다.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1694"/>
+        <location filename="../../kvantummanager.ui" line="1738"/>
         <source>If checked, the menubar and toolbar will be drawn as a whole by
 the toolbar SVG element when they are adjacent to each another.</source>
         <translation>이 옵션을 선택하면 메뉴 표시줄과 도구모음이 서로 인접할 때
 도구모음 SVG 요소에 의해 전체적으로 그려집니다.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1742"/>
+        <location filename="../../kvantummanager.ui" line="1786"/>
         <source>Shift the contents of push buttons when pressed?
 
 By default, the contents are shifted by 1px
@@ -1011,8 +1035,8 @@ both horizontally and vertically.</source>
 기본적으로 내용은 수평 및 수직으로 모두 1px씩 이동됩니다.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1935"/>
-        <location filename="../../kvantummanager.ui" line="1949"/>
+        <location filename="../../kvantummanager.ui" line="1979"/>
+        <location filename="../../kvantummanager.ui" line="1993"/>
         <source>Drag windows from their menubars, primary toolbars
 or anywhere possible (and not only from their title bars)?
 
@@ -1025,8 +1049,8 @@ Miscellaneous → Respect current DE if possible</source>
 기타 → 가능한 경우 현재 DE 존중</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1846"/>
-        <location filename="../../kvantummanager.ui" line="1865"/>
+        <location filename="../../kvantummanager.ui" line="1890"/>
+        <location filename="../../kvantummanager.ui" line="1909"/>
         <source>Will have effect only if style
 is not set by the app in its code.
 
@@ -1037,7 +1061,7 @@ Default is &quot;Follow Style&quot;.</source>
 기본값은 &quot;스타일 따르기&quot;입니다.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1625"/>
+        <location filename="../../kvantummanager.ui" line="1669"/>
         <source>By default, spin indicators are drawn as
 two buttons with arrows or plus/minus signs.
 
@@ -1049,7 +1073,7 @@ into the spin line-edit..</source>
 이를 확인하면 회전 표시도구를 회전 선 편집에 통합됩니다.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1653"/>
+        <location filename="../../kvantummanager.ui" line="1697"/>
         <source>By default, spin indicators are drawn on adjacent buttons.
 
 Checking this puts the spin-up indicator above the
@@ -1060,7 +1084,7 @@ spin-down one inside the spin line-edit.</source>
 회전 선 편집도구를 배치합니다.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1705"/>
+        <location filename="../../kvantummanager.ui" line="1749"/>
         <source>Draw combo popups as menu popups (i.e. like in Gtk)?
 
 By default, combo popups do not cover the combo box.</source>
@@ -1069,18 +1093,18 @@ By default, combo popups do not cover the combo box.</source>
 기본적으로 콤보 팝업은 콤보 상자를 덮지 않습니다.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1755"/>
+        <location filename="../../kvantummanager.ui" line="1799"/>
         <source>In Kvantum, tabs are centered by default.</source>
         <translation>Kvantum에서는 탭이 기본적으로 중앙에 위치합니다.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1504"/>
+        <location filename="../../kvantummanager.ui" line="1548"/>
         <source>Tooltip delay:</source>
         <translation>풍선 도움말 지연시간:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="943"/>
-        <location filename="../../kvantummanager.ui" line="973"/>
+        <location filename="../../kvantummanager.ui" line="987"/>
+        <location filename="../../kvantummanager.ui" line="1017"/>
         <source>A comma-separated list of executables,
 whose windows should not be translucent.
 
@@ -1093,7 +1117,7 @@ problems with translucency!)</source>
 반투명성에 문제가 있을 수 있습니다!)</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1141"/>
+        <location filename="../../kvantummanager.ui" line="1185"/>
         <source>Make scrollbars transient!
 
 Transient scrollbars appear on top of
@@ -1106,8 +1130,8 @@ They usually take no extra space.</source>
 그것들은 일반적으로 여분의 공간을 차지하지 않습니다.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1511"/>
-        <location filename="../../kvantummanager.ui" line="1548"/>
+        <location filename="../../kvantummanager.ui" line="1555"/>
+        <location filename="../../kvantummanager.ui" line="1592"/>
         <source>The delay, in milliseconds, to wait before opening a submenu.
 250 by default.
 
@@ -1120,28 +1144,28 @@ while 0 means no delay.</source>
 0은 지연시간이 없음을 의미합니다.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1518"/>
+        <location filename="../../kvantummanager.ui" line="1562"/>
         <source>Submenu delay: </source>
         <translation>하위메뉴 지연시간: </translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1532"/>
-        <location filename="../../kvantummanager.ui" line="1555"/>
+        <location filename="../../kvantummanager.ui" line="1576"/>
+        <location filename="../../kvantummanager.ui" line="1599"/>
         <source> ms</source>
         <translation> ms</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1588"/>
+        <location filename="../../kvantummanager.ui" line="1632"/>
         <source>Miscellaneous</source>
         <translation>기타</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1793"/>
+        <location filename="../../kvantummanager.ui" line="1837"/>
         <source>No arrows for scrollbars</source>
         <translation>스크롤 막대에 대한 화살표 없음</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1888"/>
+        <location filename="../../kvantummanager.ui" line="1932"/>
         <source>Draw scrollbars inside view frames?
 
 By default, scrollbars are drawn outide view frames.
@@ -1154,17 +1178,17 @@ If disabled, see Compositing &amp; General Look → Transient scrollbars!</sourc
 비활성화된 경우, 합성 및 일반 모양 → 과도 스크롤 막대를 참조하십시오!</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1895"/>
+        <location filename="../../kvantummanager.ui" line="1939"/>
         <source>Scrollbars inside frames</source>
         <translation>프레임 내부 스크롤 막대</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1928"/>
+        <location filename="../../kvantummanager.ui" line="1972"/>
         <source>Tree branch lines</source>
         <translation>트리 브랜치 선</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1611"/>
+        <location filename="../../kvantummanager.ui" line="1655"/>
         <source>By default, the label is on the frame
 and the frame is cut to contain it.
 
@@ -1177,103 +1201,103 @@ the frame, so that the frame isn&apos;t cut.</source>
 놓이므로 프레임이 잘리지 않습니다.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1618"/>
+        <location filename="../../kvantummanager.ui" line="1662"/>
         <source>Group-box label above frame</source>
         <translation>프레임 위의 그룹 상자 레이블</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1646"/>
+        <location filename="../../kvantummanager.ui" line="1690"/>
         <source>Fill rubber-band rectangles</source>
         <translation>고무 밴드 사각형 채우기</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1666"/>
+        <location filename="../../kvantummanager.ui" line="1710"/>
         <source>Mouse tracking is enabled
 for menubars by default.</source>
         <translation>마우스 추적은 기본적으로
 메뉴 표시줄에 대해 활성화됩니다.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1670"/>
+        <location filename="../../kvantummanager.ui" line="1714"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mouse tracking is enabled for menubars by default, i.e., after a menubar item is clicked and its menu is shown, the menus of the other menubar items will be shown if the cursor is put on them without clicking.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;마우스 추적은 기본적으로 메뉴 표시줄에 대해 활성화되어 있으며, 즉 메뉴 표시줄 항목을 클릭하고 메뉴가 표시된 후, 클릭하지 않고 커서를 놓으면 다른 메뉴바 항목의 메뉴가 표시됩니다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1673"/>
+        <location filename="../../kvantummanager.ui" line="1717"/>
         <source>Mouse tracking for menubars</source>
         <translation>메뉴 표시줄에 대한 마우스 추적</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1698"/>
+        <location filename="../../kvantummanager.ui" line="1742"/>
         <source>Merge menubar with toolbar</source>
         <translation>메뉴 표시줄과 도구모음 병합</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1717"/>
+        <location filename="../../kvantummanager.ui" line="1761"/>
         <source>If checked, toolbar buttons will be drawn grouped and raised
 between toolbar separators.</source>
         <translation>이 옵션을 선택하면 도구모음 단추가 그룹화되어
 도구모음 구분기호 사이에 나타납니다.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1721"/>
+        <location filename="../../kvantummanager.ui" line="1765"/>
         <source>Group toolbar buttons</source>
         <translation>그룹 도구모음 버튼</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1748"/>
+        <location filename="../../kvantummanager.ui" line="1792"/>
         <source>Shift push-button contents</source>
         <translation>푸시 버튼 내용 교체</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1942"/>
+        <location filename="../../kvantummanager.ui" line="1986"/>
         <source>Drag from:</source>
         <translation>끌어서 놓기:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1852"/>
+        <location filename="../../kvantummanager.ui" line="1896"/>
         <source>Toolbutton style:</source>
         <translation>도구버튼 스타일 :</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1765"/>
+        <location filename="../../kvantummanager.ui" line="1809"/>
         <source>If unchecked, shortcuts will not be underlined at all.</source>
         <translation>이 확인란을 선택하지 않으면 바로 가기에 밑줄이 표시되지 않습니다.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1768"/>
+        <location filename="../../kvantummanager.ui" line="1812"/>
         <source>Underline shortcuts with Alt</source>
         <translation>Alt를 사용한 밑줄 바로가기</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1632"/>
+        <location filename="../../kvantummanager.ui" line="1676"/>
         <source>Inline spin indicators</source>
         <translation>인라인 회전 표시도구</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1680"/>
+        <location filename="../../kvantummanager.ui" line="1724"/>
         <source>Draw the whole editable combo-box as a
 line-edit with arrow (and icon, if it exists)?</source>
         <translation>전체 편집 가능한 콤보 상자를 화살표가 있는
 선 편집(및 아이콘이 있는 경우)으로 그리시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1684"/>
+        <location filename="../../kvantummanager.ui" line="1728"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Draw the whole editable combo-box as a line-edit with arrow (and icon, if it exists)?&lt;/p&gt;&lt;p&gt;By default, a combo-box consists of a line-edit, a button with arrow on one side and another button with icon on the other side.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;전체 편집 가능한 콤보 상자를 화살표가 있는 선 편집(및 아이콘이 있는 경우)으로 그리시겠습니까?&lt;/p&gt;&lt;p&gt;기본적으로 콤보 상자는 선 편집, 한 쪽에 화살표가 있는 버튼 및 다른 쪽에 아이콘이 있는 다른 버튼으로 구성됩니다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1687"/>
+        <location filename="../../kvantummanager.ui" line="1731"/>
         <source>Editable combo as line-edit</source>
         <translation>라인 편집으로 편집 가능한 콤보</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1659"/>
+        <location filename="../../kvantummanager.ui" line="1703"/>
         <source>Vertical spin indicators</source>
         <translation>수직 회전 표시도구</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1594"/>
+        <location filename="../../kvantummanager.ui" line="1638"/>
         <source>When this is enabled and checked, Kvantum will try to
 respect some settings of the current desktop environment.
 
@@ -1286,44 +1310,44 @@ Uncheck it if you want to use those options!</source>
 이러한 옵션을 사용하려면 이 옵션을 선택 취소합니다!</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1604"/>
+        <location filename="../../kvantummanager.ui" line="1648"/>
         <source>Respect current DE if possible</source>
         <translation>가능하면 현재 DE 준수</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1710"/>
+        <location filename="../../kvantummanager.ui" line="1754"/>
         <source>Combo popup as menu</source>
         <translation>메뉴로 콤보 팝업</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1758"/>
+        <location filename="../../kvantummanager.ui" line="1802"/>
         <source>Left aligned tabs</source>
         <translation>왼쪽 정렬 탭</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1775"/>
+        <location filename="../../kvantummanager.ui" line="1819"/>
         <source>Inactive tabs are joined together by default,
 i.e., there is no border between them.</source>
         <translation>비활성 탭은 기본적으로 함께 결합됩니다.
 즉, 이들 탭 사이에는 경계가 없습니다.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1779"/>
+        <location filename="../../kvantummanager.ui" line="1823"/>
         <source>Join inactive tabs</source>
         <translation>비활성 탭 결합</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1966"/>
+        <location filename="../../kvantummanager.ui" line="2010"/>
         <source>Scrollable menus</source>
         <translation>스크롤 가능한 메뉴</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1601"/>
+        <location filename="../../kvantummanager.ui" line="1645"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When this is enabled and checked, Kvantum will try to respect some settings of the current desktop environment if it is KDE, Unity, Gnome or Pantheon.&lt;/p&gt;&lt;p&gt;Under KDE, it makes Kvantum read KDE settings for small and large icon sizes and also single or double clicking.&lt;/p&gt;&lt;p&gt;Under Unity, Gnome and Pantheon, it removes icons from menus and push-buttons (even if the corresponding dconf keys are changed) and disables window translucency.&lt;/p&gt;&lt;p&gt;This checkbox may disable some options. Uncheck it if you want to use those options!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;이 기능을 활성화하고 선택하면 Kvantum은 KDE, Unity, Gnome 또는 Pantheon인 경우, 현재 데스크탑 환경의 일부 설정을 준수하려고 합니다.&lt;/p&gt;&lt;p&gt;KDE에서 Kvantum은 작은 아이콘 크기와 큰 아이콘 크기에 대한 KDE 설정을 읽게 하고 한 번 또는 두 번 클릭하게 합니다.&lt;/p&gt;&lt;p&gt;Unity, Gnome 및 Pantheon에서는 메뉴 및 푸시 버튼에서 아이콘을 제거하고(해당 dconf 키를 변경한 경우에도) 창 반투명도를 비활성화합니다.&lt;/p&gt;&lt;p&gt;이 확인란은 일부 옵션을 비활성화 할 수 있습니다. 해당 옵션을 사용하려면 선택을 취소하십시오!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="802"/>
+        <location filename="../../kvantummanager.ui" line="846"/>
         <source>This needs the KDE contrast effect and is applied
 only to translucent windows that support the blur
 effect (but the KDE blur effect can be disabled).
@@ -1336,7 +1360,7 @@ A value of 1.00 means no change.</source>
 값이 1.00이면 변동 사항이 없음을 의미합니다.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1728"/>
+        <location filename="../../kvantummanager.ui" line="1772"/>
         <source>When drawing combo popups as menus,
 there will be a checkbox next to each entry
 (although Kvantum draws it as a radio button).
@@ -1349,12 +1373,12 @@ This option will hide these.</source>
 이 옵션은 이러한 항목을 숨깁니다.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1735"/>
+        <location filename="../../kvantummanager.ui" line="1779"/>
         <source>Non-checkable combo menu</source>
         <translation>확인할 수 없는 콤보 메뉴</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1960"/>
+        <location filename="../../kvantummanager.ui" line="2004"/>
         <source>Should big menus be scrollable and have
 scroll arrows on their top and/or bottom?
 
@@ -1365,7 +1389,7 @@ By default, big menus are scrollable.</source>
 기본적으로 큰 메뉴는 스크롤 가능합니다.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1973"/>
+        <location filename="../../kvantummanager.ui" line="2017"/>
         <source>Warning: This can be quite confusing at first.
 
 If you have enabled it, you could temporarily disable it
@@ -1378,90 +1402,90 @@ Ctrl 키를 눌러 드래그 앤 드롭할 수 있는 버튼에 대해
 일시적으로 비활성화할 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1980"/>
+        <location filename="../../kvantummanager.ui" line="2024"/>
         <source>Allow dragging from buttons</source>
         <translation>버튼에서 드래그 허용</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2003"/>
+        <location filename="../../kvantummanager.ui" line="2047"/>
         <source>Application Themes</source>
         <translation>응용프로그램 테마</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2009"/>
+        <location filename="../../kvantummanager.ui" line="2053"/>
         <source>&lt;center&gt;Here you could assign themes to specific applications.&lt;/center&gt;&lt;br&gt;&lt;center&gt;For each theme, you could add a comma-separated list of executables whose applications should use that theme instead of the active theme. After doing so for all of your chosen themes, save the result by clicking on the &lt;i&gt;Save&lt;/i&gt; button!&lt;/center&gt;</source>
         <translation>&lt;center&gt;여기서 특정 응용 프로그램에 테마를 할당할 수 있습니다.&lt;/center&gt;&lt;br&gt;&lt;center&gt;각 테마에 대해 응용 프로그램에서 활성 테마 대신 해당 테마를 사용해야 하는 쉼표로 구분된 실행 파일 목록을 추가할 수 있습니다. 선택한 모든 테마에 대해 이 작업을 수행한 후 &lt;i&gt;저장&lt;/i&gt; 버튼을 클릭하여 결과를 저장합니다!&lt;/center&gt;</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2044"/>
+        <location filename="../../kvantummanager.ui" line="2088"/>
         <source>Installed Theme</source>
         <translation>설치된 테마</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2060"/>
+        <location filename="../../kvantummanager.ui" line="2104"/>
         <source>Application(s)</source>
         <translation>응용프로그램</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2089"/>
+        <location filename="../../kvantummanager.ui" line="2133"/>
         <source>app1,app2,app3</source>
         <translation>앱1,앱2,앱3</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2117"/>
+        <location filename="../../kvantummanager.ui" line="2161"/>
         <source>Remove List</source>
         <translation>목록 제거</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2124"/>
+        <location filename="../../kvantummanager.ui" line="2168"/>
         <source>Save the current list of apps</source>
         <translation>현재 앱 목록 저장</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2127"/>
+        <location filename="../../kvantummanager.ui" line="2171"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Save the current list of applications with their corresponding themes!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;해당 응용 프로그램과 함께 현재 응용 프로그램 목록을 저장하십시오!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2154"/>
-        <location filename="../../kvantummanager.ui" line="2160"/>
+        <location filename="../../kvantummanager.ui" line="2198"/>
+        <location filename="../../kvantummanager.ui" line="2204"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2157"/>
+        <location filename="../../kvantummanager.ui" line="2201"/>
         <source>Quit</source>
         <translation>종료</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2170"/>
+        <location filename="../../kvantummanager.ui" line="2214"/>
         <source>Preview the active theme
 or update its preview.</source>
         <translation>활성 테마를 미리 보거나
 미리 보기를 업데이트합니다.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2174"/>
+        <location filename="../../kvantummanager.ui" line="2218"/>
         <source>Preview</source>
         <translation>미리보기</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2181"/>
+        <location filename="../../kvantummanager.ui" line="2225"/>
         <source>About</source>
         <translation>프로그램 정보</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2204"/>
+        <location filename="../../kvantummanager.ui" line="2248"/>
         <source>What&apos;s This?</source>
         <translation>이것은 무엇일까요?</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2207"/>
+        <location filename="../../kvantummanager.ui" line="2251"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click on this button and then click on a GUI element that has &amp;quot;What&apos;s This&amp;quot; tooltip  to get information about what it does.&lt;/p&gt;&lt;p&gt;There are also ordinary tooltips but this kind of tooltip will not disappear until you click somewhere.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;이 버튼을 클릭 한 다음 &amp;quot;이것은 무엇일까요&amp;quot; 풍선 도움말이 있는 GUI 요소를 클릭하면 그 기능에 대한 정보를 얻을 수 있습니다.&lt;/p&gt;&lt;p&gt;일반적인 풍선 도움말도 있지만 이 풍선 도움말은 어딘가를 클릭할 때까지 사라지지 않습니다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2210"/>
+        <location filename="../../kvantummanager.ui" line="2254"/>
         <source>Help</source>
         <translation>도움말</translation>
     </message>
@@ -1492,7 +1516,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="675"/>
         <location filename="../../KvantumManager.cpp" line="829"/>
-        <location filename="../../KvantumManager.cpp" line="2782"/>
+        <location filename="../../KvantumManager.cpp" line="2802"/>
         <source>Confirmation</source>
         <translation>확인</translation>
     </message>
@@ -1692,75 +1716,75 @@ or update its preview.</source>
         <translation>복사본이 없으면 복원할 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1400"/>
-        <location filename="../../KvantumManager.cpp" line="1420"/>
+        <location filename="../../KvantumManager.cpp" line="1409"/>
+        <location filename="../../KvantumManager.cpp" line="1429"/>
         <source>These are the settings that can be safely changed.&lt;br&gt;For the others, click &lt;i&gt;Save&lt;/i&gt; and then edit this file:</source>
         <translation>안전하게 변경할 수 있는 설정입니다.&lt;br&gt;다른 설정의 경우, &lt;i&gt;저장&lt;/i&gt;을 클릭한 다음 이 파일을 편집합니다:</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1416"/>
-        <location filename="../../KvantumManager.cpp" line="2686"/>
+        <location filename="../../KvantumManager.cpp" line="1425"/>
+        <location filename="../../KvantumManager.cpp" line="2706"/>
         <source>These are the settings that can be safely changed.&lt;br&gt;For the others, edit this file:</source>
         <translation>안전하게 변경할 수 있는 설정입니다.&lt;br&gt;다른 설정의 경우, 이 파일을 편집하십시오:</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1812"/>
+        <location filename="../../KvantumManager.cpp" line="1826"/>
         <source>No description</source>
         <translation>설명 없음</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2269"/>
+        <location filename="../../KvantumManager.cpp" line="2283"/>
         <source>A copy of the root config is created.</source>
         <translation>루트 구성의 사본이 생성됩니다.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2280"/>
+        <location filename="../../KvantumManager.cpp" line="2294"/>
         <source>A copy was already created.</source>
         <translation>복사본이 이미 만들어졌습니다.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2672"/>
+        <location filename="../../KvantumManager.cpp" line="2692"/>
         <source>Configuration saved.</source>
         <translation>환경설정이 저장되었습니다.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2783"/>
+        <location filename="../../KvantumManager.cpp" line="2803"/>
         <source>Do you want to revert to the default (root) settings of this theme?</source>
         <translation>이 테마의 기본 (루트) 설정으로 되돌리시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2786"/>
+        <location filename="../../KvantumManager.cpp" line="2806"/>
         <source>You will lose the changes you might have made.</source>
         <translation>변경한 내용이 손실됩니다.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2821"/>
+        <location filename="../../KvantumManager.cpp" line="2841"/>
         <source>Restored the root default settings of %1</source>
         <translation>%1의 루트 기본 설정을 복원했습니다</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2822"/>
+        <location filename="../../KvantumManager.cpp" line="2842"/>
         <source>the default theme</source>
         <translation>기본 테마</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2982"/>
-        <location filename="../../KvantumManager.cpp" line="2983"/>
+        <location filename="../../KvantumManager.cpp" line="3002"/>
+        <location filename="../../KvantumManager.cpp" line="3003"/>
         <source>About Kvantum Manager</source>
         <translation>Kvantum 관리자 소개</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2982"/>
+        <location filename="../../KvantumManager.cpp" line="3002"/>
         <source>Translators</source>
         <translation>번역</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2980"/>
+        <location filename="../../KvantumManager.cpp" line="3000"/>
         <source>A tool for installing, selecting&lt;br&gt;and configuring &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt; themes</source>
         <translation>&lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt; 테마 설치, 선택 &lt;br&gt;및 환경설정을 위한 도구</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2981"/>
+        <location filename="../../KvantumManager.cpp" line="3001"/>
         <source>Author: &lt;a href=&apos;mailto:tsujan2000@gmail.com?Subject=My%20Subject&apos;&gt;Pedram Pourang (aka. Tsu Jan)&lt;/a&gt; &lt;/center&gt;&lt;br&gt;</source>
         <translation>작성자: &lt;a href=&apos;mailto:tsujan2000@gmail.com?Subject=My%20Subject&apos;&gt;Pedram Pourang (aka. Tsu Jan)&lt;/a&gt; &lt;/center&gt;&lt;br&gt;</translation>
     </message>
@@ -1786,8 +1810,8 @@ or update its preview.</source>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="1013"/>
-        <location filename="../../KvantumManager.cpp" line="2212"/>
-        <location filename="../../KvantumManager.cpp" line="2681"/>
+        <location filename="../../KvantumManager.cpp" line="2226"/>
+        <location filename="../../KvantumManager.cpp" line="2701"/>
         <source>Active theme:</source>
         <translation>활성 테마:</translation>
     </message>

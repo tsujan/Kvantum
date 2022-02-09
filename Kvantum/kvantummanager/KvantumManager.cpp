@@ -1193,6 +1193,15 @@ void KvantumManager::defaultThemeButtons()
 
     ui->checkBoxShadowlessPopup->setChecked (defaultSettings.value ("shadowless_popup").toBool());
 
+    int radius = 0;
+    if (defaultSettings.contains ("menu_blur_radius")) // 0 by default
+        radius = qMin (qMax (defaultSettings.value ("menu_blur_radius").toInt(), 0), 10);
+    ui->spinMenuBlur->setValue (radius);
+    radius = 0;
+    if (defaultSettings.contains ("tooltip_blur_radius")) // 0 by default
+        radius = qMin (qMax (defaultSettings.value ("tooltip_blur_radius").toInt(), 0), 10);
+    ui->spinTooltipBlur->setValue (radius);
+
     /* all contrast effect values are 1 by default */
     if (defaultSettings.contains ("contrast"))
     {
@@ -1566,6 +1575,11 @@ void KvantumManager::tabChanged (int index)
                 }
 
                 ui->checkBoxShadowlessPopup->setChecked (themeSettings.value ("shadowless_popup").toBool());
+
+                if (themeSettings.contains ("menu_blur_radius"))
+                    ui->spinMenuBlur->setValue (qMin (qMax (themeSettings.value ("menu_blur_radius").toInt(), 0), 10));
+                if (themeSettings.contains ("tooltip_blur_radius"))
+                    ui->spinTooltipBlur->setValue (qMin (qMax (themeSettings.value ("tooltip_blur_radius").toInt(), 0), 10));
 
                 if (themeSettings.contains ("contrast"))
                 {
@@ -2401,6 +2415,9 @@ void KvantumManager::writeConfig()
         generalKeys.insert ("shadowless_popup", boolToStr (ui->checkBoxShadowlessPopup->isChecked()));
         generalKeys.insert ("blurring", boolToStr (ui->checkBoxBlurWindow->isChecked()));
 
+        generalKeys.insert ("menu_blur_radius", str.setNum (ui->spinMenuBlur->value()));
+        generalKeys.insert ("tooltip_blur_radius", str.setNum (ui->spinTooltipBlur->value()));
+
         generalKeys.insert ("contrast", str.setNum (ui->spinContrast->value(), 'f', 2));
         generalKeys.insert ("intensity", str.setNum (ui->spinIntensity->value(), 'f', 2));
         generalKeys.insert ("saturation", str.setNum (ui->spinSaturation->value(), 'f', 2));
@@ -2476,6 +2493,9 @@ void KvantumManager::writeConfig()
             || themeSettings.value ("blurring").toBool() != ui->checkBoxBlurWindow->isChecked()
             || themeSettings.value ("popup_blurring").toBool() != ui->checkBoxBlurPopup->isChecked()
             || themeSettings.value ("shadowless_popup").toBool() != ui->checkBoxShadowlessPopup->isChecked()
+
+            || qMin (qMax (themeSettings.value ("menu_blur_radius").toInt(), 0), 10) != ui->spinMenuBlur->value()
+            || qMin (qMax (themeSettings.value ("tooltip_blur_radius").toInt(), 0), 10) != ui->spinTooltipBlur->value()
 
             || qBound (static_cast<qreal>(0), themeSettings.value ("contrast").toReal(), static_cast<qreal>(2))
                != static_cast<qreal>(ui->spinContrast->value())

@@ -533,6 +533,15 @@ tooltip_shadow_depth              Integer             The depth of the shadow to
                                                       A value of zero, its absence or a false
                                                       value for "composite" means no shadow.
 
+menu_blur_radius
+tooltip_blur_radius               Integer             The corner radii for blurring translucent
+                                                      menus and tooltips that have rounded
+                                                      corners. The default value is 0 and the
+                                                      maximum is 10.
+
+                                                      Usually, a value of 2 is enough for
+                                                      preventing artifacts.
+
 translucent_windows               true/false          Translucent windows and dialogs?
                                                       This requires a translucent SVG
                                                       element for windows or a positive value

@@ -113,7 +113,7 @@ beállításaihoz.
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="346"/>
-        <location filename="../../kvantummanager.ui" line="2130"/>
+        <location filename="../../kvantummanager.ui" line="2174"/>
         <source>Save</source>
         <translation>Mentés</translation>
     </message>
@@ -259,8 +259,8 @@ egérmutató alatt ennyivel: </translation>
     <message>
         <location filename="../../kvantummanager.ui" line="666"/>
         <location filename="../../kvantummanager.ui" line="713"/>
-        <location filename="../../kvantummanager.ui" line="1037"/>
-        <location filename="../../kvantummanager.ui" line="1070"/>
+        <location filename="../../kvantummanager.ui" line="1081"/>
+        <location filename="../../kvantummanager.ui" line="1114"/>
         <source> %</source>
         <translation> %</translation>
     </message>
@@ -315,15 +315,15 @@ amennyire csak lehetséges.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="763"/>
-        <location filename="../../kvantummanager.ui" line="1207"/>
-        <location filename="../../kvantummanager.ui" line="1245"/>
-        <location filename="../../kvantummanager.ui" line="1275"/>
-        <location filename="../../kvantummanager.ui" line="1312"/>
-        <location filename="../../kvantummanager.ui" line="1340"/>
-        <location filename="../../kvantummanager.ui" line="1366"/>
-        <location filename="../../kvantummanager.ui" line="1396"/>
-        <location filename="../../kvantummanager.ui" line="1424"/>
-        <location filename="../../kvantummanager.ui" line="1459"/>
+        <location filename="../../kvantummanager.ui" line="1251"/>
+        <location filename="../../kvantummanager.ui" line="1289"/>
+        <location filename="../../kvantummanager.ui" line="1319"/>
+        <location filename="../../kvantummanager.ui" line="1356"/>
+        <location filename="../../kvantummanager.ui" line="1384"/>
+        <location filename="../../kvantummanager.ui" line="1410"/>
+        <location filename="../../kvantummanager.ui" line="1440"/>
+        <location filename="../../kvantummanager.ui" line="1468"/>
+        <location filename="../../kvantummanager.ui" line="1503"/>
         <source> px</source>
         <translation> px</translation>
     </message>
@@ -333,14 +333,14 @@ amennyire csak lehetséges.</translation>
         <translation type="unfinished">Kompozitálás és általános megjelenés</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="932"/>
+        <location filename="../../kvantummanager.ui" line="976"/>
         <source>Has effect only when there is a translucent SVG background
 for windows or the window opacity is reduced (see below).</source>
         <translation type="unfinished">Csak akkor van hatása, amikor áttetsző SVG háttér van
 az ablakokhoz, vagy az ablakátlátszatlanság csökkentett (lásd lentebb).</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="950"/>
+        <location filename="../../kvantummanager.ui" line="994"/>
         <source>Opaque apps:</source>
         <translation>Átlátszatlan alkalmazások:</translation>
     </message>
@@ -466,27 +466,51 @@ vagy ki- és bejelentkezés útján.</translation>
         <translation type="unfinished">Kompozit effektek kikapcsolása</translation>
     </message>
     <message>
+        <location filename="../../kvantummanager.ui" line="802"/>
+        <source>If blurring is enabled, these values set the corner
+radii for blurring translucent menus and tooltips
+that have rounded corners.
+
+Usually, a value of 2 is enough.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../../kvantummanager.ui" line="809"/>
+        <source>Blur Corner Radius</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../kvantummanager.ui" line="822"/>
+        <source>Menu:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../kvantummanager.ui" line="829"/>
+        <source>Tooltip:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../kvantummanager.ui" line="853"/>
         <source>Contrast Effect</source>
         <translation type="unfinished">Kontraszt effekt</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="815"/>
+        <location filename="../../kvantummanager.ui" line="859"/>
         <source>Saturation:</source>
         <translation>Telítettség:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="822"/>
+        <location filename="../../kvantummanager.ui" line="866"/>
         <source>Intensity:</source>
         <translation>Intenzitás:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="829"/>
+        <location filename="../../kvantummanager.ui" line="873"/>
         <source>Contrast:</source>
         <translation>Kontraszt:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="906"/>
+        <location filename="../../kvantummanager.ui" line="950"/>
         <source>Needs KDE blur effect, a graphic card that supports it,
 and translucent menu/tooltip SVG elements.
 
@@ -497,12 +521,12 @@ Automatically checked if window blurring is enabled.</source>
 Automatikusan be van jelölve, ha az ablakelmosás engedélyezett.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="912"/>
+        <location filename="../../kvantummanager.ui" line="956"/>
         <source>Blurring for menus and tooltips</source>
         <translation>Elmosás menükhöz és elemleírásokhoz</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="919"/>
+        <location filename="../../kvantummanager.ui" line="963"/>
         <source>Do not draw shadows for menus and tooltips.
 
 This may be useful under DEs that give
@@ -513,18 +537,18 @@ Ez hasznos lehet egyes asztali környezetek alatt
 amelyek árnyékot adnak a menüknek és az elemleírásoknak.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="925"/>
+        <location filename="../../kvantummanager.ui" line="969"/>
         <source>Shadowless menus and tooltips</source>
         <translation>Árnyék nélküli menük és elemleírások</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="936"/>
+        <location filename="../../kvantummanager.ui" line="980"/>
         <source>Translucent windows</source>
         <translation>Áttetsző ablakok</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1000"/>
-        <location filename="../../kvantummanager.ui" line="1030"/>
+        <location filename="../../kvantummanager.ui" line="1044"/>
+        <location filename="../../kvantummanager.ui" line="1074"/>
         <source>This will reduce the window opacity
 if window translucency is enabled.
 
@@ -537,126 +561,126 @@ Egy áttetsző SVG háttérnél ez NEM
 szükséges, hogy működjön.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1007"/>
+        <location filename="../../kvantummanager.ui" line="1051"/>
         <source>Reduce window opacity by</source>
         <translation>Ablakátlátszatlanság csökkentése ennyivel:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1047"/>
+        <location filename="../../kvantummanager.ui" line="1091"/>
         <source>Reduce menu opacity by</source>
         <translation>Menüátlátszatlanság csökkentése ennyivel:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1085"/>
+        <location filename="../../kvantummanager.ui" line="1129"/>
         <source>Blurring for translucent windows</source>
         <translation type="unfinished">Elmosás az áttetsző ablakokhoz</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1105"/>
+        <location filename="../../kvantummanager.ui" line="1149"/>
         <source>A 200ms fading animation when the state of
 some widgets is changed, mostly by the mouse.</source>
         <translation type="unfinished">Egy 200 ms áttűnés amikor egyes elemek
 állapota megváltozik, főleg az egér által.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1109"/>
+        <location filename="../../kvantummanager.ui" line="1153"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A 200ms fading animation when the state of some widgets is changed, mostly by the mouse.&lt;/p&gt;&lt;p&gt;The CPU usage is negligible because often only one widget is animated. The resulting visual effect depends on the active theme.&lt;/p&gt;&lt;p&gt;These widgets are supported: buttons (including radio buttons and check boxes), combo boxes, spin boxes, slider handles, line-edits and scroll views.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1112"/>
+        <location filename="../../kvantummanager.ui" line="1156"/>
         <source>Animation for state change under mouse</source>
         <translation>Animáció az állapotváltozáshoz egér alatt</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1119"/>
+        <location filename="../../kvantummanager.ui" line="1163"/>
         <source>Check this to remove all window/dialog tiling patterns!
 Uncheck it if you want those patterns back!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1123"/>
+        <location filename="../../kvantummanager.ui" line="1167"/>
         <source>Remove window/dialog tiling patterns</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1130"/>
+        <location filename="../../kvantummanager.ui" line="1174"/>
         <source>Use the same colors and shapes with active and inactive
 windows if this theme distinguishes between them?</source>
         <translation>Ugyanazokat a színeket és formákat használják az inaktív
 ablakok, ha a téma különbséget tesz közöttük?</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1134"/>
+        <location filename="../../kvantummanager.ui" line="1178"/>
         <source>Ignore inactive state</source>
         <translation type="unfinished">Inaktív állapot figyelmen kívül hagyása</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1148"/>
+        <location filename="../../kvantummanager.ui" line="1192"/>
         <source>Transient scrollbars</source>
         <translation type="unfinished">Átmeneti görgetősávok</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1170"/>
+        <location filename="../../kvantummanager.ui" line="1214"/>
         <source>Sizes &amp;&amp; Delays</source>
         <translation type="unfinished">Méretek és késleltetések</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1176"/>
+        <location filename="../../kvantummanager.ui" line="1220"/>
         <source>Sizes</source>
         <translation>Méretek</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1191"/>
+        <location filename="../../kvantummanager.ui" line="1235"/>
         <source>Small icon:</source>
         <translation>Kis ikon:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1229"/>
+        <location filename="../../kvantummanager.ui" line="1273"/>
         <source>Large icon:</source>
         <translation>Nagy ikon:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1263"/>
+        <location filename="../../kvantummanager.ui" line="1307"/>
         <source>Button icon:</source>
         <translation>Gomb ikon:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1295"/>
+        <location filename="../../kvantummanager.ui" line="1339"/>
         <source>Toolbar icon:</source>
         <translation>Eszköztárikon:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1309"/>
+        <location filename="../../kvantummanager.ui" line="1353"/>
         <source>Font size</source>
         <translation>Betűméret</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1325"/>
-        <location filename="../../kvantummanager.ui" line="1336"/>
+        <location filename="../../kvantummanager.ui" line="1369"/>
+        <location filename="../../kvantummanager.ui" line="1380"/>
         <source>The default value is 2 px but
 some apps set it themeselves.</source>
         <translation type="unfinished">Az alapértelmezett érték 2 px de néhány alkalmazás megának állítja be.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1329"/>
+        <location filename="../../kvantummanager.ui" line="1373"/>
         <source>Layout spacing:</source>
         <translation type="unfinished">Elrendezés térköze:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1353"/>
-        <location filename="../../kvantummanager.ui" line="1363"/>
+        <location filename="../../kvantummanager.ui" line="1397"/>
+        <location filename="../../kvantummanager.ui" line="1407"/>
         <source>The default value is 4 px but some apps set it themeselves.</source>
         <translation type="unfinished">Az alapértelmezett érték 4 px de néhány alkalmazás megának állítja be.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1356"/>
+        <location filename="../../kvantummanager.ui" line="1400"/>
         <source>Layout margin:</source>
         <translation type="unfinished">Elrendezés szegélye:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1379"/>
-        <location filename="../../kvantummanager.ui" line="1391"/>
+        <location filename="../../kvantummanager.ui" line="1423"/>
+        <location filename="../../kvantummanager.ui" line="1435"/>
         <source>The horizontal overlap between a submenu and its parent.
 
 0 by default.</source>
@@ -665,35 +689,35 @@ some apps set it themeselves.</source>
 0 alapértelmezetten.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1384"/>
+        <location filename="../../kvantummanager.ui" line="1428"/>
         <source>Submenu overlap: </source>
         <translation>Almenü átfedése: </translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1409"/>
-        <location filename="../../kvantummanager.ui" line="1420"/>
+        <location filename="../../kvantummanager.ui" line="1453"/>
+        <location filename="../../kvantummanager.ui" line="1464"/>
         <source>The width of horizontal spin buttons.
 (Has no effect when spin indicators are vertical.)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1413"/>
+        <location filename="../../kvantummanager.ui" line="1457"/>
         <source>Spin button width: </source>
         <translation>Léptetőgomb szélessége: </translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1800"/>
-        <location filename="../../kvantummanager.ui" line="1810"/>
+        <location filename="../../kvantummanager.ui" line="1844"/>
+        <location filename="../../kvantummanager.ui" line="1854"/>
         <source>How to activate view items?</source>
         <translation type="unfinished">Hogyan aktiválódjanak az elemek?</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1803"/>
+        <location filename="../../kvantummanager.ui" line="1847"/>
         <source>Click behavior:</source>
         <translation type="unfinished">Kattintási viselkedés:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1923"/>
+        <location filename="../../kvantummanager.ui" line="1967"/>
         <source>Draw tree branch lines?
 
 By default, tree branches have indicators but no line.</source>
@@ -702,24 +726,24 @@ By default, tree branches have indicators but no line.</source>
 Alapértelmezetten a fa menükben mutatók vannak, de vonalak nincsenek.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1902"/>
+        <location filename="../../kvantummanager.ui" line="1946"/>
         <source>Dialog button layout:</source>
         <translation type="unfinished">Párbeszédgomb elrendezés:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1912"/>
+        <location filename="../../kvantummanager.ui" line="1956"/>
         <source>They may look like dotted rectangles
 on focused buttons and other widgets.</source>
         <translation type="unfinished">Úgy néznek ki, mint pontozott téglalapok
 a fókuszált gombokra és egyéb elemekre.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1916"/>
+        <location filename="../../kvantummanager.ui" line="1960"/>
         <source>Remove focus rectangles</source>
         <translation type="unfinished">Fókusztéglalapok eltávolítása</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2112"/>
+        <location filename="../../kvantummanager.ui" line="2156"/>
         <source>Use the active theme for all apps!
 
 This Needs saving to take effect.</source>
@@ -836,7 +860,7 @@ A Kvantum megpróbálja korrigálni a működésüket,
 amennyire lehetséges.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1080"/>
+        <location filename="../../kvantummanager.ui" line="1124"/>
         <source>Needs KDE blur effect, a graphic card
 that supports it, and a translucent
 window SVG background in the theme.</source>
@@ -845,19 +869,19 @@ videokártya amely támogatja,áátetsző SVG
 ablakháttér a témában.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1158"/>
+        <location filename="../../kvantummanager.ui" line="1202"/>
         <source>Should transient scrollbars have
 semi-transparent grooves when needed?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1162"/>
+        <location filename="../../kvantummanager.ui" line="1206"/>
         <source>Transient scrollbar grooves when needed</source>
         <translation type="unfinished">Átmeneti görgetősáv-háttér</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1182"/>
-        <location filename="../../kvantummanager.ui" line="1198"/>
+        <location filename="../../kvantummanager.ui" line="1226"/>
+        <location filename="../../kvantummanager.ui" line="1242"/>
         <source>Affects menu-items and headers.
 
 The default value is 16 px but
@@ -874,8 +898,8 @@ Ha ez le van tiltva, lásd:
 Vegyes → Jelenlegi asztal tiszteletben tartása, ha lehetséges</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1220"/>
-        <location filename="../../kvantummanager.ui" line="1236"/>
+        <location filename="../../kvantummanager.ui" line="1264"/>
+        <location filename="../../kvantummanager.ui" line="1280"/>
         <source>Affects icon views.
 
 The default value is 32 px but
@@ -892,8 +916,8 @@ Ha ez le van tiltva, lásd:
 Vegyes → Jelenlegi asztal tiszteletben tartása, ha lehetséges</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1258"/>
-        <location filename="../../kvantummanager.ui" line="1270"/>
+        <location filename="../../kvantummanager.ui" line="1302"/>
+        <location filename="../../kvantummanager.ui" line="1314"/>
         <source>Affects buttons, tab-bars and list-views.
 
 The default value is 16 px.</source>
@@ -902,8 +926,8 @@ The default value is 16 px.</source>
 Az alapértelmezett érték 16 px.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1288"/>
-        <location filename="../../kvantummanager.ui" line="1302"/>
+        <location filename="../../kvantummanager.ui" line="1332"/>
+        <location filename="../../kvantummanager.ui" line="1346"/>
         <source>Affects toolbars.
 
 The default value is 22 px but
@@ -916,30 +940,30 @@ egyes alkalmazások maguk határozzák meg.
 A KDE alkalmazások pedig a KDE beállítást használják.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1440"/>
-        <location filename="../../kvantummanager.ui" line="1453"/>
+        <location filename="../../kvantummanager.ui" line="1484"/>
+        <location filename="../../kvantummanager.ui" line="1497"/>
         <source>The minimum length of scrollbars.</source>
         <translation type="unfinished">A görgetősávok minimális hossza.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1443"/>
-        <location filename="../../kvantummanager.ui" line="1456"/>
+        <location filename="../../kvantummanager.ui" line="1487"/>
+        <location filename="../../kvantummanager.ui" line="1500"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The minimum height of vertical scrollbars and the minimum width of horizontal scrollbars.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1446"/>
+        <location filename="../../kvantummanager.ui" line="1490"/>
         <source>Minimum scrollbar length: </source>
         <translation>Görgetősáv minimális hossza: </translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1491"/>
+        <location filename="../../kvantummanager.ui" line="1535"/>
         <source>Delays</source>
         <translation>Késleltetések</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1497"/>
-        <location filename="../../kvantummanager.ui" line="1525"/>
+        <location filename="../../kvantummanager.ui" line="1541"/>
+        <location filename="../../kvantummanager.ui" line="1569"/>
         <source>The delay, in milliseconds, before a tooltip is shown.
 
 Zero means tooltips are shown instantly.
@@ -952,7 +976,7 @@ A nulla azt jelenti, hogy az elemleírások azonnal megjelennek.
 -1 az alapértelmezett Qt viselkedés.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1786"/>
+        <location filename="../../kvantummanager.ui" line="1830"/>
         <source>Scrollbars have add-line and sub-line arrows by default.
 
 Checking this box removes arrows as far as possible.
@@ -961,7 +985,7 @@ If disabled, see Compositing &amp; General Look → Transient scrollbars!</sourc
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1639"/>
+        <location filename="../../kvantummanager.ui" line="1683"/>
         <source>By default, drop rectangles for movable
 toolbars and dock widgets are hollow.
 
@@ -970,13 +994,13 @@ the highlight color.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1694"/>
+        <location filename="../../kvantummanager.ui" line="1738"/>
         <source>If checked, the menubar and toolbar will be drawn as a whole by
 the toolbar SVG element when they are adjacent to each another.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1742"/>
+        <location filename="../../kvantummanager.ui" line="1786"/>
         <source>Shift the contents of push buttons when pressed?
 
 By default, the contents are shifted by 1px
@@ -987,8 +1011,8 @@ Alapértelmezetten a tartalom el lesz tolva 1 pxellel
 vízszintesen és függőlegesen is.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1935"/>
-        <location filename="../../kvantummanager.ui" line="1949"/>
+        <location filename="../../kvantummanager.ui" line="1979"/>
+        <location filename="../../kvantummanager.ui" line="1993"/>
         <source>Drag windows from their menubars, primary toolbars
 or anywhere possible (and not only from their title bars)?
 
@@ -997,8 +1021,8 @@ Miscellaneous → Respect current DE if possible</source>
         <translation type="unfinished">Ablakok húzása a menüsávoknál, az esődleges eszköztáruknál</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1846"/>
-        <location filename="../../kvantummanager.ui" line="1865"/>
+        <location filename="../../kvantummanager.ui" line="1890"/>
+        <location filename="../../kvantummanager.ui" line="1909"/>
         <source>Will have effect only if style
 is not set by the app in its code.
 
@@ -1009,7 +1033,7 @@ az alkalmazás nem állítja be a saját kódjában.
 Az alapértelmezett a &quot;Stílus követése&quot;.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1625"/>
+        <location filename="../../kvantummanager.ui" line="1669"/>
         <source>By default, spin indicators are drawn as
 two buttons with arrows or plus/minus signs.
 
@@ -1018,7 +1042,7 @@ into the spin line-edit..</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1653"/>
+        <location filename="../../kvantummanager.ui" line="1697"/>
         <source>By default, spin indicators are drawn on adjacent buttons.
 
 Checking this puts the spin-up indicator above the
@@ -1026,25 +1050,25 @@ spin-down one inside the spin line-edit.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1705"/>
+        <location filename="../../kvantummanager.ui" line="1749"/>
         <source>Draw combo popups as menu popups (i.e. like in Gtk)?
 
 By default, combo popups do not cover the combo box.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1755"/>
+        <location filename="../../kvantummanager.ui" line="1799"/>
         <source>In Kvantum, tabs are centered by default.</source>
         <translation type="unfinished">A Kvantumban, alapértelmezetten középre vannak igazítva a lapok.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1504"/>
+        <location filename="../../kvantummanager.ui" line="1548"/>
         <source>Tooltip delay:</source>
         <translation>Elemleírás késleltetése:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="943"/>
-        <location filename="../../kvantummanager.ui" line="973"/>
+        <location filename="../../kvantummanager.ui" line="987"/>
+        <location filename="../../kvantummanager.ui" line="1017"/>
         <source>A comma-separated list of executables,
 whose windows should not be translucent.
 
@@ -1057,7 +1081,7 @@ amelyeknek nem szabad áttetszőnek lenniük.
 problémájuk lehet az áttetszőséggel!)</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1141"/>
+        <location filename="../../kvantummanager.ui" line="1185"/>
         <source>Make scrollbars transient!
 
 Transient scrollbars appear on top of
@@ -1066,8 +1090,8 @@ They usually take no extra space.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1511"/>
-        <location filename="../../kvantummanager.ui" line="1548"/>
+        <location filename="../../kvantummanager.ui" line="1555"/>
+        <location filename="../../kvantummanager.ui" line="1592"/>
         <source>The delay, in milliseconds, to wait before opening a submenu.
 250 by default.
 
@@ -1080,28 +1104,28 @@ while 0 means no delay.</source>
 amíg a 0 azt, hogy nincs késleltetés.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1518"/>
+        <location filename="../../kvantummanager.ui" line="1562"/>
         <source>Submenu delay: </source>
         <translation type="unfinished">Almenü késleltetése: </translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1532"/>
-        <location filename="../../kvantummanager.ui" line="1555"/>
+        <location filename="../../kvantummanager.ui" line="1576"/>
+        <location filename="../../kvantummanager.ui" line="1599"/>
         <source> ms</source>
         <translation> ms</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1588"/>
+        <location filename="../../kvantummanager.ui" line="1632"/>
         <source>Miscellaneous</source>
         <translation>Vegyes</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1793"/>
+        <location filename="../../kvantummanager.ui" line="1837"/>
         <source>No arrows for scrollbars</source>
         <translation type="unfinished">Nyilak letiltása görgetősávokhz</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1888"/>
+        <location filename="../../kvantummanager.ui" line="1932"/>
         <source>Draw scrollbars inside view frames?
 
 By default, scrollbars are drawn outide view frames.
@@ -1114,17 +1138,17 @@ Alapértelmezetten a görgetősáv a kereten kívül jelenik meg.
 Ha le van tiltva lásd: Kompozitálás és általános megjelenés → Átmeneti görgetősávok!</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1895"/>
+        <location filename="../../kvantummanager.ui" line="1939"/>
         <source>Scrollbars inside frames</source>
         <translation>Görgetősáv a kereten belül</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1928"/>
+        <location filename="../../kvantummanager.ui" line="1972"/>
         <source>Tree branch lines</source>
         <translation>Faágvonalak</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1611"/>
+        <location filename="../../kvantummanager.ui" line="1655"/>
         <source>By default, the label is on the frame
 and the frame is cut to contain it.
 
@@ -1137,102 +1161,102 @@ Ennek bejelölése a címet a keret fölé helyezi,
 és a keret nem lesz elvágva.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1618"/>
+        <location filename="../../kvantummanager.ui" line="1662"/>
         <source>Group-box label above frame</source>
         <translation>Csoportdoboz címe a keret felett</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1646"/>
+        <location filename="../../kvantummanager.ui" line="1690"/>
         <source>Fill rubber-band rectangles</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1666"/>
+        <location filename="../../kvantummanager.ui" line="1710"/>
         <source>Mouse tracking is enabled
 for menubars by default.</source>
         <translation type="unfinished">Alapértelmezetten a menüsorokban
 az egérkövetés engedélyezett.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1670"/>
+        <location filename="../../kvantummanager.ui" line="1714"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mouse tracking is enabled for menubars by default, i.e., after a menubar item is clicked and its menu is shown, the menus of the other menubar items will be shown if the cursor is put on them without clicking.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1673"/>
+        <location filename="../../kvantummanager.ui" line="1717"/>
         <source>Mouse tracking for menubars</source>
         <translation type="unfinished">Egérkövetés a menüsorokhoz</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1698"/>
+        <location filename="../../kvantummanager.ui" line="1742"/>
         <source>Merge menubar with toolbar</source>
         <translation type="unfinished">Menüsor összevonása az eszköztárral</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1717"/>
+        <location filename="../../kvantummanager.ui" line="1761"/>
         <source>If checked, toolbar buttons will be drawn grouped and raised
 between toolbar separators.</source>
         <translation type="unfinished">Ha be van jelölve, az eszköztárgombok csoportosítva és kiemelve
 lesznek az elválasztók közül.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1721"/>
+        <location filename="../../kvantummanager.ui" line="1765"/>
         <source>Group toolbar buttons</source>
         <translation>Eszköztárgombok csoportosítása</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1748"/>
+        <location filename="../../kvantummanager.ui" line="1792"/>
         <source>Shift push-button contents</source>
         <translation type="unfinished">Gomb tartalmának eltolása</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1942"/>
+        <location filename="../../kvantummanager.ui" line="1986"/>
         <source>Drag from:</source>
         <translation>Húzás ezzel:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1852"/>
+        <location filename="../../kvantummanager.ui" line="1896"/>
         <source>Toolbutton style:</source>
         <translation type="unfinished">Ezköztárgomb stílusa:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1765"/>
+        <location filename="../../kvantummanager.ui" line="1809"/>
         <source>If unchecked, shortcuts will not be underlined at all.</source>
         <translation type="unfinished">Ha nincs bejelölve, a gyorsbillentyűk mindig alá lesznek húzva.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1768"/>
+        <location filename="../../kvantummanager.ui" line="1812"/>
         <source>Underline shortcuts with Alt</source>
         <translation type="unfinished">Gyorsbillentyűk aláhúzása</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1632"/>
+        <location filename="../../kvantummanager.ui" line="1676"/>
         <source>Inline spin indicators</source>
         <translation type="unfinished">Soron belüli léptetőgombok</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1680"/>
+        <location filename="../../kvantummanager.ui" line="1724"/>
         <source>Draw the whole editable combo-box as a
 line-edit with arrow (and icon, if it exists)?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1684"/>
+        <location filename="../../kvantummanager.ui" line="1728"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Draw the whole editable combo-box as a line-edit with arrow (and icon, if it exists)?&lt;/p&gt;&lt;p&gt;By default, a combo-box consists of a line-edit, a button with arrow on one side and another button with icon on the other side.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1687"/>
+        <location filename="../../kvantummanager.ui" line="1731"/>
         <source>Editable combo as line-edit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1659"/>
+        <location filename="../../kvantummanager.ui" line="1703"/>
         <source>Vertical spin indicators</source>
         <translation>Függőleges léptetőgombok</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1594"/>
+        <location filename="../../kvantummanager.ui" line="1638"/>
         <source>When this is enabled and checked, Kvantum will try to
 respect some settings of the current desktop environment.
 
@@ -1245,45 +1269,45 @@ Ez a jelölőnégyzet lehet, hogy letilt néhány opciót.
 Törölje a jelölést, ha szeretné azokat használni!</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1604"/>
+        <location filename="../../kvantummanager.ui" line="1648"/>
         <source>Respect current DE if possible</source>
         <translation type="unfinished">Jelenlegi asztal tiszteletben tartása,
 ha lehetséges</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1710"/>
+        <location filename="../../kvantummanager.ui" line="1754"/>
         <source>Combo popup as menu</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1758"/>
+        <location filename="../../kvantummanager.ui" line="1802"/>
         <source>Left aligned tabs</source>
         <translation>Balra igazított lapok</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1775"/>
+        <location filename="../../kvantummanager.ui" line="1819"/>
         <source>Inactive tabs are joined together by default,
 i.e., there is no border between them.</source>
         <translation type="unfinished">Az inaktív lapok alapértelmezetten össze vannak
 kapcsolva, azaz nincs közöttük szegély.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1779"/>
+        <location filename="../../kvantummanager.ui" line="1823"/>
         <source>Join inactive tabs</source>
         <translation>Inaktív lapok összecsatolása</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1966"/>
+        <location filename="../../kvantummanager.ui" line="2010"/>
         <source>Scrollable menus</source>
         <translation>Görgethető menük</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1601"/>
+        <location filename="../../kvantummanager.ui" line="1645"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When this is enabled and checked, Kvantum will try to respect some settings of the current desktop environment if it is KDE, Unity, Gnome or Pantheon.&lt;/p&gt;&lt;p&gt;Under KDE, it makes Kvantum read KDE settings for small and large icon sizes and also single or double clicking.&lt;/p&gt;&lt;p&gt;Under Unity, Gnome and Pantheon, it removes icons from menus and push-buttons (even if the corresponding dconf keys are changed) and disables window translucency.&lt;/p&gt;&lt;p&gt;This checkbox may disable some options. Uncheck it if you want to use those options!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="802"/>
+        <location filename="../../kvantummanager.ui" line="846"/>
         <source>This needs the KDE contrast effect and is applied
 only to translucent windows that support the blur
 effect (but the KDE blur effect can be disabled).
@@ -1292,7 +1316,7 @@ A value of 1.00 means no change.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1728"/>
+        <location filename="../../kvantummanager.ui" line="1772"/>
         <source>When drawing combo popups as menus,
 there will be a checkbox next to each entry
 (although Kvantum draws it as a radio button).
@@ -1301,12 +1325,12 @@ This option will hide these.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1735"/>
+        <location filename="../../kvantummanager.ui" line="1779"/>
         <source>Non-checkable combo menu</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1960"/>
+        <location filename="../../kvantummanager.ui" line="2004"/>
         <source>Should big menus be scrollable and have
 scroll arrows on their top and/or bottom?
 
@@ -1314,7 +1338,7 @@ By default, big menus are scrollable.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1973"/>
+        <location filename="../../kvantummanager.ui" line="2017"/>
         <source>Warning: This can be quite confusing at first.
 
 If you have enabled it, you could temporarily disable it
@@ -1323,90 +1347,90 @@ the Ctrl key before pressing the button.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1980"/>
+        <location filename="../../kvantummanager.ui" line="2024"/>
         <source>Allow dragging from buttons</source>
         <translation>Húzás engedélyezése a gombokról</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2003"/>
+        <location filename="../../kvantummanager.ui" line="2047"/>
         <source>Application Themes</source>
         <translation type="unfinished">Alkalmazás témák</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2009"/>
+        <location filename="../../kvantummanager.ui" line="2053"/>
         <source>&lt;center&gt;Here you could assign themes to specific applications.&lt;/center&gt;&lt;br&gt;&lt;center&gt;For each theme, you could add a comma-separated list of executables whose applications should use that theme instead of the active theme. After doing so for all of your chosen themes, save the result by clicking on the &lt;i&gt;Save&lt;/i&gt; button!&lt;/center&gt;</source>
         <translation>&lt;center&gt;Itt témákat rendelhet hozzá bizonyos alkalmazásokhoz.&lt;/center&gt;&lt;br&gt;&lt;center&gt;Egyes témákhoz hoozáadhatja az alkalmazások vesszővel elválasztott listáját, amelyek ezt a témát használják az aktív téma helyett. Miután kiválasztotta a témákat, mentse az eredményt a &lt;i&gt;Mentés &lt;/i&gt; gombra kattintva.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2044"/>
+        <location filename="../../kvantummanager.ui" line="2088"/>
         <source>Installed Theme</source>
         <translation>Telepített téma</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2060"/>
+        <location filename="../../kvantummanager.ui" line="2104"/>
         <source>Application(s)</source>
         <translation>Alkalmazás(ok)</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2089"/>
+        <location filename="../../kvantummanager.ui" line="2133"/>
         <source>app1,app2,app3</source>
         <translation>alkalmazás1,alkalmazás2,alkalmazás3,</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2117"/>
+        <location filename="../../kvantummanager.ui" line="2161"/>
         <source>Remove List</source>
         <translation>Lista eltávolítása</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2124"/>
+        <location filename="../../kvantummanager.ui" line="2168"/>
         <source>Save the current list of apps</source>
         <translation type="unfinished">Az alkalmazások jelenlegi listájának mentése</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2127"/>
+        <location filename="../../kvantummanager.ui" line="2171"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Save the current list of applications with their corresponding themes!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Alkalmazások jelenlegi listájának mentése a megfelelő témáikkal!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2154"/>
-        <location filename="../../kvantummanager.ui" line="2160"/>
+        <location filename="../../kvantummanager.ui" line="2198"/>
+        <location filename="../../kvantummanager.ui" line="2204"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2157"/>
+        <location filename="../../kvantummanager.ui" line="2201"/>
         <source>Quit</source>
         <translation>Kilépés</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2170"/>
+        <location filename="../../kvantummanager.ui" line="2214"/>
         <source>Preview the active theme
 or update its preview.</source>
         <translation type="unfinished">Az aktív téma előnézete
 vagy az előnézet frissítése.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2174"/>
+        <location filename="../../kvantummanager.ui" line="2218"/>
         <source>Preview</source>
         <translation>Előnézet</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2181"/>
+        <location filename="../../kvantummanager.ui" line="2225"/>
         <source>About</source>
         <translation>Névjegy</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2204"/>
+        <location filename="../../kvantummanager.ui" line="2248"/>
         <source>What&apos;s This?</source>
         <translation>Mi ez?</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2207"/>
+        <location filename="../../kvantummanager.ui" line="2251"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click on this button and then click on a GUI element that has &amp;quot;What&apos;s This&amp;quot; tooltip  to get information about what it does.&lt;/p&gt;&lt;p&gt;There are also ordinary tooltips but this kind of tooltip will not disappear until you click somewhere.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2210"/>
+        <location filename="../../kvantummanager.ui" line="2254"/>
         <source>Help</source>
         <translation>Segítség</translation>
     </message>
@@ -1437,7 +1461,7 @@ vagy az előnézet frissítése.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="675"/>
         <location filename="../../KvantumManager.cpp" line="829"/>
-        <location filename="../../KvantumManager.cpp" line="2782"/>
+        <location filename="../../KvantumManager.cpp" line="2802"/>
         <source>Confirmation</source>
         <translation type="unfinished">Megerősítés</translation>
     </message>
@@ -1637,76 +1661,76 @@ vagy az előnézet frissítése.</translation>
         <translation type="unfinished">Ez nem visszaállítható, ha csak nincs egy másolata róla.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1400"/>
-        <location filename="../../KvantumManager.cpp" line="1420"/>
+        <location filename="../../KvantumManager.cpp" line="1409"/>
+        <location filename="../../KvantumManager.cpp" line="1429"/>
         <source>These are the settings that can be safely changed.&lt;br&gt;For the others, click &lt;i&gt;Save&lt;/i&gt; and then edit this file:</source>
         <translation type="unfinished">Ezek a beállítások biztonságosan megváltoztathatók.&lt;br&gt;A többiért kattintson a &lt;i&gt;Mentésre&lt;/i&gt;, és szerkessze ezt a fájlt:</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1416"/>
-        <location filename="../../KvantumManager.cpp" line="2686"/>
+        <location filename="../../KvantumManager.cpp" line="1425"/>
+        <location filename="../../KvantumManager.cpp" line="2706"/>
         <source>These are the settings that can be safely changed.&lt;br&gt;For the others, edit this file:</source>
         <translation type="unfinished">Ezek a beállítások biztonságosan megváltoztathatók.&lt;br&gt;A többiért szerkessze ezt a fájlt:</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1812"/>
+        <location filename="../../KvantumManager.cpp" line="1826"/>
         <source>No description</source>
         <translation type="unfinished">Nincs leírás</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2269"/>
+        <location filename="../../KvantumManager.cpp" line="2283"/>
         <source>A copy of the root config is created.</source>
         <translation type="unfinished">A root konfiguráció másolata létrehozva.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2280"/>
+        <location filename="../../KvantumManager.cpp" line="2294"/>
         <source>A copy was already created.</source>
         <translation type="unfinished">Egy másolat már készült erről.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2672"/>
+        <location filename="../../KvantumManager.cpp" line="2692"/>
         <source>Configuration saved.</source>
         <translation type="unfinished">Konfiguráció elmentve.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2783"/>
+        <location filename="../../KvantumManager.cpp" line="2803"/>
         <source>Do you want to revert to the default (root) settings of this theme?</source>
         <translation type="unfinished">Vissza akar térni a téma alapértelmezett (root) beállításaira?</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2786"/>
+        <location filename="../../KvantumManager.cpp" line="2806"/>
         <source>You will lose the changes you might have made.</source>
         <translation>Elveszíti az esetlegesen végrehajtott változtatásokat.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2821"/>
+        <location filename="../../KvantumManager.cpp" line="2841"/>
         <source>Restored the root default settings of %1</source>
         <translation>A %1 alapértelmezett root beállításai vissza lettek állítva</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2822"/>
+        <location filename="../../KvantumManager.cpp" line="2842"/>
         <source>the default theme</source>
         <translation type="unfinished">az alapértelmezett téma</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2982"/>
-        <location filename="../../KvantumManager.cpp" line="2983"/>
+        <location filename="../../KvantumManager.cpp" line="3002"/>
+        <location filename="../../KvantumManager.cpp" line="3003"/>
         <source>About Kvantum Manager</source>
         <translation type="unfinished">A Kvantum kezelőről</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2982"/>
+        <location filename="../../KvantumManager.cpp" line="3002"/>
         <source>Translators</source>
         <translation>Fordítók</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2980"/>
+        <location filename="../../KvantumManager.cpp" line="3000"/>
         <source>A tool for installing, selecting&lt;br&gt;and configuring &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt; themes</source>
         <translation type="unfinished">Egy eszköz a &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt; témák
 telepítéséhez, kiválasztásához, és beállításához</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2981"/>
+        <location filename="../../KvantumManager.cpp" line="3001"/>
         <source>Author: &lt;a href=&apos;mailto:tsujan2000@gmail.com?Subject=My%20Subject&apos;&gt;Pedram Pourang (aka. Tsu Jan)&lt;/a&gt; &lt;/center&gt;&lt;br&gt;</source>
         <translation>Szerző: &lt;a href=&apos;mailto:tsujan2000@gmail.com?Subject=My%20Subject&apos;&gt;Pedram Pourang (más néven Tsu Jan)&lt;/a&gt; &lt;/center&gt;&lt;br&gt;</translation>
     </message>
@@ -1732,8 +1756,8 @@ telepítéséhez, kiválasztásához, és beállításához</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="1013"/>
-        <location filename="../../KvantumManager.cpp" line="2212"/>
-        <location filename="../../KvantumManager.cpp" line="2681"/>
+        <location filename="../../KvantumManager.cpp" line="2226"/>
+        <location filename="../../KvantumManager.cpp" line="2701"/>
         <source>Active theme:</source>
         <translation>Aktív téma:</translation>
     </message>

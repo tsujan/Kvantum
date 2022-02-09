@@ -138,6 +138,8 @@ typedef struct {
   /* depth of menu shadows */
   int menu_shadow_depth;
   int menu_separator_height;
+  /* the corner radius for blurring menus */
+  int menu_blur_radius;
   /* should menuitems spread across the whole menu horizontally? */
   bool spread_menuitems;
   /* overlap between a submenu and its parent */
@@ -147,6 +149,8 @@ typedef struct {
   int submenu_delay;
   /* depth of tooltip shadows */
   int tooltip_shadow_depth;
+  /* the corner radius for blurring tooltips */
+  int tooltip_blur_radius;
   /* no menu or tooltip shadow with compositing? */
   bool shadowless_popup;
   /* splitter width */
@@ -512,10 +516,12 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.no_window_pattern = false;
   tspec.menu_shadow_depth = 0;
   tspec.menu_separator_height = 10;
+  tspec.menu_blur_radius = 0;
   tspec.spread_menuitems = false;
   tspec.submenu_overlap = 0;
   tspec.submenu_delay = 250;
   tspec.tooltip_shadow_depth = 0;
+  tspec.tooltip_blur_radius = 0;
   tspec.shadowless_popup = false;
   tspec.splitter_width = 7;
   tspec.scroll_width = 12;

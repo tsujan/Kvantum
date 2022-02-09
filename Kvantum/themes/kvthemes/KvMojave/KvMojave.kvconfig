@@ -11,6 +11,7 @@ group_toolbar_buttons=true
 spread_progressbar=true
 composite=true
 menu_shadow_depth=7
+menu_blur_radius=2
 spread_menuitems=true
 tooltip_shadow_depth=6
 scroll_width=12

@@ -31,12 +31,16 @@
 
 namespace Kvantum {
 BlurHelper::BlurHelper (QObject* parent, QList<qreal> menuS, QList<qreal> tooltipS,
+                        int menuBlurRadius, int toolTipBlurRadius,
                         qreal contrast, qreal intensity, qreal saturation,
                         bool onlyActiveWindow) : QObject (parent)
 {
   contrast_ = qBound (static_cast<qreal>(0), contrast, static_cast<qreal>(2));
   intensity_ = qBound (static_cast<qreal>(0), intensity, static_cast<qreal>(2));
   saturation_ = qBound (static_cast<qreal>(0), saturation, static_cast<qreal>(2));
+
+  menuBlurRadius_ = menuBlurRadius;
+  toolTipBlurRadius_ = toolTipBlurRadius;
 
   if (!menuS.isEmpty() && menuS.size() >= 4)
     menuShadow_ = menuS;
@@ -142,15 +146,21 @@ QRegion BlurHelper::blurRegion (QWidget* widget) const
 
   /* blurring may not be suitable when the available
      painting area is restricted by a widget mask */
-  if (!wMask.isEmpty() && wMask != QRegion(rect))
-    return QRegion();
+  if (!wMask.isEmpty())
+  {
+    if (wMask != QRegion(rect))
+      return QRegion();
+    return wMask;
+  }
 
   QList<qreal> r;
+  int radius = 0;
   if ((qobject_cast<QMenu*>(widget)
        && !widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu)) // not a detached menu
       || widget->inherits("QComboBoxPrivateContainer"))
   {
     r = menuShadow_;
+    radius = menuBlurRadius_;
   }
   else if (widget->inherits("QTipLabel")
            /* unusual tooltips (like in KDE system settings) */
@@ -158,16 +168,39 @@ QRegion BlurHelper::blurRegion (QWidget* widget) const
                && !qobject_cast<QFrame*>(widget)))
   {
     r = tooltipShadow_;
+    radius = toolTipBlurRadius_;
   }
 
-  return (wMask.isEmpty()
-            ? r.isEmpty()
-                ? rect
-                : rect.adjusted (ceilingInt(r.at(0)),
-                                 ceilingInt(r.at(1)),
-                                 -ceilingInt(r.at(2)),
-                                 -ceilingInt(r.at(3)))
-            : wMask); // is the same as rect (see above)
+  if (!r.isEmpty())
+  {
+    rect.adjust (ceilingInt (r.at (0)),
+                 ceilingInt (r.at (1)),
+                 -ceilingInt (r.at (2)),
+                 -ceilingInt (r.at (3)));
+  }
+
+  if (radius > 0)
+  {
+    QSize rSize (radius, radius);
+    QRegion topLeft (QRect (rect.topLeft(), 2 * rSize), QRegion::Ellipse);
+    QRegion topRight (QRect (rect.topLeft() + QPoint(rect.width() - 2 * radius, 0),
+                             2 * rSize),
+                      QRegion::Ellipse);
+    QRegion bottomLeft (QRect (rect.topLeft() + QPoint(0, rect.height() - 2 * radius),
+                               2 * rSize),
+                        QRegion::Ellipse);
+    QRegion bottomRight (QRect (rect.topLeft() + QPoint (rect.width() - 2 * radius,
+                                                         rect.height() - 2 * radius),
+                                2 * rSize),
+                         QRegion::Ellipse);
+    return topLeft.united (topRight).united (bottomLeft).united (bottomRight)
+           .united (QRect (rect.topLeft() + QPoint (radius, 0),
+                           QSize (rect.width() - 2 * radius, rect.height())))
+           .united (QRect (rect.topLeft() + QPoint (0, radius),
+                           QSize (rect.width(), rect.height() - 2 * radius)));
+  }
+  else
+    return rect;
 }
 /*************************/
 void BlurHelper::update (QWidget* widget) const
