@@ -8880,7 +8880,11 @@ void Style::drawControl(QStyle::ControlElement element,
               const QList<QWidget*> children = widget->findChildren<QWidget*>(QString(), Qt::FindDirectChildrenOnly);
               for (QWidget *child : children)
               {
-                if (widget != child->parentWidget()) continue; // not inside another window
+                if (widget != child->parentWidget() // not inside another window
+                    || child->isWindow()) // not another window (like a menu)
+                {
+                  continue;
+                }
                 QPalette palette = child->palette();
                 if (!qobject_cast<QToolButton*>(child)
                     && (!toolbarComboBox || !qobject_cast<QComboBox*>(child))
@@ -9037,7 +9041,8 @@ void Style::drawControl(QStyle::ControlElement element,
               const QList<QWidget*> children = widget->findChildren<QWidget*>(QString(), Qt::FindDirectChildrenOnly);
               for (QWidget *child : children)
               {
-                if (widget != child->parentWidget()) continue;
+                if (widget != child->parentWidget() || child->isWindow())
+                  continue;
                 /* this is only a workaround for a new bug in Audacious 4.0 but is
                    harmless in other places because the whole stylesheet is checked */
                 if (child->styleSheet() == QStringLiteral("font-weight: bold"))
