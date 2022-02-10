@@ -181,6 +181,7 @@ QRegion BlurHelper::blurRegion (QWidget* widget) const
 
   if (radius > 0)
   {
+    radius = qMin (radius, qMin (rect.width(), rect.height()) / 2);
     QSize rSize (radius, radius);
     QRegion topLeft (QRect (rect.topLeft(), 2 * rSize), QRegion::Ellipse);
     QRegion topRight (QRect (rect.topLeft() + QPoint(rect.width() - 2 * radius, 0),
