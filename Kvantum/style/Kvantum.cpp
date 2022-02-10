@@ -2096,10 +2096,16 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
     }
 
     case PE_PanelButtonTool : {
+      const QStyleOptionToolButton *opt = qstyleoption_cast<const QStyleOptionToolButton*>(option);
+      const QToolButton *tb = qobject_cast<const QToolButton*>(widget);
       if (widget != nullptr)
       {
-        if (option->state & State_Sunken)
+        if ((option->state & State_Sunken)
+            && ((opt && (opt->features & QStyleOptionToolButton::HasMenu))
+                || (tb && tb->menu())))
+        {
           sunkenButton_ = const_cast<QWidget*>(widget);
+        }
         else if (sunkenButton_.data() == widget)
           sunkenButton_.clear();
         /* the extension button arrow has no state */
@@ -2213,8 +2219,6 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
       label_spec lspec = getLabelSpec(group);
       QRect r = option->rect;
 
-      const QToolButton *tb = qobject_cast<const QToolButton*>(widget);
-      const QStyleOptionToolButton *opt = qstyleoption_cast<const QStyleOptionToolButton*>(option);
       //const QStyleOptionTitleBar *titleBar = qstyleoption_cast<const QStyleOptionTitleBar*>(option);
 
       /*if (qobject_cast<QTabBar*>(p))
@@ -9418,15 +9422,19 @@ void Style::drawControl(QStyle::ControlElement element,
     }
 
     case CE_PushButtonBevel : { // bevel and indicator
+      const QStyleOptionButton *opt = qstyleoption_cast<const QStyleOptionButton*>(option);
+      const QPushButton *pb = qobject_cast<const QPushButton*>(widget);
       if (widget != nullptr)
       {
-        if (option->state & State_Sunken)
+        if ((option->state & State_Sunken)
+            && ((opt && (opt->features & QStyleOptionButton::HasMenu))
+                || (pb && pb->menu())))
+        {
           sunkenButton_ = const_cast<QWidget*>(widget);
+        }
         else if (sunkenButton_.data() == widget)
           sunkenButton_.clear();
       }
-      const QStyleOptionButton *opt =
-          qstyleoption_cast<const QStyleOptionButton*>(option);
 
       if (opt) {
         QObject *styleObject = option->styleObject;
@@ -9568,8 +9576,6 @@ void Style::drawControl(QStyle::ControlElement element,
                             standardPalette().color(QPalette::Button));
           return;
         }
-
-        const QPushButton *pb = qobject_cast<const QPushButton*>(widget);
 
         if (!opt->text.isEmpty()) // -> CE_PushButtonLabel
         {

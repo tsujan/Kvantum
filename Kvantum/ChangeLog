@@ -6,6 +6,7 @@ V1.0.1
  * Don't change the palette of a menu because of its toolbar parent. (This is mostly for Qt6. For some reason, no problem happened without it in Qt5.)
  * Never assign a separate theme to Kvantum manager and kvantumpreview.
  * Added options (to Kvantum Manager) for setting corner radii when blurring translucent menus and tooltips with rounded corners.
+ * To find the sunken button that has triggered a menu, check whether it really has a menu (in addition to checking of its sunken state).
 
 V1.0.0
 ---------
