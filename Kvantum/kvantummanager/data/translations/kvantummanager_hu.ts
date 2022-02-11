@@ -226,19 +226,19 @@ a kiemelési színnel!</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="572"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;By default, selected label icons are tinted by the highlight color.&lt;/p&gt;&lt;p&gt;Checking this box removes the tint.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Alapértelmezetten a kiválasztott címikonok a kiemelőszínnel vannak színezve.&lt;/p&gt;&lt;p&gt;Ennek bejelölése eltávolítja a színezést.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Alapértelmezetten a kiválasztott címikonok a kiemelőszínnel vannak színezve.&lt;/p&gt;&lt;p&gt;Ennek bejelölése eltávolítja a színezést.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="575"/>
         <source>No selection tint</source>
-        <translation type="unfinished">Nincs kiválasztási színezés</translation>
+        <translation>Nincs kiválasztási színezés</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="582"/>
         <source>Do not draw any background for (KDE) menu titles.
 (Needs Logging out and in for Plasma menus.)</source>
-        <translation type="unfinished">A (KDE) menücímekhez nem jelenik meg semmilyen háttér.
-(Szükséges hozzá a ki- és bejelentkezés a Plasma menükhöz)</translation>
+        <translation>A (KDE) menücímekhez ne jelenjen meg semmilyen háttér.
+(A  Plasma menükhöz szükséges a ki- és bejelentkezés)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="586"/>
@@ -275,15 +275,14 @@ egérmutató alatt ennyivel: </translation>
         <source>Useful with monochrome icon sets and
 when the opacity of disabled icons is not
 reduced by other means.</source>
-        <translation type="unfinished">Hasznos egyszínő ikonkészletekkel,
-és ha a letiltott ikonok átlátszatlanságát
-más módon nem csökkentik.</translation>
+        <translation>Hasznos egyszínő ikonkészletekkel,
+és amikor a letiltott ikonok átlátszatlansága nincs más módon csökkentve.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="695"/>
         <location filename="../../kvantummanager.ui" line="710"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Useful with monochrome icon sets and when the opacity of disabled icons is not reduced by other means.&lt;/p&gt;&lt;p&gt;KDE automatically reduces the opacity of disabled icons. Therefore, this option might be useful rather under other desktop environments.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Hasznos lehet egyszínű ikonkészletekkel és amikor a letiltott ikonok átlátszatlansága nincs máshogyan csökkentve.&lt;/p&gt;&lt;p&gt;A KDE automatikusan csökkenti a letiltott ikonok átlátszatlanságát. Ezért ez a lehetőség más asztali környezeteknél lehet hasznos.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Hasznos egyszínű ikonkészletekkel és amikor a letiltott ikonok átlátszatlansága nincs más módon csökkentve.&lt;/p&gt;&lt;p&gt;A KDE automatikusan csökkenti a letiltott ikonok átlátszatlanságát. Ezért ez a lehetőség más asztali környezeteknél lehet hasznos.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="698"/>
@@ -294,9 +293,9 @@ más módon nem csökkentik.</translation>
         <location filename="../../kvantummanager.ui" line="631"/>
         <source>Show size grips of dialogs and statusbars
 as far as possible.</source>
-        <translation type="unfinished">Átméretező fogantyúk megjelenítése
+        <translation>Átméretező fogantyúk megjelenítése
 párbeszédpaneleken és állapotsávokon
-amennyire csak lehetséges.</translation>
+amikor csak lehetséges.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="635"/>
@@ -306,7 +305,7 @@ amennyire csak lehetséges.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="638"/>
         <source>Force size grips</source>
-        <translation type="unfinished">Átméretező fogantyúk kényszerítése</translation>
+        <translation>Átméretező fogantyúk kényszerítése</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="748"/>
@@ -330,14 +329,14 @@ amennyire csak lehetséges.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="777"/>
         <source>Compositing &amp;&amp; General Look</source>
-        <translation type="unfinished">Kompozitálás és általános megjelenés</translation>
+        <translation>Kompozitálás és általános megjelenés</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="976"/>
         <source>Has effect only when there is a translucent SVG background
 for windows or the window opacity is reduced (see below).</source>
-        <translation type="unfinished">Csak akkor van hatása, amikor áttetsző SVG háttér van
-az ablakokhoz, vagy az ablakátlátszatlanság csökkentett (lásd lentebb).</translation>
+        <translation>Csak akkor van hatása, amikor áttetsző SVG háttér van
+az ablakokhoz, vagy az ablakátlátszatlanság le van csökkentve (lásd lentebb).</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="994"/>
@@ -360,7 +359,7 @@ Vegyes → Jelenlegi asztal tiszteletben tartása, ha lehetséges</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="227"/>
         <source>&lt;br&gt;&lt;br&gt;Since &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; is independent of all desktop environments, you first need to &lt;i&gt;activate&lt;/i&gt; it with a Qt platform integration program. KDE and LXQt provide simple tools for changing the active Qt style plugin. With other platforms, you need a Qt configuration tool.&lt;br/&gt;&lt;br/&gt;Under KDE, also select and apply the color scheme of this theme because some KDE applications may get their colors directly from the KDE color scheme.&lt;br/&gt;&lt;br/&gt;Running applications will get the new theme after being closed and reopened. Logging out and in would be good for all KDE/LXQt parts to see it completely.</source>
-        <translation type="unfinished">&lt;br&gt;&lt;br&gt;Mióta a &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; asztalikörnyezet-független, elsőnek &lt;i&gt;aktiválnia&lt;/i&gt; kell egy Qt platform integrációs programmal. A KDE és az LXQt egyszerű eszközöket biztosít az aktív Qt stílus megváltoztatásához. Más platformoknál szükséges egy Qt beállító eszköz.&lt;br/&gt;&lt;br/&gt; KDE alatt a téma színsémáját szintén alkalmazni kell, mert egyes KDE alkalmazások közvetlenül a KDE színsémáját használják.&lt;br/&gt;&lt;br/&gt;A futó alkalmazások bezárás és újbóli megnyitás után megkapják az új témát. A kijelentkezés és a bejelentkezés minden KDE/LXQt rész számára jó lenne, ha teljes mértékben látni szeretné.</translation>
+        <translation>&lt;br&gt;&lt;br&gt;Mióta a &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; asztalikörnyezet-független, elsőnek &lt;i&gt;aktiválnia&lt;/i&gt; kell egy Qt platform integrációs programmal. A KDE és az LXQt egyszerű eszközöket biztosít az aktív Qt stílus megváltoztatásához. Más platformoknál szükséges egy Qt beállító eszköz.&lt;br/&gt;&lt;br/&gt; KDE alatt a téma színsémáját szintén alkalmazni kell, mert egyes KDE alkalmazások közvetlenül a KDE színsémáját használják.&lt;br/&gt;&lt;br/&gt;A futó alkalmazások bezárás és újbóli megnyitás után kapják meg az új témát. A kijelentkezés és a bejelentkezés minden KDE/LXQt rész számára hasznos, ha teljes mértékben látni szeretné a változást.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="532"/>
@@ -371,7 +370,7 @@ will be blurred if blurring is enabled.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="536"/>
         <source>No blurring for inactive windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Nincs elmosás az inaktív ablakokhoz</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="543"/>
@@ -383,7 +382,7 @@ If this is disabled, see the above option.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="548"/>
         <source>Style vertical toolbars</source>
-        <translation type="unfinished"></translation>
+        <translation>Stílus használata a függőleges eszköztárakon</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="596"/>
@@ -409,7 +408,7 @@ az átmenetekkel együtt.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="624"/>
         <source>Disable translucency with non-integer scaling</source>
-        <translation type="unfinished">Áttetszőség letiltása nem egész számú skálázásnál</translation>
+        <translation>Áttetszőség letiltása nem egész számú skálázásnál</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="676"/>
@@ -423,7 +422,7 @@ Miscellaneous → Respect current DE if possible</source>
     <message>
         <location filename="../../kvantummanager.ui" line="683"/>
         <source>Scroll jump with middle click</source>
-        <translation type="unfinished">Görgetőugrás középső kattintással</translation>
+        <translation>Görgetőugrás középső kattintáskor</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="726"/>
@@ -437,7 +436,7 @@ seriously interfere with other jobs.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="733"/>
         <source>Kinetic scrolling</source>
-        <translation type="unfinished">Kinetikus görgetés</translation>
+        <translation>Kinetikus görgetés</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="740"/>
@@ -448,7 +447,7 @@ Values less than 16 mean the default menu icon size.
 
 Needs LXQt panel to be restarted either by &quot;Session Settings&quot;
 or through logging out and in again.</source>
-        <translation type="unfinished">Csak akkor van hatása, ha a főmenüt NEM LXQt stílust használ.
+        <translation>Csak akkor van hatása, ha a főmenüt NEM az LXQt stílusát használja.
 
 A 16-nál kevesebb érték az alapértelmezett menü-ikonméretet jelenti.
 
@@ -463,7 +462,7 @@ vagy ki- és bejelentkezés útján.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="793"/>
         <source>Disable composite effects</source>
-        <translation type="unfinished">Kompozit effektek kikapcsolása</translation>
+        <translation>Kompozit effektek kikapcsolása</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="802"/>
@@ -482,17 +481,17 @@ Usually, a value of 2 is enough.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="822"/>
         <source>Menu:</source>
-        <translation type="unfinished"></translation>
+        <translation>Menü:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="829"/>
         <source>Tooltip:</source>
-        <translation type="unfinished"></translation>
+        <translation>Elemleírás:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="853"/>
         <source>Contrast Effect</source>
-        <translation type="unfinished">Kontraszt effekt</translation>
+        <translation>Kontraszt effekt</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="859"/>
@@ -531,7 +530,7 @@ Automatikusan be van jelölve, ha az ablakelmosás engedélyezett.</translation>
 
 This may be useful under DEs that give
 shadow to menus and tooltips.</source>
-        <translation type="unfinished">Ne rajzoljon árnyékot az elemleításokhoz és menükhöz.
+        <translation>Ne rajzoljon árnyékot az elemleírásokhoz és menükhöz.
 
 Ez hasznos lehet egyes asztali környezetek alatt
 amelyek árnyékot adnak a menüknek és az elemleírásoknak.</translation>
@@ -579,8 +578,8 @@ szükséges, hogy működjön.</translation>
         <location filename="../../kvantummanager.ui" line="1149"/>
         <source>A 200ms fading animation when the state of
 some widgets is changed, mostly by the mouse.</source>
-        <translation type="unfinished">Egy 200 ms áttűnés amikor egyes elemek
-állapota megváltozik, főleg az egér által.</translation>
+        <translation>Egy 200 ms áttűnés amikor egyes elemek
+állapota megváltozik, leginkább az egér által.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1153"/>
@@ -613,7 +612,7 @@ ablakok, ha a téma különbséget tesz közöttük?</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1178"/>
         <source>Ignore inactive state</source>
-        <translation type="unfinished">Inaktív állapot figyelmen kívül hagyása</translation>
+        <translation>Inaktív állapot figyelmen kívül hagyása</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1192"/>
@@ -623,7 +622,7 @@ ablakok, ha a téma különbséget tesz közöttük?</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1214"/>
         <source>Sizes &amp;&amp; Delays</source>
-        <translation type="unfinished">Méretek és késleltetések</translation>
+        <translation>Méretek és késleltetések</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1220"/>
@@ -660,23 +659,23 @@ ablakok, ha a téma különbséget tesz közöttük?</translation>
         <location filename="../../kvantummanager.ui" line="1380"/>
         <source>The default value is 2 px but
 some apps set it themeselves.</source>
-        <translation type="unfinished">Az alapértelmezett érték 2 px de néhány alkalmazás megának állítja be.</translation>
+        <translation>Az alapértelmezett érték 2 px de néhány alkalmazás magának állítja be.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1373"/>
         <source>Layout spacing:</source>
-        <translation type="unfinished">Elrendezés térköze:</translation>
+        <translation>Elrendezés elemeinek térköze:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1397"/>
         <location filename="../../kvantummanager.ui" line="1407"/>
         <source>The default value is 4 px but some apps set it themeselves.</source>
-        <translation type="unfinished">Az alapértelmezett érték 4 px de néhány alkalmazás megának állítja be.</translation>
+        <translation>Az alapértelmezett érték 4 px de néhány alkalmazás megának állítja be.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1400"/>
         <source>Layout margin:</source>
-        <translation type="unfinished">Elrendezés szegélye:</translation>
+        <translation>Elrendezés margója:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1423"/>
@@ -684,7 +683,7 @@ some apps set it themeselves.</source>
         <source>The horizontal overlap between a submenu and its parent.
 
 0 by default.</source>
-        <translation type="unfinished">A vízszintes átfedés egy almenü és a szülője között.
+        <translation>A vízszintes átfedés egy almenü és a szülője között.
 
 0 alapértelmezetten.</translation>
     </message>
@@ -709,12 +708,12 @@ some apps set it themeselves.</source>
         <location filename="../../kvantummanager.ui" line="1844"/>
         <location filename="../../kvantummanager.ui" line="1854"/>
         <source>How to activate view items?</source>
-        <translation type="unfinished">Hogyan aktiválódjanak az elemek?</translation>
+        <translation>Hogyan aktiválódjanak az elemek?</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1847"/>
         <source>Click behavior:</source>
-        <translation type="unfinished">Kattintási viselkedés:</translation>
+        <translation>Kattintási viselkedés:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1967"/>
@@ -728,19 +727,19 @@ Alapértelmezetten a fa menükben mutatók vannak, de vonalak nincsenek.</transl
     <message>
         <location filename="../../kvantummanager.ui" line="1946"/>
         <source>Dialog button layout:</source>
-        <translation type="unfinished">Párbeszédgomb elrendezés:</translation>
+        <translation>Párbeszédgomb-elrendezés:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1956"/>
         <source>They may look like dotted rectangles
 on focused buttons and other widgets.</source>
-        <translation type="unfinished">Úgy néznek ki, mint pontozott téglalapok
-a fókuszált gombokra és egyéb elemekre.</translation>
+        <translation>Lehet, hogy úgy néznek ki, mint pontozott téglalapok
+a fókuszált gombokon és egyéb elemeken.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1960"/>
         <source>Remove focus rectangles</source>
-        <translation type="unfinished">Fókusztéglalapok eltávolítása</translation>
+        <translation>Fókusztéglalapok eltávolítása</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2156"/>
@@ -759,7 +758,7 @@ from all user installation paths.
 The root installation will still be
 available if present; this button
 only removes user themes.</source>
-        <translation type="unfinished">A kiválasztott téma eltávolítása az
+        <translation>A kiválasztott téma eltávolítása az
 összes felhasználói telepítési útvonalról.
 
 A gyökér telepítés továbbra is elérhető

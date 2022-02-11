@@ -486,22 +486,26 @@ radii for blurring translucent menus and tooltips
 that have rounded corners.
 
 Usually, a value of 2 is enough.</source>
-        <translation type="unfinished"></translation>
+        <translation>Якщо розмиття ввімкнено, ці значення встановлюють
+кут радіуса для розмивання напівпрозорих меню та
+підказок які мають закруглені кути.
+
+Зазвичай достатньо значення 2.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="809"/>
         <source>Blur Corner Radius</source>
-        <translation type="unfinished"></translation>
+        <translation>Розмиття радіуса кута</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="822"/>
         <source>Menu:</source>
-        <translation type="unfinished"></translation>
+        <translation>Меню:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="829"/>
         <source>Tooltip:</source>
-        <translation type="unfinished"></translation>
+        <translation>Підказка:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="853"/>
