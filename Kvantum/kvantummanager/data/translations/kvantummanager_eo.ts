@@ -409,7 +409,7 @@ formularoj estus horizontale centrigitaj laŭeble.</translation>
         <source>You might see annoying artifacts that are caused
 by bugs in Qt&apos;s handling of non-integer scaling
 with window translucency or gradient.</source>
-        <translation>Ve eble vidos ĉagrenajn anomaliojn kaŭzitajn de
+        <translation>Vi eble vidos ĉagrenajn anomaliojn kaŭzitajn de
 cimoj ĉe Qt, kiuj okazas kiam tralumeblaj fenestroj
 aŭ tiuj havantaj kolortransirojn estas pentritaj kun
 neentjera skalado.</translation>
@@ -503,7 +503,7 @@ Kutime, la valoro 2 estas sufiĉa.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="822"/>
         <source>Menu:</source>
-        <translation>Menu:</translation>
+        <translation>Menuo:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="829"/>
@@ -629,7 +629,7 @@ Malmarku se vi volas tiujn kahelojn refoje!</translation>
         <location filename="../../kvantummanager.ui" line="1174"/>
         <source>Use the same colors and shapes with active and inactive
 windows if this theme distinguishes between them?</source>
-        <translation>Uzi la samajn kolorojn kaj formojn ĉe la aktiva kaj neaktiva
+        <translation>Ĉu uzu la samajn kolorojn kaj formojn ĉe la aktiva kaj neaktiva
 fenestroj se ĉi tiu etoso distingas ilin unu je la alia?</translation>
     </message>
     <message>
