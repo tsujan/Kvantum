@@ -483,22 +483,26 @@ radii for blurring translucent menus and tooltips
 that have rounded corners.
 
 Usually, a value of 2 is enough.</source>
-        <translation type="unfinished"></translation>
+        <translation>Si le flou est activé, ces valeurs définissent le rayon du
+coin pour flouter les menus translucides et les info-bulles
+qui ont des coins arrondis.
+
+Généralement, une valeur de 2 suffit.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="809"/>
         <source>Blur Corner Radius</source>
-        <translation type="unfinished"></translation>
+        <translation>Rayon du coin flou</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="822"/>
         <source>Menu:</source>
-        <translation type="unfinished"></translation>
+        <translation>Menu :</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="829"/>
         <source>Tooltip:</source>
-        <translation type="unfinished"></translation>
+        <translation>Info-bulle :</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="853"/>
@@ -1401,7 +1405,7 @@ Par défaut, les grands menus sont déroulants.</translation>
 If you have enabled it, you could temporarily disable it
 for a button that can be dragged and dropped by pressing
 the Ctrl key before pressing the button.</source>
-        <translation>Attention&#x202f;: cela peut être assez déroutant au début.
+        <translation>Attention : cela peut être assez déroutant au début.
 
 Si vous l&apos;avez activé, vous pouvez le désactiver temporairement
 pour un bouton qui peut être glissé et déposé en appuyant sur

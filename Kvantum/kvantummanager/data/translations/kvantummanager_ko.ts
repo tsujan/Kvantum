@@ -367,12 +367,13 @@ Miscellaneous → Respect current DE if possible</source>
         <location filename="../../kvantummanager.ui" line="532"/>
         <source>By default, both active and inactive translucent windows
 will be blurred if blurring is enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>기본적으로 흐림이 활성화된 경우
+활성 및 비활성 반투명 창 모두가 흐려집니다.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="536"/>
         <source>No blurring for inactive windows</source>
-        <translation type="unfinished"></translation>
+        <translation>비활성 창에 대한 흐림 없음</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="543"/>
@@ -482,22 +483,26 @@ radii for blurring translucent menus and tooltips
 that have rounded corners.
 
 Usually, a value of 2 is enough.</source>
-        <translation type="unfinished"></translation>
+        <translation>흐림이 활성화된 경우 이 값은 모서리가 둥근
+반투명 메뉴 및 도구 팁을 흐리게 하기 위한
+모서리 반지름을 설정합니다.
+
+보통은 2의 값으로 충분합니다.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="809"/>
         <source>Blur Corner Radius</source>
-        <translation type="unfinished"></translation>
+        <translation>흐림 모서리 반경</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="822"/>
         <source>Menu:</source>
-        <translation type="unfinished"></translation>
+        <translation>메뉴:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="829"/>
         <source>Tooltip:</source>
-        <translation type="unfinished"></translation>
+        <translation>도구 설명:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="853"/>

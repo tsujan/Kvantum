@@ -365,7 +365,8 @@ Vegyes → Jelenlegi asztal tiszteletben tartása, ha lehetséges</translation>
         <location filename="../../kvantummanager.ui" line="532"/>
         <source>By default, both active and inactive translucent windows
 will be blurred if blurring is enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Alapértelmezetten az aktív és az inaktív ablakok is el lesznek
+mosva, ha az elmosás engedélyezett.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="536"/>
@@ -377,7 +378,9 @@ will be blurred if blurring is enabled.</source>
         <source>By default, vertical toolbars are not styled.
 
 If this is disabled, see the above option.</source>
-        <translation type="unfinished"></translation>
+        <translation>Alapértelmezetten a függőleges eszköztáraknak nincs stílusuk.
+
+Ha ez le van tiltva, lásd a fentebbi opciót.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="548"/>
@@ -471,12 +474,16 @@ radii for blurring translucent menus and tooltips
 that have rounded corners.
 
 Usually, a value of 2 is enough.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ha az elmosás engedélyezve van, ezek az értékek
+állítják az áttetsző menük és ablakok sarkainak sugarát,
+az elmosáshoz.
+
+Általában a 2 elég.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="809"/>
         <source>Blur Corner Radius</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Sarkok sugarának elmosása</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="822"/>
@@ -819,12 +826,12 @@ translucent by their apps explicitly if possible.
 This needs the KDE blur effect.
 
 Konsole, QTerminal and LXQt panel are some examples.</source>
-        <translation type="unfinished">Ablak mögötti területek elmosása amelyeket a saját
+        <translation>Ablak mögötti területek elmosása amelyeket a saját
 alkalmazásuk tett áttetszővé.
 
 Ehhez szükséges a KDE elmosás effekt.
 
-A Konsole, a Qterminal és az LXQt panel néhány példa.</translation>
+A Konsole, a Qterminal és az LXQt panel néhány példa erre.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="518"/>
@@ -863,8 +870,8 @@ amennyire lehetséges.</translation>
         <source>Needs KDE blur effect, a graphic card
 that supports it, and a translucent
 window SVG background in the theme.</source>
-        <translation type="unfinished">Szükséges a KDE elmosás effekt, egy
-videokártya amely támogatja,áátetsző SVG
+        <translation>Szükséges a KDE elmosás effekt, egy
+videokártya amely támogatja, és áttetsző SVG
 ablakháttér a témában.</translation>
     </message>
     <message>
@@ -1312,7 +1319,11 @@ only to translucent windows that support the blur
 effect (but the KDE blur effect can be disabled).
 
 A value of 1.00 means no change.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ehhez szükséges a KDE kontraszt effekt és ez csak azokra az
+áttetsző ablakokra van alkalmazva , amelyek támogatják az
+elmosás effektet. (de a KDE elmosás effektet ki lehet kapcsolni).
+
+Az 1.00 érték jelenti, hogy nincs változás.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1772"/>
@@ -1334,7 +1345,10 @@ This option will hide these.</source>
 scroll arrows on their top and/or bottom?
 
 By default, big menus are scrollable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Legyenek nyilak a nagy menük tetején
+és/vagy alján?
+
+Alapértelmezetten a nagy menük görgethetők.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2017"/>
@@ -1343,7 +1357,11 @@ By default, big menus are scrollable.</source>
 If you have enabled it, you could temporarily disable it
 for a button that can be dragged and dropped by pressing
 the Ctrl key before pressing the button.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Vigyázat: ez elég összezavaró lehet elsőre.
+
+Ha bekapcsolta, átmenetileg ki tudja kapcsolni
+egy gombhoz, amelyet lehet húzni, azáltal, hogy megnyomja
+a Ctrl gombot a gomb megnyomása előtt.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2024"/>
