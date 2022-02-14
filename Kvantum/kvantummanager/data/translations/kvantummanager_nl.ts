@@ -483,22 +483,26 @@ radii for blurring translucent menus and tooltips
 that have rounded corners.
 
 Usually, a value of 2 is enough.</source>
-        <translation type="unfinished"></translation>
+        <translation>Als vervaging is ingeschakeld, dan zijn deze waarden
+van toepassing op de afgeronde hoeken van doorzichtige
+menu&apos;s en hulpballonnen.
+
+Normaliter is een waarde van 2 afdoende.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="809"/>
         <source>Blur Corner Radius</source>
-        <translation type="unfinished"></translation>
+        <translation>Straal van hoekvervaging</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="822"/>
         <source>Menu:</source>
-        <translation type="unfinished"></translation>
+        <translation>Menu&apos;s:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="829"/>
         <source>Tooltip:</source>
-        <translation type="unfinished"></translation>
+        <translation>Hulpballonnen:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="853"/>
