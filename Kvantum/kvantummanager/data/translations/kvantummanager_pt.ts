@@ -486,8 +486,8 @@ radii for blurring translucent menus and tooltips
 that have rounded corners.
 
 Usually, a value of 2 is enough.</source>
-        <translation>Se a desfocagem estiver ativada, estes valores definem o raio
-do canto para desfocar menus translúcidos e dicas
+        <translation>Se a desfocagem estiver ativada, estes valores definem os
+raios dos cantos para desfocar menus translúcidos e dicas
 que têm cantos arredondados.
 
 Normalmente, um valor de 2 é suficiente.</translation>
@@ -495,7 +495,7 @@ Normalmente, um valor de 2 é suficiente.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="809"/>
         <source>Blur Corner Radius</source>
-        <translation>Desfocar raio do canto</translation>
+        <translation>Desfocar raios dos cantos</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="822"/>
