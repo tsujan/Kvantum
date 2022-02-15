@@ -7,6 +7,7 @@ V1.0.1
  * Never assign a separate theme to Kvantum manager and kvantumpreview.
  * Added options (to Kvantum Manager) for setting corner radii when blurring translucent menus and tooltips with rounded corners.
  * To find the sunken button that has triggered a menu, check whether it really has a menu (in addition to checking of its sunken state).
+ * Don't enforce window size grip without layout (which is possible in very rare cases).
 
 V1.0.0
 ---------

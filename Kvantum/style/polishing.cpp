@@ -990,7 +990,7 @@ void Style::polish(QWidget *widget)
         if (mw->minimumSize() != mw->maximumSize())
         {
           QLayout *lo = mw->layout();
-          if (lo == nullptr || lo->sizeConstraint() != QLayout::SetFixedSize)
+          if (lo && lo->sizeConstraint() != QLayout::SetFixedSize)
             sb->setSizeGripEnabled(true);
         }
       }
