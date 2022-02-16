@@ -242,12 +242,8 @@ Style::Style(bool useDark) : QCommonStyle()
   hspec_ = settings_->getHacksSpec();
   cspec_ = settings_->getColorSpec();
 
-#if (QT_VERSION >= QT_VERSION_CHECK(5,14,0))
   QList<QByteArray> desktopList = qgetenv("XDG_CURRENT_DESKTOP").toLower().split(':');
   QSet<QByteArray> desktop(desktopList.begin(), desktopList.end());
-#else
-  QSet<QByteArray> desktop = qgetenv("XDG_CURRENT_DESKTOP").toLower().split(':').toSet();
-#endif
   QSet<QByteArray> gtkDesktops = QSet<QByteArray>() << "gnome" << "unity" << "pantheon";
   gtkDesktop_ = gtkDesktops.intersects(desktop);
 
@@ -383,16 +379,8 @@ Style::Style(bool useDark) : QCommonStyle()
 
   if (tspec_.x11drag)
   {
-#if (QT_VERSION >= QT_VERSION_CHECK(5,15,0))
     itsWindowManager_ = new WindowManager(this, tspec_.x11drag, tspec_.drag_from_buttons);
     itsWindowManager_->initialize();
-#else
-    if (tspec_.isX11)
-    {
-      itsWindowManager_ = new WindowManager(this, tspec_.x11drag);
-      itsWindowManager_->initialize();
-    }
-#endif
   }
 
   if (tspec_.blurring)
@@ -1616,13 +1604,9 @@ static inline void colorizeRect(QPainter *painter, const QColor &col, const QRec
 
 bool Style::btnDragInProgress() const
 {
-#if (QT_VERSION >= QT_VERSION_CHECK(5,15,0))
   return (tspec_.drag_from_buttons
           && itsWindowManager_
           && itsWindowManager_->dragInProgress());
-#else
-  return false;
-#endif
 }
 
 QString Style::getState(const QStyleOption *option, const QWidget *widget) const
@@ -1807,13 +1791,9 @@ void Style::drawComboLineEdit(const QStyleOption *option,
 static inline bool isCursorOutsideWidget(const QWidget *widget)
 { // used for woking around Qt's hover bug
   if (widget == nullptr) return false;
-#if (QT_VERSION >= QT_VERSION_CHECK(5,14,0))
   QScreen *scr = widget->screen();
   return !widget->rect().contains(widget->mapFromGlobal(scr != nullptr ? QCursor::pos(scr)
                                                                        : QCursor::pos()));
-#else
-  return !widget->rect().contains(widget->mapFromGlobal(QCursor::pos()));
-#endif
 }
 
 void Style::drawPrimitive(QStyle::PrimitiveElement element,
@@ -1904,11 +1884,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
       break;
     }
 
-#if (QT_VERSION < QT_VERSION_CHECK(5,13,0))
-    case PE_FrameStatusBar : {return;} // simple is elegant
-#else
     case PE_FrameStatusBarItem : {return;}
-#endif
 
     case PE_FrameDockWidget : {
       frame_spec fspec = getFrameSpec(QStringLiteral("Dock"));
@@ -5114,14 +5090,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
                          // as in most widgets
                          (widget && widget->hasFocus() && (option->state & State_Selected)) ? "pressed" :
                          (option->state & State_Selected) ? "toggled" :
-                         ((option->state & State_MouseOver)
-#if (QT_VERSION < QT_VERSION_CHECK(5,15,0))
-                          /* Qt has a bug that gives a mouse-over state to a view item
-                             when the view is scrolled by holding a scrollbar and the
-                             cursor goes over the item. This is a simple workaround. */
-                          && !(QApplication::mouseButtons() & Qt::LeftButton)
-#endif
-                         ) ? "focused"
+                         (option->state & State_MouseOver) ? "focused"
                          : "normal" : "disabled";
       if (ivStatus.startsWith(QLatin1String("disabled")) && (option->state & State_Selected))
       {
@@ -5462,7 +5431,6 @@ Style::KvIconMode Style::getIconMode(int state, bool isInactive, label_spec lspe
          are two tabs and a new active tab is created after the first one. */
 static inline QStyleOptionTab::TabPosition tabPosition(const QStyleOptionTab *opt, const QWidget *widget)
 {
-#if (QT_VERSION >= QT_VERSION_CHECK(5,15,0))
   const QTabBar *tb = qobject_cast<const QTabBar*>(widget);
   if (tb == nullptr
       /* making an exception in the case of a dragged tab */
@@ -5507,10 +5475,6 @@ static inline QStyleOptionTab::TabPosition tabPosition(const QStyleOptionTab *op
   if (end)
     return QStyleOptionTab::End;
   return QStyleOptionTab::Middle;
-#else
-  Q_UNUSED(widget);
-  return opt->position;
-#endif
 }
 
 void Style::drawControl(QStyle::ControlElement element,
@@ -5825,11 +5789,7 @@ void Style::drawControl(QStyle::ControlElement element,
                        && (option->state & State_Active)) ? 3 :
                       (widget && widget->hasFocus() && (option->state & State_Selected)) ? 3 :
                       (option->state & State_Selected) ? 4 :
-                      ((option->state & State_MouseOver)
-#if (QT_VERSION < QT_VERSION_CHECK(5,15,0))
-                       && !(QApplication::mouseButtons() & Qt::LeftButton)
-#endif
-                      ) ? 2 : 1 : 0;
+                      (option->state & State_MouseOver) ? 2 : 1 : 0;
           if (state == 0 && (option->state & State_Selected))
             state = 3; // see the workaround for Qt Creator in PE_PanelItemViewItem
           else if (state == 2
@@ -13188,9 +13148,6 @@ void Style::setSurfaceFormat(QWidget *widget) const
       && !(widget->inherits("QTipLabel") || qobject_cast<QMenu*>(widget)))
   {
     widget->setAttribute(Qt::WA_NoSystemBackground, false);
-#if (QT_VERSION < QT_VERSION_CHECK(5,13,1))
-    widget->setAttribute(Qt::WA_TranslucentBackground, false);
-#endif
     widget->setAutoFillBackground(true); // Fusion needs this
     return;
   }
@@ -14869,13 +14826,11 @@ QRect Style::subElementRect(QStyle::SubElement element, const QStyleOption *opti
       return r;
     }
 
-#if (QT_VERSION >= QT_VERSION_CHECK(5,15,0))
     case SE_PushButtonBevel : {
       QRect r = option->rect;
       r = visualRect(option->direction, option->rect, r);
       return r;
     }
-#endif
 
     case SE_PushButtonContents : {
       QRect r = QCommonStyle::subElementRect(element,option,widget);

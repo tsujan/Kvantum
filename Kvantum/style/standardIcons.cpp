@@ -499,20 +499,16 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
       if (!icn.isNull()) return icn;
       else break;
     }
-#if (QT_VERSION >= QT_VERSION_CHECK(5,14,0))
     case SP_DialogYesToAllButton :
-#endif
     case SP_DialogYesButton :
     case SP_DialogOkButton : {
       QIcon icn = QIcon::fromTheme(QLatin1String("dialog-ok"));
       if (!icn.isNull()) return icn;
       else break;
     }
-#if (QT_VERSION >= QT_VERSION_CHECK(5,14,0))
     case SP_DialogNoToAllButton :
     case SP_DialogAbortButton :
     case SP_DialogIgnoreButton :
-#endif
     case SP_DialogCancelButton :
     case SP_DialogNoButton : {
       QIcon icn = QIcon::fromTheme(QStringLiteral("dialog-cancel"),
@@ -550,7 +546,6 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
       if (!icn.isNull()) return icn;
       else break;
     }
-#if (QT_VERSION >= QT_VERSION_CHECK(5,14,0))
     case SP_DialogSaveAllButton : {
       QIcon icn = QIcon::fromTheme(QStringLiteral("document-save-all"));
       if (!icn.isNull()) return icn;
@@ -566,7 +561,6 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
       if (!icn.isNull()) return icn;
       else break;
     }
-#endif
     // these are for LXQt file dialog
     case SP_FileDialogListView : {
       QIcon icn = QIcon::fromTheme(QStringLiteral("view-list-text"));

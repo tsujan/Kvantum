@@ -51,16 +51,11 @@ greaterThan(QT_MAJOR_VERSION, 4) {
              themeconfig/ThemeConfig.h \
              themeconfig/specs.h
   lessThan(QT_MAJOR_VERSION, 6) {
-    greaterThan(QT_MINOR_VERSION, 14) {
-      SOURCES += drag/windowmanager.cpp
-      HEADERS += drag/windowmanager.h
-    } else {
-      SOURCES += drag/windowmanager-old.cpp
-      HEADERS += drag/windowmanager-old.h
-    }
+    SOURCES += drag/windowmanager.cpp
+    HEADERS += drag/windowmanager.h
   } else {
-      SOURCES += drag/windowmanager.cpp
-      HEADERS += drag/windowmanager.h
+    SOURCES += drag/windowmanager.cpp
+    HEADERS += drag/windowmanager.h
   }
   OTHER_FILES += kvantum.json
 } else {

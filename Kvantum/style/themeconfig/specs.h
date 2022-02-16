@@ -19,11 +19,7 @@
 #define SPEC_H
 
 #include <QStringList>
-#if (QT_VERSION >= QT_VERSION_CHECK(5,15,0))
 #include "drag/windowmanager.h"
-#else
-#include "drag/windowmanager-old.h"
-#endif
 
 namespace Kvantum {
 

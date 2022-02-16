@@ -1,5 +1,6 @@
-set(QT5_MINIMUM_VERSION "5.12.0")
+set(QT5_MINIMUM_VERSION "5.15.0")
 set(QT6_MINIMUM_VERSION "6.2.0")
+set(KF5_MINIMUM_VERSION "5.82.0")
 
 if(NOT ENABLE_QT4)
   if(NOT ENABLE_QT5)
@@ -12,7 +13,7 @@ if(NOT ENABLE_QT4)
   if(QT_VERSION_MAJOR EQUAL 5)
     find_package(Qt5Core "${QT5_MINIMUM_VERSION}" REQUIRED)
     find_package(Qt5X11Extras REQUIRED)
-    find_package(KF5WindowSystem REQUIRED)
+    find_package(KF5WindowSystem "${KF5_MINIMUM_VERSION}" REQUIRED)
   else()
     find_package(Qt6Core "${QT6_MINIMUM_VERSION}" REQUIRED)
   endif()
@@ -92,35 +93,19 @@ if(NOT ENABLE_QT4)
         themeconfig/ThemeConfig.cpp
         animation/animation.cpp)
   else()
-    if((Qt5Widgets_VERSION GREATER 5.15.0) OR (Qt5Widgets_VERSION EQUAL 5.15.0))
-      set(kvantum_SOURCES
-          Kvantum.cpp
-          eventFiltering.cpp
-          polishing.cpp
-          rendering.cpp
-          standardIcons.cpp
-          viewItems.cpp
-          KvantumPlugin.cpp
-          shortcuthandler.cpp
-          blur/blurhelper.cpp
-          drag/windowmanager.cpp
-          themeconfig/ThemeConfig.cpp
-          animation/animation.cpp)
-    else()
-      set(kvantum_SOURCES
-          Kvantum.cpp
-          eventFiltering.cpp
-          polishing.cpp
-          rendering.cpp
-          standardIcons.cpp
-          viewItems.cpp
-          KvantumPlugin.cpp
-          shortcuthandler.cpp
-          blur/blurhelper.cpp
-          drag/windowmanager-old.cpp
-          themeconfig/ThemeConfig.cpp
-          animation/animation.cpp)
-    endif()
+    set(kvantum_SOURCES
+        Kvantum.cpp
+        eventFiltering.cpp
+        polishing.cpp
+        rendering.cpp
+        standardIcons.cpp
+        viewItems.cpp
+        KvantumPlugin.cpp
+        shortcuthandler.cpp
+        blur/blurhelper.cpp
+        drag/windowmanager.cpp
+        themeconfig/ThemeConfig.cpp
+        animation/animation.cpp)
   endif()
 else()
   set(kvantum_SOURCES

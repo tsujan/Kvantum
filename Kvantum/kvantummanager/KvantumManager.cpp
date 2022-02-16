@@ -53,10 +53,6 @@ KvantumManager::KvantumManager (const QString& lang, QWidget *parent) : QMainWin
 
     centerDefaultDocTabs_ = centerDefaultNormalTabs_ = false; // not really needed
 
-#if (QT_VERSION < QT_VERSION_CHECK(5,13,1))
-    ui->checkBoxKineticScrolling->setEnabled (false);
-#endif
-
     ui->openTheme->setIcon (symbolicIcon::icon (":/Icons/data/document-open.svg"));
     ui->deleteTheme->setIcon (symbolicIcon::icon (":/Icons/data/edit-delete.svg"));
     ui->useTheme->setIcon (symbolicIcon::icon (":/Icons/data/dialog-ok.svg"));
@@ -127,10 +123,6 @@ KvantumManager::KvantumManager (const QString& lang, QWidget *parent) : QMainWin
                                                     << tr ("Menubar and primary toolbar")
                                                     << tr ("Anywhere possible"));
 
-#if (QT_VERSION < QT_VERSION_CHECK(5,15,0))
-    ui->checkBoxBtnDrag->setVisible (false);
-#endif
-
     ui->appsEdit->setClearButtonEnabled (true);
 
     QLabel *statusLabel = new QLabel();
@@ -180,11 +172,9 @@ KvantumManager::KvantumManager (const QString& lang, QWidget *parent) : QMainWin
     connect (ui->aboutButton, &QAbstractButton::clicked, this, &KvantumManager::aboutDialog);
     connect (ui->whatsthisButton, &QAbstractButton::clicked, this, &KvantumManager::showWhatsThis);
     connect (ui->checkBoxComboMenu, &QAbstractButton::clicked, this, &KvantumManager::comboMenu);
-#if (QT_VERSION >= QT_VERSION_CHECK(5,15,0))
     connect (ui->comboX11Drag, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this](int index) {
         ui->checkBoxBtnDrag->setEnabled (index > 1);
     });
-#endif
 
     /* vertical toolbars could be styled only if all toolbars can */
     connect (ui->checkBoxToolbar, &QAbstractButton::clicked, [this] (bool checked) {
@@ -1875,11 +1865,7 @@ void KvantumManager::assignAppTheme (const QString &previousTheme, const QString
     {
         editTxt = editTxt.simplified();
         editTxt.remove (" ");
-#if (QT_VERSION >= QT_VERSION_CHECK(5,15,0))
         QStringList appList = editTxt.split (",", Qt::SkipEmptyParts);
-#else
-        QStringList appList = editTxt.split (",", QString::SkipEmptyParts);
-#endif
         appList.removeDuplicates();
         appThemes_.insert (appTheme, appList);
     }
@@ -2734,11 +2720,7 @@ void KvantumManager::writeAppLists()
         {
             editTxt = editTxt.simplified();
             editTxt.remove (" ");
-#if (QT_VERSION >= QT_VERSION_CHECK(5,15,0))
             QStringList appList = editTxt.split (",", Qt::SkipEmptyParts);
-#else
-            QStringList appList = editTxt.split (",", QString::SkipEmptyParts);
-#endif
             appList.removeDuplicates();
             appThemes_.insert (appTheme, appList);
         }
@@ -2948,11 +2930,7 @@ void KvantumManager::aboutDialog()
 {
     class AboutDialog : public QDialog {
     public:
-#if (QT_VERSION >= QT_VERSION_CHECK(5,15,0))
         explicit AboutDialog (QWidget* parent = nullptr, Qt::WindowFlags f = Qt::WindowFlags()) : QDialog (parent, f) {
-#else
-        explicit AboutDialog (QWidget* parent = nullptr, Qt::WindowFlags f = nullptr) : QDialog (parent, f) {
-#endif
             aboutUi.setupUi (this);
             aboutUi.textLabel->setOpenExternalLinks (true);
 
