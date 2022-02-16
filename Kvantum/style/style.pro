@@ -7,8 +7,8 @@ QT += svg
 
 greaterThan(QT_MAJOR_VERSION, 4) {
   lessThan(QT_MAJOR_VERSION, 6) {
-    lessThan(QT_MINOR_VERSION, 12) {
-      error("Kvantum needs at least Qt 5.12.0.")
+    lessThan(QT_MINOR_VERSION, 15) {
+      error("Kvantum needs at least Qt 5.15.0.")
     }
     QT += x11extras
   } else {
