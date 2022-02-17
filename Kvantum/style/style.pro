@@ -40,23 +40,18 @@ greaterThan(QT_MAJOR_VERSION, 4) {
              viewItems.cpp \
              KvantumPlugin.cpp \
              shortcuthandler.cpp \
+             drag/windowmanager.cpp \
              blur/blurhelper.cpp \
              animation/animation.cpp \
              themeconfig/ThemeConfig.cpp
   HEADERS += Kvantum.h \
              KvantumPlugin.h \
              shortcuthandler.h \
+             drag/windowmanager.h \
              blur/blurhelper.h \
              animation/animation.h \
              themeconfig/ThemeConfig.h \
              themeconfig/specs.h
-  lessThan(QT_MAJOR_VERSION, 6) {
-    SOURCES += drag/windowmanager.cpp
-    HEADERS += drag/windowmanager.h
-  } else {
-    SOURCES += drag/windowmanager.cpp
-    HEADERS += drag/windowmanager.h
-  }
   OTHER_FILES += kvantum.json
 } else {
   SOURCES += qt4/Kvantum4.cpp \
