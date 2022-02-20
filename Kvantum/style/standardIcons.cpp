@@ -1,5 +1,5 @@
 /*
- * Copyright (C) Pedram Pourang (aka Tsu Jan) 2019 <tsujan2000@gmail.com>
+ * Copyright (C) Pedram Pourang (aka Tsu Jan) 2019-2022 <tsujan2000@gmail.com>
  *
  * Kvantum is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -40,7 +40,8 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
 #else
   bool hdpi(true);
 #endif
-  qreal pixelRatio = qApp->devicePixelRatio();
+  QWindow *win = widget ? widget->window()->windowHandle() : nullptr;
+  qreal pixelRatio = win ? win->devicePixelRatio() : qApp->devicePixelRatio();
   pixelRatio = qMax(pixelRatio, static_cast<qreal>(1));
   const bool rtl(option != nullptr ? option->direction == Qt::RightToLeft
                                    : QApplication::layoutDirection() == Qt::RightToLeft);
@@ -100,14 +101,13 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
 
       QPainter painter(&pm);
 
-      /* this is commented out because vertical toolbars aren't stylable */
-      /*if (!hspec_.single_top_toolbar
+      if (hspec_.style_vertical_toolbars
           && themeRndr_ && themeRndr_->isValid()
           && enoughContrast(getFromRGBA(getLabelSpec(QStringLiteral("Toolbar")).normalColor),
                             standardPalette().color(QPalette::Active,QPalette::WindowText)))
       {
         dspec.element = "flat-"+dspec.element;
-      }*/
+      }
 
       if (renderElement(&painter, dspec.element+"-down-normal", QRect(0,0,s,s)))
         return QIcon(pm);
@@ -437,14 +437,12 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
         for (int i = 0 ; i < sizes.size() ; ++i)
         {
           int size = sizes[i].width();
-          QWindow *win = widget ? widget->window()->windowHandle() : nullptr;
 #if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
           QPixmap basePixmap = baseIcon.pixmap(win, QSize(size, size));
           QPixmap linkPixmap = icn.pixmap(win, QSize(size / 2, size / 2));
 #else
-          qreal _pixelRatio = win ? win->devicePixelRatio() : pixelRatio;
-          QPixmap basePixmap = baseIcon.pixmap(QSize(size, size), _pixelRatio);
-          QPixmap linkPixmap = icn.pixmap(QSize(size / 2, size / 2), _pixelRatio);
+          QPixmap basePixmap = baseIcon.pixmap(QSize(size, size), pixelRatio);
+          QPixmap linkPixmap = icn.pixmap(QSize(size / 2, size / 2), pixelRatio);
 #endif
           QPainter painter(&basePixmap);
           painter.drawPixmap(size/2, size/2, linkPixmap);
@@ -463,14 +461,12 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
         for (int i = 0 ; i < sizes.size() ; ++i)
         {
           int size = sizes[i].width();
-          QWindow *win = widget ? widget->window()->windowHandle() : nullptr;
 #if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
           QPixmap basePixmap = baseIcon.pixmap(win, QSize(size, size));
           QPixmap linkPixmap = icn.pixmap(win, QSize(size / 2, size / 2));
 #else
-          qreal _pixelRatio = win ? win->devicePixelRatio() : pixelRatio;
-          QPixmap basePixmap = baseIcon.pixmap(QSize(size, size), _pixelRatio);
-          QPixmap linkPixmap = icn.pixmap(QSize(size / 2, size / 2), _pixelRatio);
+          QPixmap basePixmap = baseIcon.pixmap(QSize(size, size), pixelRatio);
+          QPixmap linkPixmap = icn.pixmap(QSize(size / 2, size / 2), pixelRatio);
 #endif
           QPainter painter(&basePixmap);
           painter.drawPixmap(size/2, size/2, linkPixmap);

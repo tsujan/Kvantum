@@ -419,7 +419,6 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       QHoverEvent *he = static_cast<QHoverEvent*>(e);
 #if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
       int indx = tabbar->tabAt(he->pos());
-
 #else
       int indx = tabbar->tabAt(he->position().toPoint());
 #endif

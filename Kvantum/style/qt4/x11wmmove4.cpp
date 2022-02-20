@@ -1,8 +1,6 @@
 /*
     Adapted from Bespin's WM.cpp v0.r1710
     and QtCurve's x11helpers.c v1.8.17.
-
-    Qt5 doesn't need this but uses it for now.
 */
 
 #include "x11wmmove4.h"

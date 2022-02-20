@@ -16283,7 +16283,9 @@ void Style::drawItemPixmap(QPainter *painter, const QRect &rect,
       qApp->testAttribute(Qt::AA_UseHighDpiPixmaps) &&
 #endif
       !pixmap.isNull())
+  {
     scale = pixmap.devicePixelRatio();
+  }
   scale = qMax(scale, static_cast<qreal>(1));
 
   QRect pixRect = alignedRect(QApplication::layoutDirection(), QFlag(alignment),

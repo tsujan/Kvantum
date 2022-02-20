@@ -79,9 +79,8 @@ bool Style::renderElement(QPainter *painter,
   }
   if (!renderer) return false;
 
-  qreal pixelRatio = qApp->devicePixelRatio();
-  if (painter->device())
-    pixelRatio = painter->device()->devicePixelRatioF();
+  qreal pixelRatio = painter->device() ? painter->device()->devicePixelRatioF()
+                                       : qApp->devicePixelRatio();
   pixelRatio = qMax(pixelRatio, static_cast<qreal>(1));
   if (static_cast<qreal>(qRound(pixelRatio)) != pixelRatio)
   { // in this special case, we prevent one-pixel gaps between rectangles as far as possible
