@@ -486,22 +486,26 @@ radii for blurring translucent menus and tooltips
 that have rounded corners.
 
 Usually, a value of 2 is enough.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kun sumennus on käytössä, nämä arvot asettavat
+kulmien säteen läpinäkyville, sekä kulmistaan
+pyöristetyille valikoille ja työkaluvihjeille.
+
+Useimmiten arvo 2 on riittävä.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="809"/>
         <source>Blur Corner Radius</source>
-        <translation type="unfinished"></translation>
+        <translation>Sumennuksen Kulman Säde</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="822"/>
         <source>Menu:</source>
-        <translation type="unfinished"></translation>
+        <translation>Valikko:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="829"/>
         <source>Tooltip:</source>
-        <translation type="unfinished"></translation>
+        <translation>Työkaluvihje:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="853"/>
