@@ -78,7 +78,7 @@ the theme is already used.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="257"/>
         <source>Configure Active Theme</source>
-        <translation>활성 테마 구성</translation>
+        <translation>활성 테마 구성하기</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="321"/>
@@ -108,7 +108,7 @@ settings of this theme.
         <location filename="../../kvantummanager.ui" line="342"/>
         <source>Save this configuration
 (Ctrl+S)</source>
-        <translation>이 환경설정 저장
+        <translation>이 구성 저장
 (Ctrl+S)</translation>
     </message>
     <message>
@@ -1750,7 +1750,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="2678"/>
         <source>Configuration saved.</source>
-        <translation>환경설정이 저장되었습니다.</translation>
+        <translation>구성이 저장되었습니다.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2785"/>
