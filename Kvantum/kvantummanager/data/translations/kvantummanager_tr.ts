@@ -485,22 +485,26 @@ radii for blurring translucent menus and tooltips
 that have rounded corners.
 
 Usually, a value of 2 is enough.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bulanıklaştırma etkinleştirilirse, bu değerler, yarı saydam menüleri ve köşeleri
+yuvarlatılmış araç ipuçlarını bulanıklaştırmak
+için köşe yarıçaplarını ayarlar.
+
+ Genellikle 2 değeri yeterlidir.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="809"/>
         <source>Blur Corner Radius</source>
-        <translation type="unfinished"></translation>
+        <translation>Bulanık Köşe Yarıçapı</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="822"/>
         <source>Menu:</source>
-        <translation type="unfinished"></translation>
+        <translation>Menü:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="829"/>
         <source>Tooltip:</source>
-        <translation type="unfinished"></translation>
+        <translation>İpucu:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="853"/>
