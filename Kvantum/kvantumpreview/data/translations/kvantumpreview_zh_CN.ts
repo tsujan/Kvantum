@@ -27,8 +27,10 @@ width</source>
         <translation>切换按压
 状态按钮
 
-按钮高度
-大于宽度</translation>
+按钮
+高度
+大于
+宽度</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="95"/>
