@@ -196,7 +196,7 @@ frame.left=4
 frame.right=4
 text.press.color=white
 text.toggle.color=white
-min_width=4font
+min_width=+2
 min_height=2.0font
 
 [TabFrame]

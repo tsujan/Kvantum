@@ -150,8 +150,8 @@ inherits=PanelButtonCommand
 interior.element=tab
 text.margin.left=6
 text.margin.right=6
-text.margin.top=2
-text.margin.bottom=2
+text.margin.top=3
+text.margin.bottom=3
 frame.element=tab
 indicator.element=tab
 frame.top=4
@@ -160,7 +160,7 @@ frame.left=4
 frame.right=4
 text.press.color=white
 text.toggle.color=white
-min_width=4font
+min_width=+2
 min_height=2.0font
 
 [TabFrame]
