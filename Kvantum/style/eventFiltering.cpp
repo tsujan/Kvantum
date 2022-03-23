@@ -844,6 +844,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       { // Custom text color; don't set palettes! The app is responsible for all colors.
         break;
       }
+      bool _forcePalette(false);
       const label_spec lspec = getLabelSpec(QStringLiteral("ItemView"));
       /* set the normal inactive text color to the normal active one
          (needed when the app sets it inactive) */
@@ -852,26 +853,40 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         col = standardPalette().color(QPalette::Active,QPalette::Text);
       else
         opacifyColor(col);
-      palette.setColor(QPalette::Inactive, QPalette::Text, col);
+      if (palette.color(QPalette::Inactive, QPalette::Text) != col)
+      {
+        _forcePalette = true;
+        palette.setColor(QPalette::Inactive, QPalette::Text, col);
+      }
       if (!hasInactiveSelItemCol_)
       {
-        forcePalette(w, palette);
+        if (_forcePalette)
+          forcePalette(w, palette);
         break;
       }
       /* set the toggled inactive text color to the toggled active one
          (the main purpose of installing an event filter on the view) */
       col = getFromRGBA(lspec.toggleColor);
       opacifyColor(col);
-      palette.setColor(QPalette::Inactive, QPalette::HighlightedText, col);
+      if (palette.color(QPalette::Inactive, QPalette::HighlightedText) != col)
+      {
+        _forcePalette = true;
+        palette.setColor(QPalette::Inactive, QPalette::HighlightedText, col);
+      }
       /* use the active highlight color for the toggled (unfocused) item if there's
          no contrast with the pressed state because some apps (like Qt Designer)
          may not call PE_PanelItemViewItem but highlight the item instead */
       if (!toggledItemHasContrast_)
       {
-        palette.setColor(QPalette::Inactive, QPalette::Highlight,
-                         standardPalette().color(QPalette::Active,QPalette::Highlight));
+        col = standardPalette().color(QPalette::Active,QPalette::Highlight);
+        if (palette.color(QPalette::Inactive, QPalette::Highlight) != col)
+        {
+          _forcePalette = true;
+          palette.setColor(QPalette::Inactive, QPalette::Highlight, col);
+        }
       }
-      forcePalette(w, palette);
+      if (_forcePalette)
+        forcePalette(w, palette);
     }
     break;
 
@@ -884,6 +899,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       {
         break;
       }
+      bool _forcePalette(false);
       const label_spec lspec = getLabelSpec(QStringLiteral("ItemView"));
       /* restore the normal inactive text color (which was changed at QEvent::WindowActivate) */
       QColor col = getFromRGBA(lspec.normalInactiveColor);
@@ -891,23 +907,37 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         col = standardPalette().color(QPalette::Inactive,QPalette::Text);
       else
         opacifyColor(col);
-      palette.setColor(QPalette::Inactive, QPalette::Text, col);
+      if (palette.color(QPalette::Inactive, QPalette::Text) != col)
+      {
+        _forcePalette = true;
+        palette.setColor(QPalette::Inactive, QPalette::Text, col);
+      }
       if (!hasInactiveSelItemCol_)
       { // custom text color
-        forcePalette(w, palette);
+        if (_forcePalette)
+          forcePalette(w, palette);
         break;
       }
       /* restore the toggled inactive text color (which was changed at QEvent::WindowActivate) */
       col = getFromRGBA(lspec.toggleInactiveColor);
       opacifyColor(col);
-      palette.setColor(QPalette::Inactive,QPalette::HighlightedText, col);
+      if (palette.color(QPalette::Inactive,QPalette::HighlightedText) != col)
+      {
+        _forcePalette = true;
+        palette.setColor(QPalette::Inactive,QPalette::HighlightedText, col);
+      }
       /* restore the inactive highlight color (which was changed at QEvent::WindowActivate) */
       if (!toggledItemHasContrast_)
       {
-        palette.setColor(QPalette::Inactive, QPalette::Highlight,
-                         standardPalette().color(QPalette::Inactive,QPalette::Highlight));
+        col = standardPalette().color(QPalette::Inactive,QPalette::Highlight);
+        if (palette.color(QPalette::Inactive, QPalette::Highlight) != col)
+        {
+          _forcePalette = true;
+          palette.setColor(QPalette::Inactive, QPalette::Highlight, col);
+        }
       }
-      forcePalette(w, palette);
+      if (_forcePalette)
+        forcePalette(w, palette);
     }
     break;
 
@@ -1238,6 +1268,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         {
           break;
         }
+        bool _forcePalette(false);
         const label_spec lspec = getLabelSpec(QStringLiteral("ItemView"));
         if (isWidgetInactive(w)) // FIXME: probably not needed with inactive window
         {
@@ -1246,19 +1277,32 @@ bool Style::eventFilter(QObject *o, QEvent *e)
             col = standardPalette().color(QPalette::Inactive,QPalette::Text);
           else
             opacifyColor(col);
-          palette.setColor(QPalette::Inactive, QPalette::Text, col);
+          if (palette.color(QPalette::Inactive, QPalette::Text) != col)
+          {
+            _forcePalette = true;
+            palette.setColor(QPalette::Inactive, QPalette::Text, col);
+          }
           if (!hasInactiveSelItemCol_)
           {
-            forcePalette(w, palette);
+            if (_forcePalette)
+              forcePalette(w, palette);
             break;
           }
           col = getFromRGBA(lspec.toggleInactiveColor);
           opacifyColor(col);
-          palette.setColor(QPalette::Inactive,QPalette::HighlightedText, col);
+          if (palette.color(QPalette::Inactive,QPalette::HighlightedText) != col)
+          {
+            _forcePalette = true;
+            palette.setColor(QPalette::Inactive,QPalette::HighlightedText, col);
+          }
           if (!toggledItemHasContrast_)
           {
-            palette.setColor(QPalette::Inactive, QPalette::Highlight,
-                             standardPalette().color(QPalette::Inactive,QPalette::Highlight));
+            col = standardPalette().color(QPalette::Inactive,QPalette::Highlight);
+            if (palette.color(QPalette::Inactive, QPalette::Highlight) != col)
+            {
+              _forcePalette = true;
+              palette.setColor(QPalette::Inactive, QPalette::Highlight, col);
+            }
           }
         }
         else
@@ -1268,22 +1312,36 @@ bool Style::eventFilter(QObject *o, QEvent *e)
             col = standardPalette().color(QPalette::Active,QPalette::Text);
           else
             opacifyColor(col);
-          palette.setColor(QPalette::Inactive, QPalette::Text, col);
+          if (palette.color(QPalette::Inactive, QPalette::Text) != col)
+          {
+            _forcePalette = true;
+            palette.setColor(QPalette::Inactive, QPalette::Text, col);
+          }
           if (!hasInactiveSelItemCol_)
           {
-            forcePalette(w, palette);
+            if (_forcePalette)
+              forcePalette(w, palette);
             break;
           }
           col = getFromRGBA(lspec.toggleColor);
           opacifyColor(col);
-          palette.setColor(QPalette::Inactive, QPalette::HighlightedText, col);
+          if (palette.color(QPalette::Inactive, QPalette::HighlightedText) != col)
+          {
+            _forcePalette = true;
+            palette.setColor(QPalette::Inactive, QPalette::HighlightedText, col);
+          }
           if (!toggledItemHasContrast_)
           {
-            palette.setColor(QPalette::Inactive, QPalette::Highlight,
-                             standardPalette().color(QPalette::Active,QPalette::Highlight));
+            col = standardPalette().color(QPalette::Active,QPalette::Highlight);
+            if (palette.color(QPalette::Inactive, QPalette::Highlight) != col)
+            {
+              _forcePalette = true;
+              palette.setColor(QPalette::Inactive, QPalette::Highlight, col);
+            }
           }
         }
-        forcePalette(w, palette);
+        if (_forcePalette)
+          forcePalette(w, palette);
       }
 #if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
       /* see the case of QMenu above */
