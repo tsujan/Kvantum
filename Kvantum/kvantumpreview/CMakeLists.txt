@@ -2,16 +2,11 @@ set(QT5_MINIMUM_VERSION "5.15.0")
 set(QT6_MINIMUM_VERSION "6.2.0")
 
 if(NOT ENABLE_QT5)
-  find_package(QT NAMES Qt6 Qt5 COMPONENTS Core REQUIRED)
-  find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core REQUIRED)
+  set(QT_VERSION_MAJOR 6)
+  find_package(Qt6Core "${QT6_MINIMUM_VERSION}" REQUIRED)
 else()
   set(QT_VERSION_MAJOR 5)
-endif()
-
-if(QT_VERSION_MAJOR EQUAL 5)
   find_package(Qt5Core "${QT5_MINIMUM_VERSION}" REQUIRED)
-else()
-  find_package(Qt6Core "${QT6_MINIMUM_VERSION}" REQUIRED)
 endif()
 
 find_package(Qt${QT_VERSION_MAJOR}Widgets REQUIRED)

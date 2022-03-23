@@ -15,6 +15,8 @@ greaterThan(QT_MAJOR_VERSION, 4) {
     equals(QT_MAJOR_VERSION, 6) {
       lessThan(QT_MINOR_VERSION, 2) {
         error("Kvantum needs at least Qt 6.2.0.")
+      } else {
+        QT += widgets
       }
     } else {
       error("Kvantum cannot be compiled against this version of Qt.")

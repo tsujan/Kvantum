@@ -836,7 +836,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
     break;
 
   case QEvent::WindowActivate:
-    if (qobject_cast<QAbstractItemView*>(o))
+    if (!tspec_.no_inactiveness && qobject_cast<QAbstractItemView*>(o))
     {
       QPalette palette = w->palette();
       if (palette.color(QPalette::Active, QPalette::Text)
@@ -876,7 +876,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
     break;
 
   case QEvent::WindowDeactivate:
-    if (qobject_cast<QAbstractItemView*>(o))
+    if (!tspec_.no_inactiveness && qobject_cast<QAbstractItemView*>(o))
     {
       QPalette palette = w->palette();
       if (palette.color(QPalette::Active, QPalette::Text)
@@ -1228,6 +1228,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       }
       else if (qobject_cast<QAbstractItemView*>(o))
       {
+        if (tspec_.no_inactiveness) break;
         /* view palettes should also be set when the view is shown
            and not only when its window is activated/deactivated
            (-> QEvent::WindowActivate and QEvent::WindowDeactivate) */

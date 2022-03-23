@@ -1,3 +1,8 @@
+V1.0.2
+---------
+ * Added "widgets" to "style.pro" for Qt ≥ 6.2.4.
+ * Don't set the active/inactive palettes of item views (when they are shown/activated/deactivated) if the inactive state is ignored.
+
 V1.0.1
 ---------
  * Added a workaround for the wrong style code of "KisDoubleSliderSpinBox" in Krita 5.0.0.
