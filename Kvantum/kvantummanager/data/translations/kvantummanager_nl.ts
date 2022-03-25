@@ -852,7 +852,7 @@ other position.</source>
         <translation>Moet alleen de bovenste werkbalk worden opgemaakt?
 
 Standaard worden alle werkbalken opgemaakt,
-of ze nu bovenaan of op een positie staan.</translation>
+of ze nu bovenaan of elders staan.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="645"/>
