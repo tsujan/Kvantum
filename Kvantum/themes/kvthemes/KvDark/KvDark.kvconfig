@@ -142,8 +142,8 @@ frame.expanded.bottom=2
 frame.expanded.left=2
 frame.expanded.right=2
 frame.expansion=2.5font
-text.margin.left=6
-text.margin.right=6
+text.margin.left=4
+text.margin.right=4
 indicator.element=carrow
 
 [IndicatorSpinBox]
@@ -365,6 +365,8 @@ text.focus.color=white
 
 [ComboBox]
 inherits=LineEdit
+text.margin.left=6
+text.margin.right=6
 text.toggle.color=white
 indicator.element=carrow
 
