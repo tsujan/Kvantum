@@ -158,7 +158,8 @@ QRegion BlurHelper::blurRegion (QWidget* widget) const
        && !widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu)) // not a detached menu
       || widget->inherits("QComboBoxPrivateContainer"))
   {
-    r = menuShadow_;
+    if (!widget->testAttribute(Qt::WA_StyleSheetTarget))
+      r = menuShadow_;
     radius = menuBlurRadius_;
   }
   else if (widget->inherits("QTipLabel")
@@ -166,7 +167,8 @@ QRegion BlurHelper::blurRegion (QWidget* widget) const
            || ((widget->windowFlags() & Qt::WindowType_Mask) == Qt::ToolTip
                && !qobject_cast<QFrame*>(widget)))
   {
-    r = tooltipShadow_;
+    if (!widget->testAttribute(Qt::WA_StyleSheetTarget))
+      r = tooltipShadow_;
     radius = toolTipBlurRadius_;
   }
 

@@ -3,6 +3,7 @@ V1.0.2
  * Added "widgets" to "style.pro" for Qt ≥ 6.2.4.
  * Don't set the active/inactive palettes of item views (when they are shown/activated/deactivated) if the inactive state is ignored.
  * Force palettes (of item views) on event filtering only if needed.
+ * Apply blurring to the whole rectangles of menus/tooltips that aren't drawn by Kvantum.
 
 V1.0.1
 ---------
