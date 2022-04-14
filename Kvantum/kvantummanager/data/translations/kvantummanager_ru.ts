@@ -486,22 +486,26 @@ radii for blurring translucent menus and tooltips
 that have rounded corners.
 
 Usually, a value of 2 is enough.</source>
-        <translation type="unfinished"></translation>
+        <translation>Если размытие включено, данные значения устанавливают
+угловой радиус размытия полупрозрачных меню и подсказок,
+имеющих скруглённые углы.
+
+Обычно достаточно значения, равного 2.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="809"/>
         <source>Blur Corner Radius</source>
-        <translation type="unfinished"></translation>
+        <translation>Угловой Радиус Размытия</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="822"/>
         <source>Menu:</source>
-        <translation type="unfinished"></translation>
+        <translation>Меню:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="829"/>
         <source>Tooltip:</source>
-        <translation type="unfinished"></translation>
+        <translation>Подсказка:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="853"/>
@@ -734,7 +738,7 @@ some apps set it themeselves.</source>
         <location filename="../../kvantummanager.ui" line="1844"/>
         <location filename="../../kvantummanager.ui" line="1854"/>
         <source>How to activate view items?</source>
-        <translation>Способ активации просмотра элементов.</translation>
+        <translation>Как активировать просмотр элементов?</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1847"/>
@@ -1322,9 +1326,9 @@ between toolbar separators.</source>
         <location filename="../../kvantummanager.ui" line="1724"/>
         <source>Draw the whole editable combo-box as a
 line-edit with arrow (and icon, if it exists)?</source>
-        <translation>Отображение изменяемых полей со списками
+        <translation>Отображать изменяемые поля со списками
 в виде строки для ввода со стрелкой (и значком,
-если он существует).</translation>
+если он существует)?</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1728"/>
@@ -1354,7 +1358,7 @@ Uncheck it if you want to use those options!</source>
 
 Включение данного параметра может привести
 к отключению некоторых других параметров.
-Выключите его, чтобы предотвратить это.</translation>
+Выключите его, чтобы предотвратить это!</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1648"/>
@@ -1561,7 +1565,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="641"/>
         <source>First you have to delete its modified version!</source>
-        <translation>Сначала необходимо удалить её изменённую версию.</translation>
+        <translation>Сначала необходимо удалить её изменённую версию!</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="665"/>
@@ -1675,7 +1679,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="560"/>
         <source>Please fix that first!</source>
-        <translation>Сначала устраните эту проблему.</translation>
+        <translation>Сначала устраните эту проблему!</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="572"/>
@@ -1686,7 +1690,7 @@ or update its preview.</source>
         <location filename="../../KvantumManager.cpp" line="591"/>
         <location filename="../../KvantumManager.cpp" line="602"/>
         <source>This is not an installable Kvantum theme!</source>
-        <translation>Тема не является устанавливаемой темой Kvantum.</translation>
+        <translation>Тема не является устанавливаемой темой Kvantum!</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="592"/>
@@ -1698,7 +1702,7 @@ or update its preview.</source>
         <location filename="../../KvantumManager.cpp" line="604"/>
         <location filename="../../KvantumManager.cpp" line="614"/>
         <source>Please select another directory!</source>
-        <translation>Выберите другую папку.</translation>
+        <translation>Выберите другую папку!</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="603"/>
@@ -1708,7 +1712,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="613"/>
         <source>This is not a Kvantum theme folder!</source>
-        <translation>Папка не является папкой тем Kvantum.</translation>
+        <translation>Папка не является папкой тем Kvantum!</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="640"/>
@@ -1723,7 +1727,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="656"/>
         <source>Please choose another directory!</source>
-        <translation>Выберите другую папку.</translation>
+        <translation>Выберите другую папку!</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="666"/>
@@ -1881,7 +1885,7 @@ or update its preview.</source>
     <message>
         <location filename="../../main.cpp" line="141"/>
         <source>Please first install the Kvantum style plugin!</source>
-        <translation>Сначала установите подключаемый модуль стилей Kvantum.</translation>
+        <translation>Сначала установите подключаемый модуль стилей Kvantum!</translation>
     </message>
 </context>
 </TS>
