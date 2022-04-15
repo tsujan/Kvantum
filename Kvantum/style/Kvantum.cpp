@@ -4634,15 +4634,19 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         }
       }
       else if ((combo && combo->editable && !(cb && !cb->lineEdit())
-                && !tspec_.combo_as_lineedit) // otherwise drawn at CC_ComboBox
+                && (!tspec_.combo_as_lineedit // otherwise drawn at CC_ComboBox
+                    || (isLibreoffice_ && widget == nullptr)))
                /*&& (!(option->state & State_AutoRaise)
                    || (!status.startsWith("normal") && (option->state & State_Enabled)))*/)
       {
         /* fillWidgetInterior wasn't checked for combos  */
         fillWidgetInterior = !ispec.hasInterior
                              && hasHighContrastWithContainer(widget, getFromRGBA(getLabelSpec(cGroup).normalColor));
-        if (tspec_.square_combo_button) // the rest of the combo is like a lineedit
+        if (tspec_.square_combo_button // the rest of the combo is like a lineedit
+            || (isLibreoffice_ && widget == nullptr))
+        {
           status.replace(QLatin1String("focused"),QLatin1String("normal"));
+        }
         if (!(option->state & State_Enabled))
         {
           status.replace(QLatin1String("disabled"),QLatin1String("normal"));
