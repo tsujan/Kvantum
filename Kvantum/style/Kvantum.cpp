@@ -11148,7 +11148,9 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
           }
           if (isLibreoffice_ && widget == nullptr && opt->editable)
           {
-            painter->fillRect(o.rect, option->palette.brush(QPalette::Base));
+            QColor baseCol = option->palette.color(QPalette::Base);
+            baseCol.setAlpha(255);
+            painter->fillRect(o.rect, baseCol);
             const frame_spec fspec1 = getFrameSpec(leGroup);
             renderFrame(painter,o.rect,fspec,fspec1.element+"-normal");
           }

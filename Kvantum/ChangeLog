@@ -4,6 +4,7 @@ V1.0.2
  * Don't set the active/inactive palettes of item views (when they are shown/activated/deactivated) if the inactive state is ignored.
  * Force palettes (of item views) on event filtering only if needed.
  * Apply blurring to the whole rectangles of menus/tooltips that aren't drawn by Kvantum.
+ * Make sure that the base color of LibreOffice's editable combo-boxes is opaque.
 
 V1.0.1
 ---------
