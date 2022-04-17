@@ -706,7 +706,7 @@ some apps set it themeselves.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1847"/>
         <source>Click behavior:</source>
-        <translation type="unfinished"></translation>
+        <translation>התנהגות לחיצה:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1967"/>
@@ -882,7 +882,7 @@ KDE apps get it from KDE setting.</source>
         <location filename="../../kvantummanager.ui" line="1484"/>
         <location filename="../../kvantummanager.ui" line="1497"/>
         <source>The minimum length of scrollbars.</source>
-        <translation type="unfinished"></translation>
+        <translation>האורך המזערי של פסי גלילה.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1487"/>
@@ -992,7 +992,7 @@ By default, combo popups do not cover the combo box.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1799"/>
         <source>In Kvantum, tabs are centered by default.</source>
-        <translation type="unfinished"></translation>
+        <translation>ב־Kvantum, לשוניות ממורכזות כברירת מחדל.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1548"/>
@@ -1031,13 +1031,13 @@ while 0 means no delay.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1562"/>
         <source>Submenu delay: </source>
-        <translation type="unfinished"></translation>
+        <translation>השהיית תת־תפריט: </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1576"/>
         <location filename="../../kvantummanager.ui" line="1599"/>
         <source> ms</source>
-        <translation type="unfinished"></translation>
+        <translation> מילישניות</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1632"/>
@@ -1390,19 +1390,19 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="1004"/>
         <source>Theme changed to %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>ערכת העיצוב הוחלפה ל־%1.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="558"/>
         <source>You have no permission to write here:</source>
-        <translation type="unfinished"></translation>
+        <translation>אין לך הרשאות לכתוב לכאן:</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="104"/>
         <location filename="../../KvantumManager.cpp" line="108"/>
         <location filename="../../KvantumManager.cpp" line="114"/>
         <source>Follow Style</source>
-        <translation type="unfinished"></translation>
+        <translation>כמו הסגנון</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="105"/>
@@ -1417,22 +1417,22 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="109"/>
         <source>Icon Only</source>
-        <translation type="unfinished"></translation>
+        <translation>סמל בלבד</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="110"/>
         <source>Text Only</source>
-        <translation type="unfinished"></translation>
+        <translation>טקסט בלבד</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="111"/>
         <source>Text Beside Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>טקסט לצד סמל</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="112"/>
         <source>Text Under Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>טקסט מתחת לסמל</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="115"/>
@@ -1462,38 +1462,38 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="121"/>
         <source>Titlebar</source>
-        <translation type="unfinished"></translation>
+        <translation>שורת כותרת</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="122"/>
         <source>Menubar</source>
-        <translation type="unfinished"></translation>
+        <translation>סרגל תפריטים</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="123"/>
         <source>Menubar and primary toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>סרגל תפריטים וסרגל כלים עיקרי</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="124"/>
         <source>Anywhere possible</source>
-        <translation type="unfinished"></translation>
+        <translation>בכל מקום שאפשר</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="560"/>
         <source>Please fix that first!</source>
-        <translation type="unfinished"></translation>
+        <translation>נא לתקן את זה קודם!</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="572"/>
         <source>This file cannot be removed:</source>
-        <translation type="unfinished"></translation>
+        <translation>אי אפשר להסיר את הקובץ הזה:</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="591"/>
         <location filename="../../KvantumManager.cpp" line="602"/>
         <source>This is not an installable Kvantum theme!</source>
-        <translation type="unfinished"></translation>
+        <translation>זאת אינה ערכת עיצוב של Kvantum שניתן להתקין!</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="592"/>
@@ -1505,7 +1505,7 @@ or update its preview.</source>
         <location filename="../../KvantumManager.cpp" line="604"/>
         <location filename="../../KvantumManager.cpp" line="614"/>
         <source>Please select another directory!</source>
-        <translation type="unfinished"></translation>
+        <translation>נא לבחור בתיקייה אחרת!</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="603"/>
@@ -1525,12 +1525,12 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="655"/>
         <source>You have selected an installed theme folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>בחרת בתיקייה של ערכת עיצוב מותקנת.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="656"/>
         <source>Please choose another directory!</source>
-        <translation type="unfinished"></translation>
+        <translation>נא לבחור בתיקייה אחרת!</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="666"/>
@@ -1540,7 +1540,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="667"/>
         <source>Do you want to overwrite it?</source>
-        <translation type="unfinished"></translation>
+        <translation>לדרוס אותה?</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="702"/>

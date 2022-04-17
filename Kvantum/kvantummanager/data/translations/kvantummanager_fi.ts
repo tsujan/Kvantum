@@ -14,7 +14,7 @@
     <message>
         <location filename="../../kvantummanager.ui" line="12"/>
         <source>Kvantum Manager</source>
-        <translation>Kvantum Manager</translation>
+        <translation>Kvantum-hallinta</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="38"/>
