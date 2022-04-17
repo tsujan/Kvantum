@@ -78,12 +78,12 @@ painike</translation>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="279"/>
         <source>Button Box</source>
-        <translation>Painike ruutu</translation>
+        <translation>Painikeruutu</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="361"/>
         <source>Tool buttons</source>
-        <translation>Työkalu painikkeet</translation>
+        <translation>Työkalupainikkeet</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="369"/>
