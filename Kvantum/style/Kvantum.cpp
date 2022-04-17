@@ -6534,7 +6534,9 @@ void Style::drawControl(QStyle::ControlElement element,
           sepName = "floating-"+sepName;
         }
 
-        const QStyleOptionTab::TabPosition tabPos = tabPosition(opt, widget);
+        const QStyleOptionTab::TabPosition tabPos =
+          (isLibreoffice_ && widget == nullptr // LibreOffice gives wrong positions
+             ? QStyleOptionTab::OnlyOneTab : tabPosition(opt, widget));
 
         if (joinedActiveTab) // only use normal and toggled states
         {
@@ -6849,6 +6851,17 @@ void Style::drawControl(QStyle::ControlElement element,
           }
         }
 
+        bool libreoffice = false;
+        if (isLibreoffice_ && widget == nullptr && (option->state & State_Enabled) && status == "toggled")
+        {
+            if (enoughContrast(getFromRGBA(getLabelSpec(QStringLiteral("Tab")).toggleColor),
+                               standardPalette().color(QPalette::ButtonText)))
+            {
+              libreoffice = true;
+              painter->save();
+              painter->setOpacity(0.5);
+            }
+        }
         if (isWidgetInactive(widget))
         {
           status.append("-inactive");
@@ -6856,6 +6869,7 @@ void Style::drawControl(QStyle::ControlElement element,
         }
         renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status,true);
         renderFrame(painter,r,fspec,fspec.element+"-"+status,0,0,0,0,0,true);
+        if (libreoffice) painter->restore();
         if ((opt->state & State_HasFocus)
             && fspec.hasFocusFrame) // otherwise -> CE_TabBarTabLabel
         {
