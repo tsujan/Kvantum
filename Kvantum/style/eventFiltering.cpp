@@ -228,8 +228,8 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       else if (w->isWindow()
                && w->testAttribute(Qt::WA_StyledBackground)
                && w->testAttribute(Qt::WA_TranslucentBackground)
-               && !isPlasma_ && !isOpaque_ && !subApp_ && !isLibreoffice_
-               /*&& tspec_.translucent_windows*/ // this could have weird effects with style or settings change
+               && !isPlasma_ && !isOpaque_ && !subApp_ /*&& !isLibreoffice_
+               && tspec_.translucent_windows*/ // this could have weird effects with style or settings change
               )
       {
         int t = (w->windowFlags() & Qt::WindowType_Mask);

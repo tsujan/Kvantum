@@ -375,7 +375,7 @@ void Style::polish(QWidget *widget)
       }
       widget->setAttribute(Qt::WA_StyledBackground);
       /* take all precautions */
-      if (!isPlasma_ && !subApp_ && !isLibreoffice_
+      if (!isPlasma_ && !subApp_ /*&& !isLibreoffice_*/
           && widget->isWindow()
           && widget->windowType() != Qt::Desktop
           && !widget->testAttribute(Qt::WA_PaintOnScreen)
@@ -984,7 +984,7 @@ void Style::polish(QWidget *widget)
                        && !subApp_
                        && (qobject_cast<QMenu*>(widget)
                            /* no shadow for tooltips that are already translucent */
-                           || (widget->inherits("QTipLabel") && !isLibreoffice_
+                           || (widget->inherits("QTipLabel") /*&& !isLibreoffice_*/
                                && (!widget->testAttribute(Qt::WA_TranslucentBackground)
                                    || !widget->testAttribute(Qt::WA_NoSystemBackground)
                                    || forcedTranslucency_.contains(widget)))));

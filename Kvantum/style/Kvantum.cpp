@@ -13103,7 +13103,7 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
       }
       /* a margin > 2px could create ugly
          corners without compositing */
-      if (/*!tspec_now.composite ||*/ isLibreoffice_
+      if (/*!tspec_now.composite ||*/ (isLibreoffice_ && widget == nullptr)
           /*|| (widget && !translucentWidgets_.contains(widget))*/)
       {
         v = qMin(2,v);
@@ -13150,8 +13150,13 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
 */
 void Style::setSurfaceFormat(QWidget *widget) const
 {
-  if (!widget || noComposite_ || subApp_ || isLibreoffice_)
+  if (!widget || noComposite_ || subApp_
+      /*|| (isLibreoffice_
+          && !widget->inherits("QTipLabel")
+          && !qobject_cast<QMenu*>(widget))*/)
+  {
     return;
+  }
 
   /* The widget style may change while the app style is still Kvantum
      (as in Qt Designer), in which case, we should remove our forced

@@ -6,6 +6,7 @@ V1.0.2
  * Apply blurring to the whole rectangles of menus/tooltips that aren't drawn by Kvantum.
  * Make sure that the base color of LibreOffice's editable combo-boxes is opaque.
  * Always draw LibreOffice's tabs separate from each other (as a workaround for bugs in LibreOffice's Qt skin).
+ * Allow translucency in Qt widgets with LibreOffice.
 
 V1.0.1
 ---------
