@@ -10796,6 +10796,14 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
         qstyleoption_cast<const QStyleOptionSpinBox*>(option);
 
       if (opt) {
+        /* workaround for a bug in LibreOffice's Qt skin */
+        if (isLibreoffice_ && widget == nullptr)
+        {
+          QColor winCol = option->palette.color(QPalette::Window);
+          winCol.setAlpha(255);
+          painter->fillRect(option->rect, winCol);
+        }
+
         QStyleOptionSpinBox o(*opt);
         /* If a null widget is fed into this method but the spinbox
            has a frame (QML), we'll draw buttons vertically. Fortunately,
@@ -11166,16 +11174,10 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
           }
           if (isLibreoffice_ && widget == nullptr && opt->editable)
           { // workaround for a bug in LibreOffice's Qt skin
-            QColor baseCol = option->palette.color(QPalette::Base);
-            baseCol.setAlpha(255);
-            painter->fillRect(o.rect, baseCol);
-            frame_spec fspec1 = getFrameSpec(leGroup);
-            if (hasExpandedBorder(fspec1))
-              fspec1.expansion = 0;
-            else
-              fspec1.expansion = qMin(fspec1.expansion, LIMITED_EXPANSION);
-            renderFrame(painter, o.rect, fspec1,
-                        fspec1.element+((option->state & State_HasFocus) ? "-focused" : "-normal"));
+            QColor winCol = option->palette.color(QPalette::Window);
+            winCol.setAlpha(255);
+            painter->fillRect(o.rect, winCol);
+            drawPrimitive(PE_PanelLineEdit,&o,painter,nullptr);
           }
           else // ignore framelessness
           {

@@ -4,8 +4,7 @@ V1.0.2
  * Don't set the active/inactive palettes of item views (when they are shown/activated/deactivated) if the inactive state is ignored.
  * Force palettes (of item views) on event filtering only if needed.
  * Apply blurring to the whole rectangles of menus/tooltips that aren't drawn by Kvantum.
- * Make sure that the base color of LibreOffice's editable combo-boxes is opaque.
- * Always draw LibreOffice's tabs separate from each other (as a workaround for bugs in LibreOffice's Qt skin).
+ * Workarounds for bugs in LibreOffice's Qt skin (guarantee opaque backgrounds for LibreOffice's spin-boxes and editable combo-boxes, and draw LibreOffice's tabs separate from each other).
  * Allow translucency in Qt widgets with LibreOffice.
 
 V1.0.1
