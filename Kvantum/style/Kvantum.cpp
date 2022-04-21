@@ -11165,12 +11165,17 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
             painter->setOpacity(DISABLED_OPACITY);
           }
           if (isLibreoffice_ && widget == nullptr && opt->editable)
-          {
+          { // workaround for a bug in LibreOffice's Qt skin
             QColor baseCol = option->palette.color(QPalette::Base);
             baseCol.setAlpha(255);
             painter->fillRect(o.rect, baseCol);
-            const frame_spec fspec1 = getFrameSpec(leGroup);
-            renderFrame(painter,o.rect,fspec,fspec1.element+"-normal");
+            frame_spec fspec1 = getFrameSpec(leGroup);
+            if (hasExpandedBorder(fspec1))
+              fspec1.expansion = 0;
+            else
+              fspec1.expansion = qMin(fspec1.expansion, LIMITED_EXPANSION);
+            renderFrame(painter, o.rect, fspec1,
+                        fspec1.element+((option->state & State_HasFocus) ? "-focused" : "-normal"));
           }
           else // ignore framelessness
           {
