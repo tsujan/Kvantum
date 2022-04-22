@@ -9611,8 +9611,10 @@ void Style::drawControl(QStyle::ControlElement element,
 
         if (opt->text.size() == 0 && opt->icon.isNull())
         {
-          if (qobject_cast<const QCommandLinkButton*>(widget))
-          { // see eventFiltering.cpp -> Style::eventFilter()
+          if ((isLibreoffice_ && widget == nullptr)
+               // see eventFiltering.cpp -> Style::eventFilter()
+              || qobject_cast<const QCommandLinkButton*>(widget))
+          {
             if (hasExpandedBorder(fspec))
               fspec.expansion = 0;
             else
