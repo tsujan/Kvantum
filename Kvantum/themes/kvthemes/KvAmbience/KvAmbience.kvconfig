@@ -9,6 +9,7 @@ mirror_doc_tabs=false
 group_toolbar_buttons=false
 toolbar_item_spacing=1
 toolbar_interior_spacing=2
+toolbar_separator_thickness=9
 spread_progressbar=true
 composite=true
 menu_shadow_depth=7
