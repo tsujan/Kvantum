@@ -592,7 +592,7 @@ windows if this theme distinguishes between them?</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1220"/>
         <source>Sizes</source>
-        <translation type="unfinished"></translation>
+        <translation>Veľkosti</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1235"/>
