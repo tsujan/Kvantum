@@ -7043,30 +7043,29 @@ void Style::drawControl(QStyle::ControlElement element,
           if (rtb > 0)
           {
             fspec.left = 0;
-            if (!opt->icon.isNull())
-              lspec.left = lspec.tispace; // center the text
+            if (!opt->icon.isNull() && lspec.left < lspec.tispace)
+              lspec.left = lspec.tispace; // minimum spacing between text and button
           }
           if (ltb > 0)
           {
             fspec.right = 0;
-            if (!opt->icon.isNull())
+            if (!opt->icon.isNull() && lspec.right < lspec.tispace)
               lspec.right = lspec.tispace;
           }
         }
         else
         {
           r.adjust(ltb, 0, -rtb, 0);
-          if (!opt->icon.isNull())
           if (rtb > 0)
           {
             fspec.right = 0;
-            if (!opt->icon.isNull())
+            if (!opt->icon.isNull() && lspec.right < lspec.tispace)
               lspec.right = lspec.tispace;
           }
           if (ltb > 0)
           {
             fspec.left = 0;
-            if (!opt->icon.isNull())
+            if (!opt->icon.isNull() && lspec.left < lspec.tispace)
               lspec.left = lspec.tispace;
           }
         }
@@ -14250,17 +14249,17 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
         bool rtl(opt->direction == Qt::RightToLeft);
         if (opt->rightButtonSize.isValid()) // QSize(-1, -1) by default
         {
-          /* Right or left frame and label spaces will be replaced by "lspec.tispace" at
-             CE_TabBarTabLabel if the icon exists. Also, TOOL_BUTTON_ARROW_MARGIN and
-             tab_button_extra_margin are added for SE_TabBarTabLeftButton and SE_TabBarTabRightButton,
-             and PM_TabBarTabHSpace is added once, when a right or left button exists. */
+          /* Right/left frame and label spaces will be changed in CE_TabBarTabLabel if
+             the icon exists. Also, TOOL_BUTTON_ARROW_MARGIN and tab_button_extra_margin
+             are added for SE_TabBarTabLeftButton and SE_TabBarTabRightButton, and
+             PM_TabBarTabHSpace is added once, when a right or left button exists. */
           if (verticalTabs)
           {
             s.rheight() += opt->rightButtonSize.height() + pixelMetric(PM_TabBarTabHSpace,option,widget)
                                                          + TOOL_BUTTON_ARROW_MARGIN
                                                          + tspec_.tab_button_extra_margin
                                                          - fspec.right
-                                                         + (opt->icon.isNull() ? 0 : lspec.tispace - lspec.right);
+                                                         + (opt->icon.isNull() ? 0 : qMax(lspec.tispace-lspec.right, 0));
             s.rwidth() = qMax(s.width(), opt->rightButtonSize.width());
           }
           else
@@ -14269,8 +14268,8 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
                           + pixelMetric(PM_TabBarTabHSpace,option,widget)
                           + TOOL_BUTTON_ARROW_MARGIN
                           + tspec_.tab_button_extra_margin
-                          + (rtl ? - fspec.left  + (opt->icon.isNull() ? 0: lspec.tispace - lspec.left)
-                                 : - fspec.right + (opt->icon.isNull() ? 0 : lspec.tispace - lspec.right));
+                          + (rtl ? - fspec.left  + (opt->icon.isNull() ? 0 : qMax(lspec.tispace-lspec.left, 0))
+                                 : - fspec.right + (opt->icon.isNull() ? 0 : qMax(lspec.tispace-lspec.right, 0)));
             s.rheight() = qMax(s.height(), opt->rightButtonSize.height());
           }
         }
@@ -14281,7 +14280,7 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
             s.rheight() += opt->leftButtonSize.height() + TOOL_BUTTON_ARROW_MARGIN
                                                         + tspec_.tab_button_extra_margin
                                                         - fspec.left
-                                                        + (opt->icon.isNull() ? 0 : lspec.tispace - lspec.left);
+                                                        + (opt->icon.isNull() ? 0 : qMax(lspec.tispace-lspec.left, 0));
             if (!opt->rightButtonSize.isValid())
               s.rheight() += pixelMetric(PM_TabBarTabHSpace,option,widget);
             s.rwidth() = qMax(s.width(), opt->leftButtonSize.width());
@@ -14291,8 +14290,8 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
             s.rwidth() += opt->leftButtonSize.width()
                           + TOOL_BUTTON_ARROW_MARGIN
                           + tspec_.tab_button_extra_margin
-                          + (rtl ? - fspec.right + (opt->icon.isNull() ? 0  : lspec.tispace - lspec.right)
-                                 : - fspec.left + (opt->icon.isNull() ? 0  : lspec.tispace - lspec.left));
+                          + (rtl ? - fspec.right + (opt->icon.isNull() ? 0 : qMax(lspec.tispace-lspec.right, 0))
+                                 : - fspec.left + (opt->icon.isNull() ? 0 : qMax(lspec.tispace-lspec.left, 0)));
             if (!opt->rightButtonSize.isValid())
               s.rwidth() += pixelMetric(PM_TabBarTabHSpace,option,widget);
             s.rheight() = qMax(s.height(), opt->leftButtonSize.height());
