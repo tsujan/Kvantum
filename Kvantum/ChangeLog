@@ -6,6 +6,7 @@ V1.0.2
  * Apply blurring to the whole rectangles of menus/tooltips that aren't drawn by Kvantum.
  * Workarounds for bugs in LibreOffice's Qt skin (guarantee opaque backgrounds for LibreOffice's spin-boxes and editable combo-boxes, and draw LibreOffice's tabs separate from each other).
  * Allow translucency in Qt widgets with LibreOffice.
+ * Added a workaround for QML tool buttons.
 
 V1.0.1
 ---------

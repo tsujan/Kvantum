@@ -218,8 +218,8 @@ void BlurHelper::update (QWidget* widget) const
   else
   {
     KWindowEffects::enableBlurBehind (win, true, region);
-    /*NOTE: The contrast effect isn't used with menus and tooltips
-            because their borders may be anti-aliased. */
+    /* NOTE: The contrast effect isn't used with menus and tooltips
+             because their borders may be anti-aliased. */
     if ((contrast_ != static_cast<qreal>(1)
          || intensity_ != static_cast<qreal>(1)
          || saturation_ != static_cast<qreal>(1))

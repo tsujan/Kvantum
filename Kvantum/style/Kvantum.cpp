@@ -5481,6 +5481,105 @@ static inline QStyleOptionTab::TabPosition tabPosition(const QStyleOptionTab *op
   return QStyleOptionTab::Middle;
 }
 
+static inline void fitToolButtonText(const QStyleOptionToolButton *opt, QString &txt,
+                                     const QSize &txtSize, const QFontMetrics &fm,
+                                     const Qt::ToolButtonStyle tialign,
+                                     frame_spec &fspec, label_spec &lspec,
+                                     const int indicatorSize, const int headerMargin,
+                                     bool isLXQtPanel)
+{
+  if (tialign == Qt::ToolButtonTextBesideIcon || tialign == Qt::ToolButtonTextUnderIcon)
+  {
+    QSize availableSize = opt->rect.size()
+                          - (tialign == Qt::ToolButtonTextUnderIcon
+                               ? QSize(0, opt->iconSize.height())
+                               : QSize(opt->iconSize.width(), 0))
+                          - QSize(fspec.left+fspec.right+lspec.left+lspec.right,
+                                  fspec.top+fspec.bottom+lspec.top+lspec.bottom);
+    if (tialign == Qt::ToolButtonTextBesideIcon)
+      availableSize -= QSize(lspec.tispace, 0);
+    else
+      availableSize -= QSize(0, lspec.tispace);
+    if ((opt->features & QStyleOptionToolButton::Arrow)
+        && opt->arrowType != Qt::NoArrow)
+    {
+      availableSize -= QSize(indicatorSize+lspec.tispace+headerMargin, 0);
+    }
+
+    if (txtSize.height() > availableSize.height())
+    {
+      lspec.top = lspec.bottom = qMin(lspec.top,2);
+      fspec.top = qMin(fspec.top,3);
+      fspec.bottom = qMin(fspec.bottom,3);
+      lspec.boldFont = false;
+      if (tialign == Qt::ToolButtonTextUnderIcon)
+        lspec.tispace = qMin(lspec.tispace,2);
+    }
+    if (txtSize.width() > availableSize.width())
+    {
+      lspec.boldFont = false;
+      if (tialign == Qt::ToolButtonTextUnderIcon)
+      {
+        lspec.left = lspec.right = qMin(lspec.left,2);
+        fspec.left = qMin(fspec.left,3);
+        fspec.right = qMin(fspec.right,3);
+      }
+      else
+      {
+        int availableWidth = availableSize.width();
+        if (!isLXQtPanel) // not a task button
+        {
+          lspec.left = lspec.right = qMin(lspec.left,2);
+          lspec.tispace = qMin(lspec.tispace,2);
+          fspec.left = qMin(fspec.left,3);
+          fspec.right = qMin(fspec.right,3);
+          availableWidth = opt->rect.width() - opt->iconSize.width()
+                           - fspec.left-fspec.right
+                           - lspec.left-lspec.right-lspec.tispace;
+          if ((opt->features & QStyleOptionToolButton::Arrow)
+              && opt->arrowType != Qt::NoArrow)
+          {
+            availableWidth -= (indicatorSize + lspec.tispace + headerMargin);
+          }
+        }
+        /* if the text is beside the icon but doesn't fit in, elide it */
+        txt = makeTextElided(fm, txt, availableWidth);
+      }
+    }
+  }
+  else if (tialign == Qt::ToolButtonTextOnly)
+  {
+    QSize availableSize = opt->rect.size()
+                          - QSize(fspec.left+fspec.right+lspec.left+lspec.right,
+                                  fspec.top+fspec.bottom+lspec.top+lspec.bottom);
+
+    if (txtSize.height() > availableSize.height())
+    {
+      lspec.boldFont = false;
+      lspec.top = lspec.bottom = qMin(lspec.top,2);
+      fspec.top = qMin(fspec.top,3);
+      fspec.bottom = qMin(fspec.bottom,3);
+    }
+    if (txtSize.width() > availableSize.width())
+    {
+      lspec.boldFont = false;
+      int availableWidth = availableSize.width();
+      if (!isLXQtPanel) // not a task button
+      {
+        lspec.left = lspec.right = qMin(lspec.left,2);
+        lspec.tispace = qMin(lspec.tispace,2);
+        fspec.left = qMin(fspec.left,3);
+        fspec.right = qMin(fspec.right,3);
+        availableWidth = opt->rect.width()
+                         - fspec.left-fspec.right
+                         - lspec.left-lspec.right;
+      }
+      /* again, elide the text if it doesn't fit in */
+      txt = makeTextElided(fm, txt, availableWidth);
+    }
+  }
+}
+
 void Style::drawControl(QStyle::ControlElement element,
                         const QStyleOption *option,
                         QPainter *painter,
@@ -9301,7 +9400,7 @@ void Style::drawControl(QStyle::ControlElement element,
           }
           if (txtSize.width() > availableSize.width())
           {
-            lspec.left = lspec.right = 0;
+            lspec.left = lspec.right = qMin(lspec.left,2);
             fspec.left = qMin(fspec.left,3);
             fspec.right = qMin(fspec.right,3);
             lspec.tispace = qMin(lspec.tispace,3);
@@ -9309,7 +9408,7 @@ void Style::drawControl(QStyle::ControlElement element,
             /* elide the text if the space still isn't enough */
             int availableWidth = r.width()
                                  - (opt->icon.isNull() ? 0 : opt->iconSize.width()+lspec.tispace)
-                                 - fspec.left-fspec.right;
+                                 - fspec.left-fspec.right-lspec.left-lspec.right;
             txt = makeTextElided(QFontMetrics(painter->font()), txt, availableWidth);
           }
         }
@@ -9567,15 +9666,15 @@ void Style::drawControl(QStyle::ControlElement element,
           QSize txtSize = textSize(fnt,opt->text);
           bool enoughSpace(true);
           if (w < txtSize.width()
-                  +(opt->icon.isNull() ? 0 : opt->iconSize.width()+lspec.tispace)
-                  +lspec.left+lspec.right+fspec.left+fspec.right)
+                  + (opt->icon.isNull() ? 0 : opt->iconSize.width()+lspec.tispace)
+                  + lspec.left+lspec.right+fspec.left+fspec.right)
           {
-            lspec.left = lspec.right = 0;
+            lspec.left = lspec.right = qMin(lspec.left,2);
             enoughSpace = false;
           }
           if (h < txtSize.height()+lspec.top+lspec.bottom+fspec.top+fspec.bottom)
           {
-            lspec.top = lspec.bottom = 0;
+            lspec.top = lspec.bottom = qMin(lspec.top,2);
             enoughSpace = false;
           }
           if (!enoughSpace)
@@ -10096,80 +10195,12 @@ void Style::drawControl(QStyle::ControlElement element,
               QFont F(painter->font());
               if (lspec.boldFont) F.setWeight(lspec.boldness);
               QSize txtSize = textSize(F, txt);
-              if (tialign == Qt::ToolButtonTextBesideIcon || tialign == Qt::ToolButtonTextUnderIcon)
-              {
-                QSize availableSize = opt->rect.size()
-                                      - (tialign == Qt::ToolButtonTextUnderIcon
-                                           ? QSize(0, opt->iconSize.height())
-                                           : QSize(opt->iconSize.width(), 0))
-                                      - QSize(fspec.left+fspec.right+lspec.left+lspec.right,
-                                              fspec.top+fspec.bottom+lspec.top+lspec.bottom);
-                if (tialign == Qt::ToolButtonTextBesideIcon)
-                  availableSize -= QSize(lspec.tispace, 0);
-                else
-                  availableSize -= QSize(0, lspec.tispace);
-                if ((opt->features & QStyleOptionToolButton::Arrow)
-                    && opt->arrowType != Qt::NoArrow)
-                {
-                  availableSize -= QSize(dspec.size+lspec.tispace+pixelMetric(PM_HeaderMargin), 0);
-                }
-                if (txtSize.height() > availableSize.height())
-                {
-                  lspec.top = lspec.bottom = 0;
-                  fspec.top = fspec.bottom = 0;
-                  lspec.boldFont = false;
-                  if (tialign == Qt::ToolButtonTextUnderIcon)
-                    lspec.tispace = 0;
-                }
-                if (txtSize.width() > availableSize.width())
-                {
-                  lspec.boldFont = false;
-                  if (tialign == Qt::ToolButtonTextUnderIcon)
-                  {
-                    lspec.left = lspec.right = 0;
-                    fspec.left = fspec.right = 0;
-                  }
-                  else if (QCoreApplication::applicationName() != "lxqt-panel" // not a task button
-                           && txtSize.width() <= availableSize.width()
-                                                 + fspec.left + fspec.right
-                                                 + lspec.left + lspec.right + lspec.tispace)
-                  {
-                    lspec.left = lspec.right = lspec.tispace = 0;
-                    fspec.left = fspec.right = 0;
-                  }
-                  else // If the text is beside the icon but doesn't fit in,...
-                  { // ... elide it!
-                    txt = makeTextElided(QFontMetrics(painter->font()), txt, availableSize.width());
-                  }
-                }
-              }
-              else if (tialign == Qt::ToolButtonTextOnly)
-              {
-                QSize availableSize = opt->rect.size()
-                                      - QSize(fspec.left+fspec.right+lspec.left+lspec.right,
-                                              fspec.top+fspec.bottom+lspec.top+lspec.bottom);
-                if (txtSize.height() > availableSize.height())
-                {
-                  lspec.boldFont = false;
-                  lspec.top = lspec.bottom = 0;
-                  fspec.top = fspec.bottom = 0;
-                }
-                if (txtSize.width() > availableSize.width())
-                {
-                  lspec.boldFont = false;
-                  if (QCoreApplication::applicationName() != "lxqt-panel" // not a task button
-                      && txtSize.width() <= availableSize.width() + fspec.left + fspec.right
-                                                                  + lspec.left + lspec.right)
-                  {
-                    lspec.left = lspec.right = 0;
-                    fspec.left = fspec.right = 0;
-                  }
-                  else
-                  { // again, elide the text if it doesn't fit in
-                    txt = makeTextElided(QFontMetrics(painter->font()), txt, availableSize.width());
-                  }
-                }
-              }
+              fitToolButtonText(opt, txt,
+                                txtSize, QFontMetrics(painter->font()),
+                                tialign,
+                                fspec, lspec,
+                                dspec.size, pixelMetric(PM_HeaderMargin),
+                                QCoreApplication::applicationName() == "lxqt-panel");
             }
           }
           /* lack of space (as in some of Krita's KisToolButtons) */
@@ -10219,13 +10250,25 @@ void Style::drawControl(QStyle::ControlElement element,
             }
           }
         }
-        else // because of a mess in kate5/new KMultiTabBarTab
+        else
         {
           lspec.boldFont = false;
-          lspec.left = lspec.right = lspec.top = lspec.bottom = lspec.tispace = 0;
-          fspec.left = fspec.right = fspec.top = fspec.bottom = 0;
-          lspec.normalColor = getName(opt->palette.color(QPalette::Active,QPalette::ButtonText));
-          lspec.normalInactiveColor = getName(opt->palette.color(QPalette::Inactive,QPalette::ButtonText));
+          if (widget != nullptr) // because of a mess in kate5/new KMultiTabBarTab
+          {
+            lspec.left = lspec.right = lspec.top = lspec.bottom = lspec.tispace = 0;
+            fspec.left = fspec.right = fspec.top = fspec.bottom = 0;
+            lspec.normalColor = getName(opt->palette.color(QPalette::Active,QPalette::ButtonText));
+            lspec.normalInactiveColor = getName(opt->palette.color(QPalette::Inactive,QPalette::ButtonText));
+          }
+          else // QML
+          {
+            fitToolButtonText(opt, txt,
+                              textSize(painter->font(), txt), QFontMetrics(painter->font()),
+                              tialign,
+                              fspec, lspec,
+                              dspec.size, pixelMetric(PM_HeaderMargin),
+                              false);
+          }
         }
 
         /* Unlike in CE_PushButtonLabel, option->rect includes the whole
