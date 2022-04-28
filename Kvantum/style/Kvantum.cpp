@@ -10253,8 +10253,13 @@ void Style::drawControl(QStyle::ControlElement element,
         else
         {
           lspec.boldFont = false;
-          if (widget != nullptr) // because of a mess in kate5/new KMultiTabBarTab
+          if (widget != nullptr
+              && opt->icon.isNull()
+              && (!(opt->features & QStyleOptionToolButton::Arrow) || opt->arrowType == Qt::NoArrow))
           {
+            /* KMultiTabBarTab (in kate5) is a total mess. They derive it from QPushButton
+               but draw its panel with CC_ToolButton, draw its icon with drawItemPixmap(),
+               set a rectangle for its text and call CE_ToolButtonLabel. */
             lspec.left = lspec.right = lspec.top = lspec.bottom = lspec.tispace = 0;
             fspec.left = fspec.right = fspec.top = fspec.bottom = 0;
           }
