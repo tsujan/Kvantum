@@ -2432,7 +2432,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
                   fspec.left = qMin(fspec.left,3);
                 //fspec.expansion = 0;
                 dspec.size = qMin(dspec.size,TOOL_BUTTON_ARROW_SIZE-TOOL_BUTTON_ARROW_OVERLAP);
-                lspec.tispace=0;
+                lspec.tispace = 0;
               }
             }
             else if (tb->width() < opt->iconSize.width()+fspec.left+fspec.right
@@ -5386,7 +5386,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
   }
 }
 
-Style::KvIconMode Style::getIconMode(int state, bool isInactive, label_spec lspec) const
+Style::KvIconMode Style::getIconMode(int state, bool isInactive, const label_spec &lspec) const
 {
   if (state == -1) // a special case used by disabled toggled buttons
     return DisabledSelected;
@@ -6625,10 +6625,10 @@ void Style::drawControl(QStyle::ControlElement element,
 
         if (docMode && hasFloatingTabs_)
         {
-          ispec.element="floating-"+ispec.element;
-          fspec.element="floating-"+fspec.element;
+          ispec.element = "floating-"+ispec.element;
+          fspec.element = "floating-"+fspec.element;
           if (!fspec.expandedElement.isEmpty())
-            fspec.expandedElement="floating-"+fspec.expandedElement;
+            fspec.expandedElement = "floating-"+fspec.expandedElement;
           joinedActiveTab = joinedActiveFloatingTab_;
           sepName = "floating-"+sepName;
         }
@@ -10220,7 +10220,7 @@ void Style::drawControl(QStyle::ControlElement element,
                   else
                     fspec.left = qMin(fspec.left,3);
                   dspec.size = qMin(dspec.size,TOOL_BUTTON_ARROW_SIZE-TOOL_BUTTON_ARROW_OVERLAP); // not needed
-                  lspec.tispace=0; // not needed
+                  lspec.tispace = 0; // not needed
                 }
               }
               else
@@ -10257,8 +10257,6 @@ void Style::drawControl(QStyle::ControlElement element,
           {
             lspec.left = lspec.right = lspec.top = lspec.bottom = lspec.tispace = 0;
             fspec.left = fspec.right = fspec.top = fspec.bottom = 0;
-            lspec.normalColor = getName(opt->palette.color(QPalette::Active,QPalette::ButtonText));
-            lspec.normalInactiveColor = getName(opt->palette.color(QPalette::Inactive,QPalette::ButtonText));
           }
           else // QML
           {
@@ -10268,6 +10266,11 @@ void Style::drawControl(QStyle::ControlElement element,
                               fspec, lspec,
                               dspec.size, pixelMetric(PM_HeaderMargin),
                               false);
+          }
+          if (option->state & State_AutoRaise)
+          {
+            lspec.normalColor = getName(opt->palette.color(QPalette::Active,QPalette::ButtonText));
+            lspec.normalInactiveColor = getName(opt->palette.color(QPalette::Inactive,QPalette::ButtonText));
           }
         }
 
@@ -10560,8 +10563,8 @@ void Style::drawControl(QStyle::ControlElement element,
 
         /* text margins are already taken into
            account with PM_DockWidgetTitleMargin */
-        fspec.left=fspec.right=fspec.top=fspec.bottom=0;
-        lspec.left=lspec.right=lspec.top=lspec.bottom=0;
+        fspec.left = fspec.right = fspec.top = fspec.bottom = 0;
+        lspec.left = lspec.right = lspec.top = lspec.bottom = 0;
 
         QString title = opt->title;
         if (!title.isEmpty())
@@ -16047,7 +16050,7 @@ QRect Style::subControlRect(QStyle::ComplexControl control,
                     else
                       fspec.right = qMin(fspec.right,3);
                     dspec.size = qMin(dspec.size,TOOL_BUTTON_ARROW_SIZE-TOOL_BUTTON_ARROW_OVERLAP);
-                    lspec.tispace=0;
+                    lspec.tispace = 0;
                   }
                 }
                 return option->rect.adjusted(rtl ?
