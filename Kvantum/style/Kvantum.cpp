@@ -14263,24 +14263,34 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
         const label_spec lspec = getLabelSpec(group);
         const size_spec sspec = getSizeSpec(group);
 
-        QFont f;
-        if (widget) f = widget->font();
-        else f = QApplication::font();
-        if (lspec.boldFont || tspec_.bold_active_tab)
-          f.setWeight(lspec.boldness);
-
-        QSize iconSize;
-        if (!opt->icon.isNull())
-          iconSize = opt->iconSize;
-        int icnSize = iconSize.isValid() ?
-                        qMax(iconSize.width(), iconSize.height())
-                        : pixelMetric(PM_TabBarIconSize,option,widget); // as in CE_TabBarTabLabel
-
         QString txt = opt->text;
-        txt.replace('\n', ' '); // always draw the tab text in a single line
-        s = sizeCalculated(f,fspec,lspec,sspec,txt,
-                           opt->icon.isNull() ? QSize() : QSize(icnSize,icnSize),
-                           Qt::ToolButtonTextBesideIcon);
+        if (isLibreoffice_ && widget == nullptr && txt.isEmpty())
+        { // LibreOffice only sets the contents size
+          s = contentsSize + QSize(fspec.left+fspec.right+lspec.left+lspec.right,
+                                   fspec.top+fspec.bottom+lspec.top+lspec.bottom);
+          s = s.expandedTo(QSize(sspec.minW + (sspec.incrementW ? s.width() : 0),
+                                 sspec.minH + (sspec.incrementH ? s.height() : 0)));
+        }
+        else
+        {
+          QFont f;
+          if (widget) f = widget->font();
+          else f = QApplication::font();
+          if (lspec.boldFont || tspec_.bold_active_tab)
+            f.setWeight(lspec.boldness);
+
+          QSize iconSize;
+          if (!opt->icon.isNull())
+            iconSize = opt->iconSize;
+          int icnSize = iconSize.isValid() ?
+                          qMax(iconSize.width(), iconSize.height())
+                          : pixelMetric(PM_TabBarIconSize,option,widget); // as in CE_TabBarTabLabel
+
+          txt.replace('\n', ' '); // always draw the tab text in a single line
+          s = sizeCalculated(f,fspec,lspec,sspec,txt,
+                             opt->icon.isNull() ? QSize() : QSize(icnSize,icnSize),
+                             Qt::ToolButtonTextBesideIcon);
+        }
 
         bool verticalTabs = false;
         if (opt->shape == QTabBar::RoundedEast
@@ -14290,9 +14300,6 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
         {
           verticalTabs = true;
         }
-
-        if (txt.isEmpty())
-          s.rwidth() += lspec.left + lspec.right;
 
         if (verticalTabs)
           s.transpose();
