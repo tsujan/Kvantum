@@ -1546,8 +1546,7 @@ void Style::forceButtonTextColor(QWidget *widget, QColor col) const
 /* Compute the size of a text. */
 static inline QSize textSize(const QFont &font, const QString &text)
 {
-  int tw, th;
-  tw = th = 0;
+  int tw = 0, th = 0;
 
   if (!text.isEmpty())
   {
@@ -1559,7 +1558,7 @@ static inline QSize textSize(const QFont &font, const QString &text)
     while (i < t.size())
     {
       if (t.at(i) == QLatin1Char('&'))
-        t.remove(i,1);
+        t.remove(i, 1);
       i++;
     }
 
@@ -1568,8 +1567,8 @@ static inline QSize textSize(const QFont &font, const QString &text)
 
     th = QFontMetrics(font).height()*(l.size());
 
-    for (int i=0; i<l.size(); i++)
-      tw = qMax(tw,QFontMetrics(font).horizontalAdvance(l[i]));
+    for (int n = 0; n < l.size(); n++)
+      tw = qMax(tw, QFontMetrics(font).horizontalAdvance(l[n]));
 
     if (l.size() > 1)
     {
@@ -1580,7 +1579,7 @@ static inline QSize textSize(const QFont &font, const QString &text)
     }
   }
 
-  return QSize(tw,th);
+  return QSize(tw, th);
 }
 
 /* Elide a non-empty (and, probably, multiline) text that doesn't include '\t'. */
@@ -10873,6 +10872,8 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
         if (/*isLibreoffice_
             ||*/ ((!widget || isKisSlider1) && opt->frame && (opt->subControls & SC_SpinBoxFrame)))
         {
+          if (isLibreoffice_ && widget == nullptr)
+            editRect.adjust(-3,0,0,0); // see subControlRect() -> CC_SpinBox
           o.rect = editRect;
           drawPrimitive(PE_PanelLineEdit,&o,painter,widget);
         }
@@ -13732,6 +13733,11 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
             buttonWidth = 2*tspec_.spin_button_width + fspec1.right;
         }
         defaultSize = contentsSize + QSize(buttonWidth, 0);
+        if (isLibreoffice_ && widget == nullptr)
+        { // LibreOffice's (vertical) margins are too small
+          defaultSize += QSize(lspec.left+lspec.right + fspec.left,
+                               lspec.top+lspec.bottom + fspec.top+fspec.bottom);
+        }
       }
 
       return s.expandedTo(defaultSize);
@@ -14778,6 +14784,21 @@ QRect Style::subElementRect(QStyle::SubElement element, const QStyleOption *opti
           }
         }
       }
+      else
+      {
+        const QStyleOptionSpinBox *sbOpt = qstyleoption_cast<const QStyleOptionSpinBox*>(option);
+        // the measure we used in CC_SpinBox at drawComplexControl() (for QML)
+        if (sbOpt && (tspec_.vertical_spin_indicators || sbOpt->frame))
+        {
+          fspec.left = qMin(fspec.left,3);
+          fspec.right = qMin(fspec.right,3);
+          fspec.top = qMin(fspec.top,3);
+          fspec.bottom = qMin(fspec.bottom,3);
+          lspec.left = lspec.right = lspec.top = lspec.bottom = 0;
+          sspec.incrementW = false;
+        }
+      }
+
       QAbstractSpinBox *sb = qobject_cast<QAbstractSpinBox*>(getParent(widget,1));
       if (sb)
       {
@@ -14801,8 +14822,6 @@ QRect Style::subElementRect(QStyle::SubElement element, const QStyleOption *opti
             fspec.right = qMin(fspec.right,3);
             lspec.left = 0;
             sspec.incrementW = false;
-            if (sb->buttonSymbols() == QAbstractSpinBox::NoButtons)
-              lspec.right = 0;
           }
           if (sb->height() < fspec.top+fspec.bottom+QFontMetrics(widget->font()).height())
           {
@@ -14817,7 +14836,7 @@ QRect Style::subElementRect(QStyle::SubElement element, const QStyleOption *opti
           fspec.right = qMin(fspec.right,3);
           fspec.top = qMin(fspec.top,3);
           fspec.bottom = qMin(fspec.bottom,3);
-          lspec.left = lspec.right = lspec.top = lspec.bottom = 0;
+          lspec.left = lspec.top = lspec.bottom = 0;
           sspec.incrementW = false;
         }
       }
@@ -15563,10 +15582,13 @@ QRect Style::subControlRect(QStyle::ComplexControl control,
           return option->rect;
         case SC_SpinBoxEditField : {
           if (sw == 0) return option->rect; // no button
-          /*int margin = 0;
-            if (isLibreoffice_)
-              margin = qMin(fspecLE.left,3);*/
-          return QRect(x/* + margin*/,
+          int margin = 0;
+          /* LibreOffice sets a too small left margin for the text and doesn't
+             consult SE_LineEditContents. As a workaround, we move the field to
+             right here but draw it correctly in drawComplexControl() -> CC_SpinBox. */
+          if (isLibreoffice_ && widget == nullptr)
+            margin = 3;
+          return QRect(x + margin,
                        y,
                        w - (sw + fspec.right) - (verticalIndicators ? 0 : sw),
                        h);
