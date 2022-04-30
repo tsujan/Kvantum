@@ -6632,9 +6632,16 @@ void Style::drawControl(QStyle::ControlElement element,
           sepName = "floating-"+sepName;
         }
 
-        const QStyleOptionTab::TabPosition tabPos =
-          (isLibreoffice_ && widget == nullptr // LibreOffice gives wrong positions
-             ? QStyleOptionTab::OnlyOneTab : tabPosition(opt, widget));
+        QStyleOptionTab::TabPosition tabPos;
+        if (isLibreoffice_ && widget == nullptr)
+        {
+          /* LibreOffice gives wrong tab positions, doesn't give selected positions,
+             and its tabs may be drawn in multiple rows */
+          tabPos = QStyleOptionTab::OnlyOneTab;
+          r.adjust(1,0,-1,0); // -> CT_TabBarTab
+        }
+        else
+          tabPos = tabPosition(opt, widget);
 
         if (joinedActiveTab) // only use normal and toggled states
         {
@@ -14275,7 +14282,8 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
         QString txt = opt->text;
         if (isLibreoffice_ && widget == nullptr && txt.isEmpty())
         { // LibreOffice only sets the contents size
-          s = contentsSize + QSize(fspec.left+fspec.right+lspec.left+lspec.right,
+          s = contentsSize + QSize(fspec.left+fspec.right+lspec.left+lspec.right
+                                     + 2, // the width will decrease by 2px in CE_TabBarTabShape
                                    fspec.top+fspec.bottom+lspec.top+lspec.bottom);
           s = s.expandedTo(QSize(sspec.minW + (sspec.incrementW ? s.width() : 0),
                                  sspec.minH + (sspec.incrementH ? s.height() : 0)));
