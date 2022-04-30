@@ -4,7 +4,7 @@ V1.0.2
  * Don't set the active/inactive palettes of item views (when they are shown/activated/deactivated) if the inactive state is ignored.
  * Force palettes (of item views) on event filtering only if needed.
  * Apply blurring to the whole rectangles of menus/tooltips that aren't drawn by Kvantum.
- * Workarounds for issues in LibreOffice's Qt skin (guarantee opaque backgrounds for LibreOffice's spin-boxes and editable combo-boxes, draw LibreOffice's tabs separate from each other, and give enough space to tabs and spinboxes).
+ * Workarounds for issues in LibreOffice's Qt skin (guarantee opaque backgrounds for LibreOffice's spin-boxes and editable combo-boxes, work around bugs in tab positions, and give enough space to tabs and spinboxes).
  * Allow translucency in Qt widgets with LibreOffice.
  * Added a workaround for QML tool buttons.
 

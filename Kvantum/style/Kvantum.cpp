@@ -6632,16 +6632,16 @@ void Style::drawControl(QStyle::ControlElement element,
           sepName = "floating-"+sepName;
         }
 
-        QStyleOptionTab::TabPosition tabPos;
+        QStyleOptionTab::TabPosition tabPos = tabPosition(opt, widget);
         if (isLibreoffice_ && widget == nullptr)
         {
-          /* LibreOffice gives wrong tab positions, doesn't give selected positions,
-             and its tabs may be drawn in multiple rows */
-          tabPos = QStyleOptionTab::OnlyOneTab;
-          r.adjust(1,0,-1,0); // -> CT_TabBarTab
+          /* LibreOffice gives wrong tab positions, doesn't give selected positions, and
+             its tabs may be drawn in multiple rows. Here, only the first issue is fixed. */
+          if (tabPos == QStyleOptionTab::Beginning)
+            tabPos = QStyleOptionTab::End;
+          else if (tabPos == QStyleOptionTab::End)
+            tabPos = QStyleOptionTab::Beginning;
         }
-        else
-          tabPos = tabPosition(opt, widget);
 
         if (joinedActiveTab) // only use normal and toggled states
         {
@@ -14282,8 +14282,7 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
         QString txt = opt->text;
         if (isLibreoffice_ && widget == nullptr && txt.isEmpty())
         { // LibreOffice only sets the contents size
-          s = contentsSize + QSize(fspec.left+fspec.right+lspec.left+lspec.right
-                                     + 2, // the width will decrease by 2px in CE_TabBarTabShape
+          s = contentsSize + QSize(fspec.left+fspec.right+lspec.left+lspec.right,
                                    fspec.top+fspec.bottom+lspec.top+lspec.bottom);
           s = s.expandedTo(QSize(sspec.minW + (sspec.incrementW ? s.width() : 0),
                                  sspec.minH + (sspec.incrementH ? s.height() : 0)));
