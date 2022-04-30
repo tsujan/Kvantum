@@ -10873,7 +10873,10 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
             ||*/ ((!widget || isKisSlider1) && opt->frame && (opt->subControls & SC_SpinBoxFrame)))
         {
           if (isLibreoffice_ && widget == nullptr)
+          {
             editRect.adjust(-3,0,0,0); // see subControlRect() -> CC_SpinBox
+            o.state = (o.state & ~QStyle::State_HasFocus); // LibreOffice doesn't allow a correct focused state
+          }
           o.rect = editRect;
           drawPrimitive(PE_PanelLineEdit,&o,painter,widget);
         }
