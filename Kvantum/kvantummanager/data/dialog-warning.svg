@@ -1,0 +1,10 @@
+<svg width="16" version="1.1" xmlns="http://www.w3.org/2000/svg" height="16">
+<defs id="defs1">
+<style type="text/css" id="current-color-scheme">
+.ColorScheme-Text {
+color:#000;
+}
+</style>
+</defs>
+<path style="fill:currentColor;fill-opacity:1;stroke:none" id="path825" d="m 7.9439,1.002 c -0.462109,-0.0272341 -0.912559,0.26593 -1.26376,0.910156 l -5.5023,10.8867 c -0.47003,0.906238 0.042262,2.20117 0.962959,2.20117 h 11.5789 c 0.864363,0 1.67441,-1.08927 1.07234,-2.20117 l -5.5551,-10.8301 c -0.351202,-0.606669 -0.830074,-0.940506 -1.29306,-0.966797 Z  m -.9434,3.998 h 2 v 2 h -2 Z  m 0,3 h 2 v 5 h -2 Z " class="ColorScheme-Text"/>
+</svg>

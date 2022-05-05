@@ -3,6 +3,7 @@
     <file>data/application-exit.svg</file>
     <file>data/applications-system.svg</file>
     <file>data/dialog-ok.svg</file>
+    <file>data/dialog-warning.svg</file>
     <file>data/document-open.svg</file>
     <file>data/document-revert.svg</file>
     <file>data/document-save.svg</file>

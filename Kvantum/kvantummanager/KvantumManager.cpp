@@ -182,7 +182,6 @@ KvantumManager::KvantumManager (const QString& lang, QWidget *parent) : QMainWin
             ui->checkBoxVToolbar->setChecked (false);
         ui->checkBoxVToolbar->setEnabled (!checked);
     });
-
     /* in these cases, show a message box */
     connect (ui->checkBoxNoninteger, &QAbstractButton::clicked, [this] (bool checked) {
         if (checked) return;
@@ -193,6 +192,7 @@ KvantumManager::KvantumManager (const QString& lang, QWidget *parent) : QMainWin
                             this);
         msgBox.exec();
     });
+    ui->checkBoxKineticScrolling->setIcon (symbolicIcon::icon (":/Icons/data/dialog-warning.svg"));
     connect (ui->checkBoxKineticScrolling, &QAbstractButton::clicked, [this] (bool checked) {
         if (!checked) return;
         QString txt = ui->checkBoxKineticScrolling->toolTip().split ("\n\n", Qt::SkipEmptyParts).last();
