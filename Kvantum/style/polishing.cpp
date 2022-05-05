@@ -825,7 +825,7 @@ void Style::polish(QWidget *widget)
        && vp && !vp->testAttribute(Qt::WA_StyleSheetTarget) && !QScroller::hasScroller(vp)
        && !widget->autoFillBackground() && !widget->inherits("QComboBoxListView")
        && !widget->inherits("QTextEdit") && !widget->inherits("QPlainTextEdit")
-       && !widget->inherits("KSignalPlotter"))
+       && !widget->inherits("KSignalPlotter") && !widget->inherits("QQuickWidget"))
     {
       bool insideSubwin(false);
       QWidget *parent = pw;
@@ -1161,7 +1161,7 @@ void Style::unpolish(QWidget *widget)
         if (vp && !vp->testAttribute(Qt::WA_StyleSheetTarget)
             && !widget->autoFillBackground() && !widget->inherits("QComboBoxListView")
             && !widget->inherits("QTextEdit") && !widget->inherits("QPlainTextEdit")
-            && !widget->inherits("KSignalPlotter"))
+            && !widget->inherits("KSignalPlotter") && !widget->inherits("QQuickWidget"))
         {
           QScroller::ungrabGesture(vp);
         }

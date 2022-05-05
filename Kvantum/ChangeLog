@@ -7,6 +7,7 @@ V1.0.2
  * Workarounds for issues in LibreOffice's Qt skin (guarantee opaque backgrounds for LibreOffice's spin-boxes and editable combo-boxes, work around bugs in tab positions, and give enough space to tabs and spinboxes).
  * Allow translucency in Qt widgets with LibreOffice.
  * Added a workaround for QML tool buttons.
+ * Added a warning dialog that shows up when the user enables kinetic scrolling.
 
 V1.0.1
 ---------

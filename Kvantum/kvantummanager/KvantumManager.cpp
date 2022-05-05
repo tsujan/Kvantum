@@ -183,12 +183,22 @@ KvantumManager::KvantumManager (const QString& lang, QWidget *parent) : QMainWin
         ui->checkBoxVToolbar->setEnabled (!checked);
     });
 
-    /* in this special case, show a message box */
+    /* in these cases, show a message box */
     connect (ui->checkBoxNoninteger, &QAbstractButton::clicked, [this] (bool checked) {
         if (checked) return;
         QMessageBox msgBox (QMessageBox::Warning,
                             tr ("Kvantum"),
                             "<center>" + ui->checkBoxNoninteger->toolTip() + "</center>\n",
+                            QMessageBox::Close,
+                            this);
+        msgBox.exec();
+    });
+    connect (ui->checkBoxKineticScrolling, &QAbstractButton::clicked, [this] (bool checked) {
+        if (!checked) return;
+        QString txt = ui->checkBoxKineticScrolling->toolTip().split ("\n\n", Qt::SkipEmptyParts).last();
+        QMessageBox msgBox (QMessageBox::Warning,
+                            tr ("Kvantum"),
+                            "<center>" + txt + "</center>\n",
                             QMessageBox::Close,
                             this);
         msgBox.exec();
