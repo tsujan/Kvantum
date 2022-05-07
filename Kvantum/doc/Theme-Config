@@ -952,6 +952,14 @@ middle_click_scroll               true/false          Should the scroll slider j
                                                       clicked? The default is false and the
                                                       jump is done by a left click.
 
+kinetic_scrolling                 true/false          Scroll some scrollable widgets by
+                                                      flicking them with the left mouse button.
+
+                                                      Warning: Qt's kinetic scrolling has bugs
+                                                      and may seriously interfere with other
+                                                      jobs. It should not be enabled by theme
+                                                      makers.
+
                            **********************
                            *** Other Sections ***
                            **********************
