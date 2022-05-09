@@ -1825,7 +1825,7 @@ or update its preview.</source>
         <location filename="../../KvantumManager.cpp" line="2222"/>
         <location filename="../../KvantumManager.cpp" line="2697"/>
         <source>Active theme:</source>
-        <translation>Akltivní motiv:</translation>
+        <translation>Aktivní motiv:</translation>
     </message>
 </context>
 <context>
