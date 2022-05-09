@@ -6,7 +6,7 @@
     <message>
         <location filename="../../about.ui" line="161"/>
         <source>License</source>
-        <translation type="unfinished"></translation>
+        <translation>Licens</translation>
     </message>
 </context>
 <context>
@@ -14,49 +14,51 @@
     <message>
         <location filename="../../kvantummanager.ui" line="12"/>
         <source>Kvantum Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Kvantum Manager</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="38"/>
         <source>Install/Update Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Installer/Opdater tema</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="44"/>
         <source>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; comes with many themes but external themes can also be installed for being used by it. Here you could choose a theme folder and then press the button below to install it in your Home.&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; kommer med mange temaer, men eksterne temaer kan også blive installeret for at blive brugt med den. Her kan du vælge en mappe til temaer og så benytte knappen nedenfor til installere den i din hjemmemappe</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="76"/>
         <source>Select a Kvantum
 theme folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Vælg en Kvantum
+tema mappe</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="113"/>
         <source>Add this theme to the list of themes that
 Kvantum can use in addition to its own themes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tilføj dette team til listen af temaer som
+Kvantum kan bruge, udover dens egne temaer.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="117"/>
         <source>Install this theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Installer dette tema</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="138"/>
         <source>Change/Delete Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Ændr/Slet tema</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="144"/>
         <source>Select a theme:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vælg et tema:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="191"/>
         <source>Delete this theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Slet dette tema</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="198"/>
@@ -64,82 +66,89 @@ Kvantum can use in addition to its own themes.</source>
 
 A disabled button means that
 the theme is already used.</source>
-        <translation type="unfinished"></translation>
+        <translation>Få Kvantum til at benytte dette tema!
+
+En ikke valgbar knap betyder at
+temaet allerede er i brug.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="204"/>
         <source>Use this theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Brug dette tema</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="257"/>
         <source>Configure Active Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Tilpas aktivt tema</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="321"/>
         <source>Revert to the default (root)
 settings of this theme.
 (Ctrl+Z)</source>
-        <translation type="unfinished"></translation>
+        <translation>Gendan til de originale (root)
+indstillinger af dette tema.
+(Ctrl+Z)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="326"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Revert to the default (root) settings of this theme!&lt;/p&gt;&lt;p&gt;When clicked and confirmed, all changes to the configuration will be lost but the probable customized SVG file will remain intact.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Gendan til de oprindelige (root) indstillinger af dette tema!&lt;/p&gt;&lt;p&gt;Nå der klikkes og bekræftes, vil alle ændringer til indstillingerne blive fjernet bortset fra den  tilpassede SVG fil der forbliver uændret.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="329"/>
         <source>Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>Gendan</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="332"/>
         <source>Ctrl+Z</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ctrl+Z</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="342"/>
         <source>Save this configuration
 (Ctrl+S)</source>
-        <translation type="unfinished"></translation>
+        <translation>Gem denne konfiguration
+(Ctrl+S)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="346"/>
         <location filename="../../kvantummanager.ui" line="2174"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Gem</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="349"/>
         <source>Ctrl+S</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ctrl+S</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="356"/>
         <source>Safe Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Sikre indstillinger</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="369"/>
         <source>Uncheck all these boxes if you want all
 widgets to appear as they are by default.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fjern markeringen i alle disse bokse, hvis du vil have alle
+widgets til at vises som de er som standard.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="373"/>
         <source>Hacks</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Hacks</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="397"/>
         <source>Transparent Dolphin view</source>
-        <translation type="unfinished"></translation>
+        <translation>Transparent Dolphin gengivelse</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="425"/>
         <source>Normal font for default push buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>Normal font for tryk knapper</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="445"/>
