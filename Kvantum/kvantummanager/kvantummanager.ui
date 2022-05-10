@@ -365,10 +365,6 @@ settings of this theme.
               <number>0</number>
              </property>
              <widget class="QWidget" name="tab">
-              <property name="toolTip">
-               <string>Uncheck all these boxes if you want all
-widgets to appear as they are by default.</string>
-              </property>
               <attribute name="title">
                <string>Hacks</string>
               </attribute>

@@ -182,6 +182,7 @@ KvantumManager::KvantumManager (const QString& lang, QWidget *parent) : QMainWin
             ui->checkBoxVToolbar->setChecked (false);
         ui->checkBoxVToolbar->setEnabled (!checked);
     });
+
     /* in these cases, show a message box */
     connect (ui->checkBoxNoninteger, &QAbstractButton::clicked, [this] (bool checked) {
         if (checked) return;
