@@ -6,7 +6,7 @@
     <message>
         <location filename="../../about.ui" line="163"/>
         <source>License</source>
-        <translation type="unfinished"></translation>
+        <translation>Лиценз</translation>
     </message>
 </context>
 <context>
@@ -14,49 +14,49 @@
     <message>
         <location filename="../../kvantummanager.ui" line="12"/>
         <source>Kvantum Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Квантум Настройки</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="38"/>
         <source>Install/Update Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Инсталирай/Обнови Тема</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="44"/>
         <source>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; comes with many themes but external themes can also be installed for being used by it. Here you could choose a theme folder and then press the button below to install it in your Home.&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;center&gt;&lt;b&gt;&lt;i&gt;Квантум&lt;/i&gt;&lt;/b&gt; идва с много теми, но всеки може да добави и използва своя. Изберете папка с тема и използвайте бутона отдолу за да я инсталирате в домашната си папка.&lt;/center&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="76"/>
         <source>Select a Kvantum
 theme folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Изберете папка с тема</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="113"/>
         <source>Add this theme to the list of themes that
 Kvantum can use in addition to its own themes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Добави темата към списъка с теми на Квантум.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="117"/>
         <source>Install this theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Инсталирай темата</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="138"/>
         <source>Change/Delete Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Промяна/Изтриване на Тема</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="144"/>
         <source>Select a theme:</source>
-        <translation type="unfinished"></translation>
+        <translation>Избери тема:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="191"/>
         <source>Delete this theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Изтрий темата</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="198"/>
@@ -64,76 +64,82 @@ Kvantum can use in addition to its own themes.</source>
 
 A disabled button means that
 the theme is already used.</source>
-        <translation type="unfinished"></translation>
+        <translation>Прилагане на тази тема!
+
+Бутонът е неактивен ако
+темата вече се използва.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="204"/>
         <source>Use this theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Използвай тази тема</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="257"/>
         <source>Configure Active Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройки на активната тема</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="321"/>
         <source>Revert to the default (root)
 settings of this theme.
 (Ctrl+Z)</source>
-        <translation type="unfinished"></translation>
+        <translation>Към първоначалните
+настройки на темата.
+(Ctrl+Z)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="326"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Revert to the default (root) settings of this theme!&lt;/p&gt;&lt;p&gt;When clicked and confirmed, all changes to the configuration will be lost but the probable customized SVG file will remain intact.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Връщане към началните настройки на тази тема!&lt;/p&gt;&lt;p&gt;Ако изберете и потвърдите, всички направени промени ще се изгубят, но променените SVG файлове ще се запазят.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="329"/>
         <source>Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>Възстанови</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="332"/>
         <source>Ctrl+Z</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Z</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="342"/>
         <source>Save this configuration
 (Ctrl+S)</source>
-        <translation type="unfinished"></translation>
+        <translation>Запази настройките
+(Ctrl+S)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="346"/>
         <location filename="../../kvantummanager.ui" line="2170"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Запазване</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="349"/>
         <source>Ctrl+S</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+S</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="356"/>
         <source>Safe Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Проверени настройки</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="369"/>
         <source>Hacks</source>
-        <translation type="unfinished"></translation>
+        <translation>Специални</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="393"/>
         <source>Transparent Dolphin view</source>
-        <translation type="unfinished"></translation>
+        <translation>Прозрачен изглед за Долфин</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="421"/>
         <source>Normal font for default push buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>Нормалния шрифт за стандартните бутони</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="441"/>
@@ -142,17 +148,21 @@ settings of this theme.
 Under LXQt, it needs logging out and in or closing
 PCManFM-qt and then, stopping and starting Desktop
 with LXQt Session Settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>Страничния панел на файловия мениджър се смесва с околния интерфейс.
+
+В LXQt е необходимо да рестартирате потребителската сесия,
+или да затворите файловия мениджър, след което да спрете и пуснете 
+Desktop през LXQt Session Settings.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="448"/>
         <source>Transparent sidepane for PCManFM-qt</source>
-        <translation type="unfinished"></translation>
+        <translation>Прозрачен панел за файловия мениджър</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="463"/>
         <source>Iconless push buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>Бутони без икони</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="470"/>
@@ -161,79 +171,86 @@ with LXQt Session Settings.</source>
 Under LXQt, it needs logging out and in or closing
 PCManFM-qt and then, stopping and starting Desktop
 with LXQt Session Settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>Панела за преглед на файловия мениджър се смесва с околния интерфейс.
+
+В LXQt е необходимо да рестартирате потребителската сесия,
+или да затворите файловия мениджър, след което да спрете и пуснете 
+Desktop през LXQt Session Settings.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="477"/>
         <source>Transparent view for PCManFM-qt</source>
-        <translation type="unfinished"></translation>
+        <translation>Прозрачен изглед за файловия мениджър</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="492"/>
         <source>Iconless menus</source>
-        <translation type="unfinished"></translation>
+        <translation>Менюта без икони</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="507"/>
         <source>Blur explicitly translucent windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Изрично замъгляване на прозрачните прозорци</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="521"/>
         <source>Single top toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Единичен горен панел с инструменти</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="551"/>
         <source>Do not draw any background for KTitles.</source>
-        <translation type="unfinished"></translation>
+        <translation>Без фоново изображение за KTitles.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="554"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do not draw any background for KTitles?&lt;/p&gt;&lt;p&gt;Ktitles are used by some KDE applications to show different sections in configuration dialogs.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Без фоново изображение за KTitles?&lt;/p&gt;&lt;p&gt;KTitles се използват в някои КДЕ приложения за да се разграничат различните части на диалоговите прозорци.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="557"/>
         <source>Transparent KTitle label</source>
-        <translation type="unfinished"></translation>
+        <translation>Прозрачно заглавие на KTitle</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="564"/>
         <source>Do not tint selected label icons with
 the highlight color!</source>
-        <translation type="unfinished"></translation>
+        <translation>Без оцветяване с избрания цвят
+ за иконите на етикети!</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="568"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;By default, selected label icons are tinted by the highlight color.&lt;/p&gt;&lt;p&gt;Checking this box removes the tint.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;По подразбиране иконите на етикети се подчертават със специфичен цвят.&lt;/p&gt;&lt;p&gt;Отметка в това поле премахва този подчертаващ цвят.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="571"/>
         <source>No selection tint</source>
-        <translation type="unfinished"></translation>
+        <translation>Оцветяване без селекция</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="578"/>
         <source>Do not draw any background for (KDE) menu titles.
 (Needs Logging out and in for Plasma menus.)</source>
-        <translation type="unfinished"></translation>
+        <translation>Без фоново изображение в полетата на (КДЕ) менютата.
+(Изисква се рестарт на потребителската 
+сесия за менютата на Плазма.)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="582"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do not draw any background for (KDE) menu titles?&lt;/p&gt;&lt;p&gt;Menu titles are like menu separators but with icon and text.&lt;/p&gt;&lt;p&gt;This needs Logging out and in for KDE Plasma menus. For LXQt panel, a panel restart with &lt;span style=&quot; font-style:italic;&quot;&gt;Session Settings &lt;/span&gt;is enough.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Без фоново изображение в полетата на (КДЕ) менютата?&lt;/p&gt;&lt;p&gt;Полетата на менютата са като разделител, но имат икони и текст.&lt;/p&gt;&lt;p&gt;За КДЕ Плазма е необходим рестарт на потребителската сесия. За панела на LXQt, рестарт на панела през &lt;span style=&quot; font-style:italic;&quot;&gt;Session Settings &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="585"/>
         <source>Transparent menu title</source>
-        <translation type="unfinished"></translation>
+        <translation>Прозрачно поле в меню</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="648"/>
         <source>Tint label icons on mouseover by </source>
-        <translation type="unfinished"></translation>
+        <translation>Цвят в иконите когато курсорът е върху тях </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="662"/>
@@ -241,12 +258,12 @@ the highlight color!</source>
         <location filename="../../kvantummanager.ui" line="1077"/>
         <location filename="../../kvantummanager.ui" line="1110"/>
         <source> %</source>
-        <translation type="unfinished"></translation>
+        <translation> %</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="608"/>
         <source>Respect dark themes</source>
-        <translation type="unfinished"></translation>
+        <translation>Съобрази се с тъмните теми</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="686"/>
@@ -254,39 +271,42 @@ the highlight color!</source>
         <source>Useful with monochrome icon sets and
 when the opacity of disabled icons is not
 reduced by other means.</source>
-        <translation type="unfinished"></translation>
+        <translation>Полезно, когато иконите са монохромни и 
+когато прозрачността на неактивните икони
+ не е намалена по друг начин.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="691"/>
         <location filename="../../kvantummanager.ui" line="706"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Useful with monochrome icon sets and when the opacity of disabled icons is not reduced by other means.&lt;/p&gt;&lt;p&gt;KDE automatically reduces the opacity of disabled icons. Therefore, this option might be useful rather under other desktop environments.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Полезно, когато иконите са монохромни и когато прозрачността на неактивните икони не е намалена по друг начин.&lt;/p&gt;&lt;p&gt;КДЕ автоматично намалява прозрачността на неактивните икони. Следователно тази опция е полезна по-скоро в други графични среди.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="694"/>
         <source>Opacity of disabled icons:</source>
-        <translation type="unfinished"></translation>
+        <translation>Прозрачност на неактивните икони:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="627"/>
         <source>Show size grips of dialogs and statusbars
 as far as possible.</source>
-        <translation type="unfinished"></translation>
+        <translation>Направи по-големи полетата
+ за оразмеряване на прозорци.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="631"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show size grips of dialogs and statusbars as far as possible?&lt;/p&gt;&lt;p&gt;By default, the application decides whether they should be shown, but this hack could be useful for resizing windows easily when there is no window border.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Направи по-големи полетата за оразмеряване на прозорци.&lt;/p&gt;&lt;p&gt;По подразбиране, приложението решава да покаже ли полетата. Тази настройка ще е полезна за оразмеряване на прозорци при липсващи рамки.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="634"/>
         <source>Force size grips</source>
-        <translation type="unfinished"></translation>
+        <translation>Изричен размер на полетата за оразмеряване</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="744"/>
         <source>LXQt main menu icon size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Размер на иконите в главното меню на LXQt:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="759"/>
@@ -300,23 +320,23 @@ as far as possible.</source>
         <location filename="../../kvantummanager.ui" line="1464"/>
         <location filename="../../kvantummanager.ui" line="1499"/>
         <source> px</source>
-        <translation type="unfinished"></translation>
+        <translation> пиксели</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="773"/>
         <source>Compositing &amp;&amp; General Look</source>
-        <translation type="unfinished"></translation>
+        <translation>Композиране и стандартен изглед</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="972"/>
         <source>Has effect only when there is a translucent SVG background
 for windows or the window opacity is reduced (see below).</source>
-        <translation type="unfinished"></translation>
+        <translation>Има ефект само когато фонът на прозореца е прозрачен SVG, или целият прозорец е прозрачен.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="990"/>
         <source>Opaque apps:</source>
-        <translation type="unfinished"></translation>
+        <translation>Непрозрачни приложения:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="779"/>
