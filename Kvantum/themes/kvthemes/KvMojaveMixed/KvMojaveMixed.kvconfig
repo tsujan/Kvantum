@@ -312,7 +312,7 @@ interior.element=tframe
 inherits=PanelButtonCommand
 frame=false
 interior=false
-indicator.size=11
+indicator.size=12
 indicator.element=sarrow
 
 [HeaderSection]
