@@ -1191,20 +1191,20 @@
 <use width="100%" height="100%" style="opacity:.5" xlink:href="#arrow-up-normal" id="arrow-down-disabled" transform="matrix(1,0,0,-1,130,850)"/>
 <use width="100%" height="100%" style="opacity:.5" xlink:href="#arrow-up-normal" id="arrow-right-disabled" transform="rotate(90,156.5,547.5)"/>
 <use width="100%" height="100%" style="opacity:.5" xlink:href="#arrow-up-normal" id="arrow-left-disabled" transform="rotate(-90,173.5,285.5)"/>
-<path style="fill:#0073e6;fill-rule:evenodd" id="sarrow-plus-focused" d="m 59,526 v 9 h -9 v 4 h 9 v 9 h 4 v -9 h 9 v -4 h -9 v -9 z"/>
-<path style="fill:#1e1e1e;fill-rule:evenodd" id="sarrow-plus-pressed" d="m 104,526 v 9 h -9 v 4 h 9 v 9 h 4 v -9 h 9 v -4 h -9 v -9 z "/>
+<path style="fill:#0073e6;fill-rule:evenodd" id="sarrow-plus-focused" d="m 59,525 v 10 H 49 v 4 h 10 v 10 h 4 v -10 h 10 v -4 H 63 v -10 z"/>
+<path style="fill:#1a1a1a;fill-rule:evenodd" id="sarrow-plus-pressed" d="m 104,525 v 10 H 94 v 4 h 10 v 10 h 4 v -10 h 10 v -4 h -10 v -10 z"/>
 <g id="sarrow-minus-focused">
-<path style="fill:#0073e6" d="m 238,535 v 4 h -22 v -4 z"/>
-<path style="opacity:0" d="m 229,526 v 22 h -4 v -22 z "/>
+<path style="fill:#0073e6" d="m 239,535 v 4 h -24 v -4 z"/>
+<path style="opacity:0" d="m 229,525 v 24 h -4 v -24 z"/>
 </g>
 <g id="sarrow-minus-pressed">
-<path style="fill:#060606" d="m 273,535 v 4 h -22 v -4 z"/>
-<path style="opacity:0" d="m 264,526 v 22 h -4 v -22 z "/>
+<path style="fill:#0d0d0d" d="m 274,535 v 4 h -24 v -4 z"/>
+<path style="opacity:0" d="m 264,525 v 24 h -4 v -24 z"/>
 </g>
 <use width="100%" height="100%" style="opacity:.7" xlink:href="#sarrow-plus-pressed" id="sarrow-plus-normal" transform="translate(-90)"/>
-<use width="100%" height="100%" style="opacity:.3" xlink:href="#sarrow-plus-pressed" id="sarrow-plus-disabled" transform="translate(40)"/>
+<use width="100%" height="100%" style="opacity:.37" xlink:href="#sarrow-plus-pressed" id="sarrow-plus-disabled" transform="translate(40)"/>
 <use width="100%" height="100%" style="opacity:.7" xlink:href="#sarrow-minus-pressed" id="sarrow-minus-normal" transform="translate(-76)"/>
-<use width="100%" height="100%" style="opacity:.3" xlink:href="#sarrow-minus-pressed" id="sarrow-minus-disabled" transform="translate(33)"/>
+<use width="100%" height="100%" style="opacity:.35" xlink:href="#sarrow-minus-pressed" id="sarrow-minus-disabled" transform="translate(33)"/>
 <use width="100%" height="100%" xlink:href="#arrow-up-normal" id="sarrow-up-normal" transform="translate(0,64)"/>
 <use width="100%" height="100%" xlink:href="#arrow-up-focused" id="sarrow-up-focused" transform="translate(0,64)"/>
 <use width="100%" height="100%" xlink:href="#arrow-down-normal" id="sarrow-down-normal" transform="translate(0,64)"/>
@@ -1470,15 +1470,15 @@
 <use width="100%" height="100%" xlink:href="#flat-arrow-up-normal" id="flat-sarrow-up-normal" transform="translate(-172,131)"/>
 <use width="100%" height="100%" xlink:href="#flat-arrow-down-normal" id="flat-sarrow-down-normal" transform="translate(-172,131)"/>
 <use width="100%" height="100%" xlink:href="#flat-arrow-down-focused" id="flat-sarrow-down-focused" transform="translate(-172,131)"/>
-<path style="fill:#81c0ff;fill-rule:evenodd" id="flat-sarrow-plus-focused" d="m -113,527 0,9 -9,0 v 4 h 9 v 9 h 4 v -9 h 9 v -4 h -9 v -9 z "/>
-<path style="fill:#fff;fill-rule:evenodd" id="flat-sarrow-plus-normal" d="m -158,527 0,9 h -9 v 4 h 9 v 9 h 4 v -9 h 9 v -4 h -9 v -9 z "/>
+<path style="fill:#81c0ff;fill-rule:evenodd" id="flat-sarrow-plus-focused" d="m -113,526 v 10 h -10 v 4 h 10 v 10 h 4 v -10 h 10 v -4 h -10 v -10 z"/>
+<path style="fill:#fff;fill-rule:evenodd" id="flat-sarrow-plus-normal" d="m -158,526 v 10 h -10 v 4 h 10 v 10 h 4 v -10 h 10 v -4 h -10 v -10 z"/>
 <g id="flat-sarrow-minus-focused">
-<path style="fill:#81c0ff;fill-rule:evenodd" d="m -100,574 0,4 h -22 v -4 Z "/>
-<path style="opacity:0;fill-rule:evenodd" d="m -109,565 v 22 h -4 v -22 z "/>
+<path style="fill:#81c0ff;fill-rule:evenodd" d="m -99,574 v 4 h -24 v -4 z"/>
+<path style="opacity:0;fill-rule:evenodd" d="m -109,564 v 24 h -4 v -24 z"/>
 </g>
 <g id="flat-sarrow-minus-normal">
-<path style="opacity:.8;fill:#fff;fill-rule:evenodd" d="m -143,574 v 4 h -22 v -4 z "/>
-<path style="opacity:0;fill-rule:evenodd" d="m -152,565 v 22 h -4 v -22 z"/>
+<path style="opacity:.8;fill:#fff;fill-rule:evenodd" d="m -142,574 v 4 h -24 v -4 z"/>
+<path style="opacity:0;fill-rule:evenodd" d="m -152,564 v 24 h -4 v -24 z"/>
 </g>
 <use width="100%" height="100%" style="opacity:.5" xlink:href="#flat-sarrow-up-normal" id="flat-sarrow-up-disabled" transform="translate(132)"/>
 <use width="100%" height="100%" style="opacity:.4" xlink:href="#flat-sarrow-down-normal" id="flat-sarrow-down-disabled" transform="translate(132)"/>
