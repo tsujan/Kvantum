@@ -1476,7 +1476,7 @@
 <g id="tlineedit-focused-topright" transform="translate(373,130.5)">
 <path style="fill:#67676a;fill-rule:evenodd" d="m 59,9.5 c 5.75,0 10,4.25 10,10 H 59 Z"/>
 <g style="color:#000">
-<path style="fill:#3b8391" d="m 59,7.5 c 7,0 12,5 12,12 h -4 c 0,-4.5 -3.5,-8 -8,-8 z"/>
+<path style="fill:#3b83a5" d="m 59,7.5 c 7,0 12,5 12,12 h -4 c 0,-4.5 -3.5,-8 -8,-8 z"/>
 </g>
 </g>
 <use width="100%" height="100%" id="tlineedit-focused-bottom" xlink:href="#tlineedit-focused-top" transform="matrix(1,0,0,-1,0,332)"/>
