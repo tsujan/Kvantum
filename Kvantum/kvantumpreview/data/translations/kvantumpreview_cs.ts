@@ -79,7 +79,7 @@ push button</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="279"/>
         <source>Button Box</source>
-        <translation type="unfinished"></translation>
+        <translation>tlačítkový rámeček</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="361"/>
@@ -414,13 +414,13 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="2173"/>
         <location filename="../../KvantumPreviewBase.ui" line="2209"/>
         <source>2nd Child</source>
-        <translation type="unfinished"></translation>
+        <translation>Druhé dítě</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2178"/>
         <location filename="../../KvantumPreviewBase.ui" line="2214"/>
         <source>1st Child</source>
-        <translation type="unfinished"></translation>
+        <translation>První dítě</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2184"/>
@@ -431,7 +431,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2204"/>
         <source>3rd Child</source>
-        <translation type="unfinished"></translation>
+        <translation>Třetí dítě</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2502"/>
@@ -499,7 +499,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="2476"/>
         <location filename="../../KvantumPreviewBase.ui" line="2568"/>
         <source>GroupBox</source>
-        <translation type="unfinished"></translation>
+        <translation>Skupinový rámeček</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2355"/>
@@ -563,7 +563,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2482"/>
         <source>Group box</source>
-        <translation type="unfinished"></translation>
+        <translation>Skupinový rámeček</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2560"/>
@@ -608,7 +608,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2919"/>
         <source>toolBar_2</source>
-        <translation type="unfinished"></translation>
+        <translation>Panel nástrojů_2</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2941"/>
@@ -658,7 +658,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="3001"/>
         <source>Hold pressed to show a menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Podržením stisknutého tlačítka zobrazíte nabídku</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="3012"/>
@@ -668,12 +668,12 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="3020"/>
         <source>&amp;Radio button</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp; Výběrové tlačítko</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="3028"/>
         <source>Radio &amp;button</source>
-        <translation type="unfinished"></translation>
+        <translation>Výběrové &amp; tlačítko</translation>
     </message>
 </context>
 </TS>
