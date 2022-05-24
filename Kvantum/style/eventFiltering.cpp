@@ -1365,16 +1365,14 @@ bool Style::eventFilter(QObject *o, QEvent *e)
     }
     break;
 
-  /* FIXME For some reason unknown to me (a Qt5 bug?), the Qt5 spinbox size hint
-     is sometimes wrong as if Qt5 spinboxes don't have time to consult CT_SpinBox
-     although they should (-> qabstractspinbox.cpp -> QAbstractSpinBox::sizeHint).
-     The same thing rarely happened with Qt4 too. Here we force a minimum size by
-     using CT_SpinBox when the maximum size isn't set by the app or isn't smaller
-     than our size. */
+  /* WARNING: For some reason (e.g., the exitence of an app stylesheet),
+     the size hint of the spinbox may be wrong. Here we force a minimum
+     size by using CT_SpinBox when the maximum size isn't set by the app
+     or isn't smaller than our size. */
   case QEvent::ShowToParent:
     if (w
         /* not if it's just a QAbstractSpinBox, hoping that
-           no one sets the minimum width in normal cases */
+           no one sets the minimum size in normal cases */
         && (qobject_cast<QSpinBox*>(o)
             || qobject_cast<QDoubleSpinBox*>(o)
             || qobject_cast<QDateTimeEdit*>(o)))

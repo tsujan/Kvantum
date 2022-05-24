@@ -27,7 +27,7 @@
 int main (int argc, char *argv[])
 {
     const QString name = "Kvantum Manager";
-    const QString version = "1.0.2";
+    const QString version = "1.0.3";
 
     QStringList options;
     for (int i = 1; i < argc; ++i)

@@ -122,12 +122,12 @@
 <stop offset="1" style="stop-color:#fff;stop-opacity:0"/>
 </linearGradient>
 <linearGradient id="linearGradient10658">
-<stop offset="0" style="stop-color:#5a5a5a"/>
-<stop offset="1" style="stop-color:#919191"/>
+<stop offset="0" style="stop-color:#616161"/>
+<stop offset="1" style="stop-color:#999"/>
 </linearGradient>
 <linearGradient id="linearGradient10950">
-<stop offset="0" style="stop-color:#787878"/>
-<stop offset="1" style="stop-color:#a0a0a0"/>
+<stop offset="0" style="stop-color:#808080"/>
+<stop offset="1" style="stop-color:#a8a8a8"/>
 </linearGradient>
 <linearGradient id="linearGradient1817">
 <stop offset="0" style="stop-color:#525252"/>
@@ -505,7 +505,7 @@
 <use width="450" height="1230" id="progress-pattern-disabled-bottom" xlink:href="#progress-pattern-disabled-left" transform="rotate(-90,196,150.5)"/>
 <use width="450" height="1230" id="progress-pattern-disabled-bottomleft" xlink:href="#progress-pattern-disabled-topleft" transform="rotate(-90,196,150.5)"/>
 <use width="450" height="1230" id="progress-pattern-disabled" xlink:href="#progress-pattern-disabled-left" transform="matrix(2.1333333,0,0,1,-197.06663,0)"/>
-<path style="opacity:.5;fill:#787878;fill-rule:evenodd;fill-opacity:.475" id="progress-normal" d="m 130,140 v 32 h 32 v -32 z"/>
+<path style="opacity:.5;fill:#808080;fill-rule:evenodd;fill-opacity:.475" id="progress-normal" d="m 130,140 v 32 h 32 v -32 z"/>
 <path style="fill-rule:evenodd" id="expand-progress-normal" d="m 220,140 v 10 h 10 v -10 z"/>
 <g style="fill-rule:evenodd" id="scrollbarslider-normal-topleft" transform="translate(-135.5,5.749757)">
 <path style="fill:#969696;fill-opacity:0" d="m 155,1089 c -6.648,0 -12,5.3521 -12,12 h 12 z"/>
@@ -984,11 +984,11 @@
 <path style="opacity:.5;fill:url(#linearGradient3254);fill-rule:evenodd" id="progress-normal-topright" d="m 165.5,146 c 0,-6.64799 -5.352,-12 -12,-12 v 12 z"/>
 <path style="opacity:.5;fill:url(#linearGradient3252);fill-rule:evenodd" id="progress-normal-bottomright" d="m 165.5,146 c 0,6.64799 -5.352,12 -12,12 v -12 z"/>
 <g id="progress-normal-left" transform="translate(56)">
-<path style="opacity:.5;fill:#787878;fill-rule:evenodd;fill-opacity:.475" d="M 74,172 V 140 H 64 v 32 z"/>
+<path style="opacity:.5;fill:#808080;fill-rule:evenodd;fill-opacity:.475" d="M 74,172 V 140 H 64 v 32 z"/>
 <path style="opacity:.06;fill:url(#linearGradient3286);fill-rule:evenodd" d="M 74,172 V 140 H 64 v 32 z"/>
 </g>
 <g id="progress-normal-right" transform="translate(56)">
-<path style="opacity:.5;fill:#787878;fill-rule:evenodd;fill-opacity:.475" d="m 106,172 v -32 h 10 v 32 z"/>
+<path style="opacity:.5;fill:#808080;fill-rule:evenodd;fill-opacity:.475" d="m 106,172 v -32 h 10 v 32 z"/>
 <path style="opacity:.04;fill:url(#linearGradient3300);fill-rule:evenodd" d="m 106,172 v -32 h 10 v 32 z"/>
 </g>
 <g id="carrow-normal">
