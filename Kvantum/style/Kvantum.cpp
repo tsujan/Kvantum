@@ -12742,7 +12742,10 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
       return qMax(qMax(fspec.top,fspec.bottom),qMax(fspec.left,fspec.right));
     }
 
-    case PM_SpinBoxFrameWidth :
+    /* this isn't used by Kvantum but is set here for a rare case, where
+       an intruding stylesheet gives a wrong size hint to a spinbox */
+    case PM_SpinBoxFrameWidth : return 4;
+
     case PM_ComboBoxFrameWidth : return 0;
 
     case PM_MdiSubWindowFrameWidth : return 4;
