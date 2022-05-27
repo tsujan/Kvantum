@@ -456,22 +456,22 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2525"/>
         <source>0-0</source>
-        <translation type="unfinished"></translation>
+        <translation>0-0</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2533"/>
         <source>0-1</source>
-        <translation type="unfinished"></translation>
+        <translation>0-1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2541"/>
         <source>1-0</source>
-        <translation type="unfinished"></translation>
+        <translation>1-0</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2549"/>
         <source>1-1</source>
-        <translation type="unfinished"></translation>
+        <translation>1-1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2191"/>
@@ -663,7 +663,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="3012"/>
         <source>C&amp;heckbox</source>
-        <translation type="unfinished">&amp;Zaškrtávací políčko</translation>
+        <translation>&amp;Zaškrtávací políčko</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="3020"/>
