@@ -394,13 +394,13 @@
 <use width="450" height="1230" xlink:href="#menubar-normal-left" id="menubar-normal-right" transform="translate(25,0)"/>
 <path style="fill:#7de8ff" id="menubaritem-pressed-bottom" d="m 358.5,828.5 h 20 v 5 h -20 z"/>
 <path style="fill:#7de8ff" id="menubaritem-toggled-bottom" d="m 408.5,828.5 h 20 v 5 h -20 z"/>
-<path id="arrow-plus-pressed" d="m 128.3066,316.3066 v 8.5 h -8.5 v 5 h 8.5 v 8.5 h 5 v -8.5 h 8.5 v -5 h -8.5 v -8.5 h -5 z "/>
+<path id="arrow-plus-pressed" d="m 128,317 v 8 h -8 v 4 h 8 v 8 h 4 v -8 h 8 v -4 h -8 v -8 z"/>
 <use width="100%" height="100%" style="opacity:.3" xlink:href="#arrow-plus-pressed" id="arrow-plus-disabled" transform="translate(40)"/>
 <use width="100%" height="100%" style="opacity:.6" xlink:href="#arrow-plus-pressed" id="arrow-plus-focused" transform="translate(-48)"/>
 <use width="100%" height="100%" style="opacity:.65" xlink:href="#arrow-plus-pressed" id="arrow-plus-normal" transform="translate(-98)"/>
-<g style="fill:#d2d2d2" id="arrow-minus-pressed" transform="matrix(1.2445079,1.2445079,-1.2445079,1.2445079,500.14121,339.31233)">
-<path style="fill:#000" d="m -6.8212,57.2922 h 2.84091 v 12.5 h -2.84091 z " transform="rotate(45)"/>
-<path style="opacity:0" d="m -11.6508,62.2922 h 12.5 v 2.5 h -12.5 Z " transform="rotate(45)"/>
+<g id="arrow-minus-pressed">
+<path d="m 398,327 v 4 h -20 v -4 z"/>
+<path style="opacity:0;fill:#d2d2d2" d="m 398,319 v 20 h -20 v -20 z"/>
 </g>
 <use width="100%" height="100%" style="opacity:.6" xlink:href="#arrow-minus-pressed" id="arrow-minus-focused" transform="translate(-46)"/>
 <use width="100%" height="100%" style="opacity:.65" xlink:href="#arrow-minus-pressed" id="arrow-minus-normal" transform="translate(-100)"/>
@@ -1222,15 +1222,15 @@
 <use width="100%" height="100%" xlink:href="#tlineedit-focused-top" id="tlineedit-focused-bottom" transform="matrix(1,0,0,-1,0,190)"/>
 <path style="fill:#555;fill-rule:evenodd" id="tlineedit-focused" d="m 472,79 v 32 h 32 V 79 Z"/>
 <path id="expand-tlineedit-normal" d="m 467,50.5 h 10 v 10 h -10 z"/>
-<path style="fill:#fff" id="flat-arrow-plus-normal" d="m 30.5,343 v 8.5 h -8.5 v 5 h 8.5 v 8.5 h 5 v -8.5 h 8.5 v -5 h -8.5 V 343 Z"/>
-<path style="fill:#7de8ff" id="flat-arrow-plus-focused" d="m 80.5,343 v 8.5 h -8.5 v 5 h 8.5 v 8.5 h 5 v -8.5 h 8.5 v -5 h -8.5 v -8.5 z"/>
+<path style="fill:#fff" id="flat-arrow-plus-normal" d="m 31,344 v 8 h -8 v 4 h 8 v 8 h 4 v -8 h 8 v -4 h -8 v -8 z"/>
+<path style="fill:#7de8ff" id="flat-arrow-plus-focused" d="m 81,344 v 8 h -8 v 4 h 8 v 8 h 4 v -8 h 8 v -4 h -8 v -8 z"/>
 <g id="flat-arrow-minus-normal">
-<path style="fill:#fff" d="m 299,351.5 v 5 h -22 v -5 z"/>
-<path style="opacity:0;fill:#d2d2d2" d="m 290.2,343 v 22 h -4.4 v -22 z"/>
+<path style="fill:#fff" d="m 298,352 v 4 h -20 v -4 z"/>
+<path style="opacity:0" d="m 298,344 v 20 h -20 v -20 z"/>
 </g>
 <g id="flat-arrow-minus-focused">
-<path style="fill:#7de8ff" d="m 349,351.5 v 5 h -22 v -5 z"/>
-<path style="opacity:0;fill:#d2d2d2" d="m 340.2,343 v 22 h -4.4 v -22 z"/>
+<path style="fill:#7de8ff" d="m 348,352 v 4 h -20 v -4 z"/>
+<path style="opacity:0" d="m 348,344 v 20 h -20 v -20 z"/>
 </g>
 <use width="100%" height="100%" style="opacity:.33" xlink:href="#flat-arrow-plus-normal" id="flat-arrow-plus-disabled" transform="translate(100)"/>
 <use width="100%" height="100%" style="opacity:.33" xlink:href="#flat-arrow-minus-normal" id="flat-arrow-minus-disabled" transform="translate(100)"/>
