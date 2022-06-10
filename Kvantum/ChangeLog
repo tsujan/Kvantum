@@ -1,3 +1,8 @@
+V1.0.3
+---------
+ * Workaround for a rare case of stylesheet interference in spinboxes.
+ * Disabled "ChangeSelectionColor" in all KDE color schemes because of its buggy behavior.
+
 V1.0.2
 ---------
  * Added "widgets" to "style.pro" for Qt ≥ 6.2.4.
