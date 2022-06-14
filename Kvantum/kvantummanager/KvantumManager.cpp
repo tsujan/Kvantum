@@ -64,10 +64,10 @@ KvantumManager::KvantumManager (const QString& lang, QWidget *parent) : QMainWin
     ui->aboutButton->setIcon (symbolicIcon::icon (":/Icons/data/help-about.svg"));
     ui->quit->setIcon (symbolicIcon::icon (":/Icons/data/application-exit.svg"));
 
-    ui->toolBox->setItemIcon (0, symbolicIcon::icon (":/Icons/data/system-software-install.svg"));
-    ui->toolBox->setItemIcon (1, symbolicIcon::icon (":/Icons/data/preferences-desktop-theme.svg"));
-    ui->toolBox->setItemIcon (2, symbolicIcon::icon (":/Icons/data/preferences-system.svg"));
-    ui->toolBox->setItemIcon (3, symbolicIcon::icon (":/Icons/data/applications-system.svg"));
+    ui->toolBox->setTabIcon (0, symbolicIcon::icon (":/Icons/data/system-software-install.svg"));
+    ui->toolBox->setTabIcon (1, symbolicIcon::icon (":/Icons/data/preferences-desktop-theme.svg"));
+    ui->toolBox->setTabIcon (2, symbolicIcon::icon (":/Icons/data/preferences-system.svg"));
+    ui->toolBox->setTabIcon (3, symbolicIcon::icon (":/Icons/data/applications-system.svg"));
 
     /* The default clear icon doesn't follow the color palette when the theme is changed.
        So, we replace it with our SVG icon. */
@@ -164,7 +164,7 @@ KvantumManager::KvantumManager (const QString& lang, QWidget *parent) : QMainWin
     connect (ui->checkBoxTransient, &QAbstractButton::clicked, this, &KvantumManager::trantsientScrollbarEnbled);
     connect (ui->lineEdit, &QLineEdit::textChanged, this, &KvantumManager::txtChanged);
     connect (ui->appsEdit, &QLineEdit::textChanged, this, &KvantumManager::txtChanged);
-    connect (ui->toolBox, &QToolBox::currentChanged, this, &KvantumManager::tabChanged);
+    connect (ui->toolBox, &QTabWidget::currentChanged, this, &KvantumManager::tabChanged);
     connect (ui->tabWidget, &QTabWidget::currentChanged, this, &KvantumManager::setTabWidgetFocus);
     connect (ui->saveAppButton, &QAbstractButton::clicked, this, &KvantumManager::writeAppLists);
     connect (ui->removeAppButton, &QAbstractButton::clicked, this, &KvantumManager::removeAppList);
