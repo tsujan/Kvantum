@@ -277,7 +277,7 @@ KvantumManager::~KvantumManager()
 /*************************/
 void KvantumManager::showWindow()
 { // set the first page as the current page and really show the window
-    ui->toolBox->setCurrentIndex (0);
+    ui->toolBox->setCurrentIndex (1);
     resize (minimumSizeHint().expandedTo (QSize (600, 400)));
     hide();
     setAttribute (Qt::WA_DontShowOnScreen, false);
