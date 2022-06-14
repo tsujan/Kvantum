@@ -173,7 +173,7 @@ interior.element=common
 inherits=PanelButtonCommand
 frame=false
 interior=false
-indicator.size=7
+indicator.size=9
 
 [HeaderSection]
 inherits=PanelButtonCommand
