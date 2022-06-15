@@ -2,6 +2,7 @@ V1.0.3
 ---------
  * Workaround for a rare case of stylesheet interference in spinboxes.
  * Disabled "ChangeSelectionColor" in all KDE color schemes because of its buggy behavior.
+ * Added 2px to the text height with Qt6 because, although horizontal text aligning is fixed in Qt6, it gives a smaller text height.
 
 V1.0.2
 ---------

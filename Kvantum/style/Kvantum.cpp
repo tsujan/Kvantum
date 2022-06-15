@@ -1579,7 +1579,13 @@ static inline QSize textSize(const QFont &font, const QString &text)
     }
   }
 
+#if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
   return QSize(tw, th);
+#else
+  /* Although horizontal text aligning is fixed in Qt6,
+     Qt6 gives a smaller text height */
+  return QSize(tw, th+2);
+#endif
 }
 
 /* Elide a non-empty (and, probably, multiline) text that doesn't include '\t'. */
