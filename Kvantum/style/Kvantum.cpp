@@ -16420,10 +16420,17 @@ void Style::drawItemPixmap(QPainter *painter, const QRect &rect,
   }
   scale = qMax(scale, static_cast<qreal>(1));
 
+  auto scaledSize = QSizeF(pixmap.size()/scale).toSize();
   QRect pixRect = alignedRect(QApplication::layoutDirection(), QFlag(alignment),
-                              QSizeF(pixmap.size()/scale).toSize().boundedTo(rect.size()),
-                              rect);
-  painter->drawPixmap(pixRect, pixmap);
+                              scaledSize, rect);
+  QRect inter = pixRect.intersected(rect);
+  painter->drawPixmap(inter.x(), inter.y(),
+                      pixmap,
+                      inter.x()-pixRect.x(), inter.y()-pixRect.y(),
+                      rect.width() >= pixmap.width() ? pixmap.width() // exact width
+                                                     : qRound(inter.width()*scale),
+                      rect.height() >= pixmap.height() ? pixmap.height() // exact height
+                                                       : qRound(inter.height()*scale));
 }
 
 QPixmap Style::getPixmapFromIcon(const QIcon &icon,

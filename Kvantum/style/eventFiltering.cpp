@@ -391,7 +391,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           QFontMetrics fm(titleFont);
           titleRect.setTop(titleRect.top()
                            + qMax(0, (cbtn->icon().actualSize(cbtn->iconSize()).height()
-                           - fm.height()) / 2));
+                                      - fm.height()) / 2));
         }
         p.drawItemText(titleRect.translated(hOffset, vOffset),
                        textflags, pPalette, cbtn->isEnabled(), cbtn->text(), QPalette::ButtonText);
