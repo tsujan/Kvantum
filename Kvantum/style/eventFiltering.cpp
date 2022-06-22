@@ -577,9 +577,19 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       }
       else
       {
-        QAbstractScrollArea *sa = qobject_cast<QAbstractScrollArea*>(o);
-        if ((sa && !w->inherits("QComboBoxListView") // exclude combo popups
-             /* no animation without the top focused generic frame */
+        auto sa = qobject_cast<QAbstractScrollArea*>(o);
+        if ((sa != nullptr
+             // -> polish(QWidget *widget)
+             && (sa->frameStyle() & QFrame::StyledPanel)
+             && (sa->backgroundRole() == QPalette::Window
+                 || sa->backgroundRole() == QPalette::Button)
+             && sa->viewport() != nullptr
+             && sa->viewport()->autoFillBackground()
+             && sa->viewport()->backgroundRole() != QPalette::Window
+             && sa->viewport()->backgroundRole() != QPalette::Button
+             // exclude combo popups
+             && !w->inherits("QComboBoxListView")
+             // no animation without the top focused generic frame
              && elementExists(getFrameSpec(QStringLiteral("GenericFrame")).element+"-focused-top"))
             || (qobject_cast<QLineEdit*>(o)
                 // this is only needed for Qt5 -- Qt4 combo lineedits don't have FocusIn event
@@ -636,13 +646,23 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       QWidget *popup = QApplication::activePopupWidget();
       if (popup && !popup->isAncestorOf(w))
         break; // not due to a popup widget
-      if (qobject_cast<QComboBox*>(o)
+      auto sa = qobject_cast<QAbstractScrollArea*>(o);
+      if ((sa != nullptr
+           // -> polish(QWidget *widget)
+           && (sa->frameStyle() & QFrame::StyledPanel)
+           && (sa->backgroundRole() == QPalette::Window
+               || sa->backgroundRole() == QPalette::Button)
+           && sa->viewport() != nullptr
+           && sa->viewport()->autoFillBackground()
+           && sa->viewport()->backgroundRole() != QPalette::Window
+           && sa->viewport()->backgroundRole() != QPalette::Button
+           // exclude combo popups
+           && !w->inherits("QComboBoxListView")
+           // no animation without the top focused generic frame
+           && elementExists(getFrameSpec(QStringLiteral("GenericFrame")).element+"-focused-top"))
+          || qobject_cast<QComboBox*>(o)
           || qobject_cast<QLineEdit*>(o)
-          || qobject_cast<QAbstractSpinBox*>(o)
-          || (qobject_cast<QAbstractScrollArea*>(o)
-              && !w->inherits("QComboBoxListView") // exclude combo popups
-              /* no animation without the top focused generic frame */
-              && elementExists(getFrameSpec(QStringLiteral("GenericFrame")).element+"-focused-top")))
+          || qobject_cast<QAbstractSpinBox*>(o))
       {
         /* disable animation if focus-out happens immediately after focus-in
            for exactly the same area to prevent flashing */

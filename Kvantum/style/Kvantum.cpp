@@ -3384,7 +3384,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           break;
         }
 
-        /* -> polish(QWidget *widget)) */
+        /* -> polish(QWidget *widget) */
         bool hasFlatBg = !(sa
                            && (sa->backgroundRole() == QPalette::Window
                                || sa->backgroundRole() == QPalette::Button)

@@ -871,8 +871,8 @@ void Style::polish(QWidget *widget)
       {
         // support animation only if the background is flat
         if ((tspec_.animate_states
-             && (!vp || vp->autoFillBackground()
-                 || (!vp->styleSheet().isEmpty() && vp->testAttribute(Qt::WA_StyleSheetTarget)))
+             && (sa->frameStyle() & QFrame::StyledPanel) // see Qt -> qabstractscrollarea.cpp
+             && vp && vp->autoFillBackground()
              && themeRndr_ && themeRndr_->isValid()) // the default SVG file doesn't have a focus state for frames
            || (hasInactiveSelItemCol_
                && qobject_cast<QAbstractItemView*>(widget))) // enforce the text color of inactive selected items

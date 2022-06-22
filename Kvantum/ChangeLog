@@ -4,6 +4,7 @@ V1.0.3
  * Disabled "ChangeSelectionColor" in all KDE color schemes because of its buggy behavior.
  * Added 2px to the text height with Qt6 because, although horizontal text alignment is fixed in Qt6, it gives a smaller text height.
  * Respect lack of `scaledContents` in `QLabel` with large pixmaps (don't scale down large label images when they aren't supposed to be scaled).
+ * Don't try to animate frameless scroll-areas.
 
 V1.0.2
 ---------
