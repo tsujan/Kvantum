@@ -196,6 +196,22 @@ void Style::drawBg(QPainter *p, const QWidget *widget) const
 
 static QSet<const QWidget*> movedMenus;
 
+static inline bool isAnimatedScrollArea(QWidget *w)
+{
+  auto sa = qobject_cast<QAbstractScrollArea*>(w);
+  return (sa != nullptr
+          // -> polish(QWidget *widget)
+          && (sa->frameStyle() & QFrame::StyledPanel)
+          && (sa->backgroundRole() == QPalette::Window
+              || sa->backgroundRole() == QPalette::Button)
+          && sa->viewport() != nullptr
+          && sa->viewport()->autoFillBackground()
+          && sa->viewport()->backgroundRole() != QPalette::Window
+          && sa->viewport()->backgroundRole() != QPalette::Button
+          // exclude combo popups
+          && !w->inherits("QComboBoxListView"));
+}
+
 bool Style::eventFilter(QObject *o, QEvent *e)
 {
   QWidget *w = qobject_cast<QWidget*>(o);
@@ -577,18 +593,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       }
       else
       {
-        auto sa = qobject_cast<QAbstractScrollArea*>(o);
-        if ((sa != nullptr
-             // -> polish(QWidget *widget)
-             && (sa->frameStyle() & QFrame::StyledPanel)
-             && (sa->backgroundRole() == QPalette::Window
-                 || sa->backgroundRole() == QPalette::Button)
-             && sa->viewport() != nullptr
-             && sa->viewport()->autoFillBackground()
-             && sa->viewport()->backgroundRole() != QPalette::Window
-             && sa->viewport()->backgroundRole() != QPalette::Button
-             // exclude combo popups
-             && !w->inherits("QComboBoxListView")
+        if ((isAnimatedScrollArea(w)
              // no animation without the top focused generic frame
              && elementExists(getFrameSpec(QStringLiteral("GenericFrame")).element+"-focused-top"))
             || (qobject_cast<QLineEdit*>(o)
@@ -616,7 +621,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           }
           if (animatedWidget_ && animatedWidget_ != w)
           {
-            if (sa)
+            if (auto sa = qobject_cast<QAbstractScrollArea*>(w))
             { // no animation when a scrollbar is going to be animated
               if ((animatedWidget_ == sa->verticalScrollBar() || animatedWidget_ == sa->horizontalScrollBar())
                   && animatedWidget_->rect().contains(animatedWidget_->mapFromGlobal(QCursor::pos())))
@@ -646,18 +651,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       QWidget *popup = QApplication::activePopupWidget();
       if (popup && !popup->isAncestorOf(w))
         break; // not due to a popup widget
-      auto sa = qobject_cast<QAbstractScrollArea*>(o);
-      if ((sa != nullptr
-           // -> polish(QWidget *widget)
-           && (sa->frameStyle() & QFrame::StyledPanel)
-           && (sa->backgroundRole() == QPalette::Window
-               || sa->backgroundRole() == QPalette::Button)
-           && sa->viewport() != nullptr
-           && sa->viewport()->autoFillBackground()
-           && sa->viewport()->backgroundRole() != QPalette::Window
-           && sa->viewport()->backgroundRole() != QPalette::Button
-           // exclude combo popups
-           && !w->inherits("QComboBoxListView")
+      if ((isAnimatedScrollArea(w)
            // no animation without the top focused generic frame
            && elementExists(getFrameSpec(QStringLiteral("GenericFrame")).element+"-focused-top"))
           || qobject_cast<QComboBox*>(o)
