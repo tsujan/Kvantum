@@ -53,7 +53,6 @@
 #include <QItemSelectionModel>
 #include <QDialogButtonBox> // for dialog buttons layout
 #include <QFormLayout>
-//#include <QDebug>
 #include <QSurfaceFormat>
 #include <QWindow>
 #include <QScreen> // for isCursorOutsideWidget()
@@ -16427,10 +16426,10 @@ void Style::drawItemPixmap(QPainter *painter, const QRect &rect,
   painter->drawPixmap(inter.x(), inter.y(),
                       pixmap,
                       inter.x()-pixRect.x(), inter.y()-pixRect.y(),
-                      rect.width() >= pixmap.width() ? pixmap.width() // exact width
-                                                     : qRound(inter.width()*scale),
-                      rect.height() >= pixmap.height() ? pixmap.height() // exact height
-                                                       : qRound(inter.height()*scale));
+                      rect.width() >= scaledSize.width() ? pixmap.width() // exact width
+                                                         : qRound(inter.width()*scale),
+                      rect.height() >= scaledSize.height() ? pixmap.height() // exact height
+                                                           : qRound(inter.height()*scale));
 }
 
 QPixmap Style::getPixmapFromIcon(const QIcon &icon,
