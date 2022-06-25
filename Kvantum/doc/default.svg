@@ -262,7 +262,7 @@
        inkscape:collect="always"
        id="linearGradient6511">
       <stop
-         style="stop-color:#5f96cd;stop-opacity:1"
+         style="stop-color:#6199d1;stop-opacity:1"
          offset="0"
          id="stop6507" />
       <stop
@@ -10655,7 +10655,7 @@
        inkscape:connector-curvature="0" />
     <path
        inkscape:connector-curvature="0"
-       style="fill:#5f96cd;stroke:none"
+       style="fill:#6199d1;stroke:none"
        id="path6234"
        d="m 330,79 v 3 h 30 v -3 z" />
   </g>

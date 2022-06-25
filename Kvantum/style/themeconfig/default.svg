@@ -418,7 +418,7 @@
 <stop offset="1" style="stop-color:#e6e6e6;stop-opacity:0"/>
 </linearGradient>
 <linearGradient id="linearGradient6511">
-<stop offset="0" style="stop-color:#5f96cd"/>
+<stop offset="0" style="stop-color:#6199d1"/>
 <stop offset="1" style="stop-color:#4b8ccd"/>
 </linearGradient>
 <linearGradient id="linearGradient6582">
@@ -1565,7 +1565,7 @@
 <g id="button-toggled-bottom">
 <path style="opacity:.6;fill:#121e2a" d="m 330,82 v 3 h 30 v -3 z"/>
 <path style="opacity:.2;fill:#181e24" d="m 330,85 v 3 h 30 v -3 z"/>
-<path style="fill:#5f96cd" d="m 330,79 v 3 h 30 v -3 z"/>
+<path style="fill:#6199d1" d="m 330,79 v 3 h 30 v -3 z"/>
 </g>
 <g id="button-toggled-right">
 <path style="fill:url(#linearGradient6203)" d="m 360,49 v 30 h 3 V 49 Z"/>
