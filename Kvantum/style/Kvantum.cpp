@@ -6537,8 +6537,8 @@ void Style::drawControl(QStyle::ControlElement element,
         {
           fspec.left = qMin(fspec.left,3);
           fspec.right = qMin(fspec.right,3);
-          fspec.top = qMin(fspec.top,2);
-          fspec.bottom = qMin(fspec.bottom,2);
+          fspec.top = qMin(fspec.top,3);
+          fspec.bottom = qMin(fspec.bottom,3);
 
           lspec.left = qMin(lspec.left,2);
           lspec.right = qMin(lspec.right,2);
