@@ -5,6 +5,7 @@ V1.0.3
  * Respect lack of `scaledContents` in `QLabel` with large pixmaps (don't scale down large label images when they aren't supposed to be scaled).
  * Don't try to animate frameless scroll-areas.
  * Changed the default layout spacing to 3px.
+ * Don't enforce minimum height of spinbox (tolerate bad layouts like that of Qt Designer's view items).
 
 V1.0.2
 ---------

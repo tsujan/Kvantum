@@ -6537,13 +6537,12 @@ void Style::drawControl(QStyle::ControlElement element,
         {
           fspec.left = qMin(fspec.left,3);
           fspec.right = qMin(fspec.right,3);
-          fspec.top = qMin(fspec.top,3);
-          fspec.bottom = qMin(fspec.bottom,3);
+          fspec.top = qMin(fspec.top,2);
+          fspec.bottom = qMin(fspec.bottom,2);
 
           lspec.left = qMin(lspec.left,2);
           lspec.right = qMin(lspec.right,2);
-          lspec.top = qMin(lspec.top,2);
-          lspec.bottom = qMin(lspec.bottom,2);
+          lspec.top = lspec.bottom = 0;
           lspec.tispace = qMin(lspec.tispace,2);
           lspec.boldFont = false;
 

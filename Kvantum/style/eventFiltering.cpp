@@ -1394,8 +1394,8 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       QSize size = sizeFromContents(CT_SpinBox,nullptr,QSize(),w).expandedTo(w->minimumSize());
       if (w->maximumWidth() > size.width())
         w->setMinimumWidth(size.width());
-      if (w->maximumHeight() > size.height())
-        w->setMinimumHeight(size.height());
+      /*if (w->maximumHeight() > size.height())
+        w->setMinimumHeight(size.height());*/
     }
     /* correct line-edit palettes on stylable toolbars if needed */
     else if (qobject_cast<QLineEdit*>(o)
