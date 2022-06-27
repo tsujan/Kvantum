@@ -673,9 +673,9 @@ fenestroj se ĉi tiu etoso distingas ilin unu je la alia?</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1365"/>
         <location filename="../../kvantummanager.ui" line="1376"/>
-        <source>The default value is 2 px but
+        <source>The default value is 3 px but
 some apps set it themeselves.</source>
-        <translation>La defaŭlta valoro estas 2 px sed
+        <translation>La defaŭlta valoro estas 3 px sed
 iuj aplikaĵoj determinas ĝin mem.</translation>
     </message>
     <message>

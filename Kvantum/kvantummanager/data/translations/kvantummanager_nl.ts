@@ -667,9 +667,9 @@ inactieve vensters als dit thema daar onderscheid in maakt?</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1365"/>
         <location filename="../../kvantummanager.ui" line="1376"/>
-        <source>The default value is 2 px but
+        <source>The default value is 3 px but
 some apps set it themeselves.</source>
-        <translation>De standaardwaarde is 2 px, maar som-
+        <translation>De standaardwaarde is 3 px, maar som-
 mige programma&apos;s negeren dit.</translation>
     </message>
     <message>

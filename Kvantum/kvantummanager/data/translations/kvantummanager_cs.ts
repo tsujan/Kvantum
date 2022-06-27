@@ -670,9 +670,9 @@ okna, pokud toto téma mezi nimi rozlišuje?</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1365"/>
         <location filename="../../kvantummanager.ui" line="1376"/>
-        <source>The default value is 2 px but
+        <source>The default value is 3 px but
 some apps set it themeselves.</source>
-        <translation>Výchozí hodnota je 2 px, ale
+        <translation>Výchozí hodnota je 3 px, ale
 některé aplikace si nastavují samy.</translation>
     </message>
     <message>

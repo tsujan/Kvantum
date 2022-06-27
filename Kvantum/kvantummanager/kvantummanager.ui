@@ -1362,7 +1362,7 @@ KDE apps get it from KDE setting.</string>
                   <item row="4" column="0">
                    <widget class="QLabel" name="labelLayout">
                     <property name="toolTip">
-                     <string>The default value is 2 px but
+                     <string>The default value is 3 px but
 some apps set it themeselves.</string>
                     </property>
                     <property name="text">
@@ -1373,7 +1373,7 @@ some apps set it themeselves.</string>
                   <item row="4" column="1">
                    <widget class="QSpinBox" name="spinLayout">
                     <property name="toolTip">
-                     <string>The default value is 2 px but
+                     <string>The default value is 3 px but
 some apps set it themeselves.</string>
                     </property>
                     <property name="suffix">

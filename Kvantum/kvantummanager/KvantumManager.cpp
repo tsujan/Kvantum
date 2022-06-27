@@ -1272,7 +1272,7 @@ void KvantumManager::defaultThemeButtons()
     else
         ui->spinToolbar->setValue (tmp);
 
-    tmp = 2;
+    tmp = 3;
     if (defaultSettings.contains ("layout_spacing"))
         tmp = defaultSettings.value ("layout_spacing").toInt();
     tmp = qMin (qMax (tmp,2), 16);

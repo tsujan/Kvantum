@@ -661,9 +661,9 @@ windows if this theme distinguishes between them?</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1365"/>
         <location filename="../../kvantummanager.ui" line="1376"/>
-        <source>The default value is 2 px but
+        <source>The default value is 3 px but
 some apps set it themeselves.</source>
-        <translation>默认值为 2px，但是
+        <translation>默认值为 3px，但是
 一些 app 会自行设置。</translation>
     </message>
     <message>

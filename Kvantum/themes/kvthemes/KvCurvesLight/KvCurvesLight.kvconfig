@@ -46,7 +46,7 @@ animate_states=true
 button_contents_shift=true
 groupbox_top_label=false
 joined_inactive_tabs=true
-layout_spacing=2
+layout_spacing=3
 submenu_overlap=0
 
 [GeneralColors]

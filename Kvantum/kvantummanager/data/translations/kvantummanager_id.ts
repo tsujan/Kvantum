@@ -653,9 +653,9 @@ aktif dan nonaktif jika tema ini memperbedakan antara mereka?</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1365"/>
         <location filename="../../kvantummanager.ui" line="1376"/>
-        <source>The default value is 2 px but
+        <source>The default value is 3 px but
 some apps set it themeselves.</source>
-        <translation>Nilai bawaannya adalah 2 px tetapi
+        <translation>Nilai bawaannya adalah 3 px tetapi
 beberapa aplikasi mengaturnya sendiri.</translation>
     </message>
     <message>

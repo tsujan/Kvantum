@@ -151,7 +151,7 @@ with LXQt Session Settings.</source>
         <translation>Страничния панел на файловия мениджър се смесва с околния интерфейс.
 
 В LXQt е необходимо да рестартирате потребителската сесия,
-или да затворите файловия мениджър, след което да спрете и пуснете 
+или да затворите файловия мениджър, след което да спрете и пуснете
 Desktop през LXQt Session Settings.</translation>
     </message>
     <message>
@@ -174,7 +174,7 @@ with LXQt Session Settings.</source>
         <translation>Панела за преглед на файловия мениджър се смесва с околния интерфейс.
 
 В LXQt е необходимо да рестартирате потребителската сесия,
-или да затворите файловия мениджър, след което да спрете и пуснете 
+или да затворите файловия мениджър, след което да спрете и пуснете
 Desktop през LXQt Session Settings.</translation>
     </message>
     <message>
@@ -234,7 +234,7 @@ the highlight color!</source>
         <source>Do not draw any background for (KDE) menu titles.
 (Needs Logging out and in for Plasma menus.)</source>
         <translation>Без фоново изображение в полетата на (КДЕ) менютата.
-(Изисква се рестарт на потребителската 
+(Изисква се рестарт на потребителската
 сесия за менютата на Плазма.)</translation>
     </message>
     <message>
@@ -271,7 +271,7 @@ the highlight color!</source>
         <source>Useful with monochrome icon sets and
 when the opacity of disabled icons is not
 reduced by other means.</source>
-        <translation>Полезно, когато иконите са монохромни и 
+        <translation>Полезно, когато иконите са монохромни и
 когато прозрачността на неактивните икони
  не е намалена по друг начин.</translation>
     </message>
@@ -628,7 +628,7 @@ windows if this theme distinguishes between them?</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1365"/>
         <location filename="../../kvantummanager.ui" line="1376"/>
-        <source>The default value is 2 px but
+        <source>The default value is 3 px but
 some apps set it themeselves.</source>
         <translation type="unfinished"></translation>
     </message>

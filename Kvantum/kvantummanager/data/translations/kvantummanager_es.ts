@@ -666,9 +666,9 @@ inactivas si este tema distingue entre ellas?</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1365"/>
         <location filename="../../kvantummanager.ui" line="1376"/>
-        <source>The default value is 2 px but
+        <source>The default value is 3 px but
 some apps set it themeselves.</source>
-        <translation>El valor por defecto es 2 px, pero algunas
+        <translation>El valor por defecto es 3 px, pero algunas
 aplicaciones lo fijan ellas mismas.</translation>
     </message>
     <message>

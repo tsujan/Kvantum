@@ -549,7 +549,7 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.transient_groove = false;
   tspec.dark_titlebar = false;
   tspec.dialog_button_layout = 0;
-  tspec.layout_spacing = 2;
+  tspec.layout_spacing = 3;
   tspec.layout_margin = 4;
   tspec.small_icon_size = 16;
   tspec.large_icon_size = 32;

@@ -666,9 +666,9 @@ langais, jei šia apipavidalinimas juos atskiria?</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1365"/>
         <location filename="../../kvantummanager.ui" line="1376"/>
-        <source>The default value is 2 px but
+        <source>The default value is 3 px but
 some apps set it themeselves.</source>
-        <translation>Numatytoji reikšmė yra 2 pikseliai,
+        <translation>Numatytoji reikšmė yra 3 pikseliai,
 tačiau kai kurios programos juos nustato pačios.</translation>
     </message>
     <message>

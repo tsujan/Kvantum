@@ -667,9 +667,9 @@ windows if this theme distinguishes between them?</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1365"/>
         <location filename="../../kvantummanager.ui" line="1376"/>
-        <source>The default value is 2 px but
+        <source>The default value is 3 px but
 some apps set it themeselves.</source>
-        <translation>La valeur par défaut est 2 px mais
+        <translation>La valeur par défaut est 3 px mais
 certaines applications la définissent elles-mêmes.</translation>
     </message>
     <message>

@@ -669,9 +669,9 @@ pencerelerde aynı renkleri ve şekilleri kullansın mı?</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1365"/>
         <location filename="../../kvantummanager.ui" line="1376"/>
-        <source>The default value is 2 px but
+        <source>The default value is 3 px but
 some apps set it themeselves.</source>
-        <translation>Varsayılan değer 2 pikseldir, ancak
+        <translation>Varsayılan değer 3 pikseldir, ancak
 bazı uygulamalar bunu kendileri belirler.</translation>
     </message>
     <message>

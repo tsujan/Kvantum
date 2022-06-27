@@ -671,9 +671,9 @@ passiivisen kanssa, jos tämä teema erottaa ne?</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1365"/>
         <location filename="../../kvantummanager.ui" line="1376"/>
-        <source>The default value is 2 px but
+        <source>The default value is 3 px but
 some apps set it themeselves.</source>
-        <translation>Oletus arvo on 2px, mutta jotkut
+        <translation>Oletus arvo on 3px, mutta jotkut
 sovellukset asettavat sen itse.</translation>
     </message>
     <message>

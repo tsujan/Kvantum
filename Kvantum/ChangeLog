@@ -4,6 +4,7 @@ V1.0.3
  * Disabled "ChangeSelectionColor" in all KDE color schemes because of its buggy behavior.
  * Respect lack of `scaledContents` in `QLabel` with large pixmaps (don't scale down large label images when they aren't supposed to be scaled).
  * Don't try to animate frameless scroll-areas.
+ * Changed the default layout spacing to 3px.
 
 V1.0.2
 ---------

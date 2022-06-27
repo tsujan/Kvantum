@@ -657,9 +657,9 @@ ablakok, ha a téma különbséget tesz közöttük?</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1365"/>
         <location filename="../../kvantummanager.ui" line="1376"/>
-        <source>The default value is 2 px but
+        <source>The default value is 3 px but
 some apps set it themeselves.</source>
-        <translation>Az alapértelmezett érték 2 px de néhány alkalmazás magának állítja be.</translation>
+        <translation>Az alapértelmezett érték 3 px de néhány alkalmazás magának állítja be.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1369"/>
