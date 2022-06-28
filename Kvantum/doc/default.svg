@@ -9778,7 +9778,7 @@
        inkscape:connector-curvature="0"
        id="button-default-indicator0"
        d="m 400,92.5 -20,20 h 20 z"
-       style="fill:#b4b4b4;fill-opacity:1;stroke:none" />
+       style="fill:#ffffff;fill-opacity:1;stroke:none;opacity:0.3" />
   </g>
   <g
      style="fill-rule:evenodd;stroke:none"
@@ -10556,13 +10556,13 @@
        id="tspan6251"
        style="font-size:7.11243px;line-height:0">No frame</tspan></text>
   <path
-     style="opacity:1;fill:#787878;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     style="opacity:0.3;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
      d="m 463,1700 0,10 -10,0 z"
      id="sizegrip-normal"
      inkscape:connector-curvature="0"
      sodipodi:nodetypes="cccc" />
   <path
-     style="opacity:1;fill:#787878;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     style="opacity:0.3;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
      d="m 473,1700 0,10 -10,0 z"
      id="sizegrip-focused"
      inkscape:connector-curvature="0"

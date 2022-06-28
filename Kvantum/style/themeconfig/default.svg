@@ -1470,7 +1470,7 @@
 </g>
 <g id="button-default-indicator" transform="translate(37.5,-40)">
 <path style="opacity:0;fill:#7b7b7b" d="m 375,87.5 h 25 v 25 h -25 z"/>
-<path style="fill:#b4b4b4" d="m 400,92.5 -20,20 h 20 z"/>
+<path style="opacity:.3;fill:#fff" d="m 400,92.5 -20,20 h 20 z"/>
 </g>
 <g style="fill-rule:evenodd" id="menu-shadow-top" transform="translate(-24,-191.2501)">
 <path style="opacity:.92;fill:#4b4b4b" d="m -104,1083.75 h 48 v 8 h -48 z"/>
@@ -1547,8 +1547,7 @@
 <use width="450" height="1380" xlink:href="#mdi-maximize-focused" id="mdi-shade-focused" transform="matrix(1,0,0,-1,315.81577,2310.8116)"/>
 <use width="450" height="1380" xlink:href="#menuitem-pressed" id="menuitem-toggled" transform="translate(45,0)"/>
 <path style="opacity:.35;fill:url(#linearGradient6452)" id="header-separator" d="m 262.5,1700 h 3 v 10 h -3 z"/>
-<path style="fill:#787878" id="sizegrip-normal" d="m 463,1700 0,10 -10,0 z"/>
-<path style="fill:#787878" id="sizegrip-focused" d="m 473,1700 0,10 -10,0 z"/>
+<path style="opacity:.3;fill:#fff" id="sizegrip-normal" d="m 463,1700 0,10 -10,0 z"/>
 <g id="button-toggled-top">
 <path style="fill:#5787b7" d="m 330,46 v 3 h 30 v -3 z"/>
 <path style="opacity:.5;fill:#1e3246" d="m 330,43 v 3 h 30 v -3 z"/>
