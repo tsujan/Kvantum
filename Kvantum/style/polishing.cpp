@@ -288,7 +288,7 @@ void Style::polish(QWidget *widget)
         && !widget->inherits("QTextEdit") && !widget->inherits("QPlainTextEdit"))
     {
       bool changePalette(false);
-      if (qobject_cast<QAbstractItemView*>(widget) || qobject_cast<QAbstractScrollArea*>(widget))
+      if (qobject_cast<QAbstractScrollArea*>(widget))
       { // we don't want to give a solid backgeound to LXQt's desktop by accident
         QWidget *win = widget->window();
         if (!win->testAttribute(Qt::WA_X11NetWmWindowTypeDesktop)
@@ -309,7 +309,9 @@ void Style::polish(QWidget *widget)
         if (!enoughContrast(palette.color(QPalette::Base), txtCol)
             || !enoughContrast(palette.color(QPalette::Window), palette.color(QPalette::WindowText))
             || (qobject_cast<QAbstractItemView*>(widget)
-                && !enoughContrast(palette.color(QPalette::AlternateBase), txtCol)))
+                && !enoughContrast(overlayColor(palette.color(QPalette::Base),
+                                                palette.color(QPalette::AlternateBase)),
+                                   txtCol)))
         {
           polish(palette);
           forcePalette(widget, palette);
