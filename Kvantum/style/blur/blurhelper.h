@@ -1,4 +1,4 @@
-// Adapted from Oxygen-Transparent -> oxygenblurhelper.h
+// Some functions were adapted from Oxygen-Transparent -> oxygenblurhelper.h
 
 /*
  * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014-2022 <tsujan2000@gmail.com>

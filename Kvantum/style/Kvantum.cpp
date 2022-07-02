@@ -14447,13 +14447,8 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
     }
 
     case CT_GroupBox : {
-      const QString group = "GroupBox";
-
       frame_spec fspec;
       default_frame_spec(fspec);
-      size_spec sspec;
-      default_size_spec(sspec);
-      label_spec lspec = getLabelSpec(group);
 
       const QStyleOptionGroupBox *opt =
         qstyleoption_cast<const QStyleOptionGroupBox*>(option);
@@ -14470,13 +14465,10 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
       QSize textSize(0, 0);
       if (opt && !opt->text.isEmpty())
       {
-        if (checkable)
-        { // if checkable, don't use lspec.left, use PM_CheckBoxLabelSpacing for spacing
-          if (option && option->direction == Qt::RightToLeft)
-            lspec.right = 0;
-          else
-            lspec.left = 0;
-        }
+        size_spec sspec;
+        default_size_spec(sspec);
+        label_spec lspec = getLabelSpec(QStringLiteral("GroupBox"));
+        lspec.left = lspec.right = lspec.top = lspec.bottom = 0; // text margins aren't used
         QFont f;
         if (widget) f = widget->font();
         else f = QApplication::font();
@@ -14484,18 +14476,17 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
         textSize = sizeCalculated(f,fspec,lspec,sspec,opt->text,QSize());
       }
 
-      lspec = getLabelSpec(group); // restore the label spec because it's used by contents too
       /* see CC_GroupBox in subControlRect() for why the following condition can't be used */
       //if (opt && !(opt->features & QStyleOptionFrame::Flat))
-        fspec = getFrameSpec(group);
+        fspec = getFrameSpec(QStringLiteral("GroupBox"));
       int checkWidth = (checkable ? pixelMetric(PM_IndicatorWidth)+pixelMetric(PM_CheckBoxLabelSpacing) : 0);
       int spacing = (tspec_.groupbox_top_label ? 0 : 6 + 10); /* 3px between text and frame and
                                                                  text starts at 10px after the left frame */
       QSize defaultSize = contentsSize // as in qcommonstyle.cpp
                           + QSize(opt && opt->features.testFlag(QStyleOptionFrame::Flat) ? 0 : 16, 0);
       s = QSize(qMax(defaultSize.width(), textSize.width() + checkWidth + spacing)
-                  + fspec.left + fspec.right + lspec.left + lspec.right,
-                defaultSize.height() + fspec.top + fspec.bottom + lspec.top + lspec.bottom
+                  + fspec.left + fspec.right,
+                defaultSize.height() + fspec.top + fspec.bottom
                   + (tspec_.groupbox_top_label
                      ? 3 // 3 px spacing between text and top frame (-> CC_GroupBox in subControlRect)
                      : qMax(checkable ? pixelMetric(PM_IndicatorHeight) : 0, textSize.height())/2));
@@ -16205,9 +16196,6 @@ QRect Style::subControlRect(QStyle::ComplexControl control,
       {
         frame_spec fspec;
         default_frame_spec(fspec);
-        size_spec sspec;
-        default_size_spec(sspec);
-        label_spec lspec = getLabelSpec(QStringLiteral("GroupBox"));
 
         bool rtl(option->direction == Qt::RightToLeft);
         bool checkable = false;
@@ -16221,14 +16209,11 @@ QRect Style::subControlRect(QStyle::ComplexControl control,
 
         QSize textSize(0, 0);
         if (!opt->text.isEmpty())
-        {
-          if (checkable)
-          { // if checkable, don't use lspec.left, use PM_CheckBoxLabelSpacing for spacing
-            if (rtl)
-              lspec.right = 0;
-            else
-              lspec.left = 0;
-          }
+        { // -> CT_GroupBox
+          size_spec sspec;
+          default_size_spec(sspec);
+          label_spec lspec = getLabelSpec(QStringLiteral("GroupBox"));
+          lspec.left = lspec.right = lspec.top = lspec.bottom = 0;
           QFont f;
           if (widget) f = widget->font();
           else f = QApplication::font();
@@ -16266,11 +16251,10 @@ QRect Style::subControlRect(QStyle::ComplexControl control,
                          textSize.height());
           }
           case SC_GroupBoxContents : {
-            lspec = getLabelSpec(QStringLiteral("GroupBox")); // restore the label spec
             int top = 0;
             if (!tspec_.groupbox_top_label)
               top = qMax(checkHeight,textSize.height())/2;
-            return labelRect(subControlRect(control,option,SC_GroupBoxFrame,widget), fspec, lspec)
+            return interiorRect(subControlRect(control,option,SC_GroupBoxFrame,widget), fspec)
                    .adjusted(0,top,0,0);
           }
           case SC_GroupBoxFrame : {

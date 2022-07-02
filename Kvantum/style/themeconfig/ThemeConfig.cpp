@@ -492,7 +492,7 @@ label_spec ThemeConfig::getLabelSpec(const QString &elementName)
     v = getValue(name,KSL("text.margin.right"), i);
     r.right = qMax(v.toInt(),0);
 
-    /* let's have more compact buttons */
+    /* let's make button-like widgets a little compact */
     if(name == "LineEdit")
     {
       r.top = qMax(0,r.top-1);

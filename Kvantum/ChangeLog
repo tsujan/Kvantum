@@ -6,6 +6,7 @@ V1.0.3
  * Don't try to animate frameless scroll-areas.
  * Changed the default layout spacing to 3px.
  * Don't enforce minimum height of spinbox (tolerate bad layouts like that of Qt Designer's view items).
+ * Ignore the key "text.margin" with group-boxes.
 
 V1.0.2
 ---------

@@ -1,5 +1,3 @@
-// Adapted from Oxygen-Transparent -> oxygenblurhelper.cpp
-
 /*
  * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014-2022 <tsujan2000@gmail.com>
  *
