@@ -944,14 +944,14 @@
 <use width="100%" height="100%" xlink:href="#expand-tab-normal-topleft" id="expand-tab-focused-topleft" transform="translate(68,0)"/>
 <use width="100%" height="100%" xlink:href="#expand-tab-normal-bottomright" id="expand-tab-focused-bottomright" transform="translate(68,0)"/>
 <g id="tab-close-normal">
-<rect width="18" x="320" y="795" height="18" style="fill:#5a5a5a;fill-opacity:0"/>
-<path style="fill:#6e6e6e" d="m 329,799 c -2.74657,0 -5,2.25343 -5,5 0,2.74656 2.25343,5 5,5 2.74656,0 5,-2.25344 5,-5 0,-2.74657 -2.25344,-5 -5,-5 z m 0,2.5 c 1.39546,0 2.5,1.10453 2.5,2.5 0,1.39546 -1.10454,2.5 -2.5,2.5 -1.39547,0 -2.5,-1.10454 -2.5,-2.5 0,-1.39547 1.10453,-2.5 2.5,-2.5 z"/>
+<path style="fill-opacity:0" d="m 320,795 h 18 v 18 h -18 z"/>
+<path style="fill:#6e6e6e" d="m 329,799.5 c -2.47191,0 -4.5,2.02809 -4.5,4.5 0,2.4719 2.02809,4.5 4.5,4.5 2.4719,0 4.5,-2.0281 4.5,-4.5 0,-2.47191 -2.0281,-4.5 -4.5,-4.5 z m 0,2.25 c 1.25591,0 2.25,0.99408 2.25,2.25 0,1.25591 -0.99409,2.25 -2.25,2.25 -1.25592,0 -2.25,-0.99409 -2.25,-2.25 0,-1.25592 0.99408,-2.25 2.25,-2.25 z"/>
 </g>
 <path style="fill:#4b6da0;fill-rule:evenodd;stroke-width:.5" id="tab-close-pressed" d="m 369,796 a 8,8 0 0 0 -8,8 8,8 0 0 0 8,8 8,8 0 0 0 8,-8 8,8 0 0 0 -8,-8 z m -2.8281,3.7578 2.8281,2.8281 2.8281,-2.8281 1.4141,1.4141 -2.8281,2.8281 2.8281,2.8281 -1.4141,1.4141 -2.8281,-2.8281 -2.8281,2.8281 -1.4141,-1.4141 2.8281,-2.8281 -2.8281,-2.8281 z"/>
 <use width="100%" height="100%" style="opacity:.9" xlink:href="#tab-close-pressed" id="tab-close-focused" transform="translate(-20)"/>
 <g id="tab-close-disabled">
-<path style="fill-opacity:.27" d="m 389,799 c -2.74657,0 -5,2.25343 -5,5 0,2.74656 2.25343,5 5,5 2.74656,0 5,-2.25344 5,-5 0,-2.74657 -2.25344,-5 -5,-5 z m 0,2.5 c 1.39546,0 2.5,1.10453 2.5,2.5 0,1.39546 -1.10454,2.5 -2.5,2.5 -1.39547,0 -2.5,-1.10454 -2.5,-2.5 0,-1.39547 1.10453,-2.5 2.5,-2.5 z"/>
-<rect width="18" x="380" y="795" height="18" style="fill:#5a5a5a;fill-opacity:0"/>
+<path style="fill-opacity:.27" d="m 389,799.5 c -2.47191,0 -4.5,2.02809 -4.5,4.5 0,2.4719 2.02809,4.5 4.5,4.5 2.4719,0 4.5,-2.0281 4.5,-4.5 0,-2.47191 -2.0281,-4.5 -4.5,-4.5 z m 0,2.25 c 1.25591,0 2.25,0.99408 2.25,2.25 0,1.25591 -0.99409,2.25 -2.25,2.25 -1.25592,0 -2.25,-0.99409 -2.25,-2.25 0,-1.25592 0.99408,-2.25 2.25,-2.25 z"/>
+<path style="fill-opacity:0" d="m 380,795 h 18 v 18 h -18 z"/>
 </g>
 <use width="100%" height="100%" xlink:href="#border-button-normal-topleft" id="border-button-toggled-bottomleft" transform="matrix(1,0,0,-1,180,273)"/>
 <use width="100%" height="100%" xlink:href="#border-button-normal-top" id="border-button-toggled-bottom" transform="matrix(1,0,0,-1,180,273)"/>
@@ -1198,15 +1198,15 @@
 <path style="opacity:.4" id="expand-button-focus-left" d="M 21.75,161 H 5.25 v 12 h 16.5 z"/>
 <path style="opacity:.4" id="expand-button-focus" d="m 38.25,161 h -16.5 v 12 h 16.5 z"/>
 <path style="opacity:.4" id="expand-button-focus-right" d="m 54.75,161 h -16.5 v 12 h 16.5 z"/>
-<path style="opacity:.37" id="expand-tab-focus-topleft" d="m 331.5,96 c 0,-7 5,-12 12,-12 v 12 z"/>
-<path style="opacity:.37" id="expand-tab-focus-top" d="M 360,84 H 343.5 V 96 H 360 Z"/>
-<path style="opacity:.37" id="expand-tab-focus-bottom" d="M 360,108 H 343.5 V 96 H 360 Z"/>
-<path style="opacity:.37" id="expand-tab-focus-topright" d="m 372,96 v -6 c 0,-5 -1,-6 -6,-6 h -6 v 12 z"/>
-<path style="opacity:.37" id="expand-tab-focus-bottomleft" d="m 331.5,96 v 6 c 0,5 1,6 6,6 h 6 V 96 Z"/>
-<path style="opacity:.37" id="expand-tab-focus-bottomright" d="m 372,96 c 0,7 -5,12 -12,12 V 96 Z"/>
-<path style="opacity:.37" id="expand-tab-focus-left" d="M 21.75,173 H 5.25 v 12 h 16.5 z"/>
-<path style="opacity:.37" id="expand-tab-focus" d="m 38.25,173 h -16.5 v 12 h 16.5 z"/>
-<path style="opacity:.37" id="expand-tab-focus-right" d="m 54.75,173 h -16.5 v 12 h 16.5 z"/>
+<path style="opacity:.3" id="expand-tab-focus-topleft" d="m 331.5,96 c 0,-7 5,-12 12,-12 v 12 z"/>
+<path style="opacity:.3" id="expand-tab-focus-top" d="M 360,84 H 343.5 V 96 H 360 Z"/>
+<path style="opacity:.3" id="expand-tab-focus-bottom" d="M 360,108 H 343.5 V 96 H 360 Z"/>
+<path style="opacity:.3" id="expand-tab-focus-topright" d="m 372,96 v -6 c 0,-5 -1,-6 -6,-6 h -6 v 12 z"/>
+<path style="opacity:.3" id="expand-tab-focus-bottomleft" d="m 331.5,96 v 6 c 0,5 1,6 6,6 h 6 V 96 Z"/>
+<path style="opacity:.3" id="expand-tab-focus-bottomright" d="m 372,96 c 0,7 -5,12 -12,12 V 96 Z"/>
+<path style="opacity:.3" id="expand-tab-focus-left" d="M 21.75,173 H 5.25 v 12 h 16.5 z"/>
+<path style="opacity:.3" id="expand-tab-focus" d="m 38.25,173 h -16.5 v 12 h 16.5 z"/>
+<path style="opacity:.3" id="expand-tab-focus-right" d="m 54.75,173 h -16.5 v 12 h 16.5 z"/>
 </g>
 <path style="opacity:0" id="border-button-focus-top" d="m 360,169 h -16.5 v 12 H 360 Z"/>
 <path style="opacity:0" id="border-tab-focus-top" d="m 360,112 h -16.5 v 12 H 360 Z"/>
