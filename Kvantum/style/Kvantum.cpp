@@ -12994,6 +12994,7 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
     case PM_TabBarIconSize :
     case PM_ListViewIconSize :
     case PM_ButtonIconSize : return tspec_.button_icon_size;
+
     case PM_SmallIconSize : return tspec_.small_icon_size;
 
     case PM_IconViewIconSize:
@@ -14281,7 +14282,7 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
         const size_spec sspec = getSizeSpec(group);
 
         QString txt = opt->text;
-        if (isLibreoffice_ && widget == nullptr && txt.isEmpty())
+        if (/*isLibreoffice_ && widget == nullptr && */txt.isEmpty() && opt->icon.isNull())
         { // LibreOffice only sets the contents size
           s = contentsSize + QSize(fspec.left+fspec.right+lspec.left+lspec.right,
                                    fspec.top+fspec.bottom+lspec.top+lspec.bottom);
@@ -14307,6 +14308,14 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
           s = sizeCalculated(f,fspec,lspec,sspec,txt,
                              opt->icon.isNull() ? QSize() : QSize(icnSize,icnSize),
                              Qt::ToolButtonTextBesideIcon);
+
+          /* set the minimum contents height to 16px */
+          int m = 16 + fspec.top+fspec.bottom+lspec.top+lspec.bottom;
+          if (sspec.incrementH)
+            m += sspec.minH;
+          else
+            m = qMax(m, sspec.minH);
+          s.rheight() = qMax(s.height(), m);
         }
 
         bool verticalTabs = false;

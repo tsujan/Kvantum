@@ -7,6 +7,7 @@ V1.0.3
  * Changed the default layout spacing to 3px.
  * Don't enforce minimum height of spinbox (tolerate bad layouts like that of Qt Designer's view items).
  * Ignore the key "text.margin" with group-boxes.
+ * Set the minimum contents height of tabs to 16px.
 
 V1.0.2
 ---------
