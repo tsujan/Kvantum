@@ -52,7 +52,6 @@ submenu_overlap=0
 tooltip_delay=-1
 button_contents_shift=false
 animate_states=true
-dark_titlebar=true
 hide_combo_checkboxes=false
 layout_margin=4
 no_window_pattern=false
