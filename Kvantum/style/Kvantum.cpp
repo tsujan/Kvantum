@@ -14279,15 +14279,35 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
         const QString group = "Tab";
         const frame_spec fspec = getFrameSpec(group);
         const label_spec lspec = getLabelSpec(group);
-        const size_spec sspec = getSizeSpec(group);
+        size_spec sspec = getSizeSpec(group);
+
+        bool verticalTabs = false;
+        if (opt->shape == QTabBar::RoundedEast
+            || opt->shape == QTabBar::RoundedWest
+            || opt->shape == QTabBar::TriangularEast
+            || opt->shape == QTabBar::TriangularWest)
+        {
+          verticalTabs = true;
+        }
 
         QString txt = opt->text;
-        if (/*isLibreoffice_ && widget == nullptr && */txt.isEmpty() && opt->icon.isNull())
-        { // LibreOffice only sets the contents size
-          s = contentsSize + QSize(fspec.left+fspec.right+lspec.left+lspec.right,
-                                   fspec.top+fspec.bottom+lspec.top+lspec.bottom);
-          s = s.expandedTo(QSize(sspec.minW + (sspec.incrementW ? s.width() : 0),
-                                 sspec.minH + (sspec.incrementH ? s.height() : 0)));
+        if ((isLibreoffice_ && widget == nullptr) // LibreOffice only sets the contents size
+            || (txt.isEmpty() && opt->icon.isNull())) // another app may do it too
+        {
+          if (!verticalTabs)
+          {
+            s = contentsSize + QSize(fspec.left+fspec.right+lspec.left+lspec.right,
+                                     fspec.top+fspec.bottom+lspec.top+lspec.bottom);
+            s = s.expandedTo(QSize(sspec.minW + (sspec.incrementW ? s.width() : 0),
+                                   sspec.minH + (sspec.incrementH ? s.height() : 0)));
+          }
+          else
+          {
+            s = contentsSize + QSize(fspec.top+fspec.bottom+lspec.top+lspec.bottom,
+                                     fspec.left+fspec.right+lspec.left+lspec.right);
+            s = s.expandedTo(QSize(sspec.minH + (sspec.incrementH ? s.width() : 0),
+                                   sspec.minW + (sspec.incrementW ? s.height() : 0)));
+          }
         }
         else
         {
@@ -14305,30 +14325,22 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
                           : pixelMetric(PM_TabBarIconSize,option,widget); // as in CE_TabBarTabLabel
 
           txt.replace('\n', ' '); // always draw the tab text in a single line
+          int minH = sspec.minH; // will be considered later
+          sspec.minH = 0;
           s = sizeCalculated(f,fspec,lspec,sspec,txt,
                              opt->icon.isNull() ? QSize() : QSize(icnSize,icnSize),
                              Qt::ToolButtonTextBesideIcon);
-
           /* set the minimum contents height to 16px */
-          int m = 16 + fspec.top+fspec.bottom+lspec.top+lspec.bottom;
+          s.rheight() = qMax(s.height(), 16 + fspec.top+fspec.bottom+lspec.top+lspec.bottom);
+          /* now consider minH */
           if (sspec.incrementH)
-            m += sspec.minH;
+            s.rheight() += minH;
           else
-            m = qMax(m, sspec.minH);
-          s.rheight() = qMax(s.height(), m);
-        }
+            s.rheight() = qMax(s.height(), minH);
 
-        bool verticalTabs = false;
-        if (opt->shape == QTabBar::RoundedEast
-            || opt->shape == QTabBar::RoundedWest
-            || opt->shape == QTabBar::TriangularEast
-            || opt->shape == QTabBar::TriangularWest)
-        {
-          verticalTabs = true;
+          if (verticalTabs)
+            s.transpose();
         }
-
-        if (verticalTabs)
-          s.transpose();
 
         bool rtl(opt->direction == Qt::RightToLeft);
         if (opt->rightButtonSize.isValid()) // QSize(-1, -1) by default
@@ -15393,8 +15405,8 @@ QRect Style::subElementRect(QStyle::SubElement element, const QStyleOption *opti
         }
 
         QSize size = (element == SE_TabBarTabLeftButton) ? tab->leftButtonSize : tab->rightButtonSize;
-        int w = size.width();
-        int h = size.height();
+        int w = qMax(0, size.width());
+        int h = qMax(0, size.height());
         int midHeight = static_cast<int>(qCeil(float(tr.height() - h)/2));
         int midWidth = (tr.width() - w)/2;
 
