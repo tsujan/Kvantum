@@ -1,5 +1,5 @@
 /*
- * Copyright (C) Pedram Pourang (aka Tsu Jan) 2020 <tsujan2000@gmail.com>
+ * Copyright (C) Pedram Pourang (aka Tsu Jan) 2022 <tsujan2000@gmail.com>
  *
  * Kvantum is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -368,7 +368,7 @@ bool WindowManager::mousePressEvent (QObject *object, QEvent *event)
           DblClickSent_ = false;
         }
         else
-        { // sent a double click event
+        { // send a double click event
           DblClickSent_ = true;
           auto e = new QMouseEvent (QEvent::MouseButtonDblClick, widgetDragPoint_,
                                     Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
@@ -380,9 +380,9 @@ bool WindowManager::mousePressEvent (QObject *object, QEvent *event)
         if (DblClickSent_
             && (mouseEvent->flags() & Qt::MouseEventCreatedDoubleClick))
         {
-          /* Qt6 sends a double click event on the third mouse press. We prevent
-             that and send a press event instead. We also set "clickedWidget_",
-             to send a double click event on the fourth mouse press, etc. */
+          /* Qt6 sends a double click event with the third mouse press. We prevent
+             that and send a normal press event instead. We also set "clickedWidget_",
+             to send a double click event with the fourth mouse press, etc. */
           preventDbClick_ = true;
           clickedWidget_ = widget;
           auto e = new QMouseEvent (QEvent::MouseButtonPress, widgetDragPoint_,
