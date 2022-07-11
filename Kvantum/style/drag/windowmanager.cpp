@@ -942,9 +942,14 @@ bool WindowManager::AppEventFilter::eventFilter (QObject *object, QEvent *event)
 #endif
     return false;
   }
+
 #if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
-  else if (parent_->preventDbClick_ && event->type() == QEvent::MouseButtonDblClick)
+  if (parent_->preventDbClick_ && !parent_->isLocked()
+      && event->type() == QEvent::MouseButtonDblClick
+      && object == parent_->clickedWidget_.data())
+  {
     return true;
+  }
 #endif
 
   /* If a drag is in progress, no event will be received. Therefore,
