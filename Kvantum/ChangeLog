@@ -1,3 +1,7 @@
+V1.0.4
+---------
+ * Added a workaround for Qt6's double click problem with window dragging.
+
 V1.0.3
 ---------
  * Workaround for a rare case of stylesheet interference in spinboxes.

@@ -141,6 +141,12 @@ private:
   QPointer<QWindow> lastWin_;
   QPointer<QWidget> widgetTarget_;
   QPointer<QWidget> pressedWidget_;
+#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+  /* used by a workaround */
+  QPointer<QWidget> clickedWidget_;
+  bool DblClickSent_;
+  bool preventDbClick_;
+#endif
   QPointer<QWidget> lastPressedWidget_;
   bool dragAboutToStart_;
   bool dragInProgress_;
