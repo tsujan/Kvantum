@@ -1,6 +1,7 @@
 V1.0.4
 ---------
  * Added a workaround for Qt6's double click problem with window dragging.
+ * Added 1px to button arrow margin.
 
 V1.0.3
 ---------

@@ -61,7 +61,8 @@
 #define M_PI 3.14159265358979323846
 #define DISABLED_OPACITY 0.7
 #define COMBO_ARROW_LENGTH 20
-#define TOOL_BUTTON_ARROW_MARGIN 2
+#define INDICATOR_MARGIN 2
+#define BUTTON_ARROW_MARGIN 3 // for menu arrow
 #define TOOL_BUTTON_ARROW_SIZE 10 // when there isn't enough space (~ PM_MenuButtonIndicator)
 #define TOOL_BUTTON_ARROW_OVERLAP 4 // when there isn't enough space
 #define LIMITED_EXPANSION 14 // when the frame expansion should be limited
@@ -2299,7 +2300,9 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           }
           /* a button with just one arrow */
           else if (toolBar == nullptr && hspec_.transparent_arrow_button
-                   && !(opt && (opt->features & QStyleOptionToolButton::MenuButtonPopup))
+                   && !(opt && (opt->features & QStyleOptionToolButton::HasMenu)
+                        && ((opt->features & QStyleOptionToolButton::MenuButtonPopup)
+                            || (opt->features & QStyleOptionToolButton::PopupDelay)))
                    && !(tb
                         && (tb->popupMode() == QToolButton::MenuButtonPopup
                             || ((/*tb->popupMode() == QToolButton::InstantPopup
@@ -2422,7 +2425,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
                 && (opt->features & QStyleOptionToolButton::HasMenu))
             {
               if (tb->width() < opt->iconSize.width()+fspec.left+fspec.right
-                                +dspec.size+ pixelMetric(PM_HeaderMargin)+lspec.tispace)
+                                +dspec.size+ BUTTON_ARROW_MARGIN+lspec.tispace)
               {
                 if (rtl)
                   fspec.right = qMin(fspec.right,3);
@@ -2457,7 +2460,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
             const frame_spec fspec1 = getFrameSpec(QStringLiteral("DropDownButton"));
             if (tb->width() < opt->iconSize.width()+fspec.left
                               +(rtl ? fspec1.left : fspec1.right)
-                              +TOOL_BUTTON_ARROW_SIZE+2*TOOL_BUTTON_ARROW_MARGIN)
+                              +TOOL_BUTTON_ARROW_SIZE+2*BUTTON_ARROW_MARGIN)
             {
               fspec.left = qMin(fspec.left,3);
               fspec.right = qMin(fspec.right,3);
@@ -2523,9 +2526,9 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
                  && opt && (opt->features & QStyleOptionToolButton::HasMenu))
         {
           // enlarge to put drop down arrow (-> SC_ToolButton)
-          r.adjust(rtl ? -lspec.tispace-dspec.size-fspec.left-pixelMetric(PM_HeaderMargin) : 0,
+          r.adjust(rtl ? -lspec.tispace-dspec.size-fspec.left-BUTTON_ARROW_MARGIN : 0,
                    0,
-                   rtl ? 0 : lspec.tispace+dspec.size+fspec.right+pixelMetric(PM_HeaderMargin),
+                   rtl ? 0 : lspec.tispace+dspec.size+fspec.right+BUTTON_ARROW_MARGIN,
                    0);
         }
 
@@ -4530,7 +4533,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         {
           if (tb->width() < opt->iconSize.width()+fspec1.left
                             +(rtl ? fspec.left : fspec.right)
-                            +TOOL_BUTTON_ARROW_SIZE+2*TOOL_BUTTON_ARROW_MARGIN)
+                            +TOOL_BUTTON_ARROW_SIZE+2*BUTTON_ARROW_MARGIN)
           {
             if (rtl)
               fspec.left = qMin(fspec.left,3);
@@ -5483,17 +5486,22 @@ static inline void fitToolButtonText(const QStyleOptionToolButton *opt, QString 
                                      const QSize &txtSize, const QFontMetrics &fm,
                                      const Qt::ToolButtonStyle tialign,
                                      frame_spec &fspec, label_spec &lspec,
-                                     const int indicatorSize, const int headerMargin,
+                                     const int indicatorSize,
+                                     bool hasPopupArrow,
                                      bool isLXQtPanel)
 {
+  QSize availableSize = lspec.left > 0 && lspec.right > 0 && hasPopupArrow
+                          ? QSize(2, 0) // we removed 2px in CT_ToolButton
+                          : QSize(0, 0);
+
   if (tialign == Qt::ToolButtonTextBesideIcon || tialign == Qt::ToolButtonTextUnderIcon)
   {
-    QSize availableSize = opt->rect.size()
-                          - (tialign == Qt::ToolButtonTextUnderIcon
-                               ? QSize(0, opt->iconSize.height())
-                               : QSize(opt->iconSize.width(), 0))
-                          - QSize(fspec.left+fspec.right+lspec.left+lspec.right,
-                                  fspec.top+fspec.bottom+lspec.top+lspec.bottom);
+    availableSize += opt->rect.size()
+                     - (tialign == Qt::ToolButtonTextUnderIcon
+                          ? QSize(0, opt->iconSize.height())
+                          : QSize(opt->iconSize.width(), 0))
+                     - QSize(fspec.left+fspec.right+lspec.left+lspec.right,
+                             fspec.top+fspec.bottom+lspec.top+lspec.bottom);
     if (tialign == Qt::ToolButtonTextBesideIcon)
       availableSize -= QSize(lspec.tispace, 0);
     else
@@ -5501,7 +5509,7 @@ static inline void fitToolButtonText(const QStyleOptionToolButton *opt, QString 
     if ((opt->features & QStyleOptionToolButton::Arrow)
         && opt->arrowType != Qt::NoArrow)
     {
-      availableSize -= QSize(indicatorSize+lspec.tispace+headerMargin, 0);
+      availableSize -= QSize(indicatorSize+lspec.tispace+INDICATOR_MARGIN, 0);
     }
 
     if (txtSize.height() > availableSize.height())
@@ -5537,7 +5545,7 @@ static inline void fitToolButtonText(const QStyleOptionToolButton *opt, QString 
           if ((opt->features & QStyleOptionToolButton::Arrow)
               && opt->arrowType != Qt::NoArrow)
           {
-            availableWidth -= (indicatorSize + lspec.tispace + headerMargin);
+            availableWidth -= (indicatorSize + lspec.tispace + INDICATOR_MARGIN);
           }
         }
         /* if the text is beside the icon but doesn't fit in, elide it */
@@ -5547,9 +5555,9 @@ static inline void fitToolButtonText(const QStyleOptionToolButton *opt, QString 
   }
   else if (tialign == Qt::ToolButtonTextOnly)
   {
-    QSize availableSize = opt->rect.size()
-                          - QSize(fspec.left+fspec.right+lspec.left+lspec.right,
-                                  fspec.top+fspec.bottom+lspec.top+lspec.bottom);
+    availableSize += opt->rect.size()
+                     - QSize(fspec.left+fspec.right+lspec.left+lspec.right,
+                             fspec.top+fspec.bottom+lspec.top+lspec.bottom);
 
     if (txtSize.height() > availableSize.height())
     {
@@ -7132,12 +7140,12 @@ void Style::drawControl(QStyle::ControlElement element,
           ltb = qMax(0, opt->leftButtonSize.width());
           rtb = qMax(0, opt->rightButtonSize.width());
         }
-        /* the tab is widened for TOOL_BUTTON_ARROW_MARGIN, tab_button_extra_margin
+        /* the tab is widened for INDICATOR_MARGIN, tab_button_extra_margin
            PM_TabBarTabHSpace and tispace at CT_TabBarTab */
-        if (rtb > 0) rtb += TOOL_BUTTON_ARROW_MARGIN
+        if (rtb > 0) rtb += INDICATOR_MARGIN
                             + tspec_.tab_button_extra_margin
                             + pixelMetric(PM_TabBarTabHSpace,option,widget)/2;
-        if (ltb > 0) ltb += TOOL_BUTTON_ARROW_MARGIN
+        if (ltb > 0) ltb += INDICATOR_MARGIN
                             + tspec_.tab_button_extra_margin
                             + pixelMetric(PM_TabBarTabHSpace,option,widget)/2;
         if (rtl)
@@ -9368,7 +9376,8 @@ void Style::drawControl(QStyle::ControlElement element,
         }
 
         /* take into account the possibility of the presence of an indicator */
-        int ind = opt->features & QStyleOptionButton::HasMenu ? dspec.size+pixelMetric(PM_HeaderMargin) : 0;
+        int ind = opt->features & QStyleOptionButton::HasMenu
+                    ? dspec.size+BUTTON_ARROW_MARGIN : 0;
         QRect r = option->rect.adjusted((opt->direction == Qt::RightToLeft ? ind : 0),
                                         0,
                                         -(opt->direction == Qt::RightToLeft ? 0 : ind),
@@ -10050,6 +10059,7 @@ void Style::drawControl(QStyle::ControlElement element,
             status.replace(QLatin1String("pressed"),QLatin1String("toggled"));
           }
 
+          bool hasPopupArrow(false);
           /* the right arrow is attached */
           if (tb->popupMode() == QToolButton::MenuButtonPopup
               || ((/*tb->popupMode() == QToolButton::InstantPopup
@@ -10060,6 +10070,7 @@ void Style::drawControl(QStyle::ControlElement element,
               fspec.left = 0;
             else
               fspec.right = 0;
+            hasPopupArrow = true;
           }
 
           /* respect the text color of the parent widget */
@@ -10203,7 +10214,8 @@ void Style::drawControl(QStyle::ControlElement element,
                                 txtSize, QFontMetrics(painter->font()),
                                 tialign,
                                 fspec, lspec,
-                                dspec.size, pixelMetric(PM_HeaderMargin),
+                                dspec.size,
+                                hasPopupArrow,
                                 QCoreApplication::applicationName() == "lxqt-panel");
             }
           }
@@ -10217,7 +10229,7 @@ void Style::drawControl(QStyle::ControlElement element,
                   && (opt->features & QStyleOptionToolButton::HasMenu))
               {
                 if (tb->width() < opt->iconSize.width()+fspec.left+fspec.right
-                                  +dspec.size+ pixelMetric(PM_HeaderMargin)+lspec.tispace)
+                                  +dspec.size+ BUTTON_ARROW_MARGIN+lspec.tispace)
                 {
                   if (opt->direction == Qt::RightToLeft)
                     fspec.right = qMin(fspec.right,3);
@@ -10246,7 +10258,7 @@ void Style::drawControl(QStyle::ControlElement element,
               const frame_spec fspec1 = getFrameSpec(QStringLiteral("DropDownButton"));
               if (tb->width() < opt->iconSize.width()+fspec.left
                                 +(opt->direction == Qt::RightToLeft ? fspec1.left : fspec1.right)
-                                +TOOL_BUTTON_ARROW_SIZE+2*TOOL_BUTTON_ARROW_MARGIN)
+                                +TOOL_BUTTON_ARROW_SIZE+2*BUTTON_ARROW_MARGIN)
               {
                 fspec.left = qMin(fspec.left,3);
                 fspec.right = qMin(fspec.right,3);
@@ -10273,7 +10285,8 @@ void Style::drawControl(QStyle::ControlElement element,
                               textSize(painter->font(), txt), QFontMetrics(painter->font()),
                               tialign,
                               fspec, lspec,
-                              dspec.size, pixelMetric(PM_HeaderMargin),
+                              dspec.size,
+                              false,
                               false);
           }
           if (option->state & State_AutoRaise)
@@ -10437,16 +10450,16 @@ void Style::drawControl(QStyle::ControlElement element,
           }
           renderLabel(&o,painter,
                       !(opt->features & QStyleOptionToolButton::Arrow)
-                          || opt->arrowType == Qt::NoArrow
-                          || tialign == Qt::ToolButtonTextOnly ?
+                      || opt->arrowType == Qt::NoArrow
+                      || tialign == Qt::ToolButtonTextOnly ?
                         r : // may still have arrow for a menu but that's dealt with at CC_ToolButton
-                        // also add a margin between indicator and text (-> CT_ToolButton)
+                        // also add a space between indicator and text (-> CT_ToolButton)
                         r.adjusted(opt->direction == Qt::RightToLeft ?
                                      0
-                                     : dspec.size+lspec.tispace+pixelMetric(PM_HeaderMargin),
+                                     : dspec.size+lspec.tispace+INDICATOR_MARGIN,
                                    0,
                                    opt->direction == Qt::RightToLeft ?
-                                     -dspec.size-lspec.tispace-pixelMetric(PM_HeaderMargin)
+                                     -dspec.size-lspec.tispace-INDICATOR_MARGIN
                                      : 0,
                                    0),
                       fspec,lspec,
@@ -10819,7 +10832,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
             if (opt->toolButtonStyle == Qt::ToolButtonIconOnly && !opt->icon.isNull())
             {
               if (tb->width() < opt->iconSize.width()+fspec.left+fspec.right
-                                +dspec.size+ pixelMetric(PM_HeaderMargin)+lspec.tispace)
+                                +dspec.size+ BUTTON_ARROW_MARGIN+lspec.tispace)
               {
                 dspec.size = qMin(dspec.size,TOOL_BUTTON_ARROW_SIZE);
                 ialign = Qt::AlignRight | Qt::AlignBottom;
@@ -13864,7 +13877,9 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
         s = contentsSize + QSize (0, contentsSize.height() % 2)
             + QSize(fspec.left+fspec.right+lspec.left+lspec.right,
                     fspec.top+fspec.bottom+lspec.top+lspec.bottom)
-            + QSize(opt->features & QStyleOptionButton::HasMenu ? dspec.size+pixelMetric(PM_HeaderMargin) : 0, 0);
+            + QSize(opt->features & QStyleOptionButton::HasMenu
+                      ? dspec.size+BUTTON_ARROW_MARGIN : 0,
+                    0);
         /* this was for KColorButton but apparently
            it isn't needed when sizeCalculated() isn't used */
         /*if (txt.size() == 0 && opt->icon.isNull())
@@ -14184,8 +14199,8 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
                     || ((opt->text.isEmpty() || tialign == Qt::ToolButtonIconOnly)
                         && opt->icon.isNull()) // nothing or only arrows
                       ? 0
-                      // also add a margin between indicator and text (-> CE_ToolButtonLabel)
-                      : dspec.size+lspec.tispace+pixelMetric(PM_HeaderMargin),
+                      // also add a space between indicator and text (-> CE_ToolButtonLabel)
+                      : dspec.size+lspec.tispace+INDICATOR_MARGIN,
                     0);
 
         if (const QToolButton *tb = qobject_cast<const QToolButton*>(widget))
@@ -14200,14 +14215,18 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
             s.rwidth() += (opt->direction == Qt::RightToLeft ?
                              fspec1.left-fspec.left
                              : fspec1.right-fspec.right) // there's an attachment
-                          +dspec1.size+2*TOOL_BUTTON_ARROW_MARGIN
-                          -pixelMetric(PM_MenuButtonIndicator); // added in QToolButton::sizeHint()
+                          + dspec1.size+2*BUTTON_ARROW_MARGIN
+                          - pixelMetric(PM_MenuButtonIndicator) // added in QToolButton::sizeHint()
+                          /* If the style is not icon-only, 2 spaces are added to the width
+                             in QToolButton::sizeHint(). Here, we cautiously remove only 2px. */
+                          - (lspec.left < 1 || lspec.right < 1 || tialign == Qt::ToolButtonIconOnly ? 0 : 2);
           }
           else if ((/*tb->popupMode() == QToolButton::InstantPopup
                     || */tb->popupMode() == QToolButton::DelayedPopup)
                    && (opt->features & QStyleOptionToolButton::HasMenu))
           {
-              s.rwidth() += lspec.tispace+dspec.size + pixelMetric(PM_HeaderMargin);
+              s.rwidth() += lspec.tispace+dspec.size + BUTTON_ARROW_MARGIN
+                            - (lspec.left < 1 || lspec.right < 1 || tialign == Qt::ToolButtonIconOnly ? 0 : 2);
           }
         }
 
@@ -14346,13 +14365,13 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
         if (opt->rightButtonSize.isValid()) // QSize(-1, -1) by default
         {
           /* Right/left frame and label spaces will be changed in CE_TabBarTabLabel if
-             the icon exists. Also, TOOL_BUTTON_ARROW_MARGIN and tab_button_extra_margin
+             the icon exists. Also, INDICATOR_MARGIN and tab_button_extra_margin
              are added for SE_TabBarTabLeftButton and SE_TabBarTabRightButton, and
              PM_TabBarTabHSpace is added once, when a right or left button exists. */
           if (verticalTabs)
           {
             s.rheight() += opt->rightButtonSize.height() + pixelMetric(PM_TabBarTabHSpace,option,widget)
-                                                         + TOOL_BUTTON_ARROW_MARGIN
+                                                         + INDICATOR_MARGIN
                                                          + tspec_.tab_button_extra_margin
                                                          - fspec.right
                                                          + (opt->icon.isNull() ? 0 : qMax(lspec.tispace-lspec.right, 0));
@@ -14362,7 +14381,7 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
           {
             s.rwidth() += opt->rightButtonSize.width()
                           + pixelMetric(PM_TabBarTabHSpace,option,widget)
-                          + TOOL_BUTTON_ARROW_MARGIN
+                          + INDICATOR_MARGIN
                           + tspec_.tab_button_extra_margin
                           + (rtl ? - fspec.left  + (opt->icon.isNull() ? 0 : qMax(lspec.tispace-lspec.left, 0))
                                  : - fspec.right + (opt->icon.isNull() ? 0 : qMax(lspec.tispace-lspec.right, 0)));
@@ -14373,7 +14392,7 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
         {
           if (verticalTabs)
           {
-            s.rheight() += opt->leftButtonSize.height() + TOOL_BUTTON_ARROW_MARGIN
+            s.rheight() += opt->leftButtonSize.height() + INDICATOR_MARGIN
                                                         + tspec_.tab_button_extra_margin
                                                         - fspec.left
                                                         + (opt->icon.isNull() ? 0 : qMax(lspec.tispace-lspec.left, 0));
@@ -14384,7 +14403,7 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
           else
           {
             s.rwidth() += opt->leftButtonSize.width()
-                          + TOOL_BUTTON_ARROW_MARGIN
+                          + INDICATOR_MARGIN
                           + tspec_.tab_button_extra_margin
                           + (rtl ? - fspec.right + (opt->icon.isNull() ? 0 : qMax(lspec.tispace-lspec.right, 0))
                                  : - fspec.left + (opt->icon.isNull() ? 0 : qMax(lspec.tispace-lspec.left, 0)));
@@ -15321,10 +15340,10 @@ QRect Style::subElementRect(QStyle::SubElement element, const QStyleOption *opti
         {
           ltb = qMax(0, opt->leftButtonSize.height());
           rtb = qMax(0, opt->rightButtonSize.height());
-          if (rtb > 0) rtb += TOOL_BUTTON_ARROW_MARGIN
+          if (rtb > 0) rtb += INDICATOR_MARGIN
                               + tspec_.tab_button_extra_margin
                               + pixelMetric(PM_TabBarTabHSpace,option,widget)/2;
-          if (ltb > 0) ltb += TOOL_BUTTON_ARROW_MARGIN
+          if (ltb > 0) ltb += INDICATOR_MARGIN
                               + tspec_.tab_button_extra_margin
                               + pixelMetric(PM_TabBarTabHSpace,option,widget)/2;
           if (opt->shape == QTabBar::RoundedWest || opt->shape == QTabBar::TriangularWest)
@@ -15336,10 +15355,10 @@ QRect Style::subElementRect(QStyle::SubElement element, const QStyleOption *opti
         {
           ltb = qMax(0, opt->leftButtonSize.width());
           rtb = qMax(0, opt->rightButtonSize.width());
-          if (rtb > 0) rtb += TOOL_BUTTON_ARROW_MARGIN
+          if (rtb > 0) rtb += INDICATOR_MARGIN
                               + tspec_.tab_button_extra_margin
                               + pixelMetric(PM_TabBarTabHSpace,option,widget)/2;
-          if (ltb > 0) ltb += TOOL_BUTTON_ARROW_MARGIN
+          if (ltb > 0) ltb += INDICATOR_MARGIN
                               + tspec_.tab_button_extra_margin
                               + pixelMetric(PM_TabBarTabHSpace,option,widget)/2;
           if (opt->direction == Qt::RightToLeft)
@@ -15379,7 +15398,7 @@ QRect Style::subElementRect(QStyle::SubElement element, const QStyleOption *opti
         int verticalShift = pixelMetric(QStyle::PM_TabBarTabShiftVertical, tab, widget);
         int horizontalShift = pixelMetric(QStyle::PM_TabBarTabShiftHorizontal, tab, widget);
         int hpadding = pixelMetric(QStyle::PM_TabBarTabHSpace, option, widget) / 2
-                       + TOOL_BUTTON_ARROW_MARGIN + tspec_.tab_button_extra_margin;
+                       + INDICATOR_MARGIN + tspec_.tab_button_extra_margin;
 
         bool verticalTabs(tab->shape == QTabBar::RoundedEast
                           || tab->shape == QTabBar::RoundedWest
@@ -16067,7 +16086,7 @@ QRect Style::subControlRect(QStyle::ComplexControl control,
                 {
                   const frame_spec fspec1 = getFrameSpec(QStringLiteral("PanelButtonTool"));
                   if (w < opt->iconSize.width()+fspec1.left
-                          +(rtl ? fspec.left : fspec.right)+dspec.size+2*TOOL_BUTTON_ARROW_MARGIN)
+                          +(rtl ? fspec.left : fspec.right)+dspec.size+2*BUTTON_ARROW_MARGIN)
                   {
                     if (rtl)
                       fspec.left = qMin(fspec.left,3);
@@ -16076,9 +16095,9 @@ QRect Style::subControlRect(QStyle::ComplexControl control,
                     dspec.size = qMin(dspec.size,TOOL_BUTTON_ARROW_SIZE);
                   }
                 }
-                return option->rect.adjusted(rtl ? fspec.left+dspec.size+2*TOOL_BUTTON_ARROW_MARGIN : 0,
+                return option->rect.adjusted(rtl ? fspec.left+dspec.size+2*BUTTON_ARROW_MARGIN : 0,
                                              0,
-                                             rtl ? 0 : -fspec.right-dspec.size-2*TOOL_BUTTON_ARROW_MARGIN,
+                                             rtl ? 0 : -fspec.right-dspec.size-2*BUTTON_ARROW_MARGIN,
                                              0);
               }
               else if ((/*tb->popupMode() == QToolButton::InstantPopup
@@ -16100,7 +16119,7 @@ QRect Style::subControlRect(QStyle::ComplexControl control,
                 if (opt->toolButtonStyle == Qt::ToolButtonIconOnly && !opt->icon.isNull())
                 {
                   if (w < opt->iconSize.width()+fspec.left+fspec.right
-                          +dspec.size+ pixelMetric(PM_HeaderMargin)+lspec.tispace)
+                          +dspec.size+ BUTTON_ARROW_MARGIN+lspec.tispace)
                   {
                     if (rtl)
                       fspec.left = qMin(fspec.left,3);
@@ -16114,14 +16133,14 @@ QRect Style::subControlRect(QStyle::ComplexControl control,
                                                lspec.tispace+dspec.size
                                                  // -> CE_ToolButtonLabel
                                                  + fspec.left
-                                                 + pixelMetric(PM_HeaderMargin)
+                                                 + BUTTON_ARROW_MARGIN
                                                : 0,
                                              0,
                                              rtl ?
                                                0
                                                : - lspec.tispace-dspec.size
                                                    - fspec.right
-                                                   - pixelMetric(PM_HeaderMargin),
+                                                   - BUTTON_ARROW_MARGIN,
                                              0);
               }
             }
@@ -16151,7 +16170,7 @@ QRect Style::subControlRect(QStyle::ComplexControl control,
                 {
                   const frame_spec fspec1 = getFrameSpec(QStringLiteral("PanelButtonTool"));
                   if (w < opt->iconSize.width()+fspec1.left
-                          +(rtl ? fspec.left : fspec.right)+dspec.size+2*TOOL_BUTTON_ARROW_MARGIN)
+                          +(rtl ? fspec.left : fspec.right)+dspec.size+2*BUTTON_ARROW_MARGIN)
                   {
                     if (rtl)
                       fspec.left = qMin(fspec.left,3);
@@ -16160,7 +16179,7 @@ QRect Style::subControlRect(QStyle::ComplexControl control,
                     dspec.size = qMin(dspec.size,TOOL_BUTTON_ARROW_SIZE);
                   }
                 }
-                int l = (rtl ? fspec.left : fspec.right)+dspec.size+2*TOOL_BUTTON_ARROW_MARGIN;
+                int l = (rtl ? fspec.left : fspec.right)+dspec.size+2*BUTTON_ARROW_MARGIN;
                 return QRect(rtl ? x : x+w-l,
                              y,l,h);
               }
@@ -16182,7 +16201,7 @@ QRect Style::subControlRect(QStyle::ComplexControl control,
                 {
                   const label_spec lspec = getLabelSpec(group);
                   if (w < opt->iconSize.width()+fspec.left+fspec.right
-                          +dspec.size+ pixelMetric(PM_HeaderMargin)+lspec.tispace)
+                          +dspec.size+ BUTTON_ARROW_MARGIN+lspec.tispace)
                   {
                     if (rtl)
                       fspec.left = qMin(fspec.left,3);
@@ -16194,7 +16213,7 @@ QRect Style::subControlRect(QStyle::ComplexControl control,
                 int l = dspec.size
                         // -> CE_ToolButtonLabel
                         + (rtl ? fspec.left : fspec.right)
-                        + pixelMetric(PM_HeaderMargin);
+                        + BUTTON_ARROW_MARGIN;
                 return QRect(rtl ? x : x+w-l,
                              y,l,h);
               }
