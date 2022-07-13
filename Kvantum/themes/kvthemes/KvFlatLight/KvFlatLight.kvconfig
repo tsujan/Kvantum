@@ -38,7 +38,6 @@ large_icon_size=32
 button_icon_size=16
 toolbar_icon_size=16
 animate_states=true
-button_contents_shift=true
 combo_as_lineedit=true
 combo_menu=true
 combo_focus_rect=true

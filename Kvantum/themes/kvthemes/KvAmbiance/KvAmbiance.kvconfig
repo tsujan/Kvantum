@@ -43,7 +43,6 @@ layout_spacing=6
 tooltip_delay=-1
 submenu_overlap=0
 animate_states=false
-button_contents_shift=false
 combo_menu=true
 hide_combo_checkboxes=true
 combo_focus_rect=true

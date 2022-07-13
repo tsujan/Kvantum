@@ -114,7 +114,7 @@ oletusasetukset.
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="346"/>
-        <location filename="../../kvantummanager.ui" line="2170"/>
+        <location filename="../../kvantummanager.ui" line="2157"/>
         <source>Save</source>
         <translation>Tallenna</translation>
     </message>
@@ -722,18 +722,18 @@ sovellukset asettavat sen itse.</translation>
         <translation>Pyöräytyspainikkeen leveys: </translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1840"/>
-        <location filename="../../kvantummanager.ui" line="1850"/>
+        <location filename="../../kvantummanager.ui" line="1827"/>
+        <location filename="../../kvantummanager.ui" line="1837"/>
         <source>How to activate view items?</source>
         <translation>Kuinka kohteet aktivoidaan?</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1843"/>
+        <location filename="../../kvantummanager.ui" line="1830"/>
         <source>Click behavior:</source>
         <translation>Napsautuksen toiminta:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1963"/>
+        <location filename="../../kvantummanager.ui" line="1950"/>
         <source>Draw tree branch lines?
 
 By default, tree branches have indicators but no line.</source>
@@ -742,24 +742,24 @@ By default, tree branches have indicators but no line.</source>
 Oletuksena puun oksat osoitetaan viivoitta.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1942"/>
+        <location filename="../../kvantummanager.ui" line="1929"/>
         <source>Dialog button layout:</source>
         <translation>Valinta painikkeen asettelu:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1952"/>
+        <location filename="../../kvantummanager.ui" line="1939"/>
         <source>They may look like dotted rectangles
 on focused buttons and other widgets.</source>
         <translation>Ne saattavat näyttää katkoviivoilta
 kohdistettuihin painikkeisiin ja muihin sovelmiin.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1956"/>
+        <location filename="../../kvantummanager.ui" line="1943"/>
         <source>Remove focus rectangles</source>
         <translation>Poista kohdistussuorakaide</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2152"/>
+        <location filename="../../kvantummanager.ui" line="2139"/>
         <source>Use the active theme for all apps!
 
 This Needs saving to take effect.</source>
@@ -1001,7 +1001,7 @@ Zero means tooltips are shown instantly.
 -1 tarkoittaa Qt:n oletusasetusta.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1826"/>
+        <location filename="../../kvantummanager.ui" line="1813"/>
         <source>Scrollbars have add-line and sub-line arrows by default.
 
 Checking this box removes arrows as far as possible.
@@ -1034,19 +1034,8 @@ the toolbar SVG element when they are adjacent to each another.</source>
 työkalurivin SVG-elementin, kun ne ovat sijoitettu vierekkäin.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1782"/>
-        <source>Shift the contents of push buttons when pressed?
-
-By default, the contents are shifted by 1px
-both horizontally and vertically.</source>
-        <translation>Vaihda painikkeiden sisältöä, kun niitä painetaan?
-
-Oletuksena sisältöä siirretään yhden pisteen
-sekä vaaka- että pystysuunnassa.</translation>
-    </message>
-    <message>
-        <location filename="../../kvantummanager.ui" line="1975"/>
-        <location filename="../../kvantummanager.ui" line="1989"/>
+        <location filename="../../kvantummanager.ui" line="1962"/>
+        <location filename="../../kvantummanager.ui" line="1976"/>
         <source>Drag windows from their menubars, primary toolbars
 or anywhere possible (and not only from their title bars)?
 
@@ -1059,8 +1048,8 @@ Jos tämä on poistettu käytöstä, Katso:
 Muut → Huomioi nykyinen työpöytä jos mahdollista</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1886"/>
-        <location filename="../../kvantummanager.ui" line="1905"/>
+        <location filename="../../kvantummanager.ui" line="1873"/>
+        <location filename="../../kvantummanager.ui" line="1892"/>
         <source>Will have effect only if style
 is not set by the app in its code.
 
@@ -1106,7 +1095,7 @@ By default, combo popups do not cover the combo box.</source>
 Oletusarvoisesti yhdistelmä ponnahduksia ei peitä yhdistelmä ruutua.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1795"/>
+        <location filename="../../kvantummanager.ui" line="1792"/>
         <source>In Kvantum, tabs are centered by default.</source>
         <translation>Kvantumissa välilehdet on keskitetty oletuksena.</translation>
     </message>
@@ -1173,12 +1162,12 @@ kun taas 0 tarkoittaa, ettei viivettä ole.</translation>
         <translation>Sekalaista</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1833"/>
+        <location filename="../../kvantummanager.ui" line="1820"/>
         <source>No arrows for scrollbars</source>
         <translation>Ei vierityspalkkien nuolia</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1928"/>
+        <location filename="../../kvantummanager.ui" line="1915"/>
         <source>Draw scrollbars inside view frames?
 
 By default, scrollbars are drawn outide view frames.
@@ -1191,12 +1180,12 @@ Oletuksena vierityspalkit piirretään kehysten ulkopuolelle.
 Ellei ole käytössä, katso Koostaminen ja yleisilme → Häipyvät vierityspalkit!</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1935"/>
+        <location filename="../../kvantummanager.ui" line="1922"/>
         <source>Scrollbars inside frames</source>
         <translation>Vierityspalkit kehysten sisään</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1968"/>
+        <location filename="../../kvantummanager.ui" line="1955"/>
         <source>Tree branch lines</source>
         <translation>Puun haaraviivat</translation>
     </message>
@@ -1258,27 +1247,22 @@ työkalurivin erottimien välissä.</translation>
         <translation>Ryhmitä työkalurivin painikkeet</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1788"/>
-        <source>Shift push-button contents</source>
-        <translation>Vaihda painikkeen sisältö</translation>
-    </message>
-    <message>
-        <location filename="../../kvantummanager.ui" line="1982"/>
+        <location filename="../../kvantummanager.ui" line="1969"/>
         <source>Drag from:</source>
         <translation>Vedä:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1892"/>
+        <location filename="../../kvantummanager.ui" line="1879"/>
         <source>Toolbutton style:</source>
         <translation>Työkalupainikkeen tyyli:</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1805"/>
+        <location filename="../../kvantummanager.ui" line="1782"/>
         <source>If unchecked, shortcuts will not be underlined at all.</source>
         <translation>Jos ruutu ei ole valittuna, pikakuvakkeita ei korosteta ollenkaan.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1808"/>
+        <location filename="../../kvantummanager.ui" line="1785"/>
         <source>Underline shortcuts with Alt</source>
         <translation>Alleviivaa Alt-pikanäppäimet</translation>
     </message>
@@ -1333,24 +1317,24 @@ Poista valinta, jos haluat käyttää näitä vaihto ehtoja!</translation>
         <translation>Yhdistetty ponnahdusvalikko</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1798"/>
+        <location filename="../../kvantummanager.ui" line="1795"/>
         <source>Left aligned tabs</source>
         <translation>Vasemmalle tasatut välilehdet</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1815"/>
+        <location filename="../../kvantummanager.ui" line="1802"/>
         <source>Inactive tabs are joined together by default,
 i.e., there is no border between them.</source>
         <translation>Passiiviset välilehdet liitetään oletusarvoisesti yhteen,
 toisin sanoen niiden välillä ei ole rajaa.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1819"/>
+        <location filename="../../kvantummanager.ui" line="1806"/>
         <source>Join inactive tabs</source>
         <translation>Liitä passiiviset välilehdet</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2006"/>
+        <location filename="../../kvantummanager.ui" line="1993"/>
         <source>Scrollable menus</source>
         <translation>Vieritettävät valikot</translation>
     </message>
@@ -1391,7 +1375,7 @@ Tällä valinnalla nämä piilotetaan.</translation>
         <translation>Ei valittavissa oleva yhdistelmävalikko</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2000"/>
+        <location filename="../../kvantummanager.ui" line="1987"/>
         <source>Should big menus be scrollable and have
 scroll arrows on their top and/or bottom?
 
@@ -1402,7 +1386,7 @@ onko niissä nuolet ylhäällä ja/tai alhaalla?
 Oletuksena suuria valikoita voidaan vierittää.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2013"/>
+        <location filename="../../kvantummanager.ui" line="2000"/>
         <source>Warning: This can be quite confusing at first.
 
 If you have enabled it, you could temporarily disable it
@@ -1415,91 +1399,91 @@ väliaikaisesti nappia varten, jota voidaan raahata ja
 pudottaa Ctrl näppäintä painaen.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2020"/>
+        <location filename="../../kvantummanager.ui" line="2007"/>
         <source>Allow dragging from buttons</source>
         <translation>Salli painikkeista raahaaminen</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2043"/>
+        <location filename="../../kvantummanager.ui" line="2030"/>
         <source>Application Themes</source>
         <translation>Sovellusteemat</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2049"/>
+        <location filename="../../kvantummanager.ui" line="2036"/>
         <source>&lt;center&gt;Here you could assign themes to specific applications.&lt;/center&gt;&lt;br&gt;&lt;center&gt;For each theme, you could add a comma-separated list of executables whose applications should use that theme instead of the active theme. After doing so for all of your chosen themes, save the result by clicking on the &lt;i&gt;Save&lt;/i&gt; button!&lt;/center&gt;</source>
         <translation>&lt;center&gt;Täällä voit määrittää teemoja tietyille sovelluksille.&lt;/center&gt;&lt;br&gt;&lt;center&gt;Jokaiselle teemalle voit lisätä pilkuilla erotetun luettelon suoritettavista tiedostoista ja sovellusten tulisi käyttää kyseistä teemaa aktiivisen teeman sijasta. Kun olet tehnyt niin kaikille valitsemillesi teemoille, tallenna tulos napsauttamalla &lt;i&gt;Tallenna&lt;/i&gt; painiketta!&lt;/center&gt;</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2084"/>
+        <location filename="../../kvantummanager.ui" line="2071"/>
         <source>Installed Theme</source>
         <translation>Asennettu teema</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2100"/>
+        <location filename="../../kvantummanager.ui" line="2087"/>
         <source>Application(s)</source>
         <translatorcomment>s ehkä pois</translatorcomment>
         <translation>Sovellukset</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2129"/>
+        <location filename="../../kvantummanager.ui" line="2116"/>
         <source>app1,app2,app3</source>
         <translation>sov1,sov2,sov3</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2157"/>
+        <location filename="../../kvantummanager.ui" line="2144"/>
         <source>Remove List</source>
         <translation>Poista luettelo</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2164"/>
+        <location filename="../../kvantummanager.ui" line="2151"/>
         <source>Save the current list of apps</source>
         <translation>Tallenna nykyinen sovellusluettelo</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2167"/>
+        <location filename="../../kvantummanager.ui" line="2154"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Save the current list of applications with their corresponding themes!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Tallenna nykyinen sovellusluettelo ja vastaavat teemat!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2194"/>
-        <location filename="../../kvantummanager.ui" line="2200"/>
+        <location filename="../../kvantummanager.ui" line="2181"/>
+        <location filename="../../kvantummanager.ui" line="2187"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl-Q</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2197"/>
+        <location filename="../../kvantummanager.ui" line="2184"/>
         <source>Quit</source>
         <translation>Lopeta</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2210"/>
+        <location filename="../../kvantummanager.ui" line="2197"/>
         <source>Preview the active theme
 or update its preview.</source>
         <translation>Esikatsele aktiivista teemaa
 tai päivitä sen esikatselu.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2214"/>
+        <location filename="../../kvantummanager.ui" line="2201"/>
         <source>Preview</source>
         <translation>Esikatselu</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2221"/>
+        <location filename="../../kvantummanager.ui" line="2208"/>
         <source>About</source>
         <translation>Tietoa</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2244"/>
+        <location filename="../../kvantummanager.ui" line="2231"/>
         <source>What&apos;s This?</source>
         <translation>Mikä tämä on?</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2247"/>
+        <location filename="../../kvantummanager.ui" line="2234"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click on this button and then click on a GUI element that has &amp;quot;What&apos;s This&amp;quot; tooltip  to get information about what it does.&lt;/p&gt;&lt;p&gt;There are also ordinary tooltips but this kind of tooltip will not disappear until you click somewhere.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Napsauta tätä painiketta ja napsauta sitten GUI-elementtiä, jolla on &amp;quot;Mikä tämä on?&amp;quot; työkaluvihje saadaksesi tietoa siitä, mitä se tekee.&lt;/p&gt;&lt;p&gt;Täällä on myös tavallisia työkaluvihjeitä, mutta tällainen työkaluvinkki ei katoa, ennen kuin napsautat jotain.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2250"/>
+        <location filename="../../kvantummanager.ui" line="2237"/>
         <source>Help</source>
         <translation>Ohje</translation>
     </message>
@@ -1531,7 +1515,7 @@ tai päivitä sen esikatselu.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="676"/>
         <location filename="../../KvantumManager.cpp" line="830"/>
-        <location filename="../../KvantumManager.cpp" line="2795"/>
+        <location filename="../../KvantumManager.cpp" line="2787"/>
         <source>Confirmation</source>
         <translation>Vahvistus</translation>
     </message>
@@ -1731,75 +1715,75 @@ tai päivitä sen esikatselu.</translation>
         <translation>Sitä ei voitu palauttaa, ellei sinulla ole siitä kopioita.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1410"/>
-        <location filename="../../KvantumManager.cpp" line="1430"/>
+        <location filename="../../KvantumManager.cpp" line="1406"/>
+        <location filename="../../KvantumManager.cpp" line="1426"/>
         <source>These are the settings that can be safely changed.&lt;br&gt;For the others, click &lt;i&gt;Save&lt;/i&gt; and then edit this file:</source>
         <translation>Seuraavia asetuksia voi turvallisesti muuttaa.&lt;br&gt;Muokataksesi muita napsauta &lt;i&gt;Tallenna&lt;/i&gt; ja avaa tiedosto:</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1426"/>
-        <location filename="../../KvantumManager.cpp" line="2703"/>
+        <location filename="../../KvantumManager.cpp" line="1422"/>
+        <location filename="../../KvantumManager.cpp" line="2695"/>
         <source>These are the settings that can be safely changed.&lt;br&gt;For the others, edit this file:</source>
         <translation>Näitä asetuksia voi turvallisesti muuttaa.&lt;br&gt;Muokataksesi muita avaa tiedosto:</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1827"/>
+        <location filename="../../KvantumManager.cpp" line="1821"/>
         <source>No description</source>
         <translation>Ei kuvausta</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2280"/>
+        <location filename="../../KvantumManager.cpp" line="2274"/>
         <source>A copy of the root config is created.</source>
         <translation>Luotiin kopio juurikokoonpanosta.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2291"/>
+        <location filename="../../KvantumManager.cpp" line="2285"/>
         <source>A copy was already created.</source>
         <translation>Kopio oli jo luotu.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2689"/>
+        <location filename="../../KvantumManager.cpp" line="2681"/>
         <source>Configuration saved.</source>
         <translation>Kokoonpano on tallennettu.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2796"/>
+        <location filename="../../KvantumManager.cpp" line="2788"/>
         <source>Do you want to revert to the default (root) settings of this theme?</source>
         <translation>Haluatko palata teeman oletusasetuksiin?</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2799"/>
+        <location filename="../../KvantumManager.cpp" line="2791"/>
         <source>You will lose the changes you might have made.</source>
         <translation>Mahdolliset teeman muutokset menetetään.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2834"/>
+        <location filename="../../KvantumManager.cpp" line="2826"/>
         <source>Restored the root default settings of %1</source>
         <translation>Palautettiin teema %1 oletusasetuksiinsa</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2835"/>
+        <location filename="../../KvantumManager.cpp" line="2827"/>
         <source>the default theme</source>
         <translation>oletusteema</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2991"/>
-        <location filename="../../KvantumManager.cpp" line="2992"/>
+        <location filename="../../KvantumManager.cpp" line="2983"/>
+        <location filename="../../KvantumManager.cpp" line="2984"/>
         <source>About Kvantum Manager</source>
         <translation>Tietoa Kvantum Managerista</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2991"/>
+        <location filename="../../KvantumManager.cpp" line="2983"/>
         <source>Translators</source>
         <translation>Kääntäjät</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2989"/>
+        <location filename="../../KvantumManager.cpp" line="2981"/>
         <source>A tool for installing, selecting&lt;br&gt;and configuring &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt; themes</source>
         <translation>Työkalu &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt;-teemojen&lt;br&gt;asentamiseen, valintaan ja mukauttamiseen</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2990"/>
+        <location filename="../../KvantumManager.cpp" line="2982"/>
         <source>Author: &lt;a href=&apos;mailto:tsujan2000@gmail.com?Subject=My%20Subject&apos;&gt;Pedram Pourang (aka. Tsu Jan)&lt;/a&gt; &lt;/center&gt;&lt;br&gt;</source>
         <translation>Tekijä: &lt;a href=&apos;mailto:tsujan2000@gmail.com?Subject=My%20Subject&apos;&gt;Pedram Pourang (alias Tsu Jan)&lt;/a&gt; &lt;/center&gt;&lt;br&gt;</translation>
     </message>
@@ -1825,8 +1809,8 @@ tai päivitä sen esikatselu.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="1014"/>
-        <location filename="../../KvantumManager.cpp" line="2223"/>
-        <location filename="../../KvantumManager.cpp" line="2698"/>
+        <location filename="../../KvantumManager.cpp" line="2217"/>
+        <location filename="../../KvantumManager.cpp" line="2690"/>
         <source>Active theme:</source>
         <translation>Nykyinen teema:</translation>
     </message>

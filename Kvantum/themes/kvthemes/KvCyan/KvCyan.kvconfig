@@ -45,7 +45,6 @@ submenu_overlap=0
 tooltip_delay=-1
 animate_states=true
 no_window_pattern=true
-button_contents_shift=true
 
 [GeneralColors]
 window.color=#385768

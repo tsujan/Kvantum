@@ -692,9 +692,6 @@ groupbox_top_label                true/false          Draw the group-box label a
                                                       group boxes will not have interior or
                                                       frame expansion.
 
-button_contents_shift             true/false          Shift the contents of push-buttons when
-                                                      they are down? It is true by default.
-
 slider_width                      Integer             The width of sliders. It cannot be
                                                       greater than 48px and is 8px by default.
 

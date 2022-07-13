@@ -1138,6 +1138,35 @@ bool Style::hasHighContrastWithContainer(const QWidget *w, const QColor color) c
   return false;
 }
 
+enum arrowType
+{
+  arrowNormal,
+  arrowDelayed,
+  arrowNone
+};
+
+static inline int getArrowType(const QToolButton *tb, const QStyleOptionToolButton *opt)
+{
+  if (tb)
+  {
+    if (tb->popupMode() == QToolButton::MenuButtonPopup)
+      return arrowNormal;
+    if (opt && (opt->features & QStyleOptionToolButton::HasMenu)
+        && tb->popupMode() == QToolButton::DelayedPopup)
+    {
+      return arrowDelayed;
+    }
+  }
+  else if (opt && (opt->features & QStyleOptionToolButton::HasMenu))
+  {
+    if (opt->features & QStyleOptionToolButton::MenuButtonPopup)
+      return arrowNormal;
+    if (opt->features & QStyleOptionToolButton::PopupDelay)
+      return arrowDelayed;
+  }
+  return arrowNone;
+}
+
 enum groupedTBtnKind
 {
   tbLeft = -1,
@@ -1145,19 +1174,6 @@ enum groupedTBtnKind
   tbRight,
   tbAlone
 };
-
-/*static bool hasArrow (const QToolButton *tb, const QStyleOptionToolButton *opt)
-{
-  if (!tb || !opt) return false;
-  if (tb->popupMode() == QToolButton::MenuButtonPopup
-      || ((tb->popupMode() == QToolButton::InstantPopup
-           || tb->popupMode() == QToolButton::DelayedPopup)
-          && opt && (opt->features & QStyleOptionToolButton::HasMenu)))
-  {
-    return true;
-  }
-  return false;
-}*/
 
 static QSet<QWidget*> btnSeparators;
 
@@ -2226,6 +2242,9 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         }
         return;
       }
+
+      int arType = getArrowType(tb, opt);
+
       QToolBar *toolBar = qobject_cast<QToolBar*>(p);
       if ((tb && (tb->toolButtonStyle() == Qt::ToolButtonIconOnly
                   || (tb->toolButtonStyle() == Qt::ToolButtonFollowStyle
@@ -2300,14 +2319,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           }
           /* a button with just one arrow */
           else if (toolBar == nullptr && hspec_.transparent_arrow_button
-                   && !(opt && (opt->features & QStyleOptionToolButton::HasMenu)
-                        && ((opt->features & QStyleOptionToolButton::MenuButtonPopup)
-                            || (opt->features & QStyleOptionToolButton::PopupDelay)))
-                   && !(tb
-                        && (tb->popupMode() == QToolButton::MenuButtonPopup
-                            || ((/*tb->popupMode() == QToolButton::InstantPopup
-                                 || */tb->popupMode() == QToolButton::DelayedPopup)
-                                && opt && (opt->features & QStyleOptionToolButton::HasMenu)))))
+                   && arType == arrowNone)
           {
             return; // not in paneledButtons
           }
@@ -2386,7 +2398,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
             drawRaised = true;
             ispec.px = ispec.py = 0;
             int kind = whichGroupedTBtn(tb, p, drawSep);
-            if (kind != 2)
+            if (kind != tbAlone)
             {
               fspec.isAttached = true;
               fspec.HPos = kind;
@@ -2405,7 +2417,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
                 drawRaised = true;
                 ispec.px = ispec.py = 0;
                 int kind = whichGroupedTBtn(tb, p, drawSep);
-                if (kind != 2)
+                if (kind != tbAlone)
                 {
                   fspec.isAttached = true;
                   fspec.HPos = kind;
@@ -2418,11 +2430,9 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         if (!fspec.isAttached
             && opt && opt->toolButtonStyle == Qt::ToolButtonIconOnly && !opt->icon.isNull())
         {
-          if (tb->popupMode() != QToolButton::MenuButtonPopup)
+          if (arType != arrowNormal)
           {
-            if ((/*tb->popupMode() == QToolButton::InstantPopup
-                 || */tb->popupMode() == QToolButton::DelayedPopup)
-                && (opt->features & QStyleOptionToolButton::HasMenu))
+            if (arType == arrowDelayed)
             {
               if (tb->width() < opt->iconSize.width()+fspec.left+fspec.right
                                 +dspec.size+ BUTTON_ARROW_MARGIN+lspec.tispace)
@@ -2432,7 +2442,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
                 else
                   fspec.left = qMin(fspec.left,3);
                 //fspec.expansion = 0;
-                dspec.size = qMin(dspec.size,TOOL_BUTTON_ARROW_SIZE-TOOL_BUTTON_ARROW_OVERLAP);
+                //dspec.size = qMin(dspec.size,TOOL_BUTTON_ARROW_SIZE-TOOL_BUTTON_ARROW_OVERLAP);
                 lspec.tispace = 0;
               }
             }
@@ -2478,58 +2488,6 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
               }
             }
           }
-        }
-
-        if (tb->popupMode() == QToolButton::MenuButtonPopup)
-        {;
-          /* NOTE: The following lines are commented out because
-                   the arrow and button are always drawn together. */
-          /*if (fspec.expansion <= 0) // otherwise the drop-down part will be integrated
-          {
-            // merge with drop down button
-            if (!fspec.isAttached)
-            {
-              fspec.isAttached = true;
-              fspec.HPos = rtl ? 1 : -1;
-            }
-            else if (fspec.HPos == 1)
-              fspec.HPos = 0;
-            else if (fspec.HPos == 2)
-              fspec.HPos = rtl ? 1 : -1;
-
-            // WARNING: separating the arrow and button states
-                        from each other creates an unnatural look
-
-            // don't press the button if only its arrow is pressed
-            pbStatus = (option->state & State_Enabled) ?
-                         (option->state & State_Sunken) && tb->isDown() ? "pressed" :
-                           (option->state & State_Selected) && tb->isDown() ? "toggled" :
-                             (option->state & State_MouseOver) ? "focused" : "normal"
-                       : "disabled";
-            // don't focus the button if only its arrow is focused
-            if (pbStatus == "focused"
-                && ((opt && opt->activeSubControls == QStyle::SC_ToolButtonMenu)
-                    || (styleObject && styleObject->property("_kv_hover_bug").toBool()))) // hover bug
-            {
-              pbStatus = "normal";
-            }
-            if (pbStatus == "disabled")
-              pbStatus = "normal";
-            if (option->state & State_On) // it may be checkable
-              pbStatus = "toggled";
-            if (isWidgetInactive(widget))
-              pbStatus.append("-inactive");
-          }*/
-        }
-        else if ((/*tb->popupMode() == QToolButton::InstantPopup
-                  || */tb->popupMode() == QToolButton::DelayedPopup)
-                 && opt && (opt->features & QStyleOptionToolButton::HasMenu))
-        {
-          // enlarge to put drop down arrow (-> SC_ToolButton)
-          r.adjust(rtl ? -lspec.tispace-dspec.size-fspec.left-BUTTON_ARROW_MARGIN : 0,
-                   0,
-                   rtl ? 0 : lspec.tispace+dspec.size+fspec.right+BUTTON_ARROW_MARGIN,
-                   0);
         }
 
         bool animate(!btnDragInProgress()
@@ -2614,7 +2572,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         /*if (!isHorizontal && !withArrow)
           painter->restore();*/
       }
-      else
+      else // there is no QToolButton
       {
         if (styleObject)
           styleObject->setProperty("_kv_state", status);
@@ -4509,7 +4467,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
 
           //const QStyleOptionToolButton *opt = qstyleoption_cast<const QStyleOptionToolButton*>(option);
           int kind = whichGroupedTBtn(tb, toolBar, drawSep);
-          if (kind != 2)
+          if (kind != tbAlone)
           {
             fspec.isAttached = true;
             fspec.HPos = kind;
@@ -9310,10 +9268,10 @@ void Style::drawControl(QStyle::ControlElement element,
           standardButton.insert(widget);
           connect(widget, &QObject::destroyed, this, &Style::removeFromSet, Qt::UniqueConnection);
         }
-        drawControl(QStyle::CE_PushButtonBevel,opt,painter,widget);
+        drawControl(QStyle::CE_PushButtonBevel, opt, painter, widget);
         QStyleOptionButton subopt(*opt);
-        subopt.rect = subElementRect(SE_PushButtonContents,opt,widget);
-        drawControl(QStyle::CE_PushButtonLabel,&subopt,painter,widget);
+        subopt.rect = subElementRect(SE_PushButtonContents, opt, widget);
+        drawControl(QStyle::CE_PushButtonLabel, &subopt, painter, widget);
       }
 
       break;
@@ -9873,6 +9831,8 @@ void Style::drawControl(QStyle::ControlElement element,
 
         if (opt->features & QStyleOptionButton::HasMenu)
         {
+          int hShift = 0;
+          int vShift = 0;
           QString aStatus = "normal";
           /* use the "flat" indicator with flat buttons if it exists */
           if ((opt->features & QStyleOptionButton::Flat) && status.startsWith(QLatin1String("normal")))
@@ -9892,7 +9852,11 @@ void Style::drawControl(QStyle::ControlElement element,
             if (!(option->state & State_Enabled))
               aStatus = "disabled";
             else if (status.startsWith(QLatin1String("toggled")) || status.startsWith(QLatin1String("pressed")))
+            {
               aStatus = "pressed";
+              hShift = pixelMetric(PM_ButtonShiftHorizontal);
+              vShift = pixelMetric(PM_ButtonShiftVertical);
+            }
             else if (option->state & State_MouseOver)
             {
               if (styleObject == nullptr
@@ -9905,10 +9869,11 @@ void Style::drawControl(QStyle::ControlElement element,
           if (isWidgetInactive(widget))
             aStatus.append("-inactive");
           renderIndicator(painter,
-                          option->rect.adjusted(opt->direction == Qt::RightToLeft ? lspec.left : 0,
+                          option->rect.adjusted(opt->direction == Qt::RightToLeft ? BUTTON_ARROW_MARGIN : 0,
                                                 0,
-                                                opt->direction == Qt::RightToLeft ? 0 : -lspec.right,
-                                                0),
+                                                opt->direction == Qt::RightToLeft ? 0 : -BUTTON_ARROW_MARGIN,
+                                                0)
+                                       .adjusted(hShift,vShift,hShift,vShift),
                           fspec,dspec,dspec.element+"-down-"+aStatus,
                           option->direction,
                           Qt::AlignRight | Qt::AlignVCenter,
@@ -10045,6 +10010,9 @@ void Style::drawControl(QStyle::ControlElement element,
             status.replace(QLatin1String("focused"),QLatin1String("normal"));
         }
 
+        int arType = getArrowType(tb, opt);
+        int dspecSize = dspec.size;
+
         if (tb)
         {
           /* always show menu titles in the toggled state */
@@ -10059,18 +10027,13 @@ void Style::drawControl(QStyle::ControlElement element,
             status.replace(QLatin1String("pressed"),QLatin1String("toggled"));
           }
 
-          bool hasPopupArrow(false);
           /* the right arrow is attached */
-          if (tb->popupMode() == QToolButton::MenuButtonPopup
-              || ((/*tb->popupMode() == QToolButton::InstantPopup
-                   || */tb->popupMode() == QToolButton::DelayedPopup)
-                  && (opt->features & QStyleOptionToolButton::HasMenu)))
+          if (arType != arrowNone)
           {
             if (opt->direction == Qt::RightToLeft)
               fspec.left = 0;
             else
               fspec.right = 0;
-            hasPopupArrow = true;
           }
 
           /* respect the text color of the parent widget */
@@ -10215,18 +10178,16 @@ void Style::drawControl(QStyle::ControlElement element,
                                 tialign,
                                 fspec, lspec,
                                 dspec.size,
-                                hasPopupArrow,
+                                arType != arrowNone,
                                 QCoreApplication::applicationName() == "lxqt-panel");
             }
           }
           /* lack of space (as in some of Krita's KisToolButtons) */
           else if (!opt->icon.isNull())
           {
-            if (tb->popupMode() != QToolButton::MenuButtonPopup)
+            if (arType != arrowNormal)
             {
-              if ((/*tb->popupMode() == QToolButton::InstantPopup
-                   || */tb->popupMode() == QToolButton::DelayedPopup)
-                  && (opt->features & QStyleOptionToolButton::HasMenu))
+              if (arType == arrowDelayed)
               {
                 if (tb->width() < opt->iconSize.width()+fspec.left+fspec.right
                                   +dspec.size+ BUTTON_ARROW_MARGIN+lspec.tispace)
@@ -10235,8 +10196,9 @@ void Style::drawControl(QStyle::ControlElement element,
                     fspec.right = qMin(fspec.right,3);
                   else
                     fspec.left = qMin(fspec.left,3);
-                  dspec.size = qMin(dspec.size,TOOL_BUTTON_ARROW_SIZE-TOOL_BUTTON_ARROW_OVERLAP); // not needed
-                  lspec.tispace = 0; // not needed
+                  dspec.size = qMin(dspecSize ,TOOL_BUTTON_ARROW_SIZE-TOOL_BUTTON_ARROW_OVERLAP);
+                  dspecSize = qMin(dspecSize, TOOL_BUTTON_ARROW_SIZE); // to be restored when needed
+                  lspec.tispace = 0;
                 }
               }
               else
@@ -10266,7 +10228,7 @@ void Style::drawControl(QStyle::ControlElement element,
             }
           }
         }
-        else
+        else // there is no QToolButton
         {
           lspec.boldFont = false;
           if (widget != nullptr
@@ -10281,13 +10243,19 @@ void Style::drawControl(QStyle::ControlElement element,
           }
           else // QML
           {
-            fitToolButtonText(opt, txt,
-                              textSize(painter->font(), txt), QFontMetrics(painter->font()),
-                              tialign,
-                              fspec, lspec,
-                              dspec.size,
-                              false,
-                              false);
+            if (tialign != Qt::ToolButtonIconOnly)
+            {
+              if (!txt.isEmpty())
+              {
+                fitToolButtonText(opt, txt,
+                                  textSize(painter->font(), txt), QFontMetrics(painter->font()),
+                                  tialign,
+                                  fspec, lspec,
+                                  dspec.size,
+                                  arType != arrowNone,
+                                  false);
+              }
+            }
           }
           if (option->state & State_AutoRaise)
           {
@@ -10296,8 +10264,6 @@ void Style::drawControl(QStyle::ControlElement element,
           }
         }
 
-        /* Unlike in CE_PushButtonLabel, option->rect includes the whole
-           button and not just its label here (-> CT_ToolButton)... */
         QRect r = option->rect;
 
         int talign = Qt::AlignCenter;
@@ -10493,8 +10459,13 @@ void Style::drawControl(QStyle::ControlElement element,
              only if a toggled down arrow element exists */
           status.replace(QLatin1String("toggled"),QLatin1String("pressed"));
         }
-        if (!txt.isEmpty()) // it's empty for QStackedWidget
+        if (!opt->icon.isNull()
+            || (tialign != Qt::ToolButtonIconOnly
+                && !txt.isEmpty())) // it's empty for QStackedWidget
+        {
           r.adjust(lspec.left,lspec.top,-lspec.right,-lspec.bottom);
+        }
+        dspec.size = dspecSize; // may have changed due to lack of space
         switch (opt->arrowType) {
           case Qt::NoArrow :
             break;
@@ -10724,10 +10695,9 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
         }
         frame_spec fspec = getFrameSpec(group);
         label_spec lspec = getLabelSpec(group);
-        QStyleOptionToolButton o(*opt);
 
-        QRect r = subControlRect(CC_ToolButton,opt,SC_ToolButton,widget);
-        o.rect = r;
+        QStyleOptionToolButton o(*opt);
+        o.rect = subControlRect(CC_ToolButton, option, SC_ToolButton, widget);
 
         /* make an exception for (KDE) menu titles */
         if (hspec_.transparent_menutitle
@@ -10737,123 +10707,116 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
                     && styleHint(SH_ToolButtonStyle,option,widget) == Qt::ToolButtonTextBesideIcon))
             && qobject_cast<QMenu*>(getParent(widget,1)))
         {
-          drawControl(CE_ToolButtonLabel,&o,painter,widget);
+          drawControl(CE_ToolButtonLabel, &o, painter, widget);
           break;
         }
 
-        /* to have a consistent look, integrate the drop-down part */
-        if (tb && tb->popupMode() == QToolButton::MenuButtonPopup)
-          o.rect = r.united(subControlRect(CC_ToolButton,opt,SC_ToolButtonMenu,widget));
         /* when SH_DockWidget_ButtonsHaveFrame is set to true (default), dock button panels
            are also drawn at PE_PanelButtonTool with all needed states (-> qdockwidget.cpp) */
         if (!widget || !widget->inherits("QDockWidgetTitleButton"))
-          drawPrimitive(PE_PanelButtonTool,&o,painter,widget);
-        //drawPrimitive(PE_FrameButtonTool,&o,painter,widget);
+          drawPrimitive(PE_PanelButtonTool, option, painter, widget); // the arrow part is included
+        //drawPrimitive(PE_FrameButtonTool, option, painter, widget);
 
-        o.rect = r;
-        drawControl(CE_ToolButtonLabel,&o,painter,widget);
+        drawControl(CE_ToolButtonLabel, &o, painter, widget); // the arrow part is excluded
 
-        if (tb)
+        o.rect = subControlRect(CC_ToolButton, option, SC_ToolButtonMenu, widget);
+        int arType = getArrowType(tb, opt);
+        if (arType == arrowNormal)
+        { // only the indicator will be drawn at PE_IndicatorButtonDropDown
+          drawPrimitive(PE_IndicatorButtonDropDown, &o, painter, widget);
+        }
+        else if (arType == arrowDelayed)
         {
-          o.rect = subControlRect(CC_ToolButton,opt,SC_ToolButtonMenu,widget);
-          /* only the indicator will be drawn at PE_IndicatorButtonDropDown */
-          if (tb->popupMode() == QToolButton::MenuButtonPopup)
-            drawPrimitive(PE_IndicatorButtonDropDown,&o,painter,widget);
-          else if ((/*tb->popupMode() == QToolButton::InstantPopup
-                    || */tb->popupMode() == QToolButton::DelayedPopup)
-                   && (opt->features & QStyleOptionToolButton::HasMenu))
+          QWidget *p = getParent(widget,1);
+          QWidget *gp = getParent(p,1);
+
+          /* as in PE_PanelButtonTool */
+          bool drawRaised = false;
+          QToolBar *toolBar = qobject_cast<QToolBar*>(p);
+          if ((toolBar && toolBar->orientation() != Qt::Vertical)
+              || (qobject_cast<QToolBar*>(stb)
+                  && qobject_cast<QToolBar*>(stb)->orientation() != Qt::Vertical
+                  && tb->inherits("Fm::PathButton")))
           {
-            QWidget *p = getParent(widget,1);
-            QWidget *gp = getParent(p,1);
-
-            /* as in PE_PanelButtonTool */
-            bool drawRaised = false;
-            QToolBar *toolBar = qobject_cast<QToolBar*>(p);
-            if ((toolBar && toolBar->orientation() != Qt::Vertical)
-                || (qobject_cast<QToolBar*>(stb)
-                    && qobject_cast<QToolBar*>(stb)->orientation() != Qt::Vertical
-                    && tb->inherits("Fm::PathButton")))
-            {
-              if (tspec_.group_toolbar_buttons)
-                drawRaised = true;
-            }
-            else if (tb->inherits("Fm::PathButton"))
+            if (tspec_.group_toolbar_buttons)
               drawRaised = true;
+          }
+          else if (tb && tb->inherits("Fm::PathButton"))
+            drawRaised = true;
 
-            indicator_spec dspec = getIndicatorSpec(group);
-            lspec = getLabelSpec(group);
+          indicator_spec dspec = getIndicatorSpec(group);
+          lspec = getLabelSpec(group);
 
-            QString aStatus = getState(option,widget);
-            if (QObject *styleObject = option->styleObject)
-            { // hover bug
-              if (aStatus.startsWith(QLatin1String("focused")) && styleObject->property("_kv_hover_bug").toBool())
-                aStatus.replace(QLatin1String("focused"),QLatin1String("normal"));
-            }
+          QString aStatus = getState(option,widget);
+          if (QObject *styleObject = option->styleObject)
+          { // hover bug
+            if (aStatus.startsWith(QLatin1String("focused")) && styleObject->property("_kv_hover_bug").toBool())
+              aStatus.replace(QLatin1String("focused"),QLatin1String("normal"));
+          }
 
-            /* use the "flat" indicator with flat buttons if it exists */
-            if (aStatus.startsWith(QLatin1String("normal"))
-                && autoraise && !drawRaised
-                && themeRndr_ && themeRndr_->isValid()
-                && flatArrowExists(dspec.element))
+          /* use the "flat" indicator with flat buttons if it exists */
+          if (aStatus.startsWith(QLatin1String("normal"))
+              && autoraise && !drawRaised
+              && themeRndr_ && themeRndr_->isValid()
+              && flatArrowExists(dspec.element))
+          {
+            QColor col = getFromRGBA(lspec.normalColor);
+            if (!col.isValid())
+              col = standardPalette().color(QPalette::ButtonText);
+            QWidget* menubar = nullptr;
+            if (qobject_cast<QMenuBar*>(gp))
+              menubar = gp;
+            else if (qobject_cast<QMenuBar*>(p))
+              menubar = p;
+            if (menubar)
             {
-              QColor col = getFromRGBA(lspec.normalColor);
-              if (!col.isValid())
-                col = standardPalette().color(QPalette::ButtonText);
-              QWidget* menubar = nullptr;
-              if (qobject_cast<QMenuBar*>(gp))
-                menubar = gp;
-              else if (qobject_cast<QMenuBar*>(p))
-                menubar = p;
-              if (menubar)
-              {
-                group = "MenuBar";
-                if (mergedToolbarHeight(menubar))
-                  group = "Toolbar";
-                if (enoughContrast(col, getFromRGBA(getLabelSpec(group).normalColor)))
-                  dspec.element = "flat-"+dspec.element;
-              }
-              else if (stb)
-              {
-                if (enoughContrast(col, getFromRGBA(getLabelSpec(QStringLiteral("Toolbar")).normalColor)))
-                  dspec.element = "flat-"+dspec.element;
-              }
-              else if (p && enoughContrast(col, p->palette().color(p->foregroundRole())))
+              group = "MenuBar";
+              if (mergedToolbarHeight(menubar))
+                group = "Toolbar";
+              if (enoughContrast(col, getFromRGBA(getLabelSpec(group).normalColor)))
                 dspec.element = "flat-"+dspec.element;
             }
-            fspec.right = fspec.left = 0;
-            Qt::Alignment ialign = Qt::AlignLeft | Qt::AlignVCenter;
-            // -> CE_ToolButtonLabel
-            if (qobject_cast<QAbstractItemView*>(gp))
+            else if (stb)
             {
-              fspec.top = qMin(fspec.top,3);
-              fspec.bottom = qMin(fspec.bottom,3);
+              if (enoughContrast(col, getFromRGBA(getLabelSpec(QStringLiteral("Toolbar")).normalColor)))
+                dspec.element = "flat-"+dspec.element;
             }
-            /* lack of space */
-            if (opt->toolButtonStyle == Qt::ToolButtonIconOnly && !opt->icon.isNull())
-            {
-              if (tb->width() < opt->iconSize.width()+fspec.left+fspec.right
-                                +dspec.size+ BUTTON_ARROW_MARGIN+lspec.tispace)
-              {
-                dspec.size = qMin(dspec.size,TOOL_BUTTON_ARROW_SIZE);
-                ialign = Qt::AlignRight | Qt::AlignBottom;
-              }
-            }
-            /* distinguish between the toggled and pressed states
-               only if a toggled down arrow element exists */
-            if (aStatus.startsWith(QLatin1String("toggled"))
-                && !(themeRndr_ && themeRndr_->isValid()
-                     && themeRndr_->elementExists(dspec.element+"-down-toggled")))
-            {
-              aStatus.replace(QLatin1String("toggled"),QLatin1String("pressed"));
-            }
-            renderIndicator(painter,
-                            o.rect,
-                            fspec,dspec,
-                            dspec.element+"-down-"+aStatus,
-                            option->direction,
-                            ialign,
-                            (lspec.bottom-lspec.top)/2);
+            else if (p && enoughContrast(col, p->palette().color(p->foregroundRole())))
+              dspec.element = "flat-"+dspec.element;
           }
+          fspec.right = fspec.left = 0;
+          Qt::Alignment ialign = Qt::AlignLeft | Qt::AlignVCenter;
+          // -> CE_ToolButtonLabel
+          if (qobject_cast<QAbstractItemView*>(gp))
+          {
+            fspec.top = qMin(fspec.top,3);
+            fspec.bottom = qMin(fspec.bottom,3);
+          }
+          /* lack of space */
+          if (tb && opt->toolButtonStyle == Qt::ToolButtonIconOnly && !opt->icon.isNull())
+          {
+            if (tb->width() < opt->iconSize.width()+fspec.left+fspec.right
+                              +dspec.size+ BUTTON_ARROW_MARGIN+lspec.tispace)
+            {
+              dspec.size = qMin(dspec.size,TOOL_BUTTON_ARROW_SIZE);
+              ialign = Qt::AlignRight | Qt::AlignBottom;
+            }
+          }
+          /* distinguish between the toggled and pressed states
+             only if a toggled down arrow element exists */
+          if (aStatus.startsWith(QLatin1String("toggled"))
+              && !(themeRndr_ && themeRndr_->isValid()
+                   && themeRndr_->elementExists(dspec.element+"-down-toggled")))
+          {
+            aStatus.replace(QLatin1String("toggled"),QLatin1String("pressed"));
+          }
+          renderIndicator(painter,
+                          o.rect,
+                          fspec,dspec,
+                          dspec.element+"-down-"+aStatus,
+                          option->direction,
+                          ialign,
+                          (lspec.bottom-lspec.top)/2);
         }
       }
 
@@ -12730,7 +12693,7 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
     case PM_ButtonMargin : return 0;
 
     case PM_ButtonShiftHorizontal :
-    case PM_ButtonShiftVertical : return tspec_.button_contents_shift ? 1 : 0;
+    case PM_ButtonShiftVertical : return /*tspec_.button_contents_shift ? 1 :*/ 0;
 
     case PM_DefaultFrameWidth : {
       if (qstyleoption_cast<const QStyleOptionButton*>(option))
@@ -14203,31 +14166,27 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
                       : dspec.size+lspec.tispace+INDICATOR_MARGIN,
                     0);
 
-        if (const QToolButton *tb = qobject_cast<const QToolButton*>(widget))
+        int arType = getArrowType(qobject_cast<const QToolButton*>(widget), opt);
+        if (arType == arrowNormal)
         {
-          if (tb->popupMode() == QToolButton::MenuButtonPopup)
-          {
-            const QString group1 = "DropDownButton";
-            const frame_spec fspec1 = getFrameSpec(group1);
-            indicator_spec dspec1 = getIndicatorSpec(group1);
-            QSize defaultSize(contentsSize.width() + 6, contentsSize.height() + 5); // as in qcommonstyle.cpp
-            dspec1.size = qMin(dspec1.size,qMin(defaultSize.height(),defaultSize.width()));
-            s.rwidth() += (opt->direction == Qt::RightToLeft ?
-                             fspec1.left-fspec.left
-                             : fspec1.right-fspec.right) // there's an attachment
-                          + dspec1.size+2*BUTTON_ARROW_MARGIN
-                          - pixelMetric(PM_MenuButtonIndicator) // added in QToolButton::sizeHint()
-                          /* If the style is not icon-only, 2 spaces are added to the width
-                             in QToolButton::sizeHint(). Here, we cautiously remove only 2px. */
+          const QString group1 = "DropDownButton";
+          const frame_spec fspec1 = getFrameSpec(group1);
+          indicator_spec dspec1 = getIndicatorSpec(group1);
+          QSize defaultSize(contentsSize.width() + 6, contentsSize.height() + 5); // as in qcommonstyle.cpp
+          dspec1.size = qMin(dspec1.size,qMin(defaultSize.height(),defaultSize.width()));
+          s.rwidth() += (opt->direction == Qt::RightToLeft ?
+                           fspec1.left-fspec.left
+                           : fspec1.right-fspec.right) // there's an attachment
+                        + dspec1.size+2*BUTTON_ARROW_MARGIN
+                        - pixelMetric(PM_MenuButtonIndicator) // added in QToolButton::sizeHint()
+                        /* If the style is not icon-only, 2 spaces are added to the width
+                           in QToolButton::sizeHint(). Here, we cautiously remove only 2px. */
+                        - (lspec.left < 1 || lspec.right < 1 || tialign == Qt::ToolButtonIconOnly ? 0 : 2);
+        }
+        else if (arType == arrowDelayed)
+        {
+            s.rwidth() += lspec.tispace+dspec.size + BUTTON_ARROW_MARGIN
                           - (lspec.left < 1 || lspec.right < 1 || tialign == Qt::ToolButtonIconOnly ? 0 : 2);
-          }
-          else if ((/*tb->popupMode() == QToolButton::InstantPopup
-                    || */tb->popupMode() == QToolButton::DelayedPopup)
-                   && (opt->features & QStyleOptionToolButton::HasMenu))
-          {
-              s.rwidth() += lspec.tispace+dspec.size + BUTTON_ARROW_MARGIN
-                            - (lspec.left < 1 || lspec.right < 1 || tialign == Qt::ToolButtonIconOnly ? 0 : 2);
-          }
         }
 
         /* consider text-icon spacing, shadow and bold text */
@@ -16071,78 +16030,75 @@ QRect Style::subControlRect(QStyle::ComplexControl control,
 
           if (opt)
           {
-            if (const QToolButton *tb = qobject_cast<const QToolButton*>(widget))
+            bool rtl(opt->direction == Qt::RightToLeft);
+            const auto tb = qobject_cast<const QToolButton*>(widget);
+            int arType = getArrowType(tb, opt);
+            if (arType == arrowNormal)
             {
-              bool rtl(opt->direction == Qt::RightToLeft);
-              if (tb->popupMode() == QToolButton::MenuButtonPopup)
+              const QString group = "DropDownButton";
+              frame_spec fspec = getFrameSpec(group);
+              indicator_spec dspec = getIndicatorSpec(group);
+              /* limit the arrow size */
+              dspec.size = qMin(dspec.size, h);
+              /* lack of space */
+              if (tb && opt && opt->toolButtonStyle == Qt::ToolButtonIconOnly && !opt->icon.isNull())
               {
-                const QString group = "DropDownButton";
-                frame_spec fspec = getFrameSpec(group);
-                indicator_spec dspec = getIndicatorSpec(group);
-                /* limit the arrow size */
-                dspec.size = qMin(dspec.size, h);
-                /* lack of space */
-                if (opt && opt->toolButtonStyle == Qt::ToolButtonIconOnly && !opt->icon.isNull())
+                const frame_spec fspec1 = getFrameSpec(QStringLiteral("PanelButtonTool"));
+                if (w < opt->iconSize.width()+fspec1.left
+                        +(rtl ? fspec.left : fspec.right)+dspec.size+2*BUTTON_ARROW_MARGIN)
                 {
-                  const frame_spec fspec1 = getFrameSpec(QStringLiteral("PanelButtonTool"));
-                  if (w < opt->iconSize.width()+fspec1.left
-                          +(rtl ? fspec.left : fspec.right)+dspec.size+2*BUTTON_ARROW_MARGIN)
-                  {
-                    if (rtl)
-                      fspec.left = qMin(fspec.left,3);
-                    else
-                      fspec.right = qMin(fspec.right,3);
-                    dspec.size = qMin(dspec.size,TOOL_BUTTON_ARROW_SIZE);
-                  }
+                  if (rtl)
+                    fspec.left = qMin(fspec.left,3);
+                  else
+                    fspec.right = qMin(fspec.right,3);
+                  dspec.size = qMin(dspec.size,TOOL_BUTTON_ARROW_SIZE);
                 }
-                return option->rect.adjusted(rtl ? fspec.left+dspec.size+2*BUTTON_ARROW_MARGIN : 0,
-                                             0,
-                                             rtl ? 0 : -fspec.right-dspec.size-2*BUTTON_ARROW_MARGIN,
-                                             0);
               }
-              else if ((/*tb->popupMode() == QToolButton::InstantPopup
-                        || */tb->popupMode() == QToolButton::DelayedPopup)
-                       && (opt->features & QStyleOptionToolButton::HasMenu))
+              return option->rect.adjusted(rtl ? fspec.left+dspec.size+2*BUTTON_ARROW_MARGIN : 0,
+                                           0,
+                                           rtl ? 0 : -fspec.right-dspec.size-2*BUTTON_ARROW_MARGIN,
+                                           0);
+            }
+            else if (arType == arrowDelayed)
+            {
+              const QString group = "PanelButtonTool";
+              frame_spec fspec = getFrameSpec(group);
+              indicator_spec dspec = getIndicatorSpec(group);
+              label_spec lspec = getLabelSpec(group);
+              // -> CE_ToolButtonLabel
+              if (qobject_cast<QAbstractItemView*>(getParent(widget,2)))
               {
-                const QString group = "PanelButtonTool";
-                frame_spec fspec = getFrameSpec(group);
-                indicator_spec dspec = getIndicatorSpec(group);
-                label_spec lspec = getLabelSpec(group);
-                // -> CE_ToolButtonLabel
-                if (qobject_cast<QAbstractItemView*>(getParent(widget,2)))
-                {
-                  fspec.left = qMin(fspec.left,3);
-                  fspec.right = qMin(fspec.right,3);
-                  lspec.tispace = qMin(lspec.tispace,3);
-                }
-                /* lack of space */
-                if (opt->toolButtonStyle == Qt::ToolButtonIconOnly && !opt->icon.isNull())
-                {
-                  if (w < opt->iconSize.width()+fspec.left+fspec.right
-                          +dspec.size+ BUTTON_ARROW_MARGIN+lspec.tispace)
-                  {
-                    if (rtl)
-                      fspec.left = qMin(fspec.left,3);
-                    else
-                      fspec.right = qMin(fspec.right,3);
-                    dspec.size = qMin(dspec.size,TOOL_BUTTON_ARROW_SIZE-TOOL_BUTTON_ARROW_OVERLAP);
-                    lspec.tispace = 0;
-                  }
-                }
-                return option->rect.adjusted(rtl ?
-                                               lspec.tispace+dspec.size
-                                                 // -> CE_ToolButtonLabel
-                                                 + fspec.left
-                                                 + BUTTON_ARROW_MARGIN
-                                               : 0,
-                                             0,
-                                             rtl ?
-                                               0
-                                               : - lspec.tispace-dspec.size
-                                                   - fspec.right
-                                                   - BUTTON_ARROW_MARGIN,
-                                             0);
+                fspec.left = qMin(fspec.left,3);
+                fspec.right = qMin(fspec.right,3);
+                lspec.tispace = qMin(lspec.tispace,3);
               }
+              /* lack of space */
+              if (tb && opt->toolButtonStyle == Qt::ToolButtonIconOnly && !opt->icon.isNull())
+              {
+                if (w < opt->iconSize.width()+fspec.left+fspec.right
+                        +dspec.size+ BUTTON_ARROW_MARGIN+lspec.tispace)
+                {
+                  if (rtl)
+                    fspec.left = qMin(fspec.left,3);
+                  else
+                    fspec.right = qMin(fspec.right,3);
+                  dspec.size = qMin(dspec.size,TOOL_BUTTON_ARROW_SIZE-TOOL_BUTTON_ARROW_OVERLAP);
+                  lspec.tispace = 0;
+                }
+              }
+              return option->rect.adjusted(rtl ?
+                                             lspec.tispace+dspec.size
+                                               // -> CE_ToolButtonLabel
+                                               + fspec.left
+                                               + BUTTON_ARROW_MARGIN
+                                             : 0,
+                                           0,
+                                           rtl ?
+                                             0
+                                             : - lspec.tispace-dspec.size
+                                                 - fspec.right
+                                                 - BUTTON_ARROW_MARGIN,
+                                           0);
             }
           }
 
@@ -16155,68 +16111,65 @@ QRect Style::subControlRect(QStyle::ComplexControl control,
 
           if (opt)
           {
-            if (const QToolButton *tb = qobject_cast<const QToolButton*>(widget))
+            bool rtl(opt->direction == Qt::RightToLeft);
+            const auto tb = qobject_cast<const QToolButton*>(widget);
+            int arType = getArrowType(tb, opt);
+            if (arType == arrowNormal)
             {
-              bool rtl(opt->direction == Qt::RightToLeft);
-              if (tb->popupMode() == QToolButton::MenuButtonPopup)
+              const QString group = "DropDownButton";
+              frame_spec fspec = getFrameSpec(group);
+              indicator_spec dspec = getIndicatorSpec(group);
+              /* limit the arrow size */
+              dspec.size = qMin(dspec.size, h);
+              /* lack of space */
+              if (tb && opt && opt->toolButtonStyle == Qt::ToolButtonIconOnly && !opt->icon.isNull())
               {
-                const QString group = "DropDownButton";
-                frame_spec fspec = getFrameSpec(group);
-                indicator_spec dspec = getIndicatorSpec(group);
-                /* limit the arrow size */
-                dspec.size = qMin(dspec.size, h);
-                /* lack of space */
-                if (opt && opt->toolButtonStyle == Qt::ToolButtonIconOnly && !opt->icon.isNull())
+                const frame_spec fspec1 = getFrameSpec(QStringLiteral("PanelButtonTool"));
+                if (w < opt->iconSize.width()+fspec1.left
+                        +(rtl ? fspec.left : fspec.right)+dspec.size+2*BUTTON_ARROW_MARGIN)
                 {
-                  const frame_spec fspec1 = getFrameSpec(QStringLiteral("PanelButtonTool"));
-                  if (w < opt->iconSize.width()+fspec1.left
-                          +(rtl ? fspec.left : fspec.right)+dspec.size+2*BUTTON_ARROW_MARGIN)
-                  {
-                    if (rtl)
-                      fspec.left = qMin(fspec.left,3);
-                    else
-                      fspec.right = qMin(fspec.right,3);
-                    dspec.size = qMin(dspec.size,TOOL_BUTTON_ARROW_SIZE);
-                  }
+                  if (rtl)
+                    fspec.left = qMin(fspec.left,3);
+                  else
+                    fspec.right = qMin(fspec.right,3);
+                  dspec.size = qMin(dspec.size,TOOL_BUTTON_ARROW_SIZE);
                 }
-                int l = (rtl ? fspec.left : fspec.right)+dspec.size+2*BUTTON_ARROW_MARGIN;
-                return QRect(rtl ? x : x+w-l,
-                             y,l,h);
               }
-              else if ((/*tb->popupMode() == QToolButton::InstantPopup
-                        || */tb->popupMode() == QToolButton::DelayedPopup)
-                       && (opt->features & QStyleOptionToolButton::HasMenu))
+              int l = (rtl ? fspec.left : fspec.right)+dspec.size+2*BUTTON_ARROW_MARGIN;
+              return QRect(rtl ? x : x+w-l,
+                           y,l,h);
+            }
+            else if (arType == arrowDelayed)
+            {
+              const QString group = "PanelButtonTool";
+              frame_spec fspec = getFrameSpec(group);
+              indicator_spec dspec = getIndicatorSpec(group);
+              // -> CE_ToolButtonLabel
+              if (qobject_cast<QAbstractItemView*>(getParent(widget,2)))
               {
-                const QString group = "PanelButtonTool";
-                frame_spec fspec = getFrameSpec(group);
-                indicator_spec dspec = getIndicatorSpec(group);
-                // -> CE_ToolButtonLabel
-                if (qobject_cast<QAbstractItemView*>(getParent(widget,2)))
-                {
-                  fspec.left = qMin(fspec.left,3);
-                  fspec.right = qMin(fspec.right,3);
-                }
-                /* lack of space */
-                if (opt->toolButtonStyle == Qt::ToolButtonIconOnly && !opt->icon.isNull())
-                {
-                  const label_spec lspec = getLabelSpec(group);
-                  if (w < opt->iconSize.width()+fspec.left+fspec.right
-                          +dspec.size+ BUTTON_ARROW_MARGIN+lspec.tispace)
-                  {
-                    if (rtl)
-                      fspec.left = qMin(fspec.left,3);
-                    else
-                      fspec.right = qMin(fspec.right,3);
-                    dspec.size = qMin(dspec.size,TOOL_BUTTON_ARROW_SIZE);
-                  }
-                }
-                int l = dspec.size
-                        // -> CE_ToolButtonLabel
-                        + (rtl ? fspec.left : fspec.right)
-                        + BUTTON_ARROW_MARGIN;
-                return QRect(rtl ? x : x+w-l,
-                             y,l,h);
+                fspec.left = qMin(fspec.left,3);
+                fspec.right = qMin(fspec.right,3);
               }
+              /* lack of space */
+              if (tb && opt->toolButtonStyle == Qt::ToolButtonIconOnly && !opt->icon.isNull())
+              {
+                const label_spec lspec = getLabelSpec(group);
+                if (w < opt->iconSize.width()+fspec.left+fspec.right
+                        +dspec.size+ BUTTON_ARROW_MARGIN+lspec.tispace)
+                {
+                  if (rtl)
+                    fspec.left = qMin(fspec.left,3);
+                  else
+                    fspec.right = qMin(fspec.right,3);
+                  dspec.size = qMin(dspec.size,TOOL_BUTTON_ARROW_SIZE);
+                }
+              }
+              int l = dspec.size
+                      // -> CE_ToolButtonLabel
+                      + (rtl ? fspec.left : fspec.right)
+                      + BUTTON_ARROW_MARGIN;
+              return QRect(rtl ? x : x+w-l,
+                           y,l,h);
             }
           }
 

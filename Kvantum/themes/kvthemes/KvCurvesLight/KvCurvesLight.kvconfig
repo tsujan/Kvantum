@@ -43,7 +43,6 @@ button_icon_size=16
 toolbar_icon_size=16
 tooltip_delay=-1
 animate_states=true
-button_contents_shift=true
 groupbox_top_label=false
 joined_inactive_tabs=true
 layout_spacing=3

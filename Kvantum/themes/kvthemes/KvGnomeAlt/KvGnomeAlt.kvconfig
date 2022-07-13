@@ -50,7 +50,6 @@ tooltip_delay=-1
 submenu_overlap=3
 animate_states=true
 tree_branch_line=true
-button_contents_shift=true
 groupbox_top_label=false
 joined_inactive_tabs=true
 layout_margin=4

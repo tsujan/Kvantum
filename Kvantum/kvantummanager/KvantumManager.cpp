@@ -1127,10 +1127,6 @@ void KvantumManager::defaultThemeButtons()
         ui->checkBoxMenubar->setChecked (true);
     ui->checkBoxMenuToolbar->setChecked (defaultSettings.value ("merge_menubar_with_toolbar").toBool());
     ui->checkBoxGroupToolbar->setChecked (defaultSettings.value ("group_toolbar_buttons").toBool());
-    if (defaultSettings.contains ("button_contents_shift")) // it's true by default
-        ui->checkBoxButtonShift->setChecked (defaultSettings.value ("button_contents_shift").toBool());
-    else
-        ui->checkBoxButtonShift->setChecked (true);
     if (defaultSettings.contains ("alt_mnemonic")) // it's true by default
         ui->checkBoxAlt->setChecked (defaultSettings.value ("alt_mnemonic").toBool());
     else
@@ -1509,8 +1505,6 @@ void KvantumManager::tabChanged (int index)
                     ui->checkBoxMenuToolbar->setChecked (themeSettings.value ("merge_menubar_with_toolbar").toBool());
                 if (themeSettings.contains ("group_toolbar_buttons"))
                     ui->checkBoxGroupToolbar->setChecked (themeSettings.value ("group_toolbar_buttons").toBool());
-                if (themeSettings.contains ("button_contents_shift"))
-                    ui->checkBoxButtonShift->setChecked (themeSettings.value ("button_contents_shift").toBool());
                 if (themeSettings.contains ("alt_mnemonic"))
                     ui->checkBoxAlt->setChecked (themeSettings.value ("alt_mnemonic").toBool());
                 int delay = -1;
@@ -2390,7 +2384,6 @@ void KvantumManager::writeConfig()
         generalKeys.insert ("menubar_mouse_tracking",  boolToStr (ui->checkBoxMenubar->isChecked()));
         generalKeys.insert ("merge_menubar_with_toolbar", boolToStr (ui->checkBoxMenuToolbar->isChecked()));
         generalKeys.insert ("group_toolbar_buttons", boolToStr (ui->checkBoxGroupToolbar->isChecked()));
-        generalKeys.insert ("button_contents_shift", boolToStr (ui->checkBoxButtonShift->isChecked()));
         generalKeys.insert ("alt_mnemonic", boolToStr (ui->checkBoxAlt->isChecked()));
         generalKeys.insert ("tooltip_delay", str.setNum (ui->spinTooltipDelay->value()));
         generalKeys.insert ("submenu_delay", str.setNum (ui->spinSubmenuDelay->value()));
@@ -2517,7 +2510,6 @@ void KvantumManager::writeConfig()
             || themeSettings.value ("transient_scrollbar").toBool() != ui->checkBoxTransient->isChecked()
             || themeSettings.value ("transient_groove").toBool() != ui->checkBoxTransientGroove->isChecked()
             || themeSettings.value ("groupbox_top_label").toBool() != ui->checkBoxGroupLabel->isChecked()
-            || themeSettings.value ("button_contents_shift").toBool() != ui->checkBoxButtonShift->isChecked()
             || qMin (qMax (themeSettings.value ("button_icon_size").toInt(), 16), 64) != ui->spinButton->value()
             || qMin (qMax (themeSettings.value ("layout_spacing").toInt(), 2), 16) != ui->spinLayout->value()
             || qMin (qMax (themeSettings.value ("layout_margin").toInt(), 2), 16) != ui->spinLayoutMargin->value()

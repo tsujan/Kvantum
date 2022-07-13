@@ -50,7 +50,6 @@ remove_extra_frames=true
 layout_spacing=3
 submenu_overlap=0
 tooltip_delay=-1
-button_contents_shift=false
 animate_states=true
 hide_combo_checkboxes=false
 layout_margin=4

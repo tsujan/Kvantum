@@ -1777,15 +1777,12 @@ This option will hide these.</string>
                 </widget>
                </item>
                <item row="5" column="3" colspan="2">
-                <widget class="QCheckBox" name="checkBoxButtonShift">
+                <widget class="QCheckBox" name="checkBoxAlt">
                  <property name="toolTip">
-                  <string>Shift the contents of push buttons when pressed?
-
-By default, the contents are shifted by 1px
-both horizontally and vertically.</string>
+                  <string>If unchecked, shortcuts will not be underlined at all.</string>
                  </property>
                  <property name="text">
-                  <string>Shift push-button contents</string>
+                  <string>Underline shortcuts with Alt</string>
                  </property>
                 </widget>
                </item>
@@ -1796,16 +1793,6 @@ both horizontally and vertically.</string>
                  </property>
                  <property name="text">
                   <string>Left aligned tabs</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="6" column="3" colspan="2">
-                <widget class="QCheckBox" name="checkBoxAlt">
-                 <property name="toolTip">
-                  <string>If unchecked, shortcuts will not be underlined at all.</string>
-                 </property>
-                 <property name="text">
-                  <string>Underline shortcuts with Alt</string>
                  </property>
                 </widget>
                </item>
@@ -1834,7 +1821,7 @@ If disabled, see Compositing &amp; General Look → Transient scrollbars!</strin
                  </property>
                 </widget>
                </item>
-               <item row="8" column="3">
+               <item row="7" column="3">
                 <widget class="QLabel" name="label_10">
                  <property name="toolTip">
                   <string>How to activate view items?</string>
@@ -1844,7 +1831,7 @@ If disabled, see Compositing &amp; General Look → Transient scrollbars!</strin
                  </property>
                 </widget>
                </item>
-               <item row="8" column="4">
+               <item row="7" column="4">
                 <widget class="QComboBox" name="comboClick">
                  <property name="toolTip">
                   <string>How to activate view items?</string>
@@ -1880,7 +1867,7 @@ If disabled, see Compositing &amp; General Look → Transient scrollbars!</strin
                  </property>
                 </spacer>
                </item>
-               <item row="9" column="3">
+               <item row="8" column="3">
                 <widget class="QLabel" name="label_2">
                  <property name="toolTip">
                   <string>Will have effect only if style
@@ -1893,7 +1880,7 @@ Default is &quot;Follow Style&quot;.</string>
                  </property>
                 </widget>
                </item>
-               <item row="9" column="4">
+               <item row="8" column="4">
                 <widget class="QComboBox" name="comboToolButton">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
@@ -1936,14 +1923,14 @@ If disabled, see Compositing &amp; General Look → Transient scrollbars!</strin
                  </property>
                 </widget>
                </item>
-               <item row="10" column="3">
+               <item row="9" column="3">
                 <widget class="QLabel" name="label_3">
                  <property name="text">
                   <string>Dialog button layout:</string>
                  </property>
                 </widget>
                </item>
-               <item row="10" column="4">
+               <item row="9" column="4">
                 <widget class="QComboBox" name="comboDialogButton"/>
                </item>
                <item row="10" column="1">

@@ -23,7 +23,6 @@ popup_blurring=false
 toolbar_icon_size=16
 alt_mnemonic=true
 animate_states=true
-button_contents_shift=true
 button_icon_size=16
 combo_as_lineedit=true
 combo_menu=true

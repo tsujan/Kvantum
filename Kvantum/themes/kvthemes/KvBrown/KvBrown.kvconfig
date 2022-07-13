@@ -26,7 +26,6 @@ toolbar_icon_size=16
 toolbar_interior_spacing=3
 animate_states=true
 alt_mnemonic=true
-button_contents_shift=true
 button_icon_size=16
 combo_as_lineedit=true
 combo_menu=true

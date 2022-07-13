@@ -41,7 +41,6 @@ button_icon_size=16
 toolbar_icon_size=22
 combo_as_lineedit=true
 animate_states=false
-button_contents_shift=false
 combo_menu=true
 hide_combo_checkboxes=true
 combo_focus_rect=true

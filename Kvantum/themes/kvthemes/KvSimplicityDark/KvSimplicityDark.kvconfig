@@ -50,7 +50,6 @@ joined_inactive_tabs=true
 layout_spacing=3
 submenu_overlap=0
 tooltip_delay=-1
-button_contents_shift=true
 animate_states=true
 no_window_pattern=false
 dark_titlebar=true

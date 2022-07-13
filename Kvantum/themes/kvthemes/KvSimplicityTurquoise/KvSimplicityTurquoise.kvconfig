@@ -47,7 +47,6 @@ combo_menu=true
 combo_focus_rect=true
 inline_spin_indicators=true
 animate_states=true
-button_contents_shift=true
 groupbox_top_label=false
 joined_inactive_tabs=true
 remove_extra_frames=true

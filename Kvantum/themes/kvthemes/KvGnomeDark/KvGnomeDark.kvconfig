@@ -54,7 +54,6 @@ tooltip_delay=-1
 submenu_overlap=0
 animate_states=true
 tree_branch_line=true
-button_contents_shift=true
 contrast=1.00
 dialog_button_layout=2
 groupbox_top_label=false

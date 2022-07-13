@@ -23,7 +23,6 @@ check_size=16
 opaque=kaffeine,kmplayer,subtitlecomposer,kdenlive,vlc,smplayer,smplayer2,avidemux,avidemux2_qt4,avidemux3_qt4,avidemux3_qt5,kamoso,QtCreator,VirtualBox,VirtualBoxVM,trojita,dragon,digikam,lyx
 animate_states=true
 blurring=false
-button_contents_shift=true
 button_icon_size=16
 combo_as_lineedit=true
 combo_menu=true

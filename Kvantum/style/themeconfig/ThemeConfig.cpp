@@ -958,9 +958,9 @@ theme_spec ThemeConfig::getThemeSpec()
   v = getValue(KSL("General"),KSL("groupbox_top_label"));
   r.groupbox_top_label = v.toBool();
 
-  v = getValue(KSL("General"),KSL("button_contents_shift"));
+  /*v = getValue(KSL("General"),KSL("button_contents_shift"));
   if (v.isValid()) // true by default
-    r.button_contents_shift = v.toBool();
+    r.button_contents_shift = v.toBool();*/
 
   v = getValue(KSL("General"),KSL("transient_scrollbar"));
   r.transient_scrollbar = v.toBool();

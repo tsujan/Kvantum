@@ -52,6 +52,7 @@ public:
     QActionGroup *aGroup = new QActionGroup (this);
     actionMenu_radio->setActionGroup (aGroup);
     actionMenu_radio1->setActionGroup (aGroup);
+    pushButton_8->setMenu (menuFile);
     actionMenuButton->setMenu (menuFile);
     toolButton_8->setMenu (menuFile);
 

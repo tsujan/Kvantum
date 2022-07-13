@@ -44,7 +44,6 @@ combo_focus_rect=true
 scroll_arrows=false
 scroll_min_extent=50
 toolbar_icon_size=16
-button_contents_shift=true
 groupbox_top_label=true
 inline_spin_indicators=true
 layout_spacing=3
