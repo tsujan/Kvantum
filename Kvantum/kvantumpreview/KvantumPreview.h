@@ -154,6 +154,7 @@ private slots:
     pushButton_12->setFlat (checked);
     pushButton_6->setFlat (checked);
     pushButton_7->setFlat (checked);
+    pushButton_8->setFlat (checked);
   }
   void makeAutoRaise (bool checked) {
     toolButton->setAutoRaise (checked);

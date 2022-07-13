@@ -4,6 +4,7 @@ V1.0.4
  * Added 1px to button arrow margin.
  * Considered more details in drawing menu arrows of buttons (especially when QToolButton is null).
  * Removed button contents shift (it was useless and inconsistent).
+ * Added a pushbutton with menu to kvantumpreview.
 
 V1.0.3
 ---------
