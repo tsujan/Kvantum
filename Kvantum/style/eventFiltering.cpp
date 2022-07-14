@@ -1055,7 +1055,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         qreal dX = 0, dY = 0;
         /* this gives the real position AFTER pending movements
            because it's QWidgetData::crect (Qt -> qwidget.h) */
-        QRect g(w->geometry());
+        const QRect g(w->geometry());
 
         /* WARNING: If compositing is stopped here, we aren't responsible.
                     A check for the state of compositing at this very moment
@@ -1067,6 +1067,8 @@ bool Style::eventFilter(QObject *o, QEvent *e)
 
           dY -= menuShadow_.at(1); // top shadow
 
+          QPushButton *pBtn = nullptr;
+          QToolButton *tBtn = nullptr;
           if (w->layoutDirection() == Qt::RightToLeft)
           { // see explanations for ltr below
             dX += menuShadow_.at(2);
@@ -1105,7 +1107,11 @@ bool Style::eventFilter(QObject *o, QEvent *e)
               }
               else
               {
-                if (!sunkenButton_.isNull())
+                if (!sunkenButton_.isNull()
+                    && (((pBtn = qobject_cast<QPushButton*>(sunkenButton_.data()))
+                         && pBtn->menu() == w)
+                        || ((tBtn = qobject_cast<QToolButton*>(sunkenButton_.data()))
+                            && tBtn->menu() == w)))
                 {
                   QPoint wTopLeft = sunkenButton_.data()->mapToGlobal(QPoint(0,0));
                   if (wTopLeft.y() >= g.bottom())
@@ -1176,8 +1182,12 @@ bool Style::eventFilter(QObject *o, QEvent *e)
               }
               else
               {
-                if (!sunkenButton_.isNull()) // the menu is triggered by a button
-                {
+                if (!sunkenButton_.isNull()
+                    && (((pBtn = qobject_cast<QPushButton*>(sunkenButton_.data()))
+                         && pBtn->menu() == w)
+                        || ((tBtn = qobject_cast<QToolButton*>(sunkenButton_.data()))
+                            && tBtn->menu() == w)))
+                { // the menu is triggered by a push or tool button
                   QPoint wTopLeft = sunkenButton_.data()->mapToGlobal(QPoint(0,0));
                   if (wTopLeft.y() >= g.bottom()) // above the button (strange! Qt doesn't add 1px)
                     dY +=  menuShadow_.at(1) + menuShadow_.at(3);

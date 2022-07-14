@@ -2089,22 +2089,17 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
     case PE_PanelButtonTool : {
       const QStyleOptionToolButton *opt = qstyleoption_cast<const QStyleOptionToolButton*>(option);
       const QToolButton *tb = qobject_cast<const QToolButton*>(widget);
-      if (widget != nullptr)
-      {
-        if ((option->state & State_Sunken)
-            && ((opt && (opt->features & QStyleOptionToolButton::HasMenu))
-                || (tb && tb->menu())))
-        {
-          sunkenButton_ = const_cast<QWidget*>(widget);
-        }
-        else if (sunkenButton_.data() == widget)
-          sunkenButton_.clear();
-        /* the extension button arrow has no state */
-        if (widget->objectName() == "qt_toolbar_ext_button"
-            || widget->objectName() == "qt_menubar_ext_button")
-        {
-          break;
-        }
+
+      if ((option->state & State_Sunken) && tb && tb->menu())
+        sunkenButton_ = const_cast<QWidget*>(widget);
+      else if (sunkenButton_.data() == widget)
+        sunkenButton_.clear();
+
+      if (widget != nullptr
+          && (widget->objectName() == "qt_toolbar_ext_button"
+              || widget->objectName() == "qt_menubar_ext_button"))
+      { // the extension button arrow has no state
+        break;
       }
       interior_spec ispec;
       QString group = "PanelButtonTool";
@@ -2175,30 +2170,18 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
       }
 
       QObject *styleObject = option->styleObject;
-      const QString prevState = styleObject != nullptr
-                                  ? styleObject->property("_kv_state").toString()
-                                  : QString();
 
       /* Due to a Qt5 bug (which I call "the hover bug"), comboboxes and buttons may have
          the WA_UnderMouse attribute without being under the cursor after their menus are
          closed or they are enabled. Hence we use the following logic in several places.
          It will be harmless if the bug is fixed (but shouldn't be used with dragging from buttons). */
-      if (!prevState.isEmpty())
+      if (styleObject != nullptr)
       {
         if (!btnDragInProgress() && status.startsWith(QLatin1String("focused"))
-            && (prevState.startsWith(QLatin1String("pressed")) // if it was pressed before...
-                /* ... or if it was disabled (see below) */
-                || (prevState.startsWith(QLatin1String("normal"))
-                    && styleObject->property("_kv_hover_bug").toBool()))
             && isCursorOutsideWidget(widget))
         {
           styleObject->setProperty("_kv_hover_bug", true);
           status.replace(QLatin1String("focused"),QLatin1String("normal"));
-        }
-        else if (!(option->state & State_Enabled))
-        {
-          /* to mark the disabled state (drawn as normal but with translucency) */
-          styleObject->setProperty("_kv_hover_bug", true);
         }
         else
           styleObject->setProperty("_kv_hover_bug", QVariant());
@@ -2490,6 +2473,9 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           }
         }
 
+        const QString prevState = styleObject != nullptr
+                                    ? styleObject->property("_kv_state").toString()
+                                    : QString();
         bool animate(!btnDragInProgress()
                      && widget->isEnabled() && animatedWidget_ == widget
                      && !prevState.isEmpty());
@@ -9471,41 +9457,23 @@ void Style::drawControl(QStyle::ControlElement element,
     case CE_PushButtonBevel : { // bevel and indicator
       const QStyleOptionButton *opt = qstyleoption_cast<const QStyleOptionButton*>(option);
       const QPushButton *pb = qobject_cast<const QPushButton*>(widget);
-      if (widget != nullptr)
-      {
-        if ((option->state & State_Sunken)
-            && ((opt && (opt->features & QStyleOptionButton::HasMenu))
-                || (pb && pb->menu())))
-        {
-          sunkenButton_ = const_cast<QWidget*>(widget);
-        }
-        else if (sunkenButton_.data() == widget)
-          sunkenButton_.clear();
-      }
+
+      if ((option->state & State_Sunken) && pb && pb->menu())
+        sunkenButton_ = const_cast<QWidget*>(widget);
+      else if (sunkenButton_.data() == widget)
+        sunkenButton_.clear();
 
       if (opt) {
         QObject *styleObject = option->styleObject;
-        const QString prevState = styleObject != nullptr
-                                    ? styleObject->property("_kv_state").toString()
-                                    : QString();
 
         QString status = getState(option,widget);
-        if (!prevState.isEmpty())
+        if (styleObject != nullptr)
         { // hover bug
           if (!btnDragInProgress() && status.startsWith(QLatin1String("focused"))
-              && (prevState.startsWith(QLatin1String("pressed")) // if it was pressed before…
-                  /* ... or if it was disabled (see below) */
-                  || (prevState.startsWith(QLatin1String("normal"))
-                      && styleObject->property("_kv_hover_bug").toBool()))
               && isCursorOutsideWidget(widget))
           {
             styleObject->setProperty("_kv_hover_bug", true);
             status.replace(QLatin1String("focused"),QLatin1String("normal"));
-          }
-          else if (!(option->state & State_Enabled))
-          {
-            /* to mark the disabled state (drawn as normal but with translucency) */
-            styleObject->setProperty("_kv_hover_bug", true);
           }
           else
             styleObject->setProperty("_kv_hover_bug", QVariant());
@@ -9725,6 +9693,10 @@ void Style::drawControl(QStyle::ControlElement element,
             painter->save();
             painter->setOpacity(0.5);
           }
+
+          const QString prevState = styleObject != nullptr
+                                      ? styleObject->property("_kv_state").toString()
+                                      : QString();
           bool animate(!btnDragInProgress()
                        && widget && widget->isEnabled() && animatedWidget_ == widget
                        && !prevState.isEmpty()
