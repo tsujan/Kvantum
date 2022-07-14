@@ -182,6 +182,7 @@ bool WindowManager::eventFilter (QObject *object, QEvent *event)
       break;
 
     case QEvent::WindowBlocked:
+    case QEvent::FocusOut: //e.g., a popup is shown
     case QEvent::Leave:
     case QEvent::Hide:
       if (object == winTarget_.data())
@@ -258,6 +259,16 @@ void WindowManager::timerEvent (QTimerEvent *event)
                          QPoint (-1, -1),
                          Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
           qApp->sendEvent (widgetTarget_.data(), &e);
+#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+          /* NOTE: With Qt5, a leave event will be sent automatically if the drag is
+                   finished and the cursor moves inside the window but outside the widget.
+                   That doesn't happen with Qt6, and the widget stays in the hover state,
+                   unless the cursor enters and leaves it. So, we send a leave event here.
+                   Fortunately, if the widget is under the cursor after the drag is finished,
+                   an enter event will be sent to it automatically, restoring its hover state. */
+          QEvent e1 (QEvent::Leave);
+          qApp->sendEvent (widgetTarget_.data(), &e1);
+#endif
         }
         if (!_WMExists) return; // see mousePressEvent for the reason
         if (winTarget_)

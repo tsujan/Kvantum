@@ -1,6 +1,8 @@
 V1.0.4
 ---------
  * Added a workaround for Qt6's double click problem with window dragging.
+ * Added a workaround for Qt6's window dragging when the cursor is outside the widget after the drag is finished (previously, its hover state would persist).
+ * Don't start window dragging if a popup menu is shown and closed quickly (may happen very rarely).
  * Added 1px to button arrow margin.
  * Considered more details in drawing menu arrows of buttons (especially when QToolButton is null).
  * Removed button contents shift (it was useless and inconsistent).
