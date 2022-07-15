@@ -182,7 +182,7 @@ bool WindowManager::eventFilter (QObject *object, QEvent *event)
       break;
 
     case QEvent::WindowBlocked:
-    case QEvent::FocusOut: //e.g., a popup is shown
+    case QEvent::FocusOut: // e.g., a popup is shown
     case QEvent::Leave:
     case QEvent::Hide:
       if (object == winTarget_.data())

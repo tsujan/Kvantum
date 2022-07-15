@@ -2089,17 +2089,22 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
     case PE_PanelButtonTool : {
       const QStyleOptionToolButton *opt = qstyleoption_cast<const QStyleOptionToolButton*>(option);
       const QToolButton *tb = qobject_cast<const QToolButton*>(widget);
-
-      if ((option->state & State_Sunken) && tb && tb->menu())
-        sunkenButton_ = const_cast<QWidget*>(widget);
-      else if (sunkenButton_.data() == widget)
-        sunkenButton_.clear();
-
-      if (widget != nullptr
-          && (widget->objectName() == "qt_toolbar_ext_button"
-              || widget->objectName() == "qt_menubar_ext_button"))
-      { // the extension button arrow has no state
-        break;
+      if (widget != nullptr)
+      {
+        if ((option->state & State_Sunken)
+            && ((opt && (opt->features & QStyleOptionToolButton::HasMenu))
+                || (tb && tb->menu())))
+        {
+          sunkenButton_ = const_cast<QWidget*>(widget);
+        }
+        else if (sunkenButton_.data() == widget)
+          sunkenButton_.clear();
+        /* the extension button arrow has no state */
+        if (widget->objectName() == "qt_toolbar_ext_button"
+            || widget->objectName() == "qt_menubar_ext_button")
+        {
+          break;
+        }
       }
       interior_spec ispec;
       QString group = "PanelButtonTool";
@@ -9457,11 +9462,17 @@ void Style::drawControl(QStyle::ControlElement element,
     case CE_PushButtonBevel : { // bevel and indicator
       const QStyleOptionButton *opt = qstyleoption_cast<const QStyleOptionButton*>(option);
       const QPushButton *pb = qobject_cast<const QPushButton*>(widget);
-
-      if ((option->state & State_Sunken) && pb && pb->menu())
-        sunkenButton_ = const_cast<QWidget*>(widget);
-      else if (sunkenButton_.data() == widget)
-        sunkenButton_.clear();
+      if (widget != nullptr)
+      {
+        if ((option->state & State_Sunken)
+            && ((opt && (opt->features & QStyleOptionButton::HasMenu))
+                || (pb && pb->menu())))
+        {
+          sunkenButton_ = const_cast<QWidget*>(widget);
+        }
+        else if (sunkenButton_.data() == widget)
+          sunkenButton_.clear();
+      }
 
       if (opt) {
         QObject *styleObject = option->styleObject;
@@ -9799,13 +9810,14 @@ void Style::drawControl(QStyle::ControlElement element,
         {
           painter->restore();
           status = "disabled";
+          if (isWidgetInactive(widget))
+            status.append("-inactive");
         }
 
         if (opt->features & QStyleOptionButton::HasMenu)
         {
           int hShift = 0;
           int vShift = 0;
-          QString aStatus = "normal";
           /* use the "flat" indicator with flat buttons if it exists */
           if ((opt->features & QStyleOptionButton::Flat) && status.startsWith(QLatin1String("normal")))
           {
@@ -9819,34 +9831,18 @@ void Style::drawControl(QStyle::ControlElement element,
                 dspec.element = "flat-"+dspec.element;
             }
           }
-          else
+          else if (status.startsWith(QLatin1String("toggled")) || status.startsWith(QLatin1String("pressed")))
           {
-            if (!(option->state & State_Enabled))
-              aStatus = "disabled";
-            else if (status.startsWith(QLatin1String("toggled")) || status.startsWith(QLatin1String("pressed")))
-            {
-              aStatus = "pressed";
-              hShift = pixelMetric(PM_ButtonShiftHorizontal);
-              vShift = pixelMetric(PM_ButtonShiftVertical);
-            }
-            else if (option->state & State_MouseOver)
-            {
-              if (styleObject == nullptr
-                  || !styleObject->property("_kv_hover_bug").toBool()) // hover bug
-              {
-                aStatus = "focused";
-              }
-            }
+            hShift = pixelMetric(PM_ButtonShiftHorizontal);
+            vShift = pixelMetric(PM_ButtonShiftVertical);
           }
-          if (isWidgetInactive(widget))
-            aStatus.append("-inactive");
           renderIndicator(painter,
                           option->rect.adjusted(opt->direction == Qt::RightToLeft ? BUTTON_ARROW_MARGIN : 0,
                                                 0,
                                                 opt->direction == Qt::RightToLeft ? 0 : -BUTTON_ARROW_MARGIN,
                                                 0)
                                        .adjusted(hShift,vShift,hShift,vShift),
-                          fspec,dspec,dspec.element+"-down-"+aStatus,
+                          fspec,dspec,dspec.element+"-down-"+status,
                           option->direction,
                           Qt::AlignRight | Qt::AlignVCenter,
                           (lspec.bottom-lspec.top)/2);

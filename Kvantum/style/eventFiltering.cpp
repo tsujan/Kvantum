@@ -1082,66 +1082,61 @@ bool Style::eventFilter(QObject *o, QEvent *e)
                       - static_cast<qreal>(getMenuMargin(true)); // workaround for an old Qt bug
               }
             }
-            else
+            else if (parentMenubar)
             {
-              if (parentMenubar)
-              {
-                QString group = tspec_.merge_menubar_with_toolbar ? "Toolbar" : "MenuBar";
-                if (parentMenubar->mapToGlobal(QPoint(0,0)).y() > g.bottom())
-                  dY +=  menuShadow_.at(1) + menuShadow_.at(3) + static_cast<qreal>(getFrameSpec(group).top);
-                else
-                  dY -= static_cast<qreal>(getFrameSpec(group).bottom);
-
-                QRect activeG = parentMenubar->actionGeometry(parentMenubar->activeAction());
-                QPoint activeTopLeft = parentMenubar->mapToGlobal(activeG.topLeft());
-                if (g.right() + 1 > activeTopLeft.x() + activeG.width())
-                { // Qt positions the menu wrongly in this case but we don't add a workaround
-                  dX -= menuShadow_.at(2);
-                  qreal delta = menuShadow_.at(2)
-                                - static_cast<qreal>(g.right() + 1 - (activeTopLeft.x() + activeG.width()));
-                  if (delta > 0)
-                    dX += delta;
-                  else
-                    dX -= qMin(menuShadow_.at(0), -delta);
-                }
-              }
+              QString group = tspec_.merge_menubar_with_toolbar ? "Toolbar" : "MenuBar";
+              if (parentMenubar->mapToGlobal(QPoint(0,0)).y() > g.bottom())
+                dY +=  menuShadow_.at(1) + menuShadow_.at(3) + static_cast<qreal>(getFrameSpec(group).top);
               else
+                dY -= static_cast<qreal>(getFrameSpec(group).bottom);
+
+              QRect activeG = parentMenubar->actionGeometry(parentMenubar->activeAction());
+              QPoint activeTopLeft = parentMenubar->mapToGlobal(activeG.topLeft());
+              if (g.right() + 1 > activeTopLeft.x() + activeG.width())
+              { // Qt positions the menu wrongly in this case but we don't add a workaround
+                dX -= menuShadow_.at(2);
+                qreal delta = menuShadow_.at(2)
+                              - static_cast<qreal>(g.right() + 1 - (activeTopLeft.x() + activeG.width()));
+                if (delta > 0)
+                  dX += delta;
+                else
+                  dX -= qMin(menuShadow_.at(0), -delta);
+              }
+            }
+            else if (!sunkenButton_.isNull()
+                     && (!(pBtn = qobject_cast<QPushButton*>(sunkenButton_.data()))
+                         || pBtn->menu() == w)
+                     && (!(tBtn = qobject_cast<QToolButton*>(sunkenButton_.data()))
+                         || tBtn->menu() == w
+                         || (tBtn->defaultAction() && tBtn->defaultAction()->menu() == w)))
+            {
+              QPoint wTopLeft = sunkenButton_.data()->mapToGlobal(QPoint(0,0));
+              if (wTopLeft.y() >= g.bottom())
+                dY +=  menuShadow_.at(1) + menuShadow_.at(3);
+              if (g.right() + 1 > wTopLeft.x() + sunkenButton_.data()->width())
               {
-                if (!sunkenButton_.isNull()
-                    && (((pBtn = qobject_cast<QPushButton*>(sunkenButton_.data()))
-                         && pBtn->menu() == w)
-                        || ((tBtn = qobject_cast<QToolButton*>(sunkenButton_.data()))
-                            && tBtn->menu() == w)))
-                {
-                  QPoint wTopLeft = sunkenButton_.data()->mapToGlobal(QPoint(0,0));
-                  if (wTopLeft.y() >= g.bottom())
-                    dY +=  menuShadow_.at(1) + menuShadow_.at(3);
-                  if (g.right() + 1 > wTopLeft.x() + sunkenButton_.data()->width())
-                  {
-                    dX -= menuShadow_.at(2);
-                    qreal delta = menuShadow_.at(2)
-                                  - static_cast<qreal>(g.right() + 1 - (wTopLeft.x() + sunkenButton_.data()->width()));
-                    if (delta > 0)
-                      dX += delta;
-                    else
-                      dX -= qMin(menuShadow_.at(0), -delta);
-                  }
-                }
-                else if (!ag.isEmpty())
-                {
-                  if (g.top() != ag.top()
-                      && (g.bottom() == ag.bottom()
-                          || QCursor::pos(sc).y() >= g.bottom()))
-                  {
-                    dY += menuShadow_.at(1) + menuShadow_.at(3);
-                  }
-                  if (g.right() != ag.right()
-                      && (g.left() == ag.left()
-                          || QCursor::pos(sc).x() <= g.left()))
-                  {
-                    dX -= menuShadow_.at(2) + menuShadow_.at(0);
-                  }
-                }
+                dX -= menuShadow_.at(2);
+                qreal delta = menuShadow_.at(2)
+                              - static_cast<qreal>(g.right() + 1 - (wTopLeft.x() + sunkenButton_.data()->width()));
+                if (delta > 0)
+                  dX += delta;
+                else
+                  dX -= qMin(menuShadow_.at(0), -delta);
+              }
+            }
+            else if (!ag.isEmpty())
+            {
+              if (g.top() != ag.top()
+                  && (g.bottom() == ag.bottom()
+                      || QCursor::pos(sc).y() >= g.bottom()))
+              {
+                dY += menuShadow_.at(1) + menuShadow_.at(3);
+              }
+              if (g.right() != ag.right()
+                  && (g.left() == ag.left()
+                      || QCursor::pos(sc).x() <= g.left()))
+              {
+                dX -= menuShadow_.at(2) + menuShadow_.at(0);
               }
             }
           }
@@ -1157,73 +1152,68 @@ bool Style::eventFilter(QObject *o, QEvent *e)
               else
                 dX -= menuShadow_.at(2); // right shadow of the left menu
             }
-            else
+            else if (parentMenubar)
             {
-              if (parentMenubar)
-              {
-                QString group = tspec_.merge_menubar_with_toolbar ? "Toolbar" : "MenuBar";
-                if (parentMenubar->mapToGlobal(QPoint(0,0)).y() > g.bottom()) // menu is above menubar
-                  dY +=  menuShadow_.at(1) + menuShadow_.at(3) + static_cast<qreal>(getFrameSpec(group).top);
-                else
-                  dY -= static_cast<qreal>(getFrameSpec(group).bottom);
-
-                QPoint activeTopLeft = parentMenubar->mapToGlobal(parentMenubar->actionGeometry(
-                                                                   parentMenubar->activeAction())
-                                                                 .topLeft());
-                if (activeTopLeft.x() > g.left()) // because of the right screen border
-                {
-                  dX += menuShadow_.at(0);
-                  qreal delta = menuShadow_.at(0) - static_cast<qreal>(activeTopLeft.x() - g.left());
-                  if (delta > 0)
-                    dX -= delta;
-                  else
-                    dX += qMin(menuShadow_.at(2), -delta);
-                }
-              }
+              QString group = tspec_.merge_menubar_with_toolbar ? "Toolbar" : "MenuBar";
+              if (parentMenubar->mapToGlobal(QPoint(0,0)).y() > g.bottom()) // menu is above menubar
+                dY +=  menuShadow_.at(1) + menuShadow_.at(3) + static_cast<qreal>(getFrameSpec(group).top);
               else
+                dY -= static_cast<qreal>(getFrameSpec(group).bottom);
+
+              QPoint activeTopLeft = parentMenubar->mapToGlobal(parentMenubar->actionGeometry(
+                                                                 parentMenubar->activeAction())
+                                                               .topLeft());
+              if (activeTopLeft.x() > g.left()) // because of the right screen border
               {
-                if (!sunkenButton_.isNull()
-                    && (((pBtn = qobject_cast<QPushButton*>(sunkenButton_.data()))
-                         && pBtn->menu() == w)
-                        || ((tBtn = qobject_cast<QToolButton*>(sunkenButton_.data()))
-                            && tBtn->menu() == w)))
-                { // the menu is triggered by a push or tool button
-                  QPoint wTopLeft = sunkenButton_.data()->mapToGlobal(QPoint(0,0));
-                  if (wTopLeft.y() >= g.bottom()) // above the button (strange! Qt doesn't add 1px)
-                    dY +=  menuShadow_.at(1) + menuShadow_.at(3);
-                  if (wTopLeft.x() > g.left()) // because of the right screen border
-                  {
-                    dX += menuShadow_.at(0);
-                    qreal delta = menuShadow_.at(0) - static_cast<qreal>(wTopLeft.x() - g.left());
-                    if (delta > 0)
-                      dX -= delta;
-                    else
-                      dX += qMin(menuShadow_.at(2), -delta);
-                  }
-                }
-                else if (!ag.isEmpty()) // probably a panel menu
-                {
-                  /* snap to the screen bottom/right if possible and,
-                     as the last resort, consider the cursor position */
-                  if (g.top() != ag.top()
-                      && (g.bottom() == ag.bottom()
-                          || QCursor::pos(sc).y() >= g.bottom()))
-                  {
-                    dY += menuShadow_.at(1) + menuShadow_.at(3);
-                  }
-                  if (g.left() != ag.left()
-                      && (g.right() == ag.right()
-                          || QCursor::pos(sc).x() >= g.right() + 1))
-                  {
-                    dX += menuShadow_.at(0) + menuShadow_.at(2);
-                  }
-                }
+                dX += menuShadow_.at(0);
+                qreal delta = menuShadow_.at(0) - static_cast<qreal>(activeTopLeft.x() - g.left());
+                if (delta > 0)
+                  dX -= delta;
+                else
+                  dX += qMin(menuShadow_.at(2), -delta);
+              }
+            }
+            else if (!sunkenButton_.isNull()
+                     && (!(pBtn = qobject_cast<QPushButton*>(sunkenButton_.data()))
+                         || pBtn->menu() == w)
+                     && (!(tBtn = qobject_cast<QToolButton*>(sunkenButton_.data()))
+                         || tBtn->menu() == w
+                         || (tBtn->defaultAction() && tBtn->defaultAction()->menu() == w)))
+            { // the menu is triggered by a push or tool button
+              QPoint wTopLeft = sunkenButton_.data()->mapToGlobal(QPoint(0,0));
+              if (wTopLeft.y() >= g.bottom()) // above the button (strange! Qt doesn't add 1px)
+                dY +=  menuShadow_.at(1) + menuShadow_.at(3);
+              if (wTopLeft.x() > g.left()) // because of the right screen border
+              {
+                dX += menuShadow_.at(0);
+                qreal delta = menuShadow_.at(0) - static_cast<qreal>(wTopLeft.x() - g.left());
+                if (delta > 0)
+                  dX -= delta;
+                else
+                  dX += qMin(menuShadow_.at(2), -delta);
+              }
+            }
+            else if (!ag.isEmpty()) // probably a panel menu
+            {
+              /* snap to the screen bottom/right if possible and,
+                 as the last resort, consider the cursor position */
+              if (g.top() != ag.top()
+                  && (g.bottom() == ag.bottom()
+                      || QCursor::pos(sc).y() >= g.bottom()))
+              {
+                dY += menuShadow_.at(1) + menuShadow_.at(3);
+              }
+              if (g.left() != ag.left()
+                  && (g.right() == ag.right()
+                      || QCursor::pos(sc).x() >= g.right() + 1))
+              {
+                dX += menuShadow_.at(0) + menuShadow_.at(2);
               }
             }
           }
         }
         else if (!parentMenu && parentMenubar)
-        {
+        { // triggered by a menubar, without compositing or shadow
           QString group = tspec_.merge_menubar_with_toolbar ? "Toolbar" : "MenuBar";
           if (parentMenubar->mapToGlobal(QPoint(0,0)).y() > g.bottom()) // menu is above menubar
             dY += static_cast<qreal>(getFrameSpec(group).top);
