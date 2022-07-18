@@ -149,7 +149,7 @@ araç düğmesi</translation>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="366"/>
         <source>Push button with menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Menü ile basma düğmesi</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="415"/>
