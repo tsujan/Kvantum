@@ -7,6 +7,7 @@ Table of contents
    - [Arch-based distributions](#arch-based-distributions)
    - [Debian-based distributions](#debian-based-distributions)
    - [Gentoo-based distributions](#gentoo-based-distributions)
+   - [NixOS](#nixos)
    - [openSUSE](#opensuse)
      - [Leap](#leap)
      - [Tumbleweed](#tumbleweed)
@@ -83,6 +84,20 @@ Only if you are using a stable branch (e.g. [`KEYWORD="amd64"`](https://wiki.gen
     sudo emerge --ask --verbose x11-themes/kvantum
 
 NOTE: All of Kvantum's dependencies will be automatically installed when emerging `x11-themes/kvantum`.
+
+
+### NixOS
+
+To install Kvantum on NixOS, add the following line to `configuration.nix` :
+
+    environment.systemPackages = with pkgs; [ libsForQt5.qtstyleplugin-kvantum ];
+
+If you want to compile Kvantum from its source, copy the Nix expression of Kvantum [here](https://github.com/NixOS/nixpkgs/blob/nixos-22.05/pkgs/development/libraries/qtstyleplugin-kvantum/default.nix), then paste it in a nix file, for example `kvantum.nix` , and put it in `/etc/nixos/` , then add the following line to `configuration.nix` :
+
+    environment.systemPackages = [ (import ./kvantum.nix pkgs) ];
+
+
+> Note: You can also install Kvantum for Qt4 by installing the package `qtstyleplugin-kvantum-qt4` .
 
 ### openSUSE
 
