@@ -12,6 +12,7 @@ Table of contents
      - [Tumbleweed](#tumbleweed)
    - [Red Hat based distributions](#red-hat-based-distributions)
    - [Solus](#solus)
+   - [NixOS](#nixos)
 - [Compilation](#compilation)
    - [qmake](#with-qmake)
    - [cmake](#with-cmake)
@@ -130,6 +131,17 @@ To compile Kvantum from source on Solus, you would need the `system.devel` compo
 * `sudo eopkg install -c system.devel`
 
 There are no pre-built Kvantum eopkg installers avaialble, so proceed to [Compilation](#compilation) to compile Kvantum yourself.
+
+### NixOS
+
+To install Kvantum on NixOS, add the following line to `configuration.nix`:
+
+    environment.systemPackages = with pkgs; [ libsForQt5.qtstyleplugin-kvantum ];
+
+If you want to compile Kvantum from its source, copy the Nix expression of Kvantum [here](https://github.com/NixOS/nixpkgs/blob/nixos-22.05/pkgs/development/libraries/qtstyleplugin-kvantum/default.nix), then paste it in a nix file, for example `kvantum.nix`, and put it in `/etc/nixos/`, then add the following line to `configuration.nix`:
+
+    environment.systemPackages = with pkgs; [ (import ./kvantum.nix pkgs) ];
+
 
 ## Compilation
 
