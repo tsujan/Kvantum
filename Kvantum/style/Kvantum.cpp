@@ -5668,6 +5668,8 @@ void Style::drawControl(QStyle::ControlElement element,
           int iw = qMin(smallIconSize, pixelMetric(PM_IndicatorWidth,option,widget)); // qMin as a precaution
           int ih = qMin(smallIconSize, pixelMetric(PM_IndicatorHeight,option,widget));
 
+          bool isInactive(status.contains(QLatin1String("-inactive")));
+
           /* label */
           painter->save();
           painter->setFont(opt->font); // some apps (like TeXstudio) use special fonts
@@ -5701,7 +5703,7 @@ void Style::drawControl(QStyle::ControlElement element,
                           Qt::AlignLeft | talign,
                           txt,QPalette::Text,
                           state,
-                          status.contains(QLatin1String("-inactive")));
+                          isInactive);
             }
           }
           else
@@ -5732,7 +5734,6 @@ void Style::drawControl(QStyle::ControlElement element,
               }
             }
             QSize iconSize = QSize(smallIconSize,smallIconSize);
-            bool isInactive(status.contains(QLatin1String("-inactive")));
             QPixmap px = getPixmapFromIcon(opt->icon, getIconMode(state,isInactive,lspec), iconstate, iconSize);
             if (px.isNull()) // with a non-null icon
               iconSpace = smallIconSize + lspec.tispace;
@@ -5754,9 +5755,52 @@ void Style::drawControl(QStyle::ControlElement element,
           }
           painter->restore();
 
-          /* shortcut */
+          /* shortcut, with a little paler color */
           if (!shortcutTxt.isEmpty())
           {
+            if (state == 1)
+            {
+              QColor col;
+              if (isInactive)
+                col = getFromRGBA(lspec.normalInactiveColor);
+              if (!col.isValid())
+                col = getFromRGBA(lspec.normalColor);
+              col.setAlphaF(col.alphaF() * 0.8);
+              if (isInactive)
+                lspec.normalInactiveColor = getName(col);
+              else
+                lspec.normalColor = getName(col);
+            }
+            else if (state == 2)
+            {
+              QColor col;
+              if (isInactive)
+                col = getFromRGBA(lspec.focusInactiveColor);
+              if (!col.isValid())
+                col = getFromRGBA(lspec.focusColor);
+              col.setAlphaF(col.alphaF() * 0.8);
+              lspec.focusColor = getName(col);
+            }
+            else if (state == 3)
+            {
+              QColor col;
+              if (isInactive)
+                col = getFromRGBA(lspec.pressInactiveColor);
+              if (!col.isValid())
+                col = getFromRGBA(lspec.pressColor);
+              col.setAlphaF(col.alphaF() * 0.8);
+              lspec.pressColor = getName(col);
+            }
+            else if (state == 4)
+            {
+              QColor col;
+              if (isInactive)
+                col = getFromRGBA(lspec.toggleInactiveColor);
+              if (!col.isValid())
+                col = getFromRGBA(lspec.toggleColor);
+              col.setAlphaF(col.alphaF() * 0.8);
+              lspec.toggleColor = getName(col);
+            }
             int space = 0;
             if (opt->menuItemType == QStyleOptionMenuItem::SubMenu)
               space = dspec.size + lspec.tispace + 2; // we add a 2px right margin at CT_MenuItem
@@ -5769,7 +5813,7 @@ void Style::drawControl(QStyle::ControlElement element,
                         Qt::AlignRight | talign,
                         shortcutTxt,QPalette::Text,
                         state,
-                        status.contains(QLatin1String("-inactive")));
+                        isInactive);
           }
 
           QStyleOptionMenuItem o(*opt);

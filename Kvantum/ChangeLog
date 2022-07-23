@@ -9,6 +9,7 @@ V1.0.4
  * Added a pushbutton with menu to kvantumpreview.
  * To find the sunken button that has triggered a menu, check whether that menu really belongs to it.
  * Improved the workaround for Qt's hover bug in buttons.
+ * Made menu shortcuts a little paler than menu texts.
 
 V1.0.3
 ---------
