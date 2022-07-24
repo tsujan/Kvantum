@@ -8764,11 +8764,27 @@ void Style::drawControl(QStyle::ControlElement element,
         fspec.expansion = qMin(fspec.expansion,r.height()/2);*/
       fspec.expansion = 0; // vertical headers have variable heights
 
+      bool libreoffice = false;
+
       /* merge the background of the header with that of its parent view, if any */
       if (QAbstractItemView *iv = qobject_cast<QAbstractItemView*>(getParent(widget,1)))
       {
         if (iv->viewport() && iv->viewport()->autoFillBackground())
           painter->fillRect(r, option->palette.brush(iv->viewport()->backgroundRole()));
+      }
+      else if (isLibreoffice_ && widget == nullptr && (option->state & State_Enabled))
+      {
+        const label_spec lspec = getLabelSpec("HeaderSection");
+        if ((status.startsWith(QLatin1String("normal"))
+             && enoughContrast(getFromRGBA(lspec.normalColor), standardPalette().color(QPalette::ButtonText)))
+            || (status.startsWith(QLatin1String("toggled"))
+                && enoughContrast(getFromRGBA(lspec.toggleColor), standardPalette().color(QPalette::ButtonText))))
+        {
+          libreoffice = true;
+          painter->fillRect(option->rect, standardPalette().brush(QPalette::Window));
+          painter->save();
+          painter->setOpacity(0.5);
+        }
       }
 
       renderFrame(painter,r,fspec,fspec.element+"-"+status,0,0,0,0,0,true);
@@ -8781,6 +8797,8 @@ void Style::drawControl(QStyle::ControlElement element,
       if (!(option->state & State_Enabled))
         painter->restore();
       if (!horiz)
+        painter->restore();
+      if (libreoffice)
         painter->restore();
 
       break;
