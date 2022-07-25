@@ -11,6 +11,7 @@ V1.0.4
  * Improved the workaround for Qt's hover bug in buttons.
  * Made menu shortcuts a little paler than menu texts.
  * Added a workaround for LibreOffice's header view.
+ * Removed the old HDPI workaround.
 
 V1.0.3
 ---------

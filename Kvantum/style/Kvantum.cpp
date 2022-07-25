@@ -16408,7 +16408,7 @@ void Style::drawItemText(QPainter *painter, const QRect &rect, int flags,
 void Style::drawItemPixmap(QPainter *painter, const QRect &rect,
                            int alignment, const QPixmap &pixmap) const
 {
-  qreal scale = qApp->devicePixelRatio();
+  qreal scale = 1;
   if (
 #if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
       qApp->testAttribute(Qt::AA_UseHighDpiPixmaps) &&
@@ -16448,16 +16448,7 @@ QPixmap Style::getPixmapFromIcon(const QIcon &icon,
   else// if (iconmode == Selected || iconmode == DisabledSelected)
     icnMode = QIcon::Selected;
 
-#if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
-   bool hdpi(false);
-   if (qApp->testAttribute(Qt::AA_UseHighDpiPixmaps))
-     hdpi = true;
-#else
-  bool hdpi(true);
-#endif
-  QPixmap px = icon.pixmap(hdpi ? iconSize
-                                : (QSizeF(iconSize)*qMax(qApp->devicePixelRatio(), static_cast<qreal>(1))).toSize(),
-                           icnMode,iconstate);
+  QPixmap px = icon.pixmap(iconSize,icnMode,iconstate);
 
   if (iconmode == Disabled || iconmode == DisabledSelected)
   {
