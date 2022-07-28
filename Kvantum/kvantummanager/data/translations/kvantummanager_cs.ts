@@ -1224,7 +1224,7 @@ stavu pro lišty nabídek zapnuté.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1738"/>
         <source>Merge menubar with toolbar</source>
-        <translation>Sloužit lištu nabídek s tou nástrojů</translation>
+        <translation>Sloučit lištu nabídek s tou nástrojů</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1757"/>
@@ -1770,7 +1770,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="2981"/>
         <source>A tool for installing, selecting&lt;br&gt;and configuring &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt; themes</source>
-        <translation>Nástroj pro instalaci &lt;br&gt;a úpravu motivů &lt;a&gt;&lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt; motivů</translation>
+        <translation>Nástroj pro instalaci &lt;br&gt;a úpravu &lt;a&gt;&lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt; motivů</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2982"/>
