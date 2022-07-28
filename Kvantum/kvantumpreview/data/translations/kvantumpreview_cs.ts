@@ -150,7 +150,7 @@ beside text</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="366"/>
         <source>Push button with menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Tlačítko s nabídkou</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="415"/>
