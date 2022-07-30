@@ -56,6 +56,9 @@ public:
     actionMenuButton->setMenu (menuFile);
     toolButton_8->setMenu (menuFile);
 
+    /* a workaround for a bug in QPushButton with a shared menu */
+    pushButton_8->setFocusPolicy(Qt::NoFocus);
+
     toolBar_2->addSeparator();
     QLabel *label = new QLabel ("<center><b><i>Kvantum</i></b></center>");
     toolBar_2->addWidget (label);
