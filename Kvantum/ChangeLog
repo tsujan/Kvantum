@@ -1,3 +1,7 @@
+V1.0.5
+---------
+ * Added a workaround for wrong app codes that don't give the required info to CT_MenuItem.
+
 V1.0.4
 ---------
  * Added a workaround for Qt6's double click problem with window dragging.

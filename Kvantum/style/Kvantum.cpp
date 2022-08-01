@@ -14059,7 +14059,16 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
                              (opt->icon.isNull() || hspec_.iconless_menu)
                                ? QSize()
                                : QSize(iconSize,iconSize));
-          s.setWidth(qMax(s.width(), contentsSize.width()));
+          if (txt.isEmpty())
+          { // workaround for bad app codes that don't give the required info
+            s.setWidth(qMax(s.width(), contentsSize.width()
+                                       + fspec.left+fspec.right+lspec.left+lspec.right
+                                       + lspec.tispace));
+            s.setHeight(qMax(s.height(), contentsSize.height()
+                                         + fspec.top+fspec.bottom+lspec.top+lspec.bottom));
+          }
+          else
+            s.setWidth(qMax(s.width(), contentsSize.width()));
           s.setHeight(qMax(s.height(), opt->fontMetrics.height() + 8)); // as in qcommonstyle.cpp
           s.rwidth() += shortcutSpace;
         }
