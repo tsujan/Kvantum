@@ -14059,13 +14059,16 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
                              (opt->icon.isNull() || hspec_.iconless_menu)
                                ? QSize()
                                : QSize(iconSize,iconSize));
-          if (txt.isEmpty())
+          if (txt.isEmpty() && !qobject_cast<const QComboBox*>(widget))
           { // workaround for bad app codes that don't give the required info
             s.setWidth(qMax(s.width(), contentsSize.width()
                                        + fspec.left+fspec.right+lspec.left+lspec.right
-                                       + lspec.tispace));
+                                       + (!opt->icon.isNull() && !hspec_.iconless_menu && iconSize > 0
+                                            ? iconSize + lspec.tispace : 0)));
             s.setHeight(qMax(s.height(), contentsSize.height()
                                          + fspec.top+fspec.bottom+lspec.top+lspec.bottom));
+            if (!opt->icon.isNull() && !hspec_.iconless_menu && iconSize > 0)
+              s.setHeight(qMax(s.height(), iconSize));
           }
           else
             s.setWidth(qMax(s.width(), contentsSize.width()));
