@@ -52,7 +52,7 @@ width</source>
         <source>Multi-line
  push button</source>
         <translation>멀티 라인
- 누름 단추</translation>
+ 누름 버튼</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="160"/>
@@ -152,7 +152,7 @@ beside text</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="366"/>
         <source>Push button with menu</source>
-        <translation type="unfinished"></translation>
+        <translation>메뉴가 있는 누름 버튼</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="415"/>
