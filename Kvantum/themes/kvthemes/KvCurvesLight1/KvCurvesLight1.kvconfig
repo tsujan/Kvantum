@@ -11,7 +11,7 @@ group_toolbar_buttons=false
 spread_progressbar=true
 progressbar_thickness=8
 composite=true
-menu_shadow_depth=6
+menu_shadow_depth=7
 menu_blur_radius=2
 tooltip_shadow_depth=6
 tooltip_blur_radius=2
@@ -427,10 +427,10 @@ frame.expansion=3.4font
 
 [Menu]
 inherits=PanelButtonCommand
-frame.top=3
-frame.bottom=3
-frame.left=3
-frame.right=3
+frame.top=2
+frame.bottom=2
+frame.left=2
+frame.right=2
 frame.element=menu
 interior.element=menu
 frame.expansion=0
