@@ -10386,6 +10386,15 @@ void Style::drawControl(QStyle::ControlElement element,
                 status.append("-inactive");
             }
             lspec.left = lspec.right = lspec.top = lspec.bottom = 0;
+            /* for apps with bad style codes (like SMPlayer) */
+            if (w < fspec.left + fspec.right + dspec.size)
+            {
+              fspec.left = fspec.right = 0;
+            }
+            if (h < fspec.top + fspec.bottom + dspec.size)
+            {
+              fspec.top = fspec.bottom = 0;
+            }
             /* draw the focus rect around the arrow */
             if (opt->state & State_HasFocus)
             {
