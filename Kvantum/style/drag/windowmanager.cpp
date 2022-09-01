@@ -354,7 +354,13 @@ bool WindowManager::mousePressEvent (QObject *object, QEvent *event)
     if (!widget)
       widget = activeWin;
   }
-  if (!widget) return false;
+  if (!widget
+      /* this condition is especially needed under Wayland because
+         "QMouseEvent::globalPosition()" isn't reliable there */
+      || widget->window()->windowHandle() != w)
+  {
+    return false;
+  }
 
 #if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
   widgetDragPoint_ = widget->mapFromGlobal (mouseEvent->globalPos()); // needed by canDrag()

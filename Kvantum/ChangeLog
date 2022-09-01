@@ -2,6 +2,7 @@ V1.0.5
 ---------
  * Added a workaround for wrong app codes that don't give the required info to CT_MenuItem.
  * Added a workaround for wrong app codes that don't give the required space to tabbar scroll arrows.
+ * Added a condition for window dragging under Wayland, especially for dragging from buttons (the parent window is checked).
 
 V1.0.4
 ---------
