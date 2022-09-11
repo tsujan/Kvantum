@@ -1053,6 +1053,8 @@ void Style::polish(QApplication *app)
     isPcmanfm_ = true;
   else if (appName == "soffice.bin")
     isLibreoffice_ = true;
+  else if (appName == "krita")
+    isKrita_ = true;
   else if (appName == "plasma" || appName.startsWith("plasma-")
            || appName == "plasmashell" // Plasma5
            || appName == "kded4") // this is for the infamous appmenu

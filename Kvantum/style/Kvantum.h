@@ -488,6 +488,8 @@ class Style : public QCommonStyle {
     bool isDolphin_;
     bool isPcmanfm_;
 
+    bool isKrita_; // Because of bugs in Krita 5.1.0
+
     /* The size of the slider handle with no tick mark (if it exists) */
     mutable int ticklessSliderHandleSize_;
 

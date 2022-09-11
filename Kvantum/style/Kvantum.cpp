@@ -309,6 +309,7 @@ Style::Style(bool useDark) : QCommonStyle()
   isLibreoffice_ = false;
   isDolphin_ = false;
   isPcmanfm_ = false;
+  isKrita_ = false;
   subApp_ = false;
   isOpaque_ = false;
   ticklessSliderHandleSize_ = -1;
@@ -7576,7 +7577,7 @@ void Style::drawControl(QStyle::ControlElement element,
 
       /* This is the condition set at CT_ProgressBar for using thin progressbars.
          It is independent of the real progressbar thickness. */
-      if (!isKisSlider_ && tspec_.progressbar_thickness > 0
+      if (!isKisSlider_ && !isKrita_ && tspec_.progressbar_thickness > 0
           && QFontMetrics(f).height() > tspec_.progressbar_thickness)
       { // determine the text position relative to the bar
         bool topText;
@@ -7742,7 +7743,7 @@ void Style::drawControl(QStyle::ControlElement element,
         const label_spec lspec = getLabelSpec(QStringLiteral("Progressbar"));
         if (lspec.boldFont) f.setWeight(lspec.boldness);
 
-        if (!isKisSlider_ && tspec_.progressbar_thickness > 0
+        if (!isKisSlider_ && !isKrita_ && tspec_.progressbar_thickness > 0
             && QFontMetrics(f).height() > tspec_.progressbar_thickness)
         { // determine the text position relative to the bar
           bool topText;
@@ -8152,6 +8153,7 @@ void Style::drawControl(QStyle::ControlElement element,
         bool sideText(false);
         bool topText(false);
         if (!isKisSlider_ // KisSliderSpinBox doesn't obey thickness setting
+            && !isKrita_
             && tspec_.progressbar_thickness > 0
             && QFontMetrics(f).height() > tspec_.progressbar_thickness)
         { // see if text can be outside progressbar
@@ -14545,6 +14547,9 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
     }
 
     case CT_ProgressBar : {
+      if (isKrita_)
+        return contentsSize; // Krita's code has become too buggy since 5.1.0
+
       const QProgressBar *pb = qobject_cast<const QProgressBar*>(widget);
       bool isVertical(pb && pb->orientation() == Qt::Vertical);
 
