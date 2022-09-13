@@ -383,7 +383,7 @@ multilínia</translation>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1574"/>
         <source>Sliders/Scrolls/Progress/Dial</source>
-        <translation type="unfinished">Controls lliscants/Desplaçaments/Progrés/Marcació</translation>
+        <translation>Controls lliscants/Desplaçaments/Progrés/Marcació</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2131"/>
