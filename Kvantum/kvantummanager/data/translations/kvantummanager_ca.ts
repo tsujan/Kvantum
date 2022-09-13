@@ -489,7 +489,7 @@ Usually, a value of 2 is enough.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="818"/>
         <source>Menu:</source>
-        <translation type="unfinished"></translation>
+        <translation>Menú:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="825"/>
