@@ -2161,16 +2161,24 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
       frame_spec fspec = getFrameSpec(group);
       QString status = getState(option,widget);
 
-      /* prevent drawing pushbuttons as toolbuttons (as in QupZilla or KNotes) */
+      /* prevent drawing pushbuttons as toolbuttons (as in QupZilla, KNotes or Kate) */
       if (const QPushButton *pb = qobject_cast<const QPushButton*>(widget))
       {
         fspec.expansion = 0;
         if (pb->text().isEmpty())
         {
-          painter->fillRect(option->rect, option->palette.brush(status.contains(QLatin1String("-inactive"))
-                                                                  ? QPalette::Inactive
-                                                                  : QPalette::Active,
-                                                                QPalette::Button));
+          QColor col = widget->palette().color(status.contains(QLatin1String("-inactive"))
+                                                 ? QPalette::Inactive
+                                                 : QPalette::Active,
+                                               QPalette::Button);
+          if (pb->isChecked() || pb->isDown())
+          {
+            int gray = qGray(col.rgb());
+            if (gray <= 100) gray += 30;
+            else gray -= 30;
+            col = QColor(gray,gray,gray);
+          }
+          painter->fillRect(option->rect, col);
           break;
         }
       }
@@ -12730,8 +12738,11 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
 int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, const QWidget *widget) const
 {
   switch (metric) {
-    case PM_ButtonDefaultIndicator :
-    case PM_ButtonMargin : return 0;
+    case PM_ButtonDefaultIndicator : return 0;
+
+    /* we ignore this, but wrong style codes (like those used by Kate)
+       may not consult the active widget style to get CT_PushButton */
+    case PM_ButtonMargin : return 6;
 
     case PM_ButtonShiftHorizontal :
     case PM_ButtonShiftVertical : return /*tspec_.button_contents_shift ? 1 :*/ 0;
@@ -13875,7 +13886,7 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
 
         /* Qt adds PM_ButtonMargin plus twice PM_DefaultFrameWidth to the width and
            also the height but doesn't add anything (PM_ButtonDefaultIndicator = 0)
-           for auto-default (-> qcommonstyle.cpp). So, we set PM_ButtonMargin and
+           for auto-default (-> qcommonstyle.cpp). We ignore PM_ButtonMargin, set
            PM_DefaultFrameWidth to zero for pushbuttons, add our frames and spacings
            instead, and take into account the indicator and auto-defaultness. */
         s = contentsSize + QSize (0, contentsSize.height() % 2)

@@ -1,3 +1,7 @@
+V1.0.6
+---------
+ * Added a workaround for Kate's new status-bar and side-pane buttons, which still have wrong style codes.
+
 V1.0.5
 ---------
  * Added a workaround for wrong app codes that don't give the required info to CT_MenuItem.
