@@ -1,6 +1,7 @@
 V1.0.6
 ---------
  * Added a workaround for Kate's new status-bar and side-pane buttons, which still have wrong style codes.
+ * Updated a method that was deprecated by Qt 6.4.0.
 
 V1.0.5
 ---------
