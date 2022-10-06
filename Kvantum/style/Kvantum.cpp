@@ -12740,8 +12740,8 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
   switch (metric) {
     case PM_ButtonDefaultIndicator : return 0;
 
-    /* we ignore this, but wrong style codes (like those used by Kate)
-       may not consult the active widget style to get CT_PushButton */
+    /* we don't need this (in CT_PushButton) but set it because wrong style codes
+       may use it instead of consulting CT_PushButton (like in Kate) */
     case PM_ButtonMargin : return 6;
 
     case PM_ButtonShiftHorizontal :
