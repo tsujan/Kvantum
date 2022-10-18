@@ -13233,6 +13233,11 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
 
     case PM_TreeViewIndentation : return 20;
 
+#if (QT_VERSION >= QT_VERSION_CHECK(6,3,0))
+    case PM_LineEditIconSize : return pixelMetric(PM_SmallIconSize);
+    case PM_LineEditIconMargin : return pixelMetric(PM_SmallIconSize) / 4;
+#endif
+
     default : return QCommonStyle::pixelMetric(metric,option,widget);
   }
 }
@@ -13446,6 +13451,12 @@ int Style::styleHint(QStyle::StyleHint hint,
 
     case SH_TabBar_ElideMode : return Qt::ElideNone; // don't interfere with CE_TabBarTabLabel
 
+#if (QT_VERSION >= QT_VERSION_CHECK(6,3,0))
+    case SH_TabBar_AllowWheelScrolling : return true;
+
+    case SH_Table_AlwaysDrawLeftTopGridLines : return false;
+#endif
+
     //case SH_ScrollBar_BackgroundMode : return Qt::OpaqueMode;
 
     case SH_ScrollBar_ContextMenu : return !tspec_.transient_scrollbar; // because of the hover bug
@@ -13550,8 +13561,6 @@ int Style::styleHint(QStyle::StyleHint hint,
       }
     }
 
-    //case SH_SpinControls_DisableOnBounds: return true;
-
     case SH_ToolTip_WakeUpDelay : {
       if (tspec_.tooltip_delay >= 0)
         return tspec_.tooltip_delay;
@@ -13565,7 +13574,11 @@ int Style::styleHint(QStyle::StyleHint hint,
 
     case SH_ToolBox_SelectedPageTitleBold : return true;
 
+    case SH_SpinControls_DisableOnBounds: return true;
     case SH_SpinBox_ButtonsInsideFrame : return true;
+#if (QT_VERSION >= QT_VERSION_CHECK(6,3,0))
+    case SH_SpinBox_SelectOnStep : return true;
+#endif
 
     /* forms */
     case SH_FormLayoutFieldGrowthPolicy : {

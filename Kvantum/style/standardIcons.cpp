@@ -574,6 +574,15 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
       else break;
     }
 
+#if (QT_VERSION >= QT_VERSION_CHECK(6,3,0))
+    case SP_TabCloseButton : {
+      QIcon icn = QIcon::fromTheme(QStringLiteral("tab-close"),
+                                   QIcon::fromTheme(QStringLiteral("window-close")));
+      if (!icn.isNull()) return icn;
+      else break;
+    }
+#endif
+
     default : break;
   }
 
