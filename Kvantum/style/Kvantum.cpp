@@ -833,10 +833,10 @@ void Style::setupThemeDeps()
 
 void Style::advanceProgressbar()
 {
-  QMap<QWidget *,int>::iterator it;
+  QMap<QWidget*,int>::iterator it;
   for (it = progressbars_.begin(); it != progressbars_.end(); ++it)
   {
-    QWidget *widget = it.key();
+    auto widget = it.key();
     if (widget && widget->isVisible())
     {
       if (it.value() > INT_MAX - 2)
@@ -847,6 +847,45 @@ void Style::advanceProgressbar()
     }
   }
 }
+
+void Style::forgetProgressBar(QObject *o)
+{
+  if (auto w = qobject_cast<QWidget*>(o))
+  {
+    if (progressbars_.contains(w))
+    {
+        disconnect(w, &QObject::destroyed, this, &Style::forgetProgressBar);
+        progressbars_.remove(w);
+        if (progressbars_.size() == 0)
+          progressTimer_->stop();
+    }
+  }
+}
+
+void Style::forgetPopupOrigin(QObject *o)
+{
+  if (auto w = qobject_cast<QWidget*>(o))
+  {
+    if (popupOrigins_.contains(w))
+    {
+        disconnect(w, &QObject::destroyed, this, &Style::forgetPopupOrigin);
+        popupOrigins_.remove(w);
+    }
+  }
+}
+
+void Style::forgetMovedMenu(QObject *o)
+{
+  if (auto w = qobject_cast<QWidget*>(o))
+  {
+    if (movedMenus_.contains(w))
+    {
+        disconnect(w, &QObject::destroyed, this, &Style::forgetMovedMenu);
+        movedMenus_.remove(w);
+    }
+  }
+}
+
 
 void Style::startAnimation(Animation *animation) const
 {

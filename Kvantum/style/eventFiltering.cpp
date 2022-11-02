@@ -194,8 +194,6 @@ void Style::drawBg(QPainter *p, const QWidget *widget) const
     p->restore();
 }
 
-static QSet<const QWidget*> movedMenus;
-
 static inline bool isAnimatedScrollArea(QWidget *w)
 {
   auto sa = qobject_cast<QAbstractScrollArea*>(w);
@@ -229,16 +227,13 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           if (!progressbars_.contains(w))
           {
             progressbars_.insert(w, 0);
+            connect(w, &QObject::destroyed, this, &Style::forgetProgressBar);
             if (!progressTimer_->isActive())
               progressTimer_->start(50);
           }
         }
-        else if (!progressbars_.isEmpty())
-        {
-          progressbars_.remove(w);
-          if (progressbars_.size() == 0)
-            progressTimer_->stop();
-        }
+        else
+          forgetProgressBar(o);
         isKisSlider_ = false;
       }
       else if (w->isWindow()
@@ -962,6 +957,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
                               || w->windowType() == Qt::ToolTip))
       {
         popupOrigins_.insert(w, animatedWidget_);
+        connect(w, &QObject::destroyed, this, &Style::forgetPopupOrigin);
       }
 
       if (QProgressBar *pb = qobject_cast<QProgressBar*>(o))
@@ -969,7 +965,10 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         if (pb->maximum() == 0 && pb->minimum() == 0)
         {
           if (!progressbars_.contains(w))
+          {
             progressbars_.insert(w, 0);
+            connect(w, &QObject::destroyed, this, &Style::forgetProgressBar);
+          }
           if (!progressTimer_->isActive())
             progressTimer_->start(50);
         }
@@ -1003,7 +1002,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         }
 #endif
 
-        if (movedMenus.contains(w)) break; // already moved
+        if (movedMenus_.contains(w)) break; // already moved
         /* "magical" condition for a submenu */
         QPoint parentMenuCorner;
         QMenu *parentMenu = qobject_cast<QMenu*>(QApplication::activePopupWidget());
@@ -1260,7 +1259,8 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         }
 
         w->move(g.left() + DX, g.top() + DY);
-        movedMenus.insert(w);
+        movedMenus_.insert(w);
+        connect(w, &QObject::destroyed, this, &Style::forgetMovedMenu);
       }
       else if (tspec_.group_toolbar_buttons && qobject_cast<QToolButton*>(o))
       {
@@ -1445,88 +1445,89 @@ bool Style::eventFilter(QObject *o, QEvent *e)
     break;*/
 
   case QEvent::Hide:
-    if (qobject_cast<QToolButton*>(o))
-    {
-      if (tspec_.group_toolbar_buttons)
-      {
-        if (QToolBar *toolBar = qobject_cast<QToolBar*>(w->parentWidget()))
-        {
-          if (toolBar->orientation() != Qt::Vertical)
-            toolBar->update();
-        }
-      }
-      //break; // toolbuttons may be animated (see below)
-    }
-    else if (w && w->isEnabled() && tspec_.animate_states)
-    {
-      if (w->inherits("QComboBoxPrivateContainer")
-          && qobject_cast<QComboBox*>(w->parentWidget()))
-      {
-        /* start with an appropriate state on closing popup, considering
-           that lineedits only have normal and focused states in Kvantum */
-        if ((tspec_.combo_as_lineedit || tspec_.square_combo_button)
-            && qobject_cast<QComboBox*>(w->parentWidget())->lineEdit())
-        {
-          animationStartState_ = "normal"; // -> QEvent::FocusIn
-        }
-        else
-          animationStartState_ = "c-toggled"; // distinguish it from a toggled button
-        /* ensure that the combobox will be animated on closing popup
-           (especially needed if the cursor has been on the popup) */
-        animatedWidget_ = w->parentWidget();
-        animationOpacity_ = 0;
-        break;
-      }
-      else if (w->windowType() == Qt::Popup
-               || w->windowType() == Qt::ToolTip)
-      { // let the popup origin have a fade-out animation
-        animatedWidget_ = popupOrigins_.value(w);
-        popupOrigins_.remove(w);
-      }
-      /* let the state animation continue (not necessary but useful
-         for better flash prevention -- see FocusIn and FocusOut) */
-      else if ((animatedWidget_ == w && opacityTimer_->isActive())
-               || (animatedWidgetOut_ == w && opacityTimerOut_->isActive()))
-      {
-        break;
-      }
-    }
-    /* Falls through. */
-
-  case QEvent::Destroy: // FIXME: Isn't QEvent::Hide enough?
     if (w)
     {
-      if (qobject_cast<QMenu*>(w))
-        movedMenus.remove(w);
+      if (qobject_cast<QToolButton*>(o))
+      {
+        if (tspec_.group_toolbar_buttons)
+        {
+          if (QToolBar *toolBar = qobject_cast<QToolBar*>(w->parentWidget()))
+          {
+            if (toolBar->orientation() != Qt::Vertical)
+              toolBar->update();
+          }
+        }
+        //break; // toolbuttons may be animated (see below)
+      }
+      else if (w->isEnabled() && tspec_.animate_states)
+      {
+        if (w->inherits("QComboBoxPrivateContainer")
+            && qobject_cast<QComboBox*>(w->parentWidget()))
+        {
+          /* start with an appropriate state on closing popup, considering
+             that lineedits only have normal and focused states in Kvantum */
+          if ((tspec_.combo_as_lineedit || tspec_.square_combo_button)
+              && qobject_cast<QComboBox*>(w->parentWidget())->lineEdit())
+          {
+            animationStartState_ = "normal"; // -> QEvent::FocusIn
+          }
+          else
+            animationStartState_ = "c-toggled"; // distinguish it from a toggled button
+          /* ensure that the combobox will be animated on closing popup
+             (especially needed if the cursor has been on the popup) */
+          animatedWidget_ = w->parentWidget();
+          animationOpacity_ = 0;
+          break;
+        }
+        else if (w->windowType() == Qt::Popup
+                 || w->windowType() == Qt::ToolTip)
+        { // let the popup origin have a fade-out animation
+          animatedWidget_ = popupOrigins_.value(w);
+          forgetPopupOrigin(o);
+        }
+        /* let the state animation continue (not necessary but useful
+          for better flash prevention -- see FocusIn and FocusOut) */
+        else if ((animatedWidget_ == w && opacityTimer_->isActive())
+                 || (animatedWidgetOut_ == w && opacityTimerOut_->isActive()))
+        {
+          break;
+        }
+      }
 
+      /* remove the widget from some lists when it becomes hidden */
+      if (qobject_cast<QMenu*>(w))
+        forgetMovedMenu(o);
       if (!progressbars_.isEmpty() && qobject_cast<QProgressBar*>(o))
       {
-        progressbars_.remove(w);
-        if (progressbars_.size() == 0)
-          progressTimer_->stop();
+        forgetProgressBar(o);
+        break;
       }
       else if (tspec_.animate_states)
       {
         if (w->windowType() == Qt::Popup
             || w->windowType() == Qt::ToolTip)
         {
-          popupOrigins_.remove(w);
+          forgetPopupOrigin(o);
+          break; // popups aren't animated (see below)
         }
-        else // popups aren't animated
-        {
-          if (animatedWidget_ == w)
-          {
-            opacityTimer_->stop();
-            animatedWidget_ = nullptr;
-            animationOpacity_ = 100;
-          }
-          if (animatedWidgetOut_ == w)
-          {
-            opacityTimerOut_->stop();
-            animatedWidgetOut_ = nullptr;
-            animationOpacityOut_ = 100;
-          }
-        }
+      }
+    }
+    /* Falls through. */
+
+  case QEvent::Destroy: // not necessary
+    if (w && tspec_.animate_states)
+    {
+      if (animatedWidget_ == w)
+      {
+        opacityTimer_->stop();
+        animatedWidget_ = nullptr;
+        animationOpacity_ = 100;
+      }
+      if (animatedWidgetOut_ == w)
+      {
+        opacityTimerOut_->stop();
+        animatedWidgetOut_ = nullptr;
+        animationOpacityOut_ = 100;
       }
     }
     break;

@@ -432,12 +432,20 @@ class Style : public QCommonStyle {
     }
 
   private slots:
-    /* Called on timer timeout to advance busy progress bars. */
+    /* For busy progress bars. */
     void advanceProgressbar();
+    void forgetProgressBar(QObject *o);
+
+    void forgetPopupOrigin(QObject *o);
+
+    void forgetMovedMenu(QObject *o);
+
     void setAnimationOpacity();
     void setAnimationOpacityOut();
+
     /* Removes a widget from the list of translucent ones. */
     void noTranslucency(QObject *o);
+
     /* Removes a button from all special lists. */
     void removeFromSet(QObject *o);
 
@@ -459,6 +467,10 @@ class Style : public QCommonStyle {
 
     /* List of busy progress bars */
     QMap<QWidget*,int> progressbars_;
+
+    /* List of menus that are moved because of their shadows. */
+    QSet<const QWidget*> movedMenus_;
+
     /* List of windows, tooltips and menus that are (made) translucent */
     QSet<const QWidget*> translucentWidgets_;
     mutable QSet<QWidget*> forcedTranslucency_;
