@@ -1486,7 +1486,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           forgetPopupOrigin(o);
         }
         /* let the state animation continue (not necessary but useful
-          for better flash prevention -- see FocusIn and FocusOut) */
+           for better flash prevention -- see FocusIn and FocusOut) */
         else if ((animatedWidget_ == w && opacityTimer_->isActive())
                  || (animatedWidgetOut_ == w && opacityTimerOut_->isActive()))
         {
@@ -1502,14 +1502,12 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         forgetProgressBar(o);
         break;
       }
-      else if (tspec_.animate_states)
+      else if (tspec_.animate_states
+               && (w->windowType() == Qt::Popup
+                   || w->windowType() == Qt::ToolTip))
       {
-        if (w->windowType() == Qt::Popup
-            || w->windowType() == Qt::ToolTip)
-        {
-          forgetPopupOrigin(o);
-          break; // popups aren't animated (see below)
-        }
+        forgetPopupOrigin(o);
+        break; // popups aren't animated (see below)
       }
     }
     /* Falls through. */

@@ -1056,9 +1056,11 @@ bool Style::isWidgetInactive(const QWidget *widget) const
 
 void Style::noTranslucency(QObject *o)
 {
-  QWidget *widget = static_cast<QWidget*>(o);
-  translucentWidgets_.remove(widget);
-  forcedTranslucency_.remove(widget);
+  if (auto w = qobject_cast<QWidget*>(o))
+  {
+    translucentWidgets_.remove(w);
+    forcedTranslucency_.remove(w);
+  }
 }
 
 void Style::forcePalette(QWidget *widget, const QPalette &p) const
@@ -1556,11 +1558,13 @@ static QHash<QWidget*,QColor> txtColForced;
 
 void Style::removeFromSet(QObject *o)
 {
-  QWidget *widget = static_cast<QWidget*>(o);
-  paneledButtons.remove(widget);
-  standardButton.remove(widget);
-  txtColForced.remove(widget);
-  btnSeparators.remove(widget);
+  if (auto w = qobject_cast<QWidget*>(o))
+  {
+    paneledButtons.remove(w);
+    standardButton.remove(w);
+    txtColForced.remove(w);
+    btnSeparators.remove(w);
+  }
 }
 
 /* KCalc (KCalcButton), Dragon Player and, perhaps, some other apps set the text color
