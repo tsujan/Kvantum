@@ -11,7 +11,7 @@
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="29"/>
         <source>Push buttons</source>
-        <translation></translation>
+        <translation>Botones</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="77"/>
@@ -24,40 +24,51 @@ height
 greater
 than
 width</source>
-        <translation></translation>
+        <translation>Conmutador
+
+
+
+con
+altura
+mayor
+que
+anchura</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="95"/>
         <location filename="../../KvantumPreviewBase.ui" line="105"/>
         <source>Simple push button</source>
-        <translation></translation>
+        <translation>Botón simple</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="112"/>
         <location filename="../../KvantumPreviewBase.ui" line="128"/>
         <source>Toggle push button</source>
-        <translation></translation>
+        <translation>Conmutador</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="141"/>
         <location filename="../../KvantumPreviewBase.ui" line="152"/>
         <source>Multi-line
  push button</source>
-        <translation></translation>
+        <translation>Botón
+ multilínea</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="160"/>
         <location filename="../../KvantumPreviewBase.ui" line="180"/>
         <source>Push button
 with 32px folder icon</source>
-        <translation></translation>
+        <translation>Botón con icono
+de carpeta de 32px</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="210"/>
         <location filename="../../KvantumPreviewBase.ui" line="224"/>
         <source>Default
 push button</source>
-        <translation></translation>
+        <translation>Botón
+por defecto</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="266"/>
@@ -67,12 +78,12 @@ push button</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="279"/>
         <source>Button Box</source>
-        <translation>Caja de botones</translation>
+        <translation>Cuadro de botones</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="374"/>
         <source>Tool buttons</source>
-        <translation>Botones de herramientas</translation>
+        <translation>Botones de herramienta</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="382"/>
@@ -93,7 +104,8 @@ multilínea</translation>
         <location filename="../../KvantumPreviewBase.ui" line="508"/>
         <source>Toggle toolbutton
 with an arrow</source>
-        <translation></translation>
+        <translation>Conmutador de herramienta
+con una flecha</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="573"/>
@@ -125,20 +137,22 @@ al lado y flecha</translation>
         <source>Toggle toolbutton with icon,
 ordinary arrow
 and dropdown menu arrow</source>
-        <translation></translation>
+        <translation>Conmutador de herramienta
+con icono, flecha ordinaria
+y flecha de menú desplegable</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="528"/>
         <location filename="../../KvantumPreviewBase.ui" line="552"/>
         <source>Toolbutton with 32px PNG icon
 beside text</source>
-        <translation>Botón de herramienta con icono PNG
-de 32px junto al texto</translation>
+        <translation>Botón de herramienta con icono
+PNG de 32px junto al texto</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="366"/>
         <source>Push button with menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Botón con menú</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="415"/>
@@ -151,37 +165,45 @@ height
 greater
 than
 width</source>
-        <translation></translation>
+        <translation>Conmutador
+de
+herramienta
+
+con
+altura
+mayor
+que
+anchura</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="804"/>
         <source>Auto-raise</source>
-        <translation>Autoelevar</translation>
+        <translation>Elevar automáticamente</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="825"/>
         <source>Radio/Check buttons</source>
-        <translation>Botones de radio/casilla de verificación</translation>
+        <translation>Opciones/verificación</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="846"/>
         <location filename="../../KvantumPreviewBase.ui" line="859"/>
         <source>Simple radio button</source>
-        <translation>Botón de radio simple</translation>
+        <translation>Botón de opción simple</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="869"/>
         <location filename="../../KvantumPreviewBase.ui" line="880"/>
         <source>Multi-line
 radio button</source>
-        <translation>Botón de radio
+        <translation>Botón de opción
 multilínea</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="891"/>
         <location filename="../../KvantumPreviewBase.ui" line="917"/>
         <source>Radio button with 32px SVG icon</source>
-        <translation>Botón de radio con icono SVG de 32px</translation>
+        <translation>Botón de opción con icono SVG de 32px</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="940"/>
@@ -212,7 +234,7 @@ multilínea</translation>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1075"/>
         <source>Combos/Spins/Inputs</source>
-        <translation></translation>
+        <translation>Listas/números/entradas</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1109"/>
@@ -361,7 +383,7 @@ multilínea</translation>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1574"/>
         <source>Sliders/Scrolls/Progress/Dial</source>
-        <translation></translation>
+        <translation>Deslizadores/desplazamiento/progreso/diales</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2131"/>
@@ -387,36 +409,36 @@ multilínea</translation>
         <location filename="../../KvantumPreviewBase.ui" line="2174"/>
         <location filename="../../KvantumPreviewBase.ui" line="2272"/>
         <source>3rd Item</source>
-        <translation></translation>
+        <translation>Elemento 3</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2182"/>
         <location filename="../../KvantumPreviewBase.ui" line="2260"/>
         <source>2nd Item</source>
-        <translation></translation>
+        <translation>Elemento 2</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2186"/>
         <location filename="../../KvantumPreviewBase.ui" line="2222"/>
         <source>2nd Child</source>
-        <translation>2.º hijo</translation>
+        <translation>Subelemento 2</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2191"/>
         <location filename="../../KvantumPreviewBase.ui" line="2227"/>
         <source>1st Child</source>
-        <translation>1.er hijo</translation>
+        <translation>Subelemento 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2197"/>
         <location filename="../../KvantumPreviewBase.ui" line="2245"/>
         <source>1st Item</source>
-        <translation></translation>
+        <translation>Elemento 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2217"/>
         <source>3rd Child</source>
-        <translation>3.er hijo</translation>
+        <translation>Subelemento 3</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2515"/>
@@ -484,7 +506,7 @@ multilínea</translation>
         <location filename="../../KvantumPreviewBase.ui" line="2489"/>
         <location filename="../../KvantumPreviewBase.ui" line="2581"/>
         <source>GroupBox</source>
-        <translation>Caja de agrupación</translation>
+        <translation>Cuadro de grupo</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2368"/>
@@ -493,12 +515,12 @@ multilínea</translation>
         <location filename="../../KvantumPreviewBase.ui" line="2791"/>
         <location filename="../../KvantumPreviewBase.ui" line="2839"/>
         <source>Tab 1</source>
-        <translation></translation>
+        <translation>Pestaña 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2374"/>
         <source>Page 1 (disabled)</source>
-        <translation>Página 1 (inhabilitada)</translation>
+        <translation>Página 1 (desactivada)</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2386"/>
@@ -507,12 +529,12 @@ multilínea</translation>
         <location filename="../../KvantumPreviewBase.ui" line="2805"/>
         <location filename="../../KvantumPreviewBase.ui" line="2853"/>
         <source>Tab 2</source>
-        <translation></translation>
+        <translation>Pestaña 2</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2392"/>
         <source>Page 2 (disabled)</source>
-        <translation>Página 2 (inhabilitada)</translation>
+        <translation>Página 2 (desactivada)</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2426"/>
@@ -521,7 +543,7 @@ multilínea</translation>
         <location filename="../../KvantumPreviewBase.ui" line="2797"/>
         <location filename="../../KvantumPreviewBase.ui" line="2845"/>
         <source>Page 1</source>
-        <translation></translation>
+        <translation>Página 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2440"/>
@@ -531,52 +553,52 @@ multilínea</translation>
         <location filename="../../KvantumPreviewBase.ui" line="2811"/>
         <location filename="../../KvantumPreviewBase.ui" line="2859"/>
         <source>Page 2</source>
-        <translation></translation>
+        <translation>Página 2</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2464"/>
         <source>Stack widget (page1)</source>
-        <translation>Control apilado (página1)</translation>
+        <translation>Control de pila (página 1)</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2478"/>
         <source>Stack Widget (page2)</source>
-        <translation>Controla apilado (página2)</translation>
+        <translation>Control de pila (página 2)</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2495"/>
         <source>Group box</source>
-        <translation>Caja de agrupación</translation>
+        <translation>Cuadro de grupo</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2573"/>
         <source>Dock Widget</source>
-        <translation>Control anclable</translation>
+        <translation>Panel anclable</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2590"/>
         <source>Checkable group box</source>
-        <translation>Caja de agrupación con casilla de verificación</translation>
+        <translation>Cuadro de grupo con casilla de verificación</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2625"/>
         <source>Tool Box</source>
-        <translation>Caja de herramientas</translation>
+        <translation>Cuadro de herramientas</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2720"/>
         <source>Document mode</source>
-        <translation></translation>
+        <translation>Modo documento</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2758"/>
         <source>Box frame</source>
-        <translation>Marco de caja</translation>
+        <translation>Marco de cuadro</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2888"/>
         <source>&amp;File</source>
-        <translation></translation>
+        <translation>&amp;Archivo</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2892"/>
@@ -586,12 +608,12 @@ multilínea</translation>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2912"/>
         <source>toolBar</source>
-        <translation></translation>
+        <translation>barra de herramientas</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2932"/>
         <source>toolBar_2</source>
-        <translation></translation>
+        <translation>barra de herramientas 2</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2954"/>
@@ -616,22 +638,22 @@ multilínea</translation>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2981"/>
         <source>Toggle Layout</source>
-        <translation>Conmutar el diseño</translation>
+        <translation>Cambiar la distribución</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2984"/>
         <source>Toggle layout direction</source>
-        <translation>Conmutar la dirección del diseño</translation>
+        <translation>Cambiar la dirección de la distribución</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2996"/>
         <source>&amp;Doc Mode</source>
-        <translation></translation>
+        <translation>Modo &amp;documento</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2999"/>
         <source>Show tabs in the document mode</source>
-        <translation>Mostrar pestañas en el modo documento</translation>
+        <translation>Mostrar las pestañas en el modo documento</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="3011"/>
@@ -646,17 +668,17 @@ multilínea</translation>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="3025"/>
         <source>C&amp;heckbox</source>
-        <translation>Casilla de verificación</translation>
+        <translation>C&amp;asilla de verificación</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="3033"/>
         <source>&amp;Radio button</source>
-        <translation>Botón de &amp;radio</translation>
+        <translation>&amp;Botón de opción</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="3041"/>
         <source>Radio &amp;button</source>
-        <translation>&amp;Botón de radio</translation>
+        <translation>Botón de &amp;opción</translation>
     </message>
 </context>
 </TS>
