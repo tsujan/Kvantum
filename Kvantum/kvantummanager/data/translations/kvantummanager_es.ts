@@ -14,18 +14,17 @@
     <message>
         <location filename="../../kvantummanager.ui" line="12"/>
         <source>Kvantum Manager</source>
-        <translation>Administrador de Kvantum</translation>
+        <translation>Gestor de Kvantum</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="38"/>
         <source>Install/Update Theme</source>
-        <translation>Instalar/Actualizar temas</translation>
+        <translation>Instalar/actualizar temas</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="44"/>
         <source>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; comes with many themes but external themes can also be installed for being used by it. Here you could choose a theme folder and then press the button below to install it in your Home.&lt;/center&gt;</source>
-        <translation>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; viene con una gran variedad de temas, pero también se pueden instalarse temas externos.
-Aquí puede elegir una carpeta de temas y luego pulsar el botón ubicado debajo para instalarlo en su directorio personal.&lt;/center&gt;</translation>
+        <translation>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt;viene con varios temas, pero también se pueden instalar temas externos. Aquí puedes elegir una carpeta de temas y luego pulsar el botón de abajo para instalarlo en tu carpeta personal.&lt;/center&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="76"/>
@@ -39,7 +38,7 @@ de temas de Kvantum</translation>
         <source>Add this theme to the list of themes that
 Kvantum can use in addition to its own themes.</source>
         <translation>Añadir este tema a la lista de temas que
-Kvantum puede usar además de los suyos propios.</translation>
+Kvantum puede usar además de sus propios temas.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="117"/>
@@ -49,7 +48,7 @@ Kvantum puede usar además de los suyos propios.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="138"/>
         <source>Change/Delete Theme</source>
-        <translation>Cambiar/Borrar tema</translation>
+        <translation>Cambiar/borrar un tema</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="144"/>
@@ -67,10 +66,10 @@ Kvantum puede usar además de los suyos propios.</translation>
 
 A disabled button means that
 the theme is already used.</source>
-        <translation>Utilizar este tema en Kvantum!
+        <translation>Hace que Kvantum use este tema.
 
-Si el botón se encuentra inhabilitado
-significa que el tema ya está en uso.</translation>
+Un botón desactivado significa que
+el tema ya está en uso.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="204"/>
@@ -87,14 +86,14 @@ significa que el tema ya está en uso.</translation>
         <source>Revert to the default (root)
 settings of this theme.
 (Ctrl+Z)</source>
-        <translation>Volver a la configuración por
-defecto (original) del tema.
+        <translation>Restaurar la configuración
+por defecto del tema.
 (Ctrl+Z)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="326"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Revert to the default (root) settings of this theme!&lt;/p&gt;&lt;p&gt;When clicked and confirmed, all changes to the configuration will be lost but the probable customized SVG file will remain intact.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;¡Volver a la configuración por defecto (original) del tema!&lt;/p&gt;&lt;p&gt;Al hacer clic y confirmar, se pierden todos los cambios en la configuración, aunque el archivo SVG posiblemente modificado permanecerá intacto.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Restaura la configuración por defecto de este tema.&lt;/p&gt;&lt;p&gt;Al hacer clic y confirmar, se pierden todos los cambios en la configuración, aunque el archivo SVG posiblemente modificado permanecerá intacto.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="329"/>
@@ -142,7 +141,7 @@ defecto (original) del tema.
     <message>
         <location filename="../../kvantummanager.ui" line="421"/>
         <source>Normal font for default push buttons</source>
-        <translation>Fuente normal para los pulsadores por defecto</translation>
+        <translation>Tipo de letra normal para los botones por defecto</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="441"/>
@@ -151,11 +150,11 @@ defecto (original) del tema.
 Under LXQt, it needs logging out and in or closing
 PCManFM-qt and then, stopping and starting Desktop
 with LXQt Session Settings.</source>
-        <translation>Fusionar el panel lateral de PCManFM-qt con su entorno.
+        <translation>Fusiona el panel lateral de PCManFM-qt con su entorno.
 
-En LXQt, es necesario cerrar e iniciar sesión, o cerrar
-PCManFM-qt y, entonces, detener e iniciar el escritorio
-con Configuración de la sesión de LXQt.</translation>
+En LXQt es necesario cerrar e iniciar sesión o cerrar
+PCManFM-qt y después detener e iniciar el escritorio
+con configuración de la sesión de LXQt.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="448"/>
@@ -174,11 +173,11 @@ con Configuración de la sesión de LXQt.</translation>
 Under LXQt, it needs logging out and in or closing
 PCManFM-qt and then, stopping and starting Desktop
 with LXQt Session Settings.</source>
-        <translation>Fusionar la vista de PCManFM-qt con su entorno.
+        <translation>Fusiona la vista de PCManFM-qt con su entorno.
 
-En LXQt, es necesario cerrar e iniciar sesión, o cerrar
-PCManFM-qt y, entonces, detener e iniciar el escritorio
-con Configuración de la sesión de LXQt.</translation>
+En LXQt es necesario cerrar e iniciar sesión o cerrar
+PCManFM-qt y después detener e iniciar el escritorio
+con la configuración de la sesión de LXQt.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="477"/>
@@ -203,12 +202,12 @@ con Configuración de la sesión de LXQt.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="551"/>
         <source>Do not draw any background for KTitles.</source>
-        <translation>No dibujar el fondo para los KTitles.</translation>
+        <translation>No dibuja el fondo para los KTitles.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="554"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do not draw any background for KTitles?&lt;/p&gt;&lt;p&gt;Ktitles are used by some KDE applications to show different sections in configuration dialogs.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;¿Quiere no dibujar el fondo para los KTitles?&lt;/p&gt;&lt;p&gt;Los Ktitles se usan en algunas aplicaciones de KDE para mostrar secciones diferentes en cuadros de diálogo de configuración.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;¿No dibujar el fondo para los KTitles?&lt;/p&gt;&lt;p&gt;Los Ktitles se usan en algunas aplicaciones de KDE para mostrar secciones diferentes en los diálogos de configuración.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="557"/>
@@ -363,12 +362,13 @@ Miscelánea → Respetar el escritorio actual si es posible</translation>
         <location filename="../../kvantummanager.ui" line="528"/>
         <source>By default, both active and inactive translucent windows
 will be blurred if blurring is enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Por defecto, se difuminarán tanto las ventanas translúcidas
+activas como las inactivas si se activa el difuminado.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="532"/>
         <source>No blurring for inactive windows</source>
-        <translation type="unfinished"></translation>
+        <translation>No difuminar las ventanas inactivas</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="539"/>
@@ -479,22 +479,26 @@ radii for blurring translucent menus and tooltips
 that have rounded corners.
 
 Usually, a value of 2 is enough.</source>
-        <translation type="unfinished"></translation>
+        <translation>Si se activa el difuminado, estos valores definen el
+radio de las esquinas de menús translúcidos y
+descripciones emergentes con esquinas redondeadas.
+
+Normalmente, un valor de 2 es suficiente.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="805"/>
         <source>Blur Corner Radius</source>
-        <translation type="unfinished"></translation>
+        <translation>Radio de la esquina difuminada</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="818"/>
         <source>Menu:</source>
-        <translation type="unfinished"></translation>
+        <translation>Menú:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="825"/>
         <source>Tooltip:</source>
-        <translation type="unfinished"></translation>
+        <translation>Descripción emergente:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="849"/>

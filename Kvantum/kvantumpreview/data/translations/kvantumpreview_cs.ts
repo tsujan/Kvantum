@@ -419,13 +419,13 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="2186"/>
         <location filename="../../KvantumPreviewBase.ui" line="2222"/>
         <source>2nd Child</source>
-        <translation>Druhé dítě</translation>
+        <translation>Druhý potomek</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2191"/>
         <location filename="../../KvantumPreviewBase.ui" line="2227"/>
         <source>1st Child</source>
-        <translation>První dítě</translation>
+        <translation>První potomek</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2197"/>
@@ -436,7 +436,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2217"/>
         <source>3rd Child</source>
-        <translation>Třetí dítě</translation>
+        <translation>Třetí potomek</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2515"/>
