@@ -1,6 +1,7 @@
 V1.0.7
 ---------
  * Don't rely on the (undocumented) "Destroy" event to remove destroyed widgets from lists. In this way, the cause of a rare crash is removed.
+ * Added a workaround to Kvantum Manager for a regression in a recent version of Qt 5.15, which resized the page "Configure Active Theme" incorrectly.
 
 V1.0.6
 ---------

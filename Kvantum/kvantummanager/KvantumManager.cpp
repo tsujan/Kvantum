@@ -297,6 +297,46 @@ void KvantumManager::fitThirdPageToContents()
     {
         if (auto scrollArea = qobject_cast<QAbstractScrollArea*>(viewport->parentWidget()))
         {
+#if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
+            QSize maxSize;
+            QRect sr;
+            if (QWindow *win = windowHandle())
+            {
+                if (QScreen *sc = win->screen())
+                    sr = sc->availableGeometry();
+            }
+            if (sr.isNull())
+            {
+                if (QScreen *pScreen = QApplication::primaryScreen())
+                    sr = pScreen->availableGeometry();
+            }
+            if (!sr.isNull())
+            {
+                maxSize = sr.size()
+                          // the window frame size
+                          - (frameGeometry().size() - size());
+            }
+
+            /* WARNING: For some reason unknown to me, after a Qt5 upgrade,
+                        the window will be resized correctly only if its
+                        width is calculated and set after its height. */
+            int diff = viewport->childrenRect().height() - scrollArea->height();
+            if (diff > 0)
+            {
+                int newHeight = height() + diff;
+                if (maxSize.isValid())
+                    newHeight = qMin (newHeight, maxSize.height());
+                resize (size().width(), newHeight);
+            }
+            diff = viewport->childrenRect().width() - scrollArea->width();
+            if (diff > 0)
+            {
+                int newWidth = width() + diff;
+                if (maxSize.isValid())
+                    newWidth = qMin (newWidth, maxSize.width());
+                resize (newWidth, size().height());
+            }
+#else
             QSize diff = viewport->childrenRect().size() - scrollArea->size();
             if (diff.width() > 0 || diff.height() > 0)
             {
@@ -320,6 +360,7 @@ void KvantumManager::fitThirdPageToContents()
                 }
                 resize (newSize);
             }
+#endif
         }
     }
 }
@@ -2146,7 +2187,7 @@ void KvantumManager::updateThemeList (bool updateAppThemes)
                 if (appTheme.endsWith ("#"))
                 {
                     /* we remove # for simplicity and add it only at writeOrigAppLists() */
-                    appTheme.remove (appTheme.count() - 1, 1);
+                    appTheme.remove (appTheme.size() - 1, 1);
                     if (ui->comboBox->findText ((appTheme == "Default" ? "Kvantum" : appTheme) + modifiedSuffix_) == -1)
                     {
                         nonexistent = true;
