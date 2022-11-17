@@ -86,6 +86,7 @@ private:
     void defaultThemeButtons();
     void restyleWindow();
     void writeOrigAppLists();
+    bool setConfigLabel (bool animate = false);
     QString getComment (const QString &comboText, bool setState = true);
     // to be independent of '../style/drag/windowmanager.h'
     enum Drag {

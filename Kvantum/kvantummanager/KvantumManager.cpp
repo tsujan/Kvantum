@@ -263,7 +263,9 @@ KvantumManager::KvantumManager (const QString& lang, QWidget *parent) : QMainWin
 
     /* The conf page is the largest and we want to avoid scrollbars in it
        the first time it is shown. So, we force a layout calculation for it,
-       knowing that it is the current page in the ui file. */
+       knowing that it is the current page in the ui file. But, first, the
+       text of "configLabel" should be set. */
+    setConfigLabel();
     setAttribute (Qt::WA_DontShowOnScreen);
     show();
 }
@@ -297,7 +299,7 @@ void KvantumManager::fitThirdPageToContents()
     {
         if (auto scrollArea = qobject_cast<QAbstractScrollArea*>(viewport->parentWidget()))
         {
-#if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
+            /* the maximum size inside the available geometry */
             QSize maxSize;
             QRect sr;
             if (QWindow *win = windowHandle())
@@ -313,10 +315,11 @@ void KvantumManager::fitThirdPageToContents()
             if (!sr.isNull())
             {
                 maxSize = sr.size()
-                          // the window frame size
-                          - (frameGeometry().size() - size());
+                        // the window frame size
+                        - (frameGeometry().size() - size());
             }
 
+#if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
             /* WARNING: For some reason unknown to me, after a Qt5 upgrade,
                         the window will be resized correctly only if its
                         width is calculated and set after its height. */
@@ -341,17 +344,6 @@ void KvantumManager::fitThirdPageToContents()
             if (diff.width() > 0 || diff.height() > 0)
             {
                 QSize newSize = size().expandedTo (size() + diff);
-                QRect sr;
-                if (QWindow *win = windowHandle())
-                {
-                    if (QScreen *sc = win->screen())
-                        sr = sc->availableGeometry();
-                }
-                if (sr.isNull())
-                {
-                    if (QScreen *pScreen = QApplication::primaryScreen())
-                        sr = pScreen->availableGeometry();
-                }
                 if (!sr.isNull())
                 {
                     newSize = newSize.boundedTo (sr.size()
@@ -1024,6 +1016,16 @@ void KvantumManager::showAnimated (QWidget *w, int duration)
     animation_->setStartValue (0.0);
     animation_->setEndValue (1.0);
     animation_->start();
+
+    /* Qt has a scroll bug that shows up when SH_UnderlineShortcut
+       is set to "false" and interferes with horizontal scrolling
+       of the label in the third page. This is a workaround. */
+    if (ui->configLabel->isVisible())
+    {
+        connect (animation_, &QAbstractAnimation::finished,
+                 ui->configLabel, QOverload<>::of(&QWidget::update),
+                 Qt::UniqueConnection);
+    }
 }
 /*************************/
 // Activates the theme and sets kvconfigTheme_.
@@ -1398,6 +1400,44 @@ void KvantumManager::restyleWindow()
     });
 }
 /*************************/
+bool KvantumManager::setConfigLabel (bool animate)
+{
+    bool hasUserSVG;
+    if (kvconfigTheme_.isEmpty())
+    {
+        ui->configLabel->setText (tr ("These are the settings that can be safely changed.<br>For the others, click <i>Save</i> and then edit this file:")
+                                  + "<br><i>~/.config/Kvantum/Default#/<b>Default#.kvconfig</b></i>");
+        if (animate)
+            showAnimated (ui->configLabel, 1000);
+        ui->checkBoxPattern->setEnabled (false);
+        hasUserSVG = true;
+    }
+    else
+    {
+        /* a config other than the default Kvantum one */
+        QString themeDir = userThemeDir (kvconfigTheme_);
+        userConfigFile_ = QString ("%1/%2.kvconfig").arg (themeDir).arg (kvconfigTheme_);
+        QString userSvg = QString ("%1/%2.svg").arg (themeDir).arg (kvconfigTheme_);
+        hasUserSVG = QFile::exists (userSvg);
+        if (!QFile::exists (userConfigFile_) && !hasUserSVG)
+        { // no user theme but a root one
+            ui->configLabel->setText (tr ("These are the settings that can be safely changed.<br>For the others, click <i>Save</i> and then edit this file:")
+                                      + QString ("<br><i>~/.config/Kvantum/%1#/<b>%1#.kvconfig</b></i>").arg (kvconfigTheme_));
+        }
+        else
+        {
+            /* If the user config file doesn't exist but the user SVG file does,
+               the default config file will be coppied to the user folder in
+               tabChanged() and this text will be correct. */
+            ui->configLabel->setText (tr ("These are the settings that can be safely changed.<br>For the others, edit this file:")
+                                      + QString ("<a href='%2'><br><i>%1").arg (themeDir).arg (userConfigFile_) + QString ("/<b>%1.kvconfig</b></i></a>").arg (kvconfigTheme_));
+        }
+        if (animate)
+            showAnimated (ui->configLabel, 1000);
+    }
+    return hasUserSVG;
+}
+/*************************/
 void KvantumManager::tabChanged (int index)
 {
     ui->statusBar->clearMessage();
@@ -1442,32 +1482,11 @@ void KvantumManager::tabChanged (int index)
         defaultThemeButtons();
         setTabWidgetFocus();
 
-        if (kvconfigTheme_.isEmpty())
-        {
-            ui->configLabel->setText (tr ("These are the settings that can be safely changed.<br>For the others, click <i>Save</i> and then edit this file:")
-                                      + "<br><i>~/.config/Kvantum/Default#/<b>Default#.kvconfig</b></i>");
-            showAnimated (ui->configLabel, 1000);
-            ui->checkBoxPattern->setEnabled (false);
-        }
-        else
-        {
-            /* a config other than the default Kvantum one */
-            QString themeDir = userThemeDir (kvconfigTheme_);
-            QString themeConfig = QString ("%1/%2.kvconfig").arg (themeDir).arg (kvconfigTheme_);
-            userConfigFile_ = themeConfig;
-            QString userSvg = QString ("%1/%2.svg").arg (themeDir).arg (kvconfigTheme_);
+        bool hasUserSVG = setConfigLabel (true); // also sets userConfigFile_
 
-            /* If themeConfig doesn't exist but userSvg does, themeConfig be created by copying
-               the default config below and this message will be correct. If neither themeConfig
-               nor userSvg exists, this message will be replaced by the one that follows it. */
-            ui->configLabel->setText (tr ("These are the settings that can be safely changed.<br>For the others, edit this file:")
-                                      + QString ("<a href='%2'><br><i>%1").arg (themeDir).arg (userConfigFile_) + QString ("/<b>%1.kvconfig</b></i></a>").arg (kvconfigTheme_));
-            if (!QFile::exists (themeConfig) && !QFile::exists (userSvg))
-            { // no user theme but a root one
-                ui->configLabel->setText (tr ("These are the settings that can be safely changed.<br>For the others, click <i>Save</i> and then edit this file:")
-                                          + QString ("<br><i>~/.config/Kvantum/%1#/<b>%1#.kvconfig</b></i>").arg (kvconfigTheme_));
-            }
-            showAnimated (ui->configLabel, 1000);
+        if (!kvconfigTheme_.isEmpty())
+        {
+            QString themeConfig = userConfigFile_; // might change below
 
             if (kvconfigTheme_.endsWith ("#"))
                 ui->restoreButton->show();
@@ -1478,7 +1497,7 @@ void KvantumManager::tabChanged (int index)
                theme config if this user theme doesn't have a config */
             if (!QFile::exists (themeConfig))
             {
-                if (QFile::exists (userSvg)) // a user theme without config
+                if (hasUserSVG) // a user theme without config
                     copyRootTheme (QString(), kvconfigTheme_);
                 else // a root theme
                 {
