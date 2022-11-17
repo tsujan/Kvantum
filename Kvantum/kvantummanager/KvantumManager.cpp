@@ -1402,7 +1402,7 @@ void KvantumManager::restyleWindow()
 /*************************/
 bool KvantumManager::setConfigLabel (bool animate)
 {
-    bool hasUserSVG;
+    bool hasUserSVG = false;
     if (kvconfigTheme_.isEmpty())
     {
         ui->configLabel->setText (tr ("These are the settings that can be safely changed.<br>For the others, click <i>Save</i> and then edit this file:")
@@ -1410,7 +1410,6 @@ bool KvantumManager::setConfigLabel (bool animate)
         if (animate)
             showAnimated (ui->configLabel, 1000);
         ui->checkBoxPattern->setEnabled (false);
-        hasUserSVG = true;
     }
     else
     {
