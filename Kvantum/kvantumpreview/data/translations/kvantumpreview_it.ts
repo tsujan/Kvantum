@@ -573,7 +573,7 @@ con più righe</translation>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2625"/>
         <source>Tool Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Casella degli strumenti</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2720"/>

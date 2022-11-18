@@ -131,7 +131,7 @@ d&apos;aquest tema.
     <message>
         <location filename="../../kvantummanager.ui" line="366"/>
         <source>Hacks</source>
-        <translation>Hacks</translation>
+        <translation>Funcions útils</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="390"/>
@@ -479,12 +479,16 @@ radii for blurring translucent menus and tooltips
 that have rounded corners.
 
 Usually, a value of 2 is enough.</source>
-        <translation type="unfinished"></translation>
+        <translation>Si el difuminat està activat, aquests valors estableixen el radi
+de la cantonada per a difuminar els menús translúcids i els consells
+amb cantonades arrodonides.
+
+Normalment, un valor de 2 és suficient.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="802"/>
         <source>Blur Corner Radius</source>
-        <translation type="unfinished"></translation>
+        <translation>Radi de la cantonada del difuminat</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="815"/>
@@ -494,7 +498,7 @@ Usually, a value of 2 is enough.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="822"/>
         <source>Tooltip:</source>
-        <translation type="unfinished"></translation>
+        <translation>Consell:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="846"/>
@@ -1370,10 +1374,10 @@ Aquesta opció els ocultarà.</translation>
 scroll arrows on their top and/or bottom?
 
 By default, big menus are scrollable.</source>
-        <translation type="unfinished">Els menús grans han de ser desplaçables i tenir
+        <translation>Els menús grans haurien de ser desplaçables i tenir 
 fletxes de desplaçament a la part superior i/o inferior?
 
-Per defecte, els menús grans són desplaçables.</translation>
+Per defecte, els menús grans es poden desplaçar.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1997"/>
@@ -1382,11 +1386,11 @@ Per defecte, els menús grans són desplaçables.</translation>
 If you have enabled it, you could temporarily disable it
 for a button that can be dragged and dropped by pressing
 the Ctrl key before pressing the button.</source>
-        <translation type="unfinished">Avís: això pot ser molt confús al principi.
+        <translation>Avís: això pot ser prou confús al principi.
 
-Si ho ha habilitat, pot deshabilitar-ho temporalment
-per a un botó que permeti arrossegar i deixar anar pressionant
-la tecla Ctrl abans de prémer el botó.</translation>
+Si l&apos;heu activat, podeu desactivar-lo temporalment 
+per a un botó que pot arrossegar i deixar anar 
+prement la tecla Ctrl abans de prémer el botó.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2004"/>
@@ -1630,7 +1634,7 @@ o actualitza la seva previsualització.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="636"/>
         <source>The name of an installable themes should not be &quot;Default&quot;.</source>
-        <translation type="unfinished">El nom d&apos;un tema instal·lable no hauria de ser «Default».</translation>
+        <translation>El nom d&apos;un tema instal·lable no hauria de ser «Default».</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="637"/>
@@ -1749,7 +1753,7 @@ o actualitza la seva previsualització.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="2885"/>
         <source>Restored the root default settings of %1</source>
-        <translation type="unfinished">S&apos;ha restaurat la configuració arrel predeterminada de %1</translation>
+        <translation>S&apos;ha restaurat la configuració arrel predeterminada de %1</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2886"/>
