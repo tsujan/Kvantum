@@ -6,12 +6,12 @@
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="14"/>
         <source>Kvantum Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Kvantum Forhåndsvisning</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="29"/>
         <source>Push buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>Trykknapper</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="77"/>
@@ -24,96 +24,112 @@ height
 greater
 than
 width</source>
-        <translation type="unfinished"></translation>
+        <translation>Skift
+skubbe
+knap
+
+med
+højde
+større
+end
+bredde</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="95"/>
         <location filename="../../KvantumPreviewBase.ui" line="105"/>
         <source>Simple push button</source>
-        <translation type="unfinished"></translation>
+        <translation>Enkel trykknap</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="112"/>
         <location filename="../../KvantumPreviewBase.ui" line="128"/>
         <source>Toggle push button</source>
-        <translation type="unfinished"></translation>
+        <translation>Skift trykknap</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="141"/>
         <location filename="../../KvantumPreviewBase.ui" line="152"/>
         <source>Multi-line
  push button</source>
-        <translation type="unfinished"></translation>
+        <translation>Multi-linje
+trykknap</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="160"/>
         <location filename="../../KvantumPreviewBase.ui" line="180"/>
         <source>Push button
 with 32px folder icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Trykknap
+med 32px mappeikon</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="210"/>
         <location filename="../../KvantumPreviewBase.ui" line="224"/>
         <source>Default
 push button</source>
-        <translation type="unfinished"></translation>
+        <translation>Standard
+trykknap</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="266"/>
         <source>Flat buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>Flade knapper</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="279"/>
         <source>Button Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Knapboks</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="374"/>
         <source>Tool buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>Værktøjsknapper</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="382"/>
         <location filename="../../KvantumPreviewBase.ui" line="459"/>
         <source>Simple toolbutton</source>
-        <translation type="unfinished"></translation>
+        <translation>Enkel værktøjsknap</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="466"/>
         <location filename="../../KvantumPreviewBase.ui" line="477"/>
         <source>Multi-line
 toolbutton</source>
-        <translation type="unfinished"></translation>
+        <translation>Multi-linje
+værktøjsknap</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="485"/>
         <location filename="../../KvantumPreviewBase.ui" line="508"/>
         <source>Toggle toolbutton
 with an arrow</source>
-        <translation type="unfinished"></translation>
+        <translation>Skift værktøjsknap
+med en pil</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="573"/>
         <location filename="../../KvantumPreviewBase.ui" line="597"/>
         <source>Toolbutton with 32px SVG icon
 and text below</source>
-        <translation type="unfinished"></translation>
+        <translation>Værktøjsknap med 32px SVG ikon
+og tekst nedenfor</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="618"/>
         <location filename="../../KvantumPreviewBase.ui" line="639"/>
         <source>Toolbutton with text below
 and arrow</source>
-        <translation type="unfinished"></translation>
+        <translation>Værktøjsknap med tekst nedenfor
+og pil</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="657"/>
         <location filename="../../KvantumPreviewBase.ui" line="678"/>
         <source>Toolbutton with icon at the side
 and arrow</source>
-        <translation type="unfinished"></translation>
+        <translation>Værktøjsknap med ikon på siden
+og pil</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="696"/>
@@ -121,7 +137,9 @@ and arrow</source>
         <source>Toggle toolbutton with icon,
 ordinary arrow
 and dropdown menu arrow</source>
-        <translation type="unfinished"></translation>
+        <translation>Skift værktøjsknap med ikon,
+almindelig pil
+og rullemenu pil</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="528"/>
