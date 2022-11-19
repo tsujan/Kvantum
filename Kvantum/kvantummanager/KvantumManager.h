@@ -39,8 +39,6 @@ public:
     KvantumManager (const QString& lang = QString(), QWidget *parent = 0);
     ~KvantumManager();
 
-    void showWindow();
-
 protected:
     void closeEvent (QCloseEvent *event);
     bool eventFilter (QObject *watched, QEvent *event);
@@ -72,7 +70,7 @@ private slots:
     void setTabWidgetFocus();
 
 private:
-    void fitThirdPageToContents();
+    void fitConfPageToContents();
     QString tooTipToWhatsThis (const QString &tip);
     void notWritable (const QString &path);
     void canNotBeRemoved (const QString &path, bool isDir);
@@ -86,7 +84,6 @@ private:
     void defaultThemeButtons();
     void restyleWindow();
     void writeOrigAppLists();
-    bool setConfigLabel (bool animate = false);
     QString getComment (const QString &comboText, bool setState = true);
     // to be independent of '../style/drag/windowmanager.h'
     enum Drag {

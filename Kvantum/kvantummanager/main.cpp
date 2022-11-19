@@ -146,7 +146,6 @@ int main (int argc, char *argv[])
     if (QApplication::style()->objectName() != "kvantum")
         QApplication::setStyle (QStyleFactory::create ("kvantum"));
     KvManager::KvantumManager km (lang, nullptr);
-    km.showWindow();
 
     return a.exec();
 }

@@ -1,7 +1,7 @@
 V1.0.7
 ---------
  * Don't rely on the (undocumented) "Destroy" event to remove destroyed widgets from lists. In this way, the cause of a rare crash is removed.
- * Added a workaround to Kvantum Manager for a window resizing regression in a recent version of Qt 5.15. Also, improved the code for avoiding scrollbars in the 3rd page.
+ * Better guarantee for the lack of scrollbars in the config page of Kvantum Manager when it's visited for the first time.
 
 V1.0.6
 ---------
