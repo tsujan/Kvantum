@@ -51,8 +51,8 @@ l&apos;amplada</translation>
         <location filename="../../KvantumPreviewBase.ui" line="152"/>
         <source>Multi-line
  push button</source>
-        <translation type="unfinished">Botó per prémer
-multilínia</translation>
+        <translation type="unfinished">Multilínia
+botó de prémer</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="160"/>
@@ -152,7 +152,7 @@ al costat del text</translation>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="366"/>
         <source>Push button with menu</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Botó per prémer amb el menú</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="415"/>
@@ -183,7 +183,7 @@ l&apos;amplada</translation>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="825"/>
         <source>Radio/Check buttons</source>
-        <translation type="unfinished">Botons de ràdio/casella de selecció</translation>
+        <translation type="unfinished">Botons d&apos;opció/verificació</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="846"/>
