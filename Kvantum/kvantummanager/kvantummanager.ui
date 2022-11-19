@@ -257,6 +257,9 @@ the theme is already used.</string>
         <string>Configure Active Theme</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_4">
+        <property name="sizeConstraint">
+         <enum>QLayout::SetMinimumSize</enum>
+        </property>
         <item row="0" column="0" colspan="2">
          <widget class="QLabel" name="configLabel">
           <property name="wordWrap">
@@ -366,6 +369,9 @@ settings of this theme.
                <string>Hacks</string>
               </attribute>
               <layout class="QGridLayout" name="gridLayout_8">
+               <property name="sizeConstraint">
+                <enum>QLayout::SetMinimumSize</enum>
+               </property>
                <item row="0" column="0">
                 <spacer name="horizontalSpacer_1">
                  <property name="orientation">
