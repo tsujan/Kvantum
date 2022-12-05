@@ -103,7 +103,7 @@ indstillinger af dette tema.
     <message>
         <location filename="../../kvantummanager.ui" line="332"/>
         <source>Ctrl+Z</source>
-        <translation type="unfinished">Ctrl+Z</translation>
+        <translation>Ctrl+Z</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="342"/>
@@ -121,7 +121,7 @@ indstillinger af dette tema.
     <message>
         <location filename="../../kvantummanager.ui" line="349"/>
         <source>Ctrl+S</source>
-        <translation type="unfinished">Ctrl+S</translation>
+        <translation>Ctrl+S</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="356"/>
@@ -131,7 +131,7 @@ indstillinger af dette tema.
     <message>
         <location filename="../../kvantummanager.ui" line="369"/>
         <source>Hacks</source>
-        <translation type="unfinished">Hacks</translation>
+        <translation>Hacks</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="396"/>
