@@ -3415,8 +3415,12 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         }
         bool animate(!pcmanfmInactiveView
                      && widget && widget->isEnabled()
-                     && ((animatedWidget_ == widget && !fStatus.startsWith(QLatin1String("normal")))
-                         || (animatedWidgetOut_ == widget && fStatus.startsWith(QLatin1String("normal")))));
+                     && ((animatedWidget_ == widget
+                          && opacityTimer_->isActive()
+                          && !fStatus.startsWith(QLatin1String("normal")))
+                         || (animatedWidgetOut_ == widget
+                             && opacityTimerOut_->isActive()
+                             && fStatus.startsWith(QLatin1String("normal")))));
         QString animationStartState(animationStartState_);
         int animationOpacity = animationOpacity_;
         if (animate)
@@ -3450,6 +3454,13 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
             else
               animationStartState_ = fStatus;
           }
+        }
+        else
+        {
+          if (animatedWidget_ == widget)
+            animationStartState_ = fStatus;
+          if (animatedWidgetOut_ == widget)
+            animationStartStateOut_ = fStatus;
         }
         if (!(option->state & State_Enabled))
           painter->restore();
@@ -3844,12 +3855,20 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         painter->setOpacity(DISABLED_OPACITY);
       }
       bool animateSpin(qobject_cast<QAbstractSpinBox*>(p)
-                       && ((animatedWidget_ == p && !leStatus.startsWith(QLatin1String("normal")))
-                           || (animatedWidgetOut_ == p && leStatus.startsWith(QLatin1String("normal")))));
+                       && ((animatedWidget_ == p
+                            && opacityTimer_->isActive()
+                            && !leStatus.startsWith(QLatin1String("normal")))
+                           || (animatedWidgetOut_ == p
+                               && opacityTimerOut_->isActive()
+                               && leStatus.startsWith(QLatin1String("normal")))));
       bool animate(/*!isLibreoffice_ &&*/ widget && widget->isEnabled()
                    && !qobject_cast<const QAbstractScrollArea*>(widget)
-                   && ((animatedWidget_ == widget && !leStatus.startsWith(QLatin1String("normal")))
-                       || (animatedWidgetOut_ == widget && leStatus.startsWith(QLatin1String("normal")))
+                   && ((animatedWidget_ == widget
+                        && opacityTimer_->isActive()
+                        && !leStatus.startsWith(QLatin1String("normal")))
+                       || (animatedWidgetOut_ == widget
+                           && opacityTimerOut_->isActive()
+                           && leStatus.startsWith(QLatin1String("normal")))
                        || animateSpin));
       QString animationStartState(animationStartState_);
       int animationOpacity = animationOpacity_;
@@ -3896,6 +3915,13 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           else
             animationStartState_ = leStatus;
         }
+      }
+      else
+      {
+        if (animatedWidget_ == widget)
+          animationStartState_ = leStatus;
+        if (animatedWidgetOut_ == widget)
+          animationStartStateOut_ = leStatus;
       }
       if (fillWidgetInterior) // widget isn't null
       {
@@ -4419,7 +4445,10 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         status = (option->state & State_Enabled) ?
                   (option->state & State_On) ? "toggled" :
                   ((option->state & State_Sunken) || cb->hasFocus()) ? "pressed" :
-                  (option->state & State_MouseOver) ? "focused" : "normal"
+                  (option->state & State_MouseOver)
+                    && !(option->styleObject
+                         && option->styleObject->property("_kv_hover_bug").toBool()) // hover bug
+                  ? "focused" : "normal"
                 : "disabled";
         if (isWidgetInactive(widget))
           status.append("-inactive");
@@ -4656,12 +4685,15 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           painter->setOpacity(DISABLED_OPACITY);
         }
         bool mouseAnimation(animatedWidget_ == widget
+                            && opacityTimer_->isActive()
                             && (!status.startsWith(QLatin1String("normal"))
                                 || animationStartState_.startsWith(QLatin1String("focused"))));
         bool animate(cb && cb->isEnabled()
                      && !qobject_cast<const QAbstractScrollArea*>(widget)
                      && (mouseAnimation
-                         || (animatedWidgetOut_ == widget && status.startsWith(QLatin1String("normal")))));
+                         || (animatedWidgetOut_ == widget
+                             && opacityTimerOut_->isActive()
+                             && status.startsWith(QLatin1String("normal")))));
         QString animationStartState(animationStartState_);
         if (animationStartState.startsWith(QLatin1String("c-")))
           animationStartState.remove(0, 2);
@@ -4725,6 +4757,17 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
             if (!mouseAnimation)
               animationStartStateOut_ = status;
           }
+        }
+        else
+        {
+          if (animatedWidget_ == widget)
+          {
+            animationStartState_ = status;
+            if (animationStartState_.startsWith(QLatin1String("toggled")))
+              animationStartState_ = "c-" + animationStartState_;
+          }
+          if (animatedWidgetOut_ == widget)
+            animationStartStateOut_ = status;
         }
         if (fillWidgetInterior) // widget isn't null
         {
@@ -6525,7 +6568,7 @@ void Style::drawControl(QStyle::ControlElement element,
                          && option->styleObject->property("_kv_hover_bug").toBool()) // hover bug
                   ? "focused" :
                   (option->state & State_Sunken)
-                  // to know it has focus
+                  // to know whether it has keyboard focus
                   || (option->state & State_Selected) ? "pressed" : "normal"
                  : "disabled";
         if (isWidgetInactive(widget))
@@ -8672,7 +8715,9 @@ void Style::drawControl(QStyle::ControlElement element,
         painter->save();
         painter->setOpacity(DISABLED_OPACITY);
       }
-      bool animate(widget && widget->isEnabled() && animatedWidget_ == widget
+      bool animate(widget && widget->isEnabled()
+                   && animatedWidget_ == widget
+                   && opacityTimer_->isActive()
                    && !qobject_cast<const QAbstractScrollArea*>(widget));
       if (animate)
       {
@@ -8695,6 +8740,8 @@ void Style::drawControl(QStyle::ControlElement element,
         if (animationOpacity_ >= 100)
           animationStartState_ = sStatus;
       }
+      else if (animatedWidget_ == widget)
+        animationStartState_ = sStatus;
       QSize indicatorSize(r.width() - fspec.left-fspec.right,
                           qMin(dspec.size, r.height() - fspec.top-fspec.bottom));
       if (tspec_.center_scrollbar_indicator)
@@ -11082,8 +11129,12 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
           }
           bool animate(widget && widget->isEnabled()
                        && !qobject_cast<const QAbstractScrollArea*>(widget)
-                       && ((animatedWidget_ == widget && !leStatus.startsWith(QLatin1String("normal")))
-                           || (animatedWidgetOut_ == widget && leStatus.startsWith(QLatin1String("normal")))));
+                       && ((animatedWidget_ == widget
+                            && opacityTimer_->isActive()
+                            && !leStatus.startsWith(QLatin1String("normal")))
+                           || (animatedWidgetOut_ == widget
+                               && opacityTimerOut_->isActive()
+                               && leStatus.startsWith(QLatin1String("normal")))));
 
           QString animationStartState(animationStartState_);
           int animationOpacity = animationOpacity_;
@@ -11124,6 +11175,13 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
               else
                 animationStartState_ = leStatus;
             }
+          }
+          else
+          {
+            if (animatedWidget_ == widget)
+              animationStartState_ = leStatus;
+            if (animatedWidgetOut_ == widget)
+              animationStartStateOut_ = leStatus;
           }
           if (fillWidgetInterior) // widget isn't null
           {
@@ -11249,33 +11307,34 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
                     (option->state & State_On) ? "toggled" :
                     (option->state & State_MouseOver) ? "focused" :
                     (option->state & State_Sunken)
-                    // to know it has focus
+                    // to know whether it has keyboard focus
                     || (option->state & State_Selected) ? "pressed" : "normal"
                    : "disabled";
           if (QObject *styleObject = option->styleObject)
           { // hover bug
             if (status == "focused")
             {
-              if (styleObject->property("_kv_state").toString() == "sunken"
-                  && isCursorOutsideWidget(widget))
+              if (/*styleObject->property("_kv_state").toString() == "sunken"
+                  && */isCursorOutsideWidget(widget))
               {
                 styleObject->setProperty("_kv_hover_bug", true);
-                styleObject->setProperty("_kv_state", QVariant());
-                status = "normal";
+                //styleObject->setProperty("_kv_state", QVariant());
+                status = (option->state & State_Sunken)
+                         || (option->state & State_Selected) ? "pressed" : "normal";
               }
               else
               {
                 styleObject->setProperty("_kv_hover_bug", QVariant());
-                styleObject->setProperty("_kv_state", QVariant());
+                //styleObject->setProperty("_kv_state", QVariant());
               }
             }
             else
             {
               styleObject->setProperty("_kv_hover_bug", QVariant());
-              if (status == "normal")
+              /*if (status == "normal")
                 styleObject->setProperty("_kv_state", QVariant());
               else
-                styleObject->setProperty("_kv_state", "sunken"); // includes the disabled state too
+                styleObject->setProperty("_kv_state", "sunken");*/ // includes the disabled state too
             }
           }
           if (isWidgetInactive(widget))
@@ -11417,13 +11476,17 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
                                              rtl ? editWidth-o.rect.width() : 0, 0);
               }
               bool mouseAnimation(animatedWidget_ == widget
+                                  && opacityTimer_->isActive()
                                   && (!status.startsWith(QLatin1String("normal"))
                                       || ((!editable || !drwaAsLineEdit
                                            || (cb->view() && cb->view()->isVisible()))
-                                          && animationStartState_.startsWith(QLatin1String("focused")))));
+                                          && (animationStartState_.startsWith(QLatin1String("focused"))
+                                              || animationStartState_.startsWith(QLatin1String("c-"))))));
               bool animate(cb && cb->isEnabled()
                            && (mouseAnimation
-                               || (animatedWidgetOut_ == widget && status.startsWith(QLatin1String("normal")))));
+                               || (animatedWidgetOut_ == widget
+                                   && opacityTimerOut_->isActive()
+                                   && status.startsWith(QLatin1String("normal")))));
               QString animationStartState(animationStartState_);
               if (animationStartState.startsWith(QLatin1String("c-")))
                 animationStartState.remove(0, 2);
@@ -11516,6 +11579,17 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
                   if (animationStartState_.startsWith(QLatin1String("toggled")))
                     animationStartState_ = "c-" + animationStartState_;
                 }
+              }
+              else
+              {
+                if (animatedWidget_ == widget)
+                {
+                  animationStartState_ = status;
+                  if (animationStartState_.startsWith(QLatin1String("toggled")))
+                    animationStartState_ = "c-" + animationStartState_;
+                }
+                if (animatedWidgetOut_ == widget)
+                  animationStartStateOut_ = status;
               }
               if (fillWidgetInterior) // widget isn't null
               {
@@ -12272,7 +12346,9 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
           }
 
           QString status = getState(option,widget);
-          bool animate(widget && widget->isEnabled() && animatedWidget_ == widget
+          bool animate(widget && widget->isEnabled()
+                       && animatedWidget_ == widget
+                       && opacityTimer_->isActive()
                        && !qobject_cast<const QAbstractScrollArea*>(widget));
           if (animate)
           {
@@ -12294,6 +12370,8 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
             if (animationOpacity_ >= 100)
               animationStartState_ = status;
           }
+          else if (animatedWidget_ == widget)
+            animationStartState_ = status;
 
           // a decorative indicator if its element exists
           const indicator_spec dspec = getIndicatorSpec(group);

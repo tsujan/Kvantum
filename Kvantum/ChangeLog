@@ -1,3 +1,7 @@
+V1.0.8
+---------
+ * Fixed combo-box status under Wayland.
+
 V1.0.7
 ---------
  * Don't rely on the (undocumented) "Destroy" event to remove destroyed widgets from lists. In this way, the cause of a rare crash is removed.
