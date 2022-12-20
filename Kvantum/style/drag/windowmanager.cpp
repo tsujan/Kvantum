@@ -335,35 +335,32 @@ bool WindowManager::mousePressEvent (QObject *object, QEvent *event)
 
   /* find the widget */
   QWidget *widget = nullptr;
-  QWidget *activeWin = qApp->activeWindow();
-  if (!activeWin)
+  /* NOTE: Under Wayland, if the window was inactive before being dragged, it may still
+           be inactive when this function is called. Moreover, the app may have multiple
+           windows and the mouse may have been pressed on an inactive one. Therefore,
+           we can't rely on QApplication::activeWindow() to find the widget.
+
+           On the other hand, QApplication::widgetAt() isn't reliable either because it
+           calls QApplication::topLevelAt(), which is useless under Wayland.
+
+           Checking all top level widgets is our only option. it works under X11 too. */
+  QWidget *topLevelWidget = nullptr;
+  const auto tlws = qApp->topLevelWidgets();
+  for (const auto tlw : tlws)
   {
-    /* This can happen under Wayland if the window is inactive before being
-       dragged. QApplication::widgetAt() is fast because the window can't have
-       "Qt::WA_TransparentForMouseEvents" (-> Qt -> QApplication::widgetAt). */
+    if (tlw->windowHandle() == w)
+    {
+      topLevelWidget = tlw;
+      break;
+    }
+  }
+  if (!topLevelWidget) return false;
 #if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
-    widget = qApp->widgetAt (mouseEvent->globalPos());
+  widget = topLevelWidget->childAt (topLevelWidget->mapFromGlobal (mouseEvent->globalPos()));
 #else
-    widget = qApp->widgetAt (mouseEvent->globalPosition().toPoint());
+  widget = topLevelWidget->childAt (topLevelWidget->mapFromGlobal (mouseEvent->globalPosition()).toPoint());
 #endif
-  }
-  else
-  {
-#if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
-    widget = activeWin->childAt (activeWin->mapFromGlobal (mouseEvent->globalPos()));
-#else
-    widget = activeWin->childAt (activeWin->mapFromGlobal (mouseEvent->globalPosition()).toPoint());
-#endif
-    if (!widget)
-      widget = activeWin;
-  }
-  if (!widget
-      /* this condition is especially needed under Wayland because
-         "QMouseEvent::globalPosition()" isn't reliable there */
-      || widget->window()->windowHandle() != w)
-  {
-    return false;
-  }
+  if (!widget) return false;
 
 #if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
   widgetDragPoint_ = widget->mapFromGlobal (mouseEvent->globalPos()); // needed by canDrag()

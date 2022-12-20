@@ -1,6 +1,7 @@
 V1.0.8
 ---------
  * Fixed combo-box status under Wayland.
+ * Fixed dragging of inactive windows of multi-window apps under Wayland.
 
 V1.0.7
 ---------
