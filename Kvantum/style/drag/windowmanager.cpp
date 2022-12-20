@@ -360,7 +360,8 @@ bool WindowManager::mousePressEvent (QObject *object, QEvent *event)
 #else
   widget = topLevelWidget->childAt (topLevelWidget->mapFromGlobal (mouseEvent->globalPosition()).toPoint());
 #endif
-  if (!widget) return false;
+  if (!widget)
+    widget = topLevelWidget;
 
 #if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
   widgetDragPoint_ = widget->mapFromGlobal (mouseEvent->globalPos()); // needed by canDrag()
