@@ -14246,7 +14246,7 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
           const indicator_spec dspec = getIndicatorSpec(group);
           /* we also add 2px for the right margin. */
           s.rwidth() += dspec.size + lspec.tispace + 2;
-          s.rheight() += (dspec.size > s.height() ? dspec.size : 0);
+          s.setHeight(qMax(s.height(), dspec.size));
         }
 
         if (!(tspec_.combo_menu
@@ -14264,7 +14264,7 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
               && (opt->checkType == QStyleOptionMenuItem::Exclusive
                   || opt->checkType == QStyleOptionMenuItem::NonExclusive))
           {
-            s.rheight() += (cSize > s.height() ? cSize : 0);
+            s.setHeight(qMax(s.height(), cSize));
           }
         }
 
