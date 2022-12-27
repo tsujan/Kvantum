@@ -1855,6 +1855,14 @@ static inline bool isCursorOutsideWidget(const QWidget *widget)
                                                                        : QCursor::pos()));
 }
 
+static inline bool isCursorOutsideRect(const QWidget *widget, const QRect &rect)
+{ // used for woking around Qt's hover bug
+  if (widget == nullptr) return false;
+  QScreen *scr = widget->screen();
+  return !rect.contains(widget->mapFromGlobal(scr != nullptr ? QCursor::pos(scr)
+                                                             : QCursor::pos()));
+}
+
 void Style::drawPrimitive(QStyle::PrimitiveElement element,
                           const QStyleOption *option,
                           QPainter *painter,
@@ -4282,6 +4290,12 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         {
           if (!elementExists(dspec.element+"-down-toggled"))
             aStatus.replace(QLatin1String("toggled"),QLatin1String("pressed"));
+        }
+        else if (aStatus.startsWith(QLatin1String("focused"))
+                 && option->styleObject != nullptr
+                 && option->styleObject->property("_kv_hover_bug").toBool()) // hover bug
+        {
+          aStatus.replace(QLatin1String("focused"),QLatin1String("normal"));
         }
         if (opt->sortIndicator == QStyleOptionHeader::SortDown)
           renderIndicator(painter,option->rect,fspec,dspec,dspec.element+"-down-"+aStatus,option->direction);
@@ -8851,6 +8865,17 @@ void Style::drawControl(QStyle::ControlElement element,
       }
 
       QString status = getState(option,widget);
+      if (QObject *styleObject = option->styleObject)
+      {
+        if (status.startsWith(QLatin1String("focused"))
+            && isCursorOutsideRect(widget, option->rect))
+        { // hover bug
+          styleObject->setProperty("_kv_hover_bug", true);
+          status.replace(QLatin1String("focused"),QLatin1String("normal"));
+        }
+        else
+          styleObject->setProperty("_kv_hover_bug", QVariant());
+      }
       if (!(option->state & State_Enabled))
       {
         status.replace(QLatin1String("disabled"),QLatin1String("normal"));
@@ -8993,7 +9018,13 @@ void Style::drawControl(QStyle::ControlElement element,
         else if (status.startsWith(QLatin1String("toggled")))
           state = 4;
         else if (status.startsWith(QLatin1String("focused")))
-          state = 2;
+        {
+          if (option->styleObject == nullptr
+              || !option->styleObject->property("_kv_hover_bug").toBool()) // hover bug
+          {
+            state = 2;
+          }
+        }
 
         QSize iconSize = QSize(smallIconSize,smallIconSize);
         bool isInactive(status.contains(QLatin1String("-inactive")));
