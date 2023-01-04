@@ -1,5 +1,5 @@
 /*
- * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014 <tsujan2000@gmail.com>
+ * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014-2023 <tsujan2000@gmail.com>
  *
  * Kvantum is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -30,9 +30,9 @@ class KvantumPreview : public QMainWindow, private Ui::KvantumPreviewBase {
   Q_OBJECT
 
 public:
-  KvantumPreview (QWidget *parent = 0) : QMainWindow (parent)
-  {
+  KvantumPreview (QWidget *parent = nullptr) : QMainWindow (parent) {
     setupUi (this);
+
     QList<int> sizes; sizes << 50 << 50;
     splitter->setSizes (sizes);
     splitter_2->setSizes (sizes);
@@ -135,9 +135,11 @@ private slots:
     tabWidget_6->setTabsClosable (false);
     tabWidget_6->setTabsClosable (true);
   }
+
   void KvDocMode (bool checked) {
     tabWidget->setDocumentMode (checked);
   }
+
   void docMode (bool checked) {
     tabWidget_2->setDocumentMode (checked);
     tabWidget_3->setDocumentMode (checked);
@@ -145,6 +147,7 @@ private slots:
     tabWidget_5->setDocumentMode (checked);
     tabWidget_6->setDocumentMode (checked);
   }
+
   void makeFlat (bool checked) {
     pushButton->setFlat (checked);
     pushButton_4->setFlat (checked);
@@ -159,6 +162,7 @@ private slots:
     pushButton_7->setFlat (checked);
     pushButton_8->setFlat (checked);
   }
+
   void makeAutoRaise (bool checked) {
     toolButton->setAutoRaise (checked);
     toolButton_2->setAutoRaise (checked);
@@ -179,6 +183,7 @@ private slots:
     toolButton_17->setAutoRaise (checked);
     toolButton_18->setAutoRaise (checked);
   }
+
   void setDisabledState (int state) {
     checkBox_8->setCheckState(static_cast<Qt::CheckState>(state));
   }

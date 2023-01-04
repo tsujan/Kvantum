@@ -72,7 +72,7 @@ scrollable_menu=true
 
 [GeneralColors]
 window.color=#ebebeb
-inactive.window.color=#ebebeb
+inactive.window.color=#e6e6e6
 base.color=#ffffffcc
 inactive.base.color=#fafafacc
 alt.base.color=#f3f3f3

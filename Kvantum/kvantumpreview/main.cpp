@@ -1,5 +1,5 @@
 /*
- * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014 <tsujan2000@gmail.com>
+ * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014-2023 <tsujan2000@gmail.com>
  *
  * Kvantum is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -23,8 +23,8 @@
 
 int main (int argc, char *argv[])
 {
-  QApplication::setApplicationName ("KvantumViewer");
-  QApplication viewer (argc,argv);
+  QApplication viewer (argc, argv);
+  viewer.setApplicationName ("Kvantum Preview");
 #if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
   viewer.setAttribute(Qt::AA_UseHighDpiPixmaps, true);
 #endif
@@ -32,7 +32,7 @@ int main (int argc, char *argv[])
   QStringList langs (QLocale::system().uiLanguages());
   QString lang; // bcp47Name() doesn't work under vbox
   if (!langs.isEmpty())
-      lang = langs.first().replace ('-', '_');
+    lang = langs.first().replace ('-', '_');
   QTranslator qtTranslator;
 #if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
   if (!qtTranslator.load ("qt_" + lang, QLibraryInfo::location (QLibraryInfo::TranslationsPath)))
@@ -60,7 +60,7 @@ int main (int argc, char *argv[])
 #endif
   viewer.installTranslator (&KPTranslator);
 
-  KvantumPreview k (NULL);
+  KvantumPreview k (nullptr);
   k.show();
   QList<QTabWidget *> list = k.findChildren<QTabWidget*>();
   if (!list.isEmpty())
