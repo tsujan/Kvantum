@@ -3463,7 +3463,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
               animationStartState_ = fStatus;
           }
         }
-        else
+        else if (!pcmanfmInactiveView && widget && widget->isEnabled())
         {
           if (animatedWidget_ == widget)
             animationStartState_ = fStatus;
@@ -3924,12 +3924,18 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
             animationStartState_ = leStatus;
         }
       }
-      else
+      else if (widget && widget->isEnabled())
       {
-        if (animatedWidget_ == widget)
+        if (animatedWidget_ == widget
+            || (qobject_cast<QAbstractSpinBox*>(p) && animatedWidget_ == p))
+        {
           animationStartState_ = leStatus;
-        if (animatedWidgetOut_ == widget)
+        }
+        if (animatedWidgetOut_ == widget
+            || (qobject_cast<QAbstractSpinBox*>(p) && animatedWidget_ == p))
+        {
           animationStartStateOut_ = leStatus;
+        }
       }
       if (fillWidgetInterior) // widget isn't null
       {
@@ -4772,7 +4778,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
               animationStartStateOut_ = status;
           }
         }
-        else
+        else if (cb && cb->isEnabled() && !qobject_cast<const QAbstractScrollArea*>(widget))
         {
           if (animatedWidget_ == widget)
           {
@@ -8754,8 +8760,11 @@ void Style::drawControl(QStyle::ControlElement element,
         if (animationOpacity_ >= 100)
           animationStartState_ = sStatus;
       }
-      else if (animatedWidget_ == widget)
+      else if (widget && widget->isEnabled() && animatedWidget_ == widget
+               && !qobject_cast<const QAbstractScrollArea*>(widget))
+      {
         animationStartState_ = sStatus;
+      }
       QSize indicatorSize(r.width() - fspec.left-fspec.right,
                           qMin(dspec.size, r.height() - fspec.top-fspec.bottom));
       if (tspec_.center_scrollbar_indicator)
@@ -11207,7 +11216,8 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
                 animationStartState_ = leStatus;
             }
           }
-          else
+          else if (widget && widget->isEnabled()
+                   && !qobject_cast<const QAbstractScrollArea*>(widget))
           {
             if (animatedWidget_ == widget)
               animationStartState_ = leStatus;
@@ -11611,7 +11621,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
                     animationStartState_ = "c-" + animationStartState_;
                 }
               }
-              else
+              else if (cb && cb->isEnabled())
               {
                 if (animatedWidget_ == widget)
                 {
@@ -12401,8 +12411,11 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
             if (animationOpacity_ >= 100)
               animationStartState_ = status;
           }
-          else if (animatedWidget_ == widget)
+          else if (widget && widget->isEnabled() && animatedWidget_ == widget
+                   && !qobject_cast<const QAbstractScrollArea*>(widget))
+          {
             animationStartState_ = status;
+          }
 
           // a decorative indicator if its element exists
           const indicator_spec dspec = getIndicatorSpec(group);
