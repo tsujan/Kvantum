@@ -1,8 +1,8 @@
 V1.0.8
 ---------
- * Fixed combo-box status under Wayland.
  * Fixed dragging of inactive windows of multi-window apps under Wayland.
  * Fixed a miscalculation about setting menu-item height in a rare case.
+ * Improved the workaround for Qt's hover bug in combo-boxes (especially under Wayland).
  * Workaround for Qt's hover bug in header views (especially under Wayland).
 
 V1.0.7

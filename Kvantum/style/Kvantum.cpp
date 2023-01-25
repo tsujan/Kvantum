@@ -1,5 +1,5 @@
 /*
- * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014-2022 <tsujan2000@gmail.com>
+ * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014-2023 <tsujan2000@gmail.com>
  *
  * Kvantum is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -8735,11 +8735,9 @@ void Style::drawControl(QStyle::ControlElement element,
         painter->save();
         painter->setOpacity(DISABLED_OPACITY);
       }
-      bool canAnimate(widget && widget->isEnabled()
+      bool canAnimate(widget && widget->isEnabled() && animatedWidget_ == widget
                       && !qobject_cast<const QAbstractScrollArea*>(widget));
-      bool animate(canAnimate
-                   && animatedWidget_ == widget
-                   && opacityTimer_->isActive());
+      bool animate(canAnimate && opacityTimer_->isActive());
       if (animate)
       {
         qreal opacity = painter->opacity();
@@ -12385,11 +12383,9 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
           }
 
           QString status = getState(option,widget);
-          bool canAnimate(widget && widget->isEnabled()
+          bool canAnimate(widget && widget->isEnabled() && animatedWidget_ == widget
                           && !qobject_cast<const QAbstractScrollArea*>(widget));
-          bool animate(canAnimate
-                       && animatedWidget_ == widget
-                       && opacityTimer_->isActive());
+          bool animate(canAnimate && opacityTimer_->isActive());
           if (animate)
           {
             if (animationStartState_ == status)
