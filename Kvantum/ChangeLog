@@ -4,6 +4,7 @@ V1.0.8
  * Fixed a miscalculation about setting menu-item height in a rare case.
  * Improved the workaround for Qt's hover bug in combo-boxes (especially under Wayland).
  * Workaround for Qt's hover bug in header views (especially under Wayland).
+ * Support menu icons whose widths are greater than the small icon size.
 
 V1.0.7
 ---------
