@@ -240,9 +240,9 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1109"/>
         <location filename="../../KvantumPreviewBase.ui" line="1195"/>
         <location filename="../../KvantumPreviewBase.ui" line="1264"/>
-        <location filename="../../KvantumPreviewBase.ui" line="1378"/>
-        <location filename="../../KvantumPreviewBase.ui" line="1450"/>
-        <location filename="../../KvantumPreviewBase.ui" line="1508"/>
+        <location filename="../../KvantumPreviewBase.ui" line="1388"/>
+        <location filename="../../KvantumPreviewBase.ui" line="1464"/>
+        <location filename="../../KvantumPreviewBase.ui" line="1522"/>
         <source>Frameless (no difference)</source>
         <translation>테두리 없음 (차이 없음)</translation>
     </message>
@@ -279,404 +279,404 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1204"/>
         <location filename="../../KvantumPreviewBase.ui" line="1273"/>
-        <location filename="../../KvantumPreviewBase.ui" line="1387"/>
-        <location filename="../../KvantumPreviewBase.ui" line="1459"/>
+        <location filename="../../KvantumPreviewBase.ui" line="1397"/>
+        <location filename="../../KvantumPreviewBase.ui" line="1473"/>
         <source>Frameless 1</source>
         <translation>테두리 없음 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1209"/>
         <location filename="../../KvantumPreviewBase.ui" line="1278"/>
-        <location filename="../../KvantumPreviewBase.ui" line="1392"/>
-        <location filename="../../KvantumPreviewBase.ui" line="1464"/>
+        <location filename="../../KvantumPreviewBase.ui" line="1406"/>
+        <location filename="../../KvantumPreviewBase.ui" line="1478"/>
         <source>Frameless 2</source>
         <translation>테두리 없음 2</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1214"/>
         <location filename="../../KvantumPreviewBase.ui" line="1283"/>
-        <location filename="../../KvantumPreviewBase.ui" line="1397"/>
-        <location filename="../../KvantumPreviewBase.ui" line="1469"/>
+        <location filename="../../KvantumPreviewBase.ui" line="1411"/>
+        <location filename="../../KvantumPreviewBase.ui" line="1483"/>
         <source>Frameless 3</source>
         <translation>테두리 없음 3</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1219"/>
         <location filename="../../KvantumPreviewBase.ui" line="1288"/>
-        <location filename="../../KvantumPreviewBase.ui" line="1402"/>
-        <location filename="../../KvantumPreviewBase.ui" line="1474"/>
+        <location filename="../../KvantumPreviewBase.ui" line="1416"/>
+        <location filename="../../KvantumPreviewBase.ui" line="1488"/>
         <source>Frameless 4</source>
         <translation>테두리 없음 4</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1224"/>
-        <location filename="../../KvantumPreviewBase.ui" line="1407"/>
+        <location filename="../../KvantumPreviewBase.ui" line="1421"/>
         <source>Frameless 5</source>
         <translation>테두리 없음 4</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1229"/>
-        <location filename="../../KvantumPreviewBase.ui" line="1412"/>
+        <location filename="../../KvantumPreviewBase.ui" line="1426"/>
         <source>Frameless 6</source>
         <translation>테두리 없음 6</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1234"/>
-        <location filename="../../KvantumPreviewBase.ui" line="1417"/>
+        <location filename="../../KvantumPreviewBase.ui" line="1431"/>
         <source>Frameless 7</source>
         <translation>테두리 없음 7</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1239"/>
-        <location filename="../../KvantumPreviewBase.ui" line="1422"/>
+        <location filename="../../KvantumPreviewBase.ui" line="1436"/>
         <source>Frameless 8</source>
         <translation>테두리 없음 8</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1244"/>
-        <location filename="../../KvantumPreviewBase.ui" line="1427"/>
+        <location filename="../../KvantumPreviewBase.ui" line="1441"/>
         <source>Frameless 9</source>
         <translation>테두리 없음 9</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1249"/>
-        <location filename="../../KvantumPreviewBase.ui" line="1432"/>
+        <location filename="../../KvantumPreviewBase.ui" line="1446"/>
         <source>Frameless 10</source>
         <translation>테두리 없음 10</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1300"/>
-        <location filename="../../KvantumPreviewBase.ui" line="1339"/>
+        <location filename="../../KvantumPreviewBase.ui" line="1343"/>
         <source>Editable combo box</source>
         <translation>편집 가능한 콤보 상자</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1309"/>
-        <location filename="../../KvantumPreviewBase.ui" line="1348"/>
+        <location filename="../../KvantumPreviewBase.ui" line="1352"/>
         <source>Editable combo box 1</source>
         <translation>편집 가능한 콤보 상자 1</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="1314"/>
-        <location filename="../../KvantumPreviewBase.ui" line="1353"/>
+        <location filename="../../KvantumPreviewBase.ui" line="1318"/>
+        <location filename="../../KvantumPreviewBase.ui" line="1357"/>
         <source>Editable combo box 2</source>
         <translation>편집 가능한 콤보 상자 2</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="1319"/>
-        <location filename="../../KvantumPreviewBase.ui" line="1358"/>
+        <location filename="../../KvantumPreviewBase.ui" line="1323"/>
+        <location filename="../../KvantumPreviewBase.ui" line="1362"/>
         <source>Editable combo box 3</source>
         <translation>편집 가능한 콤보 상자 3</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="1324"/>
-        <location filename="../../KvantumPreviewBase.ui" line="1363"/>
+        <location filename="../../KvantumPreviewBase.ui" line="1328"/>
+        <location filename="../../KvantumPreviewBase.ui" line="1367"/>
         <source>Editable combo box 4</source>
         <translation>편집 가능한 콤보 상자 4</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="1482"/>
-        <location filename="../../KvantumPreviewBase.ui" line="1495"/>
+        <location filename="../../KvantumPreviewBase.ui" line="1496"/>
+        <location filename="../../KvantumPreviewBase.ui" line="1509"/>
         <source>Line-edit</source>
         <translation>라인 편집</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="1574"/>
+        <location filename="../../KvantumPreviewBase.ui" line="1588"/>
         <source>Sliders/Scrolls/Progress/Dial</source>
         <translation>슬라이더/스크롤/진행/다이얼</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2131"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2145"/>
         <source>Containers</source>
         <translation>컨테이너</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2152"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2166"/>
         <source>Header 1</source>
         <translation>헤더 1</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2161"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2175"/>
         <source>Header 2</source>
         <translation>헤더 2</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2169"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2183"/>
         <source>Header 3</source>
         <translation>헤더 3</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2174"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2272"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2188"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2286"/>
         <source>3rd Item</source>
         <translation>3번째 항목</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2182"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2260"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2196"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2274"/>
         <source>2nd Item</source>
         <translation>2번째 항목</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2186"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2222"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2200"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2236"/>
         <source>2nd Child</source>
         <translation>2번째 종속</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2191"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2227"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2205"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2241"/>
         <source>1st Child</source>
         <translation>1번째 종속</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2197"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2245"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2211"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2259"/>
         <source>1st Item</source>
         <translation>1번째 항목</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2217"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2231"/>
         <source>3rd Child</source>
         <translation>3번째 종속</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2515"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2529"/>
         <source>Row 0</source>
         <translation>행 0</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2520"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2534"/>
         <source>Row 1</source>
         <translation>행 1</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2525"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2539"/>
         <source>Column 0</source>
         <translation>열 0</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2533"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2547"/>
         <source>Column 1</source>
         <translation>열 1</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2538"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2552"/>
         <source>0-0</source>
         <translation>0-0</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2546"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2560"/>
         <source>0-1</source>
         <translation>0-1</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2554"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2568"/>
         <source>1-0</source>
         <translation>1-0</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2562"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2576"/>
         <source>1-1</source>
         <translation>1-1</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2204"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2207"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2218"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2221"/>
         <source>Editable</source>
         <translation>편집 가능</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2234"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2248"/>
         <source>Non-Editable</source>
         <translation>편집 불가</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2282"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2296"/>
         <source>Subwindow</source>
         <translation>하위 창</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2329"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2343"/>
         <source>Panel frame</source>
         <translation>패널 테두리</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2348"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2489"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2581"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2362"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2503"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2595"/>
         <source>GroupBox</source>
         <translation>그룹상자</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2368"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2420"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2714"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2791"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2839"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2382"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2434"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2728"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2805"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2853"/>
         <source>Tab 1</source>
         <translation>탭 1</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2374"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2388"/>
         <source>Page 1 (disabled)</source>
         <translation>1 페이지 (사용안함)</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2386"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2434"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2732"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2805"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2853"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2400"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2448"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2746"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2819"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2867"/>
         <source>Tab 2</source>
         <translation>탭 2</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2392"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2406"/>
         <source>Page 2 (disabled)</source>
         <translation>2 페이지 (사용안함)</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2426"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2619"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2674"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2797"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2845"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2440"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2633"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2688"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2811"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2859"/>
         <source>Page 1</source>
         <translation>1 페이지</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2440"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2647"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2687"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2738"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2811"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2859"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2454"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2661"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2701"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2752"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2825"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2873"/>
         <source>Page 2</source>
         <translation>2 페이지</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2464"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2478"/>
         <source>Stack widget (page1)</source>
         <translation>스택 위젯 (1페이지)</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2478"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2492"/>
         <source>Stack Widget (page2)</source>
         <translation>스택 위젯 (2페이지)</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2495"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2509"/>
         <source>Group box</source>
         <translation>그룹 상자</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2573"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2587"/>
         <source>Dock Widget</source>
         <translation>독 위젯</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2590"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2604"/>
         <source>Checkable group box</source>
         <translation>체크 가능한 그룹 상자</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2625"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2639"/>
         <source>Tool Box</source>
         <translation>도구 상자</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2720"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2734"/>
         <source>Document mode</source>
         <translation>문서 모드</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2758"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2772"/>
         <source>Box frame</source>
         <translation>상자 테두리</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2888"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2902"/>
         <source>&amp;File</source>
         <translation>파일(&amp;F)</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2892"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2906"/>
         <source>&amp;Submenu</source>
         <translation>하위메뉴(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2912"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2926"/>
         <source>toolBar</source>
         <translation>도구모음</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2932"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2946"/>
         <source>toolBar_2</source>
         <translation>도구모음 2</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2954"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2968"/>
         <source>&amp;Quit</source>
         <translation>종료(&amp;Q)</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2957"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2971"/>
         <source>Quit</source>
         <translation>종료</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2960"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2974"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2968"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2982"/>
         <source>&amp;Checkbox</source>
         <translation>확인란(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2981"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2995"/>
         <source>Toggle Layout</source>
         <translation>레이아웃 전환</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2984"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2998"/>
         <source>Toggle layout direction</source>
         <translation>레이아웃 방향 전환</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2996"/>
+        <location filename="../../KvantumPreviewBase.ui" line="3010"/>
         <source>&amp;Doc Mode</source>
         <translation>문서 모드(&amp;D)</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2999"/>
+        <location filename="../../KvantumPreviewBase.ui" line="3013"/>
         <source>Show tabs in the document mode</source>
         <translation>문서 모드에서 탭 표시</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="3011"/>
+        <location filename="../../KvantumPreviewBase.ui" line="3025"/>
         <source>Menu Button</source>
         <translation>메뉴 버튼</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="3014"/>
+        <location filename="../../KvantumPreviewBase.ui" line="3028"/>
         <source>Hold pressed to show a menu</source>
         <translation>길게 누르면 메뉴 표시</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="3025"/>
+        <location filename="../../KvantumPreviewBase.ui" line="3039"/>
         <source>C&amp;heckbox</source>
         <translation>확인란(&amp;H)</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="3033"/>
+        <location filename="../../KvantumPreviewBase.ui" line="3047"/>
         <source>&amp;Radio button</source>
         <translation>라디오 버튼(&amp;R)</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="3041"/>
+        <location filename="../../KvantumPreviewBase.ui" line="3055"/>
         <source>Radio &amp;button</source>
         <translation>라디오 버튼(&amp;B)</translation>
     </message>
