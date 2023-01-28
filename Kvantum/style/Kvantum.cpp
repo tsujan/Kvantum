@@ -5686,11 +5686,11 @@ void Style::drawControl(QStyle::ControlElement element,
         const indicator_spec dspec = getIndicatorSpec(group);
         label_spec lspec = getLabelSpec(group);
 
-        bool isComboMenu(qobject_cast<const QComboBox*>(widget));
+        const QComboBox *combo = qobject_cast<const QComboBox*>(widget);
 
         /* we should limit text-icon spacing for combo menu
            because we can't know whether it has icon */
-        if (isComboMenu)
+        if (combo != nullptr)
           lspec.tispace = qMin(lspec.tispace, 6);
 
         if (opt->menuItemType == QStyleOptionMenuItem::Separator)
@@ -5721,7 +5721,7 @@ void Style::drawControl(QStyle::ControlElement element,
           QString txt = opt->text;
           txt.replace('\n', ' '); // may be needed with combos
           QString shortcutTxt;
-          if (!isComboMenu)
+          if (combo == nullptr)
           {
             int tabIndex = txt.indexOf(QLatin1Char('\t'));
             if (tabIndex > 0)
@@ -5731,7 +5731,7 @@ void Style::drawControl(QStyle::ControlElement element,
             }
           }
 
-          int smallIconSize = pixelMetric(PM_SmallIconSize); // icon height (as in CT_MenuItem)
+          int smallIconSize = pixelMetric(PM_SmallIconSize);
           int talign = Qt::AlignVCenter | Qt::TextSingleLine;
           if (!styleHint(SH_UnderlineShortcut, opt, widget))
             talign |= Qt::TextHideMnemonic;
@@ -5778,7 +5778,7 @@ void Style::drawControl(QStyle::ControlElement element,
           bool rtl(option->direction == Qt::RightToLeft);
           bool hideCheckBoxes(tspec_.combo_menu //&& !isLibreoffice_
                               && tspec_.hide_combo_checkboxes
-                              && isComboMenu); // as in CT_MenuItem
+                              && combo != nullptr); // as in CT_MenuItem
 
           int iw = qMin(smallIconSize, pixelMetric(PM_IndicatorWidth,option,widget)); // qMin as a precaution
           int ih = qMin(smallIconSize, pixelMetric(PM_IndicatorHeight,option,widget));
@@ -5795,7 +5795,6 @@ void Style::drawControl(QStyle::ControlElement element,
           {
             checkSpace = iw + pixelMetric(PM_CheckBoxLabelSpacing);
           }
-          int iconWidth = qMax(smallIconSize, opt->maxIconWidth); // as in CT_MenuItem
           int iconSpace = 0;
           if (opt->icon.isNull() || hspec_.iconless_menu)
           {
@@ -5804,11 +5803,11 @@ void Style::drawControl(QStyle::ControlElement element,
               if (((opt->maxIconWidth > 0
                     /* combobox always announces the existence of an icon,
                        so we don't care about aligning its menu texts */
-                    && !isComboMenu)
+                    && combo == nullptr)
                    || widget == nullptr) // QML menus set maxIconWidth to 0, although they have icon
                   && !hspec_.iconless_menu)
               {
-                iconSpace = iconWidth + lspec.tispace;
+                iconSpace = smallIconSize + lspec.tispace;
               }
               renderLabel(option,painter,
                           option->rect.adjusted(rtl ? 0 : iconSpace+checkSpace,
@@ -5830,11 +5829,11 @@ void Style::drawControl(QStyle::ControlElement element,
                 && qobject_cast<const QMenu*>(widget))
             {
               if (widget->objectName() == "TopLevelMainMenu")
-                smallIconSize = iconWidth = lxqtMenuIconSize;
+                smallIconSize = lxqtMenuIconSize;
               else if (QMenu *menu = qobject_cast<QMenu*>(getParent(widget, 1)))
               {
                 if (menu->objectName() == "TopLevelMainMenu")
-                  smallIconSize = iconWidth = lxqtMenuIconSize;
+                  smallIconSize = lxqtMenuIconSize;
                 else
                 {
                   while (qobject_cast<QMenu*>(getParent(menu, 1)))
@@ -5842,17 +5841,17 @@ void Style::drawControl(QStyle::ControlElement element,
                     menu = qobject_cast<QMenu*>(getParent(menu, 1));
                     if (menu->objectName() == "TopLevelMainMenu")
                     {
-                      smallIconSize = iconWidth = lxqtMenuIconSize;
+                      smallIconSize = lxqtMenuIconSize;
                       break;
                     }
                   }
                 }
               }
             }
-            QSize iconSize = QSize(iconWidth, smallIconSize);
+            QSize iconSize = combo != nullptr ? combo->iconSize() : QSize(smallIconSize, smallIconSize);
             QPixmap px = getPixmapFromIcon(opt->icon, getIconMode(state,isInactive,lspec), iconstate, iconSize);
             if (px.isNull()) // with a non-null icon
-              iconSpace = iconWidth + lspec.tispace;
+              iconSpace = iconSize.width() + lspec.tispace;
             QRect r = option->rect.adjusted(rtl ? 0 : iconSpace+checkSpace,
                                             0,
                                             rtl ? -iconSpace-checkSpace : 0,
@@ -5968,7 +5967,7 @@ void Style::drawControl(QStyle::ControlElement element,
                                                                             0));
             if (opt->checkType == QStyleOptionMenuItem::Exclusive
                 // combo menu checkboxes are exclusive
-                || isComboMenu)
+                || combo != nullptr)
             {
               if (opt->checked)
                 o.state |= State_On;
@@ -14203,19 +14202,29 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
         const label_spec lspec = getLabelSpec(group);
         const size_spec sspec = getSizeSpec(group);
 
-        int iconHeight = pixelMetric(PM_SmallIconSize);
-        int iconWidth = qMax(iconHeight, opt->maxIconWidth);
+        const QComboBox *combo = qobject_cast<const QComboBox*>(widget);
+        int smallIconSize = pixelMetric(PM_SmallIconSize);
+
+        QSize iconSize;
+        if (combo != nullptr)
+          iconSize = combo->iconSize();
+        else
+        {
+          int extra = opt->maxIconWidth > smallIconSize ? 2 : 0; // just for backward compatibility
+          iconSize = QSize(smallIconSize+extra, smallIconSize+extra);
+        }
+
         int lxqtMenuIconSize = hspec_.lxqtmainmenu_iconsize;
         if (lxqtMenuIconSize >= 16
-            && lxqtMenuIconSize != iconHeight
+            && lxqtMenuIconSize != smallIconSize
             && qobject_cast<const QMenu*>(widget))
         {
           if (widget->objectName() == "TopLevelMainMenu")
-            iconHeight = iconWidth = lxqtMenuIconSize;
+            iconSize = QSize(lxqtMenuIconSize, lxqtMenuIconSize);
           else if (QMenu *menu = qobject_cast<QMenu*>(getParent(widget, 1)))
           {
             if (menu->objectName() == "TopLevelMainMenu")
-              iconHeight = iconWidth = lxqtMenuIconSize;
+              iconSize = QSize(lxqtMenuIconSize, lxqtMenuIconSize);
             else
             {
               while (qobject_cast<QMenu*>(getParent(menu, 1)))
@@ -14223,7 +14232,7 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
                 menu = qobject_cast<QMenu*>(getParent(menu, 1));
                 if (menu->objectName() == "TopLevelMainMenu")
                 {
-                  iconHeight = iconWidth = lxqtMenuIconSize;
+                  iconSize = QSize(lxqtMenuIconSize, lxqtMenuIconSize);
                   break;
                 }
               }
@@ -14239,7 +14248,7 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
           QString txt = opt->text;
           txt.replace('\n', ' '); // may be needed with combos
           int shortcutSpace = 0;
-          if (!qobject_cast<const QComboBox*>(widget))
+          if (combo == nullptr)
           {
             int tabIndex = txt.indexOf(QLatin1Char('\t'));
             if (tabIndex > 0)
@@ -14249,19 +14258,17 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
             }
           }
           s = sizeCalculated(f,fspec,lspec,sspec,txt,
-                             (opt->icon.isNull() || hspec_.iconless_menu)
-                               ? QSize()
-                               : QSize(iconWidth, iconHeight));
-          if (txt.isEmpty() && !qobject_cast<const QComboBox*>(widget))
+                             (opt->icon.isNull() || hspec_.iconless_menu) ? QSize() : iconSize);
+          if (txt.isEmpty() && combo == nullptr)
           { // workaround for bad app codes that don't give the required info
             s.setWidth(qMax(s.width(), contentsSize.width()
                                        + fspec.left+fspec.right+lspec.left+lspec.right
-                                       + (!opt->icon.isNull() && !hspec_.iconless_menu && iconWidth > 0
-                                            ? iconWidth + lspec.tispace : 0)));
+                                       + (!opt->icon.isNull() && !hspec_.iconless_menu && iconSize.width() > 0
+                                            ? iconSize.width() + lspec.tispace : 0)));
             s.setHeight(qMax(s.height(), contentsSize.height()
                                          + fspec.top+fspec.bottom+lspec.top+lspec.bottom));
             if (!opt->icon.isNull() && !hspec_.iconless_menu)
-              s.setHeight(qMax(s.height(), iconHeight));
+              s.setHeight(qMax(s.height(), iconSize.height()));
           }
           else
             s.setWidth(qMax(s.width(), contentsSize.width()));
@@ -14273,9 +14280,9 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
            and that isn't taken into account with sizeCalculated() */
         if(opt->icon.isNull() && !hspec_.iconless_menu
            /* QML menus set maxIconWidth to 0, although they have icon */
-           && (opt->maxIconWidth || widget == nullptr))
+           && (opt->maxIconWidth > 0 || widget == nullptr))
         {
-          s.rwidth() += iconWidth + lspec.tispace;
+          s.rwidth() += iconSize.width() + lspec.tispace;
         }
 
         if (opt->menuItemType == QStyleOptionMenuItem::SubMenu)
@@ -14288,14 +14295,13 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
 
         if (!(tspec_.combo_menu
               && tspec_.hide_combo_checkboxes
-              && qobject_cast<const QComboBox*>(widget)) // see Qt -> qcombobox_p.h -> QComboMenuDelegate
+              && combo != nullptr) // see Qt -> qcombobox_p.h -> QComboMenuDelegate
             && ((widget && opt->menuHasCheckableItems)
                 /* QML menus only use checkType, while
                    the default value of menuHasCheckableItems is true. */
                 || opt->checkType != QStyleOptionMenuItem::NotCheckable))
         {
-          int iw = qMin(pixelMetric(PM_SmallIconSize),
-                        pixelMetric(PM_IndicatorWidth,option,widget)); // qMin as a precaution
+          int iw = qMin(smallIconSize, pixelMetric(PM_IndicatorWidth,option,widget)); // qMin as a precaution
           s.rwidth() += iw + pixelMetric(PM_CheckBoxLabelSpacing);
           /* for the height, see if there's really a check/radio button */
           if (opt->menuItemType != QStyleOptionMenuItem::Separator // exclude combo menu separators
@@ -14303,8 +14309,7 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
                   || opt->checkType == QStyleOptionMenuItem::NonExclusive))
           {
             s.setHeight(qMax(s.height(),
-                             qMin(pixelMetric(PM_SmallIconSize),
-                                  pixelMetric(PM_IndicatorHeight,option,widget))));
+                             qMin(smallIconSize, pixelMetric(PM_IndicatorHeight,option,widget))));
           }
         }
 
