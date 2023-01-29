@@ -11378,12 +11378,13 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
             status.append("-inactive");
 
           int margin = 0; // see CC_ComboBox at subControlRect
-          if (opt->editable && !opt->currentIcon.isNull())
-            margin = (rtl ? fspec.right+lspec.right : fspec.left+lspec.left) + lspec.tispace
-                      - (drwaAsLineEdit ? 0
-                         : 3); // it's 4px in qcombobox.cpp -> QComboBoxPrivate::updateLineEditGeometry()
-          else if (isLibreoffice_ && widget == nullptr)
+          if (isLibreoffice_ && widget == nullptr)
             margin = fspec.left;
+          else if (opt->editable && !opt->currentIcon.isNull())
+          {
+            margin = (rtl ? fspec.right+lspec.right : fspec.left+lspec.left) + lspec.tispace - 4;
+            margin = qMax(margin, 0);
+          }
           // SC_ComboBoxEditField includes the icon too
           o.rect = subControlRect(CC_ComboBox,opt,SC_ComboBoxEditField,widget)
                    .adjusted(rtl ? 0 : -margin,
@@ -15122,9 +15123,8 @@ QRect Style::subElementRect(QStyle::SubElement element, const QStyleOption *opti
           else
           {
             rect.adjust(0, 0, fspec.right+lspec.right-3, 0); // spacing between the text and arrow (button)
-            /* without left frame, it can be widened to the left but, unfortunately,
-               we don't know the value of "QLineEditPrivate::effectiveLeftTextMargin()"
-               and so, we can't level it horizontally with a combobox that has icon */
+            /* although the left margin is removed here, this editable text can't be
+               aligned exactly with the text of a similar combobox that is uneditable */
             if (widget->x() > 0)
               rect.adjust(-fspec.left-lspec.left+(tspec_.combo_as_lineedit || tspec_.square_combo_button
                                                     ? 0 : 3),
@@ -15867,6 +15867,8 @@ QRect Style::subControlRect(QStyle::ComplexControl control,
     case CC_ComboBox :
       switch (subControl) {
         case SC_ComboBoxFrame : return option->rect;
+        /* SC_ComboBoxEditField should include the icon, if any
+           (-> qcombobox.cpp -> QComboBoxPrivate::updateLineEditGeometry) */
         case SC_ComboBoxEditField : {
           bool rtl(option->direction == Qt::RightToLeft);
           const QStyleOptionComboBox *opt =
@@ -15893,15 +15895,14 @@ QRect Style::subControlRect(QStyle::ComplexControl control,
             const frame_spec Fspec = getFrameSpec(QStringLiteral("LineEdit"));
             margin = qMin(Fspec.left,3);
           }
-          else
+          else if (opt && opt->editable && !opt->currentIcon.isNull())
           {
             /* The left icon should respect frame width, text margin
                and text-icon spacing in the editable mode too. */
-            if (opt && opt->editable && !opt->currentIcon.isNull())
-              margin = (rtl ? fspec.right+combolspec.right : fspec.left+combolspec.left)
-                       + combolspec.tispace
-                       - (tspec_.combo_as_lineedit || tspec_.square_combo_button ? 0
-                          : 3); // it's 4px in qcombobox.cpp -> QComboBoxPrivate::updateLineEditGeometry()
+            margin = (rtl ? fspec.right+combolspec.right : fspec.left+combolspec.left)
+                     + combolspec.tispace
+                     - 4; // it's 4px in qcombobox.cpp -> QComboBoxPrivate::updateLineEditGeometry()
+            margin = qMax(margin, 0);
           }
           int combo_arrow_length = tspec_.square_combo_button
                                     ? qMax(COMBO_ARROW_LENGTH, h-arrowFrameSize)

@@ -6,6 +6,7 @@ V1.0.8
  * Workaround for Qt's hover bug in header views (especially under Wayland).
  * Support combo menu icons whose widths are greater than the small icon size.
  * Limited the extra vertical margins of menu-item icons to 1px.
+ * Smaller text-icon spacing for editable comboboxes that are drawn as lineedits.
 
 V1.0.7
 ---------
