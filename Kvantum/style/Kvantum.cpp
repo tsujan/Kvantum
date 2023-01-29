@@ -13848,6 +13848,11 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
                         s.width());
       s.rwidth() = qMax(minW + (sspec.incrementW ? s.width() : 0),
                         s.width());
+      if (le)
+      {
+        QMargins m = le->textMargins();
+        s.rheight() += qMax(m.top(), 0) + qMax(m.bottom(), 0);
+      }
       /* defaultSize may be a bit thicker because of frame, which doesn't matter
          to us. However, we'll make an exception for widgets like KCalcDisplay. */
       if (s.height() < defaultSize.height() && le == nullptr)
