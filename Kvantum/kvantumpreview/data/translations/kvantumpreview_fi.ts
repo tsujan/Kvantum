@@ -240,8 +240,8 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1198"/>
         <location filename="../../KvantumPreviewBase.ui" line="1271"/>
         <location filename="../../KvantumPreviewBase.ui" line="1437"/>
-        <location filename="../../KvantumPreviewBase.ui" line="1513"/>
-        <location filename="../../KvantumPreviewBase.ui" line="1605"/>
+        <location filename="../../KvantumPreviewBase.ui" line="1519"/>
+        <location filename="../../KvantumPreviewBase.ui" line="1611"/>
         <source>Frameless (no difference)</source>
         <translation>Kehyksetön (ei eroa)</translation>
     </message>
@@ -279,7 +279,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1207"/>
         <location filename="../../KvantumPreviewBase.ui" line="1280"/>
         <location filename="../../KvantumPreviewBase.ui" line="1446"/>
-        <location filename="../../KvantumPreviewBase.ui" line="1522"/>
+        <location filename="../../KvantumPreviewBase.ui" line="1528"/>
         <source>Frameless 1</source>
         <translation>Kehyksetön 1</translation>
     </message>
@@ -287,7 +287,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1216"/>
         <location filename="../../KvantumPreviewBase.ui" line="1289"/>
         <location filename="../../KvantumPreviewBase.ui" line="1455"/>
-        <location filename="../../KvantumPreviewBase.ui" line="1531"/>
+        <location filename="../../KvantumPreviewBase.ui" line="1537"/>
         <source>Frameless 2</source>
         <translation>Kehyksetön 2</translation>
     </message>
@@ -295,7 +295,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1221"/>
         <location filename="../../KvantumPreviewBase.ui" line="1294"/>
         <location filename="../../KvantumPreviewBase.ui" line="1460"/>
-        <location filename="../../KvantumPreviewBase.ui" line="1536"/>
+        <location filename="../../KvantumPreviewBase.ui" line="1542"/>
         <source>Frameless 3</source>
         <translation>Kehyksetön 3</translation>
     </message>
@@ -303,7 +303,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1226"/>
         <location filename="../../KvantumPreviewBase.ui" line="1299"/>
         <location filename="../../KvantumPreviewBase.ui" line="1465"/>
-        <location filename="../../KvantumPreviewBase.ui" line="1541"/>
+        <location filename="../../KvantumPreviewBase.ui" line="1547"/>
         <source>Frameless 4</source>
         <translation>Kehyksetön 4</translation>
     </message>
@@ -311,7 +311,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1231"/>
         <location filename="../../KvantumPreviewBase.ui" line="1304"/>
         <location filename="../../KvantumPreviewBase.ui" line="1470"/>
-        <location filename="../../KvantumPreviewBase.ui" line="1546"/>
+        <location filename="../../KvantumPreviewBase.ui" line="1552"/>
         <source>Frameless 5</source>
         <translation>Kehyksetön 5</translation>
     </message>
@@ -319,7 +319,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1236"/>
         <location filename="../../KvantumPreviewBase.ui" line="1309"/>
         <location filename="../../KvantumPreviewBase.ui" line="1475"/>
-        <location filename="../../KvantumPreviewBase.ui" line="1551"/>
+        <location filename="../../KvantumPreviewBase.ui" line="1557"/>
         <source>Frameless 6</source>
         <translation>Kehyksetön 6</translation>
     </message>
@@ -327,7 +327,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1241"/>
         <location filename="../../KvantumPreviewBase.ui" line="1314"/>
         <location filename="../../KvantumPreviewBase.ui" line="1480"/>
-        <location filename="../../KvantumPreviewBase.ui" line="1556"/>
+        <location filename="../../KvantumPreviewBase.ui" line="1562"/>
         <source>Frameless 7</source>
         <translation>Kehyksetön 7</translation>
     </message>
@@ -335,7 +335,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1246"/>
         <location filename="../../KvantumPreviewBase.ui" line="1319"/>
         <location filename="../../KvantumPreviewBase.ui" line="1485"/>
-        <location filename="../../KvantumPreviewBase.ui" line="1561"/>
+        <location filename="../../KvantumPreviewBase.ui" line="1567"/>
         <source>Frameless 8</source>
         <translation>Kehyksetön 8</translation>
     </message>
@@ -343,7 +343,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1251"/>
         <location filename="../../KvantumPreviewBase.ui" line="1324"/>
         <location filename="../../KvantumPreviewBase.ui" line="1490"/>
-        <location filename="../../KvantumPreviewBase.ui" line="1566"/>
+        <location filename="../../KvantumPreviewBase.ui" line="1572"/>
         <source>Frameless 9</source>
         <translation>Kehyksetön 9</translation>
     </message>
@@ -351,7 +351,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1256"/>
         <location filename="../../KvantumPreviewBase.ui" line="1329"/>
         <location filename="../../KvantumPreviewBase.ui" line="1495"/>
-        <location filename="../../KvantumPreviewBase.ui" line="1571"/>
+        <location filename="../../KvantumPreviewBase.ui" line="1577"/>
         <source>Frameless 10</source>
         <translation>Kehyksetön 10</translation>
     </message>
@@ -386,308 +386,308 @@ check box</source>
         <translation>Muokattava yhd.ruutu 4</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="1579"/>
-        <location filename="../../KvantumPreviewBase.ui" line="1592"/>
+        <location filename="../../KvantumPreviewBase.ui" line="1585"/>
+        <location filename="../../KvantumPreviewBase.ui" line="1598"/>
         <source>Line-edit</source>
         <translation>Rivin muokkaus</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="1671"/>
+        <location filename="../../KvantumPreviewBase.ui" line="1677"/>
         <source>Sliders/Scrolls/Progress/Dial</source>
         <translation>Liukusäätimet/rullat/kulku/valitsin</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2228"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2234"/>
         <source>Containers</source>
         <translation>Laatikot</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2249"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2255"/>
         <source>Header 1</source>
         <translation>Otsikko 1</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2258"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2264"/>
         <source>Header 2</source>
         <translation>Otsikko 2</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2266"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2272"/>
         <source>Header 3</source>
         <translation>Otsikko 3</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2271"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2369"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2277"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2375"/>
         <source>3rd Item</source>
         <translation>3. Kohde</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2279"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2357"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2285"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2363"/>
         <source>2nd Item</source>
         <translation>2. Kohde</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2283"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2319"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2289"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2325"/>
         <source>2nd Child</source>
         <translation>2. Ali</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2288"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2324"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2294"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2330"/>
         <source>1st Child</source>
         <translation>1. Ali</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2294"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2342"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2300"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2348"/>
         <source>1st Item</source>
         <translation>1. Kohde</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2314"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2320"/>
         <source>3rd Child</source>
         <translation>3. Ali</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2612"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2618"/>
         <source>Row 0</source>
         <translation>Rivi 0</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2617"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2623"/>
         <source>Row 1</source>
         <translation>Rivi 1</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2622"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2628"/>
         <source>Column 0</source>
         <translation>Sarake 0</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2630"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2636"/>
         <source>Column 1</source>
         <translation>Sarake 1</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2635"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2641"/>
         <source>0-0</source>
         <translation>0-0</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2643"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2649"/>
         <source>0-1</source>
         <translation>0-1</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2651"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2657"/>
         <source>1-0</source>
         <translation>1-0</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2659"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2665"/>
         <source>1-1</source>
         <translation>1-1</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2301"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2304"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2307"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2310"/>
         <source>Editable</source>
         <translation>muokattava</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2331"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2337"/>
         <source>Non-Editable</source>
         <translation>Ei muokattava</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2379"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2385"/>
         <source>Subwindow</source>
         <translation>Ikkuna</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2426"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2432"/>
         <source>Panel frame</source>
         <translation>Paneelin runko</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2445"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2586"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2678"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2451"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2592"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2684"/>
         <source>GroupBox</source>
         <translation>Ryhmälaatikko</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2465"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2517"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2811"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2888"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2936"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2471"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2523"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2817"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2894"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2942"/>
         <source>Tab 1</source>
         <translation>Välilehti 1</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2471"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2477"/>
         <source>Page 1 (disabled)</source>
         <translation>Sivu 1 (poistettu)</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2483"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2531"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2829"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2902"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2950"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2489"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2537"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2835"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2908"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2956"/>
         <source>Tab 2</source>
         <translation>Välilehti 2</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2489"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2495"/>
         <source>Page 2 (disabled)</source>
         <translation>Sivu 2 (poistettu)</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2523"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2716"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2771"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2894"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2942"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2529"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2722"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2777"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2900"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2948"/>
         <source>Page 1</source>
         <translation>Sivu 1</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2537"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2744"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2784"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2835"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2908"/>
-        <location filename="../../KvantumPreviewBase.ui" line="2956"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2543"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2750"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2790"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2841"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2914"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2962"/>
         <source>Page 2</source>
         <translation>Sivu 2</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2561"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2567"/>
         <source>Stack widget (page1)</source>
         <translation>Sovelman (sivu1)</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2575"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2581"/>
         <source>Stack Widget (page2)</source>
         <translation>Sovelman (sivu2)</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2592"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2598"/>
         <source>Group box</source>
         <translation>Ryhmäruutu</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2670"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2676"/>
         <source>Dock Widget</source>
         <translation>Paneelin sovelma</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2687"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2693"/>
         <source>Checkable group box</source>
         <translation>Rastitettava ruutu</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2722"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2728"/>
         <source>Tool Box</source>
         <translation>Työkaluruutu</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2817"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2823"/>
         <source>Document mode</source>
         <translation>Asiakirja tila</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2855"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2861"/>
         <source>Box frame</source>
         <translation>Ruudun kehys</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2985"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2991"/>
         <source>&amp;File</source>
         <translation>&amp;Tiedosto</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="2989"/>
+        <location filename="../../KvantumPreviewBase.ui" line="2995"/>
         <source>&amp;Submenu</source>
         <translation>&amp;Alivalikko</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="3009"/>
+        <location filename="../../KvantumPreviewBase.ui" line="3015"/>
         <source>toolBar</source>
         <translation>Työkalurivi</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="3029"/>
+        <location filename="../../KvantumPreviewBase.ui" line="3035"/>
         <source>toolBar_2</source>
         <translation>Työkalurivi_2</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="3051"/>
+        <location filename="../../KvantumPreviewBase.ui" line="3057"/>
         <source>&amp;Quit</source>
         <translation>&amp;Sulje</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="3054"/>
+        <location filename="../../KvantumPreviewBase.ui" line="3060"/>
         <source>Quit</source>
         <translation>Sulje</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="3057"/>
+        <location filename="../../KvantumPreviewBase.ui" line="3063"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="3065"/>
+        <location filename="../../KvantumPreviewBase.ui" line="3071"/>
         <source>&amp;Checkbox</source>
         <translation>&amp;Valintaruutu</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="3078"/>
+        <location filename="../../KvantumPreviewBase.ui" line="3084"/>
         <source>Toggle Layout</source>
         <translation>Vaihda asettelua</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="3081"/>
+        <location filename="../../KvantumPreviewBase.ui" line="3087"/>
         <source>Toggle layout direction</source>
         <translation>Vaihda asettelun suunta</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="3093"/>
+        <location filename="../../KvantumPreviewBase.ui" line="3099"/>
         <source>&amp;Doc Mode</source>
         <translation>&amp;Asiakirjat</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="3096"/>
+        <location filename="../../KvantumPreviewBase.ui" line="3102"/>
         <source>Show tabs in the document mode</source>
         <translation>Näytä välilehdet asiakirja tilassa</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="3108"/>
+        <location filename="../../KvantumPreviewBase.ui" line="3114"/>
         <source>Menu Button</source>
         <translation>Valikkopainike</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="3111"/>
+        <location filename="../../KvantumPreviewBase.ui" line="3117"/>
         <source>Hold pressed to show a menu</source>
         <translation>Pidä painettuna valikon näyttämiseksi</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="3122"/>
+        <location filename="../../KvantumPreviewBase.ui" line="3128"/>
         <source>C&amp;heckbox</source>
         <translation>&amp;Valintaruutu</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="3130"/>
+        <location filename="../../KvantumPreviewBase.ui" line="3136"/>
         <source>&amp;Radio button</source>
         <translation>&amp;Valintapainike</translation>
     </message>
     <message>
-        <location filename="../../KvantumPreviewBase.ui" line="3138"/>
+        <location filename="../../KvantumPreviewBase.ui" line="3144"/>
         <source>Radio &amp;button</source>
         <translation>Valinta&amp;painike</translation>
     </message>
