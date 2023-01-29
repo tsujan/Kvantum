@@ -1167,6 +1167,9 @@ check box</string>
           <property name="text">
            <string>Standard combo box 1</string>
           </property>
+          <property name="icon">
+           <iconset theme="user-home"/>
+          </property>
          </item>
          <item>
           <property name="text">
@@ -1202,6 +1205,10 @@ check box</string>
          <item>
           <property name="text">
            <string>Frameless 1</string>
+          </property>
+          <property name="icon">
+           <iconset resource="KvantumPreviewResources.qrc">
+            <normaloff>:/Icons/data/icon.svg</normaloff>:/Icons/data/icon.svg</iconset>
           </property>
          </item>
          <item>
@@ -1272,6 +1279,10 @@ check box</string>
           <property name="text">
            <string>Frameless 1</string>
           </property>
+          <property name="icon">
+           <iconset resource="KvantumPreviewResources.qrc">
+            <normaloff>:/Icons/data/icon.svg</normaloff>:/Icons/data/icon.svg</iconset>
+          </property>
          </item>
          <item>
           <property name="text">
@@ -1286,6 +1297,36 @@ check box</string>
          <item>
           <property name="text">
            <string>Frameless 4</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Frameless 5</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Frameless 6</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Frameless 7</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Frameless 8</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Frameless 9</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Frameless 10</string>
           </property>
          </item>
         </widget>
@@ -1316,6 +1357,10 @@ check box</string>
          <item>
           <property name="text">
            <string>Editable combo box 2</string>
+          </property>
+          <property name="icon">
+           <iconset resource="KvantumPreviewResources.qrc">
+            <normaloff>:/Icons/data/icon.svg</normaloff>:/Icons/data/icon.svg</iconset>
           </property>
          </item>
          <item>
@@ -1350,6 +1395,10 @@ check box</string>
          <item>
           <property name="text">
            <string>Editable combo box 1</string>
+          </property>
+          <property name="icon">
+           <iconset resource="KvantumPreviewResources.qrc">
+            <normaloff>:/Icons/data/icon.svg</normaloff>:/Icons/data/icon.svg</iconset>
           </property>
          </item>
          <item>
@@ -1465,12 +1514,16 @@ check box</string>
           </property>
           <property name="icon">
            <iconset resource="KvantumPreviewResources.qrc">
-            <normaloff>:/Icons/data/icon.svg</normaloff>:/Icons/data/icon.svg</iconset>
+            <normaloff>:/Icons/data/icon-wide.svg</normaloff>:/Icons/data/icon-wide.svg</iconset>
           </property>
          </item>
          <item>
           <property name="text">
            <string>Frameless 1</string>
+          </property>
+          <property name="icon">
+           <iconset resource="KvantumPreviewResources.qrc">
+            <normaloff>:/Icons/data/icon-wide.svg</normaloff>:/Icons/data/icon-wide.svg</iconset>
           </property>
          </item>
          <item>
@@ -1486,6 +1539,36 @@ check box</string>
          <item>
           <property name="text">
            <string>Frameless 4</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Frameless 5</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Frameless 6</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Frameless 7</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Frameless 8</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Frameless 9</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Frameless 10</string>
           </property>
          </item>
         </widget>
