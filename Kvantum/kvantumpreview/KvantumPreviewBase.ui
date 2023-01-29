@@ -1358,10 +1358,6 @@ check box</string>
           <property name="text">
            <string>Editable combo box 2</string>
           </property>
-          <property name="icon">
-           <iconset resource="KvantumPreviewResources.qrc">
-            <normaloff>:/Icons/data/icon.svg</normaloff>:/Icons/data/icon.svg</iconset>
-          </property>
          </item>
          <item>
           <property name="text">
