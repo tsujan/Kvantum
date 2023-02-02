@@ -1,5 +1,5 @@
 /*
- * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014-2019 <tsujan2000@gmail.com>
+ * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014-2023 <tsujan2000@gmail.com>
  *
  * Kvantum is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -432,10 +432,6 @@ class Style : public QCommonStyle {
     }
 
   private slots:
-    /* For busy progress bars. */
-    void advanceProgressbar();
-    void forgetProgressBar(QObject *o);
-
     void forgetPopupOrigin(QObject *o);
 
     void forgetMovedMenu(QObject *o);
@@ -457,16 +453,13 @@ class Style : public QCommonStyle {
 
     QString xdg_config_home;
 
-    QTimer *progressTimer_, *opacityTimer_, *opacityTimerOut_;
+    QTimer *opacityTimer_, *opacityTimerOut_;
     mutable int animationOpacity_, animationOpacityOut_; // A value >= 100 stops state change animation.
     /* The start state for state change animation */
     mutable QString animationStartState_, animationStartStateOut_;
     /* The widget whose state change is animated */
     QPointer<QWidget> animatedWidget_, animatedWidgetOut_;
     QHash<QWidget*, QPointer<QWidget>> popupOrigins_;
-
-    /* List of busy progress bars */
-    QMap<QWidget*,int> progressbars_;
 
     /* List of menus that are moved because of their shadows. */
     QSet<const QWidget*> movedMenus_;

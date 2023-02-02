@@ -1,7 +1,7 @@
 // Adapted from Qt
 
 /*
- * Copyright (C) Pedram Pourang (aka Tsu Jan) 2016-2021 <tsujan2000@gmail.com>
+ * Copyright (C) Pedram Pourang (aka Tsu Jan) 2016-2023 <tsujan2000@gmail.com>
  *
  * Kvantum is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -49,13 +49,14 @@ public:
   enum FrameRate {
       DefaultFps,
       SixtyFps,
-      ThirtyFps
+      ThirtyFps,
+      TwentyFps
   };
 
   FrameRate frameRate() const;
   void setFrameRate(FrameRate fps);
 
-  void updateTarget();
+  virtual void updateTarget();
 
 public Q_SLOTS:
   void start();
@@ -71,6 +72,25 @@ private:
   FrameRate fps_;
   int skip_;
 };
+
+/*************************/
+
+class ProgressbarAnimation : public Animation
+{
+    Q_OBJECT
+
+public:
+  ProgressbarAnimation(QObject *target);
+
+  void updateTarget() override;
+
+  int pixels() const;
+
+private:
+    int pixels_;
+};
+
+/*************************/
 
 class NumberAnimation : public Animation
 {
@@ -95,6 +115,8 @@ private:
   qreal end_;
   mutable qreal prev_;
 };
+
+/*************************/
 
 class ScrollbarAnimation : public NumberAnimation
 {

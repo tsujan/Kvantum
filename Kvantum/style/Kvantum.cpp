@@ -171,7 +171,6 @@ static inline QString getName(const QColor &col)
 
 Style::Style(bool useDark) : QCommonStyle()
 {
-  progressTimer_ = new QTimer(this);
   opacityTimer_ = opacityTimerOut_ = nullptr;
   animationOpacity_ = animationOpacityOut_ = 100;
   animationStartState_ = animationStartStateOut_ = "normal";
@@ -315,8 +314,6 @@ Style::Style(bool useDark) : QCommonStyle()
   ticklessSliderHandleSize_ = -1;
   isKisSlider_ = false;
 
-  connect(progressTimer_, &QTimer::timeout, this, &Style::advanceProgressbar);
-
   if (tspec_.animate_states)
   {
     opacityTimer_ = new QTimer(this);
@@ -428,12 +425,6 @@ Style::~Style()
 
   /* all the following timers have "this" as their parent
      but are explicitly deleted here only to be listed */
-  if (progressTimer_)
-  {
-    progressTimer_->stop();
-    delete progressTimer_;
-    progressTimer_ = nullptr;
-  }
   if (opacityTimer_)
   {
     opacityTimer_->stop();
@@ -829,37 +820,6 @@ void Style::setupThemeDeps()
   }
   else
     settings_ = defaultSettings_;
-}
-
-void Style::advanceProgressbar()
-{
-  QMap<QWidget*,int>::iterator it;
-  for (it = progressbars_.begin(); it != progressbars_.end(); ++it)
-  {
-    auto widget = it.key();
-    if (widget && widget->isVisible())
-    {
-      if (it.value() > INT_MAX - 2)
-        it.value() = 0;
-      else
-        it.value() += 2;
-      widget->update();
-    }
-  }
-}
-
-void Style::forgetProgressBar(QObject *o)
-{
-  if (auto w = qobject_cast<QWidget*>(o))
-  {
-    if (progressbars_.contains(w))
-    {
-        disconnect(w, &QObject::destroyed, this, &Style::forgetProgressBar);
-        progressbars_.remove(w);
-        if (progressbars_.size() == 0)
-          progressTimer_->stop();
-    }
-  }
 }
 
 void Style::forgetPopupOrigin(QObject *o)
@@ -8030,6 +7990,16 @@ void Style::drawControl(QStyle::ControlElement element,
         bool thin = false;
         if (opt->maximum != 0 || opt->minimum != 0)
         {
+          if (QObject *styleObject = option->styleObject)
+          { // could only have ProgressbarAnimation
+            if (Animation *animation = animations_.take(styleObject))
+            {
+              animation->stop();
+              delete animation;
+              animation = nullptr;
+            }
+          }
+
           int length = isVertical ? h : w;
           int empty = length
                       - sliderPositionFromValue(opt->minimum,
@@ -8111,11 +8081,17 @@ void Style::drawControl(QStyle::ControlElement element,
           if (thin)
             painter->restore();
         }
-        else if (widget)
+        else if (QObject *styleObject = option->styleObject)
         { // busy progressbar
           if (!r.isValid()) return;
-          QWidget *wi = const_cast<QWidget*>(widget);
-          int animcount = progressbars_[wi];
+          ProgressbarAnimation *anim = qobject_cast<ProgressbarAnimation *>(animations_.value(styleObject));
+          if (!anim)
+          {
+            anim = new ProgressbarAnimation(styleObject);
+            startAnimation(anim);
+            return;
+          }
+          int animPixels = anim->pixels();
           int pm = qMin(qMax(pixelMetric(PM_ProgressBarChunkWidth),fspec.left+fspec.right),r.width()/2-2);
           if (pm > h
               && h >= fspec.left+fspec.right
@@ -8123,20 +8099,20 @@ void Style::drawControl(QStyle::ControlElement element,
           { // make it compact with ordinary progressbars
             pm = h;
           }
-          QRect R = r.adjusted(animcount,0,0,0);
+          QRect R = r.adjusted(animPixels,0,0,0);
           if (isVertical)
           {
             if (inverted)
-              R.setX(r.x()+r.width()-(animcount % r.width()));
+              R.setX(r.x()+r.width()-(animPixels % r.width()));
             else
-              R.setX(r.x()+(animcount % r.width()));
+              R.setX(r.x()+(animPixels % r.width()));
           }
           else
           {
             if (inverted)
-              R.setX(r.x()+r.width()-(animcount % r.width()));
+              R.setX(r.x()+r.width()-(animPixels % r.width()));
             else
-              R.setX(r.x()+(animcount % r.width()));
+              R.setX(r.x()+(animPixels % r.width()));
           }
           int W = !isRounded ? pm : !isVertical ? qMax(h,pm) : qMax(w,pm);
           if (W <= 0 || W > r.width()) return;
@@ -8220,8 +8196,6 @@ void Style::drawControl(QStyle::ControlElement element,
             renderInterior(painter,R,fspec,ispec,ispec.element+"-"+status,true);
           }
         }
-        else
-          QCommonStyle::drawControl(element,option,painter,widget);
       }
 
       break;

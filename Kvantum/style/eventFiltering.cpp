@@ -1,5 +1,5 @@
 /*
- * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014-2022 <tsujan2000@gmail.com>
+ * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014-2023 <tsujan2000@gmail.com>
  *
  * Kvantum is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -220,22 +220,8 @@ bool Style::eventFilter(QObject *o, QEvent *e)
     {
       if (w->inherits("KisAbstractSliderSpinBox") || w->inherits("Digikam::DAbstractSliderSpinBox"))
         isKisSlider_ = true;
-      else if (QProgressBar *pb = qobject_cast<QProgressBar*>(o))
-      {
-        if (pb->maximum() == 0 && pb->minimum() == 0)
-        { // add the busy progress bar to the list
-          if (!progressbars_.contains(w))
-          {
-            progressbars_.insert(w, 0);
-            connect(w, &QObject::destroyed, this, &Style::forgetProgressBar);
-            if (!progressTimer_->isActive())
-              progressTimer_->start(50);
-          }
-        }
-        else
-          forgetProgressBar(o);
+      else if (qobject_cast<QProgressBar*>(o))
         isKisSlider_ = false;
-      }
       else if (w->isWindow()
                && w->testAttribute(Qt::WA_StyledBackground)
                && w->testAttribute(Qt::WA_TranslucentBackground)
@@ -960,20 +946,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         connect(w, &QObject::destroyed, this, &Style::forgetPopupOrigin);
       }
 
-      if (QProgressBar *pb = qobject_cast<QProgressBar*>(o))
-      {
-        if (pb->maximum() == 0 && pb->minimum() == 0)
-        {
-          if (!progressbars_.contains(w))
-          {
-            progressbars_.insert(w, 0);
-            connect(w, &QObject::destroyed, this, &Style::forgetProgressBar);
-          }
-          if (!progressTimer_->isActive())
-            progressTimer_->start(50);
-        }
-      }
-      else if (QMenu *menu = qobject_cast<QMenu*>(o))
+      if (QMenu *menu = qobject_cast<QMenu*>(o))
       {
         //if (isLibreoffice_) break;
         if (w->testAttribute(Qt::WA_X11NetWmWindowTypeMenu)) break; // detached menu
@@ -1497,14 +1470,9 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       /* remove the widget from some lists when it becomes hidden */
       if (qobject_cast<QMenu*>(w))
         forgetMovedMenu(o);
-      if (!progressbars_.isEmpty() && qobject_cast<QProgressBar*>(o))
-      {
-        forgetProgressBar(o);
-        break;
-      }
-      else if (tspec_.animate_states
-               && (w->windowType() == Qt::Popup
-                   || w->windowType() == Qt::ToolTip))
+      if (tspec_.animate_states
+          && (w->windowType() == Qt::Popup
+              || w->windowType() == Qt::ToolTip))
       {
         forgetPopupOrigin(o);
         break; // popups aren't animated (see below)

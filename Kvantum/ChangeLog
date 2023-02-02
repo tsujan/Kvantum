@@ -8,6 +8,7 @@ V1.0.8
  * Limited the extra vertical margins of menu-item icons to 1px.
  * Smaller text-icon spacing for editable comboboxes that are drawn as lineedits.
  * Added vertical text margins of lineedits to their heights.
+ * Also animate busy progressbars without `QWidget`.
 
 V1.0.7
 ---------
