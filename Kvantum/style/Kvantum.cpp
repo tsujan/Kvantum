@@ -4674,7 +4674,8 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
                             && opacityTimer_ && opacityTimer_->isActive()
                             && (!status.startsWith(QLatin1String("normal"))
                                 || animationStartState_.startsWith(QLatin1String("focused"))));
-        bool animate(opacityTimer_ && cb && cb->isEnabled()
+        bool animate(opacityTimer_
+                     && cb && cb->isEnabled()
                      && (mouseAnimation
                          || (animatedWidgetOut_ == widget
                              && opacityTimerOut_->isActive()
@@ -14668,8 +14669,9 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
         const size_spec sspec = getSizeSpec("ItemView");
         s = s.expandedTo(QSize(0, // minW doesn't have meaning here
                                sspec.minH + (sspec.incrementH ? s.height() : 0)));
+        return s;
       }
-      return s.expandedTo(contentsSize);
+      return contentsSize;
     }
 
     case CT_TabWidget : {
