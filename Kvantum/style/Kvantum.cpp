@@ -2773,8 +2773,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           else
             suffix = "-normal";
         }
-        bool animate(opacityTimer_ != nullptr
-                     && !qstyleoption_cast<const QStyleOptionMenuItem*>(option));
+        bool animate(opacityTimer_ && !qstyleoption_cast<const QStyleOptionMenuItem*>(option));
         if (!animate && widget != nullptr // not QML or Libreoffice's unstyled menu
             && elementExists("menu-"+ispec.element+suffix))
         {
@@ -3826,7 +3825,9 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         painter->save();
         painter->setOpacity(DISABLED_OPACITY);
       }
-      bool animateSpin(opacityTimer_
+      bool canAnimate(/*!isLibreoffice_ &&*/ opacityTimer_ && widget && widget->isEnabled()
+                      && !qobject_cast<const QAbstractScrollArea*>(widget));
+      bool animateSpin(canAnimate
                        && qobject_cast<QAbstractSpinBox*>(p)
                        && ((animatedWidget_ == p
                             && opacityTimer_->isActive()
@@ -3834,8 +3835,6 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
                            || (animatedWidgetOut_ == p
                                && opacityTimerOut_->isActive()
                                && leStatus.startsWith(QLatin1String("normal")))));
-      bool canAnimate(/*!isLibreoffice_ &&*/ opacityTimer_ && widget && widget->isEnabled()
-                      && !qobject_cast<const QAbstractScrollArea*>(widget));
       bool animate(canAnimate
                    && ((animatedWidget_ == widget
                         && opacityTimer_->isActive()
@@ -4670,12 +4669,13 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           painter->save();
           painter->setOpacity(DISABLED_OPACITY);
         }
-        bool mouseAnimation(widget && animatedWidget_ == widget
-                            && opacityTimer_ && opacityTimer_->isActive()
+        bool canAnimate(opacityTimer_ && cb && cb->isEnabled());
+        bool mouseAnimation(canAnimate
+                            && animatedWidget_ == widget
+                            && opacityTimer_->isActive()
                             && (!status.startsWith(QLatin1String("normal"))
                                 || animationStartState_.startsWith(QLatin1String("focused"))));
-        bool animate(opacityTimer_
-                     && cb && cb->isEnabled()
+        bool animate(canAnimate
                      && (mouseAnimation
                          || (animatedWidgetOut_ == widget
                              && opacityTimerOut_->isActive()
@@ -4744,7 +4744,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
               animationStartStateOut_ = status;
           }
         }
-        else if (cb && cb->isEnabled())
+        else if (canAnimate)
         {
           if (animatedWidget_ == widget)
           {
@@ -11497,15 +11497,16 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
                 leOpt.rect = o.rect.adjusted(rtl ? 0 : o.rect.width()-editWidth, 0,
                                              rtl ? editWidth-o.rect.width() : 0, 0);
               }
-              bool mouseAnimation(widget && animatedWidget_ == widget
-                                  && opacityTimer_ && opacityTimer_->isActive()
+              bool canAnimate(opacityTimer_ && cb && cb->isEnabled());
+              bool mouseAnimation(canAnimate
+                                  && animatedWidget_ == widget
+                                  && opacityTimer_->isActive()
                                   && (!status.startsWith(QLatin1String("normal"))
                                       || ((!editable || !drwaAsLineEdit
                                            || (cb->view() && cb->view()->isVisible()))
                                           && (animationStartState_.startsWith(QLatin1String("focused"))
                                               || animationStartState_.startsWith(QLatin1String("c-"))))));
-              bool animate(opacityTimer_
-                           && cb && cb->isEnabled()
+              bool animate(canAnimate
                            && (mouseAnimation
                                || (animatedWidgetOut_ == widget
                                    && opacityTimerOut_->isActive()
@@ -11603,7 +11604,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
                     animationStartState_ = "c-" + animationStartState_;
                 }
               }
-              else if (cb && cb->isEnabled())
+              else if (canAnimate)
               {
                 if (animatedWidget_ == widget)
                 {
