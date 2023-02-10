@@ -1,3 +1,7 @@
+V1.0.9
+---------
+ * Fixed a regression that caused crashes in QML apps and LibreOffice when the widget animation was disabled.
+
 V1.0.8
 ---------
  * Fixed dragging of inactive windows of multi-window apps under Wayland.

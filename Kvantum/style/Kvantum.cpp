@@ -2501,7 +2501,8 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         const QString prevState = styleObject != nullptr
                                     ? styleObject->property("_kv_state").toString()
                                     : QString();
-        bool animate(!btnDragInProgress()
+        bool animate(opacityTimer_
+                     && !btnDragInProgress()
                      && widget->isEnabled() && animatedWidget_ == widget
                      && !prevState.isEmpty());
         if (animate && prevState == status)
@@ -2772,10 +2773,13 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           else
             suffix = "-normal";
         }
-        bool animate(!qstyleoption_cast<const QStyleOptionMenuItem*>(option));
+        bool animate(opacityTimer_ != nullptr
+                     && !qstyleoption_cast<const QStyleOptionMenuItem*>(option));
         if (!animate && widget != nullptr // not QML or Libreoffice's unstyled menu
             && elementExists("menu-"+ispec.element+suffix))
+        {
           prefix = "menu-"; // make exception for menuitems
+        }
         if (isWidgetInactive(widget))
           suffix.append("-inactive");
         /*if (isLibreoffice_ && suffix == "-checked-focused"
@@ -2893,7 +2897,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
               suffix = "-normal";
           }
         }
-        bool animate(true);
+        bool animate(opacityTimer_ != nullptr);
         if (qstyleoption_cast<const QStyleOptionMenuItem*>(option))
         {
           animate = false;
@@ -3381,7 +3385,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           baseCol.setAlpha(255);
           painter->fillRect(option->rect, baseCol);
         }
-        bool canAnimate(!pcmanfmInactiveView && widget && widget->isEnabled());
+        bool canAnimate(opacityTimer_ && !pcmanfmInactiveView && widget && widget->isEnabled());
         bool animate(canAnimate
                      && ((animatedWidget_ == widget
                           && opacityTimer_->isActive()
@@ -3822,14 +3826,15 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         painter->save();
         painter->setOpacity(DISABLED_OPACITY);
       }
-      bool animateSpin(qobject_cast<QAbstractSpinBox*>(p)
+      bool animateSpin(opacityTimer_
+                       && qobject_cast<QAbstractSpinBox*>(p)
                        && ((animatedWidget_ == p
                             && opacityTimer_->isActive()
                             && !leStatus.startsWith(QLatin1String("normal")))
                            || (animatedWidgetOut_ == p
                                && opacityTimerOut_->isActive()
                                && leStatus.startsWith(QLatin1String("normal")))));
-      bool canAnimate(/*!isLibreoffice_ &&*/ widget && widget->isEnabled()
+      bool canAnimate(/*!isLibreoffice_ &&*/ opacityTimer_ && widget && widget->isEnabled()
                       && !qobject_cast<const QAbstractScrollArea*>(widget));
       bool animate(canAnimate
                    && ((animatedWidget_ == widget
@@ -4665,11 +4670,11 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           painter->save();
           painter->setOpacity(DISABLED_OPACITY);
         }
-        bool mouseAnimation(animatedWidget_ == widget
-                            && opacityTimer_->isActive()
+        bool mouseAnimation(widget && animatedWidget_ == widget
+                            && opacityTimer_ && opacityTimer_->isActive()
                             && (!status.startsWith(QLatin1String("normal"))
                                 || animationStartState_.startsWith(QLatin1String("focused"))));
-        bool animate(cb && cb->isEnabled()
+        bool animate(opacityTimer_ && cb && cb->isEnabled()
                      && (mouseAnimation
                          || (animatedWidgetOut_ == widget
                              && opacityTimerOut_->isActive()
@@ -4873,7 +4878,8 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
       const QString animationStartState = styleObject != nullptr
                                             ? styleObject->property("_kv_state").toString()
                                             : QString();
-      bool animate(widget && widget->isEnabled() && animatedWidget_ == widget
+      bool animate(opacityTimer_
+                   && widget && widget->isEnabled() && animatedWidget_ == widget
                    && !animationStartState.isEmpty()
                    && qobject_cast<const QAbstractButton*>(widget));
       if (animate && animationStartState == status)
@@ -8709,7 +8715,8 @@ void Style::drawControl(QStyle::ControlElement element,
         painter->save();
         painter->setOpacity(DISABLED_OPACITY);
       }
-      bool canAnimate(widget && widget->isEnabled() && animatedWidget_ == widget
+      bool canAnimate(opacityTimer_
+                      && widget && widget->isEnabled() && animatedWidget_ == widget
                       && !qobject_cast<const QAbstractScrollArea*>(widget));
       bool animate(canAnimate && opacityTimer_->isActive());
       if (animate)
@@ -9880,7 +9887,8 @@ void Style::drawControl(QStyle::ControlElement element,
           const QString prevState = styleObject != nullptr
                                       ? styleObject->property("_kv_state").toString()
                                       : QString();
-          bool animate(!btnDragInProgress()
+          bool animate(opacityTimer_
+                       && !btnDragInProgress()
                        && widget && widget->isEnabled() && animatedWidget_ == widget
                        && !prevState.isEmpty()
                        && !qobject_cast<const QAbstractScrollArea*>(widget));
@@ -11137,7 +11145,8 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
             painter->save();
             painter->setOpacity(DISABLED_OPACITY);
           }
-          bool canAnimate(widget && widget->isEnabled()
+          bool canAnimate(opacityTimer_
+                          && widget && widget->isEnabled()
                           && !qobject_cast<const QAbstractScrollArea*>(widget));
           bool animate(canAnimate
                        && ((animatedWidget_ == widget
@@ -11487,14 +11496,15 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
                 leOpt.rect = o.rect.adjusted(rtl ? 0 : o.rect.width()-editWidth, 0,
                                              rtl ? editWidth-o.rect.width() : 0, 0);
               }
-              bool mouseAnimation(animatedWidget_ == widget
-                                  && opacityTimer_->isActive()
+              bool mouseAnimation(widget && animatedWidget_ == widget
+                                  && opacityTimer_ && opacityTimer_->isActive()
                                   && (!status.startsWith(QLatin1String("normal"))
                                       || ((!editable || !drwaAsLineEdit
                                            || (cb->view() && cb->view()->isVisible()))
                                           && (animationStartState_.startsWith(QLatin1String("focused"))
                                               || animationStartState_.startsWith(QLatin1String("c-"))))));
-              bool animate(cb && cb->isEnabled()
+              bool animate(opacityTimer_
+                           && cb && cb->isEnabled()
                            && (mouseAnimation
                                || (animatedWidgetOut_ == widget
                                    && opacityTimerOut_->isActive()
@@ -12358,7 +12368,8 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
           }
 
           QString status = getState(option,widget);
-          bool canAnimate(widget && widget->isEnabled() && animatedWidget_ == widget
+          bool canAnimate(opacityTimer_
+                          && widget && widget->isEnabled() && animatedWidget_ == widget
                           && !qobject_cast<const QAbstractScrollArea*>(widget));
           bool animate(canAnimate && opacityTimer_->isActive());
           if (animate)
