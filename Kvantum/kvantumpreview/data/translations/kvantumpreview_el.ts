@@ -30,7 +30,7 @@ width</source>
         <location filename="../../KvantumPreviewBase.ui" line="95"/>
         <location filename="../../KvantumPreviewBase.ui" line="105"/>
         <source>Simple push button</source>
-        <translation type="unfinished"></translation>
+        <translation>Απλό κουμπί πίεσης</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="112"/>
