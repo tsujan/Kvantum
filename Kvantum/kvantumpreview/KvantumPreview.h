@@ -56,8 +56,20 @@ public:
     actionMenuButton->setMenu (menuFile);
     toolButton_8->setMenu (menuFile);
 
-    dateTimeEdit_3->setCalendarPopup(true);
-    dateTimeEdit_4->setCalendarPopup(true);
+    /* set the current time and locale in date-time widgets */
+    auto cur = QDateTime::currentDateTime();
+    dateTimeEdit->setDateTime (cur);
+    dateTimeEdit_2->setDateTime (cur);
+    dateTimeEdit_3->setDateTime (cur);
+    dateTimeEdit_4->setDateTime (cur);
+    auto l = QLocale(locale().language(), locale().country());
+    dateTimeEdit->setLocale (l);
+    dateTimeEdit_2->setLocale (l);
+    dateTimeEdit_3->setLocale (l);
+    dateTimeEdit_4->setLocale (l);
+
+    dateTimeEdit_3->setCalendarPopup (true);
+    dateTimeEdit_4->setCalendarPopup (true);
 
     /* a workaround for a bug in QPushButton with a shared menu */
     pushButton_8->setFocusPolicy(Qt::NoFocus);

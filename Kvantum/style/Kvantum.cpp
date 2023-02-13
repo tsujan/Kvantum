@@ -11429,15 +11429,13 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
                 if (cb != nullptr)
                 {
                   if (cb->lineEdit() != nullptr)
-                  {
                     editWidth = cb->lineEdit()->width();
-                    if (extra > 0)
-                      editWidth += extra;
-                  }
                 }
                 else
                   editWidth = o.rect.width();
               }
+              if (extra > 0)
+                editWidth += extra;
 
               if (widget && widget->hasFocus())
               {
