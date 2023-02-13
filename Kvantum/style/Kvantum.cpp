@@ -45,6 +45,7 @@
 #include <QLabel>
 #include <QDoubleSpinBox>
 #include <QDateTimeEdit>
+#include <QCalendarWidget> // for styling QDateTimeEdit with calendar
 //#include <QBitmap>
 #include <QtMath>
 #include <QMenuBar>
@@ -1674,29 +1675,19 @@ void Style::drawFocusRect(QPainter *painter, const QRect &rect, const QString &e
 void Style::drawComboLineEdit(const QStyleOption *option,
                               QPainter *painter,
                               const QWidget *lineedit,
-                              const QWidget *combo) const
+                              const QWidget *combo,
+                              const QString &group,
+                              bool fillInterior) const
 {
-  if (!lineedit || !combo) return;
-  if (isPlasma_ && lineedit->window()->testAttribute(Qt::WA_NoSystemBackground))
+  if (isPlasma_ && lineedit && lineedit->window()->testAttribute(Qt::WA_NoSystemBackground))
     return;
 
-  QString group;
-  if ((!getFrameSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty()
-       || !getInteriorSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty())
-      && getStylableToolbarContainer(lineedit, true)
-      && !enoughContrast(lineedit->palette().color(QPalette::Active, QPalette::Text),
-                         getFromRGBA(getLabelSpec(QStringLiteral("Toolbar")).normalColor)))
-  {
-    group = "ToolbarLineEdit";
-  }
-  else
-    group = "LineEdit";
-  interior_spec ispec = getInteriorSpec(group);
+  const interior_spec ispec = getInteriorSpec(group);
   frame_spec fspec = getFrameSpec(group);
   label_spec lspec = getLabelSpec(group);
   const size_spec sspec = getSizeSpec(group);
 
-  /*if (isLibreoffice_) // impossible because lineedit != NULL
+  /*if (isLibreoffice_)
   {
     fspec.left = qMin(fspec.left,3);
     fspec.right = qMin(fspec.right,3);
@@ -1705,11 +1696,12 @@ void Style::drawComboLineEdit(const QStyleOption *option,
   }
   else
   {*/
-    bool noSpace((lineedit->testAttribute(Qt::WA_StyleSheetTarget)
-                  && !lineedit->styleSheet().isEmpty()
-                  && lineedit->styleSheet().contains(QLatin1String("padding")))
-                 || lineedit->minimumWidth() == lineedit->maximumWidth());
-    if (!noSpace
+    bool noSpace(lineedit
+                 && ((lineedit->testAttribute(Qt::WA_StyleSheetTarget)
+                      && !lineedit->styleSheet().isEmpty()
+                      && lineedit->styleSheet().contains(QLatin1String("padding")))
+                     || lineedit->minimumWidth() == lineedit->maximumWidth()));
+    if (!noSpace && lineedit
         && lineedit->height() < sizeCalculated(lineedit->font(),fspec,lspec,sspec,QStringLiteral("W"),QSize()).height())
     { // the label spacing isn't added at CT_ComboBox
       lspec.top = qMin(lspec.top,2);
@@ -1745,11 +1737,12 @@ void Style::drawComboLineEdit(const QStyleOption *option,
   if (option->direction == Qt::RightToLeft)
   {
     int arrowFrameSize = tspec_.combo_as_lineedit ? fspec.left : getFrameSpec(QStringLiteral("ComboBox")).left;
-    if (lineedit->width() < combo->width()
-                            - (tspec_.square_combo_button
-                               ? qMax(COMBO_ARROW_LENGTH, combo->height()-arrowFrameSize)
-                               : COMBO_ARROW_LENGTH)
-                            - arrowFrameSize)
+    if (lineedit && combo
+        && lineedit->width() < combo->width()
+                               - (tspec_.square_combo_button
+                                  ? qMax(COMBO_ARROW_LENGTH, combo->height()-arrowFrameSize)
+                                  : COMBO_ARROW_LENGTH)
+                               - arrowFrameSize)
     {
       fspec.HPos = 0;
     }
@@ -1757,7 +1750,7 @@ void Style::drawComboLineEdit(const QStyleOption *option,
   }
   else
   {
-    if (lineedit->x() > 0) fspec.HPos = 0;
+    if (lineedit && lineedit->x() > 0) fspec.HPos = 0;
     else fspec.HPos = -1;
   }
 
@@ -1776,12 +1769,12 @@ void Style::drawComboLineEdit(const QStyleOption *option,
                 option->rect,
               fspec,
               fspec.element+leStatus);
-  if (ispec.hasInterior || !hasHighContrastWithContainer(combo, lineedit->palette().color(QPalette::Text)))
+  if (!fillInterior)
   {
     renderInterior(painter,option->rect,fspec,ispec,ispec.element+leStatus);
 
     /* a workaround for bad codes that change line-edit base color */
-    if (!isPcmanfm_ && group == "LineEdit")
+    if (!isPcmanfm_ && group == "LineEdit" && lineedit)
     {
       QColor baseCol = lineedit->palette().color(QPalette::Base);
       if (baseCol != standardPalette().color(lineedit->palette().currentColorGroup(), QPalette::Base)
@@ -1796,10 +1789,11 @@ void Style::drawComboLineEdit(const QStyleOption *option,
   }
   else
   {
-    QColor baseCol = lineedit->palette().color(leStatus.contains(QLatin1String("-inactive"))
-                                                 ? QPalette::Inactive
-                                                 : QPalette::Active,
-                                               QPalette::Base);
+    QColor baseCol = (lineedit ? lineedit->palette() : standardPalette())
+                     .color(leStatus.contains(QLatin1String("-inactive"))
+                                                ? QPalette::Inactive
+                                                : QPalette::Active,
+                                              QPalette::Base);
     baseCol.setAlpha(255);
     painter->fillRect(interiorRect(option->rect,fspec), baseCol);
   }
@@ -3637,6 +3631,12 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
 
       QWidget *p = getParent(widget,1);
 
+      if (auto dte = qobject_cast<QDateTimeEdit*>(p))
+      {
+        if (dte->calendarWidget())
+          return; // its panel is drawn as an editable combo in CC_ComboBox
+      }
+
       /* We draw lineedits of editable comboboxes only in drawComboLineEdit().
          It seems that some style plugins draw it twice. */
       if (qobject_cast<const QLineEdit*>(widget) && qobject_cast<QComboBox*>(p))
@@ -4356,23 +4356,30 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
       const QComboBox *cb = qobject_cast<const QComboBox*>(widget);
 
       QString cGroup;
-      if ((!getFrameSpec(QStringLiteral("ToolbarComboBox")).element.isEmpty()
-           || !getInteriorSpec(QStringLiteral("ToolbarComboBox")).element.isEmpty())
-          && getStylableToolbarContainer(cb, true))
+      if (combo)
       {
-        cGroup = "ToolbarComboBox";
-      }
-      else cGroup = "ComboBox";
-
-      if (cb /*&& !cb->duplicatesEnabled()*/)
-      {
-        if (tspec_.combo_as_lineedit && combo && combo->editable && cb->lineEdit())
+        if ((!getFrameSpec(QStringLiteral("ToolbarComboBox")).element.isEmpty()
+             || !getInteriorSpec(QStringLiteral("ToolbarComboBox")).element.isEmpty())
+            && getStylableToolbarContainer(widget, true))
         {
-          if ((!getFrameSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty()
-               || !getInteriorSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty())
-              && getStylableToolbarContainer(cb->lineEdit(), true)
-              && !enoughContrast(cb->lineEdit()->palette().color(QPalette::Active, QPalette::Text),
-                                 getFromRGBA(getLabelSpec(QStringLiteral("Toolbar")).normalColor)))
+          cGroup = "ToolbarComboBox";
+        }
+        else cGroup = "ComboBox";
+
+        if (tspec_.combo_as_lineedit && combo->editable)
+        {
+          // -> drawComplexControl() -> CC_ComboBox
+          bool calEdit = qobject_cast<const QDateTimeEdit*>(widget) != nullptr
+                         && qobject_cast<const QDateTimeEdit*>(widget)->calendarWidget() != nullptr;
+          if ((cb || calEdit)
+              && (!getFrameSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty()
+                  || !getInteriorSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty())
+              && getStylableToolbarContainer(calEdit ? widget : cb->lineEdit(), true)
+              && (calEdit
+                    ? enoughContrast(standardPalette().color(QPalette::Active, QPalette::Text),
+                                     getFromRGBA(getLabelSpec(QStringLiteral("Toolbar")).normalColor))
+                    : !enoughContrast(cb->lineEdit()->palette().color(QPalette::Active, QPalette::Text),
+                                      getFromRGBA(getLabelSpec(QStringLiteral("Toolbar")).normalColor))))
           {
             fspec = getFrameSpec(QStringLiteral("ToolbarLineEdit"));
             ispec = getInteriorSpec(QStringLiteral("ToolbarLineEdit"));
@@ -4416,8 +4423,9 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           vOffset = (lspec.bottom-lspec.top)/2;
         }
 
-        if (!(combo && combo->editable && cb->lineEdit()
+        if (!(combo->editable
               // someone may want transparent lineedits (as the developer of Cantata does)
+              && cb && cb->lineEdit()
               && cb->lineEdit()->palette().color(cb->lineEdit()->backgroundRole()).alpha() == 0))
         {
           fspec.isAttached = true;
@@ -4429,7 +4437,9 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
 
         status = (option->state & State_Enabled) ?
                   (option->state & State_On) ? "toggled" :
-                  ((option->state & State_Sunken) || cb->hasFocus()) ? "pressed" :
+                  ((option->state & State_Sunken)
+                   || (cb && cb->hasFocus())
+                   || (widget && widget->hasFocus())) ? "pressed" :
                   (option->state & State_MouseOver)
                     && !(option->styleObject
                          && option->styleObject->property("_kv_hover_bug").toBool()) // hover bug
@@ -4438,7 +4448,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         if (isWidgetInactive(widget))
           status.append("-inactive");
 
-        if ((combo && !combo->editable) || !cb->lineEdit())
+        if (!combo->editable)
         {
           /* in this case, the state definition isn't the usual one */
           status = (option->state & State_Enabled) ?
@@ -4458,7 +4468,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           if (lspec1.boldFont) F.setWeight(lspec1.boldness);
           QSize txtSize = textSize(F,combo->currentText);
           if (/*cb->width() < fspec.left+lspec1.left+txtSize.width()+lspec1.right+COMBO_ARROW_LENGTH+fspec.right
-              ||*/ cb->height() < fspec.top+lspec1.top+txtSize.height()+fspec.bottom+lspec1.bottom)
+              ||*/ cb && cb->height() < fspec.top+lspec1.top+txtSize.height()+fspec.bottom+lspec1.bottom)
           {
             if (rtl)
               r.adjust(0,0,-qMax(fspec.left-3,0),0);
@@ -4478,7 +4488,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         }
         else
         {
-          if (vOffset != 0)
+          if (vOffset != 0 && cb && cb->lineEdit())
           { // -> drawComboLineEdit()
             const label_spec lspec1 = getLabelSpec(QStringLiteral("LineEdit"));
             const size_spec sspec1 = getSizeSpec(QStringLiteral("LineEdit"));
@@ -4489,12 +4499,12 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
             }
           }
 
-          if (combo && tspec_.combo_as_lineedit)
+          if (tspec_.combo_as_lineedit)
           { // correct the state for an editabe combo that's drawn as lineedit
-            if (cb->hasFocus())
+            if ((cb && cb->hasFocus()) || (widget && widget->hasFocus()))
             {
               if (isWidgetInactive(widget))
-              status = "focused-inactive";
+                status = "focused-inactive";
               else status = "focused";
             }
             else if (status.startsWith(QLatin1String("focused")))
@@ -4649,7 +4659,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           }
         }
       }
-      else if ((combo && combo->editable && !(cb && !cb->lineEdit())
+      else if ((combo && combo->editable
                 && (!tspec_.combo_as_lineedit // otherwise drawn at CC_ComboBox
                     || (isLibreoffice_ && widget == nullptr)))
                /*&& (!(option->state & State_AutoRaise)
@@ -11239,9 +11249,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
     }
 
     case CC_ComboBox : {
-      /* WARNING: QML comboboxes have lineedit even when they aren't editable.
-         Hence, the existence of a lineedit isn't a sufficient but only a necessary
-         condition for editability. */
+      /* WARNING: The existence of a lineedit isn't a sufficient condition for editability. */
       const QStyleOptionComboBox *opt =
           qstyleoption_cast<const QStyleOptionComboBox*>(option);
 
@@ -11250,24 +11258,30 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
         QRect arrowRect = subControlRect(CC_ComboBox,opt,SC_ComboBoxArrow,widget);
         const QComboBox *cb = qobject_cast<const QComboBox*>(widget);
         bool rtl(opt->direction == Qt::RightToLeft);
-        bool editable(opt->editable && cb && cb->lineEdit());
 
         QString group;
         if ((!getFrameSpec(QStringLiteral("ToolbarComboBox")).element.isEmpty()
              || !getInteriorSpec(QStringLiteral("ToolbarComboBox")).element.isEmpty())
-            && getStylableToolbarContainer(cb, true))
+            && getStylableToolbarContainer(cb != nullptr ? cb : widget, true))
         {
           group = "ToolbarComboBox";
         }
         else group = "ComboBox";
 
         QString leGroup;
-        if (cb
+
+        /* the text of QDateTimeEdit is provided by a lineedit, whose panel we don't draw */
+        bool calEdit = qobject_cast<const QDateTimeEdit*>(widget) != nullptr
+                       && qobject_cast<const QDateTimeEdit*>(widget)->calendarWidget() != nullptr;
+        if ((cb || calEdit)
             && (!getFrameSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty()
                 || !getInteriorSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty())
-            && getStylableToolbarContainer(cb->lineEdit(), true)
-            && !enoughContrast(cb->lineEdit()->palette().color(QPalette::Active, QPalette::Text),
-                               getFromRGBA(getLabelSpec(QStringLiteral("Toolbar")).normalColor)))
+            && getStylableToolbarContainer(calEdit ? widget : cb->lineEdit(), true)
+            && (calEdit // the color of its lineedit may have changed (-> CE_ToolBar)
+                  ? enoughContrast(standardPalette().color(QPalette::Active, QPalette::Text),
+                                   getFromRGBA(getLabelSpec(QStringLiteral("Toolbar")).normalColor))
+                  : !enoughContrast(cb->lineEdit()->palette().color(QPalette::Active, QPalette::Text),
+                                    getFromRGBA(getLabelSpec(QStringLiteral("Toolbar")).normalColor))))
         {
           leGroup = "ToolbarLineEdit";
         }
@@ -11288,7 +11302,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
         }
         int arrowFrameSize = rtl ? fspec.left : fspec.right;
         const bool drwaAsLineEdit(tspec_.combo_as_lineedit || tspec_.square_combo_button);
-        if (editable) // otherwise the arrow part will be integrated
+        if (opt->editable) // otherwise the arrow part will be integrated
         {
           if (drwaAsLineEdit)
           {
@@ -11305,19 +11319,21 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
         }
 
         int extra = 0;
-        if (editable)
+        if (opt->editable && cb)
         {
-          QLineEdit *le = cb->lineEdit();
-          /* Konqueror may add an icon to the right of lineedit (for LTR) */
-          int combo_arrow_length = tspec_.square_combo_button
-                                    ? qMax(COMBO_ARROW_LENGTH, cb->height()-arrowFrameSize)
-                                    : COMBO_ARROW_LENGTH;
-          extra  = rtl ? le->x() - (combo_arrow_length+arrowFrameSize)
-                       : w - (combo_arrow_length+arrowFrameSize) - (le->x()+le->width());
-          if (extra > 0)
+          if (QLineEdit *le = cb->lineEdit())
           {
-            if (rtl) arrowRect.adjust(0,0,extra,0);
-            else arrowRect.adjust(-extra,0,0,0);
+            /* Konqueror may add an icon to the right of lineedit (for LTR) */
+            int combo_arrow_length = tspec_.square_combo_button
+                                      ? qMax(COMBO_ARROW_LENGTH, cb->height()-arrowFrameSize)
+                                      : COMBO_ARROW_LENGTH;
+            extra  = rtl ? le->x() - (combo_arrow_length+arrowFrameSize)
+                         : w - (combo_arrow_length+arrowFrameSize) - (le->x()+le->width());
+            if (extra > 0)
+            {
+              if (rtl) arrowRect.adjust(0,0,extra,0);
+              else arrowRect.adjust(-extra,0,0,0);
+            }
           }
         }
 
@@ -11395,10 +11411,13 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
             int editWidth = 0;
             if (cb)
             {
-              if (editable)
+              if (opt->editable)
               {
-                if (!drwaAsLineEdit) // otherwise, the frame and edit field are drawn together as a lineedit
+                if (!drwaAsLineEdit // otherwise, the frame and edit field are drawn together as a lineedit
+                    && cb->lineEdit())
+                {
                   editWidth = cb->lineEdit()->width();
+                }
                 if (extra > 0)
                   editWidth += extra;
                 if (cb->hasFocus())
@@ -11425,11 +11444,40 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
                 }
               }
             }
+            else if (opt->editable)
+            {
+              if (!drwaAsLineEdit)
+                editWidth = o.rect.width();
+              if (widget && widget->hasFocus())
+              {
+                if (drwaAsLineEdit)
+                {
+                  if (isWidgetInactive(widget))
+                    status = "focused-inactive"; // impossible
+                  else status = "focused";
+                }
+                else
+                {
+                  if (isWidgetInactive(widget))
+                    status = "pressed-inactive";
+                  else status = "pressed";
+                }
+              }
+              else if (drwaAsLineEdit)
+              {
+                if (status.startsWith(QLatin1String("focused")))
+                  status.replace(QLatin1String("focused"),QLatin1String("normal"));
+                else if (status.startsWith(QLatin1String("toggled")))
+                  status.replace(QLatin1String("toggled"),QLatin1String("normal"));
+              }
+            }
 
             /* a workaround for bad codes that change line-edit base color */
-            bool colored(!isPcmanfm_ && editable && leGroup == "LineEdit"
+            bool colored(cb && cb->lineEdit()
+                         && !isPcmanfm_ && opt->editable && leGroup == "LineEdit"
                          && cb->lineEdit()->palette().color(QPalette::Base)
-                            != standardPalette().color(cb->lineEdit()->palette().currentColorGroup(), QPalette::Base)
+                            != standardPalette().color(cb->lineEdit()->palette().currentColorGroup(),
+                                                       QPalette::Base)
                          && cb->lineEdit()->palette().color(QPalette::Base).saturation() > 10);
 
             if (!opt->editable)
@@ -11481,18 +11529,44 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
                 painter->setOpacity(0.5);
               }
             }
-            if (!editable
-                // nothing should be drawn here if the lineedit is transparent (as in Cantata)
-                || cb->lineEdit()->palette().color(cb->lineEdit()->backgroundRole()).alpha() != 0)
+            if (!(opt->editable
+                  // nothing should be drawn here if the lineedit is transparent (as in Cantata)
+                  && cb && cb->lineEdit()
+                  && cb->lineEdit()->palette().color(cb->lineEdit()->backgroundRole()).alpha() == 0))
             {
-              bool fillWidgetInterior(!ispec.hasInterior
-                                      && hasHighContrastWithContainer(widget,
-                                                                      drwaAsLineEdit && editable
-                                                                      ? cb->lineEdit()->palette().color(QPalette::Text)
-                                                                      : getFromRGBA(getLabelSpec(group).normalColor)));
+              bool fillWidgetInterior(!ispec.hasInterior);
+              if (fillWidgetInterior)
+              {
+                if (drwaAsLineEdit && opt->editable)
+                {
+                  if (calEdit)
+                  {
+                    if (leGroup == "ToolbarLineEdit")
+                      fillWidgetInterior = false; // it's on a stylable toolbar
+                    else
+                    {
+                      fillWidgetInterior =
+                        hasHighContrastWithContainer(widget, standardPalette().color(QPalette::Text));
+                    }
+                  }
+                  else
+                  {
+                    fillWidgetInterior =
+                      hasHighContrastWithContainer(widget,
+                                                   cb && cb->lineEdit()
+                                                     ? cb->lineEdit()->palette().color(QPalette::Text)
+                                                     : standardPalette().color(QPalette::Text));
+                  }
+                }
+                else
+                {
+                  fillWidgetInterior =
+                    hasHighContrastWithContainer(widget, getFromRGBA(getLabelSpec(group).normalColor));
+                }
+              }
 
               QStyleOptionComboBox leOpt(*opt);
-              if (!drwaAsLineEdit && editable)
+              if (!drwaAsLineEdit && opt->editable)
               {
                 leOpt.rect = o.rect.adjusted(rtl ? 0 : o.rect.width()-editWidth, 0,
                                              rtl ? editWidth-o.rect.width() : 0, 0);
@@ -11502,7 +11576,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
                                   && animatedWidget_ == widget
                                   && opacityTimer_->isActive()
                                   && (!status.startsWith(QLatin1String("normal"))
-                                      || ((!editable || !drwaAsLineEdit
+                                      || ((!opt->editable || !drwaAsLineEdit
                                            || (cb->view() && cb->view()->isVisible()))
                                           && (animationStartState_.startsWith(QLatin1String("focused"))
                                               || animationStartState_.startsWith(QLatin1String("c-"))))));
@@ -11516,7 +11590,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
                 animationStartState.remove(0, 2);
               int animationOpacity = animationOpacity_;
               bool animatePanel(!(tspec_.combo_focus_rect
-                                  && (!drwaAsLineEdit || !editable)
+                                  && (!drwaAsLineEdit || !opt->editable)
                                   && (status.startsWith(QLatin1String("normal"))
                                       || status.startsWith(QLatin1String("pressed")))
                                   && (animationStartState.startsWith(QLatin1String("normal"))
@@ -11548,13 +11622,14 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
                     if (!fillWidgetInterior)
                       renderInterior(painter,r,fspec,ispec,ispec.element+"-"+_status);
                   }
-                  if (!drwaAsLineEdit && editable)
+                  if (!drwaAsLineEdit && opt->editable)
                   {
                     if (!mouseAnimation)
                       leOpt.state = State_Enabled | State_Active | State_HasFocus;
                     else
                       leOpt.state = opt->state & (State_Enabled);
-                    drawComboLineEdit(&leOpt, painter, cb->lineEdit(), widget);
+                    drawComboLineEdit(&leOpt, painter, cb->lineEdit(), widget,
+                                      leGroup, fillWidgetInterior);
                   }
                 }
                 if (animatePanel)
@@ -11571,7 +11646,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
                 renderInterior(painter,r,fspec,ispec,ispec.element+"-"+_status);
 
               /* draw the line-edit part */
-              if (!drwaAsLineEdit && editable)
+              if (!drwaAsLineEdit && opt->editable)
               {
                 leOpt.state = (opt->state & (State_Enabled | State_MouseOver | State_HasFocus))
                               | State_KeyboardFocusChange;
@@ -11580,7 +11655,8 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
                   painter->save();
                   painter->setOpacity(static_cast<qreal>(animationOpacity)/100.0);
                 }
-                drawComboLineEdit(&leOpt, painter, cb->lineEdit(), widget);
+                drawComboLineEdit(&leOpt, painter, cb ? cb->lineEdit() : nullptr, widget,
+                                  leGroup, fillWidgetInterior);
                 if (animate && !animatePanel)
                   painter->restore();
               }
@@ -11594,7 +11670,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
                   if (!mouseAnimation)
                   {
                     animationStartStateOut_ = status;
-                    if (!editable && animatedWidget_ == widget)
+                    if (!opt->editable && animatedWidget_ == widget)
                       animationStartState_ = status;
                   }
                   else
@@ -11624,12 +11700,10 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
                                                               : QPalette::Active,
                                                              QPalette::Base);
                 else
-                  comboCol = widget->palette().color(status.contains(QLatin1String("-inactive"))
-                                                       ? QPalette::Inactive
-                                                       : QPalette::Active,
-                                                     drwaAsLineEdit
-                                                       ? QPalette::Base
-                                                       : QPalette::Button);
+                  comboCol = (widget ? widget->palette() : standardPalette())
+                             .color(status.contains(QLatin1String("-inactive"))
+                                      ? QPalette::Inactive : QPalette::Active,
+                                    drwaAsLineEdit ? QPalette::Base : QPalette::Button);
                 comboCol.setAlpha(255);
                 painter->fillRect(interiorRect(r,fspec), comboCol);
               }
@@ -11642,7 +11716,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
               }
 
               /* draw combo icon separator if it exists */
-              if (!drwaAsLineEdit && editable)
+              if (!drwaAsLineEdit && opt->editable)
               {
                 const QString sepName = fspec.element + "-icon-separator";
                 QRect sep;
@@ -11669,7 +11743,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
             }
             if (libreoffice) painter->restore();
             /* draw focus rect */
-            if (tspec_.combo_focus_rect && !editable
+            if (tspec_.combo_focus_rect && !opt->editable
                 && (option->state & State_Enabled) && !(option->state & State_On)
                 && ((option->state & State_Sunken) || (option->state & State_Selected)))
             {
@@ -11740,14 +11814,22 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
             else if (status.startsWith(QLatin1String("focused")))
               state = 2;
 
-            if (editable && drwaAsLineEdit)
+            if (opt->editable && drwaAsLineEdit)
             {
               /* correct the state and colors */
               if (state > 1) state = 1;
               if (leGroup == "LineEdit")
               {
-                lspec.normalColor = getName(widget->palette().color(QPalette::Active,QPalette::Text));
-                lspec.normalInactiveColor = getName(widget->palette().color(QPalette::Inactive,QPalette::Text));
+                if (widget)
+                {
+                  lspec.normalColor = getName(widget->palette().color(QPalette::Active,QPalette::Text));
+                  lspec.normalInactiveColor = getName(widget->palette().color(QPalette::Inactive,QPalette::Text));
+                }
+                else
+                {
+                  lspec.normalColor = getName(standardPalette().color(QPalette::Active,QPalette::Text));
+                  lspec.normalInactiveColor = getName(standardPalette().color(QPalette::Inactive,QPalette::Text));
+                }
               }
               else
               {
@@ -11759,8 +11841,9 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
               /* when there isn't enough space (-> SE_LineEditContents and drawComboLineEdit) */
               label_spec lspec1 = getLabelSpec(leGroup);
               const size_spec sspec1 = getSizeSpec(leGroup);
-              if (cb->lineEdit()->height()
-                  < sizeCalculated(cb->lineEdit()->font(),fspec,lspec1,sspec1,QStringLiteral("W"),QSize()).height())
+              if (cb && cb->lineEdit()
+                  && cb->lineEdit()->height()
+                     < sizeCalculated(cb->lineEdit()->font(),fspec,lspec1,sspec1,QStringLiteral("W"),QSize()).height())
               {
                 lspec.top = qMin(lspec.top,2);
                 lspec.bottom = qMin(lspec.bottom,2);
@@ -15040,11 +15123,31 @@ QRect Style::subElementRect(QStyle::SubElement element, const QStyleOption *opti
         }
       }
 
+      bool rtl(option->direction == Qt::RightToLeft);
       QAbstractSpinBox *sb = qobject_cast<QAbstractSpinBox*>(getParent(widget,1));
       if (sb)
       {
         lspec.right = 0;
-        if ((!tspec_.vertical_spin_indicators
+
+        /* QDateTimeEdit is drawn as an editable combo */
+        bool calEdit = qobject_cast<QDateTimeEdit*>(sb) != nullptr
+                       && qobject_cast<QDateTimeEdit*>(sb)->calendarWidget() != nullptr;
+        int calEditArrowWidth = 0;
+        if (calEdit)
+        { // -> subControlRect() -> CC_ComboBox
+          frame_spec fspec = getFrameSpec(tspec_.combo_as_lineedit ? QStringLiteral("LineEdit")
+                                                                   : QStringLiteral("ComboBox"));
+          int combo_arrow_length = tspec_.square_combo_button
+                                     ? qMax(COMBO_ARROW_LENGTH, option->rect.height()
+                                                                - (rtl ? fspec.left : fspec.right))
+                                     : COMBO_ARROW_LENGTH;
+          if (rtl)
+            calEditArrowWidth = combo_arrow_length + fspec.left;
+          else
+            calEditArrowWidth = combo_arrow_length + fspec.right;
+        }
+
+        if (((!tspec_.vertical_spin_indicators || calEdit)
              // Krita 5.0.0
              && !sb->inherits("KisIntParseSpinBox")
              && !sb->inherits("KisDoubleParseSpinBox"))
@@ -15054,10 +15157,14 @@ QRect Style::subElementRect(QStyle::SubElement element, const QStyleOption *opti
           if (maxTxt.isEmpty()
               || option->rect.width() < textSize(sb->font(),maxTxt).width() + fspec.left
                                         + (sspec.incrementW ? sspec.minW : 0)
-                                        + (sb->buttonSymbols() == QAbstractSpinBox::NoButtons ? fspec.right : 0)
+                                        + (sb->buttonSymbols() == QAbstractSpinBox::NoButtons
+                                             ? fspec.right : 0)
               || (sb->buttonSymbols() != QAbstractSpinBox::NoButtons
-                  && sb->width() < option->rect.width() + 2*tspec_.spin_button_width
-                                                       + getFrameSpec(QStringLiteral("IndicatorSpinBox")).right))
+                  && sb->width() < option->rect.width()
+                                   + (calEdit
+                                        ? calEditArrowWidth
+                                        : 2*tspec_.spin_button_width
+                                          + getFrameSpec(QStringLiteral("IndicatorSpinBox")).right)))
           {
             fspec.left = qMin(fspec.left,3);
             fspec.right = qMin(fspec.right,3);
@@ -15081,7 +15188,6 @@ QRect Style::subElementRect(QStyle::SubElement element, const QStyleOption *opti
           sspec.incrementW = false;
         }
       }
-      bool rtl(option->direction == Qt::RightToLeft);
       QRect rect = labelRect(option->rect, fspec, lspec);
       if (sspec.incrementW)
       {

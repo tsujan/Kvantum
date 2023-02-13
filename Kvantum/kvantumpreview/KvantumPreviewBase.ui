@@ -1638,6 +1638,16 @@ check box</string>
          </property>
         </widget>
        </item>
+       <item row="9" column="0">
+        <widget class="QDateTimeEdit" name="dateTimeEdit_3"/>
+       </item>
+       <item row="9" column="1">
+        <widget class="QDateTimeEdit" name="dateTimeEdit_4">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
       </layout>
      </item>
      <item row="1" column="2">
@@ -3750,6 +3760,22 @@ check box</string>
     <hint type="destinationlabel">
      <x>408</x>
      <y>216</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>dateTimeEdit_3</sender>
+   <signal>dateTimeChanged(QDateTime)</signal>
+   <receiver>dateTimeEdit_4</receiver>
+   <slot>setDateTime(QDateTime)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>277</x>
+     <y>485</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>522</x>
+     <y>485</y>
     </hint>
    </hints>
   </connection>

@@ -56,6 +56,9 @@ public:
     actionMenuButton->setMenu (menuFile);
     toolButton_8->setMenu (menuFile);
 
+    dateTimeEdit_3->setCalendarPopup(true);
+    dateTimeEdit_4->setCalendarPopup(true);
+
     /* a workaround for a bug in QPushButton with a shared menu */
     pushButton_8->setFocusPolicy(Qt::NoFocus);
 
@@ -72,6 +75,9 @@ public:
     lineedit->setClearButtonEnabled (true);
     toolBar_2->addWidget (lineedit);
     toolBar_2->addSeparator();
+    /*auto dte = new QDateTimeEdit();
+    dte->setCalendarPopup(true);
+    toolBar_2->addWidget (dte);*/
     toolBar_2->addWidget (new QSpinBox());
 
     /* add a progress-bar to the first cell of the table widget */
@@ -121,10 +127,18 @@ public:
 
 private slots:
   void toggleLayout() {
+    /* resetting of formats is needed for having correct text alignments */
+    auto f = dateTimeEdit->displayFormat();
+
     if (QApplication::layoutDirection() == Qt::LeftToRight)
       QApplication::setLayoutDirection (Qt::RightToLeft);
     else
       QApplication::setLayoutDirection (Qt::LeftToRight);
+
+    dateTimeEdit->setDisplayFormat (f);
+    dateTimeEdit_2->setDisplayFormat (f);
+    dateTimeEdit_3->setDisplayFormat (f);
+    dateTimeEdit_4->setDisplayFormat (f);
 
     /* FIXME Why isn't the close button position
        updated after changing layout direction? */
@@ -134,6 +148,16 @@ private slots:
     tabWidget_5->setTabsClosable (true);
     tabWidget_6->setTabsClosable (false);
     tabWidget_6->setTabsClosable (true);
+
+    /* needed for having the correct size when
+       the right text margin is more than the left one */
+    /*for (auto &a : toolBar_2->actions()) {
+      if (qobject_cast<QSpinBox*>(toolBar_2->widgetForAction (a))) {
+        toolBar_2->removeAction (a);
+        toolBar_2->addAction (a);
+        break;
+      }
+    }*/
   }
 
   void KvDocMode (bool checked) {

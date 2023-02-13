@@ -1,3 +1,8 @@
+V1.0.10
+---------
+ * Support editable comboboxes not derived from `QComboBox`.
+ * Clean drawing of `QDateTimeEdit` with calendar widget (Qt badly draws a lineedit over a combobox).
+
 V1.0.9
 ---------
  * Fixed a regression that caused crashes in QML apps and LibreOffice when the widget animation was disabled.

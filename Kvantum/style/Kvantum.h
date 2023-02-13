@@ -276,7 +276,9 @@ class Style : public QCommonStyle {
     void drawComboLineEdit(const QStyleOption *option,
                            QPainter *painter,
                            const QWidget *lineedit,
-                           const QWidget *combo) const;
+                           const QWidget *combo,
+                           const QString &group,
+                           bool fillInterior) const;
 
     /* Gets a pixmap with a proper size from an icon considering HDPI. */
     QPixmap getPixmapFromIcon(const QIcon &icon,
