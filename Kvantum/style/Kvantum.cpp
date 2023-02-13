@@ -3633,7 +3633,8 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
       /* We draw the lineedit of an editable combo only in drawComplexControl() -> CC_ComboBox.
          It seems that some style plugins draw it twice. */
       if (qobject_cast<const QLineEdit*>(widget)
-          && (qobject_cast<QComboBox*>(p) || widget->property("_kv_combo").toBool()))
+          && (qobject_cast<QComboBox*>(p)
+              || (p && p->property("_kv_combo").toBool())))
       {
         break;
       }
@@ -11311,7 +11312,10 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
           /* announce that the child lineedit is drawn as a combo part
              to prevent it from being redrawn in PE_PanelLineEdit */
           if (cb == nullptr && lineEditWidget != nullptr)
-            lineEditWidget->setProperty("_kv_combo", true);
+          {
+            if (QObject *styleObject = option->styleObject)
+              styleObject->setProperty("_kv_combo", true);
+          }
 
           if (drwaAsLineEdit)
           {
@@ -11418,45 +11422,23 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
           {
             /* don't cover the lineedit area */
             int editWidth = 0;
-            if (cb)
+            if (opt->editable)
             {
-              if (opt->editable)
+              if (!drwaAsLineEdit) // otherwise, the frame and edit field are drawn together as a lineedit
               {
-                if (!drwaAsLineEdit // otherwise, the frame and edit field are drawn together as a lineedit
-                    && cb->lineEdit())
+                if (cb != nullptr)
                 {
-                  editWidth = cb->lineEdit()->width();
-                }
-                if (extra > 0)
-                  editWidth += extra;
-                if (cb->hasFocus())
-                {
-                  if (drwaAsLineEdit)
+                  if (cb->lineEdit() != nullptr)
                   {
-                    if (isWidgetInactive(widget))
-                      status = "focused-inactive"; // impossible
-                    else status = "focused";
-                  }
-                  else
-                  {
-                    if (isWidgetInactive(widget))
-                      status = "pressed-inactive";
-                    else status = "pressed";
+                    editWidth = cb->lineEdit()->width();
+                    if (extra > 0)
+                      editWidth += extra;
                   }
                 }
-                else if (drwaAsLineEdit)
-                {
-                  if (status.startsWith(QLatin1String("focused")))
-                    status.replace(QLatin1String("focused"),QLatin1String("normal"));
-                  else if (status.startsWith(QLatin1String("toggled")))
-                    status.replace(QLatin1String("toggled"),QLatin1String("normal"));
-                }
+                else
+                  editWidth = o.rect.width();
               }
-            }
-            else if (opt->editable)
-            {
-              if (!drwaAsLineEdit)
-                editWidth = o.rect.width();
+
               if (widget && widget->hasFocus())
               {
                 if (drwaAsLineEdit)
@@ -15139,7 +15121,7 @@ QRect Style::subElementRect(QStyle::SubElement element, const QStyleOption *opti
         lspec.right = 0;
 
         /* widgets like QDateTimeEdit with calendar are drawn as editable combos */
-        bool insideCombo(widget->property("_kv_combo").toBool());
+        bool insideCombo(sb->property("_kv_combo").toBool());
         int comboArrowWidth = 0;
         if (insideCombo)
         { // -> subControlRect() -> CC_ComboBox
