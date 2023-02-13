@@ -45,7 +45,6 @@
 #include <QLabel>
 #include <QDoubleSpinBox>
 #include <QDateTimeEdit>
-#include <QCalendarWidget> // for styling QDateTimeEdit with calendar
 //#include <QBitmap>
 #include <QtMath>
 #include <QMenuBar>
@@ -3631,16 +3630,13 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
 
       QWidget *p = getParent(widget,1);
 
-      if (auto dte = qobject_cast<QDateTimeEdit*>(p))
-      {
-        if (dte->calendarWidget())
-          return; // its panel is drawn as an editable combo in CC_ComboBox
-      }
-
-      /* We draw lineedits of editable comboboxes only in drawComboLineEdit().
+      /* We draw the lineedit of an editable combo only in drawComplexControl() -> CC_ComboBox.
          It seems that some style plugins draw it twice. */
-      if (qobject_cast<const QLineEdit*>(widget) && qobject_cast<QComboBox*>(p))
+      if (qobject_cast<const QLineEdit*>(widget)
+          && (qobject_cast<QComboBox*>(p) || widget->property("_kv_combo").toBool()))
+      {
         break;
+      }
 
       QString group;
       if ((!getFrameSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty()
@@ -4369,17 +4365,20 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         if (tspec_.combo_as_lineedit && combo->editable)
         {
           // -> drawComplexControl() -> CC_ComboBox
-          bool calEdit = qobject_cast<const QDateTimeEdit*>(widget) != nullptr
-                         && qobject_cast<const QDateTimeEdit*>(widget)->calendarWidget() != nullptr;
-          if ((cb || calEdit)
-              && (!getFrameSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty()
-                  || !getInteriorSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty())
-              && getStylableToolbarContainer(calEdit ? widget : cb->lineEdit(), true)
-              && (calEdit
-                    ? enoughContrast(standardPalette().color(QPalette::Active, QPalette::Text),
-                                     getFromRGBA(getLabelSpec(QStringLiteral("Toolbar")).normalColor))
-                    : !enoughContrast(cb->lineEdit()->palette().color(QPalette::Active, QPalette::Text),
-                                      getFromRGBA(getLabelSpec(QStringLiteral("Toolbar")).normalColor))))
+          QLineEdit *lineEditWidget = nullptr;
+          if (cb != nullptr)
+            lineEditWidget = cb->lineEdit();
+          else if (widget)
+          {
+            lineEditWidget = widget->findChild<QLineEdit*>(QString(), Qt::FindDirectChildrenOnly);
+            if (lineEditWidget != nullptr && !widget->isAncestorOf(lineEditWidget))
+              lineEditWidget = nullptr;
+          }
+          if ((!getFrameSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty()
+               || !getInteriorSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty())
+              && getStylableToolbarContainer(lineEditWidget, true)
+              && !enoughContrast(lineEditWidget->palette().color(QPalette::Active, QPalette::Text),
+                                 getFromRGBA(getLabelSpec(QStringLiteral("Toolbar")).normalColor)))
           {
             fspec = getFrameSpec(QStringLiteral("ToolbarLineEdit"));
             ispec = getInteriorSpec(QStringLiteral("ToolbarLineEdit"));
@@ -11270,18 +11269,23 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
 
         QString leGroup;
 
-        /* the text of QDateTimeEdit is provided by a lineedit, whose panel we don't draw */
-        bool calEdit = qobject_cast<const QDateTimeEdit*>(widget) != nullptr
-                       && qobject_cast<const QDateTimeEdit*>(widget)->calendarWidget() != nullptr;
-        if ((cb || calEdit)
-            && (!getFrameSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty()
-                || !getInteriorSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty())
-            && getStylableToolbarContainer(calEdit ? widget : cb->lineEdit(), true)
-            && (calEdit // the color of its lineedit may have changed (-> CE_ToolBar)
-                  ? enoughContrast(standardPalette().color(QPalette::Active, QPalette::Text),
-                                   getFromRGBA(getLabelSpec(QStringLiteral("Toolbar")).normalColor))
-                  : !enoughContrast(cb->lineEdit()->palette().color(QPalette::Active, QPalette::Text),
-                                    getFromRGBA(getLabelSpec(QStringLiteral("Toolbar")).normalColor))))
+        /* also cover a widget like QDateTimeEdit with calendar,
+           that isn't a QComboBox but drawn as one */
+        QLineEdit *lineEditWidget = nullptr;
+        if (cb != nullptr)
+          lineEditWidget = cb->lineEdit();
+        else if (widget)
+        {
+          lineEditWidget = widget->findChild<QLineEdit*>(QString(), Qt::FindDirectChildrenOnly);
+          if (lineEditWidget != nullptr && !widget->isAncestorOf(lineEditWidget))
+            lineEditWidget = nullptr;
+        }
+
+        if ((!getFrameSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty()
+             || !getInteriorSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty())
+            && getStylableToolbarContainer(lineEditWidget, true)
+            && !enoughContrast(lineEditWidget->palette().color(QPalette::Active, QPalette::Text),
+                               getFromRGBA(getLabelSpec(QStringLiteral("Toolbar")).normalColor)))
         {
           leGroup = "ToolbarLineEdit";
         }
@@ -11304,6 +11308,11 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
         const bool drwaAsLineEdit(tspec_.combo_as_lineedit || tspec_.square_combo_button);
         if (opt->editable) // otherwise the arrow part will be integrated
         {
+          /* announce that the child lineedit is drawn as a combo part
+             to prevent it from being redrawn in PE_PanelLineEdit */
+          if (cb == nullptr && lineEditWidget != nullptr)
+            lineEditWidget->setProperty("_kv_combo", true);
+
           if (drwaAsLineEdit)
           {
             fspec = getFrameSpec(leGroup);
@@ -11539,14 +11548,14 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
               {
                 if (drwaAsLineEdit && opt->editable)
                 {
-                  if (calEdit)
+                  if (cb == nullptr && lineEditWidget != nullptr)
                   {
                     if (leGroup == "ToolbarLineEdit")
                       fillWidgetInterior = false; // it's on a stylable toolbar
                     else
                     {
                       fillWidgetInterior =
-                        hasHighContrastWithContainer(widget, standardPalette().color(QPalette::Text));
+                        hasHighContrastWithContainer(lineEditWidget, standardPalette().color(QPalette::Text));
                     }
                   }
                   else
@@ -15129,11 +15138,10 @@ QRect Style::subElementRect(QStyle::SubElement element, const QStyleOption *opti
       {
         lspec.right = 0;
 
-        /* QDateTimeEdit is drawn as an editable combo */
-        bool calEdit = qobject_cast<QDateTimeEdit*>(sb) != nullptr
-                       && qobject_cast<QDateTimeEdit*>(sb)->calendarWidget() != nullptr;
-        int calEditArrowWidth = 0;
-        if (calEdit)
+        /* widgets like QDateTimeEdit with calendar are drawn as editable combos */
+        bool insideCombo(widget->property("_kv_combo").toBool());
+        int comboArrowWidth = 0;
+        if (insideCombo)
         { // -> subControlRect() -> CC_ComboBox
           frame_spec fspec = getFrameSpec(tspec_.combo_as_lineedit ? QStringLiteral("LineEdit")
                                                                    : QStringLiteral("ComboBox"));
@@ -15142,12 +15150,12 @@ QRect Style::subElementRect(QStyle::SubElement element, const QStyleOption *opti
                                                                 - (rtl ? fspec.left : fspec.right))
                                      : COMBO_ARROW_LENGTH;
           if (rtl)
-            calEditArrowWidth = combo_arrow_length + fspec.left;
+            comboArrowWidth = combo_arrow_length + fspec.left;
           else
-            calEditArrowWidth = combo_arrow_length + fspec.right;
+            comboArrowWidth = combo_arrow_length + fspec.right;
         }
 
-        if (((!tspec_.vertical_spin_indicators || calEdit)
+        if (((!tspec_.vertical_spin_indicators || insideCombo)
              // Krita 5.0.0
              && !sb->inherits("KisIntParseSpinBox")
              && !sb->inherits("KisDoubleParseSpinBox"))
@@ -15161,8 +15169,8 @@ QRect Style::subElementRect(QStyle::SubElement element, const QStyleOption *opti
                                              ? fspec.right : 0)
               || (sb->buttonSymbols() != QAbstractSpinBox::NoButtons
                   && sb->width() < option->rect.width()
-                                   + (calEdit
-                                        ? calEditArrowWidth
+                                   + (insideCombo
+                                        ? comboArrowWidth
                                         : 2*tspec_.spin_button_width
                                           + getFrameSpec(QStringLiteral("IndicatorSpinBox")).right)))
           {
