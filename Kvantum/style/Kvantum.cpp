@@ -3632,11 +3632,18 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
 
       /* We draw the lineedit of an editable combo only in drawComplexControl() -> CC_ComboBox.
          It seems that some style plugins draw it twice. */
-      if (qobject_cast<const QLineEdit*>(widget)
-          && (qobject_cast<QComboBox*>(p)
-              || (p && p->property("_kv_combo").toBool())))
+      if (qobject_cast<const QLineEdit*>(widget))
       {
-        break;
+        if (qobject_cast<QComboBox*>(p) || (p && p->property("_kv_combo").toBool()))
+          break;
+      }
+      else if (QObject *styleObject = option->styleObject)
+      {
+        if (QObject *pObj = styleObject->parent())
+        {
+          if (pObj->property("_kv_combo").toBool())
+            break;
+        }
       }
 
       QString group;
@@ -3685,7 +3692,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
                                    || p->inherits("Digikam::DAbstractSliderSpinBox")))
                          /*|| (isLibreoffice_ && sbOpt)*/);
 
-      if (!widget) // WARNING: QML has anchoring!
+      if (widget == nullptr && !isLibreoffice_) // WARNING: QML has anchoring!
       {
         if (hasExpandedBorder(fspec))
           fspec.expansion = 0;
@@ -9849,16 +9856,15 @@ void Style::drawControl(QStyle::ControlElement element,
 
         if (opt->text.size() == 0 && opt->icon.isNull())
         {
-          if ((isLibreoffice_ && widget == nullptr)
-               // see eventFiltering.cpp -> Style::eventFilter()
-              || qobject_cast<const QCommandLinkButton*>(widget))
+          if (qobject_cast<const QCommandLinkButton*>(widget))
           {
             if (hasExpandedBorder(fspec))
               fspec.expansion = 0;
             else
               fspec.expansion = qMin(fspec.expansion, LIMITED_EXPANSION);
           }
-          else fspec.expansion = 0; // KColorButton (color button in general)
+          else if (!isLibreoffice_)
+            fspec.expansion = 0; // KColorButton (color button in general)
         }
         if (!(option->state & State_Enabled))
         {
@@ -11297,7 +11303,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
         frame_spec fspec = getFrameSpec(group);
         interior_spec ispec = getInteriorSpec(group);
 
-        if (!widget) // WARNING: QML has anchoring!
+        if (widget == nullptr && !isLibreoffice_) // WARNING: QML has anchoring!
         {
           if (hasExpandedBorder(fspec))
             fspec.expansion = 0;
@@ -11309,9 +11315,9 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
         const bool drwaAsLineEdit(tspec_.combo_as_lineedit || tspec_.square_combo_button);
         if (opt->editable) // otherwise the arrow part will be integrated
         {
-          /* announce that the child lineedit is drawn as a combo part
-             to prevent it from being redrawn in PE_PanelLineEdit */
-          if (cb == nullptr && lineEditWidget != nullptr)
+          /* announce that the lineedit is drawn as a combo part
+             and shouldn't be redrawn in PE_PanelLineEdit */
+          if (cb == nullptr)
           {
             if (QObject *styleObject = option->styleObject)
               styleObject->setProperty("_kv_combo", true);
@@ -11392,7 +11398,9 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
 
           int margin = 0; // see CC_ComboBox at subControlRect
           if (isLibreoffice_ && widget == nullptr)
-            margin = fspec.left;
+          {
+            margin = rtl ? fspec.right+lspec.right : fspec.left+lspec.left;
+          }
           else if (opt->editable && !opt->currentIcon.isNull())
           {
             margin = (rtl ? fspec.right+lspec.right : fspec.left+lspec.left) + lspec.tispace - 4;
@@ -11411,15 +11419,24 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
             painter->save();
             painter->setOpacity(DISABLED_OPACITY);
           }
-          if (isLibreoffice_ && widget == nullptr && opt->editable)
-          { // workaround for a bug in LibreOffice's Qt skin
-            QColor winCol = option->palette.color(QPalette::Window);
-            winCol.setAlpha(255);
-            painter->fillRect(o.rect, winCol);
-            drawPrimitive(PE_PanelLineEdit,&o,painter,nullptr);
-          }
-          else // ignore framelessness
           {
+            /* workarounds for bugs in LibreOffice's Qt skin */
+            bool libreoffice(false);
+            if (isLibreoffice_ && widget == nullptr)
+            {
+              QColor winCol = standardPalette().color(QPalette::Window);
+              winCol.setAlpha(255);
+              painter->fillRect(option->rect, winCol);
+              if ((option->state & State_Enabled) && !(drwaAsLineEdit && opt->editable)
+                  && enoughContrast(getFromRGBA(lspec.normalColor),
+                                    standardPalette().color(QPalette::ButtonText)))
+              {
+                libreoffice = true;
+                painter->save();
+                painter->setOpacity(0.5);
+              }
+            }
+
             /* don't cover the lineedit area */
             int editWidth = 0;
             if (opt->editable)
@@ -11507,17 +11524,6 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
             /* integrate the arrow part if the combo isn't editable or is fully drawn as a lineedit */
             if (!opt->editable || (cb && !cb->lineEdit()) || tspec_.combo_as_lineedit)
               r = r.united(arrowRect);
-            bool libreoffice = false;
-            if (isLibreoffice_ && widget == nullptr && (option->state & State_Enabled))
-            {
-              if (enoughContrast(getFromRGBA(lspec.normalColor), standardPalette().color(QPalette::ButtonText)))
-              {
-                libreoffice = true;
-                painter->fillRect(option->rect, standardPalette().brush(QPalette::Window));
-                painter->save();
-                painter->setOpacity(0.5);
-              }
-            }
             if (!(opt->editable
                   // nothing should be drawn here if the lineedit is transparent (as in Cantata)
                   && cb && cb->lineEdit()
@@ -11644,9 +11650,16 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
                   painter->save();
                   painter->setOpacity(static_cast<qreal>(animationOpacity)/100.0);
                 }
+                if (libreoffice)
+                  painter->restore();
                 drawComboLineEdit(&leOpt, painter, cb ? cb->lineEdit() : nullptr, widget,
                                   leGroup, fillWidgetInterior);
-                if (animate && !animatePanel)
+                if (libreoffice)
+                {
+                  painter->save();
+                  painter->setOpacity(0.5);
+                }
+                else if (animate && !animatePanel)
                   painter->restore();
               }
 
@@ -15978,9 +15991,8 @@ QRect Style::subControlRect(QStyle::ComplexControl control,
           }
           const label_spec combolspec =  getLabelSpec(QStringLiteral("ComboBox"));
           if (isLibreoffice_ && widget == nullptr)
-          {
-            const frame_spec Fspec = getFrameSpec(QStringLiteral("LineEdit"));
-            margin = qMin(Fspec.left,3);
+          { // neither CE_ComboBoxLabel nor SE_LineEditContents is consulted
+            margin = rtl ? fspec.right+combolspec.right : fspec.left+combolspec.left;
           }
           else if (opt && opt->editable && !opt->currentIcon.isNull())
           {
