@@ -11420,21 +11420,17 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
             painter->setOpacity(DISABLED_OPACITY);
           }
           {
-            /* workarounds for bugs in LibreOffice's Qt skin */
+            /* a workaround for a bug in LibreOffice's Qt skin */
             bool libreoffice(false);
-            if (isLibreoffice_ && widget == nullptr)
+            if (isLibreoffice_ && widget == nullptr
+                && (option->state & State_Enabled)
+                && !(drwaAsLineEdit && opt->editable)
+                && enoughContrast(getFromRGBA(lspec.normalColor),
+                                  standardPalette().color(QPalette::ButtonText)))
             {
-              QColor winCol = standardPalette().color(QPalette::Window);
-              winCol.setAlpha(255);
-              painter->fillRect(option->rect, winCol);
-              if ((option->state & State_Enabled) && !(drwaAsLineEdit && opt->editable)
-                  && enoughContrast(getFromRGBA(lspec.normalColor),
-                                    standardPalette().color(QPalette::ButtonText)))
-              {
-                libreoffice = true;
-                painter->save();
-                painter->setOpacity(0.5);
-              }
+              libreoffice = true;
+              painter->save();
+              painter->setOpacity(0.5);
             }
 
             /* don't cover the lineedit area */
