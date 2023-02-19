@@ -24,39 +24,41 @@
     <message>
         <location filename="../../kvantummanager.ui" line="44"/>
         <source>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; comes with many themes but external themes can also be installed for being used by it. Here you could choose a theme folder and then press the button below to install it in your Home.&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;center&gt;&lt;b&gt;Το &lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; έρχεται με πολλά ενσωματωμένα θέματα αλλά μπορούν να εγκατασταθούν και εξωτερικά θέματα. Από εδώ μπορείτε να επιλέξετε έναν φάκελο θεμάτων και έπειτα πιέζοντας το κουμπί παρακάτω να το εγκαταστήσετε στον προσωπικό σας φάκελο.&lt;/center&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="76"/>
         <source>Select a Kvantum
 theme folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Επιλέξτε έναν φάκελο
+θεμάτων Kvantum</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="113"/>
         <source>Add this theme to the list of themes that
 Kvantum can use in addition to its own themes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Προσθήκη του θέματος στην λίστα
+των θεμάτων του Kvantum.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="117"/>
         <source>Install this theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Εγκατάσταση του θέματος</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="138"/>
         <source>Change/Delete Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Αλλαγή/Διαγραφή θέματος</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="144"/>
         <source>Select a theme:</source>
-        <translation type="unfinished"></translation>
+        <translation>Επιλογή θέματος:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="191"/>
         <source>Delete this theme</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Διαγραφή θέματος</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="198"/>
@@ -64,61 +66,67 @@ Kvantum can use in addition to its own themes.</source>
 
 A disabled button means that
 the theme is already used.</source>
-        <translation type="unfinished"></translation>
+        <translation>Να γίνεται χρήση του θέματος από το Kvantum!
+
+Αν το κουμπί είναι απενεργοποιημένο
+σημαίνει ότι το θέμα χρησιμοποιείται ήδη.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="204"/>
         <source>Use this theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Χρήση του θέματος</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="257"/>
         <source>Configure Active Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Διαμόρφωση του ενεργού θέματος</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="321"/>
         <source>Revert to the default (root)
 settings of this theme.
 (Ctrl+Z)</source>
-        <translation type="unfinished"></translation>
+        <translation>Επαναφορά στις προκαθορισμένες
+ρυθμίσεις του θέματος.
+(Ctrl+Z)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="326"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Revert to the default (root) settings of this theme!&lt;/p&gt;&lt;p&gt;When clicked and confirmed, all changes to the configuration will be lost but the probable customized SVG file will remain intact.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Επαναφορά του θέματος στις προκαθορισμένες ρυθμίσεις!&lt;/p&gt;&lt;p&gt;Αφού κάνετε κλικ και επιβεβαιώσετε την ενέργεια, όλες οι αλλαγές της διαμόρφωσης θα χαθούν αλλά οι ενδεχόμενες προσαρμογές στο αρχείο SVG θα παραμείνουν ως έχουν.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="329"/>
         <source>Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>Επαναφορά</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="332"/>
         <source>Ctrl+Z</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Z</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="342"/>
         <source>Save this configuration
 (Ctrl+S)</source>
-        <translation type="unfinished"></translation>
+        <translation>Αποθήκευση της διαμόρφωσης
+(Ctrl+S)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="346"/>
         <location filename="../../kvantummanager.ui" line="2160"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Αποθήκευση</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="349"/>
         <source>Ctrl+S</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+S</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="356"/>
         <source>Safe Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Ασφαλείς ρυθμίσεις</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="369"/>
@@ -128,12 +136,12 @@ settings of this theme.
     <message>
         <location filename="../../kvantummanager.ui" line="396"/>
         <source>Transparent Dolphin view</source>
-        <translation type="unfinished"></translation>
+        <translation>Διαφανής προβολή Dolphin</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="424"/>
         <source>Normal font for default push buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>Τυπική γραμματοσειρά εξ ορισμού για τα κουμπιά πίεσης</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="444"/>
@@ -147,12 +155,12 @@ with LXQt Session Settings.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="451"/>
         <source>Transparent sidepane for PCManFM-qt</source>
-        <translation type="unfinished"></translation>
+        <translation>Διαφανής πλευρικό πίνακας για το PCManFM-qt</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="466"/>
         <source>Iconless push buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>Κουμπιά πίεσης άνευ εικονιδίων</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="473"/>
@@ -166,12 +174,12 @@ with LXQt Session Settings.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="480"/>
         <source>Transparent view for PCManFM-qt</source>
-        <translation type="unfinished"></translation>
+        <translation>Διαφανής προβολή για το PCManFM-qt</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="495"/>
         <source>Iconless menus</source>
-        <translation type="unfinished"></translation>
+        <translation>Μενού άνευ εικονιδίων</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="510"/>
@@ -228,7 +236,7 @@ the highlight color!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="588"/>
         <source>Transparent menu title</source>
-        <translation type="unfinished"></translation>
+        <translation>Διαφανής τίτλος μενού</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="651"/>
@@ -241,12 +249,12 @@ the highlight color!</source>
         <location filename="../../kvantummanager.ui" line="1080"/>
         <location filename="../../kvantummanager.ui" line="1113"/>
         <source> %</source>
-        <translation type="unfinished"></translation>
+        <translation> %</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="611"/>
         <source>Respect dark themes</source>
-        <translation type="unfinished"></translation>
+        <translation>Να λαμβάνονται υπόψιν τα σκοτεινά θέματα</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="689"/>
@@ -265,7 +273,7 @@ reduced by other means.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="697"/>
         <source>Opacity of disabled icons:</source>
-        <translation type="unfinished"></translation>
+        <translation>Αδιαφάνεια απενεργοποιημένων εικονιδίων:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="630"/>
@@ -281,12 +289,12 @@ as far as possible.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="637"/>
         <source>Force size grips</source>
-        <translation type="unfinished"></translation>
+        <translation>Εξαναγκασμός λαβών μεγέθους</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="747"/>
         <source>LXQt main menu icon size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Μέγεθος εικονιδίων του κυρίως μενού LXQt:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="762"/>
@@ -300,12 +308,12 @@ as far as possible.</source>
         <location filename="../../kvantummanager.ui" line="1467"/>
         <location filename="../../kvantummanager.ui" line="1502"/>
         <source> px</source>
-        <translation type="unfinished"></translation>
+        <translation> εικ</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="776"/>
         <source>Compositing &amp;&amp; General Look</source>
-        <translation type="unfinished"></translation>
+        <translation>Σύνθεση &amp;&amp; γενική εμφάνιση</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="975"/>
@@ -316,7 +324,7 @@ for windows or the window opacity is reduced (see below).</source>
     <message>
         <location filename="../../kvantummanager.ui" line="993"/>
         <source>Opaque apps:</source>
-        <translation type="unfinished"></translation>
+        <translation>Αδιαφανείς εφαρμογές:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="782"/>
@@ -341,7 +349,7 @@ will be blurred if blurring is enabled.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="535"/>
         <source>No blurring for inactive windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Να μην γίνεται θόλωση των μη ενεργών παραθύρων</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="542"/>
@@ -353,7 +361,7 @@ If this is disabled, see the above option.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="547"/>
         <source>Style vertical toolbars</source>
-        <translation type="unfinished"></translation>
+        <translation>Τεχνοτροπία κατακόρυφων γραμμών εργαλείων</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="595"/>
@@ -425,7 +433,7 @@ or through logging out and in again.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="792"/>
         <source>Disable composite effects</source>
-        <translation type="unfinished"></translation>
+        <translation>Απενεργοποίηση τεχνασμάτων εντυπωσιασμού σύνθεσης</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="801"/>
@@ -444,32 +452,32 @@ Usually, a value of 2 is enough.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="821"/>
         <source>Menu:</source>
-        <translation type="unfinished"></translation>
+        <translation>Μενού:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="828"/>
         <source>Tooltip:</source>
-        <translation type="unfinished"></translation>
+        <translation>Υπόδειξη:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="852"/>
         <source>Contrast Effect</source>
-        <translation type="unfinished"></translation>
+        <translation>Τέχνασμα εντυπωσιασμού αντίθεσης</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="858"/>
         <source>Saturation:</source>
-        <translation type="unfinished"></translation>
+        <translation>Κορεσμός:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="865"/>
         <source>Intensity:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ένταση:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="872"/>
         <source>Contrast:</source>
-        <translation type="unfinished"></translation>
+        <translation>Αντίθεση:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="949"/>
@@ -482,7 +490,7 @@ Automatically checked if window blurring is enabled.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="955"/>
         <source>Blurring for menus and tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>Θόλωση των μενού και των υποδείξεων</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="962"/>
@@ -495,7 +503,7 @@ shadow to menus and tooltips.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="968"/>
         <source>Shadowless menus and tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>Ασκίαστα μενού και υποδείξεις</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="979"/>
@@ -515,12 +523,12 @@ needed for this key to work.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1050"/>
         <source>Reduce window opacity by</source>
-        <translation type="unfinished"></translation>
+        <translation>Μείωση της αδιαφάνειας παραθύρων κατά</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1090"/>
         <source>Reduce menu opacity by</source>
-        <translation type="unfinished"></translation>
+        <translation>Μείωση της αδιαφάνειας μενού κατά</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1128"/>
@@ -573,37 +581,37 @@ windows if this theme distinguishes between them?</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1213"/>
         <source>Sizes &amp;&amp; Delays</source>
-        <translation type="unfinished"></translation>
+        <translation>Μεγέθη &amp;&amp; καθυστερήσεις</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1219"/>
         <source>Sizes</source>
-        <translation type="unfinished"></translation>
+        <translation>Μεγέθη</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1234"/>
         <source>Small icon:</source>
-        <translation type="unfinished"></translation>
+        <translation>Μικρό εικονίδιο:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1272"/>
         <source>Large icon:</source>
-        <translation type="unfinished"></translation>
+        <translation>Μεγάλο εικονίδιο:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1306"/>
         <source>Button icon:</source>
-        <translation type="unfinished"></translation>
+        <translation>Εικονίδιο κουμπιού:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1338"/>
         <source>Toolbar icon:</source>
-        <translation type="unfinished"></translation>
+        <translation>Εικονίδιο γραμμής εργαλείων:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1352"/>
         <source>Font size</source>
-        <translation type="unfinished"></translation>
+        <translation>Μέγεθος γραμματοσειράς</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1368"/>
@@ -615,7 +623,7 @@ some apps set it themeselves.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1372"/>
         <source>Layout spacing:</source>
-        <translation type="unfinished"></translation>
+        <translation>Διαπόσταση διάταξης:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1396"/>
@@ -626,7 +634,7 @@ some apps set it themeselves.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1399"/>
         <source>Layout margin:</source>
-        <translation type="unfinished"></translation>
+        <translation>Περιθώριο διάταξης:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1422"/>
@@ -639,7 +647,7 @@ some apps set it themeselves.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1427"/>
         <source>Submenu overlap: </source>
-        <translation type="unfinished"></translation>
+        <translation>Υπερκάλυψη υπομενού: </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1452"/>
@@ -662,7 +670,7 @@ some apps set it themeselves.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1833"/>
         <source>Click behavior:</source>
-        <translation type="unfinished"></translation>
+        <translation>Συμπεριφορά του κλικ:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1953"/>
@@ -981,12 +989,12 @@ while 0 means no delay.</source>
         <location filename="../../kvantummanager.ui" line="1575"/>
         <location filename="../../kvantummanager.ui" line="1598"/>
         <source> ms</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"> ms</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1631"/>
         <source>Miscellaneous</source>
-        <translation type="unfinished"></translation>
+        <translation>Διάφορα</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1823"/>
@@ -1222,12 +1230,12 @@ the Ctrl key before pressing the button.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2119"/>
         <source>app1,app2,app3</source>
-        <translation type="unfinished"></translation>
+        <translation>εφαρμ1,εφαρμ2,εφαρμ3</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2147"/>
         <source>Remove List</source>
-        <translation type="unfinished"></translation>
+        <translation>Αφαίρεση λίστας</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2154"/>
@@ -1243,12 +1251,12 @@ the Ctrl key before pressing the button.</source>
         <location filename="../../kvantummanager.ui" line="2184"/>
         <location filename="../../kvantummanager.ui" line="2190"/>
         <source>Ctrl+Q</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Q</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2187"/>
         <source>Quit</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Έξοδος</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2200"/>
@@ -1259,17 +1267,17 @@ or update its preview.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2204"/>
         <source>Preview</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Προεπισκόπηση</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2211"/>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Σχετικά</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2234"/>
         <source>What&apos;s This?</source>
-        <translation type="unfinished"></translation>
+        <translation>Τι είναι αυτό;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2237"/>
@@ -1279,7 +1287,7 @@ or update its preview.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2240"/>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Βοήθεια</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="329"/>
@@ -1311,17 +1319,17 @@ or update its preview.</source>
         <location filename="../../KvantumManager.cpp" line="778"/>
         <location filename="../../KvantumManager.cpp" line="2779"/>
         <source>Confirmation</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Επιβεβαίωση</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="739"/>
         <source>%1 installed.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Εγκατεστημένα</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="909"/>
         <source>%1 deleted.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Διαγράφηκε</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="969"/>
@@ -1338,7 +1346,7 @@ or update its preview.</source>
         <location filename="../../KvantumManager.cpp" line="108"/>
         <location filename="../../KvantumManager.cpp" line="114"/>
         <source>Follow Style</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Βάσει τεχνοτροπίας</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="105"/>
@@ -1348,27 +1356,27 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="106"/>
         <source>Double Click</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Διπλό κλικ</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="109"/>
         <source>Icon Only</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Μόνο εικονίδιο</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="110"/>
         <source>Text Only</source>
-        <translation type="unfinished"></translation>
+        <translation>Μόνο κείμενο</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="111"/>
         <source>Text Beside Icon</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Κείμενο δίπλα στο εικονίδιο</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="112"/>
         <source>Text Under Icon</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Κείμενο κάτω απο το εικονίδιο</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="115"/>
@@ -1398,12 +1406,12 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="121"/>
         <source>Titlebar</source>
-        <translation type="unfinished"></translation>
+        <translation>Γραμμή τίτλου</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="122"/>
         <source>Menubar</source>
-        <translation type="unfinished"></translation>
+        <translation>Γραμμή μενού</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="123"/>
@@ -1466,7 +1474,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="615"/>
         <source>Please choose another directory!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Παρακαλώ επιλέξτε έναν άλλο κατάλογο</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="625"/>
@@ -1476,7 +1484,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="626"/>
         <source>Do you want to overwrite it?</source>
-        <translation type="unfinished"></translation>
+        <translation>Επιθυμείτε να το αντικαταστήσετε;</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="661"/>
@@ -1501,7 +1509,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="779"/>
         <source>Do you really want to delete &lt;i&gt;%1&lt;/i&gt;?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Επιθυμείτε πραγματικά την διαγραφή του %1;</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="782"/>
@@ -1523,7 +1531,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="1813"/>
         <source>No description</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Χωρίς περιγραφή</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2266"/>
@@ -1569,7 +1577,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="2975"/>
         <source>Translators</source>
-        <translation type="unfinished"></translation>
+        <translation>Μεταφραστές</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2973"/>
@@ -1584,12 +1592,12 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="51"/>
         <source>modified</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">τροποποιημένος</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="52"/>
         <source>default</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">προκαθορισμένο</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="529"/>
