@@ -3,6 +3,7 @@ V1.0.10
  * Support editable comboboxes not derived from `QComboBox`.
  * Clean drawing of `QDateTimeEdit` with calendar widget (Qt badly draws a lineedit over a combobox).
  * Allow rounded buttons, comboboxes and lineedits for LibreOffice.
+ * Fill the whole rectangle of a colored view-item.
 
 V1.0.9
 ---------

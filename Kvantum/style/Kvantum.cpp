@@ -5145,16 +5145,15 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
                          (option->state & State_Selected) ? "toggled" :
                          (option->state & State_MouseOver) ? "focused"
                          : "normal" : "disabled";
-      if (ivStatus.startsWith(QLatin1String("disabled")) && (option->state & State_Selected))
+      if (ivStatus == "disabled" && (option->state & State_Selected))
       {
         /* Disabled items aren't selectable but Qt Creator wrongly disables
            the headers of a cmake project and let the user select them! */
-        ivStatus.replace(QLatin1String("disabled"),QLatin1String("pressed"));
+        ivStatus = "pressed";
       }
-      else if (ivStatus.startsWith(QLatin1String("focused"))
-               && isCursorOutsideWidget(widget)) // hover bug
+      else if (ivStatus == "focused" && isCursorOutsideWidget(widget)) // hover bug
       {
-        ivStatus.replace(QLatin1String("focused"),QLatin1String("normal"));
+        ivStatus = "normal";
       }
       bool isInactive(isWidgetInactive(widget));
 
@@ -5266,31 +5265,12 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           }
         }
         if (opt->backgroundBrush.style() != Qt::NoBrush
-            && !ivStatus.startsWith(QLatin1String("pressed")) && !ivStatus.startsWith(QLatin1String("toggled")))
+            && ivStatus != "pressed" && ivStatus != "toggled")
         {
           /* In this case, the item is colored intentionally.
              However, since QCommonStyle excludes the selected states, we did so too. */
-          fspec.expansion = 0;
-          /*if (opt->state & State_HasFocus)
-            renderFrame(painter,option->rect,fspec,fspec.element+"-pressed",0,0,0,0,0,fspec.isAttached,true);
-          else*/ if (ivStatus != "normal" && ivStatus != "disabled")
-          {
-            if (isWidgetInactive(widget))
-              ivStatus.append("-inactive");
-            renderFrame(painter,option->rect,fspec,fspec.element+"-"+ivStatus,0,0,0,0,0,fspec.isAttached,true);
-          }
           QBrush brush = opt->backgroundBrush;
           QColor col = brush.color();
-          //if ((ivStatus.startsWith("pressed") || ivStatus.startsWith("toggled"))
-              //&& !enoughContrast(col, opt->palette.color(QPalette::HighlightedText)))
-          //{
-            /* Wireshark sets the whole color of "QStyleOptionViewItem::backgroundBrush".
-               While there's no guarantee for a high contrast between that color and the
-               highlighted text color for active items, Wireshark doesn't style active
-               items itself. This workaround is for such cases of incomplete hard-coded styling. */
-            //col = opt->palette.brush(QPalette::Active, QPalette::Highlight).color();
-           // brush.setColor(col);
-          //}
           if (col.alpha() < 255)
           {
             /* this is for deciding on the text color at CE_ItemViewItem later */
@@ -5299,8 +5279,16 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           }
           QPointF oldBO = painter->brushOrigin();
           painter->setBrushOrigin(opt->rect.topLeft()); // sometimes needed (as in Basket)
-          painter->fillRect(interiorRect(opt->rect,fspec), brush);
+          painter->fillRect(opt->rect, brush);
           painter->setBrushOrigin(oldBO);
+
+          if (ivStatus == "focused")
+          {
+            if (isWidgetInactive(widget))
+              ivStatus.append("-inactive");
+            fspec.expansion = 0;
+            renderFrame(painter,option->rect,fspec,fspec.element+"-"+ivStatus,0,0,0,0,0,fspec.isAttached,true);
+          }
           break;
         }
         else if (indx.isValid() && !(indx.flags() & Qt::ItemIsEditable)
