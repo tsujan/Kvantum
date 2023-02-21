@@ -219,7 +219,7 @@ text.normal.color=white
 text.focus.color=white
 text.toggle.color=black
 min_width=4font
-min_height=1.87font
+min_height=1.4font
 
 [TabFrame]
 inherits=PanelButtonCommand

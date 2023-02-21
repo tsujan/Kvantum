@@ -1324,12 +1324,12 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="739"/>
         <source>%1 installed.</source>
-        <translation type="unfinished">Εγκατεστημένα</translation>
+        <translation type="unfinished">%1 Εγκατεστημένα.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="909"/>
         <source>%1 deleted.</source>
-        <translation type="unfinished">Διαγράφηκε</translation>
+        <translation type="unfinished">%1 Διαγράφηκε.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="969"/>

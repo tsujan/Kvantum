@@ -245,7 +245,7 @@ indicator.size=14
 text.normal.color=black
 text.focus.color=black
 min_width=4font
-min_height=1.87font
+min_height=1.6font
 
 [TabFrame]
 inherits=PanelButtonCommand
