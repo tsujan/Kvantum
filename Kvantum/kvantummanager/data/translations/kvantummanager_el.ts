@@ -58,7 +58,7 @@ Kvantum can use in addition to its own themes.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="191"/>
         <source>Delete this theme</source>
-        <translation type="unfinished">Διαγραφή θέματος</translation>
+        <translation>Διαγραφή του θέματος</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="198"/>
