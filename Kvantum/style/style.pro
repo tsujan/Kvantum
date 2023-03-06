@@ -32,7 +32,17 @@ VERSION = 0.1
 
 greaterThan(QT_MAJOR_VERSION, 4) {
   lessThan(QT_MAJOR_VERSION, 6) {
-    QT += KWindowSystem
+    contains(WITHOUT_KF, YES) {
+      DEFINES += NO_KF
+      message("Compiling without KDE Frameworks...")
+    } else {
+      QT += KWindowSystem
+    }
+  } else {
+    contains(WITHOUT_KF, YES) {
+      DEFINES += NO_KF
+      message("Compiling without KDE Frameworks...")
+    }
   }
   SOURCES += Kvantum.cpp \
              eventFiltering.cpp \

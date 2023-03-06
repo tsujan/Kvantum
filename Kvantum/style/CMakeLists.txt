@@ -9,7 +9,9 @@ if(NOT ENABLE_QT4)
   else()
     set(QT_VERSION_MAJOR 5)
     find_package(Qt5 "${QT5_MINIMUM_VERSION}" REQUIRED COMPONENTS Core Gui Widgets Svg X11Extras)
-    find_package(KF5WindowSystem "${KF5_MINIMUM_VERSION}" REQUIRED)
+    if(NOT WITHOUT_KF)
+      find_package(KF5WindowSystem "${KF5_MINIMUM_VERSION}" REQUIRED)
+    endif()
   endif()
 else()
   find_package(Qt4 4.8.7 REQUIRED)
@@ -66,6 +68,10 @@ else()
 endif()
 
 add_definitions(-DDATADIR="${CMAKE_INSTALL_PREFIX}/share")
+
+if(WITHOUT_KF)
+  add_definitions(-DNO_KF)
+endif()
 
 if(NOT ENABLE_QT4)
   if(QT_VERSION_MAJOR EQUAL 6)
@@ -125,15 +131,23 @@ if(NOT ENABLE_QT4)
                                   ${Qt6Widgets_LIBRARIES}
                                   ${Qt6Svg_LIBRARIES}
                                   ${X11_LIBRARIES})
-
   else()
-    target_link_libraries(kvantum ${Qt5Core_LIBRARIES}
-                                  ${Qt5Gui_LIBRARIES}
-                                  ${Qt5Widgets_LIBRARIES}
-                                  ${Qt5Svg_LIBRARIES}
-                                  ${Qt5X11Extras_LIBRARIES}
-                                  ${X11_LIBRARIES}
-                                  KF5::WindowSystem)
+    if(WITHOUT_KF)
+      target_link_libraries(kvantum ${Qt5Core_LIBRARIES}
+                                    ${Qt5Gui_LIBRARIES}
+                                    ${Qt5Widgets_LIBRARIES}
+                                    ${Qt5Svg_LIBRARIES}
+                                    ${Qt5X11Extras_LIBRARIES}
+                                    ${X11_LIBRARIES})
+    else()
+      target_link_libraries(kvantum ${Qt5Core_LIBRARIES}
+                                    ${Qt5Gui_LIBRARIES}
+                                    ${Qt5Widgets_LIBRARIES}
+                                    ${Qt5Svg_LIBRARIES}
+                                    ${Qt5X11Extras_LIBRARIES}
+                                    ${X11_LIBRARIES}
+                                    KF5::WindowSystem)
+    endif()
   endif()
 else()
   target_link_libraries(kvantum ${QT_QTCORE_LIBRARY}

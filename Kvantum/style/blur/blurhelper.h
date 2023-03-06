@@ -116,6 +116,12 @@ class BlurHelper: public QObject
     qreal contrast_, intensity_, saturation_;
 
     bool onlyActiveWindow_;
+
+#ifdef NO_KF
+    /* The required atom. */
+    Atom atom_blur_;
+    bool isX11_;
+#endif
 };
 }
 

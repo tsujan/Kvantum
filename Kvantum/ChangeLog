@@ -4,6 +4,7 @@ V1.0.10
  * Clean drawing of `QDateTimeEdit` with calendar widget (Qt badly draws a lineedit over a combobox).
  * Allow rounded buttons, comboboxes and lineedits for LibreOffice.
  * Fill the whole rectangle of a colored view-item.
+ * Allow compilation without KDE Frameworks (KWin's blur effect will be enabled only under X11 and the contrast effect will be disabled).
 
 V1.0.9
 ---------

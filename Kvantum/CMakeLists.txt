@@ -8,6 +8,7 @@ if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
 endif()
 
 option(ENABLE_QT4 "Building Qt4 plugin." OFF)
+option(WITHOUT_KF "Compiling without KDE Frameworks..." OFF)
 option(ENABLE_QT5 "Building Qt5 plugin." ON)
 
 add_subdirectory(style)

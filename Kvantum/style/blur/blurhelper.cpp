@@ -22,8 +22,18 @@
 #include <QFrame>
 #include <QWindow>
 
+#ifdef NO_KF
+#if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
+#include <QVector>
+#include <QX11Info>
+#endif
+#include <QApplication>
+#include <X11/Xlib.h>
+#include <X11/Xatom.h>
+#else
 #if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
 #include <KWindowEffects>
+#endif
 #endif
 
 namespace Kvantum {
@@ -32,6 +42,23 @@ BlurHelper::BlurHelper (QObject* parent, QList<qreal> menuS, QList<qreal> toolti
                         qreal contrast, qreal intensity, qreal saturation,
                         bool onlyActiveWindow) : QObject (parent)
 {
+#ifdef NO_KF
+  isX11_ = (QString::compare(QGuiApplication::platformName(), "xcb", Qt::CaseInsensitive) == 0);
+  if (isX11_)
+  {
+#if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
+    atom_blur_ = XInternAtom (QX11Info::display(), "_KDE_NET_WM_BLUR_BEHIND_REGION", False);
+#else
+    if (auto x11NativeInterfce = qApp->nativeInterface<QNativeInterface::QX11Application>())
+      atom_blur_ = XInternAtom (x11NativeInterfce->display(), "_KDE_NET_WM_BLUR_BEHIND_REGION", False);
+    else
+      atom_blur_ = None;
+#endif
+  }
+  else
+    atom_blur_ = None;
+#endif
+
   contrast_ = qBound (static_cast<qreal>(0), contrast, static_cast<qreal>(2));
   intensity_ = qBound (static_cast<qreal>(0), intensity, static_cast<qreal>(2));
   saturation_ = qBound (static_cast<qreal>(0), saturation, static_cast<qreal>(2));
@@ -134,12 +161,23 @@ static inline int ceilingInt (const qreal r)
 
 QRegion BlurHelper::blurRegion (QWidget* widget) const
 {
-  if (!widget->isVisible()) return QRegion();
+  if (!widget->isVisible())
+    return QRegion();
 
-  if (onlyActiveWindow_ && !isWidgetActive (widget)) return QRegion();
+  if (onlyActiveWindow_ && !isWidgetActive (widget))
+    return QRegion();
 
   QRect rect = widget->rect();
   QRegion wMask = widget->mask();
+
+  qreal dpr = 1;
+#ifdef NO_KF
+  if (isX11_)
+  {
+    QWindow *win = widget->window()->windowHandle();
+    dpr = win ? win->devicePixelRatio() : qApp->devicePixelRatio();
+  }
+#endif
 
   /* blurring may not be suitable when the available
      painting area is restricted by a widget mask */
@@ -147,7 +185,14 @@ QRegion BlurHelper::blurRegion (QWidget* widget) const
   {
     if (wMask != QRegion(rect))
       return QRegion();
+#ifdef NO_KF
+    QRect mr = wMask.boundingRect();
+    if (dpr > static_cast<qreal>(1))
+      mr.setSize (QSizeF(mr.size() * dpr).toSize());
+    return mr;
+#else
     return wMask;
+#endif
   }
 
   QList<qreal> r;
@@ -170,12 +215,20 @@ QRegion BlurHelper::blurRegion (QWidget* widget) const
     radius = toolTipBlurRadius_;
   }
 
+#ifdef NO_KF
+  if (dpr > static_cast<qreal>(1))
+  {
+    rect.setSize (QSizeF(rect.size() * dpr).toSize());
+    radius *= qRound (dpr * 2);
+  }
+#endif
+
   if (!r.isEmpty())
   {
-    rect.adjust (ceilingInt (r.at (0)),
-                 ceilingInt (r.at (1)),
-                 -ceilingInt (r.at (2)),
-                 -ceilingInt (r.at (3)));
+    rect.adjust (ceilingInt (dpr * r.at (0)),
+                 ceilingInt (dpr * r.at (1)),
+                 -ceilingInt (dpr * r.at (2)),
+                 -ceilingInt (dpr * r.at (3)));
   }
 
   if (radius > 0)
@@ -205,7 +258,15 @@ QRegion BlurHelper::blurRegion (QWidget* widget) const
 /*************************/
 void BlurHelper::update (QWidget* widget) const
 {
-#if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
+#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+#ifdef NO_KF
+  if (!isX11_)
+    return;
+#else
+  return;
+#endif
+#endif
+
   QWindow *win = widget->windowHandle();
   if (win == nullptr)
     return;
@@ -215,6 +276,29 @@ void BlurHelper::update (QWidget* widget) const
     clear (widget);
   else
   {
+#ifdef NO_KF
+    if (!widget->internalWinId())
+      return;
+    Display *display = nullptr;
+#if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
+    QVector<unsigned long> data;
+    display = QX11Info::display();
+#else
+    QList<unsigned long> data;
+    if (auto x11NativeInterfce = qApp->nativeInterface<QNativeInterface::QX11Application>())
+      display = x11NativeInterfce->display();
+#endif
+    if (display == nullptr)
+      return;
+    for (QRegion::const_iterator it = region.begin(); it != region.end(); ++ it)
+    {
+      data << (*it).x() << (*it).y() << (*it).width() << (*it).height();
+    }
+    XChangeProperty (display, widget->internalWinId(),
+                     atom_blur_, XA_CARDINAL, 32, PropModeReplace,
+                     reinterpret_cast<const unsigned char *>(data.constData()),
+                     data.size());
+#elif (QT_VERSION < QT_VERSION_CHECK(6,0,0))
     KWindowEffects::enableBlurBehind (win, true, region);
     /* NOTE: The contrast effect isn't used with menus and tooltips
              because their borders may be anti-aliased. */
@@ -230,16 +314,37 @@ void BlurHelper::update (QWidget* widget) const
                                                 contrast_, intensity_, saturation_,
                                                 region);
     }
+
+#endif
   }
   // force update
   if (widget->isVisible())
     widget->update();
-#endif
 }
 /*************************/
 void BlurHelper::clear (QWidget* widget) const
 {
+#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+#ifdef NO_KF
+  if (!isX11_)
+    return;
+#else
+  Q_UNUSED (widget)
+  return;
+#endif
+#endif
+
+#ifdef NO_KF
+  Display *display = nullptr;
 #if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
+  display = QX11Info::display();
+#else
+  if (auto x11NativeInterfce = qApp->nativeInterface<QNativeInterface::QX11Application>())
+    display = x11NativeInterfce->display();
+#endif
+  if (display && widget->internalWinId())
+    XDeleteProperty (display, widget->internalWinId(), atom_blur_);
+#elif (QT_VERSION < QT_VERSION_CHECK(6,0,0))
   QWindow *win = widget->windowHandle();
   if (win != nullptr)
   {
