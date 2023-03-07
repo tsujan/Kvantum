@@ -296,7 +296,7 @@ void BlurHelper::update (QWidget* widget) const
     }
     XChangeProperty (display, widget->internalWinId(),
                      atom_blur_, XA_CARDINAL, 32, PropModeReplace,
-                     reinterpret_cast<const unsigned char *>(data.constData()),
+                     reinterpret_cast<const unsigned char*>(data.constData()),
                      data.size());
 #elif (QT_VERSION < QT_VERSION_CHECK(6,0,0))
     KWindowEffects::enableBlurBehind (win, true, region);
@@ -314,7 +314,6 @@ void BlurHelper::update (QWidget* widget) const
                                                 contrast_, intensity_, saturation_,
                                                 region);
     }
-
 #endif
   }
   // force update

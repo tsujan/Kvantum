@@ -1092,11 +1092,8 @@ void Style::renderLabel(
           painter->save();
           if (lspec.a < 255)
             shadowColor.setAlpha(lspec.a);
-          //if (hspec_.opaque_colors)
-          //{
-            painter->setOpacity(shadowColor.alphaF());
-            shadowColor.setAlpha(255);
-          //}
+          painter->setOpacity(shadowColor.alphaF());
+          shadowColor.setAlpha(255);
           painter->setPen(shadowColor);
           for (int i=0; i<lspec.depth; i++)
           {
@@ -1110,11 +1107,8 @@ void Style::renderLabel(
       }
 
       painter->save();
-      //if (hspec_.opaque_colors)
-      //{
-        painter->setOpacity(txtCol.alphaF());
-        txtCol.setAlpha(255);
-      //}
+      painter->setOpacity(txtCol.alphaF());
+      txtCol.setAlpha(255);
       painter->setPen(txtCol);
       painter->drawText(rtext,talign,text);
       painter->restore();
@@ -1136,11 +1130,8 @@ void Style::renderLabel(
     {
       painter->save();
       normalColor.setAlpha(102); // 0.4 * normalColor.alpha()
-      //if (hspec_.opaque_colors)
-      //{
-        painter->setOpacity(normalColor.alphaF());
-        normalColor.setAlpha(255);
-      //}
+      painter->setOpacity(normalColor.alphaF());
+      normalColor.setAlpha(255);
       painter->setPen(normalColor);
       painter->drawText(rtext,talign,text);
       painter->restore();

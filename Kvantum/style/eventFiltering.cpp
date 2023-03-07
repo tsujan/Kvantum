@@ -347,10 +347,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
             col = getFromRGBA(lspec.normalColor);
         }
         if (col.isValid())
-        {
-          opacifyColor(col);
           pPalette.setColor(QPalette::ButtonText, col);
-        }
 
         /* icon */
         if (!cbtn->icon().isNull())
@@ -846,8 +843,6 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       QColor col = getFromRGBA(lspec.normalColor);
       if (!col.isValid())
         col = standardPalette().color(QPalette::Active,QPalette::Text);
-      else
-        opacifyColor(col);
       if (palette.color(QPalette::Inactive, QPalette::Text) != col)
       {
         _forcePalette = true;
@@ -862,7 +857,6 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       /* set the toggled inactive text color to the toggled active one
          (the main purpose of installing an event filter on the view) */
       col = getFromRGBA(lspec.toggleColor);
-      opacifyColor(col);
       if (palette.color(QPalette::Inactive, QPalette::HighlightedText) != col)
       {
         _forcePalette = true;
@@ -900,8 +894,6 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       QColor col = getFromRGBA(lspec.normalInactiveColor);
       if (!col.isValid())
         col = standardPalette().color(QPalette::Inactive,QPalette::Text);
-      else
-        opacifyColor(col);
       if (palette.color(QPalette::Inactive, QPalette::Text) != col)
       {
         _forcePalette = true;
@@ -915,7 +907,6 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       }
       /* restore the toggled inactive text color (which was changed at QEvent::WindowActivate) */
       col = getFromRGBA(lspec.toggleInactiveColor);
-      opacifyColor(col);
       if (palette.color(QPalette::Inactive,QPalette::HighlightedText) != col)
       {
         _forcePalette = true;
@@ -1262,8 +1253,6 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           QColor col = getFromRGBA(lspec.normalInactiveColor);
           if (!col.isValid())
             col = standardPalette().color(QPalette::Inactive,QPalette::Text);
-          else
-            opacifyColor(col);
           if (palette.color(QPalette::Inactive, QPalette::Text) != col)
           {
             _forcePalette = true;
@@ -1276,7 +1265,6 @@ bool Style::eventFilter(QObject *o, QEvent *e)
             break;
           }
           col = getFromRGBA(lspec.toggleInactiveColor);
-          opacifyColor(col);
           if (palette.color(QPalette::Inactive,QPalette::HighlightedText) != col)
           {
             _forcePalette = true;
@@ -1297,8 +1285,6 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           QColor col = getFromRGBA(lspec.normalColor);
           if (!col.isValid())
             col = standardPalette().color(QPalette::Active,QPalette::Text);
-          else
-            opacifyColor(col);
           if (palette.color(QPalette::Inactive, QPalette::Text) != col)
           {
             _forcePalette = true;
@@ -1311,7 +1297,6 @@ bool Style::eventFilter(QObject *o, QEvent *e)
             break;
           }
           col = getFromRGBA(lspec.toggleColor);
-          opacifyColor(col);
           if (palette.color(QPalette::Inactive, QPalette::HighlightedText) != col)
           {
             _forcePalette = true;
@@ -1381,22 +1366,18 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       if (enoughContrast(col, standardPalette().color(QPalette::Active,QPalette::Text)))
       {
         QColor col1 = col;
-        opacifyColor(col1);
         QPalette palette = w->palette();
         palette.setColor(QPalette::Active, QPalette::Text, col1);
         if (!tspec_.no_inactiveness)
         {
           col1 = getFromRGBA(tlspec.normalInactiveColor);
           if (!col1.isValid()) col1 = col;
-          opacifyColor(col1);
         }
         palette.setColor(QPalette::Inactive, QPalette::Text, col1);
         col1 = col; // placeholder
         col1.setAlpha(128);
-        opacifyColor(col1);
         palette.setColor(QPalette::PlaceholderText, col1);
         col.setAlpha(102); // 0.4 * col.alpha()
-        opacifyColor(col);
         palette.setColor(QPalette::Disabled, QPalette::Text,col);
         forcePalette(w, palette);
         /* also correct the color of the symbolic clear icon (-> CE_ToolBar) */

@@ -14,6 +14,7 @@ if(NOT ENABLE_QT4)
     endif()
   endif()
 else()
+  set(QT_VERSION_MAJOR 4)
   find_package(Qt4 4.8.7 REQUIRED)
 
   include(${QT_USE_FILE})
