@@ -33,33 +33,31 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 #set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} ${QT_CMAKE_PREFIX_PATH})
 #set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules/")
 
-if(NOT ENABLE_QT4)
-  if(QT_VERSION_MAJOR EQUAL 6)
-    get_target_property(REAL_QMAKE_EXECUTABLE Qt6::qmake
-                        IMPORTED_LOCATION)
-    execute_process(COMMAND "${REAL_QMAKE_EXECUTABLE}" -query QT_INSTALL_PLUGINS
-                    OUTPUT_VARIABLE _Qt6_PLUGIN_INSTALL_DIR
-                    ERROR_QUIET OUTPUT_STRIP_TRAILING_WHITESPACE)
-    set(KVANTUM_STYLE_DIR "${_Qt6_PLUGIN_INSTALL_DIR}/styles/")
+if(QT_VERSION_MAJOR EQUAL 6)
+  get_target_property(REAL_QMAKE_EXECUTABLE Qt6::qmake
+                      IMPORTED_LOCATION)
+  execute_process(COMMAND "${REAL_QMAKE_EXECUTABLE}" -query QT_INSTALL_PLUGINS
+                  OUTPUT_VARIABLE _Qt6_PLUGIN_INSTALL_DIR
+                  ERROR_QUIET OUTPUT_STRIP_TRAILING_WHITESPACE)
+  set(KVANTUM_STYLE_DIR "${_Qt6_PLUGIN_INSTALL_DIR}/styles/")
 
-    include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}
-                        ${Qt6Core_INCLUDE_DIRS} ${Qt6Widgets_INCLUDE_DIRS}
-                        ${Qt6Gui_INCLUDE_DIRS} ${Qt6Svg_INCLUDE_DIRS}
-                        ${X11_INCLUDE_DIR})
-  else()
-    get_target_property(REAL_QMAKE_EXECUTABLE ${Qt5Core_QMAKE_EXECUTABLE}
-                        IMPORTED_LOCATION)
-    execute_process(COMMAND "${REAL_QMAKE_EXECUTABLE}" -query QT_INSTALL_PLUGINS
-                    OUTPUT_VARIABLE _Qt5_PLUGIN_INSTALL_DIR
-                    ERROR_QUIET OUTPUT_STRIP_TRAILING_WHITESPACE)
-    set(KVANTUM_STYLE_DIR "${_Qt5_PLUGIN_INSTALL_DIR}/styles/")
+  include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}
+                      ${Qt6Core_INCLUDE_DIRS} ${Qt6Widgets_INCLUDE_DIRS}
+                      ${Qt6Gui_INCLUDE_DIRS} ${Qt6Svg_INCLUDE_DIRS}
+                      ${X11_INCLUDE_DIR})
+elseif(QT_VERSION_MAJOR EQUAL 5)
+  get_target_property(REAL_QMAKE_EXECUTABLE ${Qt5Core_QMAKE_EXECUTABLE}
+                      IMPORTED_LOCATION)
+  execute_process(COMMAND "${REAL_QMAKE_EXECUTABLE}" -query QT_INSTALL_PLUGINS
+                  OUTPUT_VARIABLE _Qt5_PLUGIN_INSTALL_DIR
+                  ERROR_QUIET OUTPUT_STRIP_TRAILING_WHITESPACE)
+  set(KVANTUM_STYLE_DIR "${_Qt5_PLUGIN_INSTALL_DIR}/styles/")
 
-    include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}
-                        ${Qt5Core_INCLUDE_DIRS} ${Qt5Widgets_INCLUDE_DIRS}
-                        ${Qt5Gui_INCLUDE_DIRS} ${Qt5Svg_INCLUDE_DIRS}
-                        ${Qt5X11Extras_INCLUDE_DIRS}
-                        ${X11_INCLUDE_DIR})
-  endif()
+  include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}
+                      ${Qt5Core_INCLUDE_DIRS} ${Qt5Widgets_INCLUDE_DIRS}
+                      ${Qt5Gui_INCLUDE_DIRS} ${Qt5Svg_INCLUDE_DIRS}
+                      ${Qt5X11Extras_INCLUDE_DIRS}
+                      ${X11_INCLUDE_DIR})
 else()
   set(KVANTUM_STYLE_DIR "${QT_PLUGINS_DIR}/styles/")
 
@@ -74,36 +72,20 @@ if(WITHOUT_KF)
   add_definitions(-DNO_KF)
 endif()
 
-if(NOT ENABLE_QT4)
-  if(QT_VERSION_MAJOR EQUAL 6)
-    set(kvantum_SOURCES
-        Kvantum.cpp
-        eventFiltering.cpp
-        polishing.cpp
-        rendering.cpp
-        standardIcons.cpp
-        viewItems.cpp
-        KvantumPlugin.cpp
-        shortcuthandler.cpp
-        blur/blurhelper.cpp
-        drag/windowmanager.cpp
-        themeconfig/ThemeConfig.cpp
-        animation/animation.cpp)
-  else()
-    set(kvantum_SOURCES
-        Kvantum.cpp
-        eventFiltering.cpp
-        polishing.cpp
-        rendering.cpp
-        standardIcons.cpp
-        viewItems.cpp
-        KvantumPlugin.cpp
-        shortcuthandler.cpp
-        blur/blurhelper.cpp
-        drag/windowmanager.cpp
-        themeconfig/ThemeConfig.cpp
-        animation/animation.cpp)
-  endif()
+if(QT_VERSION_MAJOR GREATER 4)
+  set(kvantum_SOURCES
+      Kvantum.cpp
+      eventFiltering.cpp
+      polishing.cpp
+      rendering.cpp
+      standardIcons.cpp
+      viewItems.cpp
+      KvantumPlugin.cpp
+      shortcuthandler.cpp
+      blur/blurhelper.cpp
+      drag/windowmanager.cpp
+      themeconfig/ThemeConfig.cpp
+      animation/animation.cpp)
 else()
   set(kvantum_SOURCES
       qt4/Kvantum4.cpp
@@ -125,30 +107,28 @@ else()
   set(KDE_COLOR_DIR "${CMAKE_INSTALL_PREFIX}/share/kde4/apps/color-schemes/")
 endif()
 
-if(NOT ENABLE_QT4)
-  if(QT_VERSION_MAJOR EQUAL 6)
-    target_link_libraries(kvantum ${Qt6Core_LIBRARIES}
-                                  ${Qt6Gui_LIBRARIES}
-                                  ${Qt6Widgets_LIBRARIES}
-                                  ${Qt6Svg_LIBRARIES}
+if(QT_VERSION_MAJOR EQUAL 6)
+  target_link_libraries(kvantum ${Qt6Core_LIBRARIES}
+                                ${Qt6Gui_LIBRARIES}
+                                ${Qt6Widgets_LIBRARIES}
+                                ${Qt6Svg_LIBRARIES}
+                                ${X11_LIBRARIES})
+elseif(QT_VERSION_MAJOR EQUAL 5)
+  if(WITHOUT_KF)
+    target_link_libraries(kvantum ${Qt5Core_LIBRARIES}
+                                  ${Qt5Gui_LIBRARIES}
+                                  ${Qt5Widgets_LIBRARIES}
+                                  ${Qt5Svg_LIBRARIES}
+                                  ${Qt5X11Extras_LIBRARIES}
                                   ${X11_LIBRARIES})
   else()
-    if(WITHOUT_KF)
-      target_link_libraries(kvantum ${Qt5Core_LIBRARIES}
-                                    ${Qt5Gui_LIBRARIES}
-                                    ${Qt5Widgets_LIBRARIES}
-                                    ${Qt5Svg_LIBRARIES}
-                                    ${Qt5X11Extras_LIBRARIES}
-                                    ${X11_LIBRARIES})
-    else()
-      target_link_libraries(kvantum ${Qt5Core_LIBRARIES}
-                                    ${Qt5Gui_LIBRARIES}
-                                    ${Qt5Widgets_LIBRARIES}
-                                    ${Qt5Svg_LIBRARIES}
-                                    ${Qt5X11Extras_LIBRARIES}
-                                    ${X11_LIBRARIES}
-                                    KF5::WindowSystem)
-    endif()
+    target_link_libraries(kvantum ${Qt5Core_LIBRARIES}
+                                  ${Qt5Gui_LIBRARIES}
+                                  ${Qt5Widgets_LIBRARIES}
+                                  ${Qt5Svg_LIBRARIES}
+                                  ${Qt5X11Extras_LIBRARIES}
+                                  ${X11_LIBRARIES}
+                                  KF5::WindowSystem)
   endif()
 else()
   target_link_libraries(kvantum ${QT_QTCORE_LIBRARY}

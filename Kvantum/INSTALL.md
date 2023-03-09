@@ -163,7 +163,7 @@ Open a terminal inside this folder and issue the following commands:
     cmake ..
     make
 
-If you want to install Kvantum in a nonstandard path (which is not recommended), you could add the option `-DCMAKE_INSTALL_PREFIX=YOUR_SELECTED_PATH` to the `cmake` command.
+In some distros, you may need to be more explicit and use `cmake .. -DCMAKE_INSTALL_PREFIX=/usr` for installing Kvantum under `/usr`, in contrast to `/usr/local`. The latter place may not be good in Linux distros and could cause troubles later.
 
 NOTE: Experimental compilation of Kvantum's plugin against Qt6 can be done with `cmake .. -DENABLE_QT5=OFF`. For now, it lacks blurring support (which requires version 6 of `kwindowsystem`). When Qt6 becomes the default version of Qt in some distros, that compilation option will be set to `OFF` by default and all components of Kvantum will be compiled against Qt6.
 

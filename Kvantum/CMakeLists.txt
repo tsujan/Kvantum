@@ -1,5 +1,5 @@
 project(kvantum)
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.1.0)
 set(CMAKE_BUILD_TYPE Release)
 add_definitions (-Wall)
 
