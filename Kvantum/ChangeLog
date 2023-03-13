@@ -5,6 +5,7 @@ V1.0.10
  * Allow rounded buttons, comboboxes and lineedits for LibreOffice.
  * Fill the whole rectangle of a colored view-item.
  * Allow compilation without KDE Frameworks (KWin's blur effect will be enabled only under X11 and the contrast effect will be disabled).
+ * Removed Openbox themes (Openbox's development stopped years ago).
 
 V1.0.9
 ---------
