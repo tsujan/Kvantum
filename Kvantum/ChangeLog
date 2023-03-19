@@ -6,6 +6,7 @@ V1.0.10
  * Fill the whole rectangle of a colored view-item.
  * Allow compilation without KDE Frameworks (KWin's blur effect will be enabled only under X11 and the contrast effect will be disabled).
  * Removed Openbox themes (Openbox's development stopped years ago).
+ * Ensure enough contrast for texts of menubar corner widgets.
 
 V1.0.9
 ---------

@@ -6195,6 +6195,68 @@ void Style::drawControl(QStyle::ControlElement element,
           r.adjust(0,0,0,th);
         }
 
+        const label_spec lspec1 = getLabelSpec(group);
+
+        /* set the palettes of corner widgets if needed */
+        if (const QMenuBar *mb = qobject_cast<const QMenuBar*>(widget))
+        {
+          QList<QWidget*> cornerWidgets;
+          if (QWidget *r = mb->cornerWidget())
+          {
+            if (!qobject_cast<QToolButton*>(r)) // flat toolbuttons are dealt with at CE_ToolButtonLabel
+              cornerWidgets << r;
+          }
+          if (QWidget *l = mb->cornerWidget(Qt::TopLeftCorner))
+          {
+            if (!qobject_cast<QToolButton*>(l))
+              cornerWidgets << l;
+          }
+          if (!cornerWidgets.isEmpty())
+          {
+            QColor txtCol = getFromRGBA(lspec1.normalColor);
+            if (txtCol.isValid()
+                && txtCol != standardPalette().color(QPalette::Active,QPalette::WindowText))
+            {
+              QColor inactiveTxtCol, disabledTxtCol, pTxtCol;
+              for (QWidget *cw : cornerWidgets)
+              {
+                QPalette palette = cw->palette();
+                if (palette.color(QPalette::Active, QPalette::WindowText) != txtCol)
+                {
+                  if (!inactiveTxtCol.isValid())
+                  {
+                    if (tspec_.no_inactiveness)
+                      inactiveTxtCol = txtCol;
+                    else
+                    {
+                      inactiveTxtCol = getFromRGBA(lspec1.normalInactiveColor);
+                      if (!inactiveTxtCol.isValid()) inactiveTxtCol = txtCol;
+                    }
+                    disabledTxtCol = txtCol;
+                    disabledTxtCol.setAlpha(102); // 0.4 * disabledTxtCol.alpha()
+                    pTxtCol = txtCol; // placeholder
+                    pTxtCol.setAlpha(128);
+                  }
+                  palette.setColor(QPalette::Active, QPalette::WindowText, txtCol);
+                  palette.setColor(QPalette::Inactive, QPalette::WindowText, inactiveTxtCol);
+                  palette.setColor(QPalette::Disabled, QPalette::WindowText, disabledTxtCol);
+                  palette.setColor(QPalette::Active, QPalette::ButtonText, txtCol);
+                  palette.setColor(QPalette::Inactive, QPalette::ButtonText, inactiveTxtCol);
+                  palette.setColor(QPalette::Disabled, QPalette::ButtonText, disabledTxtCol);
+                  if (qobject_cast<QLabel*>(cw))
+                  {
+                    palette.setColor(QPalette::Active, QPalette::Text, txtCol);
+                    palette.setColor(QPalette::Inactive, QPalette::Text, inactiveTxtCol);
+                    palette.setColor(QPalette::Disabled, QPalette::Text, disabledTxtCol);
+                    palette.setColor(QPalette::PlaceholderText, pTxtCol);
+                  }
+                  forcePalette(cw, palette);
+                }
+              }
+            }
+          }
+        }
+
         frame_spec fspec = getFrameSpec(group);
         if (tspec_.merge_menubar_with_toolbar && group != "Toolbar")
         {
@@ -6264,7 +6326,6 @@ void Style::drawControl(QStyle::ControlElement element,
         }
         else // always get normal color from menubar (or toolbar if they're merged)
         {
-          const label_spec lspec1 = getLabelSpec(group);
           lspec.normalColor = lspec1.normalColor;
           lspec.normalInactiveColor = lspec1.normalInactiveColor;
         }
