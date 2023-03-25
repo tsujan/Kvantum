@@ -262,13 +262,11 @@ QRegion BlurHelper::blurRegion (QWidget* widget) const
 /*************************/
 void BlurHelper::update (QWidget* widget) const
 {
-#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
 #ifdef NO_KF
   if (!isX11_)
     return;
-#else
+#elif (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
   return;
-#endif
 #endif
 
   QWindow *win = widget->windowHandle();
@@ -327,14 +325,12 @@ void BlurHelper::update (QWidget* widget) const
 /*************************/
 void BlurHelper::clear (QWidget* widget) const
 {
-#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
 #ifdef NO_KF
   if (!isX11_)
     return;
-#else
+#elif (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
   Q_UNUSED (widget)
   return;
-#endif
 #endif
 
 #ifdef NO_KF
