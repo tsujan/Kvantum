@@ -103,7 +103,11 @@ bool BlurHelper::isWidgetActive (const QWidget *widget) const
 {
   return (widget->window()->windowFlags().testFlag(Qt::WindowDoesNotAcceptFocus)
           || widget->window()->windowFlags().testFlag(Qt::X11BypassWindowManagerHint)
-          || widget->isActiveWindow());
+          || widget->isActiveWindow()
+          // make exception for tooltips
+          || widget->inherits("QTipLabel")
+          || ((widget->windowFlags() & Qt::WindowType_Mask) == Qt::ToolTip
+              && !qobject_cast<const QFrame*>(widget)));
 }
 /*************************/
 bool BlurHelper::eventFilter (QObject* object, QEvent* event)
@@ -308,7 +312,7 @@ void BlurHelper::update (QWidget* widget) const
         && !qobject_cast<QMenu*>(widget)
         && !widget->inherits("QTipLabel")
         && ((widget->windowFlags() & Qt::WindowType_Mask) != Qt::ToolTip
-            && !qobject_cast<QFrame*>(widget)))
+            || qobject_cast<QFrame*>(widget)))
     {
       KWindowEffects::enableBackgroundContrast (win, true,
                                                 contrast_, intensity_, saturation_,
@@ -354,7 +358,7 @@ void BlurHelper::clear (QWidget* widget) const
         && !qobject_cast<QMenu*>(widget)
         && !widget->inherits("QTipLabel")
         && ((widget->windowFlags() & Qt::WindowType_Mask) != Qt::ToolTip
-            && !qobject_cast<QFrame*>(widget)))
+            || qobject_cast<QFrame*>(widget)))
     {
       KWindowEffects::enableBackgroundContrast (win, false);
     }
