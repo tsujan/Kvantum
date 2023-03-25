@@ -362,12 +362,13 @@ Jei tai yra išjungta, žiūrėkite:
         <location filename="../../kvantummanager.ui" line="531"/>
         <source>By default, both active and inactive translucent windows
 will be blurred if blurring is enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pagal numatymą, tiek aktyvūs, tiek pasyvūs dalinai permatomi langai
+bus sulieti, jei suliejimas yra įjungtas.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="535"/>
         <source>No blurring for inactive windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Nesulieti pasyvius langus</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="542"/>
@@ -479,22 +480,26 @@ radii for blurring translucent menus and tooltips
 that have rounded corners.
 
 Usually, a value of 2 is enough.</source>
-        <translation type="unfinished"></translation>
+        <translation>Jei suliejimas yra įjungtas, šios reikšmės nustatys
+dalinai permatomų meniu ir paaiškinimų, turinčių apvalius kampus,
+suliejimo kampo spindulį.
+
+Įprastai, reikšmės „2“ pakanka.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="808"/>
         <source>Blur Corner Radius</source>
-        <translation type="unfinished"></translation>
+        <translation>Suliejimo kampo spindulys</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="821"/>
         <source>Menu:</source>
-        <translation type="unfinished"></translation>
+        <translation>Meniu:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="828"/>
         <source>Tooltip:</source>
-        <translation type="unfinished"></translation>
+        <translation>Paaiškinimas:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="852"/>
