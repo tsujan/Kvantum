@@ -1004,14 +1004,15 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         }
         /* get the available geometry (Qt menus don't
            spread across the available virtual geometry) */
-        QRect sg, ag;
+        QRect ag;
+        //QRect sg;
         QScreen *sc = nullptr;
         if (QWindow *win = w->windowHandle())
         {
           sc = win->screen();
           if (sc)
           {
-            sg = sc->geometry();
+            //sg = sc->geometry();
             ag = sc->availableGeometry();
           }
         }
@@ -1089,17 +1090,36 @@ bool Style::eventFilter(QObject *o, QEvent *e)
             }
             else if (!ag.isEmpty())
             {
-              if (g.top() != ag.top()
-                  && (g.bottom() == ag.bottom()
-                      || QCursor::pos(sc).y() >= g.bottom()))
+              if (tspec_.isX11)
               {
-                dY += menuShadow_.at(1) + menuShadow_.at(3);
+                if (g.top() != ag.top()
+                    && (g.bottom() == ag.bottom()
+                        || QCursor::pos(sc).y() > g.bottom()))
+                {
+                  dY += menuShadow_.at(1) + menuShadow_.at(3);
+                }
+                if (g.right() != ag.right()
+                    && (g.left() == ag.left()
+                        || QCursor::pos(sc).x() <= g.left()))
+                {
+                  dX -= menuShadow_.at(2) + menuShadow_.at(0);
+                }
               }
-              if (g.right() != ag.right()
-                  && (g.left() == ag.left()
-                      || QCursor::pos(sc).x() <= g.left()))
+              else if (QWidget *p = w->parentWidget())
               {
-                dX -= menuShadow_.at(2) + menuShadow_.at(0);
+                while (p->parentWidget())
+                  p = p->parentWidget();
+                const QRect pg(p->geometry());
+                if (g.bottom() + 1 == pg.top()
+                    || QCursor::pos(sc).y() > g.bottom())
+                {
+                  dY += menuShadow_.at(1) + menuShadow_.at(3);
+                }
+                if (g.left() == pg.right() + 1
+                    || QCursor::pos(sc).x() <= g.left())
+                {
+                  dX -= menuShadow_.at(2) + menuShadow_.at(0);
+                }
               }
             }
           }
@@ -1160,17 +1180,36 @@ bool Style::eventFilter(QObject *o, QEvent *e)
             {
               /* snap to the screen bottom/right if possible and,
                  as the last resort, consider the cursor position */
-              if (g.top() != ag.top()
-                  && (g.bottom() == ag.bottom()
-                      || QCursor::pos(sc).y() >= g.bottom()))
+              if (tspec_.isX11)
               {
-                dY += menuShadow_.at(1) + menuShadow_.at(3);
+                if (g.top() != ag.top()
+                    && (g.bottom() == ag.bottom()
+                        || QCursor::pos(sc).y() > g.bottom()))
+                {
+                  dY += menuShadow_.at(1) + menuShadow_.at(3);
+                }
+                if (g.left() != ag.left()
+                    && (g.right() == ag.right()
+                        || QCursor::pos(sc).x() > g.right()))
+                {
+                  dX += menuShadow_.at(0) + menuShadow_.at(2);
+                }
               }
-              if (g.left() != ag.left()
-                  && (g.right() == ag.right()
-                      || QCursor::pos(sc).x() >= g.right() + 1))
-              {
-                dX += menuShadow_.at(0) + menuShadow_.at(2);
+              else if (QWidget *p = w->parentWidget())
+              { // the global position is unknown under Wayland
+                while (p->parentWidget())
+                  p = p->parentWidget();
+                const QRect pg(p->geometry());
+                if (g.bottom() + 1 == pg.top()
+                    || QCursor::pos(sc).y() > g.bottom())
+                {
+                  dY += menuShadow_.at(1) + menuShadow_.at(3);
+                }
+                if (g.right() + 1 == pg.left()
+                    || QCursor::pos(sc).x() > g.right())
+                {
+                  dX += menuShadow_.at(0) + menuShadow_.at(2);
+                }
               }
             }
           }
@@ -1208,8 +1247,9 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         int DY = qRound(dY);
         if (DX == 0 && DY == 0) break;
 
+        /* This workaround isn't needed anymore. It didn't work with Wayland either. */
         // prevent the menu from switching to another screen
-        if (!sg.isEmpty() && QApplication::screens().size() > 1)
+        /*if (!sg.isEmpty() && QApplication::screens().size() > 1)
         {
           if (g.top() + DY < sg.top() && g.top() >= sg.top())
             DY = sg.top() - g.top();
@@ -1220,7 +1260,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           }
           else if (g.left() + DX < sg.left() && g.left() >= sg.left())
             DX = sg.left() - g.left();
-        }
+        }*/
 
         w->move(g.left() + DX, g.top() + DY);
         movedMenus_.insert(w);
