@@ -30,7 +30,7 @@ width</source>
         <location filename="../../KvantumPreviewBase.ui" line="95"/>
         <location filename="../../KvantumPreviewBase.ui" line="105"/>
         <source>Simple push button</source>
-        <translation type="unfinished"></translation>
+        <translation>シンプルなプッシュボタン</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="112"/>
@@ -78,7 +78,7 @@ push button</source>
         <location filename="../../KvantumPreviewBase.ui" line="382"/>
         <location filename="../../KvantumPreviewBase.ui" line="459"/>
         <source>Simple toolbutton</source>
-        <translation type="unfinished"></translation>
+        <translation>シンプルなツールボタン</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="466"/>
@@ -133,7 +133,7 @@ beside text</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="366"/>
         <source>Push button with menu</source>
-        <translation type="unfinished"></translation>
+        <translation>メニュー付きプッシュボタン</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="415"/>
@@ -162,7 +162,7 @@ width</source>
         <location filename="../../KvantumPreviewBase.ui" line="846"/>
         <location filename="../../KvantumPreviewBase.ui" line="859"/>
         <source>Simple radio button</source>
-        <translation type="unfinished"></translation>
+        <translation>シンプルなラジオボタン</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="869"/>
@@ -175,7 +175,7 @@ radio button</source>
         <location filename="../../KvantumPreviewBase.ui" line="891"/>
         <location filename="../../KvantumPreviewBase.ui" line="917"/>
         <source>Radio button with 32px SVG icon</source>
-        <translation type="unfinished"></translation>
+        <translation>32 ピクセル SVG アイコン付きラジオボタン</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="940"/>
