@@ -1105,17 +1105,17 @@ bool Style::eventFilter(QObject *o, QEvent *e)
                   dX -= menuShadow_.at(2) + menuShadow_.at(0);
                 }
               }
-              else if (QWidget *p = w->parentWidget())
+              else
               {
-                while (p->parentWidget())
-                  p = p->parentWidget();
-                const QRect pg(p->geometry());
-                if (g.bottom() + 1 == pg.top()
+                QRect pg;
+                if (QWidget *p = w->parentWidget())
+                  pg = p->window()->geometry();
+                if ((!pg.isNull() && g.bottom() + 1 == pg.top())
                     || QCursor::pos(sc).y() > g.bottom())
                 {
                   dY += menuShadow_.at(1) + menuShadow_.at(3);
                 }
-                if (g.left() == pg.right() + 1
+                if ((!pg.isNull() && g.left() == pg.right() + 1)
                     || QCursor::pos(sc).x() <= g.left())
                 {
                   dX -= menuShadow_.at(2) + menuShadow_.at(0);
@@ -1178,10 +1178,10 @@ bool Style::eventFilter(QObject *o, QEvent *e)
             }
             else if (!ag.isEmpty()) // probably a panel menu
             {
-              /* snap to the screen bottom/right if possible and,
-                 as the last resort, consider the cursor position */
               if (tspec_.isX11)
               {
+                /* snap to the screen bottom/right if possible and,
+                   as the last resort, consider the cursor position */
                 if (g.top() != ag.top()
                     && (g.bottom() == ag.bottom()
                         || QCursor::pos(sc).y() > g.bottom()))
@@ -1195,17 +1195,19 @@ bool Style::eventFilter(QObject *o, QEvent *e)
                   dX += menuShadow_.at(0) + menuShadow_.at(2);
                 }
               }
-              else if (QWidget *p = w->parentWidget())
-              { // the global position is unknown under Wayland
-                while (p->parentWidget())
-                  p = p->parentWidget();
-                const QRect pg(p->geometry());
-                if (g.bottom() + 1 == pg.top()
+              else // the global position is unknown under Wayland
+              {
+                /* snap to the parent window's top/left side if needed and,
+                   as the last resort, consider the cursor position */
+                QRect pg;
+                if (QWidget *p = w->parentWidget())
+                  pg = p->window()->geometry();
+                if ((!pg.isNull() && g.bottom() + 1 == pg.top())
                     || QCursor::pos(sc).y() > g.bottom())
                 {
                   dY += menuShadow_.at(1) + menuShadow_.at(3);
                 }
-                if (g.right() + 1 == pg.left()
+                if ((!pg.isNull() && g.right() + 1 == pg.left())
                     || QCursor::pos(sc).x() > g.right())
                 {
                   dX += menuShadow_.at(0) + menuShadow_.at(2);
