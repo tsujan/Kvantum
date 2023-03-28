@@ -241,7 +241,7 @@ korostus väreillä!</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="585"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do not draw any background for (KDE) menu titles?&lt;/p&gt;&lt;p&gt;Menu titles are like menu separators but with icon and text.&lt;/p&gt;&lt;p&gt;This needs Logging out and in for KDE Plasma menus. For LXQt panel, a panel restart with &lt;span style=&quot; font-style:italic;&quot;&gt;Session Settings &lt;/span&gt;is enough.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Etkö piirrä mitään taustaa (KDE) -valikoiden otsikoille?&lt;/p&gt;&lt;p&gt;Valikot ovat kuin valikkopalkkeja, mutta niissä on kuvake ja teksti.&lt;/p&gt;&lt;p&gt;Tämä edellyttää kirjautumista ulos ja sisään KDE Plasma -valikoissa. LXQt-paneelissa paneeli käynnistyy uudelleen&lt;span style=&quot; font-style:italic;&quot;&gt;Istunnon asetukset &lt;/span&gt;ovat riittävät.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ollaanko piirtämättä mitään taustaa (KDE-)valikoiden otsikoille?&lt;/p&gt;&lt;p&gt;Valikot ovat kuin valikkorivejä, mutta niissä on kuvake ja teksti.&lt;/p&gt;&lt;p&gt;Tämä edellyttää kirjautumista ulos ja sisään KDE Plasma -valikoissa. LXQt-paneelissa paneeli käynnistyy uudelleen&lt;span style=&quot; font-style:italic;&quot;&gt;Istunnon asetukset &lt;/span&gt;ovat riittävät.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="588"/>
@@ -457,7 +457,7 @@ Needs LXQt panel to be restarted either by &quot;Session Settings&quot;
 or through logging out and in again.</source>
         <translation>Vaikuttaa vain, kun päävalikkoa EI ole muotoiltu LXQt:lla.
 
-Alle 16 tarkoittaa valikkokuvakkeen oletus kokoa.
+Alle 16 tarkoittaa valikkokuvakkeen oletuskokoa.
 
 LXQt-paneelin tulee käynnistää uudelleen joko &quot;Istunnon asetuksissa&quot;
 tai kirjautumalla ulos ja uudelleen sisään.</translation>
