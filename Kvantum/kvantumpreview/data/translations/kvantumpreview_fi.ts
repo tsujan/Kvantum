@@ -629,7 +629,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="3063"/>
         <source>&amp;Quit</source>
-        <translation>&amp;Sulje</translation>
+        <translation>&amp;Lopeta</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="3066"/>

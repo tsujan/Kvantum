@@ -775,11 +775,11 @@ from all user installation paths.
 The root installation will still be
 available if present; this button
 only removes user themes.</source>
-        <translation>Poista valittu teema kaialta käyttäjän
-asennus poluista.
+        <translation>Poista valittu teema kaikista käyttäjän
+asennuspoluista.
 
 Tämä edellyttää tallennusta, jotta se
-tulee voimaan. Root asennuspolku on
+tulee voimaan. Oletusteema on
 edelleen käytettävissä, jos sellainen on.
 Tämä painike poistaa vain käyttäjän teemat.</translation>
     </message>
