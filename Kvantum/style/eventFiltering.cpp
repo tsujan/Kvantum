@@ -1092,17 +1092,19 @@ bool Style::eventFilter(QObject *o, QEvent *e)
             {
               if (tspec_.isX11)
               {
-                if (g.top() != ag.top()
-                    && (g.bottom() == ag.bottom()
-                        || QCursor::pos(sc).y() > g.bottom()))
+                if (g.top() != ag.top())
                 {
-                  dY += menuShadow_.at(1) + menuShadow_.at(3);
+                  if (g.bottom() == ag.bottom() || QCursor::pos(sc).y() > g.bottom())
+                    dY += menuShadow_.at(1) + menuShadow_.at(3);
+                  else if (g.top() < ag.top())
+                    dY += menuShadow_.at(1);
                 }
-                if (g.right() != ag.right()
-                    && (g.left() == ag.left()
-                        || QCursor::pos(sc).x() <= g.left()))
+                if (g.right() != ag.right())
                 {
-                  dX -= menuShadow_.at(2) + menuShadow_.at(0);
+                  if (g.left() == ag.left() || QCursor::pos(sc).x() <= g.left())
+                    dX -= menuShadow_.at(2) + menuShadow_.at(0);
+                  else if (g.right() > ag.right())
+                    dX -= menuShadow_.at(2);
                 }
               }
               else
@@ -1182,17 +1184,19 @@ bool Style::eventFilter(QObject *o, QEvent *e)
               {
                 /* snap to the screen bottom/right if possible and,
                    as the last resort, consider the cursor position */
-                if (g.top() != ag.top()
-                    && (g.bottom() == ag.bottom()
-                        || QCursor::pos(sc).y() > g.bottom()))
+                if (g.top() != ag.top())
                 {
-                  dY += menuShadow_.at(1) + menuShadow_.at(3);
+                  if (g.bottom() == ag.bottom() || QCursor::pos(sc).y() > g.bottom())
+                    dY += menuShadow_.at(1) + menuShadow_.at(3);
+                  else if (g.top() < ag.top())
+                    dY += menuShadow_.at(1); // no more off-screen
                 }
-                if (g.left() != ag.left()
-                    && (g.right() == ag.right()
-                        || QCursor::pos(sc).x() > g.right()))
+                if (g.left() != ag.left())
                 {
-                  dX += menuShadow_.at(0) + menuShadow_.at(2);
+                  if (g.right() == ag.right() || QCursor::pos(sc).x() > g.right())
+                    dX += menuShadow_.at(0) + menuShadow_.at(2);
+                  else if (g.left() < ag.left())
+                    dX += menuShadow_.at(0); // no more off-screen
                 }
               }
               else // the global position is unknown under Wayland
