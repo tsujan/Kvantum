@@ -358,24 +358,27 @@ Mitmesugust → Järgi võimalusel aktiivset töölauakeskkonda</translation>
         <location filename="../../kvantummanager.ui" line="531"/>
         <source>By default, both active and inactive translucent windows
 will be blurred if blurring is enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vaikimisi nii aktiivsed kui ka mitteaktiivsed läbipaistvad aknad
+hägustatakse, kui hägustamine on lubatud.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="535"/>
         <source>No blurring for inactive windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Mitteaktiivseid aknaid ei hägustata</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="542"/>
         <source>By default, vertical toolbars are not styled.
 
 If this is disabled, see the above option.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vaikimisi ei ole vertikaalsed tööriistaribad kujundatud.
+
+Kui see on välja lülitatud, vaata ülaltoodud valikut.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="547"/>
         <source>Style vertical toolbars</source>
-        <translation type="unfinished"></translation>
+        <translation>Kujunda vertikaalsed tööriistaribad</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="595"/>
