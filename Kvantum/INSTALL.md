@@ -179,6 +179,19 @@ If you have compiled Kvantum with `qmake`, the following command cleans the sour
 
 If you have used `cmake` for compilation, to compile Kvantum again, first remove the contents of the build directory.
 
+### OpenBSD (7.3+)
+
+In OpenBSD (7.3+), Kvantum requires explicit installation of gcc, qt5, kwindowsystem, and cmake. Previous end-user reports suggest avoiding qmake. Altogether, Kvantum reliably builds with the following steps:
+
+pkg_add gcc qt5 kwindowsystem cmake
+git clone https://github.com/tsujan/Kvantum
+cd Kvantum/Kvantum
+mkdir build && cd build
+cmake -DCMAKE_PREFIX_PATH=/usr/local/lib/qt5/cmake/ ../
+make
+make install
+
+
 ## Usage
 
 ### Desktop environments
