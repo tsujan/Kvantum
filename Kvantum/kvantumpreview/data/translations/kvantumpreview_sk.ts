@@ -11,7 +11,7 @@
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="29"/>
         <source>Push buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>Tlačidlá</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="77"/>
@@ -30,39 +30,42 @@ width</source>
         <location filename="../../KvantumPreviewBase.ui" line="95"/>
         <location filename="../../KvantumPreviewBase.ui" line="105"/>
         <source>Simple push button</source>
-        <translation type="unfinished"></translation>
+        <translation>Jednoduché tlačidlo</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="112"/>
         <location filename="../../KvantumPreviewBase.ui" line="128"/>
         <source>Toggle push button</source>
-        <translation type="unfinished"></translation>
+        <translation>Prepínacie tlačidlo</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="141"/>
         <location filename="../../KvantumPreviewBase.ui" line="152"/>
         <source>Multi-line
  push button</source>
-        <translation type="unfinished"></translation>
+        <translation>Viacriadkové
+tlačidlo</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="160"/>
         <location filename="../../KvantumPreviewBase.ui" line="180"/>
         <source>Push button
 with 32px folder icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Stlačte tlačidlo
+priečinka s ikonami 32 px</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="210"/>
         <location filename="../../KvantumPreviewBase.ui" line="224"/>
         <source>Default
 push button</source>
-        <translation type="unfinished"></translation>
+        <translation>Predvolené
+tlačidlo</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="266"/>
         <source>Flat buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>Ploché tlačidlá</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="279"/>
@@ -72,27 +75,29 @@ push button</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="374"/>
         <source>Tool buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>Tlačidlá nástrojov</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="382"/>
         <location filename="../../KvantumPreviewBase.ui" line="459"/>
         <source>Simple toolbutton</source>
-        <translation type="unfinished"></translation>
+        <translation>Jednoduché tlačidlo nástrojov</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="466"/>
         <location filename="../../KvantumPreviewBase.ui" line="477"/>
         <source>Multi-line
 toolbutton</source>
-        <translation type="unfinished"></translation>
+        <translation>Viacriadkové
+tlačidlo</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="485"/>
         <location filename="../../KvantumPreviewBase.ui" line="508"/>
         <source>Toggle toolbutton
 with an arrow</source>
-        <translation type="unfinished"></translation>
+        <translation>Prepínacie tlačidlo nástroja
+so šípkou</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="573"/>
