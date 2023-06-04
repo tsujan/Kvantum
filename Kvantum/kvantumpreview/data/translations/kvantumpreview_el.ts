@@ -83,48 +83,53 @@ push button</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="374"/>
         <source>Tool buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>Κουμπιά εργαλείων</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="382"/>
         <location filename="../../KvantumPreviewBase.ui" line="459"/>
         <source>Simple toolbutton</source>
-        <translation type="unfinished"></translation>
+        <translation>Απλό κουμπί εργαλείων</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="466"/>
         <location filename="../../KvantumPreviewBase.ui" line="477"/>
         <source>Multi-line
 toolbutton</source>
-        <translation type="unfinished"></translation>
+        <translation>Κουμπί εργαλείων
+πολλαπλών γραμμών</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="485"/>
         <location filename="../../KvantumPreviewBase.ui" line="508"/>
         <source>Toggle toolbutton
 with an arrow</source>
-        <translation type="unfinished"></translation>
+        <translation>Εναλλαγή κουμπιού εργαλείων
+με ένα βέλος</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="573"/>
         <location filename="../../KvantumPreviewBase.ui" line="597"/>
         <source>Toolbutton with 32px SVG icon
 and text below</source>
-        <translation type="unfinished"></translation>
+        <translation>Κουμπί εργαλείων με SVG εικονίδιο 32εικ
+και κείμενο από κάτω</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="618"/>
         <location filename="../../KvantumPreviewBase.ui" line="639"/>
         <source>Toolbutton with text below
 and arrow</source>
-        <translation type="unfinished"></translation>
+        <translation>Κουμπί εργαλείων με κείμενο από κάτω
+και βέλος</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="657"/>
         <location filename="../../KvantumPreviewBase.ui" line="678"/>
         <source>Toolbutton with icon at the side
 and arrow</source>
-        <translation type="unfinished"></translation>
+        <translation>Κουμπί εργαλείων με πλευρικό εικονίδιο
+και βέλος</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="696"/>
@@ -132,19 +137,22 @@ and arrow</source>
         <source>Toggle toolbutton with icon,
 ordinary arrow
 and dropdown menu arrow</source>
-        <translation type="unfinished"></translation>
+        <translation>Εναλλαγή κουμπιού εργαλείων με εικονίδιο,
+τυπικό βέλος
+και βέλος αναπτυσσόμενου μενού</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="528"/>
         <location filename="../../KvantumPreviewBase.ui" line="552"/>
         <source>Toolbutton with 32px PNG icon
 beside text</source>
-        <translation type="unfinished"></translation>
+        <translation>Κουμπί εργαλείων με PNG εικονίδιο 32εικ
+δίπλα από κείμενο</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="366"/>
         <source>Push button with menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Κουμπί πίεσης με μενού</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="415"/>
@@ -157,30 +165,39 @@ height
 greater
 than
 width</source>
-        <translation type="unfinished"></translation>
+        <translation>Εναλλαγή
+κουμπιού
+εργαλείων
+
+με
+ύψος
+μεγαλύτερο
+από το
+πλάτος</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="804"/>
         <source>Auto-raise</source>
-        <translation type="unfinished"></translation>
+        <translation>Αυτόματη ανύψωση</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="825"/>
         <source>Radio/Check buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>Κουμπιά επιλογών/ελέγχου</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="846"/>
         <location filename="../../KvantumPreviewBase.ui" line="859"/>
         <source>Simple radio button</source>
-        <translation type="unfinished"></translation>
+        <translation>Απλό κουμπί επιλογών</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="869"/>
         <location filename="../../KvantumPreviewBase.ui" line="880"/>
         <source>Multi-line
 radio button</source>
-        <translation type="unfinished"></translation>
+        <translation>Κουμπί επιλογών
+πολλαπλών γραμμών</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="891"/>
@@ -206,7 +223,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="982"/>
         <location filename="../../KvantumPreviewBase.ui" line="995"/>
         <source>Tri-state check box</source>
-        <translation type="unfinished"></translation>
+        <translation>Πλαίσιο ελέγχου τριπλής κατάστασης</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1005"/>
@@ -217,7 +234,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1075"/>
         <source>Combos/Spins/Inputs</source>
-        <translation type="unfinished"></translation>
+        <translation>Συνδυασμοί/περιστροφή/εισαγωγές</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1109"/>
@@ -227,37 +244,37 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1515"/>
         <location filename="../../KvantumPreviewBase.ui" line="1607"/>
         <source>Frameless (no difference)</source>
-        <translation type="unfinished"></translation>
+        <translation>Άνευ πλαισίου (χωρίς διαφορά)</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1120"/>
         <location filename="../../KvantumPreviewBase.ui" line="1159"/>
         <source>Standard combo box</source>
-        <translation type="unfinished"></translation>
+        <translation>Τυπικό πλαίσιο συνδυασμών</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1129"/>
         <location filename="../../KvantumPreviewBase.ui" line="1168"/>
         <source>Standard combo box 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Τυπικό πλαίσιο συνδυασμών 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1137"/>
         <location filename="../../KvantumPreviewBase.ui" line="1176"/>
         <source>Standard combo box 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Τυπικό πλαίσιο συνδυασμών 2</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1142"/>
         <location filename="../../KvantumPreviewBase.ui" line="1181"/>
         <source>Standard combo box 3</source>
-        <translation type="unfinished"></translation>
+        <translation>Τυπικό πλαίσιο συνδυασμών 3</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1147"/>
         <location filename="../../KvantumPreviewBase.ui" line="1186"/>
         <source>Standard combo box 4</source>
-        <translation type="unfinished"></translation>
+        <translation>Τυπικό πλαίσιο συνδυασμών 4</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1207"/>
@@ -265,7 +282,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1442"/>
         <location filename="../../KvantumPreviewBase.ui" line="1524"/>
         <source>Frameless 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Άνευ πλαισίου 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1216"/>
@@ -273,7 +290,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1451"/>
         <location filename="../../KvantumPreviewBase.ui" line="1533"/>
         <source>Frameless 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Άνευ πλαισίου 2</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1221"/>
@@ -281,7 +298,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1456"/>
         <location filename="../../KvantumPreviewBase.ui" line="1538"/>
         <source>Frameless 3</source>
-        <translation type="unfinished"></translation>
+        <translation>Άνευ πλαισίου 3</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1226"/>
@@ -289,7 +306,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1461"/>
         <location filename="../../KvantumPreviewBase.ui" line="1543"/>
         <source>Frameless 4</source>
-        <translation type="unfinished"></translation>
+        <translation>Άνευ πλαισίου 4</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1231"/>
@@ -297,7 +314,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1466"/>
         <location filename="../../KvantumPreviewBase.ui" line="1548"/>
         <source>Frameless 5</source>
-        <translation type="unfinished"></translation>
+        <translation>Άνευ πλαισίου 5</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1236"/>
@@ -305,7 +322,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1471"/>
         <location filename="../../KvantumPreviewBase.ui" line="1553"/>
         <source>Frameless 6</source>
-        <translation type="unfinished"></translation>
+        <translation>Άνευ πλαισίου 6</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1241"/>
@@ -313,7 +330,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1476"/>
         <location filename="../../KvantumPreviewBase.ui" line="1558"/>
         <source>Frameless 7</source>
-        <translation type="unfinished"></translation>
+        <translation>Άνευ πλαισίου 7</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1246"/>
@@ -321,7 +338,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1481"/>
         <location filename="../../KvantumPreviewBase.ui" line="1563"/>
         <source>Frameless 8</source>
-        <translation type="unfinished"></translation>
+        <translation>Άνευ πλαισίου 8</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1251"/>
@@ -329,7 +346,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1486"/>
         <location filename="../../KvantumPreviewBase.ui" line="1568"/>
         <source>Frameless 9</source>
-        <translation type="unfinished"></translation>
+        <translation>Άνευ πλαισίου 9</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1256"/>
@@ -337,37 +354,37 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1491"/>
         <location filename="../../KvantumPreviewBase.ui" line="1573"/>
         <source>Frameless 10</source>
-        <translation type="unfinished"></translation>
+        <translation>Άνευ πλαισίου 10</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1341"/>
         <location filename="../../KvantumPreviewBase.ui" line="1384"/>
         <source>Editable combo box</source>
-        <translation type="unfinished"></translation>
+        <translation>Επεξεργάσιμο πλαίσιο συνδυασμών</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1350"/>
         <location filename="../../KvantumPreviewBase.ui" line="1393"/>
         <source>Editable combo box 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Επεξεργάσιμο πλαίσιο συνδυασμών 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1359"/>
         <location filename="../../KvantumPreviewBase.ui" line="1402"/>
         <source>Editable combo box 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Επεξεργάσιμο πλαίσιο συνδυασμών 2</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1364"/>
         <location filename="../../KvantumPreviewBase.ui" line="1407"/>
         <source>Editable combo box 3</source>
-        <translation type="unfinished"></translation>
+        <translation>Επεξεργάσιμο πλαίσιο συνδυασμών 3</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1369"/>
         <location filename="../../KvantumPreviewBase.ui" line="1412"/>
         <source>Editable combo box 4</source>
-        <translation type="unfinished"></translation>
+        <translation>Επεξεργάσιμο πλαίσιο συνδυασμών 4</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1581"/>
@@ -378,7 +395,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1683"/>
         <source>Sliders/Scrolls/Progress/Dial</source>
-        <translation type="unfinished"></translation>
+        <translation>Κύλιση/Ολισθητές/Πρόοδος/Κλήσεις</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2240"/>
@@ -553,12 +570,12 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2573"/>
         <source>Stack widget (page1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Στοίβα γραφικού συστατικού (σελίδα 1)</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2587"/>
         <source>Stack Widget (page2)</source>
-        <translation type="unfinished"></translation>
+        <translation>Στοίβα γραφικού συστατικού (σελίδα 2)</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2604"/>
@@ -578,17 +595,17 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2734"/>
         <source>Tool Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Εργαλειοθήκη</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2829"/>
         <source>Document mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Λειτουργία εγγράφου</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2867"/>
         <source>Box frame</source>
-        <translation type="unfinished"></translation>
+        <translation>Πλαίσιο</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2997"/>
@@ -643,12 +660,12 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="3105"/>
         <source>&amp;Doc Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Λειτουργία εγγράφου</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="3108"/>
         <source>Show tabs in the document mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Εμφάνιση καρτελών στην λειτουργία εγγράφου</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="3120"/>
@@ -658,7 +675,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="3123"/>
         <source>Hold pressed to show a menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Κρατήστε πατημένο για την εμφάνιση ενός μενού</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="3134"/>
