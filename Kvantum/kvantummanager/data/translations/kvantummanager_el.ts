@@ -189,7 +189,7 @@ with LXQt Session Settings.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="524"/>
         <source>Single top toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Απλή γραμμή εργαλείων κορυφής</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="554"/>
@@ -215,7 +215,7 @@ the highlight color!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="571"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;By default, selected label icons are tinted by the highlight color.&lt;/p&gt;&lt;p&gt;Checking this box removes the tint.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;By default, selected label icons are tinted by the highlight color.&lt;/p&gt;&lt;p&gt;Checking this box removes the tint.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="574"/>
@@ -412,7 +412,7 @@ seriously interfere with other jobs.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="732"/>
         <source>Kinetic scrolling</source>
-        <translation type="unfinished"></translation>
+        <translation>Κινητική κύλιση</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="739"/>
@@ -447,7 +447,7 @@ Usually, a value of 2 is enough.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="808"/>
         <source>Blur Corner Radius</source>
-        <translation type="unfinished"></translation>
+        <translation>Ακτίνα θόλωσης γωνιών</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="821"/>
@@ -508,7 +508,7 @@ shadow to menus and tooltips.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="979"/>
         <source>Translucent windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Ημιδιαφανή παράθυρα</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1043"/>
@@ -533,7 +533,7 @@ needed for this key to work.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1128"/>
         <source>Blurring for translucent windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Θόλωση ημιδιαφανών παραθύρων</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1148"/>
@@ -862,7 +862,7 @@ KDE apps get it from KDE setting.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1534"/>
         <source>Delays</source>
-        <translation type="unfinished"></translation>
+        <translation>Καθυστερήσεις</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1540"/>
@@ -949,7 +949,7 @@ By default, combo popups do not cover the combo box.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1547"/>
         <source>Tooltip delay:</source>
-        <translation type="unfinished"></translation>
+        <translation>Καθυστέρηση υπόδειξης:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="986"/>
@@ -983,13 +983,13 @@ while 0 means no delay.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1561"/>
         <source>Submenu delay: </source>
-        <translation type="unfinished"></translation>
+        <translation>Καθυστέρηση υπομενού: </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1575"/>
         <location filename="../../kvantummanager.ui" line="1598"/>
         <source> ms</source>
-        <translation type="unfinished"> ms</translation>
+        <translation> ms</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1631"/>
@@ -1256,7 +1256,7 @@ the Ctrl key before pressing the button.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2187"/>
         <source>Quit</source>
-        <translation type="unfinished">Έξοδος</translation>
+        <translation>Έξοδος</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2200"/>
@@ -1267,12 +1267,12 @@ or update its preview.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2204"/>
         <source>Preview</source>
-        <translation type="unfinished">Προεπισκόπηση</translation>
+        <translation>Προεπισκόπηση</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2211"/>
         <source>About</source>
-        <translation type="unfinished">Σχετικά</translation>
+        <translation>Σχετικά</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2234"/>
@@ -1287,7 +1287,7 @@ or update its preview.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2240"/>
         <source>Help</source>
-        <translation type="unfinished">Βοήθεια</translation>
+        <translation>Βοήθεια</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="329"/>
@@ -1307,7 +1307,7 @@ or update its preview.</source>
         <location filename="../../KvantumManager.cpp" line="660"/>
         <location filename="../../KvantumManager.cpp" line="676"/>
         <source>Kvantum</source>
-        <translation type="unfinished"></translation>
+        <translation>Kvantum</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="600"/>
@@ -1319,17 +1319,17 @@ or update its preview.</source>
         <location filename="../../KvantumManager.cpp" line="778"/>
         <location filename="../../KvantumManager.cpp" line="2779"/>
         <source>Confirmation</source>
-        <translation type="unfinished">Επιβεβαίωση</translation>
+        <translation>Επιβεβαίωση</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="739"/>
         <source>%1 installed.</source>
-        <translation type="unfinished">%1 Εγκατεστημένα.</translation>
+        <translation>%1 εγκατεστημένα.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="909"/>
         <source>%1 deleted.</source>
-        <translation type="unfinished">%1 Διαγράφηκε.</translation>
+        <translation>%1 διαγράφηκε.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="969"/>
@@ -1346,22 +1346,22 @@ or update its preview.</source>
         <location filename="../../KvantumManager.cpp" line="108"/>
         <location filename="../../KvantumManager.cpp" line="114"/>
         <source>Follow Style</source>
-        <translation type="unfinished">Βάσει τεχνοτροπίας</translation>
+        <translation>Βάσει τεχνοτροπίας</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="105"/>
         <source>Single Click</source>
-        <translation type="unfinished"></translation>
+        <translation>Απλό κλικ</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="106"/>
         <source>Double Click</source>
-        <translation type="unfinished">Διπλό κλικ</translation>
+        <translation>Διπλό κλικ</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="109"/>
         <source>Icon Only</source>
-        <translation type="unfinished">Μόνο εικονίδιο</translation>
+        <translation>Μόνο εικονίδιο</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="110"/>
@@ -1371,37 +1371,37 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="111"/>
         <source>Text Beside Icon</source>
-        <translation type="unfinished">Κείμενο δίπλα στο εικονίδιο</translation>
+        <translation>Κείμενο δίπλα στο εικονίδιο</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="112"/>
         <source>Text Under Icon</source>
-        <translation type="unfinished">Κείμενο κάτω απο το εικονίδιο</translation>
+        <translation>Κείμενο κάτω από το εικονίδιο</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="115"/>
         <source>KDE Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Διάταξη KDE</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="116"/>
         <source>Gnome Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Διάταξη Gnome</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="117"/>
         <source>Mac Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Διάταξη Mac</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="118"/>
         <source>Windows Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Διάταξη Windows</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="119"/>
         <source>Android Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Διάταξη Android</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="121"/>
@@ -1531,7 +1531,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="1813"/>
         <source>No description</source>
-        <translation type="unfinished">Χωρίς περιγραφή</translation>
+        <translation>Χωρίς περιγραφή</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2266"/>
@@ -1597,7 +1597,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="52"/>
         <source>default</source>
-        <translation type="unfinished">προκαθορισμένο</translation>
+        <translation>προκαθορισμένο</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="529"/>
@@ -1614,7 +1614,7 @@ or update its preview.</source>
         <location filename="../../KvantumManager.cpp" line="2209"/>
         <location filename="../../KvantumManager.cpp" line="2682"/>
         <source>Active theme:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ενεργό θέμα:</translation>
     </message>
 </context>
 <context>
