@@ -150,7 +150,10 @@ settings of this theme.
 Under LXQt, it needs logging out and in or closing
 PCManFM-qt and then, stopping and starting Desktop
 with LXQt Session Settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>Συγχώνευση του πλευρικού πίνακα του PCManFM-qt με το περιβάλλον του.
+
+Στο LXQt, απαιτείται επανασύνδεση ή κλείσιμο του PCManFM-qt και επανεκκίνηση
+της επιφάνειας εργασίας μέσω των ρυθμίσεων συνεδρίας LXQt.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="451"/>
@@ -169,7 +172,10 @@ with LXQt Session Settings.</source>
 Under LXQt, it needs logging out and in or closing
 PCManFM-qt and then, stopping and starting Desktop
 with LXQt Session Settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>Συγχώνευση της προβολής του PCManFM-qt με το περιβάλλον του.
+
+Στο LXQt, απαιτείται επανασύνδεση ή κλείσιμο του PCManFM-qt και επανεκκίνηση
+της επιφάνειας εργασίας μέσω των ρυθμίσεων συνεδρίας LXQt.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="480"/>
@@ -184,7 +190,7 @@ with LXQt Session Settings.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="510"/>
         <source>Blur explicitly translucent windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Θόλωση ρητώς των ημιδιαφανών παραθύρων</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="524"/>
@@ -1572,7 +1578,7 @@ or update its preview.</source>
         <location filename="../../KvantumManager.cpp" line="2975"/>
         <location filename="../../KvantumManager.cpp" line="2976"/>
         <source>About Kvantum Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Σχετικά με τον Διαχειριστή Kvantum</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2975"/>
