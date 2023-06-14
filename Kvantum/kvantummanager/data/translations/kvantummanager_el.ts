@@ -131,7 +131,7 @@ settings of this theme.
     <message>
         <location filename="../../kvantummanager.ui" line="369"/>
         <source>Hacks</source>
-        <translation type="unfinished"></translation>
+        <translation>Τεχνάσματα</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="396"/>
@@ -200,17 +200,17 @@ with LXQt Session Settings.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="554"/>
         <source>Do not draw any background for KTitles.</source>
-        <translation type="unfinished"></translation>
+        <translation>KTitle χωρίς παρασκήνιο.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="557"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do not draw any background for KTitles?&lt;/p&gt;&lt;p&gt;Ktitles are used by some KDE applications to show different sections in configuration dialogs.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Να μην γίνεται σχεδιασμός παρασκηνίου για KTitle;&lt;/p&gt;&lt;p&gt;Τα KTitle χρησιμοποιούνται σε μερικές εφαρμογές KDE για την εμφάνιση διαφόρων ενοτήτων στα παράθυρα διαλόγων.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="560"/>
         <source>Transparent KTitle label</source>
-        <translation type="unfinished"></translation>
+        <translation>Διάφανη ετικέτα KTitle</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="567"/>
