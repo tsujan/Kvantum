@@ -1628,7 +1628,7 @@ or update its preview.</source>
     <message>
         <location filename="../../main.cpp" line="139"/>
         <source>Kvantum</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Kvantum</translation>
     </message>
     <message>
         <location filename="../../main.cpp" line="140"/>

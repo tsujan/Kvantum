@@ -14849,7 +14849,9 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
         fspec = getFrameSpec(QStringLiteral("Toolbar"));
       else
         fspec = getFrameSpec(QStringLiteral("MenuBar"));
-      const int frameWidth = (option->direction == Qt::RightToLeft ? fspec.left : fspec.right);
+      bool rtl(option ? option->direction == Qt::RightToLeft
+                      : QApplication::layoutDirection() == Qt::RightToLeft);
+      const int frameWidth = (rtl ? fspec.left : fspec.right);
       if (const QStyleOptionComplex *styleOpt = qstyleoption_cast<const QStyleOptionComplex *>(option))
       {
         const int buttonSize = pixelMetric(PM_TitleBarButtonSize, styleOpt, widget);
