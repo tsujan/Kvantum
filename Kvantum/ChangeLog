@@ -1,3 +1,7 @@
+V1.0.11
+---------
+ * Ensure an opaque base color for combo popups on toolbars.
+
 V1.0.10
 ---------
  * Support editable comboboxes not derived from `QComboBox`.

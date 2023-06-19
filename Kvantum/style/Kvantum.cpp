@@ -9181,6 +9181,15 @@ void Style::drawControl(QStyle::ControlElement element,
                       palette.setColor(QPalette::WindowText, comboTxtCol);
                       palette.setColor(QPalette::Disabled, QPalette::ButtonText, comboDisabledTxtCol);
                       palette.setColor(QPalette::Disabled, QPalette::WindowText, comboDisabledTxtCol);
+                      QColor baseCol = palette.color(QPalette::Active, QPalette::Base);
+                      if (baseCol.alpha() < 255
+                          && baseCol == standardPalette().color(QPalette::Active, QPalette::Base))
+                      { // it was opacified for QComboBoxPrivateContainer in "Style::polish()"
+                        QColor winCol = standardPalette().color(QPalette::Active, QPalette::Window);
+                        winCol.setAlpha(255);
+                        baseCol = overlayColor(winCol, baseCol);
+                        palette.setColor(QPalette::Base, baseCol);
+                      }
                       forcePalette(cb, palette);
                     }
                     else break; // all or nothing
@@ -9343,6 +9352,15 @@ void Style::drawControl(QStyle::ControlElement element,
                       palette.setColor(QPalette::WindowText, comboTxtCol);
                       palette.setColor(QPalette::Disabled,QPalette::ButtonText, comboDisabledTxtCol);
                       palette.setColor(QPalette::Disabled,QPalette::WindowText, comboDisabledTxtCol);
+                      QColor baseCol = palette.color(QPalette::Active, QPalette::Base);
+                      if (baseCol.alpha() < 255
+                          && baseCol == standardPalette().color(QPalette::Active, QPalette::Base))
+                      {
+                        QColor winCol = standardPalette().color(QPalette::Active, QPalette::Window);
+                        winCol.setAlpha(255);
+                        baseCol = overlayColor(winCol, baseCol);
+                        palette.setColor(QPalette::Base, baseCol);
+                      }
                       forcePalette(cb, palette);
                     }
                     else break;
