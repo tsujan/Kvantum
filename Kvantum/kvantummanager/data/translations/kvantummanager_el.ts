@@ -216,7 +216,8 @@ with LXQt Session Settings.</source>
         <location filename="../../kvantummanager.ui" line="567"/>
         <source>Do not tint selected label icons with
 the highlight color!</source>
-        <translation type="unfinished"></translation>
+        <translation>Να μην χρωματίζονται τα εικονίδια επιλεγμένων ετικετών
+με το χρώμα επισήμανσης!</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="571"/>
@@ -226,18 +227,19 @@ the highlight color!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="574"/>
         <source>No selection tint</source>
-        <translation type="unfinished"></translation>
+        <translation>Χωρίς χρωματισμό της επιλογής</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="581"/>
         <source>Do not draw any background for (KDE) menu titles.
 (Needs Logging out and in for Plasma menus.)</source>
-        <translation type="unfinished"></translation>
+        <translation>Να μην σχεδιάζεται παρασκήνιο των τίτλων μενού (KDE).
+(Απαιτεί επανασύνδεση για τα μενού Plasma.)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="585"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do not draw any background for (KDE) menu titles?&lt;/p&gt;&lt;p&gt;Menu titles are like menu separators but with icon and text.&lt;/p&gt;&lt;p&gt;This needs Logging out and in for KDE Plasma menus. For LXQt panel, a panel restart with &lt;span style=&quot; font-style:italic;&quot;&gt;Session Settings &lt;/span&gt;is enough.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Να μην σχεδιάζεται παρασκήνιο για τίτλους μενού (KDE);&lt;/p&gt;&lt;p&gt;Οι τίτλοι μενού είναι όπως οι διαχωριστές μενού αλλά με εικονίδιο και κείμενο.&lt;/p&gt;&lt;p&gt;Αυτό απαιτεί επανασύνδεση για τα μενού Plasma KDE. Για τον πίνακα LXQt, η επανεκκίνηση του πίνακα με τις &lt;span style=&quot; font-style:italic;&quot;&gt;Ρυθμίσεις συνεδρίας &lt;/span&gt;αρκεί.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="588"/>
@@ -247,7 +249,7 @@ the highlight color!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="651"/>
         <source>Tint label icons on mouseover by </source>
-        <translation type="unfinished"></translation>
+        <translation>Χρωματισμός των εικονιδίων των ετικετών με το πέρασμα του ποντικιού ανά </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="665"/>
