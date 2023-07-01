@@ -270,13 +270,15 @@ the highlight color!</source>
         <source>Useful with monochrome icon sets and
 when the opacity of disabled icons is not
 reduced by other means.</source>
-        <translation type="unfinished"></translation>
+        <translation>Χρήσιμο με μονόχρωμα σύνολα εικονιδίων και
+όταν η αδιαφάνεια των απενεργοποιημένων εικονιδίων
+δεν έχει μειωθεί από άλλα μέσα.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="694"/>
         <location filename="../../kvantummanager.ui" line="709"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Useful with monochrome icon sets and when the opacity of disabled icons is not reduced by other means.&lt;/p&gt;&lt;p&gt;KDE automatically reduces the opacity of disabled icons. Therefore, this option might be useful rather under other desktop environments.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Χρήσιμο με μονόχρωμα σύνολα εικονιδίων και όταν η αδιαφάνεια των απενεργοποιημένων εικονιδίων δεν έχει μειωθεί από άλλα μέσα.&lt;/p&gt;&lt;p&gt;Το KDE μειώνει αυτόματα την αδιαφάνεια των απενεργοποιημένων εικονιδίων. Ωστόσο, αυτή η επιλογή μπορεί να είναι χρήσιμη και σε άλλα περιβάλλοντα εργασίας.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="697"/>
@@ -287,12 +289,13 @@ reduced by other means.</source>
         <location filename="../../kvantummanager.ui" line="630"/>
         <source>Show size grips of dialogs and statusbars
 as far as possible.</source>
-        <translation type="unfinished"></translation>
+        <translation>Προβολή στο πλαίσιο του εφικτού των λαβών μεγέθους
+των πλαισίων διαλόγων και των γραμμών κατάστασης.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="634"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show size grips of dialogs and statusbars as far as possible?&lt;/p&gt;&lt;p&gt;By default, the application decides whether they should be shown, but this hack could be useful for resizing windows easily when there is no window border.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Εμφάνιση των λαβών μεγέθους των διαλόγων και των γραμμών κατάστασης στο πλαίσιο του εφικτού;&lt;/p&gt;&lt;p&gt;Εξ ορισμού, η εφαρμογή αποφασίζει πότε θα πρέπει να εμφανίζονται, αλλά αυτό το τέχνασμα θα φανεί χρήσιμο για την εύκολη αλλαγή του μεγέθους των παραθύρων άνευ περιγράμματος.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="637"/>
