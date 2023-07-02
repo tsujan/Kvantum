@@ -48,7 +48,7 @@ Kvantum can use in addition to its own themes.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="138"/>
         <source>Change/Delete Theme</source>
-        <translation>Αλλαγή/Διαγραφή θέματος</translation>
+        <translation>Αλλαγή/διαγραφή θέματος</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="144"/>
@@ -330,7 +330,8 @@ as far as possible.</source>
         <location filename="../../kvantummanager.ui" line="975"/>
         <source>Has effect only when there is a translucent SVG background
 for windows or the window opacity is reduced (see below).</source>
-        <translation type="unfinished"></translation>
+        <translation>Έχει αποτέλεσμα μόνον σε ημιδιαφανή παρασκήνια SVG
+παραθύρων ή όταν η αδιαφάνεια του παραθύρου έχει μειωθεί (δείτε κατωτέρω).</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="993"/>
@@ -344,12 +345,13 @@ will not have translucency or shadow.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation type="unfinished"></translation>
+        <translation>Αν είναι επιλεγμένο, τα μενού, οι υποδείξεις και τα παράθυρα
+δεν θα έχουν ημιδιαφάνεια ή σκιά.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="227"/>
         <source>&lt;br&gt;&lt;br&gt;Since &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; is independent of all desktop environments, you first need to &lt;i&gt;activate&lt;/i&gt; it with a Qt platform integration program. KDE and LXQt provide simple tools for changing the active Qt style plugin. With other platforms, you need a Qt configuration tool.&lt;br/&gt;&lt;br/&gt;Under KDE, also select and apply the color scheme of this theme because some KDE applications may get their colors directly from the KDE color scheme.&lt;br/&gt;&lt;br/&gt;Running applications will get the new theme after being closed and reopened. Logging out and in would be good for all KDE/LXQt parts to see it completely.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br&gt;&lt;br&gt;Εφόσον το &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; είναι ανεξάρτητο από τα περιβάλλοντα εργασίας, θα πρέπει πρώτα να το &lt;i&gt;ενεργοποιήσετε&lt;/i&gt; με ένα πρόγραμμα ενσωμάτωσης πλατύβαθρου Qt. Τα περιβάλλοντα KDE και LXQt παρέχουν απλά εργαλεία για αλλαγές στο ενεργό πρόσθετο τεχνοτροπίας Qt. Σε άλλα περιβάλλοντα, χρειάζεστε ένα εργαλείο διαμόρφωσης της Qt.&lt;br/&gt;&lt;br/&gt;Στο KDE, επιλέξτε και εφαρμόστε τον χρωματικό συνδυασμό του θέματος διότι ορισμένες εφαρμογές KDE ίσως να λαμβάνουν τα χρώματά τους απευθείας από τον χρωματικό συνδυασμό του KDE.&lt;br/&gt;&lt;br/&gt;Οι εκτελούμενες εφαρμογές θα χρησιμοποιήσουν το νέο θέμα μετά από επανεκκίνηση. Η επανεκκίνηση της συνεδρίας βοηθά στο να εφαρμοστεί το θέμα εξ ολοκλήρου σε όλα τα τμήματα των περιβαλλόντων KDE/LXQt.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="531"/>
