@@ -6,7 +6,7 @@
     <message>
         <location filename="../../about.ui" line="169"/>
         <source>License</source>
-        <translation type="unfinished"></translation>
+        <translation>Licencja</translation>
     </message>
 </context>
 <context>
