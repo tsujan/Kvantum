@@ -362,12 +362,13 @@ Miscellaneous → Respect current DE if possible</source>
         <location filename="../../kvantummanager.ui" line="531"/>
         <source>By default, both active and inactive translucent windows
 will be blurred if blurring is enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>כברירת מחדל, חלונות שקופים למחצה שפעילים ושאינם פעילים
+יטושטשו אם מצב טשטוש מופעל.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="535"/>
         <source>No blurring for inactive windows</source>
-        <translation type="unfinished"></translation>
+        <translation>בלי טשטוש לחלונות לא פעילים</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="542"/>
@@ -387,7 +388,8 @@ If this is disabled, see the above option.</source>
         <location filename="../../kvantummanager.ui" line="595"/>
         <source>If checked, the contents of a form will be
 horizontally centered as far as possible.</source>
-        <translation type="unfinished"></translation>
+        <translation>אם מסומן, התוכן של התבנית 
+ימורכז אופקית ככל הניתן.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="599"/>
@@ -404,7 +406,7 @@ with window translucency or gradient.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="623"/>
         <source>Disable translucency with non-integer scaling</source>
-        <translation type="unfinished"></translation>
+        <translation>השבתת שקיפות עם קנה מידה ללא מספרים שלמים</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="675"/>
@@ -558,7 +560,7 @@ needed for this key to work.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1128"/>
         <source>Blurring for translucent windows</source>
-        <translation type="unfinished"></translation>
+        <translation>טשטוש לחלונות שקופים למחצה</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1148"/>
@@ -585,18 +587,19 @@ Uncheck it if you want those patterns back!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1166"/>
         <source>Remove window/dialog tiling patterns</source>
-        <translation type="unfinished"></translation>
+        <translation>הסרת תבנית ריצוף לחלונות/חלוניות</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1173"/>
         <source>Use the same colors and shapes with active and inactive
 windows if this theme distinguishes between them?</source>
-        <translation type="unfinished"></translation>
+        <translation>להשתמש באותם הצבעים והצורות עם חלונות פעילים
+ובלתי פעילים אם ערכת העיצוב הזאת מבדילה ביניהם?</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1177"/>
         <source>Ignore inactive state</source>
-        <translation type="unfinished"></translation>
+        <translation>התעלמות ממצב חוסר פעילות</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1191"/>
@@ -694,7 +697,7 @@ some apps set it themeselves.</source>
         <location filename="../../kvantummanager.ui" line="1830"/>
         <location filename="../../kvantummanager.ui" line="1840"/>
         <source>How to activate view items?</source>
-        <translation type="unfinished"></translation>
+        <translation>כיצד להפעיל את פריטי הצפייה?</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1833"/>
@@ -706,12 +709,14 @@ some apps set it themeselves.</source>
         <source>Draw tree branch lines?
 
 By default, tree branches have indicators but no line.</source>
-        <translation type="unfinished"></translation>
+        <translation>לצייר קווים לענפי העץ?
+
+כברירת מחדל, לענפי העץ יש מחוונים אך אין קו.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1932"/>
         <source>Dialog button layout:</source>
-        <translation type="unfinished"></translation>
+        <translation>פריסת כפתורי חלוניות:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1942"/>
@@ -982,7 +987,7 @@ By default, combo popups do not cover the combo box.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1547"/>
         <source>Tooltip delay:</source>
-        <translation type="unfinished"></translation>
+        <translation>השהיית חלונית עצה:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="986"/>
@@ -1095,7 +1100,7 @@ for menubars by default.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1741"/>
         <source>Merge menubar with toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>מיזוג סרגל התפריטים עם סרגל הכלים</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1760"/>
@@ -1116,7 +1121,7 @@ between toolbar separators.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1882"/>
         <source>Toolbutton style:</source>
-        <translation type="unfinished"></translation>
+        <translation>סגנון כפתור כלי:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1785"/>
@@ -1126,7 +1131,7 @@ between toolbar separators.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1788"/>
         <source>Underline shortcuts with Alt</source>
-        <translation type="unfinished"></translation>
+        <translation>להציב קו מתחת לקיצורים עם Alt</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1675"/>
@@ -1192,7 +1197,7 @@ i.e., there is no border between them.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1996"/>
         <source>Scrollable menus</source>
-        <translation type="unfinished"></translation>
+        <translation>תפריטים נגללים</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1644"/>
@@ -1531,17 +1536,17 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="663"/>
         <source>The user installation will take priority.</source>
-        <translation type="unfinished"></translation>
+        <translation>התקנת המשתמש תועדף.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="677"/>
         <source>This theme is also installed as user in:</source>
-        <translation type="unfinished"></translation>
+        <translation>ערכת העיצוב הזו מותקנת גם כמשתמש תחת:</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="679"/>
         <source>This installation will take priority.</source>
-        <translation type="unfinished"></translation>
+        <translation>ההתקנה הזאת תועדף.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="779"/>
@@ -1551,7 +1556,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="782"/>
         <source>It could not be restored unless you have a copy of it.</source>
-        <translation type="unfinished"></translation>
+        <translation>אי אפשר לשחזר אלמלא יש לך עותק.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="1395"/>
@@ -1573,7 +1578,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="2266"/>
         <source>A copy of the root config is created.</source>
-        <translation type="unfinished"></translation>
+        <translation>נוצר עותק של הגדרות היסוד.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2277"/>

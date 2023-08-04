@@ -49,21 +49,24 @@ width</source>
         <location filename="../../KvantumPreviewBase.ui" line="152"/>
         <source>Multi-line
  push button</source>
-        <translation type="unfinished"></translation>
+        <translation>כפתור לחיצה
+ פרוס על שורות</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="160"/>
         <location filename="../../KvantumPreviewBase.ui" line="180"/>
         <source>Push button
 with 32px folder icon</source>
-        <translation type="unfinished"></translation>
+        <translation>כפתור לחיצה
+עם סמל תיקייה של 32 פיקסלים</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="210"/>
         <location filename="../../KvantumPreviewBase.ui" line="224"/>
         <source>Default
 push button</source>
-        <translation type="unfinished"></translation>
+        <translation>כפתור לחיצה
+כברירת מחדל</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="266"/>
@@ -73,7 +76,7 @@ push button</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="279"/>
         <source>Button Box</source>
-        <translation type="unfinished"></translation>
+        <translation>תיבת כפתור</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="374"/>
@@ -84,14 +87,15 @@ push button</source>
         <location filename="../../KvantumPreviewBase.ui" line="382"/>
         <location filename="../../KvantumPreviewBase.ui" line="459"/>
         <source>Simple toolbutton</source>
-        <translation type="unfinished"></translation>
+        <translation>כפתור כלי פשוט</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="466"/>
         <location filename="../../KvantumPreviewBase.ui" line="477"/>
         <source>Multi-line
 toolbutton</source>
-        <translation type="unfinished"></translation>
+        <translation>כפתור כלי
+בכמה שורות</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="485"/>
