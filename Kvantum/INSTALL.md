@@ -51,7 +51,7 @@ If you want to compile Kvantum from its source, install the following packages:
 
 To install Kvantum directly, you have the choice to install the stable package **or**, preferably, the git package. Respectively, execute:
 
-    sudo pacman -S kvantum-qt5
+    sudo pacman -S kvantum
 
 Or:
 
