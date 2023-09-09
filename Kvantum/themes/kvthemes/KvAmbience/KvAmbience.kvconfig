@@ -271,10 +271,10 @@ text.shadow=false
 [Tab]
 inherits=PanelButtonCommand
 interior.element=tab
-text.margin.left=7
-text.margin.right=7
-text.margin.top=3
-text.margin.bottom=3
+text.margin.left=6
+text.margin.right=6
+text.margin.top=2
+text.margin.bottom=2
 frame.expandedElement=ebutton
 frame.element=tab
 focusFrame=true
@@ -286,6 +286,7 @@ text.focus.color=#000000b4
 text.toggle.color=black
 text.toggle.inactive.color=#000000a0
 text.bold=true
+min_width=3font
 
 [TabFrame]
 inherits=PanelButtonCommand
