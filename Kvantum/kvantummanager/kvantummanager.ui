@@ -1044,7 +1044,10 @@ problems with translucency!)</string>
 if window translucency is enabled.
 
 A translucent SVG background is NOT
-needed for this key to work.</string>
+needed for this key to work.
+
+A negative value means that only the
+opacity of inactive windows is reduced.</string>
                  </property>
                  <property name="text">
                   <string>Reduce window opacity by</string>
@@ -1074,10 +1077,16 @@ needed for this key to work.</string>
 if window translucency is enabled.
 
 A translucent SVG background is NOT
-needed for this key to work.</string>
+needed for this key to work.
+
+A negative value means that only the
+opacity of inactive windows is reduced.</string>
                  </property>
                  <property name="suffix">
                   <string> %</string>
+                 </property>
+                 <property name="minimum">
+                  <number>-90</number>
                  </property>
                  <property name="maximum">
                   <number>90</number>

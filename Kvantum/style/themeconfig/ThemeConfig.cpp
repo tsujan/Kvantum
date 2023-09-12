@@ -631,7 +631,7 @@ theme_spec ThemeConfig::getCompositeSpec()
 
       if (ispec.hasInterior
           || (!nonIntegerScale
-              && getValue(KSL("General"),KSL("reduce_window_opacity")).toInt() > 0))
+              && getValue(KSL("General"),KSL("reduce_window_opacity")).toInt() != 0))
       {
         v = getValue(KSL("General"),KSL("translucent_windows"));
         if (v.isValid())
@@ -696,7 +696,7 @@ theme_spec ThemeConfig::getThemeSpec()
 
   v = getValue(KSL("General"),KSL("reduce_window_opacity"));
   if (v.isValid()) // compositing will be checked by the code
-    r.reduce_window_opacity = qMin(qMax(v.toInt(),0),90);
+    r.reduce_window_opacity = qMin(qMax(v.toInt(),-90),90);
 
   v = getValue(KSL("General"),KSL("reduce_menu_opacity"));
   if (v.isValid()) // compositing will be checked by the code

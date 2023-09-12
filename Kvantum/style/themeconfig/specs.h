@@ -112,7 +112,8 @@ typedef struct {
   /* do we have translucent windows and dialogs? */
   bool translucent_windows;
   /* reduce window opacity by this percentage
-     (if window translucency is enabled)? */
+     (if window translucency is enabled)?
+     A negative value means reducing only the opacity of inactive windows. */
   int reduce_window_opacity;
   /* the same as above but for menus */
   int reduce_menu_opacity;

@@ -168,7 +168,8 @@ void Style::drawBg(QPainter *p, const QWidget *widget) const
   default_frame_spec(fspec);
 
   QString suffix = "-normal";
-  if (isWidgetInactive(widget))
+  bool isInactive(isWidgetInactive(widget));
+  if (isInactive)
     suffix = "-normal-inactive";
 
   if (tspec_.no_window_pattern && (ispec.px > 0 || ispec.py > 0))
@@ -176,10 +177,15 @@ void Style::drawBg(QPainter *p, const QWidget *widget) const
 
   p->setClipRegion(bgndRect, Qt::IntersectClip);
   int ro = tspec_.reduce_window_opacity;
+  if (ro < 0)
+  {
+    if (isInactive) ro = -ro;
+    else ro = 0;
+  }
   if (ro > 0)
   {
     p->save();
-    p->setOpacity(1.0 - static_cast<qreal>(tspec_.reduce_window_opacity)/100.0);
+    p->setOpacity(1.0 - static_cast<qreal>(ro)/100.0);
   }
   int dh = sspec.incrementH ? sspec.minH : qMax(sspec.minH - bgndRect.height(), 0);
   int dw = sspec.incrementW ? sspec.minW : qMax(sspec.minW - bgndRect.width(), 0);

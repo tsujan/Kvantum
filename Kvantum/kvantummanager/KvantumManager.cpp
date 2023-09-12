@@ -1177,7 +1177,7 @@ void KvantumManager::defaultThemeButtons()
 
     tmp = 0;
     if (defaultSettings.contains ("reduce_window_opacity")) // it's 0 by default
-        tmp = qMin (qMax (defaultSettings.value ("reduce_window_opacity").toInt(), 0), 90);
+        tmp = qMin (qMax (defaultSettings.value ("reduce_window_opacity").toInt(), -90), 90);
     ui->spinReduceOpacity->setValue (tmp);
 
     tmp = 0;
@@ -1587,7 +1587,7 @@ void KvantumManager::tabChanged (int index)
                 if (themeSettings.contains ("reduce_window_opacity"))
                 {
                     int rwo = themeSettings.value ("reduce_window_opacity").toInt();
-                    rwo = qMin (qMax (rwo, 0), 90);
+                    rwo = qMin (qMax (rwo, -90), 90);
                     ui->spinReduceOpacity->setValue (rwo);
                 }
                 if (themeSettings.contains ("reduce_menu_opacity"))
@@ -2470,7 +2470,7 @@ void KvantumManager::writeConfig()
         themeSettings.beginGroup ("General");
         if (themeSettings.value ("composite").toBool() == ui->checkBoxNoComposite->isChecked()
             || themeSettings.value ("translucent_windows").toBool() != ui->checkBoxTrans->isChecked()
-            || qMin (qMax (themeSettings.value ("reduce_window_opacity").toInt(), 0), 90) != ui->spinReduceOpacity->value()
+            || qMin (qMax (themeSettings.value ("reduce_window_opacity").toInt(), -90), 90) != ui->spinReduceOpacity->value()
             || qMin (qMax (themeSettings.value ("reduce_menu_opacity").toInt(), 0), 90) != ui->spinReduceMenuOpacity->value()
             || themeSettings.value ("blurring").toBool() != ui->checkBoxBlurWindow->isChecked()
             || themeSettings.value ("popup_blurring").toBool() != ui->checkBoxBlurPopup->isChecked()

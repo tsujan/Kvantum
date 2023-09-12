@@ -544,7 +544,7 @@ tooltip_blur_radius               Integer             The corner radii for blurr
 
 translucent_windows               true/false          Translucent windows and dialogs?
                                                       This requires a translucent SVG
-                                                      element for windows or a positive value
+                                                      element for windows or a nonzero value
                                                       for "reduce_window_opacity". A false
                                                       value, its absence or a false value for
                                                       "composite" means no translucency.
@@ -563,6 +563,10 @@ reduce_window_opacity             Integer             If "translucent_windows" i
                                                       window background exists in the SVG image
                                                       or not. The default value is 0 and the
                                                       maximum is 90.
+
+                                                      NOTE: A negative value means that the
+                                                      opacity will be reduced only for inactive
+                                                      windows.
 
 reduce_menu_opacity               Integer             As above but for menus.
 
