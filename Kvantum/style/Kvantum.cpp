@@ -9146,12 +9146,9 @@ void Style::drawControl(QStyle::ControlElement element,
                     && (!toolbarComboBox || !qobject_cast<QComboBox*>(child))
                     && palette.color(QPalette::Active, QPalette::WindowText) == toolbarTxtCol)
                 {
-                  palette.setColor(QPalette::Active, QPalette::WindowText,
-                                   standardPalette().color(QPalette::Active,QPalette::WindowText));
-                  palette.setColor(QPalette::Inactive, QPalette::WindowText,
-                                   standardPalette().color(QPalette::Inactive,QPalette::WindowText));
-                  palette.setColor(QPalette::Disabled, QPalette::WindowText,
-                                   standardPalette().color(QPalette::Disabled,QPalette::WindowText));
+                  palette.setColor(QPalette::Active, QPalette::WindowText, txtCol);
+                  palette.setColor(QPalette::Inactive, QPalette::WindowText, inactiveTxtCol);
+                  palette.setColor(QPalette::Disabled, QPalette::WindowText, disabledTxtCol);
                   palette.setColor(QPalette::Active, QPalette::ButtonText, txtCol);
                   palette.setColor(QPalette::Inactive, QPalette::ButtonText, inactiveTxtCol);
                   palette.setColor(QPalette::Disabled, QPalette::ButtonText, disabledTxtCol);
