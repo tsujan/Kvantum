@@ -107,6 +107,7 @@ lxqtmainmenu_iconsize=22
 transparent_pcmanfm_view=false
 no_selection_tint=true
 transparent_arrow_button=true
+centered_forms=true
 
 [PanelButtonCommand]
 frame=true
