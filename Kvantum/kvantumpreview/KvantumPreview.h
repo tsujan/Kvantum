@@ -60,16 +60,9 @@ public:
     auto cur = QDateTime::currentDateTime();
     dateTimeEdit->setDateTime (cur);
     dateTimeEdit_2->setDateTime (cur);
-    dateTimeEdit_3->setDateTime (cur);
-    dateTimeEdit_4->setDateTime (cur);
     auto l = QLocale(locale().language(), locale().country());
     dateTimeEdit->setLocale (l);
     dateTimeEdit_2->setLocale (l);
-    dateTimeEdit_3->setLocale (l);
-    dateTimeEdit_4->setLocale (l);
-
-    dateTimeEdit_3->setCalendarPopup (true);
-    dateTimeEdit_4->setCalendarPopup (true);
 
     /* a workaround for a bug in QPushButton with a shared menu */
     pushButton_8->setFocusPolicy(Qt::NoFocus);
@@ -87,10 +80,29 @@ public:
     lineedit->setClearButtonEnabled (true);
     toolBar_2->addWidget (lineedit);
     toolBar_2->addSeparator();
-    /*auto dte = new QDateTimeEdit();
-    dte->setCalendarPopup(true);
-    toolBar_2->addWidget (dte);*/
     toolBar_2->addWidget (new QSpinBox());
+
+    /* add a toolbar below the top ones */
+    addToolBarBreak(Qt::TopToolBarArea);
+    QToolBar *toolBar = new QToolBar (this);
+    toolBar->setFloatable(true);
+    toolBar->setMovable(true);
+    addToolBar (toolBar);
+    /* date-time editor with popup */
+    dte_ = new QDateTimeEdit();
+    dte_->setDateTime (cur);
+    dte_->setLocale (l);
+    dte_->setCalendarPopup (true);
+    toolBar->addWidget (dte_);
+    toolBar->addSeparator();
+    /** progress-bar */
+    QProgressBar *pb = new QProgressBar();
+    pb->setValue (50);
+    toolBar->addWidget (pb);
+    /* spacer */
+    QWidget *spacer = new QWidget();
+    spacer->setSizePolicy (QSizePolicy::Expanding, QSizePolicy::Preferred);
+    toolBar->addWidget (spacer);
 
     /* add a progress-bar to the first cell of the table widget */
     if (tableWidget->rowCount() > 0 && tableWidget->columnCount() > 0) {
@@ -98,7 +110,7 @@ public:
       QHBoxLayout *layout = new QHBoxLayout (container);
       layout->setAlignment (Qt::AlignCenter);
       layout->setContentsMargins (1, 1, 1, 1);
-      QProgressBar *pb = new QProgressBar();
+      pb = new QProgressBar();
       pb->setValue (50);
       layout->addWidget (pb);
       container->setLayout (layout);
@@ -149,8 +161,8 @@ private slots:
 
     dateTimeEdit->setDisplayFormat (f);
     dateTimeEdit_2->setDisplayFormat (f);
-    dateTimeEdit_3->setDisplayFormat (f);
-    dateTimeEdit_4->setDisplayFormat (f);
+    dte_->setDisplayFormat (f);
+    dte_->setDisplayFormat (f);
 
     /* FIXME Why isn't the close button position
        updated after changing layout direction? */
@@ -223,6 +235,9 @@ private slots:
   void setDisabledState (int state) {
     checkBox_8->setCheckState(static_cast<Qt::CheckState>(state));
   }
+
+private:
+  QDateTimeEdit *dte_;
 };
 
 #endif // KVANTUMPREVIEW_H

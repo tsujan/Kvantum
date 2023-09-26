@@ -1103,16 +1103,6 @@ check box</string>
      </item>
      <item row="1" column="1">
       <layout class="QGridLayout" name="gridLayout_8">
-       <item row="6" column="0">
-        <widget class="QLineEdit" name="lineEdit_2">
-         <property name="text">
-          <string>Frameless (no difference)</string>
-         </property>
-         <property name="frame">
-          <bool>false</bool>
-         </property>
-        </widget>
-       </item>
        <item row="0" column="0">
         <widget class="QComboBox" name="comboBox">
          <item>
@@ -1598,6 +1588,16 @@ check box</string>
          </property>
         </widget>
        </item>
+       <item row="6" column="0">
+        <widget class="QLineEdit" name="lineEdit_2">
+         <property name="text">
+          <string>Frameless (no difference)</string>
+         </property>
+         <property name="frame">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
        <item row="6" column="1">
         <widget class="QLineEdit" name="lineEdit_4">
          <property name="enabled">
@@ -1635,16 +1635,6 @@ check box</string>
         <widget class="QDateTimeEdit" name="dateTimeEdit">
          <property name="buttonSymbols">
           <enum>QAbstractSpinBox::PlusMinus</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="9" column="0">
-        <widget class="QDateTimeEdit" name="dateTimeEdit_3"/>
-       </item>
-       <item row="9" column="1">
-        <widget class="QDateTimeEdit" name="dateTimeEdit_4">
-         <property name="enabled">
-          <bool>false</bool>
          </property>
         </widget>
        </item>
@@ -3760,22 +3750,6 @@ check box</string>
     <hint type="destinationlabel">
      <x>408</x>
      <y>216</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>dateTimeEdit_3</sender>
-   <signal>dateTimeChanged(QDateTime)</signal>
-   <receiver>dateTimeEdit_4</receiver>
-   <slot>setDateTime(QDateTime)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>277</x>
-     <y>485</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>522</x>
-     <y>485</y>
     </hint>
    </hints>
   </connection>

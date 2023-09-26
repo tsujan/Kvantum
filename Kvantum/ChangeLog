@@ -2,6 +2,7 @@ V1.0.11
 ---------
  * Ensure an opaque base color for combo popups on toolbars.
  * Affect only inactive windows if the opacity reduction is negative.
+ * Added a toolbar, containing a date-time editor with popup and a progress-bar, below the top toolbars of kvantumpreview.
 
 V1.0.10
 ---------
