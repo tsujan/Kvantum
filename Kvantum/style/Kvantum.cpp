@@ -9146,9 +9146,12 @@ void Style::drawControl(QStyle::ControlElement element,
                     && (!toolbarComboBox || !qobject_cast<QComboBox*>(child))
                     && palette.color(QPalette::Active, QPalette::WindowText) == toolbarTxtCol)
                 {
-                  palette.setColor(QPalette::Active, QPalette::WindowText, txtCol);
-                  palette.setColor(QPalette::Inactive, QPalette::WindowText, inactiveTxtCol);
-                  palette.setColor(QPalette::Disabled, QPalette::WindowText, disabledTxtCol);
+                  palette.setColor(QPalette::Active, QPalette::WindowText,
+                                   standardPalette().color(QPalette::Active,QPalette::WindowText));
+                  palette.setColor(QPalette::Inactive, QPalette::WindowText,
+                                   standardPalette().color(QPalette::Inactive,QPalette::WindowText));
+                  palette.setColor(QPalette::Disabled, QPalette::WindowText,
+                                   standardPalette().color(QPalette::Disabled,QPalette::WindowText));
                   palette.setColor(QPalette::Active, QPalette::ButtonText, txtCol);
                   palette.setColor(QPalette::Inactive, QPalette::ButtonText, inactiveTxtCol);
                   palette.setColor(QPalette::Disabled, QPalette::ButtonText, disabledTxtCol);
@@ -9508,7 +9511,8 @@ void Style::drawControl(QStyle::ControlElement element,
         frame_spec fspec = getFrameSpec(group);
         const indicator_spec dspec = getIndicatorSpec(group);
         label_spec lspec = getLabelSpec(group);
-        QWidget *p = qobject_cast<QTabWidget*>(getParent(widget,1));
+        QWidget *p = getParent(widget,1);
+
         if (isPlasma_ && widget && widget->window()->testAttribute(Qt::WA_NoSystemBackground))
         {
           lspec.left = lspec.right = lspec.top = lspec.bottom = 0;
@@ -9622,8 +9626,9 @@ void Style::drawControl(QStyle::ControlElement element,
 
         if (opt->features & QStyleOptionButton::Flat) // respect the text color of the parent widget
         {
-          lspec.normalColor = getName(standardPalette().color(QPalette::Active,QPalette::WindowText));
-          lspec.normalInactiveColor = getName(standardPalette().color(QPalette::Inactive,QPalette::WindowText));
+          QPalette pal = widget ? widget->palette() : standardPalette();
+          lspec.normalColor = getName(pal.color(QPalette::Active,QPalette::WindowText));
+          lspec.normalInactiveColor = getName(pal.color(QPalette::Inactive,QPalette::WindowText));
         }
 
         QStyleOptionButton o(*opt);
@@ -9783,7 +9788,7 @@ void Style::drawControl(QStyle::ControlElement element,
           forceButtonTextColor(widget,col);
         }
 
-        QWidget *p = qobject_cast<QTabWidget*>(getParent(widget,1));
+        QWidget *p = getParent(widget,1);
         if (QTabWidget *tw = qobject_cast<QTabWidget*>(p))
         { // tab corner widget
           if (opt->text.isEmpty()

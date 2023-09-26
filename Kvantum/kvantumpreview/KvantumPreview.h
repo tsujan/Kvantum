@@ -84,25 +84,25 @@ public:
 
     /* add a toolbar below the top ones */
     addToolBarBreak(Qt::TopToolBarArea);
-    QToolBar *toolBar = new QToolBar (this);
-    toolBar->setFloatable(true);
-    toolBar->setMovable(true);
-    addToolBar (toolBar);
+    QToolBar *extraToolBar = new QToolBar (this);
+    extraToolBar->setFloatable(true);
+    extraToolBar->setMovable(true);
+    addToolBar (extraToolBar);
     /* date-time editor with popup */
     dte_ = new QDateTimeEdit();
     dte_->setDateTime (cur);
     dte_->setLocale (l);
     dte_->setCalendarPopup (true);
-    toolBar->addWidget (dte_);
-    toolBar->addSeparator();
-    /** progress-bar */
+    extraToolBar->addWidget (dte_);
+    extraToolBar->addSeparator();
+    /* progress-bar */
     QProgressBar *pb = new QProgressBar();
     pb->setValue (50);
-    toolBar->addWidget (pb);
+    extraToolBar->addWidget (pb);
     /* spacer */
     QWidget *spacer = new QWidget();
     spacer->setSizePolicy (QSizePolicy::Expanding, QSizePolicy::Preferred);
-    toolBar->addWidget (spacer);
+    extraToolBar->addWidget (spacer);
 
     /* add a progress-bar to the first cell of the table widget */
     if (tableWidget->rowCount() > 0 && tableWidget->columnCount() > 0) {
