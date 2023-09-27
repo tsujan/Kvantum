@@ -9117,21 +9117,18 @@ void Style::drawControl(QStyle::ControlElement element,
       if (!stylable)
       {
         if (widget && option->styleObject)
-        { // correct foreground colors if needed (see the case of stylable toolbar below)
+        { // restore or correct foreground colors if needed (see the case of stylable toolbar below)
           QString toolbarState = option->styleObject->property("_kv_toolbar").toString();
           if (toolbarState.isEmpty() // no child palette checked
               || toolbarState == "styled") // the toolbar was styled before
           {
             QColor txtCol = standardPalette().color(QPalette::Active, QPalette::Text);
-            QColor pTxtCol = standardPalette().color(QPalette::PlaceholderText);
             QColor toolbarTxtCol(getFromRGBA(getLabelSpec(group).normalColor));
 
             if (enoughContrast(txtCol, toolbarTxtCol))
             {
               bool toolbarComboBox(!getFrameSpec(QStringLiteral("ToolbarComboBox")).element.isEmpty()
                                    || !getInteriorSpec(QStringLiteral("ToolbarComboBox")).element.isEmpty());
-              QColor inactiveTxtCol = standardPalette().color(QPalette::Inactive, QPalette::Text);
-              QColor disabledTxtCol = standardPalette().color(QPalette::Disabled, QPalette::Text);
 
               const QList<QWidget*> children = widget->findChildren<QWidget*>(QString(), Qt::FindDirectChildrenOnly);
               for (QWidget *child : children)
@@ -9146,18 +9143,37 @@ void Style::drawControl(QStyle::ControlElement element,
                     && (!toolbarComboBox || !qobject_cast<QComboBox*>(child))
                     && palette.color(QPalette::Active, QPalette::WindowText) == toolbarTxtCol)
                 {
-                  palette.setColor(QPalette::Active, QPalette::WindowText, txtCol);
-                  palette.setColor(QPalette::Inactive, QPalette::WindowText, inactiveTxtCol);
-                  palette.setColor(QPalette::Disabled, QPalette::WindowText, disabledTxtCol);
-                  palette.setColor(QPalette::Active, QPalette::ButtonText, txtCol);
-                  palette.setColor(QPalette::Inactive, QPalette::ButtonText, inactiveTxtCol);
-                  palette.setColor(QPalette::Disabled, QPalette::ButtonText, disabledTxtCol);
+                  palette.setColor(QPalette::Active, QPalette::WindowText,
+                                   standardPalette().color(QPalette::Active,QPalette::WindowText));
+                  palette.setColor(QPalette::Inactive, QPalette::WindowText,
+                                   standardPalette().color(QPalette::Inactive,QPalette::WindowText));
+                  palette.setColor(QPalette::Disabled, QPalette::WindowText,
+                                   standardPalette().color(QPalette::Disabled,QPalette::WindowText));
                   if (qobject_cast<QLabel*>(child))
                   {
                     palette.setColor(QPalette::Active, QPalette::Text, txtCol);
-                    palette.setColor(QPalette::Inactive, QPalette::Text, inactiveTxtCol);
-                    palette.setColor(QPalette::Disabled, QPalette::Text, disabledTxtCol);
-                    palette.setColor(QPalette::PlaceholderText, pTxtCol);
+                    palette.setColor(QPalette::Inactive, QPalette::Text,
+                                     standardPalette().color(QPalette::Inactive, QPalette::Text));
+                    palette.setColor(QPalette::Disabled, QPalette::Text,
+                                     standardPalette().color(QPalette::Disabled, QPalette::Text));
+                    palette.setColor(QPalette::PlaceholderText,
+                                     standardPalette().color(QPalette::PlaceholderText));
+                    /* see the case of stylable toolbar for the reason */
+                    palette.setColor(QPalette::Active, QPalette::ButtonText,
+                                     standardPalette().color(QPalette::Active,QPalette::WindowText));
+                    palette.setColor(QPalette::Inactive, QPalette::ButtonText,
+                                     standardPalette().color(QPalette::Inactive,QPalette::WindowText));
+                    palette.setColor(QPalette::Disabled, QPalette::ButtonText,
+                                     standardPalette().color(QPalette::Disabled,QPalette::WindowText));
+                  }
+                  else
+                  {
+                    palette.setColor(QPalette::Active, QPalette::ButtonText,
+                                     standardPalette().color(QPalette::Active,QPalette::ButtonText));
+                    palette.setColor(QPalette::Inactive, QPalette::ButtonText,
+                                     standardPalette().color(QPalette::Inactive,QPalette::ButtonText));
+                    palette.setColor(QPalette::Disabled, QPalette::ButtonText,
+                                     standardPalette().color(QPalette::Disabled,QPalette::ButtonText));
                   }
                   forcePalette(child, palette);
                 }
@@ -9208,9 +9224,12 @@ void Style::drawControl(QStyle::ControlElement element,
                   if (txtCol != palette.color(QPalette::Active, QPalette::Text))
                   {
                     palette.setColor(QPalette::Active, QPalette::Text, txtCol);
-                    palette.setColor(QPalette::Inactive, QPalette::Text, inactiveTxtCol);
-                    palette.setColor(QPalette::Disabled, QPalette::Text, disabledTxtCol);
-                    palette.setColor(QPalette::PlaceholderText, pTxtCol);
+                    palette.setColor(QPalette::Inactive, QPalette::Text,
+                                     standardPalette().color(QPalette::Inactive, QPalette::Text));
+                    palette.setColor(QPalette::Disabled, QPalette::Text,
+                                     standardPalette().color(QPalette::Disabled, QPalette::Text));
+                    palette.setColor(QPalette::PlaceholderText,
+                                     standardPalette().color(QPalette::PlaceholderText));
                     forcePalette(le, palette);
                   }
                   /* if this line-edit is inside a combo, its palette is
