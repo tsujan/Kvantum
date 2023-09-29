@@ -352,7 +352,7 @@ Mitmesugust → Järgi võimalusel aktiivset töölauakeskkonda</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="227"/>
         <source>&lt;br&gt;&lt;br&gt;Since &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; is independent of all desktop environments, you first need to &lt;i&gt;activate&lt;/i&gt; it with a Qt platform integration program. KDE and LXQt provide simple tools for changing the active Qt style plugin. With other platforms, you need a Qt configuration tool.&lt;br/&gt;&lt;br/&gt;Under KDE, also select and apply the color scheme of this theme because some KDE applications may get their colors directly from the KDE color scheme.&lt;br/&gt;&lt;br/&gt;Running applications will get the new theme after being closed and reopened. Logging out and in would be good for all KDE/LXQt parts to see it completely.</source>
-        <translation type="unfinished">&lt;br&gt;&lt;br&gt;Since &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; is independent of all desktop environments, you first need to &lt;i&gt;activate&lt;/i&gt; it with a Qt platform integration program. KDE and LXQt provide simple tools for changing the active Qt style plugin. With other platforms, you need a Qt configuration tool.&lt;br/&gt;&lt;br/&gt;Under KDE, also select and apply the color scheme of this theme because some KDE applications may get their colors directly from the KDE color scheme.&lt;br/&gt;&lt;br/&gt;Running applications will get the new theme after being closed and reopened. Logging out and in would be good for all KDE/LXQt parts to see it completely.</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="531"/>
@@ -507,7 +507,10 @@ Usually, a value of 2 is enough.</source>
 and translucent menu/tooltip SVG elements.
 
 Automatically checked if window blurring is enabled.</source>
-        <translation></translation>
+        <translation>Vajab KDE hägususe efekti, seda toetavat graafikakaarti,
+ja läbipaistva menüü/tööriistavihje SVG-elemente.
+
+Kontrollitakse automaatselt, kas akende hägustamine on lubatud.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="955"/>
@@ -560,7 +563,7 @@ kui mõne vidina olekut muudetakse, enamasti hiire abil.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1161"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A 200ms fading animation when the state of some widgets is changed, mostly by the mouse.&lt;/p&gt;&lt;p&gt;The CPU usage is negligible because often only one widget is animated. The resulting visual effect depends on the active theme.&lt;/p&gt;&lt;p&gt;These widgets are supported: buttons (including radio buttons and check boxes), combo boxes, spin boxes, slider handles, line-edits and scroll views.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;200 ms tuhmuv animatsioon, kui mõne vidina olekut (enamasti hiirega) muudetakse.&lt;/p&gt;&lt;p&gt;Protsessori kasutus on tühine, kuna sageli animeeritakse ainult ühte vidinat. Saadud visuaalne efekt sõltub aktiivsest teemast.&lt;/p&gt;&lt;p&gt;Toetatakse neid vidinaid: nupud (sh raadionupud ja märkeruudud), liitkastid, keerutamiskastid, liuguri käepidemed, rea redigeerimised ja kerimisvaated.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1164"/>

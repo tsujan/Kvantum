@@ -177,7 +177,7 @@ with LXQt Session Settings.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="495"/>
         <source>Iconless menus</source>
-        <translation type="unfinished"></translation>
+        <translation>Menu bez ikon</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="510"/>
@@ -450,32 +450,32 @@ Usually, a value of 2 is enough.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="821"/>
         <source>Menu:</source>
-        <translation type="unfinished"></translation>
+        <translation>Menu:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="828"/>
         <source>Tooltip:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pasek narzędzi:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="852"/>
         <source>Contrast Effect</source>
-        <translation type="unfinished"></translation>
+        <translation>Efekt kontrastu</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="858"/>
         <source>Saturation:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nasycenie:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="865"/>
         <source>Intensity:</source>
-        <translation type="unfinished"></translation>
+        <translation>Intensywność:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="872"/>
         <source>Contrast:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontrast:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="949"/>
@@ -1231,7 +1231,7 @@ the Ctrl key before pressing the button.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2128"/>
         <source>app1,app2,app3</source>
-        <translation type="unfinished"></translation>
+        <translation>app1,app2,app3</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2156"/>
@@ -1578,7 +1578,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="2970"/>
         <source>Translators</source>
-        <translation type="unfinished"></translation>
+        <translation>Tłumacze</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2968"/>

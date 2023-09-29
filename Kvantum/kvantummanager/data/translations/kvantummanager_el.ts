@@ -357,7 +357,8 @@ Miscellaneous → Respect current DE if possible</source>
         <location filename="../../kvantummanager.ui" line="531"/>
         <source>By default, both active and inactive translucent windows
 will be blurred if blurring is enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Εξ ορισμού, τα ενεργά και μη ενεργά ημιδιαφανή παράθυρα
+θα είναι θολά αν η θόλωση είναι ενεργοποιημένη.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="535"/>
@@ -369,7 +370,9 @@ will be blurred if blurring is enabled.</source>
         <source>By default, vertical toolbars are not styled.
 
 If this is disabled, see the above option.</source>
-        <translation type="unfinished"></translation>
+        <translation>Εξ ορισμού, οι κατακόρυφες γραμμές εργαλείων δεν έχουν κάποια τεχνοτροπία.
+
+Αν είναι απενεργοποιημένο, ανατρέξτε στην ανωτέρω επιλογή.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="547"/>
