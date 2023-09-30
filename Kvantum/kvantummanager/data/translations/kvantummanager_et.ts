@@ -384,12 +384,13 @@ Kui see on välja lülitatud, vaata ülaltoodud valikut.</translation>
         <location filename="../../kvantummanager.ui" line="595"/>
         <source>If checked, the contents of a form will be
 horizontally centered as far as possible.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kui see valik on kasutusel, siis vormi sisu joondatakse
+rõhtsalt keskele sedavõrd, kui see on võimalik.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="599"/>
         <source>Centered form layouts</source>
-        <translation type="unfinished"></translation>
+        <translation>Joonda vormid keskele</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="618"/>
@@ -1256,11 +1257,14 @@ needed for this key to work.
 
 A negative value means that only the
 opacity of inactive windows is reduced.</source>
-        <translation type="unfinished">See vähendab akna läbipaistmatust,
-kui akna läbipaistvus on lubatud.
+        <translation>Kui akna läbipaistvus on lubatud, siis
+see vähendab akna läbipaistmatust.
 
 Selle valiku töötamiseks pole
-läbipaistev SVG taust vajalik.</translation>
+läbipaistev SVG taust vajalik.
+
+Negatiivne väärtus tähistab, et mitteaktiivsete
+akende läbipaistmatust vähendatakse.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1780"/>
