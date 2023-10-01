@@ -1347,11 +1347,14 @@ needed for this key to work.
 
 A negative value means that only the
 opacity of inactive windows is reduced.</source>
-        <translation type="unfinished">Це зменшить непрозорість вікна
+        <translation>Це зменшить непрозорість вікна
 якщо її увімкнено.
 
 Напівпрозоре тло SVG НЕ
-обов&apos;язкове для роботи цієї опції.</translation>
+обов&apos;язкове для роботи цієї опції.
+
+Від&apos;ємне значення означає, що зменшується
+непрозорість лише неактивних вікон.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1780"/>
