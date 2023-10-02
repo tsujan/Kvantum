@@ -1336,11 +1336,14 @@ needed for this key to work.
 
 A negative value means that only the
 opacity of inactive windows is reduced.</source>
-        <translation type="unfinished">Dit vermindert de vensterdoorzichtigheid als
+        <translation>Dit vermindert de vensterdoorzichtigheid als
 vensterdoorzichtigheid is ingeschakeld.
 
 Dit item werkt ook zónder een doorzichtige svg-
-achtergrond.</translation>
+achtergrond.
+
+Door een negatieve waarde in te stellen, wordt
+de doorzichtigheid van inactieve vensters verminderd.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1780"/>
