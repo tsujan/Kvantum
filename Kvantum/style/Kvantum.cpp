@@ -3054,14 +3054,14 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         if (option->state & State_Item)
         {
           const QLineF line = rtl ?
-                QLineF(QPointF(rf.left(), centerY), QPointF(centerX - expanderAdjust, centerY)) :
-                QLineF(QPointF(centerX + expanderAdjust, centerY), QPointF(rf.right(), centerY));
+                QLineF(QPointF(rf.left() + 1, centerY), QPointF(centerX - expanderAdjust - 1, centerY)) :
+                QLineF(QPointF(centerX + expanderAdjust + 1, centerY), QPointF(rf.right() - 1, centerY));
           painter->drawLine(line);
         }
         // the bottom if we have a sibling
         if (option->state & State_Sibling)
         {
-          const QLineF line(QPointF(centerX, centerY + expanderAdjust), QPointF(centerX, rf.bottom()));
+          const QLineF line(QPointF(centerX, centerY + expanderAdjust + 1), QPointF(centerX, rf.bottom() - 1));
           painter->drawLine(line);
         }
         painter->restore();
