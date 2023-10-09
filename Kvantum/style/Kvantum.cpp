@@ -3043,6 +3043,14 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         else
           col = option->palette.color(QPalette::Dark);
         if (!col.isValid()) break;
+
+        /* With a translucent light/dark color, small overlaps are visible. They could be
+           avoided by adding or subtracting 1 in proper places, but that method would cause
+           gaps on mouse-over with scale factors. As a workaround, we make the color opaque. */
+        QColor baseCol = standardPalette().color(QPalette::Base);
+        baseCol.setAlpha(255);
+        col = overlayColor(baseCol, col);
+
         painter->save();
         painter->setPen(col);
         if (option->state & (State_Item | State_Children | State_Sibling))
