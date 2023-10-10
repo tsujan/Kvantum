@@ -383,12 +383,13 @@ If this is disabled, see the above option.</source>
         <location filename="../../kvantummanager.ui" line="595"/>
         <source>If checked, the contents of a form will be
 horizontally centered as far as possible.</source>
-        <translation type="unfinished"></translation>
+        <translation>Αν είναι επιλεγμένο, το περιεχόμενο μιας φόρμας
+θα κεντράρεται οριζοντίως στα πλαίσια του εφικτού.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="599"/>
         <source>Centered form layouts</source>
-        <translation type="unfinished"></translation>
+        <translation>Κεντραρισμένες διατάξεις φορμών</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="618"/>
