@@ -24,14 +24,14 @@
     <message>
         <location filename="../../kvantummanager.ui" line="44"/>
         <source>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; comes with many themes but external themes can also be installed for being used by it. Here you could choose a theme folder and then press the button below to install it in your Home.&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; jest dostarczany z wieloma motywami, ale można także dograć motywy zewnętrzne. Tutaj możesz wybrać folder z motywem, a następnie nacisnąć przycisk poniżej, aby zainstalować go w swoim katalogu domowym.&lt;/center&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="76"/>
         <source>Select a Kvantum
 theme folder</source>
         <translation>Wybierz folder
-motywów Kvantum</translation>
+motywu Kvantum</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="113"/>
@@ -86,12 +86,14 @@ Nieaktywny przycisk oznacza,
         <source>Revert to the default (root)
 settings of this theme.
 (Ctrl+Z)</source>
-        <translation type="unfinished"></translation>
+        <translation>Przywróć domyślne
+ustawienia tego motywu.
+(Ctrl+Z)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="326"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Revert to the default (root) settings of this theme!&lt;/p&gt;&lt;p&gt;When clicked and confirmed, all changes to the configuration will be lost but the probable customized SVG file will remain intact.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Przywróć domyślne ustawienia tego motywu!&lt;/p&gt;&lt;p&gt;Po kliknięciu i potwierdzeniu wszystkie zmiany w konfiguracji zostaną utracone, ale prawdopodobnie zmodyfikowany plik SVG pozostanie nienaruszony.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="329"/>
@@ -107,7 +109,7 @@ settings of this theme.
         <location filename="../../kvantummanager.ui" line="342"/>
         <source>Save this configuration
 (Ctrl+S)</source>
-        <translation>Zapisz tą konfigurację
+        <translation>Zapisz tę konfigurację
 (Ctrl+S)</translation>
     </message>
     <message>
@@ -129,17 +131,17 @@ settings of this theme.
     <message>
         <location filename="../../kvantummanager.ui" line="369"/>
         <source>Hacks</source>
-        <translation type="unfinished"></translation>
+        <translation>Hacki</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="396"/>
         <source>Transparent Dolphin view</source>
-        <translation type="unfinished"></translation>
+        <translation>Przezroczysty widok w Dolphin</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="424"/>
         <source>Normal font for default push buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>Normalna czcionka dla domyślnych przycisków</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="444"/>
@@ -148,12 +150,16 @@ settings of this theme.
 Under LXQt, it needs logging out and in or closing
 PCManFM-qt and then, stopping and starting Desktop
 with LXQt Session Settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>Scal panel boczny PCManFM-qt z jego otoczeniem.
+
+W LXQt wymaga to wylogowania i zalogowania lub zamknięcia
+PCManFM-qt, a następnie zatrzymanie i uruchomienie pulpitu
+z ustawieniami sesji LXQt.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="451"/>
         <source>Transparent sidepane for PCManFM-qt</source>
-        <translation type="unfinished"></translation>
+        <translation>Przezroczysty panel boczny dla PCManFM-qt</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="466"/>
@@ -311,7 +317,7 @@ as far as possible.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="776"/>
         <source>Compositing &amp;&amp; General Look</source>
-        <translation type="unfinished"></translation>
+        <translation>Komponowanie i ogólny wygląd</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="975"/>
@@ -336,7 +342,7 @@ Miscellaneous → Respect current DE if possible</source>
     <message>
         <location filename="../../kvantummanager.ui" line="227"/>
         <source>&lt;br&gt;&lt;br&gt;Since &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; is independent of all desktop environments, you first need to &lt;i&gt;activate&lt;/i&gt; it with a Qt platform integration program. KDE and LXQt provide simple tools for changing the active Qt style plugin. With other platforms, you need a Qt configuration tool.&lt;br/&gt;&lt;br/&gt;Under KDE, also select and apply the color scheme of this theme because some KDE applications may get their colors directly from the KDE color scheme.&lt;br/&gt;&lt;br/&gt;Running applications will get the new theme after being closed and reopened. Logging out and in would be good for all KDE/LXQt parts to see it completely.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br&gt;&lt;br&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; jest niezależny od środowisk graficznych, więc należy go najpierw &lt;i&gt;aktywować&lt;/i&gt; za pomocą programu integracji platformy Qt. KDE i LXQt zapewniają proste narzędzia do zmiany aktywnej implementacji stylu. W innych środowiskach potrzebne jest narzędzie konfiguracyjne.&lt;br/&gt;&lt;br/&gt;W KDE należy również zastosować schemat kolorów tego motywu, ponieważ niektóre aplikacje KDE mogą pobierać kolory bezpośrednio ze schematu kolorów KDE.&lt;br/&gt;&lt;br/&gt;Uruchomione aplikacje należy zrestartować, aby zobaczyć nowy motyw. Zaloguj się ponownie, aby zobaczyć wszystkie zmiany dla części KDE/LXQt.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="531"/>
@@ -564,7 +570,7 @@ windows if this theme distinguishes between them?</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1200"/>
         <source>Transient scrollbars</source>
-        <translation type="unfinished"></translation>
+        <translation>Chwilowe paski przewijania</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1222"/>
@@ -869,7 +875,11 @@ Zero means tooltips are shown instantly.
 Checking this box removes arrows as far as possible.
 
 If disabled, see Compositing &amp; General Look → Transient scrollbars!</source>
-        <translation type="unfinished"></translation>
+        <translation>Paski przewijania mają domyślnie strzałki dodawania linii i podlinii.
+
+Zaznaczenie tego pola usuwa strzałki tak daleko, jak to możliwe.
+
+Jeśli nieaktywne, zobacz Komponowanie i ogólny wygląd → Chwilowe paski przewijania!</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1691"/>
@@ -1521,13 +1531,13 @@ or update its preview.</source>
         <location filename="../../KvantumManager.cpp" line="1393"/>
         <location filename="../../KvantumManager.cpp" line="1413"/>
         <source>These are the settings that can be safely changed.&lt;br&gt;For the others, click &lt;i&gt;Save&lt;/i&gt; and then edit this file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Te ustawienia można bezpiecznie zmienić.&lt;br&gt;W przypadku pozostałych ustawień kliknij przycisk &lt;i&gt;Zapisz&lt;/i&gt;, a następnie edytuj ten plik:</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="1409"/>
         <location filename="../../KvantumManager.cpp" line="2685"/>
         <source>These are the settings that can be safely changed.&lt;br&gt;For the others, edit this file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Te ustawienia można bezpiecznie zmienić.&lt;br&gt;Pozostałe należy edytować w tym pliku:</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="1811"/>
