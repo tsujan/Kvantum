@@ -2986,7 +2986,6 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
       const indicator_spec dspec = getIndicatorSpec(QStringLiteral("TreeExpander"));
       QRect r = option->rect;
       bool rtl(option->direction == Qt::RightToLeft);
-      qreal expanderAdjust = 0.0;
 
       if (option->state & State_Children)
       {
@@ -3021,57 +3020,62 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           if (rtl)
             painter->restore();
         }
-
-        if (tspec_.tree_branch_line)
-        {
-          int sizeLimit = qMin(qMin(r.width(), r.height()), dspec.size);
-          //if(!( sizeLimit&1)) --sizeLimit; // make it odd
-          expanderAdjust = static_cast<qreal>(sizeLimit)/2 + static_cast<qreal>(1);
-        }
       }
 
-      if (tspec_.tree_branch_line) // adapted from Oxygen
+      if (tspec_.tree_branch_line)
       {
+        const QColor col = (qGray(option->palette.color(QPalette::Window).rgb()) <= 100)
+                ? option->palette.color(QPalette::Light)
+                : option->palette.color(QPalette::Dark);
+
+        if (!col.isValid()) 
+          break;
+
+        const qreal devicePixelRatio = (painter->device())
+                ? painter->device()->devicePixelRatioF()
+                : qApp->devicePixelRatio();
+
+        const qreal pixelRatio = qMax(devicePixelRatio, static_cast<qreal>(1));
+
+        const int sizeLimit = qMin(qMin(r.width(), r.height()), dspec.size);
+        const QRectF indicatorRect(alignedRect(option->direction, Qt::AlignCenter, QSize(sizeLimit, sizeLimit), r));
+        const QPointF indicatorCenter(indicatorRect.center());
+        const qreal centerX = indicatorCenter.x();
+        const qreal centerY = indicatorCenter.y();
+
         const QRectF rf(r); // maximum precision
-        const QPointF center(rf.center());
-        const qreal centerX = center.x();
-        const qreal centerY = center.y();
+        const qreal lineOffset = (sizeLimit % 2 == 0 && pixelRatio == 1.0) 
+                ? 1.0 : 0.5;
 
-        QColor col;
-        if (qGray(option->palette.color(QPalette::Window).rgb()) <= 100)
-          col = option->palette.color(QPalette::Light);
-        else
-          col = option->palette.color(QPalette::Dark);
-        if (!col.isValid()) break;
+        QPainterPath linePath;
+        linePath.setFillRule(Qt::WindingFill);
 
-        /* With a translucent light/dark color, small overlaps are visible. They could be
-           avoided by adding or subtracting 1 in proper places, but that method would cause
-           gaps on mouse-over with scale factors. As a workaround, we make the color opaque. */
-        QColor baseCol = standardPalette().color(QPalette::Base);
-        baseCol.setAlpha(255);
-        col = overlayColor(baseCol, col);
-
-        painter->save();
-        painter->setPen(col);
         if (option->state & (State_Item | State_Children | State_Sibling))
-        {
-          const QLineF line(QPointF(centerX, rf.top()), QPointF(centerX, centerY - expanderAdjust));
-          painter->drawLine(line);
-        }
+          linePath.addRect(QRectF(QPointF(centerX - lineOffset, rf.top()), QPointF(centerX + lineOffset, centerY + lineOffset)));
+
         // the right/left (depending on dir) line will be drawn if there is an item
         if (option->state & State_Item)
         {
-          const QLineF line = rtl ?
-                QLineF(QPointF(rf.left(), centerY), QPointF(centerX - expanderAdjust, centerY)) :
-                QLineF(QPointF(centerX + expanderAdjust, centerY), QPointF(rf.right(), centerY));
-          painter->drawLine(line);
+          const QRectF rect = (rtl)
+                  ? QRectF(QPointF(rf.left(), centerY - lineOffset), QPointF(centerX - lineOffset, centerY + lineOffset)) 
+                  : QRectF(QPointF(centerX + lineOffset, centerY - lineOffset), QPointF(rf.right(), centerY + lineOffset));
+          linePath.addRect(rect);
         }
-        // the bottom if we have a sibling
+
         if (option->state & State_Sibling)
+          linePath.addRect(QRectF(QPointF(centerX - lineOffset, centerY + lineOffset), QPointF(centerX + lineOffset, rf.bottom())));
+
+        if (option->state & State_Children)
         {
-          const QLineF line(QPointF(centerX, centerY + expanderAdjust), QPointF(centerX, rf.bottom()));
-          painter->drawLine(line);
+          QPainterPath indicatorPath;
+          indicatorPath.addRect(indicatorRect);
+          linePath -= indicatorPath;
         }
+
+        painter->save();
+        painter->setBrush(col);
+        painter->setPen(Qt::NoPen);
+        painter->drawPath(linePath);
         painter->restore();
       }
 
