@@ -1271,6 +1271,12 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         }*/
 
         w->move(g.left() + DX, g.top() + DY);
+#if (QT_VERSION >= QT_VERSION_CHECK(6,6,0))
+        /* WARNING: Because of a bug in Qt 6.6, translucent menus may be drawn only partially
+                    after being moved on a non-primary screen -- especially right-click menus.
+                    As a workaround, the menu is resized here. */
+        w->resize(g.size());
+#endif
         movedMenus_.insert(w);
         connect(w, &QObject::destroyed, this, &Style::forgetMovedMenu);
       }
