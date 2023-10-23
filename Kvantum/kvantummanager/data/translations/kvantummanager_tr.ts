@@ -1346,11 +1346,14 @@ needed for this key to work.
 
 A negative value means that only the
 opacity of inactive windows is reduced.</source>
-        <translation type="unfinished">Bu, pencere yarı saydamlığı etkinleştirilirse
-pencere matlığını azaltacaktır.
+        <translation>Bu, pencere yarı saydamlığı etkinleştirilmişse
+pencere opaklığını azaltacaktır.
 
-Bu anahtarın çalışması için yarı saydam bir
-SVG arka planı gerekli DEĞİLDİR.</translation>
+Bu tuşun çalışması için yarı saydam bir SVG 
+arka planı gerekli DEĞİLDİR.
+
+Negatif bir değer, yalnızca etkin olmayan 
+pencerelerin opaklığının azaltılacağı anlamına gelir.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1780"/>
