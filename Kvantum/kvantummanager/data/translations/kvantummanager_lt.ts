@@ -1026,7 +1026,7 @@ Default is &quot;Follow Style&quot;.</source>
         <translation>Veiks tik tuo atveju, jei programa
 neturi nustatyto stiliaus savo kode.
 
-Numatytasis yra &quot;Sekti stiliumi&quot;.</translation>
+Numatytasis yra „Sekti stiliumi“.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1677"/>
@@ -1346,11 +1346,14 @@ needed for this key to work.
 
 A negative value means that only the
 opacity of inactive windows is reduced.</source>
-        <translation type="unfinished">Jeigu yra įjungtas dalinis langų permatomumas,
+        <translation>Jeigu yra įjungtas dalinis langų permatomumas,
 tai sumažins langų nepermatomumą.
 
 Tam, kad veiktų šis raktas, dalinai permatomas
-SVG fonas NĖRA būtinas.</translation>
+SVG fonas NĖRA būtinas.
+
+Neigiama reikšmė reiškia, kad bus sumažinamas
+tik neaktyvių langų nepermatomumas.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1787"/>
@@ -1639,7 +1642,7 @@ arba atnaujinti jo peržiūrą.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="549"/>
         <source>The name of an installable themes should not be &quot;Default&quot;.</source>
-        <translation>Galimų įdiegti apipavidalinimų pavadinimai neturėtų būti &quot;Default&quot;.</translation>
+        <translation>Galimų įdiegti apipavidalinimų pavadinimai neturėtų būti „Default“.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="550"/>
@@ -1651,7 +1654,7 @@ arba atnaujinti jo peržiūrą.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="560"/>
         <source>Installable themes should not have # in their names.</source>
-        <translation>Galimų įdiegti apipavidalinimų pavadinimuose neturėtų būti &quot;#&quot; simbolio.</translation>
+        <translation>Galimų įdiegti apipavidalinimų pavadinimuose neturėtų būti „#“ simbolio.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="570"/>
