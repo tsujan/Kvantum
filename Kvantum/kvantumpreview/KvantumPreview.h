@@ -60,7 +60,11 @@ public:
     auto cur = QDateTime::currentDateTime();
     dateTimeEdit->setDateTime (cur);
     dateTimeEdit_2->setDateTime (cur);
+#if (QT_VERSION >= QT_VERSION_CHECK(6,2,0))
+    auto l = QLocale(locale().language(), locale().territory());
+#else
     auto l = QLocale(locale().language(), locale().country());
+#endif
     dateTimeEdit->setLocale (l);
     dateTimeEdit_2->setLocale (l);
 

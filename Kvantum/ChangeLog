@@ -1,7 +1,7 @@
 V1.0.11
 ---------
  * Made it possible to reduce only the opacity of inactive windows with negative values of the relevant setting (in Kvantum Manager).
- * Added a workaround for a bug in Qt 6.6, because of which, translucent menus may be drawn only partially on a non-primary screen.
+ * Added a workaround for a bug in Qt 6.6, because of which, translucent menus on a non-primary screen might be drawn with their minimum sizes and without contents after being moved.
  * Ensure an opaque base color for combo popups on toolbars.
  * Use the standard palette when restoring the text colors on an unstyled toolbar.
  * Added a workaround for tiny overlaps between tree branch lines with translucent light/dark colors.
