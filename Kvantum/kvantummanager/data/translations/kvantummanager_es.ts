@@ -1352,11 +1352,14 @@ needed for this key to work.
 
 A negative value means that only the
 opacity of inactive windows is reduced.</source>
-        <translation type="unfinished">Reduce la opacidad de la ventana si está
+        <translation>Reduce la opacidad de la ventana si está
 habilitada la translucidez de ventanas.
 
 No se necesita un fondo SVG translúcido
-para que funcione.</translation>
+para que funcione.
+
+Un valor negativo implica que sólo se 
+reduce la opacidad de ventanas inactivas.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1780"/>

@@ -490,12 +490,12 @@ Généralement, une valeur de 2 suffit.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="821"/>
         <source>Menu:</source>
-        <translation>Menu&#xa0;:</translation>
+        <translation>Menu :</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="828"/>
         <source>Tooltip:</source>
-        <translation>Info-bulle&#xa0;:</translation>
+        <translation>Info-bulle :</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="852"/>
@@ -1343,11 +1343,14 @@ needed for this key to work.
 
 A negative value means that only the
 opacity of inactive windows is reduced.</source>
-        <translation type="unfinished">Cela réduira l&apos;opacité de la fenêtre
+        <translation>Cela réduira l&apos;opacité de la fenêtre
 si la translucidité de la fenêtre est activée.
 
 Un fond SVG translucide n&apos;est PAS
-nécessaire pour que cette clé fonctionne.</translation>
+nécessaire pour que cette clé fonctionne.
+
+Une valeur négative signifie que seule
+l&apos;opacité des fenêtres inactives est réduite.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1780"/>
@@ -1385,7 +1388,7 @@ Par défaut, les grands menus sont déroulants.</translation>
 If you have enabled it, you could temporarily disable it
 for a button that can be dragged and dropped by pressing
 the Ctrl key before pressing the button.</source>
-        <translation>Attention&#x202f;: cela peut être assez déroutant au début.
+        <translation>Attention : cela peut être assez déroutant au début.
 
 Si vous l&apos;avez activé, vous pouvez le désactiver temporairement
 pour un bouton qui peut être glissé et déposé en appuyant sur
