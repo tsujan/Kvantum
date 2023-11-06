@@ -581,7 +581,7 @@ stanu niektórych widżetów, głównie za pomocą myszy.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1161"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A 200ms fading animation when the state of some widgets is changed, mostly by the mouse.&lt;/p&gt;&lt;p&gt;The CPU usage is negligible because often only one widget is animated. The resulting visual effect depends on the active theme.&lt;/p&gt;&lt;p&gt;These widgets are supported: buttons (including radio buttons and check boxes), combo boxes, spin boxes, slider handles, line-edits and scroll views.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Animacja zanikania trwająca 200 ms w przypadku zmiany stanu niektórych widżetów, głównie za pomocą myszy.&lt;/p&gt;&lt;p&gt;Zużycie procesora jest znikome, ponieważ często animowany jest tylko jeden widżet. Wynikowy efekt wizualny zależy od aktywnego motywu.&lt;/p&gt;&lt;p&gt;Obsługiwane są te widżety: przyciski (w tym przyciski opcji i pola wyboru), pola kombi, pola obrotowe, uchwyty suwaków, edycje linii i widoki przewijania.&lt;/p&gt;&lt;p&gt; p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Animacja zanikania trwająca 200 ms w przypadku zmiany stanu niektórych widżetów, głównie za pomocą myszy.&lt;/p&gt;&lt;p&gt;Zużycie procesora jest znikome, ponieważ często animowany jest tylko jeden widżet. Wynikowy efekt wizualny zależy od aktywnego motywu.&lt;/p&gt;&lt;p&gt;Obsługiwane są te widżety: przyciski (w tym przyciski opcji i pola wyboru), pola kombi, pola pokrętła, uchwyty suwaków, linie edycji i widoki przewijania.&lt;/p&gt;&lt;p&gt; p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1164"/>
@@ -663,7 +663,7 @@ niektóre aplikacje ustawiają ją samodzielnie.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1381"/>
         <source>Layout spacing:</source>
-        <translation>Rozstaw układów:</translation>
+        <translation>Rozstaw układu:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1405"/>
@@ -696,13 +696,13 @@ Domyślnie 0.</translation>
         <location filename="../../kvantummanager.ui" line="1472"/>
         <source>The width of horizontal spin buttons.
 (Has no effect when spin indicators are vertical.)</source>
-        <translation>Szerokość poziomych przycisków obrotowych.
-(Nie ma żadnego efektu, gdy wskaźniki obrotowe są ustawione pionowo.)</translation>
+        <translation>Szerokość poziomych przycisków pokrętła.
+(Nie ma żadnego efektu, gdy wskaźniki pokrętła są ustawione pionowo.)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1465"/>
         <source>Spin button width: </source>
-        <translation>Szerokość przycisku obrotowego: </translation>
+        <translation>Szerokość przycisku pokrętła: </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1839"/>
@@ -1046,11 +1046,11 @@ two buttons with arrows or plus/minus signs.
 
 Checking this integrates the spin indicators
 into the spin line-edit..</source>
-        <translation>Domyślnie wskaźniki obrotowe są rysowane jako dwa
+        <translation>Domyślnie wskaźniki pokrętła są rysowane jako dwa
 przyciski ze strzałkami lub znakami plus/minus.
 
-Sprawdzenie tego integruje wskaźniki obrotowy
-z edycją linii obrotowej.</translation>
+Sprawdzenie tego integruje wskaźniki pokrętła
+z linią edycji pokrętła.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1705"/>
@@ -1058,10 +1058,10 @@ z edycją linii obrotowej.</translation>
 
 Checking this puts the spin-up indicator above the
 spin-down one inside the spin line-edit.</source>
-        <translation>Domyślnie wskaźniki obrotowy są rysowane na sąsiadujących przyciskach.
+        <translation>Domyślnie wskaźniki pokrętła są rysowane na sąsiadujących przyciskach.
 
-Zaznaczenie tej opcji powoduje umieszczenie wskaźnika rozkręcania
-nad wskaźnikiem rozpędzania w ramach edycji linii obrotowej.</translation>
+Zaznaczenie tej opcji powoduje umieszczenie wskaźnika pokrętła
+w górę nad wskaźnikiem pokrętła w dół w ramach linii edycji pokrętła.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1757"/>
@@ -1247,29 +1247,29 @@ zgrupowane i podnoszone pomiędzy separatorami paska narzędzi.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1684"/>
         <source>Inline spin indicators</source>
-        <translation>Wbudowane wskaźniki obrotowe</translation>
+        <translation>Wbudowane wskaźniki pokrętła</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1732"/>
         <source>Draw the whole editable combo-box as a
 line-edit with arrow (and icon, if it exists)?</source>
         <translation>Narysować całe edytowalne pole kombi jako
-edycję linii ze strzałką (i ikoną, jeśli istnieje)?</translation>
+linię edycji ze strzałką (i ikoną, jeśli istnieje)?</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1736"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Draw the whole editable combo-box as a line-edit with arrow (and icon, if it exists)?&lt;/p&gt;&lt;p&gt;By default, a combo-box consists of a line-edit, a button with arrow on one side and another button with icon on the other side.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Rysować całe edytowalne pole kombi jako edycję linii ze strzałką (i ikoną, jeśli istnieje)?&lt;/p&gt;&lt;p&gt;Domyślnie pole kombi składa się z edycji linii, przycisku ze strzałką po jednej stronie i drugiego przycisku z ikoną po drugiej stronie.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Rysować całe edytowalne pole kombi jako linię edycji ze strzałką (i ikoną, jeśli istnieje)?&lt;/p&gt;&lt;p&gt;Domyślnie pole kombi składa się z linii edycji, przycisku ze strzałką po jednej stronie i drugiego przycisku z ikoną po drugiej stronie.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1739"/>
         <source>Editable combo as line-edit</source>
-        <translation>Edytowalne kombi jako edycja linii</translation>
+        <translation>Edytowalne kombi jako linia edycji</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1711"/>
         <source>Vertical spin indicators</source>
-        <translation>Pionowe wskaźniki obrotowe</translation>
+        <translation>Pionowe wskaźniki pokrętła</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1646"/>
