@@ -415,7 +415,7 @@ Miscellaneous → Respect current DE if possible</source>
     <message>
         <location filename="../../kvantummanager.ui" line="682"/>
         <source>Scroll jump with middle click</source>
-        <translation type="unfinished"></translation>
+        <translation>Βηματική κύλιση με μεσαίο κλικ</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="725"/>
