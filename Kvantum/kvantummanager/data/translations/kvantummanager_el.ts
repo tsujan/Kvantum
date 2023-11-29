@@ -396,12 +396,14 @@ horizontally centered as far as possible.</source>
         <source>You might see annoying artifacts that are caused
 by bugs in Qt&apos;s handling of non-integer scaling
 with window translucency or gradient.</source>
-        <translation type="unfinished"></translation>
+        <translation>Μπορεί να δείτε ενοχλητικά τεχνουργήματα
+λόγω σφαλμάτων της Qt στην διαχείριση της ημιτελής κλιμάκωσης
+με διαφάνεια ή διαβάθμιση των παραθύρων.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="623"/>
         <source>Disable translucency with non-integer scaling</source>
-        <translation type="unfinished"></translation>
+        <translation>Απενεργοποίηση της διαφάνειας στην ημιτελή κλιμάκωση</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="675"/>
