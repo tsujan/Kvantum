@@ -14,12 +14,12 @@
     <message>
         <location filename="../../kvantummanager.ui" line="12"/>
         <source>Kvantum Manager</source>
-        <translation>Kvantum haldur</translation>
+        <translation>Kvantumi haldur</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="38"/>
         <source>Install/Update Theme</source>
-        <translation>Teema uuendus/paigaldus</translation>
+        <translation>Uuenda/paigalda teema</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="44"/>
@@ -31,13 +31,13 @@
         <source>Select a Kvantum
 theme folder</source>
         <translation>Vali Kvantum
-teema kataloog</translation>
+teemakataloog</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="113"/>
         <source>Add this theme to the list of themes that
 Kvantum can use in addition to its own themes.</source>
-        <translation>Lisa antud teema nimekirja, mida saab
+        <translation>Lisa see teema nende hulka, mida saab
 Kvantum kasutada lisaks oma teemadele.</translation>
     </message>
     <message>
@@ -135,7 +135,7 @@ vaikeväärtused
     <message>
         <location filename="../../kvantummanager.ui" line="396"/>
         <source>Transparent Dolphin view</source>
-        <translation>Dolphini läbipaistev vaade</translation>
+        <translation>Dolphini läbipaistvus</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="424"/>
@@ -179,7 +179,7 @@ LXQt seansi seadetes.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="480"/>
         <source>Transparent view for PCManFM-qt</source>
-        <translation>PCManFM-qt läbipaistev vaade</translation>
+        <translation>PCManFM-qt läbipaistvus</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="495"/>
@@ -402,7 +402,7 @@ with window translucency or gradient.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="623"/>
         <source>Disable translucency with non-integer scaling</source>
-        <translation type="unfinished"></translation>
+        <translation>Keela läbipaistvus mitte-täisarvulisel skaleerimisel</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="675"/>
@@ -430,7 +430,7 @@ seriously interfere with other jobs.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="732"/>
         <source>Kinetic scrolling</source>
-        <translation type="unfinished"></translation>
+        <translation>Kineetiline kerimine</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="739"/>
@@ -470,17 +470,17 @@ Usually, a value of 2 is enough.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="808"/>
         <source>Blur Corner Radius</source>
-        <translation type="unfinished"></translation>
+        <translation>Hägu nurga raadius</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="821"/>
         <source>Menu:</source>
-        <translation type="unfinished"></translation>
+        <translation>Menüü:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="828"/>
         <source>Tooltip:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vihje:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="852"/>
@@ -532,7 +532,7 @@ mis kasutavad varju menüüdel ja vihjetel.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="968"/>
         <source>Shadowless menus and tooltips</source>
-        <translation>Varjuta menüüd ja vihjed</translation>
+        <translation>Varjudeta menüüd ja vihjed</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="979"/>
@@ -591,7 +591,7 @@ windows if this theme distinguishes between them?</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1186"/>
         <source>Ignore inactive state</source>
-        <translation>Ignoreeri mitteaktiivset olekut</translation>
+        <translation>Eira mitteaktiivset olekut</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1200"/>
@@ -694,14 +694,16 @@ Vaikeväärtus on 0.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1842"/>
         <source>Click behavior:</source>
-        <translation type="unfinished"></translation>
+        <translation>Klõpsu toiming:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1962"/>
         <source>Draw tree branch lines?
 
 By default, tree branches have indicators but no line.</source>
-        <translation></translation>
+        <translation>Kas kuvada puuharude jooned?
+
+Vaikimisi kuvatakse indikaatorid, mitte jooned.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1941"/>
@@ -712,12 +714,13 @@ By default, tree branches have indicators but no line.</source>
         <location filename="../../kvantummanager.ui" line="1951"/>
         <source>They may look like dotted rectangles
 on focused buttons and other widgets.</source>
-        <translation type="unfinished"></translation>
+        <translation>Need võivad näida katkendliku ristkülikuna 
+fookuses olevatel nuppudel ja vidinatel.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1955"/>
         <source>Remove focus rectangles</source>
-        <translation type="unfinished"></translation>
+        <translation>Eemalda fookuse ristkülikud</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2151"/>
@@ -1092,7 +1095,7 @@ If disabled, see Compositing &amp; General Look → Transient scrollbars!</sourc
     <message>
         <location filename="../../kvantummanager.ui" line="1967"/>
         <source>Tree branch lines</source>
-        <translation>Puuharude jooned</translation>
+        <translation>Kataloogipuu harude jooned</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1663"/>
