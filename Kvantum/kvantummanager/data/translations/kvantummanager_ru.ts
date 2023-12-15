@@ -1383,12 +1383,14 @@ needed for this key to work.
 
 A negative value means that only the
 opacity of inactive windows is reduced.</source>
-        <translation type="unfinished">Уменьшение непрозрачности окон при
+        <translation>Уменьшение непрозрачности окон при
 включённой прозрачности.
 
 Для работы этого параметра
-полупрозрачный фон SVG НЕ
-требуется.</translation>
+полупрозрачный фон SVG НЕ требуется.
+
+Отрицательное значение уменьшает
+непрозрачность только неактивных окон.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1780"/>
