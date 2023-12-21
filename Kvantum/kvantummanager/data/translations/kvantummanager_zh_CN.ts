@@ -1333,11 +1333,14 @@ needed for this key to work.
 
 A negative value means that only the
 opacity of inactive windows is reduced.</source>
-        <translation type="unfinished">如果窗口半透明启用，
+        <translation>如果窗口半透明启用，
 将会减少窗口的不透明度。
 
 不需要半透明的 SVG 背景
-就能让这个选项起作用。</translation>
+就能让这个选项起作用。
+
+负值表示仅降低
+非活动窗口的不透明度。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1780"/>
