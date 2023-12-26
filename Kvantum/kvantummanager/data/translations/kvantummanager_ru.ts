@@ -222,7 +222,7 @@ the highlight color!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="571"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;By default, selected label icons are tinted by the highlight color.&lt;/p&gt;&lt;p&gt;Checking this box removes the tint.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;По умолчанию выбранные значки окрашиваются в цвет подсветки.&lt;/p&gt;&lt;p&gt;Установка этого флажка выключает окрашивание.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;По умолчанию выбранные значки окрашиваются в цвет подсветки.&lt;/p&gt;&lt;p&gt;Установка этого флажка отключает окрашивание.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="574"/>
@@ -239,7 +239,7 @@ the highlight color!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="585"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do not draw any background for (KDE) menu titles?&lt;/p&gt;&lt;p&gt;Menu titles are like menu separators but with icon and text.&lt;/p&gt;&lt;p&gt;This needs Logging out and in for KDE Plasma menus. For LXQt panel, a panel restart with &lt;span style=&quot; font-style:italic;&quot;&gt;Session Settings &lt;/span&gt;is enough.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Выключение отображения фона в заголовках меню (в среде KDE).&lt;/p&gt;&lt;p&gt;Заголовки меню похожи на разделители меню, но имеют значки и текст.&lt;/p&gt;&lt;p&gt;Для применения изменений необходим перезапуск KDE Plasma. Для панели LXQt достаточно перезапустить панель с &lt;span style=&quot; font-style:italic;&quot;&gt;параметрами сеанса&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Не рисовать фон в заголовках меню (в среде KDE)?&lt;/p&gt;&lt;p&gt;Заголовки меню похожи на разделители меню, но имеют значки и текст.&lt;/p&gt;&lt;p&gt;Для применения изменений необходим перезапуск KDE Plasma. Для панели LXQt достаточно перезапустить панель с &lt;span style=&quot; font-style:italic;&quot;&gt;параметрами сеанса&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="588"/>
@@ -1314,13 +1314,11 @@ respect some settings of the current desktop environment.
 
 This checkbox may disable some options.
 Uncheck it if you want to use those options!</source>
-        <translation>Если флажок установлен, Kvantum попытается
-учесть некоторые параметры текущей среды
-рабочего стола.
+        <translation>Если включено, Kvantum попытается учесть
+некоторые настройки текущей среды рабочего стола.
 
-Включение данного параметра может привести
-к отключению некоторых других параметров.
-Выключите его, чтобы предотвратить это!</translation>
+Этот флажок может отключить некоторые настройки.
+Снимите его, чтобы предотвратить это!</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1656"/>
@@ -1357,7 +1355,7 @@ i.e., there is no border between them.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1653"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When this is enabled and checked, Kvantum will try to respect some settings of the current desktop environment if it is KDE, Unity, Gnome or Pantheon.&lt;/p&gt;&lt;p&gt;Under KDE, it makes Kvantum read KDE settings for small and large icon sizes and also single or double clicking.&lt;/p&gt;&lt;p&gt;Under Unity, Gnome and Pantheon, it removes icons from menus and push-buttons (even if the corresponding dconf keys are changed) and disables window translucency.&lt;/p&gt;&lt;p&gt;This checkbox may disable some options. Uncheck it if you want to use those options!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Если флажок установлен, Kvantum попытается учесть некоторые параметры среды рабочего стола, если это среда KDE, Unity, Gnome или Pantheon.&lt;/p&gt;&lt;p&gt;В среде KDE Kvantum считывает параметры KDE для маленьких и больших значков, а также параметры одиночных или двойных щелчков мышью.&lt;/p&gt;&lt;p&gt;В средах Unity, Gnome и Pantheon программа удаляет значки из меню и кнопок (даже если изменены соответствующие ключи в dconf) и отключает полупрозрачность окон.&lt;/p&gt;&lt;p&gt;Включение данного параметра может привести к отключению некоторых других параметров. Выключите его, чтобы предотвратить это.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Если флажок установлен, Kvantum попытается учесть некоторые параметры среды рабочего стола, если это среда KDE, Unity, Gnome или Pantheon.&lt;/p&gt;&lt;p&gt;В среде KDE Kvantum считывает параметры KDE для маленьких и больших значков, а также параметры одиночных или двойных щелчков мышью.&lt;/p&gt;&lt;p&gt;В средах Unity, Gnome и Pantheon программа удаляет значки из меню и кнопок (даже если изменены соответствующие ключи в dconf) и отключает полупрозрачность окон.&lt;/p&gt;&lt;p&gt;Включение данного параметра может привести к отключению некоторых других параметров. Отключите его, чтобы предотвратить это.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="845"/>
