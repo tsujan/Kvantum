@@ -346,7 +346,10 @@ will not have translucency or shadow.
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
         <translation>Αν είναι επιλεγμένο, τα μενού, οι υποδείξεις και τα παράθυρα
-δεν θα έχουν ημιδιαφάνεια ή σκιά.</translation>
+δεν θα έχουν ημιδιαφάνεια ή σκιά.
+
+Αν είναι απενεργοποιημένο, ανατρέξτε στο:
+Διάφορα → Ρυθμίσεις αν γίνεται από το τρέχον DE</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="227"/>
@@ -412,7 +415,11 @@ when the scrollbar is left clicked.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation type="unfinished"></translation>
+        <translation>Εξ ορισμού, η λαβή ολίσθησης μεταπηδά σε μια θέση
+όταν γίνεται αριστερό κλικ στην γραμμή ολίσθησης.
+
+Αν αυτή η επιλογή είναι απενεργοποιημένη, ανατρέξτε στο:
+Διάφορα → Ρυθμίσεις αν γίνεται από το τρέχον DE</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="682"/>
@@ -447,7 +454,7 @@ or through logging out and in again.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="789"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If checked, menus, tooltips and windows will not have translucency or shadow.&lt;/p&gt;&lt;p&gt;When unchecked, translucency and shadow will be available if there are appropriate elements in the theme&apos;s SVG file.&lt;/p&gt;&lt;p&gt;If this is disabled, see Miscellaneous → Respect current DE if possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Αν είναι επιλεγμένο, τα μενού, οι υποδείξεις και τα παράθυρα δεν θα έχουν ημιδιαφάνεια ή σκιά..&lt;/p&gt;&lt;p&gt;όταν το πλαίσιο ελέγχου δεν είναι επιλεγμένο, η ημιδιαφάνεια και η σκίαση θα είναι διαθέσιμες αν υπάρχουν τα κατάλληλα στοιχεία στο αρχείο SVG του θέματος.&lt;/p&gt;&lt;p&gt;Αν είναι απενεργοποιημένο, ανατρέξτε στο Διάφορα → Ρυθμίσεις αν γίνεται από το τρέχον DE.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="792"/>
@@ -743,7 +750,11 @@ By default, most push buttons have icon.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation type="unfinished"></translation>
+        <translation>Κανένα εικονίδιο για τα κουμπιά με κείμενο;
+
+Εξ ορισμού, τα περισσότερα κουμπιά πίεσης έχουν ένα εικονίδιο.
+Αν είναι απενεργοποιημένο, ανατρέξτε στο:
+Διάφορα → Ρυθμίσεις αν γίνεται από το τρέχον DE</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="487"/>
@@ -753,7 +764,11 @@ By default, some of them may have icon.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation type="unfinished"></translation>
+        <translation>Κανένα εικονίδιο για τα αντικείμενα των μενού;
+
+Εξ ορισμού, ορισμένα από αυτά μπορεί να έχουν ένα εικονίδιο.
+Αν είναι απενεργοποιημένο, ανατρέξτε στο:
+Διάφορα → Ρυθμίσεις αν γίνεται από το τρέχον DE</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="502"/>
@@ -819,7 +834,13 @@ some apps may set it themselves.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation type="unfinished"></translation>
+        <translation>Επηρεάζει τα αντικείμενα των μενού και τις επικεφαλίδες.
+
+Η τιμή εξ ορισμού είναι 16 εικ, αλλά
+ορισμένες εφαρμογές καθορίζουν αυτές την τιμή.
+
+Αν είναι απενεργοποιημένο, ανατρέξτε στο:
+Διάφορα → Ρυθμίσεις αν γίνεται από το τρέχον DE</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1272"/>
@@ -831,7 +852,13 @@ some apps set it themselves.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation type="unfinished"></translation>
+        <translation>Επηρεάζει την προβολή των εικονιδίων.
+
+Η τιμή εξ ορισμού είναι 32 εικ, αλλά
+ορισμένες εφαρμογές καθορίζουν αυτές την τιμή.
+
+Αν είναι απενεργοποιημένο, ανατρέξτε στο:
+Διάφορα → Ρυθμίσεις αν γίνεται από το τρέχον DE</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1310"/>
@@ -915,7 +942,11 @@ or anywhere possible (and not only from their title bars)?
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation type="unfinished"></translation>
+        <translation>Μεταφορά παραθύρων από την γραμμή των μενού τους, την κύρια γραμμή εργαλείων
+ή από αλλού αν είναι εφικτό (και όχι μόνον από την γραμμή τίτλου του παραθύρου);
+
+Αν είναι απενεργοποιημένο, ανατρέξτε στο:
+Διάφορα → Ρυθμίσεις αν γίνεται από το τρέχον DE</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1885"/>
@@ -1138,7 +1169,7 @@ Uncheck it if you want to use those options!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1656"/>
         <source>Respect current DE if possible</source>
-        <translation type="unfinished"></translation>
+        <translation>Ρυθμίσεις αν γίνεται από το τρέχον DE</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1762"/>
