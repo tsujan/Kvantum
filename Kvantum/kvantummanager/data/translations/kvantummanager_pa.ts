@@ -6,7 +6,7 @@
     <message>
         <location filename="../../about.ui" line="169"/>
         <source>License</source>
-        <translation type="unfinished"></translation>
+        <translation>ਲਸੰਸ</translation>
     </message>
 </context>
 <context>
@@ -14,12 +14,12 @@
     <message>
         <location filename="../../kvantummanager.ui" line="12"/>
         <source>Kvantum Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>ਕਵਾਟੁਮ ਮੈਨੇਜਰ</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="38"/>
         <source>Install/Update Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>ਥੀਮ ਇੰਸਟਾਲ/ਅੱਪਡੇਟ ਕਰੋ</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="44"/>
@@ -41,22 +41,22 @@ Kvantum can use in addition to its own themes.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="117"/>
         <source>Install this theme</source>
-        <translation type="unfinished"></translation>
+        <translation>ਇਹ ਥੀਮ ਇੰਸਟਾਲ ਕਰੋ</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="138"/>
         <source>Change/Delete Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>ਥੀਮ ਨੂੰ ਬਦਲੋ/ਹਟਾਓ</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="144"/>
         <source>Select a theme:</source>
-        <translation type="unfinished"></translation>
+        <translation>ਥੀਮ ਚੁਣੋ:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="191"/>
         <source>Delete this theme</source>
-        <translation type="unfinished"></translation>
+        <translation>ਇਹ ਥੀਮ ਨੂੰ ਹਟਾਓ</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="198"/>
@@ -91,7 +91,7 @@ settings of this theme.
     <message>
         <location filename="../../kvantummanager.ui" line="329"/>
         <source>Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>ਬਹਾਲ ਕਰੋ</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="332"/>
@@ -108,7 +108,7 @@ settings of this theme.
         <location filename="../../kvantummanager.ui" line="346"/>
         <location filename="../../kvantummanager.ui" line="2169"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>ਸੰਭਾਲੋ</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="349"/>
@@ -118,12 +118,12 @@ settings of this theme.
     <message>
         <location filename="../../kvantummanager.ui" line="356"/>
         <source>Safe Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>ਸੁਰੱਖਿਆ ਸੈਟਿੰਗਾਂ</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="369"/>
         <source>Hacks</source>
-        <translation type="unfinished"></translation>
+        <translation>ਹੈਕ</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="396"/>
@@ -241,7 +241,7 @@ the highlight color!</source>
         <location filename="../../kvantummanager.ui" line="1086"/>
         <location filename="../../kvantummanager.ui" line="1122"/>
         <source> %</source>
-        <translation type="unfinished"></translation>
+        <translation> %</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="611"/>
@@ -300,7 +300,7 @@ as far as possible.</source>
         <location filename="../../kvantummanager.ui" line="1476"/>
         <location filename="../../kvantummanager.ui" line="1511"/>
         <source> px</source>
-        <translation type="unfinished"></translation>
+        <translation> ਪਿਕਸਲ</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="776"/>
@@ -444,7 +444,7 @@ Usually, a value of 2 is enough.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="821"/>
         <source>Menu:</source>
-        <translation type="unfinished"></translation>
+        <translation>ਮੇਨੂ:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="828"/>
@@ -563,37 +563,37 @@ windows if this theme distinguishes between them?</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1222"/>
         <source>Sizes &amp;&amp; Delays</source>
-        <translation type="unfinished"></translation>
+        <translation>ਆਕਾਰ ਤੇ ਦੇਰੀਆਂ</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1228"/>
         <source>Sizes</source>
-        <translation type="unfinished"></translation>
+        <translation>ਆਕਾਰ</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1243"/>
         <source>Small icon:</source>
-        <translation type="unfinished"></translation>
+        <translation>ਛੋਟਾ ਆਈਕਾਨ:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1281"/>
         <source>Large icon:</source>
-        <translation type="unfinished"></translation>
+        <translation>ਵੱਡਾ ਆਈਕਾਨ:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1315"/>
         <source>Button icon:</source>
-        <translation type="unfinished"></translation>
+        <translation>ਬਟਨ ਆਈਕਾਨ:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1347"/>
         <source>Toolbar icon:</source>
-        <translation type="unfinished"></translation>
+        <translation>ਟੂਲਬਾਰ ਆਈਕਾਨ:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1361"/>
         <source>Font size</source>
-        <translation type="unfinished"></translation>
+        <translation>ਫ਼ੋਂਟ ਆਕਾਰ</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1377"/>
@@ -844,7 +844,7 @@ KDE apps get it from KDE setting.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1543"/>
         <source>Delays</source>
-        <translation type="unfinished"></translation>
+        <translation>ਦੇਰੀਆਂ</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1549"/>
@@ -976,7 +976,7 @@ while 0 means no delay.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1640"/>
         <source>Miscellaneous</source>
-        <translation type="unfinished"></translation>
+        <translation>ਫੁਟਕਲ</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1832"/>
@@ -1205,7 +1205,7 @@ the Ctrl key before pressing the button.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2042"/>
         <source>Application Themes</source>
-        <translation type="unfinished"></translation>
+        <translation>ਐਪਲੀਕੇਸ਼ਨ ਥੀਮ</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2048"/>
@@ -1220,7 +1220,7 @@ the Ctrl key before pressing the button.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2099"/>
         <source>Application(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>ਐਪਲੀਕੇਸ਼ਨਾਂ</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2128"/>
@@ -1230,7 +1230,7 @@ the Ctrl key before pressing the button.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2156"/>
         <source>Remove List</source>
-        <translation type="unfinished"></translation>
+        <translation>ਸੂਚੀ ਨੂੰ ਹਟਾਓ</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2163"/>
@@ -1251,7 +1251,7 @@ the Ctrl key before pressing the button.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2196"/>
         <source>Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>ਬਾਹਰ</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2209"/>
@@ -1262,17 +1262,17 @@ or update its preview.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2213"/>
         <source>Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>ਝਲਕ</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2220"/>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>ਇਸ ਬਾਰੇ</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2243"/>
         <source>What&apos;s This?</source>
-        <translation type="unfinished"></translation>
+        <translation>ਇਹ ਕੀ ਹੈ?</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2246"/>
@@ -1314,22 +1314,22 @@ or update its preview.</source>
         <location filename="../../KvantumManager.cpp" line="776"/>
         <location filename="../../KvantumManager.cpp" line="2777"/>
         <source>Confirmation</source>
-        <translation type="unfinished"></translation>
+        <translation>ਤਸਦੀਕ</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="737"/>
         <source>%1 installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 ਇੰਸਟਾਲ ਹੈ।</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="907"/>
         <source>%1 deleted.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 ਨੂੰ ਹਟਾਇਆ।</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="967"/>
         <source>Theme changed to %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>ਥੀਮ ਨੂੰ %1 ਲਈ ਬਦਲਿਆ।</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="515"/>
@@ -1346,22 +1346,22 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="105"/>
         <source>Single Click</source>
-        <translation type="unfinished"></translation>
+        <translation>ਇਕਹੇਰਾ ਕਲਿੱਕ</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="106"/>
         <source>Double Click</source>
-        <translation type="unfinished"></translation>
+        <translation>ਦੂਹਰਾ ਕਲਿੱਕ</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="109"/>
         <source>Icon Only</source>
-        <translation type="unfinished"></translation>
+        <translation>ਸਿਰਫ਼ ਆਈਕਾਨ</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="110"/>
         <source>Text Only</source>
-        <translation type="unfinished"></translation>
+        <translation>ਸਿਰਫ਼ ਲਿਖਤ</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="111"/>
@@ -1376,37 +1376,37 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="115"/>
         <source>KDE Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>KDE ਲੇਆਉਟ</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="116"/>
         <source>Gnome Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>ਗਨੋਮ ਲੇਆਉਟ</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="117"/>
         <source>Mac Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>ਮੈਕ ਲੇਆਉਟ</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="118"/>
         <source>Windows Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>ਵਿੰਡੋਜ਼ ਲਾਈਟ</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="119"/>
         <source>Android Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>ਐਂਡਰਾਇਡ ਲੇਆਉਟ</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="121"/>
         <source>Titlebar</source>
-        <translation type="unfinished"></translation>
+        <translation>ਟਾਈਟਲ-ਪੱਟੀ</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="122"/>
         <source>Menubar</source>
-        <translation type="unfinished"></translation>
+        <translation>ਮੇਨੂ-ਪੱਟੀ</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="123"/>
@@ -1416,7 +1416,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="124"/>
         <source>Anywhere possible</source>
-        <translation type="unfinished"></translation>
+        <translation>ਜਿੱਥੇ ਵੀ ਸੰਭਵ ਹੋਵੇ</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="517"/>
@@ -1426,7 +1426,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="529"/>
         <source>This file cannot be removed:</source>
-        <translation type="unfinished"></translation>
+        <translation>ਇਹ ਫਾਇਲ ਨੂੰ ਹਟਾਇਆ ਨਹੀਂ ਜਾ ਸਕਦਾ ਹੈ:</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="548"/>
@@ -1444,7 +1444,7 @@ or update its preview.</source>
         <location filename="../../KvantumManager.cpp" line="561"/>
         <location filename="../../KvantumManager.cpp" line="571"/>
         <source>Please select another directory!</source>
-        <translation type="unfinished"></translation>
+        <translation>ਹੋਰ ਡਾਇਰੈਕਟਰੀ ਚੁਣੋ!</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="560"/>
