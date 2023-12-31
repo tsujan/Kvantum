@@ -1339,11 +1339,14 @@ needed for this key to work.
 
 A negative value means that only the
 opacity of inactive windows is reduced.</source>
-        <translation type="unfinished">창 반투명 기능이 활성화된 경우
+        <translation>창 반투명 기능이 활성화된 경우
 창 불투명도가 감소합니다.
 
-이 키가 작동하는데
-반투명 SVG 배경이 필요하지 않습니다.</translation>
+이 키가 작동하는 데
+반투명 SVG 배경이 필요하지 않습니다.
+
+음수 값은 비활성 창의 불투명도만
+감소한다는 의미입니다.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1780"/>
