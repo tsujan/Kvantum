@@ -222,7 +222,7 @@ the highlight color!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="571"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;By default, selected label icons are tinted by the highlight color.&lt;/p&gt;&lt;p&gt;Checking this box removes the tint.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;By default, selected label icons are tinted by the highlight color.&lt;/p&gt;&lt;p&gt;Checking this box removes the tint.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Εξ ορισμού, τα εικονίδια των επιλεγμένων ετικετών είναι χρωματισμένα με το χρώμα τονισμού.&lt;/p&gt;&lt;p&gt;Επιλέξτε αυτό το πλαίσιο για να αφαιρέσετε την απόχρωση.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="574"/>
@@ -433,7 +433,11 @@ with the left mouse button.
 
 Warning: Qt&apos;s kinetic scrolling has bugs and may
 seriously interfere with other jobs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ολισθήστε ορισμένα κυλιόμενα γραφικά συστατικά
+ξεφυλλίζοντάς τα με το αριστερό κλικ του ποντικιού.
+
+Προειδοποίηση: Η κινητική ολίσθηση της Qt περιέχει σφάλματα
+και μπορεί να έχει σημαντική παρεμβολή σε άλλες εργασίες.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="732"/>
@@ -1527,7 +1531,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="613"/>
         <source>Please choose another directory!</source>
-        <translation type="unfinished">Παρακαλώ επιλέξτε έναν άλλο κατάλογο</translation>
+        <translation>Παρακαλώ επιλέξτε έναν άλλο κατάλογο!</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="623"/>
