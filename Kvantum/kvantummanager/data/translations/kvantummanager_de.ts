@@ -343,7 +343,7 @@ will be blurred if blurring is enabled.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="535"/>
         <source>No blurring for inactive windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine Unschärfe bei inaktiven Fenstern</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="542"/>
