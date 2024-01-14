@@ -132,12 +132,12 @@ settings of this theme.
     <message>
         <location filename="../../kvantummanager.ui" line="396"/>
         <source>Transparent Dolphin view</source>
-        <translation>Vista Trasparente di Dolphin</translation>
+        <translation>Vista trasparente per Dolphin</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="424"/>
         <source>Normal font for default push buttons</source>
-        <translation>Fonte Normale per i bottoni push di default</translation>
+        <translation>Carattere normale per i pulsanti predefiniti</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="444"/>
@@ -151,12 +151,12 @@ with LXQt Session Settings.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="451"/>
         <source>Transparent sidepane for PCManFM-qt</source>
-        <translation type="unfinished"></translation>
+        <translation>Pannello laterale trasparente per PCManFM-qt</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="466"/>
         <source>Iconless push buttons</source>
-        <translation>Bottoni senza icona</translation>
+        <translation>Pulsanti senza icona</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="473"/>
@@ -170,7 +170,7 @@ with LXQt Session Settings.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="480"/>
         <source>Transparent view for PCManFM-qt</source>
-        <translation type="unfinished"></translation>
+        <translation>Vista trasparente per PCManFM-qt</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="495"/>
@@ -200,7 +200,7 @@ with LXQt Session Settings.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="560"/>
         <source>Transparent KTitle label</source>
-        <translation>Testo KTitle Trasparente</translation>
+        <translation>Testo KTitle trasparente</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="567"/>
@@ -291,7 +291,7 @@ as far as possible.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="747"/>
         <source>LXQt main menu icon size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Dimensione icona del menu di applicazioni di LXQt:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="762"/>
@@ -321,7 +321,7 @@ for windows or the window opacity is reduced (see below).</source>
     <message>
         <location filename="../../kvantummanager.ui" line="993"/>
         <source>Opaque apps:</source>
-        <translation type="unfinished"></translation>
+        <translation>Applicazioni opache:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="782"/>
@@ -346,7 +346,7 @@ will be blurred if blurring is enabled.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="535"/>
         <source>No blurring for inactive windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Nessuna sfocatura per le finestre inattive</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="542"/>
@@ -395,7 +395,7 @@ Miscellaneous → Respect current DE if possible</source>
     <message>
         <location filename="../../kvantummanager.ui" line="682"/>
         <source>Scroll jump with middle click</source>
-        <translation type="unfinished"></translation>
+        <translation>Salta con il clic centrale nel scorrimento</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="725"/>
@@ -430,7 +430,7 @@ or through logging out and in again.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="792"/>
         <source>Disable composite effects</source>
-        <translation type="unfinished"></translation>
+        <translation>Disabilita effetti</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="801"/>
