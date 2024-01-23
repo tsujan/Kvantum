@@ -1076,7 +1076,7 @@ pyöri-alas on yksi rivin-muokkaus.</translation>
         <source>Draw combo popups as menu popups (i.e. like in Gtk)?
 
 By default, combo popups do not cover the combo box.</source>
-        <translation>Piirrä yhdistelmä valikko ponnahdus ikkunoita (kuten gtk)?
+        <translation type="unfinished">Piirrä yhdistelmä valikko ponnahdus ikkunoita (kuten gtk)?
 
 Oletusarvoisesti yhdistelmä ponnahduksia ei peitä yhdistelmä ruutua.</translation>
     </message>
@@ -1125,7 +1125,7 @@ Ne eivät yleensä vie ylimääräistä tilaa.</translation>
 
 -1 means no popup (opening by clicking),
 while 0 means no delay.</source>
-        <translation>Viive, millisekuntina, odottaa ennen alivalikon avaamista.
+        <translation type="unfinished">Viive, millisekuntina, odottaa ennen alivalikon avaamista.
 Oletuksena 250ms.
 
 -1 tarkoittaa, ettei ponnahdusikkunaa (avata napsauttamalla),
