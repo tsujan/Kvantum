@@ -24,7 +24,7 @@
     <message>
         <location filename="../../kvantummanager.ui" line="44"/>
         <source>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; comes with many themes but external themes can also be installed for being used by it. Here you could choose a theme folder and then press the button below to install it in your Home.&lt;/center&gt;</source>
-        <translation></translation>
+        <translation>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; kommt mit vielen Themen, aber externe Themen können ebenfalls installiert und verwendet werden. Hier können Sie einen Themenordner auswählen. Mit dem unteren Knopf wird das Theme in ihren Home Ordner installiert.&lt;/center&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="76"/>
@@ -37,7 +37,8 @@ Themenordner aus</translation>
         <location filename="../../kvantummanager.ui" line="113"/>
         <source>Add this theme to the list of themes that
 Kvantum can use in addition to its own themes.</source>
-        <translation></translation>
+        <translation>Füge dieses Thema zu der Themenliste hinzu,
+die Kvantum neben seinen eigenen Themen nutzen kann.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="117"/>
@@ -65,7 +66,10 @@ Kvantum can use in addition to its own themes.</source>
 
 A disabled button means that
 the theme is already used.</source>
-        <translation></translation>
+        <translation>Lass Kvantum dieses Thema verwenden!
+
+Ein deaktivierter Knopf bedeutet, dass
+das Thema bereits verwendet wird.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="204"/>
@@ -82,12 +86,14 @@ the theme is already used.</source>
         <source>Revert to the default (root)
 settings of this theme.
 (Ctrl+Z)</source>
-        <translation></translation>
+        <translation>Setze auf die Standardeinstellungen (root)
+dieses Themas zurück.
+(Ctrl+Z)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="326"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Revert to the default (root) settings of this theme!&lt;/p&gt;&lt;p&gt;When clicked and confirmed, all changes to the configuration will be lost but the probable customized SVG file will remain intact.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Setze auf die Standardeinstellungen (root) dieses Themas zurück!&lt;/p&gt;&lt;p&gt;Wenn gedrückt und bestätigt gehen alle Änderungen an den Einstellungen verloren, aber bearbeitete SVG Dateien bleiben intakt.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="329"/>
@@ -135,7 +141,7 @@ settings of this theme.
     <message>
         <location filename="../../kvantummanager.ui" line="424"/>
         <source>Normal font for default push buttons</source>
-        <translation></translation>
+        <translation>Normale Schriftart für Standard Push Buttons</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="444"/>
@@ -144,7 +150,11 @@ settings of this theme.
 Under LXQt, it needs logging out and in or closing
 PCManFM-qt and then, stopping and starting Desktop
 with LXQt Session Settings.</source>
-        <translation></translation>
+        <translation>Führe PCManFM-qt&apos;s Seitenleiste mit seiner Umgebung zusammen.
+
+Unter LXQt muss sich erneut eingeloggt werden oder
+PCManFM-qt schließen und anschließend den Desktop 
+mit LXQt Sitzungseinstellungen neu starten.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="451"/>
@@ -154,7 +164,7 @@ with LXQt Session Settings.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="466"/>
         <source>Iconless push buttons</source>
-        <translation></translation>
+        <translation>Pushbuttons ohne Icons</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="473"/>
@@ -338,7 +348,8 @@ Miscellaneous → Respect current DE if possible</source>
         <location filename="../../kvantummanager.ui" line="531"/>
         <source>By default, both active and inactive translucent windows
 will be blurred if blurring is enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Standardmäßig werden sowohl aktive als auch inaktive durchsichtige Fenster
+ unscharf dargestellt, wenn die Weichzeichnung aktiviert ist.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="535"/>
@@ -350,7 +361,10 @@ will be blurred if blurring is enabled.</source>
         <source>By default, vertical toolbars are not styled.
 
 If this is disabled, see the above option.</source>
-        <translation type="unfinished"></translation>
+        <translation>Standardmäßig sind die vertikalen Symbolleisten nicht gestaltet.
+
+Wenn diese Funktion deaktiviert ist, siehe die obige Option.
+</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="547"/>
@@ -361,19 +375,22 @@ If this is disabled, see the above option.</source>
         <location filename="../../kvantummanager.ui" line="595"/>
         <source>If checked, the contents of a form will be
 horizontally centered as far as possible.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wenn diese Option aktiviert ist, wird der Inhalt einer Form
+horizontal so weit wie möglich zentriert.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="599"/>
         <source>Centered form layouts</source>
-        <translation type="unfinished"></translation>
+        <translation>Zentrierte Layout-Form</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="618"/>
         <source>You might see annoying artifacts that are caused
 by bugs in Qt&apos;s handling of non-integer scaling
 with window translucency or gradient.</source>
-        <translation type="unfinished"></translation>
+        <translation>Es könnten störende Artefakte zu sehen sein, die durch Fehler 
+in Qt&apos;s Umgang von nicht-integer Skalierung 
+mit Fenstertransluzenz oder Farbverlauf auftreten.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="623"/>
