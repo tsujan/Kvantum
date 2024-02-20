@@ -1,11 +1,13 @@
 set(QT5_MINIMUM_VERSION "5.15.0")
 set(QT6_MINIMUM_VERSION "6.2.0")
 set(KF5_MINIMUM_VERSION "5.82.0")
+set(KF6_MINIMUM_VERSION "5.82.0")
 
 if(NOT ENABLE_QT4)
   if(NOT ENABLE_QT5)
     set(QT_VERSION_MAJOR 6)
     find_package(Qt6 "${QT6_MINIMUM_VERSION}" REQUIRED COMPONENTS Core Gui Widgets Svg)
+    find_package(KF6WindowSystem "${KF6_MINIMUM_VERSION}" REQUIRED)
   else()
     set(QT_VERSION_MAJOR 5)
     find_package(Qt5 "${QT5_MINIMUM_VERSION}" REQUIRED COMPONENTS Core Gui Widgets Svg X11Extras)
@@ -112,7 +114,8 @@ if(QT_VERSION_MAJOR EQUAL 6)
                                 ${Qt6Gui_LIBRARIES}
                                 ${Qt6Widgets_LIBRARIES}
                                 ${Qt6Svg_LIBRARIES}
-                                ${X11_LIBRARIES})
+                                ${X11_LIBRARIES}
+                                KF6::WindowSystem)
 elseif(QT_VERSION_MAJOR EQUAL 5)
   if(WITHOUT_KF)
     target_link_libraries(kvantum ${Qt5Core_LIBRARIES}

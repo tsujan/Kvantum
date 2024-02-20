@@ -23,7 +23,7 @@
 #include <QWindow>
 
 #ifdef NO_KF
-#if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
+#if (QT_VERSION < QT_VERSION_CHECK(7,0,0))
 #include <QVector>
 #include <QX11Info>
 #endif
@@ -31,7 +31,7 @@
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
 #else
-#if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
+#if (QT_VERSION < QT_VERSION_CHECK(7,0,0))
 #include <KWindowEffects>
 #endif
 #endif
@@ -46,7 +46,7 @@ BlurHelper::BlurHelper (QObject* parent, QList<qreal> menuS, QList<qreal> toolti
   isX11_ = (QString::compare(QGuiApplication::platformName(), "xcb", Qt::CaseInsensitive) == 0);
   if (isX11_)
   {
-#if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
+#if (QT_VERSION < QT_VERSION_CHECK(7,0,0))
     atom_blur_ = XInternAtom (QX11Info::display(), "_KDE_NET_WM_BLUR_BEHIND_REGION", False);
 #else
     if (auto x11NativeInterfce = qApp->nativeInterface<QNativeInterface::QX11Application>())
@@ -265,7 +265,7 @@ void BlurHelper::update (QWidget* widget) const
 #ifdef NO_KF
   if (!isX11_)
     return;
-#elif (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+#elif (QT_VERSION >= QT_VERSION_CHECK(7,0,0))
   return;
 #endif
 
@@ -282,7 +282,7 @@ void BlurHelper::update (QWidget* widget) const
     if (!widget->internalWinId())
       return;
     Display *display = nullptr;
-#if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
+#if (QT_VERSION < QT_VERSION_CHECK(7,0,0))
     QVector<unsigned long> data;
     display = QX11Info::display();
 #else
@@ -300,7 +300,7 @@ void BlurHelper::update (QWidget* widget) const
                      atom_blur_, XA_CARDINAL, 32, PropModeReplace,
                      reinterpret_cast<const unsigned char*>(data.constData()),
                      data.size());
-#elif (QT_VERSION < QT_VERSION_CHECK(6,0,0))
+#elif (QT_VERSION < QT_VERSION_CHECK(7,0,0))
     KWindowEffects::enableBlurBehind (win, true, region);
     /* NOTE: The contrast effect isn't used with menus and tooltips
              because their borders may be anti-aliased. */
@@ -328,14 +328,14 @@ void BlurHelper::clear (QWidget* widget) const
 #ifdef NO_KF
   if (!isX11_)
     return;
-#elif (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+#elif (QT_VERSION >= QT_VERSION_CHECK(7,0,0))
   Q_UNUSED (widget)
   return;
 #endif
 
 #ifdef NO_KF
   Display *display = nullptr;
-#if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
+#if (QT_VERSION < QT_VERSION_CHECK(7,0,0))
   display = QX11Info::display();
 #else
   if (auto x11NativeInterfce = qApp->nativeInterface<QNativeInterface::QX11Application>())
@@ -343,7 +343,7 @@ void BlurHelper::clear (QWidget* widget) const
 #endif
   if (display && widget->internalWinId())
     XDeleteProperty (display, widget->internalWinId(), atom_blur_);
-#elif (QT_VERSION < QT_VERSION_CHECK(6,0,0))
+#elif (QT_VERSION < QT_VERSION_CHECK(7,0,0))
   QWindow *win = widget->windowHandle();
   if (win != nullptr)
   {
