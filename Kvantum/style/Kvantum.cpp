@@ -1,5 +1,5 @@
 /*
- * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014-2023 <tsujan2000@gmail.com>
+ * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014-2024 <tsujan2000@gmail.com>
  *
  * Kvantum is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -827,6 +827,7 @@ void Style::forgetMovedMenu(QObject *o)
 
 void Style::startAnimation(Animation *animation) const
 {
+  if (animation->target() == nullptr) return;
   stopAnimation(animation->target());
   connect(animation, &QObject::destroyed, this, &Style::removeAnimation, Qt::UniqueConnection);
   animations_.insert(animation->target(), animation);

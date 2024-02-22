@@ -1,7 +1,7 @@
 // Adapted from Qt
 
 /*
- * Copyright (C) Pedram Pourang (aka Tsu Jan) 2016-2023 <tsujan2000@gmail.com>
+ * Copyright (C) Pedram Pourang (aka Tsu Jan) 2016-2024 <tsujan2000@gmail.com>
  *
  * Kvantum is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -88,6 +88,7 @@ void Animation::setFrameRate(FrameRate fps)
 
 void Animation::updateTarget()
 {
+  if(target() == nullptr) return;
   QEvent event(QEvent::StyleAnimationUpdate);
   event.setAccepted(false);
   QCoreApplication::sendEvent(target(), &event);
