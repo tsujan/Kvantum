@@ -13,7 +13,7 @@ option(ENABLE_QT5 "Building Qt5 plugin." OFF)
 
 add_subdirectory(style)
 if(NOT ENABLE_QT4)
-  if(ENABLE_QT5)
+  if(NOT ENABLE_QT5)
     add_subdirectory(kvantumpreview)
     add_subdirectory(kvantummanager)
     add_subdirectory(themes)
