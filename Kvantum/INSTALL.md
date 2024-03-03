@@ -149,7 +149,9 @@ Open a terminal inside this folder and issue the following commands:
 
 In some distros, you may need to be more explicit and use `cmake .. -DCMAKE_INSTALL_PREFIX=/usr` for installing Kvantum under `/usr`, in contrast to `/usr/local`. The latter place may not be good in Linux distros and could cause troubles later.
 
-NOTE: You can also compile Kvantum's Qt5 plugin by using `cmake .. -DENABLE_QT5=ON`, but you need `qt5-x11extras` (or whatever the name of its dev package is in your distro) in addition to the Qt5 counterparts of the required packages.
+NOTE 1. Kvantum needs `kwindowsystem` only to support some KWin effects (like blur effect). `kwindowsystem` is a small package which does not depend on KDE itself. However, if you do not need those effects, you could use `cmake .. -DWITHOUT_KF=ON`.
+
+NOTE 2: You can also compile Kvantum's Qt5 plugin by using `cmake .. -DENABLE_QT5=ON`, but you need `qt5-x11extras` (or whatever the name of its dev package is in your distro) in addition to the Qt5 counterparts of the required packages.
 
 ## Installation
 
