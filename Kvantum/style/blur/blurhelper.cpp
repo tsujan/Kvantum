@@ -31,9 +31,7 @@
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
 #else
-#if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
 #include <KWindowEffects>
-#endif
 #endif
 
 namespace Kvantum {
@@ -265,8 +263,6 @@ void BlurHelper::update (QWidget* widget) const
 #ifdef NO_KF
   if (!isX11_)
     return;
-#elif (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
-  return;
 #endif
 
   QWindow *win = widget->windowHandle();
@@ -300,7 +296,7 @@ void BlurHelper::update (QWidget* widget) const
                      atom_blur_, XA_CARDINAL, 32, PropModeReplace,
                      reinterpret_cast<const unsigned char*>(data.constData()),
                      data.size());
-#elif (QT_VERSION < QT_VERSION_CHECK(6,0,0))
+#else
     KWindowEffects::enableBlurBehind (win, true, region);
     /* NOTE: The contrast effect isn't used with menus and tooltips
              because their borders may be anti-aliased. */
@@ -328,9 +324,6 @@ void BlurHelper::clear (QWidget* widget) const
 #ifdef NO_KF
   if (!isX11_)
     return;
-#elif (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
-  Q_UNUSED (widget)
-  return;
 #endif
 
 #ifdef NO_KF
@@ -343,7 +336,7 @@ void BlurHelper::clear (QWidget* widget) const
 #endif
   if (display && widget->internalWinId())
     XDeleteProperty (display, widget->internalWinId(), atom_blur_);
-#elif (QT_VERSION < QT_VERSION_CHECK(6,0,0))
+#else
   QWindow *win = widget->windowHandle();
   if (win != nullptr)
   {

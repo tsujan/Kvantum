@@ -1,11 +1,15 @@
 set(QT5_MINIMUM_VERSION "5.15.0")
 set(QT6_MINIMUM_VERSION "6.2.0")
 set(KF5_MINIMUM_VERSION "5.82.0")
+set(KF6_MINIMUM_VERSION "6.0.0")
 
 if(NOT ENABLE_QT4)
   if(NOT ENABLE_QT5)
     set(QT_VERSION_MAJOR 6)
     find_package(Qt6 "${QT6_MINIMUM_VERSION}" REQUIRED COMPONENTS Core Gui Widgets Svg)
+    if(NOT WITHOUT_KF)
+      find_package(KF6WindowSystem "${KF6_MINIMUM_VERSION}" REQUIRED)
+    endif()
   else()
     set(QT_VERSION_MAJOR 5)
     find_package(Qt5 "${QT5_MINIMUM_VERSION}" REQUIRED COMPONENTS Core Gui Widgets Svg X11Extras)
@@ -108,11 +112,20 @@ else()
 endif()
 
 if(QT_VERSION_MAJOR EQUAL 6)
-  target_link_libraries(kvantum ${Qt6Core_LIBRARIES}
-                                ${Qt6Gui_LIBRARIES}
-                                ${Qt6Widgets_LIBRARIES}
-                                ${Qt6Svg_LIBRARIES}
-                                ${X11_LIBRARIES})
+  if(WITHOUT_KF)
+    target_link_libraries(kvantum ${Qt6Core_LIBRARIES}
+                                  ${Qt6Gui_LIBRARIES}
+                                  ${Qt6Widgets_LIBRARIES}
+                                  ${Qt6Svg_LIBRARIES}
+                                  ${X11_LIBRARIES})
+  else()
+    target_link_libraries(kvantum ${Qt6Core_LIBRARIES}
+                                  ${Qt6Gui_LIBRARIES}
+                                  ${Qt6Widgets_LIBRARIES}
+                                  ${Qt6Svg_LIBRARIES}
+                                  ${X11_LIBRARIES}
+                                  KF6::WindowSystem)
+  endif()
 elseif(QT_VERSION_MAJOR EQUAL 5)
   if(WITHOUT_KF)
     target_link_libraries(kvantum ${Qt5Core_LIBRARIES}
@@ -138,6 +151,6 @@ else()
 endif()
 
 install(TARGETS kvantum LIBRARY DESTINATION ${KVANTUM_STYLE_DIR})
-if(QT_VERSION_MAJOR LESS 6)
+if(QT_VERSION_MAJOR EQUAL 6)
   install(FILES "${CMAKE_SOURCE_DIR}/color/Kvantum.colors" DESTINATION ${KDE_COLOR_DIR})
 endif()

@@ -88,7 +88,7 @@ void Animation::setFrameRate(FrameRate fps)
 
 void Animation::updateTarget()
 {
-  if(target() == nullptr) return;
+  if (target() == nullptr) return;
   QEvent event(QEvent::StyleAnimationUpdate);
   event.setAccepted(false);
   QCoreApplication::sendEvent(target(), &event);

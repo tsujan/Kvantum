@@ -1,5 +1,5 @@
 /*
- * Copyright (C) Pedram Pourang (aka Tsu Jan) 2018-2020 <tsujan2000@gmail.com>
+ * Copyright (C) Pedram Pourang (aka Tsu Jan) 2018-2024 <tsujan2000@gmail.com>
  *
  * Kvantum is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -27,7 +27,7 @@
 int main (int argc, char *argv[])
 {
     const QString name = "Kvantum Manager";
-    const QString version = "1.0.11";
+    const QString version = "1.1.0";
 
     QStringList options;
     for (int i = 1; i < argc; ++i)

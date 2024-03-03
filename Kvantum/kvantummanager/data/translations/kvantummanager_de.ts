@@ -4,7 +4,7 @@
 <context>
     <name>KvManager::AboutDialog</name>
     <message>
-        <location filename="../../about.ui" line="169"/>
+        <location filename="../../about.ui" line="171"/>
         <source>License</source>
         <translation>Lizenz</translation>
     </message>
@@ -388,7 +388,7 @@ horizontal so weit wie möglich zentriert.</translation>
         <source>You might see annoying artifacts that are caused
 by bugs in Qt&apos;s handling of non-integer scaling
 with window translucency or gradient.</source>
-        <translation>Es könnten störende Artefakte zu sehen sein, die durch Fehler 
+        <translation>Es könnten störende Artefakte zu sehen sein, die durch Fehler&#xa0;
 in Qt&apos;s Umgang von nicht-integer Skalierung 
 mit Fenstertransluzenz oder Farbverlauf auftreten.</translation>
     </message>

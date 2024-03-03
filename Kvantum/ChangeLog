@@ -1,5 +1,7 @@
-V1.0.11
+V1.1.0
 ---------
+ * Made the default (cmake) compilation be against Qt6. (For Qt5, set "ENABLE_QT5" to "ON", as in `cmake .. -DENABLE_QT5=ON`.)
+ * Removed the support for qmake (because KF6 doesn't support it).
  * Made it possible to reduce only the opacity of inactive windows with negative values of the relevant setting (in Kvantum Manager).
  * Added a workaround for a bug in Qt 6.6, because of which, translucent menus on a non-primary screen might be drawn with their minimum sizes and without contents after being moved.
  * Ensure an opaque base color for combo popups on toolbars.
