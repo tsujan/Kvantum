@@ -454,7 +454,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2645"/>
         <source>0-1</source>
-        <translation type="unfinished">0-1</translation>
+        <translation>0-1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2653"/>
