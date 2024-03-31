@@ -151,7 +151,7 @@ neben Text</translation>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="366"/>
         <source>Push button with menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Druckknopf mit Menü</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="415"/>
