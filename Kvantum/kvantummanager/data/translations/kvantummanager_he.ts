@@ -479,12 +479,12 @@ Usually, a value of 2 is enough.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="821"/>
         <source>Menu:</source>
-        <translation type="unfinished"></translation>
+        <translation>תפריט:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="828"/>
         <source>Tooltip:</source>
-        <translation type="unfinished"></translation>
+        <translation>חלונית צצה:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="852"/>
@@ -517,7 +517,7 @@ Automatically checked if window blurring is enabled.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="955"/>
         <source>Blurring for menus and tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>טשטוש לתפריטים וחלוניות צצות</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="962"/>
@@ -535,7 +535,7 @@ shadow to menus and tooltips.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="979"/>
         <source>Translucent windows</source>
-        <translation type="unfinished"></translation>
+        <translation>חלונות שקופים למחצה</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1053"/>
