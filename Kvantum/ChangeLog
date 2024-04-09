@@ -1,3 +1,7 @@
+V1.1.1
+---------
+ * The support for qmake is back without KWindowSystem and without being advertised.
+
 V1.1.0
 ---------
  * Made the default compilation be against Qt6. (For Qt5, set "ENABLE_QT5" to "ON", as in `cmake .. -DENABLE_QT5=ON`.)
