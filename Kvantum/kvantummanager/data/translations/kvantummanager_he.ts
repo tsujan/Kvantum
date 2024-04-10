@@ -1606,7 +1606,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="2816"/>
         <source>Restored the root default settings of %1</source>
-        <translation type="unfinished"></translation>
+        <translation>שוחזרו הגדרות ברירת המחדל המקוריות של %1</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2817"/>
