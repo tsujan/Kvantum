@@ -2744,11 +2744,15 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           else
             suffix = "-normal";
         }
-        bool animate(opacityTimer_ && !qstyleoption_cast<const QStyleOptionMenuItem*>(option));
-        if (!animate && widget != nullptr // not QML or Libreoffice's unstyled menu
-            && elementExists("menu-"+ispec.element+suffix))
+        bool animate(opacityTimer_);
+        if (qstyleoption_cast<const QStyleOptionMenuItem*>(option))
         {
-          prefix = "menu-"; // make exception for menuitems
+          animate = false; // no animation for menuitems
+          if (widget != nullptr // not QML or Libreoffice's unstyled menu
+              && elementExists("menu-"+ispec.element+suffix))
+          {
+            prefix = "menu-"; // make exception for menuitems
+          }
         }
         if (isWidgetInactive(widget))
           suffix.append("-inactive");

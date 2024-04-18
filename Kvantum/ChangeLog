@@ -2,6 +2,7 @@ V1.1.1
 ---------
  * The support for qmake is back without KWindowSystem and without being advertised.
  * Added a workaround for a backward incompatible change in how Qt 6.7 draws item views.
+ * Fixed an old issue in drawing radio buttons under mouse cursor without animation.
 
 V1.1.0
 ---------
