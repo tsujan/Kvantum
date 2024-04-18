@@ -592,7 +592,12 @@ void Style::viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
                                      checkRect->size(), check);
     *pixmapRect = QStyle::alignedRect(opt->direction, opt->decorationAlignment,
                                       pixmapRect->size(), decoration);
+#if (QT_VERSION >= QT_VERSION_CHECK(6,7,0))
+    if (opt->showDecorationSelected
+        || emptyText) // WARNING: There is a backward incompatible change in Qt 6.7.
+#else
     if (opt->showDecorationSelected)
+#endif
       *textRect = display; // the text takes all available space
     else
       *textRect = QStyle::alignedRect(opt->direction, opt->displayAlignment,
