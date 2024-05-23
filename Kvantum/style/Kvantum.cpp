@@ -7315,7 +7315,7 @@ void Style::drawControl(QStyle::ControlElement element,
                         : pixelMetric(PM_TabBarIconSize,option,widget);
 
         /* eliding (WARNING: QML may report an empty text when there isn't
-                             enough space, so nothing can be done for it. */
+                             enough space, so nothing can be done for it.) */
         QString txt = opt->text;
         if (!txt.isEmpty())
         {
