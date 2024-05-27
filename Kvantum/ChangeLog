@@ -1,6 +1,7 @@
 V1.1.2
 ---------
  * Workaround for an inconsistency in Qt, where a persistent editor can be opened for an item view without setting the flag "ItemIsEditable".
+ * Follow Qt 6.7 by giving the available space to the text rectangle of a view item (this extends the workaround which was added to V1.1.1).
 
 V1.1.1
 ---------
