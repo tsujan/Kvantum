@@ -5282,7 +5282,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           break;
         }
         else if (indx.isValid() && !(indx.flags() & Qt::ItemIsEditable)
-                 && iv && !iv->isPersistentEditorOpen(indx)
+                 && iv && !iv->isPersistentEditorOpen(indx) // Qt is inconsistent here
                  && (option->state & State_Enabled))
         {
           /* force colors when text isn't drawn at CE_ItemViewItem (as in VLC) */

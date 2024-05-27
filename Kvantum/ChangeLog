@@ -1,6 +1,6 @@
 V1.1.2
 ---------
- * Exclude persistent editors from the workaround for item views whose texts aren't drawn in the standard way (as in VLC).
+ * Workaround for an inconsistency in Qt, where a persistent editor can be opened for an item view without setting the flag "ItemIsEditable".
 
 V1.1.1
 ---------
