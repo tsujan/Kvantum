@@ -111,7 +111,7 @@ settings of this theme.
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="346"/>
-        <location filename="../../kvantummanager.ui" line="2169"/>
+        <location filename="../../kvantummanager.ui" line="2173"/>
         <source>Save</source>
         <translation>Захаваць</translation>
     </message>
@@ -247,8 +247,8 @@ the highlight color!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="665"/>
         <location filename="../../kvantummanager.ui" line="712"/>
-        <location filename="../../kvantummanager.ui" line="1086"/>
-        <location filename="../../kvantummanager.ui" line="1122"/>
+        <location filename="../../kvantummanager.ui" line="1090"/>
+        <location filename="../../kvantummanager.ui" line="1126"/>
         <source> %</source>
         <translation type="unfinished"></translation>
     </message>
@@ -299,15 +299,15 @@ as far as possible.</source>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="762"/>
-        <location filename="../../kvantummanager.ui" line="1259"/>
-        <location filename="../../kvantummanager.ui" line="1297"/>
-        <location filename="../../kvantummanager.ui" line="1327"/>
-        <location filename="../../kvantummanager.ui" line="1364"/>
-        <location filename="../../kvantummanager.ui" line="1392"/>
-        <location filename="../../kvantummanager.ui" line="1418"/>
-        <location filename="../../kvantummanager.ui" line="1448"/>
-        <location filename="../../kvantummanager.ui" line="1476"/>
-        <location filename="../../kvantummanager.ui" line="1511"/>
+        <location filename="../../kvantummanager.ui" line="1263"/>
+        <location filename="../../kvantummanager.ui" line="1301"/>
+        <location filename="../../kvantummanager.ui" line="1331"/>
+        <location filename="../../kvantummanager.ui" line="1368"/>
+        <location filename="../../kvantummanager.ui" line="1396"/>
+        <location filename="../../kvantummanager.ui" line="1422"/>
+        <location filename="../../kvantummanager.ui" line="1452"/>
+        <location filename="../../kvantummanager.ui" line="1480"/>
+        <location filename="../../kvantummanager.ui" line="1515"/>
         <source> px</source>
         <translation type="unfinished"></translation>
     </message>
@@ -323,7 +323,7 @@ for windows or the window opacity is reduced (see below).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="993"/>
+        <location filename="../../kvantummanager.ui" line="995"/>
         <source>Opaque apps:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -512,182 +512,182 @@ shadow to menus and tooltips.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1053"/>
+        <location filename="../../kvantummanager.ui" line="1057"/>
         <source>Reduce window opacity by</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1099"/>
+        <location filename="../../kvantummanager.ui" line="1103"/>
         <source>Reduce menu opacity by</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1137"/>
+        <location filename="../../kvantummanager.ui" line="1141"/>
         <source>Blurring for translucent windows</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1157"/>
+        <location filename="../../kvantummanager.ui" line="1161"/>
         <source>A 200ms fading animation when the state of
 some widgets is changed, mostly by the mouse.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1161"/>
+        <location filename="../../kvantummanager.ui" line="1165"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A 200ms fading animation when the state of some widgets is changed, mostly by the mouse.&lt;/p&gt;&lt;p&gt;The CPU usage is negligible because often only one widget is animated. The resulting visual effect depends on the active theme.&lt;/p&gt;&lt;p&gt;These widgets are supported: buttons (including radio buttons and check boxes), combo boxes, spin boxes, slider handles, line-edits and scroll views.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1164"/>
+        <location filename="../../kvantummanager.ui" line="1168"/>
         <source>Animation for state change under mouse</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1171"/>
+        <location filename="../../kvantummanager.ui" line="1175"/>
         <source>Check this to remove all window/dialog tiling patterns!
 Uncheck it if you want those patterns back!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1175"/>
+        <location filename="../../kvantummanager.ui" line="1179"/>
         <source>Remove window/dialog tiling patterns</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1182"/>
+        <location filename="../../kvantummanager.ui" line="1186"/>
         <source>Use the same colors and shapes with active and inactive
 windows if this theme distinguishes between them?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1186"/>
+        <location filename="../../kvantummanager.ui" line="1190"/>
         <source>Ignore inactive state</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1200"/>
+        <location filename="../../kvantummanager.ui" line="1204"/>
         <source>Transient scrollbars</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1222"/>
+        <location filename="../../kvantummanager.ui" line="1226"/>
         <source>Sizes &amp;&amp; Delays</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1228"/>
+        <location filename="../../kvantummanager.ui" line="1232"/>
         <source>Sizes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1243"/>
+        <location filename="../../kvantummanager.ui" line="1247"/>
         <source>Small icon:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1281"/>
+        <location filename="../../kvantummanager.ui" line="1285"/>
         <source>Large icon:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1315"/>
+        <location filename="../../kvantummanager.ui" line="1319"/>
         <source>Button icon:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1347"/>
+        <location filename="../../kvantummanager.ui" line="1351"/>
         <source>Toolbar icon:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1361"/>
+        <location filename="../../kvantummanager.ui" line="1365"/>
         <source>Font size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1377"/>
-        <location filename="../../kvantummanager.ui" line="1388"/>
+        <location filename="../../kvantummanager.ui" line="1381"/>
+        <location filename="../../kvantummanager.ui" line="1392"/>
         <source>The default value is 3 px but
 some apps set it themeselves.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1381"/>
+        <location filename="../../kvantummanager.ui" line="1385"/>
         <source>Layout spacing:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1405"/>
-        <location filename="../../kvantummanager.ui" line="1415"/>
+        <location filename="../../kvantummanager.ui" line="1409"/>
+        <location filename="../../kvantummanager.ui" line="1419"/>
         <source>The default value is 4 px but some apps set it themeselves.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1408"/>
+        <location filename="../../kvantummanager.ui" line="1412"/>
         <source>Layout margin:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1431"/>
-        <location filename="../../kvantummanager.ui" line="1443"/>
+        <location filename="../../kvantummanager.ui" line="1435"/>
+        <location filename="../../kvantummanager.ui" line="1447"/>
         <source>The horizontal overlap between a submenu and its parent.
 
 0 by default.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1436"/>
+        <location filename="../../kvantummanager.ui" line="1440"/>
         <source>Submenu overlap: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1461"/>
-        <location filename="../../kvantummanager.ui" line="1472"/>
+        <location filename="../../kvantummanager.ui" line="1465"/>
+        <location filename="../../kvantummanager.ui" line="1476"/>
         <source>The width of horizontal spin buttons.
 (Has no effect when spin indicators are vertical.)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1465"/>
+        <location filename="../../kvantummanager.ui" line="1469"/>
         <source>Spin button width: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1839"/>
-        <location filename="../../kvantummanager.ui" line="1849"/>
+        <location filename="../../kvantummanager.ui" line="1843"/>
+        <location filename="../../kvantummanager.ui" line="1853"/>
         <source>How to activate view items?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1842"/>
+        <location filename="../../kvantummanager.ui" line="1846"/>
         <source>Click behavior:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1962"/>
+        <location filename="../../kvantummanager.ui" line="1966"/>
         <source>Draw tree branch lines?
 
 By default, tree branches have indicators but no line.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1941"/>
+        <location filename="../../kvantummanager.ui" line="1945"/>
         <source>Dialog button layout:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1951"/>
+        <location filename="../../kvantummanager.ui" line="1955"/>
         <source>They may look like dotted rectangles
 on focused buttons and other widgets.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1955"/>
+        <location filename="../../kvantummanager.ui" line="1959"/>
         <source>Remove focus rectangles</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2151"/>
+        <location filename="../../kvantummanager.ui" line="2155"/>
         <source>Use the active theme for all apps!
 
 This Needs saving to take effect.</source>
@@ -774,26 +774,26 @@ as far as possible.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1132"/>
+        <location filename="../../kvantummanager.ui" line="1136"/>
         <source>Needs KDE blur effect, a graphic card
 that supports it, and a translucent
 window SVG background in the theme.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1210"/>
+        <location filename="../../kvantummanager.ui" line="1214"/>
         <source>Should transient scrollbars have
 semi-transparent grooves when needed?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1214"/>
+        <location filename="../../kvantummanager.ui" line="1218"/>
         <source>Transient scrollbar grooves when needed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1234"/>
-        <location filename="../../kvantummanager.ui" line="1250"/>
+        <location filename="../../kvantummanager.ui" line="1238"/>
+        <location filename="../../kvantummanager.ui" line="1254"/>
         <source>Affects menu-items and headers.
 
 The default value is 16 px but
@@ -804,8 +804,8 @@ Miscellaneous → Respect current DE if possible</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1272"/>
-        <location filename="../../kvantummanager.ui" line="1288"/>
+        <location filename="../../kvantummanager.ui" line="1276"/>
+        <location filename="../../kvantummanager.ui" line="1292"/>
         <source>Affects icon views.
 
 The default value is 32 px but
@@ -816,16 +816,16 @@ Miscellaneous → Respect current DE if possible</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1310"/>
-        <location filename="../../kvantummanager.ui" line="1322"/>
+        <location filename="../../kvantummanager.ui" line="1314"/>
+        <location filename="../../kvantummanager.ui" line="1326"/>
         <source>Affects buttons, tab-bars and list-views.
 
 The default value is 16 px.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1340"/>
-        <location filename="../../kvantummanager.ui" line="1354"/>
+        <location filename="../../kvantummanager.ui" line="1344"/>
+        <location filename="../../kvantummanager.ui" line="1358"/>
         <source>Affects toolbars.
 
 The default value is 22 px but
@@ -834,30 +834,30 @@ KDE apps get it from KDE setting.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1492"/>
-        <location filename="../../kvantummanager.ui" line="1505"/>
+        <location filename="../../kvantummanager.ui" line="1496"/>
+        <location filename="../../kvantummanager.ui" line="1509"/>
         <source>The minimum length of scrollbars.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1495"/>
-        <location filename="../../kvantummanager.ui" line="1508"/>
+        <location filename="../../kvantummanager.ui" line="1499"/>
+        <location filename="../../kvantummanager.ui" line="1512"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The minimum height of vertical scrollbars and the minimum width of horizontal scrollbars.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1498"/>
+        <location filename="../../kvantummanager.ui" line="1502"/>
         <source>Minimum scrollbar length: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1543"/>
+        <location filename="../../kvantummanager.ui" line="1547"/>
         <source>Delays</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1549"/>
-        <location filename="../../kvantummanager.ui" line="1577"/>
+        <location filename="../../kvantummanager.ui" line="1553"/>
+        <location filename="../../kvantummanager.ui" line="1581"/>
         <source>The delay, in milliseconds, before a tooltip is shown.
 
 Zero means tooltips are shown instantly.
@@ -866,7 +866,7 @@ Zero means tooltips are shown instantly.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1825"/>
+        <location filename="../../kvantummanager.ui" line="1829"/>
         <source>Scrollbars have add-line and sub-line arrows by default.
 
 Checking this box removes arrows as far as possible.
@@ -875,7 +875,7 @@ If disabled, see Compositing &amp; General Look → Transient scrollbars!</sourc
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1691"/>
+        <location filename="../../kvantummanager.ui" line="1695"/>
         <source>By default, drop rectangles for movable
 toolbars and dock widgets are hollow.
 
@@ -884,14 +884,14 @@ the highlight color.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1746"/>
+        <location filename="../../kvantummanager.ui" line="1750"/>
         <source>If checked, the menubar and toolbar will be drawn as a whole by
 the toolbar SVG element when they are adjacent to each another.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1974"/>
-        <location filename="../../kvantummanager.ui" line="1988"/>
+        <location filename="../../kvantummanager.ui" line="1978"/>
+        <location filename="../../kvantummanager.ui" line="1992"/>
         <source>Drag windows from their menubars, primary toolbars
 or anywhere possible (and not only from their title bars)?
 
@@ -900,8 +900,8 @@ Miscellaneous → Respect current DE if possible</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1885"/>
-        <location filename="../../kvantummanager.ui" line="1904"/>
+        <location filename="../../kvantummanager.ui" line="1889"/>
+        <location filename="../../kvantummanager.ui" line="1908"/>
         <source>Will have effect only if style
 is not set by the app in its code.
 
@@ -909,7 +909,7 @@ Default is &quot;Follow Style&quot;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1677"/>
+        <location filename="../../kvantummanager.ui" line="1681"/>
         <source>By default, spin indicators are drawn as
 two buttons with arrows or plus/minus signs.
 
@@ -918,7 +918,7 @@ into the spin line-edit..</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1705"/>
+        <location filename="../../kvantummanager.ui" line="1709"/>
         <source>By default, spin indicators are drawn on adjacent buttons.
 
 Checking this puts the spin-up indicator above the
@@ -926,25 +926,25 @@ spin-down one inside the spin line-edit.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1757"/>
+        <location filename="../../kvantummanager.ui" line="1761"/>
         <source>Draw combo popups as menu popups (i.e. like in Gtk)?
 
 By default, combo popups do not cover the combo box.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1804"/>
+        <location filename="../../kvantummanager.ui" line="1808"/>
         <source>In Kvantum, tabs are centered by default.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1556"/>
+        <location filename="../../kvantummanager.ui" line="1560"/>
         <source>Tooltip delay:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="986"/>
-        <location filename="../../kvantummanager.ui" line="1016"/>
+        <location filename="../../kvantummanager.ui" line="988"/>
+        <location filename="../../kvantummanager.ui" line="1018"/>
         <source>A comma-separated list of executables,
 whose windows should not be translucent.
 
@@ -953,7 +953,7 @@ problems with translucency!)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1193"/>
+        <location filename="../../kvantummanager.ui" line="1197"/>
         <source>Make scrollbars transient!
 
 Transient scrollbars appear on top of
@@ -962,8 +962,8 @@ They usually take no extra space.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1563"/>
-        <location filename="../../kvantummanager.ui" line="1600"/>
+        <location filename="../../kvantummanager.ui" line="1567"/>
+        <location filename="../../kvantummanager.ui" line="1604"/>
         <source>The delay, in milliseconds, to wait before opening a submenu.
 250 by default.
 
@@ -972,28 +972,28 @@ while 0 means no delay.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1570"/>
+        <location filename="../../kvantummanager.ui" line="1574"/>
         <source>Submenu delay: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1584"/>
-        <location filename="../../kvantummanager.ui" line="1607"/>
+        <location filename="../../kvantummanager.ui" line="1588"/>
+        <location filename="../../kvantummanager.ui" line="1611"/>
         <source> ms</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1640"/>
+        <location filename="../../kvantummanager.ui" line="1644"/>
         <source>Miscellaneous</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1832"/>
+        <location filename="../../kvantummanager.ui" line="1836"/>
         <source>No arrows for scrollbars</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1927"/>
+        <location filename="../../kvantummanager.ui" line="1931"/>
         <source>Draw scrollbars inside view frames?
 
 By default, scrollbars are drawn outide view frames.
@@ -1002,17 +1002,17 @@ If disabled, see Compositing &amp; General Look → Transient scrollbars!</sourc
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1934"/>
+        <location filename="../../kvantummanager.ui" line="1938"/>
         <source>Scrollbars inside frames</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1967"/>
+        <location filename="../../kvantummanager.ui" line="1971"/>
         <source>Tree branch lines</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1663"/>
+        <location filename="../../kvantummanager.ui" line="1667"/>
         <source>By default, the label is on the frame
 and the frame is cut to contain it.
 
@@ -1021,95 +1021,95 @@ the frame, so that the frame isn&apos;t cut.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1670"/>
+        <location filename="../../kvantummanager.ui" line="1674"/>
         <source>Group-box label above frame</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1698"/>
+        <location filename="../../kvantummanager.ui" line="1702"/>
         <source>Fill rubber-band rectangles</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1718"/>
+        <location filename="../../kvantummanager.ui" line="1722"/>
         <source>Mouse tracking is enabled
 for menubars by default.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1722"/>
+        <location filename="../../kvantummanager.ui" line="1726"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mouse tracking is enabled for menubars by default, i.e., after a menubar item is clicked and its menu is shown, the menus of the other menubar items will be shown if the cursor is put on them without clicking.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1725"/>
+        <location filename="../../kvantummanager.ui" line="1729"/>
         <source>Mouse tracking for menubars</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1750"/>
+        <location filename="../../kvantummanager.ui" line="1754"/>
         <source>Merge menubar with toolbar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1769"/>
+        <location filename="../../kvantummanager.ui" line="1773"/>
         <source>If checked, toolbar buttons will be drawn grouped and raised
 between toolbar separators.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1773"/>
+        <location filename="../../kvantummanager.ui" line="1777"/>
         <source>Group toolbar buttons</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1981"/>
+        <location filename="../../kvantummanager.ui" line="1985"/>
         <source>Drag from:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1891"/>
+        <location filename="../../kvantummanager.ui" line="1895"/>
         <source>Toolbutton style:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1794"/>
+        <location filename="../../kvantummanager.ui" line="1798"/>
         <source>If unchecked, shortcuts will not be underlined at all.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1797"/>
+        <location filename="../../kvantummanager.ui" line="1801"/>
         <source>Underline shortcuts with Alt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1684"/>
+        <location filename="../../kvantummanager.ui" line="1688"/>
         <source>Inline spin indicators</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1732"/>
+        <location filename="../../kvantummanager.ui" line="1736"/>
         <source>Draw the whole editable combo-box as a
 line-edit with arrow (and icon, if it exists)?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1736"/>
+        <location filename="../../kvantummanager.ui" line="1740"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Draw the whole editable combo-box as a line-edit with arrow (and icon, if it exists)?&lt;/p&gt;&lt;p&gt;By default, a combo-box consists of a line-edit, a button with arrow on one side and another button with icon on the other side.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1739"/>
+        <location filename="../../kvantummanager.ui" line="1743"/>
         <source>Editable combo as line-edit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1711"/>
+        <location filename="../../kvantummanager.ui" line="1715"/>
         <source>Vertical spin indicators</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1646"/>
+        <location filename="../../kvantummanager.ui" line="1650"/>
         <source>When this is enabled and checked, Kvantum will try to
 respect some settings of the current desktop environment.
 
@@ -1118,38 +1118,38 @@ Uncheck it if you want to use those options!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1656"/>
+        <location filename="../../kvantummanager.ui" line="1660"/>
         <source>Respect current DE if possible</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1762"/>
+        <location filename="../../kvantummanager.ui" line="1766"/>
         <source>Combo popup as menu</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1807"/>
+        <location filename="../../kvantummanager.ui" line="1811"/>
         <source>Left aligned tabs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1814"/>
+        <location filename="../../kvantummanager.ui" line="1818"/>
         <source>Inactive tabs are joined together by default,
 i.e., there is no border between them.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1818"/>
+        <location filename="../../kvantummanager.ui" line="1822"/>
         <source>Join inactive tabs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2005"/>
+        <location filename="../../kvantummanager.ui" line="2009"/>
         <source>Scrollable menus</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1653"/>
+        <location filename="../../kvantummanager.ui" line="1657"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When this is enabled and checked, Kvantum will try to respect some settings of the current desktop environment if it is KDE, Unity, Gnome or Pantheon.&lt;/p&gt;&lt;p&gt;Under KDE, it makes Kvantum read KDE settings for small and large icon sizes and also single or double clicking.&lt;/p&gt;&lt;p&gt;Under Unity, Gnome and Pantheon, it removes icons from menus and push-buttons (even if the corresponding dconf keys are changed) and disables window translucency.&lt;/p&gt;&lt;p&gt;This checkbox may disable some options. Uncheck it if you want to use those options!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1163,8 +1163,8 @@ A value of 1.00 means no change.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1043"/>
-        <location filename="../../kvantummanager.ui" line="1076"/>
+        <location filename="../../kvantummanager.ui" line="1047"/>
+        <location filename="../../kvantummanager.ui" line="1080"/>
         <source>This will reduce the window opacity
 if window translucency is enabled.
 
@@ -1176,7 +1176,7 @@ opacity of inactive windows is reduced.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1780"/>
+        <location filename="../../kvantummanager.ui" line="1784"/>
         <source>When drawing combo popups as menus,
 there will be a checkbox next to each entry
 (although Kvantum draws it as a radio button).
@@ -1185,12 +1185,12 @@ This option will hide these.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1787"/>
+        <location filename="../../kvantummanager.ui" line="1791"/>
         <source>Non-checkable combo menu</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="1999"/>
+        <location filename="../../kvantummanager.ui" line="2003"/>
         <source>Should big menus be scrollable and have
 scroll arrows on their top and/or bottom?
 
@@ -1198,7 +1198,7 @@ By default, big menus are scrollable.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2012"/>
+        <location filename="../../kvantummanager.ui" line="2016"/>
         <source>Warning: This can be quite confusing at first.
 
 If you have enabled it, you could temporarily disable it
@@ -1207,89 +1207,89 @@ the Ctrl key before pressing the button.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2019"/>
+        <location filename="../../kvantummanager.ui" line="2023"/>
         <source>Allow dragging from buttons</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2042"/>
+        <location filename="../../kvantummanager.ui" line="2046"/>
         <source>Application Themes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2048"/>
+        <location filename="../../kvantummanager.ui" line="2052"/>
         <source>&lt;center&gt;Here you could assign themes to specific applications.&lt;/center&gt;&lt;br&gt;&lt;center&gt;For each theme, you could add a comma-separated list of executables whose applications should use that theme instead of the active theme. After doing so for all of your chosen themes, save the result by clicking on the &lt;i&gt;Save&lt;/i&gt; button!&lt;/center&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2083"/>
+        <location filename="../../kvantummanager.ui" line="2087"/>
         <source>Installed Theme</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2099"/>
+        <location filename="../../kvantummanager.ui" line="2103"/>
         <source>Application(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2128"/>
+        <location filename="../../kvantummanager.ui" line="2132"/>
         <source>app1,app2,app3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2156"/>
+        <location filename="../../kvantummanager.ui" line="2160"/>
         <source>Remove List</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2163"/>
+        <location filename="../../kvantummanager.ui" line="2167"/>
         <source>Save the current list of apps</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2166"/>
+        <location filename="../../kvantummanager.ui" line="2170"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Save the current list of applications with their corresponding themes!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2193"/>
-        <location filename="../../kvantummanager.ui" line="2199"/>
+        <location filename="../../kvantummanager.ui" line="2197"/>
+        <location filename="../../kvantummanager.ui" line="2203"/>
         <source>Ctrl+Q</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2196"/>
+        <location filename="../../kvantummanager.ui" line="2200"/>
         <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2209"/>
+        <location filename="../../kvantummanager.ui" line="2213"/>
         <source>Preview the active theme
 or update its preview.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2213"/>
+        <location filename="../../kvantummanager.ui" line="2217"/>
         <source>Preview</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2220"/>
+        <location filename="../../kvantummanager.ui" line="2224"/>
         <source>About</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2243"/>
+        <location filename="../../kvantummanager.ui" line="2247"/>
         <source>What&apos;s This?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2246"/>
+        <location filename="../../kvantummanager.ui" line="2250"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click on this button and then click on a GUI element that has &amp;quot;What&apos;s This&amp;quot; tooltip  to get information about what it does.&lt;/p&gt;&lt;p&gt;There are also ordinary tooltips but this kind of tooltip will not disappear until you click somewhere.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2249"/>
+        <location filename="../../kvantummanager.ui" line="2253"/>
         <source>Help</source>
         <translation type="unfinished"></translation>
     </message>
