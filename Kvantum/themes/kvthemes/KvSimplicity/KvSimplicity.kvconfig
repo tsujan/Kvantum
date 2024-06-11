@@ -83,6 +83,7 @@ transparent_arrow_button=true
 lxqtmainmenu_iconsize=22
 single_top_toolbar=true
 no_selection_tint=true
+centered_forms=true
 
 [PanelButtonCommand]
 frame=true

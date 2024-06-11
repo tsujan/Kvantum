@@ -96,6 +96,7 @@ normal_default_pushbutton=false
 single_top_toolbar=true
 tint_on_mouseover=0
 transparent_arrow_button=true
+centered_forms=true
 
 [PanelButtonCommand]
 frame=true
