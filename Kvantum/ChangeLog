@@ -1,3 +1,7 @@
+V1.1.3
+---------
+ * Draw dragged tabs of Qt ≥ 6.6 as single tabs (like they were drawn with Qt < 6.6).
+
 V1.1.2
 ---------
  * Workaround for an inconsistency in Qt, where a persistent editor can be opened for an item view without setting the flag "ItemIsEditable".

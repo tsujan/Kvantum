@@ -5462,6 +5462,11 @@ Style::KvIconMode Style::getIconMode(int state, bool isInactive, const label_spe
          are two tabs and a new active tab is created after the first one. */
 static inline QStyleOptionTab::TabPosition tabPosition(const QStyleOptionTab *opt, const QWidget *widget)
 {
+#if (QT_VERSION >= QT_VERSION_CHECK(6,6,0))
+  if (opt->position == QStyleOptionTab::Moving)
+    return QStyleOptionTab::OnlyOneTab;
+#endif
+
   const QTabBar *tb = qobject_cast<const QTabBar*>(widget);
   if (tb == nullptr
       /* making an exception in the case of a dragged tab */
