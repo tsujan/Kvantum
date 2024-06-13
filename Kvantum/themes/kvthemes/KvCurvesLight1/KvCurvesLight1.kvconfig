@@ -65,7 +65,7 @@ reduce_menu_opacity=0
 [GeneralColors]
 window.color=#E5E5E6
 base.color=#FBFBFB96
-alt.base.color=#0000000a
+alt.base.color=#D2D2D259
 button.color=#E5E5E6
 light.color=white
 mid.light.color=#ECECEC
