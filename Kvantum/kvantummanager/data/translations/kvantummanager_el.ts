@@ -591,7 +591,7 @@ windows if this theme distinguishes between them?</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1190"/>
         <source>Ignore inactive state</source>
-        <translation type="unfinished"></translation>
+        <translation>Αγνόηση ανενεργού κατάστασης</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1204"/>
@@ -638,7 +638,8 @@ windows if this theme distinguishes between them?</source>
         <location filename="../../kvantummanager.ui" line="1392"/>
         <source>The default value is 3 px but
 some apps set it themeselves.</source>
-        <translation type="unfinished"></translation>
+        <translation>Η προεπιλεγμένη τιμή είναι 3 px αλλά
+κάποιες εφαρμογές την ορίζουν οι ίδιες.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1385"/>
@@ -649,7 +650,7 @@ some apps set it themeselves.</source>
         <location filename="../../kvantummanager.ui" line="1409"/>
         <location filename="../../kvantummanager.ui" line="1419"/>
         <source>The default value is 4 px but some apps set it themeselves.</source>
-        <translation type="unfinished"></translation>
+        <translation>Η προεπιλεγμένη τιμή είναι 4 px αλλά κάποιες εφαρμογές την ορίζουν οι ίδιες.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1412"/>
@@ -886,7 +887,7 @@ KDE apps get it from KDE setting.</source>
         <location filename="../../kvantummanager.ui" line="1496"/>
         <location filename="../../kvantummanager.ui" line="1509"/>
         <source>The minimum length of scrollbars.</source>
-        <translation type="unfinished"></translation>
+        <translation>Το ελάχιστο μήκος των γραμμών κύλισης.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1499"/>
@@ -897,7 +898,7 @@ KDE apps get it from KDE setting.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1502"/>
         <source>Minimum scrollbar length: </source>
-        <translation type="unfinished"></translation>
+        <translation>Ελάχιστο μήκος γραμμών κύλισης: </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1547"/>
@@ -1277,12 +1278,12 @@ the Ctrl key before pressing the button.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2087"/>
         <source>Installed Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Εγκατεστημένο θέμα</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2103"/>
         <source>Application(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>Εφαρμογή(ές)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2132"/>
@@ -1488,7 +1489,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="529"/>
         <source>This file cannot be removed:</source>
-        <translation type="unfinished"></translation>
+        <translation>Αυτό το αρχείο δε μπορεί να αφαιρεθεί:</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="548"/>
