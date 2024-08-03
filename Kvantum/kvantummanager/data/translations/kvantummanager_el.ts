@@ -809,7 +809,9 @@ Hard-coded icons/styles may not respect this key.</source>
         <source>Some apps may not respect dark themes.
 Kvantum can try to correct their behavior
 as far as possible.</source>
-        <translation type="unfinished"></translation>
+        <translation>Κάποιες εφαρμογές μπορεί να μη σεβαστούν τα σκοτεινά θέματα.
+Το Kvantum μπορεί να επιχειρήσει να διορθώσει αυτή τους τη συμπεριφορά
+στο μέτρο του δυνατού.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1136"/>
@@ -1044,7 +1046,7 @@ while 0 means no delay.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1836"/>
         <source>No arrows for scrollbars</source>
-        <translation type="unfinished"></translation>
+        <translation>Χωρίς βέλη για γραμμές κύλισης</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1931"/>
@@ -1134,7 +1136,7 @@ between toolbar separators.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1801"/>
         <source>Underline shortcuts with Alt</source>
-        <translation type="unfinished"></translation>
+        <translation>Υπογράμμιση συντομεύσεων με Alt</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1688"/>
@@ -1268,7 +1270,7 @@ the Ctrl key before pressing the button.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2046"/>
         <source>Application Themes</source>
-        <translation type="unfinished"></translation>
+        <translation>Θέματα εφαρμογής</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2052"/>
@@ -1298,7 +1300,7 @@ the Ctrl key before pressing the button.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2167"/>
         <source>Save the current list of apps</source>
-        <translation type="unfinished"></translation>
+        <translation>Αποθήκευση της τρέχουσας λίστας εφαρμογών</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2170"/>
@@ -1350,7 +1352,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="327"/>
         <source>Open Kvantum Theme Folder...</source>
-        <translation type="unfinished"></translation>
+        <translation>Άνοιγμα φακέλου θέματος Kvantum...</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="190"/>
@@ -1392,7 +1394,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="967"/>
         <source>Theme changed to %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Το θέμα άλλαξε σε %1.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="515"/>
@@ -1484,7 +1486,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="517"/>
         <source>Please fix that first!</source>
-        <translation type="unfinished"></translation>
+        <translation>Παρακαλούμε φτιάξτε αυτό πρώτα!</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="529"/>
@@ -1527,7 +1529,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="612"/>
         <source>You have selected an installed theme folder.</source>
-        <translation type="unfinished"></translation>
+        <translation>Έχετε επιλέξει ένα φάκελο εγκατεστημένου θέματος.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="613"/>
@@ -1537,7 +1539,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="623"/>
         <source>The theme already exists.</source>
-        <translation type="unfinished"></translation>
+        <translation>Το θέμα υπάρχει ήδη.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="624"/>
@@ -1567,7 +1569,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="777"/>
         <source>Do you really want to delete &lt;i&gt;%1&lt;/i&gt;?</source>
-        <translation type="unfinished">Επιθυμείτε πραγματικά την διαγραφή του %1;</translation>
+        <translation>Επιθυμείτε πραγματικά τη διαγραφή του &lt;i&gt;%1&lt;/i&gt;;</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="780"/>
@@ -1604,7 +1606,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="2671"/>
         <source>Configuration saved.</source>
-        <translation type="unfinished"></translation>
+        <translation>Αποθήκευση διαμόρφωσης.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2778"/>
@@ -1614,7 +1616,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="2781"/>
         <source>You will lose the changes you might have made.</source>
-        <translation type="unfinished"></translation>
+        <translation>Θα χάσετε τις αλλαγές που μπορεί να έχετε κάνει.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2816"/>
@@ -1624,7 +1626,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="2817"/>
         <source>the default theme</source>
-        <translation type="unfinished"></translation>
+        <translation>το προεπιλεγμένο θέμα</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2970"/>
