@@ -586,7 +586,8 @@ Uncheck it if you want those patterns back!</source>
         <location filename="../../kvantummanager.ui" line="1186"/>
         <source>Use the same colors and shapes with active and inactive
 windows if this theme distinguishes between them?</source>
-        <translation type="unfinished"></translation>
+        <translation>Να χρησιμοποιηθούν τα ίδια χρώματα και σχήματα με τα ενεργά και τα ανενεργά
+παράθυρα αν αυτό το θέμα κάνει διάκριση μεταξύ τους;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1190"/>
@@ -686,7 +687,7 @@ some apps set it themeselves.</source>
         <location filename="../../kvantummanager.ui" line="1843"/>
         <location filename="../../kvantummanager.ui" line="1853"/>
         <source>How to activate view items?</source>
-        <translation type="unfinished"></translation>
+        <translation>Πώς να ενεργοποιήσετε στοιχεία εμφάνισης;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1846"/>
@@ -703,7 +704,7 @@ By default, tree branches have indicators but no line.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1945"/>
         <source>Dialog button layout:</source>
-        <translation type="unfinished"></translation>
+        <translation>Διάταξη κουμπιού διαλόγου:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1955"/>
@@ -721,7 +722,9 @@ on focused buttons and other widgets.</source>
         <source>Use the active theme for all apps!
 
 This Needs saving to take effect.</source>
-        <translation type="unfinished"></translation>
+        <translation>Χρήση του ενεργού θέματος για όλες τις εφαρμογές!
+
+Αυτό χρειάζεται αποθήκευση για να τεθεί σε ισχύ.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="183"/>
@@ -873,7 +876,9 @@ Miscellaneous → Respect current DE if possible</source>
         <source>Affects buttons, tab-bars and list-views.
 
 The default value is 16 px.</source>
-        <translation type="unfinished"></translation>
+        <translation>Επηρεάζει κουμπιά, γραμμές καρτελών και προβολές λίστας.
+
+Η προεπιλεγμένη τιμή είναι 16 px.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1344"/>
@@ -883,7 +888,11 @@ The default value is 16 px.</source>
 The default value is 22 px but
 some apps set it themselves.
 KDE apps get it from KDE setting.</source>
-        <translation type="unfinished"></translation>
+        <translation>Επηρεάζει γραμμές εργαλείων.
+
+Η προεπιλεγμένη τιμή είναι 22 px αλλά
+κάποιες εφαρμογές την ορίζουν οι ίδιες.
+Οι εφαρμογές KDE την αποκτούν από τη ρύθμιση του KDE.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1496"/>
@@ -1060,7 +1069,7 @@ If disabled, see Compositing &amp; General Look → Transient scrollbars!</sourc
     <message>
         <location filename="../../kvantummanager.ui" line="1938"/>
         <source>Scrollbars inside frames</source>
-        <translation type="unfinished"></translation>
+        <translation>Γραμμές κύλισης εντός πλαισίων</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1971"/>
@@ -1105,7 +1114,7 @@ for menubars by default.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1754"/>
         <source>Merge menubar with toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Συγχώνευση γραμμής μενού με γραμμή εργαλείων</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1773"/>
@@ -1116,7 +1125,7 @@ between toolbar separators.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1777"/>
         <source>Group toolbar buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>Ομαδοποίηση κουμπιών γραμμής εργαλείων</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1985"/>
@@ -1186,7 +1195,7 @@ Uncheck it if you want to use those options!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1811"/>
         <source>Left aligned tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>Καρτέλες στοιχισμένες αριστερά</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1818"/>
@@ -1202,7 +1211,7 @@ i.e., there is no border between them.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2009"/>
         <source>Scrollable menus</source>
-        <translation type="unfinished"></translation>
+        <translation>Μενού σε κύλιση</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1657"/>
@@ -1322,7 +1331,8 @@ the Ctrl key before pressing the button.</source>
         <location filename="../../kvantummanager.ui" line="2213"/>
         <source>Preview the active theme
 or update its preview.</source>
-        <translation type="unfinished"></translation>
+        <translation>Προεπισκόπηση του ενεργού θέματος
+ή ενημέρωση της προεπισκόπησής του.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2217"/>
@@ -1372,7 +1382,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="598"/>
         <source>First you have to delete its modified version!</source>
-        <translation type="unfinished"></translation>
+        <translation>Πρώτα πρέπει να διαγράψετε την τροποποιημένη του έκδοση!</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="622"/>
@@ -1476,7 +1486,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="123"/>
         <source>Menubar and primary toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Γραμμή μενού και πρωτεύουσα γραμμή εργαλείων</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="124"/>
@@ -1554,7 +1564,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="661"/>
         <source>The user installation will take priority.</source>
-        <translation type="unfinished"></translation>
+        <translation>Η εγκατάσταση του χρήστη θα λάβει προτεραιότητα.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="675"/>
@@ -1564,7 +1574,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="677"/>
         <source>This installation will take priority.</source>
-        <translation type="unfinished"></translation>
+        <translation>Αυτή η εγκατάσταση θα λάβει προτεραιότητα.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="777"/>
@@ -1682,12 +1692,12 @@ or update its preview.</source>
     <message>
         <location filename="../../main.cpp" line="139"/>
         <source>Kvantum</source>
-        <translation type="unfinished">Kvantum</translation>
+        <translation>Kvantum</translation>
     </message>
     <message>
         <location filename="../../main.cpp" line="140"/>
         <source>Kvantum is not installed on your system.</source>
-        <translation type="unfinished"></translation>
+        <translation>Το Kvantum δεν είναι εγκατεστημένο στο σύστημά σας.</translation>
     </message>
     <message>
         <location filename="../../main.cpp" line="141"/>
