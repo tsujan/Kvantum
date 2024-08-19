@@ -597,7 +597,7 @@ windows if this theme distinguishes between them?</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1204"/>
         <source>Transient scrollbars</source>
-        <translation type="unfinished"></translation>
+        <translation>Παροδικές γραμμές κύλισης</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1226"/>
@@ -1519,7 +1519,7 @@ or update its preview.</source>
         <location filename="../../KvantumManager.cpp" line="561"/>
         <location filename="../../KvantumManager.cpp" line="571"/>
         <source>Please select another directory!</source>
-        <translation type="unfinished"></translation>
+        <translation>Παρακαλώ επιλέξτε ένα άλλο κατάλογο!</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="560"/>
@@ -1672,7 +1672,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="527"/>
         <source>This directory cannot be removed:</source>
-        <translation type="unfinished"></translation>
+        <translation>Αυτός ο κατάλογος δε μπορεί να αφαιρεθεί:</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="534"/>
