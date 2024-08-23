@@ -23,7 +23,11 @@
 #define KSL(x) QStringLiteral(x)
 #define KL1(x) QLatin1StringView(x)
 
+QT_BEGIN_NAMESPACE
+
 class QSettings;
+
+QT_END_NAMESPACE
 
 namespace Kvantum {
 

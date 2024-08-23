@@ -35,7 +35,11 @@
 #define SLIDER_TICK_SIZE 5 // 10 at most
 #define ANIMATION_FRAME 40 // in ms
 
+QT_BEGIN_NAMESPACE
+
 class QSvgRenderer;
+
+QT_END_NAMESPACE
 
 namespace Kvantum {
 

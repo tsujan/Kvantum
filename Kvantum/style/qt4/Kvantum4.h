@@ -28,7 +28,11 @@
 #include "ThemeConfig4.h"
 #include "blurhelper4.h"
 
+QT_BEGIN_NAMESPACE
+
 class QSvgRenderer;
+
+QT_END_NAMESPACE
 
 namespace Kvantum {
 
