@@ -150,17 +150,19 @@ indstillinger af dette tema.
 Under LXQt, it needs logging out and in or closing
 PCManFM-qt and then, stopping and starting Desktop
 with LXQt Session Settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>Flet PCManFM-qt&apos;s sidepanel med omgivelserne.
+
+Under LXQt, skal der logges ud og ind eller også skal PCManFM-qt lukkes og Skrivebordet genstartes med LXQt-sessionsindstillinger.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="451"/>
         <source>Transparent sidepane for PCManFM-qt</source>
-        <translation type="unfinished"></translation>
+        <translation>Gennemsigtigt sidepanel til PCManFM-qt</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="466"/>
         <source>Iconless push buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>Ikonfrie knapper</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="473"/>
@@ -169,32 +171,36 @@ with LXQt Session Settings.</source>
 Under LXQt, it needs logging out and in or closing
 PCManFM-qt and then, stopping and starting Desktop
 with LXQt Session Settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kombiner PCManFM-qts visning med omgivelserne.
+
+Under LXQt skal den logges ud og ind eller lukkes
+PCManFM-qt og derefter, stop og start Desktop
+med LXQt-sessionsindstillinger.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="480"/>
         <source>Transparent view for PCManFM-qt</source>
-        <translation type="unfinished"></translation>
+        <translation>Gennemsigtig visning til PCManFM-qt</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="495"/>
         <source>Iconless menus</source>
-        <translation type="unfinished"></translation>
+        <translation>Ikonfrie menuer</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="510"/>
         <source>Blur explicitly translucent windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Slør eksplicit gennemsigtige vinduer</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="524"/>
         <source>Single top toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Enkelt øverste værktøjslinje</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="554"/>
         <source>Do not draw any background for KTitles.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tegn ikke nogen baggrund for KTitles.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="557"/>
