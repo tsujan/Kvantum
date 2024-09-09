@@ -205,49 +205,51 @@ med LXQt-sessionsindstillinger.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="557"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do not draw any background for KTitles?&lt;/p&gt;&lt;p&gt;Ktitles are used by some KDE applications to show different sections in configuration dialogs.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Tegn ingen baggrund for KTitles?&lt;/p&gt;&lt;p&gt;Ktitles bruges af nogle KDE-programmer til at vise forskellige sektioner i indstillingsdialoger.&lt;/p&gt;&lt;/body. &gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="560"/>
         <source>Transparent KTitle label</source>
-        <translation type="unfinished"></translation>
+        <translation>Gennemsigtig KTitle etiket</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="567"/>
         <source>Do not tint selected label icons with
 the highlight color!</source>
-        <translation type="unfinished"></translation>
+        <translation>Farv ikke valgte etiketikoner med
+den fremhævende farve!</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="571"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;By default, selected label icons are tinted by the highlight color.&lt;/p&gt;&lt;p&gt;Checking this box removes the tint.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Som standard er valgte etiketikoner tonet af den fremhævende farve.&lt;/p&gt;&lt;p&gt;Hvis du markerer dette felt, fjernes nuancen.&lt;/p&gt;&lt;/body&gt;&lt;/ html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="574"/>
         <source>No selection tint</source>
-        <translation type="unfinished"></translation>
+        <translation>Ingen udvælgelsesfarve</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="581"/>
         <source>Do not draw any background for (KDE) menu titles.
 (Needs Logging out and in for Plasma menus.)</source>
-        <translation type="unfinished"></translation>
+        <translation>Tegn ikke nogen baggrund for (KDE) menutitler.
+(Kræver log-ud og log-ind for plasmamenuer.)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="585"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do not draw any background for (KDE) menu titles?&lt;/p&gt;&lt;p&gt;Menu titles are like menu separators but with icon and text.&lt;/p&gt;&lt;p&gt;This needs Logging out and in for KDE Plasma menus. For LXQt panel, a panel restart with &lt;span style=&quot; font-style:italic;&quot;&gt;Session Settings &lt;/span&gt;is enough.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Tegn ikke baggrund for (KDE) menutitler?&lt;/p&gt;&lt;p&gt;Menutitler er ligesom menu-separatorer, men med ikon og tekst.&lt;/p&gt;&lt;p &gt;Dette kræver log-ud og log-ind for KDE Plasma-menuer. For LXQt-panelet er en panelgenstart med &lt;span style=&quot; font-style:italic;&quot;&gt;Sessionsindstillinger &lt;/span&gt; nok.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="588"/>
         <source>Transparent menu title</source>
-        <translation type="unfinished"></translation>
+        <translation>Gennemsigtig menutitel</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="651"/>
         <source>Tint label icons on mouseover by </source>
-        <translation type="unfinished"></translation>
+        <translation>Farveetiketikoner ved mouseover af </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="665"/>
@@ -255,12 +257,12 @@ the highlight color!</source>
         <location filename="../../kvantummanager.ui" line="1090"/>
         <location filename="../../kvantummanager.ui" line="1126"/>
         <source> %</source>
-        <translation type="unfinished"></translation>
+        <translation> %</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="611"/>
         <source>Respect dark themes</source>
-        <translation type="unfinished"></translation>
+        <translation>Respekter mørke temaer</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="689"/>
@@ -268,24 +270,27 @@ the highlight color!</source>
         <source>Useful with monochrome icon sets and
 when the opacity of disabled icons is not
 reduced by other means.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nyttigt med monokrome ikonsæt og
+når uigennemsigtigheden af deaktiverede 
+ikoner ikke er reduceret på anden måde.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="694"/>
         <location filename="../../kvantummanager.ui" line="709"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Useful with monochrome icon sets and when the opacity of disabled icons is not reduced by other means.&lt;/p&gt;&lt;p&gt;KDE automatically reduces the opacity of disabled icons. Therefore, this option might be useful rather under other desktop environments.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Nyttig ved monokrome ikonsæt, og når uigennemsigtighed af deaktiverede ikoner ikke reduceres på anden måde.&lt;/p&gt;&lt;p&gt;KDE reducerer automatisk uigennemsigtigheden af deaktiverede ikoner. Derfor kan denne indstilling være nyttig i forbindelse med andre skrivebordsmiljøer.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="697"/>
         <source>Opacity of disabled icons:</source>
-        <translation type="unfinished"></translation>
+        <translation>Uigennemsigtighed af deaktiverede ikoner:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="630"/>
         <source>Show size grips of dialogs and statusbars
 as far as possible.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis størrelsesgreb på dialoger og statuslinjer
+så vidt muligt.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="634"/>

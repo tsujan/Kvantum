@@ -453,7 +453,12 @@ Values less than 16 mean the default menu icon size.
 
 Needs LXQt panel to be restarted either by &quot;Session Settings&quot;
 or through logging out and in again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Έχει αποτέλεσμα μόνο όταν το κύριο μενού ΔΕΝ είναι στυλιζαρισμένο από το LXQt.
+
+Τιμές μικρότερες από 16 σημαίνουν το προεπιλεγμένο μέγεθος εικονιδίου μενού.
+
+Χρειάζεται επανεκκίνηση του πίνακα LXQt είτε από τις «Ρυθμίσεις συνεδρίας»
+ή μέσω αποσύνδεσης και επανασύνδεσης ξανά.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="789"/>
@@ -569,7 +574,7 @@ some widgets is changed, mostly by the mouse.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1168"/>
         <source>Animation for state change under mouse</source>
-        <translation type="unfinished"></translation>
+        <translation>Εφέ κίνησης για αλλαγή κατάστασης κάτω από το ποντίκι</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1175"/>
@@ -795,7 +800,11 @@ Konsole, QTerminal and LXQt panel are some examples.</source>
 By default, all toolbars are styled,
 whether they are on the top or at any
 other position.</source>
-        <translation type="unfinished"></translation>
+        <translation>Να είναι στυλιζαρισμένη μόνο η πάνω γραμμή εργαλείων;
+
+Από προεπιλογή, όλες οι γραμμές εργαλείων είναι στυλιζαρισμένες,
+είτε είναι στο πάνω μέρος είτε σε οποιαδήποτε
+άλλη θέση.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="644"/>
@@ -904,7 +913,7 @@ KDE apps get it from KDE setting.</source>
         <location filename="../../kvantummanager.ui" line="1499"/>
         <location filename="../../kvantummanager.ui" line="1512"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The minimum height of vertical scrollbars and the minimum width of horizontal scrollbars.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Το ελάχιστο ύψος των κάθετων γραμμών κύλισης και το ελάχιστο πλάτος των οριζόντιων γραμμών κύλισης.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1502"/>
@@ -924,7 +933,11 @@ KDE apps get it from KDE setting.</source>
 Zero means tooltips are shown instantly.
 
 -1 means the default Qt behavior.</source>
-        <translation type="unfinished"></translation>
+        <translation>Η καθυστέρηση, σε χιλιοστά δευτερολέπτου, προτού εμφανιστεί μια συμβουλή εργαλείου.
+
+Μηδέν σημαίνει οι συμβουλές εργαλείου να εμφανίζονται άμεσα.
+
+-1 σημαίνει την προεπιλεγμένη συμπεριφορά Qt.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1829"/>
@@ -1000,7 +1013,7 @@ By default, combo popups do not cover the combo box.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1808"/>
         <source>In Kvantum, tabs are centered by default.</source>
-        <translation type="unfinished"></translation>
+        <translation>Στο Kvantum, οι καρτέλες είναι κεντραρισμένες από προεπιλογή.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1560"/>
@@ -1130,7 +1143,7 @@ between toolbar separators.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1985"/>
         <source>Drag from:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ανάσυρση από:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1895"/>
@@ -1140,7 +1153,7 @@ between toolbar separators.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1798"/>
         <source>If unchecked, shortcuts will not be underlined at all.</source>
-        <translation type="unfinished"></translation>
+        <translation>Αν αποεπιλεγεί, οι συντομεύσεις δε θα είναι καθόλου υπογραμμισμένες.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1801"/>
@@ -1491,7 +1504,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="124"/>
         <source>Anywhere possible</source>
-        <translation type="unfinished"></translation>
+        <translation>Οπουδήποτε είναι δυνατόν</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="517"/>
@@ -1507,7 +1520,7 @@ or update its preview.</source>
         <location filename="../../KvantumManager.cpp" line="548"/>
         <location filename="../../KvantumManager.cpp" line="559"/>
         <source>This is not an installable Kvantum theme!</source>
-        <translation type="unfinished"></translation>
+        <translation>Αυτό δεν είναι ένα εγκαταστάσιμο θέμα Kvantum!</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="549"/>
@@ -1524,17 +1537,17 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="560"/>
         <source>Installable themes should not have # in their names.</source>
-        <translation type="unfinished"></translation>
+        <translation>Τα εγκαταστάσιμα θέμα δε θα έπρεπε να έχουν το # στα ονόματά τους.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="570"/>
         <source>This is not a Kvantum theme folder!</source>
-        <translation type="unfinished"></translation>
+        <translation>Αυτός δεν είναι ένας φάκελος θέματος Kvantum!</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="597"/>
         <source>The theme already exists in modified form.</source>
-        <translation type="unfinished"></translation>
+        <translation>Το θέμα υπάρχει ήδη σε τροποιημένη μορφή.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="612"/>
@@ -1559,7 +1572,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="659"/>
         <source>This theme is also installed as root in:</source>
-        <translation type="unfinished"></translation>
+        <translation>Αυτό το θέμα είναι επίσης εγκατεστημένο ως διαχειριστής σε:</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="661"/>
@@ -1569,7 +1582,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="675"/>
         <source>This theme is also installed as user in:</source>
-        <translation type="unfinished"></translation>
+        <translation>Αυτός το θέμα είναι επίσης εγκατεστημένο ως χρήστης σε:</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="677"/>
@@ -1596,7 +1609,7 @@ or update its preview.</source>
         <location filename="../../KvantumManager.cpp" line="1409"/>
         <location filename="../../KvantumManager.cpp" line="2685"/>
         <source>These are the settings that can be safely changed.&lt;br&gt;For the others, edit this file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Αυτές είναι οι ρυθμίσεις που μπορούν να αλλαχθούν με ασφάλεια.&lt;br&gt;Για τις υπόλοιπες, επεξεργαστείτε αυτό το αρχείο:</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="1811"/>
@@ -1606,12 +1619,12 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="2264"/>
         <source>A copy of the root config is created.</source>
-        <translation type="unfinished"></translation>
+        <translation>Δημιουργήθηκε αντίγραφο της διαμόρφωσης διαχειριστή.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2275"/>
         <source>A copy was already created.</source>
-        <translation type="unfinished"></translation>
+        <translation>Αντίγραφο είχε ήδη δημιουργηθεί.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2671"/>
@@ -1631,7 +1644,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="2816"/>
         <source>Restored the root default settings of %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Έγινε επαναφορά των προεπιλεγμένων ρυθμίσεων διαχειριστή του %1</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2817"/>
@@ -1657,7 +1670,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="2969"/>
         <source>Author: &lt;a href=&apos;mailto:tsujan2000@gmail.com?Subject=My%20Subject&apos;&gt;Pedram Pourang (aka. Tsu Jan)&lt;/a&gt; &lt;/center&gt;&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Συντάκτης: &lt;a href=&apos;mailto:tsujan2000@gmail.com?Subject=My%20Subject&apos;&gt;Pedram Pourang (aka. Tsu Jan)&lt;/a&gt; &lt;/center&gt;&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="51"/>
@@ -1702,7 +1715,7 @@ or update its preview.</source>
     <message>
         <location filename="../../main.cpp" line="141"/>
         <source>Please first install the Kvantum style plugin!</source>
-        <translation type="unfinished"></translation>
+        <translation>Παρακαλούμε εγκαταστήστε πρώτα το πρόσθετο στυλ Kvantum!</translation>
     </message>
 </context>
 </TS>
