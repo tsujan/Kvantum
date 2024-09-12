@@ -477,7 +477,11 @@ radii for blurring translucent menus and tooltips
 that have rounded corners.
 
 Usually, a value of 2 is enough.</source>
-        <translation type="unfinished"></translation>
+        <translation>Αν είναι ενεργοποιημένη η θόλωση, αυτές οι τιμές ορίζουν τις ακτίνες
+γωνίας για θόλωση ημιδιάφανων μενού και συμβουλών εργαλείου
+που έχουν στρογγυλεμένες γωνίες.
+
+Συνήθως, μια τιμή 2 είναι αρκετή.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="808"/>
@@ -520,7 +524,10 @@ Usually, a value of 2 is enough.</source>
 and translucent menu/tooltip SVG elements.
 
 Automatically checked if window blurring is enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Χρειάζεται εφέ θόλωσης KDE, μια κάρτα γραφικών που να το υποστηρίζει,
+και στοιχεία SVG ημιδιάφανων μενού/συμβουλών εργαλείου.
+
+Αυτόματα επιλεγμένο αν είναι ενεργοποιημένη η θόλωση παραθύρου.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="955"/>
@@ -533,7 +540,10 @@ Automatically checked if window blurring is enabled.</source>
 
 This may be useful under DEs that give
 shadow to menus and tooltips.</source>
-        <translation type="unfinished"></translation>
+        <translation>Να μη σχεδιάζονται σκιές για μενού και συμβουλές εργαλείου.
+
+Αυτό μπορεί να είναι χρήσιμο υπό ΠΕ που παρέχουν
+σκιά σε μενού και συμβουλές εργαλείου.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="968"/>
@@ -564,7 +574,8 @@ shadow to menus and tooltips.</source>
         <location filename="../../kvantummanager.ui" line="1161"/>
         <source>A 200ms fading animation when the state of
 some widgets is changed, mostly by the mouse.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ένα εφέ κίνησης σβησίματος 200ms όταν αλλάζει η κατάσταση
+κάποιων γραφικών στοιχείων, κυρίως από το ποντίκι.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1165"/>
@@ -681,12 +692,13 @@ some apps set it themeselves.</source>
         <location filename="../../kvantummanager.ui" line="1476"/>
         <source>The width of horizontal spin buttons.
 (Has no effect when spin indicators are vertical.)</source>
-        <translation type="unfinished"></translation>
+        <translation>Το πλάτος των οριζόντιων κουμπιών αυξομείωσης.
+(Δεν έχει επίδραση όταν οι δείκτες αυξομείωσης είναι κάθετοι.)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1469"/>
         <source>Spin button width: </source>
-        <translation type="unfinished"></translation>
+        <translation>Πλάτος κουμπιών αυξομείωσης: </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1843"/>
@@ -830,7 +842,9 @@ as far as possible.</source>
         <source>Needs KDE blur effect, a graphic card
 that supports it, and a translucent
 window SVG background in the theme.</source>
-        <translation type="unfinished"></translation>
+        <translation>Χρειάζεται εφέ θόλωσης KDE, μια κάρτα γραφικών
+που να το υποστηρίζει, και ένα ημιδιάφανο
+φόντο παραθύρου SVG στο θέμα.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1214"/>
@@ -961,7 +975,8 @@ the highlight color.</source>
         <location filename="../../kvantummanager.ui" line="1750"/>
         <source>If checked, the menubar and toolbar will be drawn as a whole by
 the toolbar SVG element when they are adjacent to each another.</source>
-        <translation type="unfinished"></translation>
+        <translation>Αν επιλεγεί, η γραμμή μενού και η γραμμή εργαλείων θα σχεδιαστούν ως σύνολο από
+το στοιχείο γραμμής εργαλείων SVG όταν είναι παρακείμενες η μία στην άλλη.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1978"/>
@@ -984,7 +999,10 @@ Miscellaneous → Respect current DE if possible</source>
 is not set by the app in its code.
 
 Default is &quot;Follow Style&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Θα έχει επίδραση μόνο αν το στυλ
+δεν ορίζεται από την εφαρμογή στον κώδικά της.
+
+Η προεπιλογή είναι «Παρακολούθηση στυλ».</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1681"/>
@@ -993,7 +1011,11 @@ two buttons with arrows or plus/minus signs.
 
 Checking this integrates the spin indicators
 into the spin line-edit..</source>
-        <translation type="unfinished"></translation>
+        <translation>Από προεπιλογή, οι δείκτες αυξομείωσης είναι σχεδιασμένοι ως
+δυο κουμπιά με βέλη ή σύμβολα συν/πλην.
+
+Επιλέγοντας αυτό ενσωματώνονται οι δείκτες αυξομείωσης
+μέσα στη γραμμή-επεξεργασία αυξομείωσης..</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1709"/>
@@ -1001,7 +1023,9 @@ into the spin line-edit..</source>
 
 Checking this puts the spin-up indicator above the
 spin-down one inside the spin line-edit.</source>
-        <translation type="unfinished"></translation>
+        <translation>Από προεπιλογή, οι δείκτες αυξομείωσης είναι σχεδιασμένοι σε παρακείμενα κουμπιά.
+
+Επιλέγοντας αυτό τοποθετείται ο δείκτης αύξησης από πάνω από τον δείκτη μείωσης μέσα στη γραμμή-επεξεργασία αυξομείωσης.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1761"/>
@@ -1037,7 +1061,11 @@ problems with translucency!)</source>
 Transient scrollbars appear on top of
 their scroll views only when needed.
 They usually take no extra space.</source>
-        <translation type="unfinished"></translation>
+        <translation>Να γίνουν παροδικές οι γραμμές κύλισης!
+
+Οι παροδικές γραμμές κύλισης εμφανίζονται επί των
+προβολών τους κύλισης μόνο όταν χρειάζεται.
+Συνήθως δεν καταλαμβάνουν επιπλέον χώρο.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1567"/>
@@ -1047,7 +1075,11 @@ They usually take no extra space.</source>
 
 -1 means no popup (opening by clicking),
 while 0 means no delay.</source>
-        <translation type="unfinished"></translation>
+        <translation>Η καθυστέρηση, σε χιλιοστά δευτερολέπτου, αναμονής προτού ανοίξει ένα υπομενού.
+250 από προεπιλογή.
+
+-1 σημαίνει καθόλου ανάδυση (άνοιγμα με κλικ),
+ενώ 0 σημαίνει καθόλου καθυστέρηση.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1574"/>
@@ -1133,7 +1165,8 @@ for menubars by default.</source>
         <location filename="../../kvantummanager.ui" line="1773"/>
         <source>If checked, toolbar buttons will be drawn grouped and raised
 between toolbar separators.</source>
-        <translation type="unfinished"></translation>
+        <translation>Αν επιλεγεί, τα κουμπιά γραμμής εργαλείων θα σχεδιαστούν ομαδοποιημένα και ανυψωμένα
+ανάμεσα στα διαχωριστικά γραμμής εργαλείων.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1777"/>
@@ -1163,7 +1196,7 @@ between toolbar separators.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1688"/>
         <source>Inline spin indicators</source>
-        <translation type="unfinished"></translation>
+        <translation>Ενσωματωμένοι δείκτες αυξομείωσης</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1736"/>
@@ -1184,7 +1217,7 @@ line-edit with arrow (and icon, if it exists)?</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1715"/>
         <source>Vertical spin indicators</source>
-        <translation type="unfinished"></translation>
+        <translation>Κάθετοι δείκτες αυξομείωσης</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1650"/>
@@ -1238,7 +1271,11 @@ only to translucent windows that support the blur
 effect (but the KDE blur effect can be disabled).
 
 A value of 1.00 means no change.</source>
-        <translation type="unfinished"></translation>
+        <translation>Αυτό χρειάζεται το εφέ αντίθεσης KDE και εφαρμόζεται
+μόνο σε ημιδιάφανα παράθυρα που υποστηρίζουν το εφέ
+θόλωσης (αλλά το εφέ θόλωσης KDE μπορεί να απενεργοποιηθεί).
+
+Μια τιμή 1.00 σημαίνει καμία αλλαγή.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1047"/>
@@ -1251,7 +1288,14 @@ needed for this key to work.
 
 A negative value means that only the
 opacity of inactive windows is reduced.</source>
-        <translation type="unfinished"></translation>
+        <translation>Αυτό θα μειώσει την αδιαφάνεια παραθύρου
+αν η ημιδιαφάνεια παραθύρου είναι ενεργοποιημένη.
+
+Ένα ημιδιαφανές παρασκήνιο SVG ΔΕΝ
+χρειάζεται για να λειτουργήσει αυτό το κουμπί.
+
+Μια αρνητική τιμή σημαίνει ότι μόνο
+η αδιαφάνεια των ανενεργών παραθύρων μειώνεται.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1784"/>
@@ -1273,7 +1317,10 @@ This option will hide these.</source>
 scroll arrows on their top and/or bottom?
 
 By default, big menus are scrollable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Θα πρέπει τα μεγάλα μενού να είναι κυλιόμενα και να έχουν
+βέλη κύλισης στο πάνω και/ή στο κάτω τους μέρος;
+
+Από προεπιλογή, τα μεγάλα μενού είναι κυλιόμενα.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2016"/>
@@ -1327,7 +1374,7 @@ the Ctrl key before pressing the button.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2170"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Save the current list of applications with their corresponding themes!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Αποθήκευση της τρέχουσας λίστας εφαρμογών με τα αντίστοιχά τους θέματα!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2197"/>
@@ -1422,7 +1469,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="515"/>
         <source>You have no permission to write here:</source>
-        <translation type="unfinished"></translation>
+        <translation>Δεν έχετε άδεια εγγραφής εδώ:</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="104"/>
@@ -1525,7 +1572,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="549"/>
         <source>The name of an installable themes should not be &quot;Default&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Το όνομα ενός εγκαταστάσιμου θέματος δε θα πρέπει να είναι «Default».</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="550"/>
@@ -1597,13 +1644,13 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="780"/>
         <source>It could not be restored unless you have a copy of it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Αδυναμία επαναφοράς εκτός αν έχετε αντίγραφο από αυτό.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="1393"/>
         <location filename="../../KvantumManager.cpp" line="1413"/>
         <source>These are the settings that can be safely changed.&lt;br&gt;For the others, click &lt;i&gt;Save&lt;/i&gt; and then edit this file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Αυτές είναι οι ρυθμίσεις που μπορούν να αλλαχθούν με ασφάλεια.&lt;br&gt;Για τις υπόλοιπες, κάνετε κλικ στο &lt;i&gt;Αποθήκευση&lt;/i&gt; και κατόπιν επεξεργαστείτε αυτό το αρχείο:</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="1409"/>
@@ -1634,7 +1681,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="2778"/>
         <source>Do you want to revert to the default (root) settings of this theme?</source>
-        <translation type="unfinished"></translation>
+        <translation>Θέλετε να επανέλθετε στις προεπιλεγμένες (ρίζα) ρυθμίσεις αυτού του θέματος;</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2781"/>
@@ -1665,7 +1712,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="2968"/>
         <source>A tool for installing, selecting&lt;br&gt;and configuring &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt; themes</source>
-        <translation type="unfinished"></translation>
+        <translation>Ένα εργαλείο για εγκατάσταση, επιλογή&lt;br&gt;και διαμόρφωση θεμάτων &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2969"/>
@@ -1690,7 +1737,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="534"/>
         <source>You might want to investigate the cause.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ίσως να θέλετε να διερευνήσετε την αιτία.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="966"/>
