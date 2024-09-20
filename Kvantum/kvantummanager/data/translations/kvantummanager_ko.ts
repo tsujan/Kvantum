@@ -301,7 +301,7 @@ as far as possible.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="637"/>
         <source>Force size grips</source>
-        <translation>크기 조정 핸들의 강제 사용</translation>
+        <translation>크기 조절 강제 적용</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="747"/>
@@ -325,7 +325,7 @@ as far as possible.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="776"/>
         <source>Compositing &amp;&amp; General Look</source>
-        <translation>합성 &amp;&amp; 일반 모양</translation>
+        <translation>합성 &amp;&amp; 전반적인 외형</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="975"/>
@@ -346,7 +346,7 @@ will not have translucency or shadow.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation>이 옵션을 선택하면 메뉴, 풍선 도움말 및 창에는
+        <translation>이 옵션을 선택하면 메뉴, 툴팁 및 창에는
 투명도 또는 그림자가 없습니다.
 이 옵션을 사용할 수 없는 경우, 다음 참조:
 기타 → 가능하면 현재 DE 준수</translation>
@@ -399,14 +399,14 @@ horizontally centered as far as possible.</source>
         <source>You might see annoying artifacts that are caused
 by bugs in Qt&apos;s handling of non-integer scaling
 with window translucency or gradient.</source>
-        <translation>Qt에서 창 반투명 또는 그라디언트를 사용하여 정수가
-아닌 스케일링을 처리하는 버그로 인해 성가신
+        <translation>Qt에서 창 반투명 또는 그라디언트를 사용하여
+비정수 배율을 처리하는 버그로 인해 성가신
 아티팩트가 나타날 수 있습니다.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="623"/>
         <source>Disable translucency with non-integer scaling</source>
-        <translation>정수가 아닌 스케일링으로 투명도 비활성화</translation>
+        <translation>비정수 배율에서 투명도 비활성화</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="675"/>
@@ -462,7 +462,7 @@ or through logging out and in again.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="789"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If checked, menus, tooltips and windows will not have translucency or shadow.&lt;/p&gt;&lt;p&gt;When unchecked, translucency and shadow will be available if there are appropriate elements in the theme&apos;s SVG file.&lt;/p&gt;&lt;p&gt;If this is disabled, see Miscellaneous → Respect current DE if possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;이 옵션을 선택하면 메뉴, 풍선 도움말 및 창에 투명도 또는 그림자가 없습니다.&lt;/p&gt;&lt;p&gt;선택하지 않으면 테마의 SVG 파일에 적절한 요소가 있는 경우 투명도와 그림자를 사용할 수 있습니다.&lt;/p&gt;&lt;p&gt;이 기능을 사용할 수 없는 경우, 다음 참조: 기타 → 가능하면 현재 DE를 준수하십시오.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;이 옵션을 선택하면 메뉴, 툴팁 및 창에 투명도 또는 그림자가 없습니다.&lt;/p&gt;&lt;p&gt;선택하지 않으면 테마의 SVG 파일에 적절한 요소가 있는 경우 투명도와 그림자를 사용할 수 있습니다.&lt;/p&gt;&lt;p&gt;이 기능을 사용할 수 없는 경우, 다음 참조: 기타 → 가능하면 현재 DE를 준수하십시오.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="792"/>
@@ -477,7 +477,7 @@ that have rounded corners.
 
 Usually, a value of 2 is enough.</source>
         <translation>흐림이 활성화된 경우 이 값은 모서리가 둥근
-반투명 메뉴 및 도구 팁을 흐리게 하기 위한
+반투명 메뉴 및 툴팁을 흐리게 하기 위한
 모서리 반지름을 설정합니다.
 
 보통은 2의 값으로 충분합니다.</translation>
@@ -495,7 +495,7 @@ Usually, a value of 2 is enough.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="828"/>
         <source>Tooltip:</source>
-        <translation>도구 설명:</translation>
+        <translation>툴팁:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="852"/>
@@ -524,14 +524,14 @@ and translucent menu/tooltip SVG elements.
 
 Automatically checked if window blurring is enabled.</source>
         <translation>KDE 흐림 효과, 이를 지원하는 그래픽 카드 및
-반투명 메뉴/풍선 도움말 SVG 요소가 필요합니다.
+반투명 메뉴/툴팁 SVG 요소가 필요합니다.
 
 창 흐림이 활성화되어 있는지 자동으로 확인합니다.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="955"/>
         <source>Blurring for menus and tooltips</source>
-        <translation>메뉴 및 풍선 도움말 흐리게</translation>
+        <translation>메뉴 및 툴팁 흐림효과</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="962"/>
@@ -539,15 +539,15 @@ Automatically checked if window blurring is enabled.</source>
 
 This may be useful under DEs that give
 shadow to menus and tooltips.</source>
-        <translation>메뉴 및 풍선 도움말에 그림자를 그리지 마십시오.
+        <translation>메뉴 및 툴팁에 그림자를 그리지 않습니다.
 
-이 기능은 DE에서 메뉴 및 풍선 도움말에
+이 기능은 DE에서 메뉴 및 툴팁에
 그림자를 제공하는데 유용할 수 있습니다.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="968"/>
         <source>Shadowless menus and tooltips</source>
-        <translation>그림자 없는 메뉴 및 풍선 도움말</translation>
+        <translation>그림자 없는 메뉴 및 툴팁</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="979"/>
@@ -613,7 +613,7 @@ windows if this theme distinguishes between them?</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1204"/>
         <source>Transient scrollbars</source>
-        <translation>일시적인 스크롤막대</translation>
+        <translation>숨겨진 스크롤바</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1226"/>
@@ -872,13 +872,13 @@ window SVG background in the theme.</source>
         <location filename="../../kvantummanager.ui" line="1214"/>
         <source>Should transient scrollbars have
 semi-transparent grooves when needed?</source>
-        <translation>필요할 때 일시적인 스크롤 막대에
-반투명 홈이 있어야 합니까?</translation>
+        <translation>필요할 때 나타나는 스크롤바에
+반투명 그로브가 있어야 합니까?</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1218"/>
         <source>Transient scrollbar grooves when needed</source>
-        <translation>필요한 경우 일시적인 스크롤 막대를 홈으로 이동</translation>
+        <translation>필요할 때 나타나는 스크롤바 그로브</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1238"/>
@@ -970,9 +970,9 @@ KDE 앱은 KDE 설정에서 가져옵니다.</translation>
 Zero means tooltips are shown instantly.
 
 -1 means the default Qt behavior.</source>
-        <translation>풍선 도움말이 표시되기까지의 지연시간(밀리초)입니다.
+        <translation>툴팁이 표시되기까지의 지연시간(밀리초)입니다.
 
-0은 풍선 도움말이 즉시 표시됨을 의미합니다.
+0은 툴팁이 즉시 표시됨을 의미합니다.
 
 -1은 기본 Qt 동작을 의미합니다.</translation>
     </message>
@@ -987,7 +987,7 @@ If disabled, see Compositing &amp; General Look → Transient scrollbars!</sourc
 
 이 상자를 선택하면 화살표가 최대한 제거됩니다.
 
-비활성화된 경우, 참조: 합성 &amp; 일반 모습 → 일시적인 스크롤바!</translation>
+비활성화된 경우, 참조: 합성 &amp; 전반적인 외형 → 숨겨진 스크롤바!</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1695"/>
@@ -1074,7 +1074,7 @@ By default, combo popups do not cover the combo box.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1560"/>
         <source>Tooltip delay:</source>
-        <translation>풍선 도움말 지연시간:</translation>
+        <translation>툴팁 지연시간:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="988"/>
@@ -1097,11 +1097,11 @@ problems with translucency!)</source>
 Transient scrollbars appear on top of
 their scroll views only when needed.
 They usually take no extra space.</source>
-        <translation>스크롤 막대를 일시적으로 만드십시오!
+        <translation>스크롤 막대를 필요할 때만 만들기!
 
-일시적인 스크롤 막대는 필요할 때만
+숨겨진 스크롤바는 필요할 때만
 스크롤 보기 위에 표시됩니다.
-그것들은 일반적으로 여분의 공간을 차지하지 않습니다.</translation>
+그것들은 공간을 많이 차지하지 않습니다.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1567"/>
@@ -1145,11 +1145,11 @@ while 0 means no delay.</source>
 By default, scrollbars are drawn outide view frames.
 
 If disabled, see Compositing &amp; General Look → Transient scrollbars!</source>
-        <translation>보기 프레임 안에 스크롤 막대를 그리시겠습니까?
+        <translation>보기 프레임 안에 스크롤바를 그리시겠습니까?
 
-기본적으로 스크롤 막대는 보기 프레임 외부에 그려집니다.
+기본적으로 스크롤바는 보기 프레임 외부에 그려집니다.
 
-비활성화된 경우, 합성 및 일반 모양 → 과도 스크롤 막대를 참조하십시오!</translation>
+비활성화된 경우, 합성 &amp; 전반적인 외형 → 숨겨진 스크롤바를 참조하십시오!</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1938"/>
@@ -1471,7 +1471,7 @@ or update its preview.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2250"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click on this button and then click on a GUI element that has &amp;quot;What&apos;s This&amp;quot; tooltip  to get information about what it does.&lt;/p&gt;&lt;p&gt;There are also ordinary tooltips but this kind of tooltip will not disappear until you click somewhere.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;이 버튼을 클릭 한 다음 &amp;quot;이것은 무엇일까요&amp;quot; 풍선 도움말이 있는 GUI 요소를 클릭하면 그 기능에 대한 정보를 얻을 수 있습니다.&lt;/p&gt;&lt;p&gt;일반적인 풍선 도움말도 있지만 이 풍선 도움말은 어딘가를 클릭할 때까지 사라지지 않습니다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;이 버튼을 클릭 한 다음 &amp;quot;이것은 무엇일까요&amp;quot; 툴팁이 있는 GUI 요소를 클릭하면 그 기능에 대한 정보를 얻을 수 있습니다.&lt;/p&gt;&lt;p&gt;일반적인 툴팁도 있지만, 어딘가를 클릭할 때까지 이러한 종류의 툴팁은 사라지지 않습니다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2253"/>
