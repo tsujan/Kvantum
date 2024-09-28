@@ -78,7 +78,7 @@ per defecte</translation>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="279"/>
         <source>Button Box</source>
-        <translation type="unfinished">Quadre de botons</translation>
+        <translation>Quadre de botons</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="374"/>
@@ -234,7 +234,7 @@ multilínia</translation>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1075"/>
         <source>Combos/Spins/Inputs</source>
-        <translation type="unfinished">Quadres combinats/Espins/Entrades</translation>
+        <translation>Quadres combinats / Girs / Entrades</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1188"/>
@@ -518,7 +518,7 @@ multilínia</translation>
         <location filename="../../KvantumPreviewBase.ui" line="2588"/>
         <location filename="../../KvantumPreviewBase.ui" line="2680"/>
         <source>GroupBox</source>
-        <translation type="unfinished">Caselles de grup</translation>
+        <translation>Quadre de grups</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2467"/>
@@ -585,7 +585,7 @@ multilínia</translation>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2672"/>
         <source>Dock Widget</source>
-        <translation type="unfinished">Giny acoblable</translation>
+        <translation>Giny acoblable</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2689"/>

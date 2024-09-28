@@ -241,7 +241,7 @@ amb el color de ressaltat!</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="585"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do not draw any background for (KDE) menu titles?&lt;/p&gt;&lt;p&gt;Menu titles are like menu separators but with icon and text.&lt;/p&gt;&lt;p&gt;This needs Logging out and in for KDE Plasma menus. For LXQt panel, a panel restart with &lt;span style=&quot; font-style:italic;&quot;&gt;Session Settings &lt;/span&gt;is enough.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;No voleu dibuixar cap fons per als títols del menú (KDE)?&lt;/p&gt;&lt;p&gt;Els títols dels menús són com separadors de menú però amb icona i text.&lt;/p&gt;&lt;p&gt;Es necessari sortir i entrar a la sessió per als menús del Plasma de KDE. Per al panell LXQt, es suficient un reinici amb &lt;span style=&quot; font-style:italic;&quot;&gt;Ajusts de la sessió&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;No dibuixeu cap fons per als títols del menú (KDE)?&lt;/p&gt;&lt;p&gt;Els títols del menú són com els separadors del menú però amb la icona i el text.&lt;/p&gt;&lt;p&gt;Això necessita tancar la sessió i tornar-hi a entrar per als menús del Plasma del KDE. Per a LXQt, amb un reinici del plafó amb &lt;span style=&quot; font-style:italic;&quot;&gt;Configuració de sessió &lt;/span&gt;n&apos;hi ha prou.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="588"/>
@@ -1105,11 +1105,11 @@ problemes amb la translucidesa!)</translation>
 Transient scrollbars appear on top of
 their scroll views only when needed.
 They usually take no extra space.</source>
-        <translation type="unfinished">Fes que les barres de desplaçament siguin transitòries!
+        <translation>Fes que les barres de desplaçament siguin transitòries!
 
 Les barres de desplaçament transitòries apareixen a la part
 superior de les vistes de desplaçament només quan
-és necessari. Normalment no prenen espai extra.</translation>
+és necessari. Normalment no agafen espai extra.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1567"/>
@@ -1153,11 +1153,11 @@ mentre 0 significa sense retard.</translation>
 By default, scrollbars are drawn outide view frames.
 
 If disabled, see Compositing &amp; General Look → Transient scrollbars!</source>
-        <translation type="unfinished">Voleu dibuixar barres de desplaçament dins dels marcs de visualització?
+        <translation>Voleu dibuixar barres de desplaçament dins dels marcs de visualització?
 
 Per defecte, les barres de desplaçament es dibuixen fora del marc de la visualització.
 
-Si està desactivat, vegeu Composició i aspecte general → Barres de desplaçament transitòries!</translation>
+Si això està desactivat, vegeu Composició i aspecte general → Barres de desplaçament transitòries!</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1938"/>
@@ -1294,7 +1294,7 @@ Desmarqueu-la si voleu utilitzar aquestes opcions!</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1766"/>
         <source>Combo popup as menu</source>
-        <translation type="unfinished">Quadre combinat desplegable com a menú</translation>
+        <translation>Quadre combinat desplegable com a menú</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1811"/>
@@ -1347,11 +1347,14 @@ needed for this key to work.
 
 A negative value means that only the
 opacity of inactive windows is reduced.</source>
-        <translation type="unfinished">Reduirà l&apos;opacitat de la finestra
-si la translucidesa de la finestra està habilitada
+        <translation>Reduirà l&apos;opacitat de la finestra
+si la translucidesa de la finestra està habilitada.
 
 No és necessari un fons SVG translúcid
-perquè aquesta clau funcioni.</translation>
+perquè aquesta clau funcioni.
+
+Un valor negatiu significa que només
+es redueix l&apos;opacitat de les finestres inactives.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1784"/>
@@ -1424,7 +1427,7 @@ Després de fer-ho amb tots els temes que hagi triat, guardi el resultat fent cl
     <message>
         <location filename="../../kvantummanager.ui" line="2132"/>
         <source>app1,app2,app3</source>
-        <translation type="unfinished">aplicació1, aplicació2, aplicació3</translation>
+        <translation>aplicació1, aplicació2, aplicació3</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2160"/>
