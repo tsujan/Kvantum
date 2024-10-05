@@ -250,31 +250,31 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1110"/>
         <location filename="../../KvantumPreviewBase.ui" line="1149"/>
         <source>Standard combo box</source>
-        <translation>Τυπικό πλαίσιο συνδυασμών</translation>
+        <translation>Τυπικό σύνθετο πλαίσιο</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1119"/>
         <location filename="../../KvantumPreviewBase.ui" line="1158"/>
         <source>Standard combo box 1</source>
-        <translation>Τυπικό πλαίσιο συνδυασμών 1</translation>
+        <translation>Τυπικό σύνθετο πλαίσιο 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1127"/>
         <location filename="../../KvantumPreviewBase.ui" line="1166"/>
         <source>Standard combo box 2</source>
-        <translation>Τυπικό πλαίσιο συνδυασμών 2</translation>
+        <translation>Τυπικό σύνθετο πλαίσιο 2</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1132"/>
         <location filename="../../KvantumPreviewBase.ui" line="1171"/>
         <source>Standard combo box 3</source>
-        <translation>Τυπικό πλαίσιο συνδυασμών 3</translation>
+        <translation>Τυπικό σύνθετο πλαίσιο 3</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1137"/>
         <location filename="../../KvantumPreviewBase.ui" line="1176"/>
         <source>Standard combo box 4</source>
-        <translation>Τυπικό πλαίσιο συνδυασμών 4</translation>
+        <translation>Τυπικό σύνθετο πλαίσιο 4</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1197"/>
@@ -360,31 +360,31 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1331"/>
         <location filename="../../KvantumPreviewBase.ui" line="1374"/>
         <source>Editable combo box</source>
-        <translation>Επεξεργάσιμο πλαίσιο συνδυασμών</translation>
+        <translation>Επεξεργάσιμο σύνθετο πλαίσιο</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1340"/>
         <location filename="../../KvantumPreviewBase.ui" line="1383"/>
         <source>Editable combo box 1</source>
-        <translation>Επεξεργάσιμο πλαίσιο συνδυασμών 1</translation>
+        <translation>Επεξεργάσιμο σύνθετο πλαίσιο 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1349"/>
         <location filename="../../KvantumPreviewBase.ui" line="1392"/>
         <source>Editable combo box 2</source>
-        <translation>Επεξεργάσιμο πλαίσιο συνδυασμών 2</translation>
+        <translation>Επεξεργάσιμο σύνθετο πλαίσιο 2</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1354"/>
         <location filename="../../KvantumPreviewBase.ui" line="1397"/>
         <source>Editable combo box 3</source>
-        <translation>Επεξεργάσιμο πλαίσιο συνδυασμών 3</translation>
+        <translation>Επεξεργάσιμο σύνθετο πλαίσιο 3</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1359"/>
         <location filename="../../KvantumPreviewBase.ui" line="1402"/>
         <source>Editable combo box 4</source>
-        <translation>Επεξεργάσιμο πλαίσιο συνδυασμών 4</translation>
+        <translation>Επεξεργάσιμο σύνθετο πλαίσιο 4</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1571"/>
