@@ -580,7 +580,7 @@ some widgets is changed, mostly by the mouse.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1165"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A 200ms fading animation when the state of some widgets is changed, mostly by the mouse.&lt;/p&gt;&lt;p&gt;The CPU usage is negligible because often only one widget is animated. The resulting visual effect depends on the active theme.&lt;/p&gt;&lt;p&gt;These widgets are supported: buttons (including radio buttons and check boxes), combo boxes, spin boxes, slider handles, line-edits and scroll views.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ένα εφέ κίνησης σβησίματος 200ms όταν αλλάζει η κατάσταση κάποιων γραφικών στοιχείων, περισσότερο από το ποντίκι.&lt;/p&gt;&lt;p&gt;Η χρήση CPU είναι αμελητέα επειδή συνήθως μόνο ένα γραφικό στοιχείο τελεί σε κίνηση. Το επακόλουθο οπτικό εφέ εξαρτάται από το ενεργό θέμα.&lt;/p&gt;&lt;p&gt;Υποστηρίζονται αυτά τα γραφικά στοιχεία: κουμπιά (περιλαμβανομένων των κουμπιών επιλογής και των πλαισίων ελέγχου), σύνθετα πλαίσια, πλαίσια τιμών, συρόμενα ρυθμιστικά, γραμμές επεξεργασίας και προβολές κύλισης.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1168"/>
@@ -591,12 +591,13 @@ some widgets is changed, mostly by the mouse.</source>
         <location filename="../../kvantummanager.ui" line="1175"/>
         <source>Check this to remove all window/dialog tiling patterns!
 Uncheck it if you want those patterns back!</source>
-        <translation type="unfinished"></translation>
+        <translation>Επιλέξτε αυτό για αφαίρεση όλων των διατάξεων παράθεσης παραθύρων/διαλόγου!
+Αποεπιλέξτε το αν θέλετε πίσω αυτές τις διατάξεις!</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1179"/>
         <source>Remove window/dialog tiling patterns</source>
-        <translation type="unfinished"></translation>
+        <translation>Αφαίρεση διατάξεων παράθεσης παραθύρων/διαλόγου</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1186"/>
@@ -680,7 +681,9 @@ some apps set it themeselves.</source>
         <source>The horizontal overlap between a submenu and its parent.
 
 0 by default.</source>
-        <translation type="unfinished"></translation>
+        <translation>Η οριζόντια επικάλυψη ανάμεσα σε ένα υπομενού και στο γονικό του στοιχείο.
+
+Από προεπιλογή 0.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1440"/>
@@ -751,7 +754,12 @@ from all user installation paths.
 The root installation will still be
 available if present; this button
 only removes user themes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Αφαίρεση του επιλεγμένου θέματος
+από όλες τις διαδρομές εγκατάστασης χρήστη.
+
+Η ριζική εγκατάσταση θα εξακολουθεί να είναι
+διαθέσιμη εάν υπάρχει· το κουμπί αυτό
+αφαιρεί μόνο τα θέματα χρήστη.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="391"/>
@@ -765,7 +773,9 @@ By default, it has the base background.</source>
         <source>No bold font for default push buttons?
 
 Such push buttons have bold text by default.</source>
-        <translation type="unfinished"></translation>
+        <translation>Χωρίς έντονη γραμματοσειρά για τα προεπιλεγμένα κουμπιά πίεσης;
+
+Τέτοια κουμπιά πίεσης έχουν έντονη γραμματοσειρά από προεπιλογή.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="458"/>
@@ -803,7 +813,12 @@ translucent by their apps explicitly if possible.
 This needs the KDE blur effect.
 
 Konsole, QTerminal and LXQt panel are some examples.</source>
-        <translation type="unfinished"></translation>
+        <translation>Θόλωση των περιοχών πίσω από παράθυρα που έχουν γίνει
+ημιδιάφανα καθαρά από τις εφαρμογές τους εάν είναι δυνατό.
+
+Αυτό χρειάζεται το εφέ θόλωσης KDE.
+
+Το Konsole, το QTerminal και ο πίνακας LXQt είναι κάποια παραδείγματα.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="517"/>
@@ -867,7 +882,7 @@ some apps may set it themselves.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation>Επηρεάζει τα αντικείμενα των μενού και τις επικεφαλίδες.
+        <translation type="unfinished">Επηρεάζει τα αντικείμενα των μενού και τις επικεφαλίδες.
 
 Η τιμή εξ ορισμού είναι 16 εικ, αλλά
 ορισμένες εφαρμογές καθορίζουν αυτές την τιμή.
@@ -1128,7 +1143,11 @@ and the frame is cut to contain it.
 
 Checking this puts the label right above
 the frame, so that the frame isn&apos;t cut.</source>
-        <translation type="unfinished"></translation>
+        <translation>Από προεπιλογή, η ετικέτα είναι πάνω στο πλαίσιο
+και το πλαίσιο έχει περικοπεί για να την περιέχει.
+
+Επιλέγοντας αυτό μπαίνει η ετικέτα ακριβώς πάνω
+από το πλαίσιο, ώστε το πλαίσιο να μην περικοπεί.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1674"/>
@@ -1309,7 +1328,7 @@ This option will hide these.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1791"/>
         <source>Non-checkable combo menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Μη επιλέξιμο σύνθετο μενού</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2003"/>
@@ -1329,12 +1348,16 @@ By default, big menus are scrollable.</source>
 If you have enabled it, you could temporarily disable it
 for a button that can be dragged and dropped by pressing
 the Ctrl key before pressing the button.</source>
-        <translation type="unfinished"></translation>
+        <translation>Προειδοποίηση: Αυτό μπορεί να είναι αρκετά περίπλοκο στην αρχή.
+
+Αν το έχετε ενεργοποιήσει, θα μπορούσατε προσωρινά να το απενεργοποιήσετε
+για ένα κουμπί που μπορεί να συρθεί και να αποτεθεί πατώντας
+το κουμπί Ctrl προτού πατήσετε το κουμπί.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2023"/>
         <source>Allow dragging from buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>Να επιτρέπεται σύρσιμο από κουμπιά</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2046"/>
