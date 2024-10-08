@@ -730,12 +730,13 @@ By default, tree branches have indicators but no line.</source>
         <location filename="../../kvantummanager.ui" line="1955"/>
         <source>They may look like dotted rectangles
 on focused buttons and other widgets.</source>
-        <translation type="unfinished"></translation>
+        <translation>Μπορεί να μοιάζουν με διάστικτα ορθογώνια παραλληλόγραμμα
+στα εστιασμένα κουμπιά και άλλα γραφικά στοιχεία.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1959"/>
         <source>Remove focus rectangles</source>
-        <translation type="unfinished"></translation>
+        <translation>Αφαίρεση ορθογώνιων παραλληλογράμμων εστίασης</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2155"/>
