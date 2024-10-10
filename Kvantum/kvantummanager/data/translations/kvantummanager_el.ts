@@ -719,7 +719,9 @@ some apps set it themeselves.</source>
         <source>Draw tree branch lines?
 
 By default, tree branches have indicators but no line.</source>
-        <translation type="unfinished"></translation>
+        <translation>Να σχεδιάζονται γραμμές κλάδων δέντρων;
+
+Από προεπιλογή, οι κλάδοι δέντρων έχουν δείκτες αλλά όχι γραμμή.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1945"/>
@@ -767,7 +769,9 @@ only removes user themes.</source>
         <source>Merge Dolphin&apos;s view with its surroundings?
 
 By default, it has the base background.</source>
-        <translation type="unfinished"></translation>
+        <translation>Συγχώνευση της προβολής του Dolphin με τα περίχωρά του;
+
+Από προεπιλογή, έχει το παρασκήνιο βάσης.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="419"/>
@@ -842,7 +846,11 @@ other position.</source>
 This is mostly relevant with monochrome icons.
 
 Hard-coded icons/styles may not respect this key.</source>
-        <translation type="unfinished"></translation>
+        <translation>Το χρώμα επισήμανσης χρησιμοποιείται για απόδοση χρωματικού τόνου.
+
+Αυτό αφορά περισσότερο μονόχρωμα εικονίδια.
+
+Τα ενσωματωμένα στον κώδικα εικονίδια/στυλ μπορεί να μη λάβουν υπόψη αυτό το κλειδί.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="606"/>
@@ -866,12 +874,13 @@ window SVG background in the theme.</source>
         <location filename="../../kvantummanager.ui" line="1214"/>
         <source>Should transient scrollbars have
 semi-transparent grooves when needed?</source>
-        <translation type="unfinished"></translation>
+        <translation>Θα πρέπει οι παροδικές γραμμές κύλισης να έχουν
+ημιδιάφανες αυλακώσεις όταν χρειάζεται;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1218"/>
         <source>Transient scrollbar grooves when needed</source>
-        <translation type="unfinished"></translation>
+        <translation>Αυλακώσεις παροδικών γραμμών κύλισης όταν χρειάζεται</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1238"/>
@@ -1125,7 +1134,11 @@ while 0 means no delay.</source>
 By default, scrollbars are drawn outide view frames.
 
 If disabled, see Compositing &amp; General Look → Transient scrollbars!</source>
-        <translation type="unfinished"></translation>
+        <translation>Να σχεδιάζονται οι γραμμές κύλισης εντός των πλαισίων προβολής;
+
+Από προεπιλογή, οι γραμμές κύλισης σχεδιάζονται εκτός των πλαισίων προβολής.
+
+Αν απενεργοποιηθεί, δείτε το Σύνθεση γραφικών &amp; γενική εμφάνιση → Παροδικές γραμμές κύλισης!</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1938"/>
@@ -1135,7 +1148,7 @@ If disabled, see Compositing &amp; General Look → Transient scrollbars!</sourc
     <message>
         <location filename="../../kvantummanager.ui" line="1971"/>
         <source>Tree branch lines</source>
-        <translation type="unfinished"></translation>
+        <translation>Γραμμές κλάδων δέντρων</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1667"/>
@@ -1164,17 +1177,18 @@ the frame, so that the frame isn&apos;t cut.</source>
         <location filename="../../kvantummanager.ui" line="1722"/>
         <source>Mouse tracking is enabled
 for menubars by default.</source>
-        <translation type="unfinished"></translation>
+        <translation>Η παρακολούθηση ποντικιού είναι ενεργοποιημένη
+για τις γραμμές μενού από προεπιλογή.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1726"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mouse tracking is enabled for menubars by default, i.e., after a menubar item is clicked and its menu is shown, the menus of the other menubar items will be shown if the cursor is put on them without clicking.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Η παρακολούθηση ποντικιού είναι ενεργοποιημένη για τις γραμμές μενού από προεπιλογή, ήτοι, αφότου έχει γίνει κλικ σε ένα στοιχείο γραμμής μενού και εμφανιστεί το μενού του, τα μενού των άλλων στοιχείων γραμμής μενού θα εμφανιστούν αν ο δρομέας τοποθετηθεί πάνω τους χωρίς κλικ.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1729"/>
         <source>Mouse tracking for menubars</source>
-        <translation type="unfinished"></translation>
+        <translation>Παρακολούθηση ποντικιού για γραμμές μενού</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1754"/>
@@ -1246,7 +1260,11 @@ respect some settings of the current desktop environment.
 
 This checkbox may disable some options.
 Uncheck it if you want to use those options!</source>
-        <translation type="unfinished"></translation>
+        <translation>Όταν αυτό είναι ενεργοποιημένο και επιλεγμένο, το Kvantum θα προσπαθήσει
+να λάβει υπόψη κάποιες ρυθμίσεις του τρέχοντος περιβάλλοντος επιφάνειας εργασίας.
+
+Αυτό το πλαίσιο ελέγχου θα απενεργοποιήσει κάποιες επιλογές.
+Αποεπιλέξτε το αν θέλετε να χρησιμοποιήσετε αυτές τις επιλογές!</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1660"/>
@@ -1282,7 +1300,7 @@ i.e., there is no border between them.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1657"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When this is enabled and checked, Kvantum will try to respect some settings of the current desktop environment if it is KDE, Unity, Gnome or Pantheon.&lt;/p&gt;&lt;p&gt;Under KDE, it makes Kvantum read KDE settings for small and large icon sizes and also single or double clicking.&lt;/p&gt;&lt;p&gt;Under Unity, Gnome and Pantheon, it removes icons from menus and push-buttons (even if the corresponding dconf keys are changed) and disables window translucency.&lt;/p&gt;&lt;p&gt;This checkbox may disable some options. Uncheck it if you want to use those options!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Όταν αυτό είναι ενεργοποιημένο και επιλεγμένο, το Kvantum θα προσπαθήσει να λάβει υπόψη κάποιες ρυθμίσεις του τρέχοντος περιβάλλοντος επιφάνειας εργασίας αν αυτό είναι KDE, Unity, Gnome ή Pantheon.&lt;/p&gt;&lt;p&gt;Υπό το KDE, αυτό κάνει το Kvantum να διαβάσει τις ρυθμίσεις KDE για μικρά και μεγάλα μεγέθη εικονιδίων και επίσης μονό ή διπλό κλικ.&lt;/p&gt;&lt;p&gt;Υπό το Unity, Gnome και Pantheon, αυτό αφαιρεί εικονίδια από μενού και κουμπιά πίεσης (ακόμα κι αν τα σχετικά κλειδιά dconf είναι αλλαγμένα) και απενεργοποιεί την ημιδιαφάνεια παραθύρου.&lt;/p&gt;&lt;p&gt;Αυτό το πλαίσιο ελέγχου μπορεί να απενεργοποιήσει κάποιες επιλογές. Αποεπιλέξτε το αν θέλετε να χρησιμοποιήσετε αυτές τις επιλογές!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="845"/>
