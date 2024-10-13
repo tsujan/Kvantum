@@ -324,7 +324,7 @@ as far as possible.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="776"/>
         <source>Compositing &amp;&amp; General Look</source>
-        <translation>Σύνθεση &amp;&amp; γενική εμφάνιση</translation>
+        <translation>Σύνθεση γραφικών &amp;&amp; γενική εμφάνιση</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="975"/>
@@ -985,7 +985,11 @@ Zero means tooltips are shown instantly.
 Checking this box removes arrows as far as possible.
 
 If disabled, see Compositing &amp; General Look → Transient scrollbars!</source>
-        <translation type="unfinished"></translation>
+        <translation>Οι γραμμές κύλισης έχουν βέλη προσθήκης και αφαίρεσης γραμμής από προεπιλογή.
+
+Η επιλογή αυτού του πλαισίου αφαιρεί τα βέλη στο μέτρο του δυνατού.
+
+Αν απενεργοποιηθεί, δείτε Σϋνθεση γραφικών &amp; γενική εμφάνιση → Παροδικές γραμμές κύλισης!</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1695"/>
