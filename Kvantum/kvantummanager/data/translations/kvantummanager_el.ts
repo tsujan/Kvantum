@@ -1061,7 +1061,9 @@ spin-down one inside the spin line-edit.</source>
         <source>Draw combo popups as menu popups (i.e. like in Gtk)?
 
 By default, combo popups do not cover the combo box.</source>
-        <translation type="unfinished"></translation>
+        <translation>Να σχεδιάζονται σύνθετα αναδυόμενα ως αναδυόμενα μενού (δηλαδή όπως στο Gtk);
+
+Από προεπιλογή, τα σύνθετα αναδυόμενα δεν καλύπτουν το σύνθετο πλαίσιο.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1808"/>
@@ -1219,7 +1221,7 @@ between toolbar separators.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1895"/>
         <source>Toolbutton style:</source>
-        <translation type="unfinished"></translation>
+        <translation>Τεχνοτροπία κουμπιού εργαλείων:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1798"/>
@@ -1278,7 +1280,7 @@ Uncheck it if you want to use those options!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1766"/>
         <source>Combo popup as menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Σύνθετο αναδυόμενο ως μενού</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1811"/>
@@ -1346,7 +1348,11 @@ there will be a checkbox next to each entry
 (although Kvantum draws it as a radio button).
 
 This option will hide these.</source>
-        <translation type="unfinished"></translation>
+        <translation>Όταν σχεδιάζονται σύνθετα αναδυόμενα ως μενού,
+θα υπάρχει ένα πλαίσιο ελέγχου δίπλα σε κάθε καταχώρηση
+(αν και το Kvantum το σχεδιάζει ως κουμπί επιλογής).
+
+Αυτή η επιλογή θα τα αποκρύψει.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1791"/>
