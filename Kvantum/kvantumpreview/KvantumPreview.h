@@ -48,7 +48,11 @@ public:
     connect (checkBoxDocMode, &QAbstractButton::toggled, this, &KvantumPreview::docMode);
     connect (checkBoxFlat, &QAbstractButton::toggled, this, &KvantumPreview::makeFlat);
     connect (checkBoxRaise, &QAbstractButton::toggled, this, &KvantumPreview::makeAutoRaise);
+#if (QT_VERSION >= QT_VERSION_CHECK(6,7,0))
+    connect (checkBox_7, &QCheckBox::checkStateChanged, this, &KvantumPreview::setDisabledState);
+#else
     connect (checkBox_7, &QCheckBox::stateChanged, this, &KvantumPreview::setDisabledState);
+#endif
     QActionGroup *aGroup = new QActionGroup (this);
     actionMenu_radio->setActionGroup (aGroup);
     actionMenu_radio1->setActionGroup (aGroup);

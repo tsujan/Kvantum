@@ -79,7 +79,11 @@ class BlurHelper: public QObject
     }
     void update()
     {
-      for (const WidgetPointer& widget : static_cast<const WidgetSet&>(pendingWidgets_))
+#if (QT_VERSION >= QT_VERSION_CHECK(6,6,0))
+      for (const WidgetPointer& widget : std::as_const(pendingWidgets_))
+#else
+      for (const WidgetPointer& widget : qAsConst(pendingWidgets_))
+#endif
       {
         if (widget)
           update (widget.data());
