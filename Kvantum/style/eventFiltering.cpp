@@ -17,7 +17,6 @@
 
 #include "Kvantum.h"
 
-#include <QLibrary> // only for setGtkVariant()
 #include <QPainter>
 #include <QTimer>
 #include <QApplication>
@@ -43,87 +42,6 @@
 
 namespace Kvantum
 {
-
-static void setGtkVariant(QWidget *widget, bool dark) // by Craig Drummond
-{
-  if (!widget || QLatin1String("xcb")!=qApp->platformName()) {
-    return;
-  }
-  static const char *_GTK_THEME_VARIANT="_GTK_THEME_VARIANT";
-
-  // Check if already set
-  QByteArray styleVar = dark ? "dark" : "light";
-  QVariant var=widget->property("_GTK_THEME_VARIANT");
-  if (var.isValid() && var.toByteArray()==styleVar) {
-    return;
-  }
-
-  // Typedef's from xcb/xcb.h - copied so that there is no
-  // direct xcb dependency
-  typedef quint32 XcbAtom;
-
-  struct XcbInternAtomCookie {
-    unsigned int sequence;
-  };
-
-  struct XcbInternAtomReply {
-    quint8  response_type;
-    quint8  pad0;
-    quint16 sequence;
-    quint32 length;
-    XcbAtom atom;
-  };
-
-  typedef void * (*XcbConnectFn)(int, int);
-  typedef XcbInternAtomCookie (*XcbInternAtomFn)(void *, int, int, const char *);
-  typedef XcbInternAtomReply * (*XcbInternAtomReplyFn)(void *, XcbInternAtomCookie, int);
-  typedef int (*XcbChangePropertyFn)(void *, int, int, XcbAtom, XcbAtom, int, int, const void *);
-  typedef int (*XcbFlushFn)(void *);
-
-  static QLibrary *lib = 0;
-  static XcbAtom variantAtom = 0;
-  static XcbAtom utf8TypeAtom = 0;
-  static void *xcbConn = 0;
-  static XcbChangePropertyFn XcbChangePropertyFnPtr = 0;
-  static XcbFlushFn XcbFlushFnPtr = 0;
-
-  if (!lib) {
-    lib = new QLibrary("libxcb", qApp);
-
-    if (lib->load()) {
-      XcbConnectFn XcbConnectFnPtr=(XcbConnectFn)lib->resolve("xcb_connect");
-      XcbInternAtomFn XcbInternAtomFnPtr=(XcbInternAtomFn)lib->resolve("xcb_intern_atom");
-      XcbInternAtomReplyFn XcbInternAtomReplyFnPtr=(XcbInternAtomReplyFn)lib->resolve("xcb_intern_atom_reply");
-
-      XcbChangePropertyFnPtr=(XcbChangePropertyFn)lib->resolve("xcb_change_property");
-      XcbFlushFnPtr=(XcbFlushFn)lib->resolve("xcb_flush");
-      if (XcbConnectFnPtr && XcbInternAtomFnPtr && XcbInternAtomReplyFnPtr && XcbChangePropertyFnPtr && XcbFlushFnPtr) {
-        xcbConn=(*XcbConnectFnPtr)(0, 0);
-        if (xcbConn) {
-          XcbInternAtomReply *typeReply = (*XcbInternAtomReplyFnPtr)(xcbConn, (*XcbInternAtomFnPtr)(xcbConn, 0, 11, "UTF8_STRING"), 0);
-
-          if (typeReply) {
-            XcbInternAtomReply *gtkVarReply = (*XcbInternAtomReplyFnPtr)(xcbConn, (*XcbInternAtomFnPtr)(xcbConn, 0, strlen(_GTK_THEME_VARIANT),
-                                                                                                        _GTK_THEME_VARIANT), 0);
-            if (gtkVarReply) {
-               utf8TypeAtom = typeReply->atom;
-               variantAtom = gtkVarReply->atom;
-               free(gtkVarReply);
-            }
-            free(typeReply);
-          }
-        }
-      }
-    }
-  }
-
-  if (0!=variantAtom) {
-    (*XcbChangePropertyFnPtr)(xcbConn, 0, widget->effectiveWinId(), variantAtom, utf8TypeAtom, 8,
-                              styleVar.length(), (const void *)styleVar.constData());
-    (*XcbFlushFnPtr)(xcbConn);
-    widget->setProperty(_GTK_THEME_VARIANT, styleVar);
-  }
-}
 
 void Style::drawBg(QPainter *p, const QWidget *widget) const
 {
@@ -825,12 +743,6 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         }
       }
     }
-    else if (gtkDesktop_
-             && (!w->parent() || !qobject_cast<QWidget*>(w->parent())
-                 || qobject_cast<QDialog*>(w) || qobject_cast<QMainWindow*>(w)))
-    {
-      setGtkVariant(w, tspec_.dark_titlebar);
-    }
     break;
 
   case QEvent::WindowActivate:
@@ -949,7 +861,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         if (w->testAttribute(Qt::WA_X11NetWmWindowTypeMenu)) break; // detached menu
         if (w->testAttribute(Qt::WA_StyleSheetTarget)) break; // not drawn by Kvantum (see PM_MenuHMargin)
 
-#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+//#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
         /*
           This is a workaround for a fixed Qt5 bug (QTBUG-47043) that has reappeared
           in Qt6 in another form but with almost the same result: _NET_WM_WINDOW_TYPE
@@ -957,7 +869,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           "QXcbWindowFunctions::setWmWindowType()" doesn't exist in Qt6 but the window
           type can be set by removing and resetting menu/combo attributes.
         */
-        if (tspec_.isX11 && !e->spontaneous() && w->windowHandle() != nullptr)
+        /*if (tspec_.isX11 && !e->spontaneous() && w->windowHandle() != nullptr)
         {
           if (w->testAttribute(Qt::WA_X11NetWmWindowTypeDropDownMenu))
           {
@@ -969,8 +881,8 @@ bool Style::eventFilter(QObject *o, QEvent *e)
             w->setAttribute(Qt::WA_X11NetWmWindowTypePopupMenu, false);
             w->setAttribute(Qt::WA_X11NetWmWindowTypePopupMenu, true);
           }
-        }
-#endif
+        }*/
+//#endif
 
         if (movedMenus_.contains(w)) break; // already moved
         /* "magical" condition for a submenu */
@@ -1369,9 +1281,9 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         if (_forcePalette)
           forcePalette(w, palette);
       }
-#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
+//#if (QT_VERSION >= QT_VERSION_CHECK(6,0,0))
       /* see the case of QMenu above */
-      else if (w->inherits("QComboBoxPrivateContainer"))
+      /*else if (w->inherits("QComboBoxPrivateContainer"))
       {
         if (tspec_.combo_menu && tspec_.isX11
             && !e->spontaneous() && w->windowHandle() != nullptr
@@ -1380,14 +1292,8 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           w->setAttribute(Qt::WA_X11NetWmWindowTypeCombo, false);
           w->setAttribute(Qt::WA_X11NetWmWindowTypeCombo, true);
         }
-      }
-#endif
-      else if (gtkDesktop_
-               && (!w->parent() || !qobject_cast<QWidget *>(w->parent())
-                   || qobject_cast<QDialog *>(w) || qobject_cast<QMainWindow *>(w)))
-      {
-        setGtkVariant(w, tspec_.dark_titlebar);
-      }
+      }*/
+//#endif
     }
     break;
 

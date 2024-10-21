@@ -292,28 +292,28 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
 
     /* file system icons */
     case SP_DriveFDIcon : {
-      QIcon icn = QIcon::fromTheme(QLatin1String("media-floppy"));
+      QIcon icn = QIcon::fromTheme(QStringLiteral("media-floppy"));
       if (!icn.isNull()) return icn;
       else break;
     }
     case SP_DriveHDIcon : {
-      QIcon icn = QIcon::fromTheme(QLatin1String("drive-harddisk"));
+      QIcon icn = QIcon::fromTheme(QStringLiteral("drive-harddisk"));
       if (!icn.isNull()) return icn;
       else break;
     }
     case SP_DriveCDIcon :
     case SP_DriveDVDIcon : {
-      QIcon icn = QIcon::fromTheme(QLatin1String("media-optical"));
+      QIcon icn = QIcon::fromTheme(QStringLiteral("media-optical"));
       if (!icn.isNull()) return icn;
       else break;
     }
     case SP_TrashIcon : {
-      QIcon icn = QIcon::fromTheme(QLatin1String("user-trash"));
+      QIcon icn = QIcon::fromTheme(QStringLiteral("user-trash"));
       if (!icn.isNull()) return icn;
       else break;
     }
     case SP_DesktopIcon : {
-      QIcon icn = QIcon::fromTheme(QLatin1String("user-desktop"));
+      QIcon icn = QIcon::fromTheme(QStringLiteral("user-desktop"));
       if (!icn.isNull()) return icn;
       else break;
     }
@@ -325,93 +325,93 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
     }
     case SP_DirClosedIcon :
     case SP_DirIcon : {
-      QIcon icn = QIcon::fromTheme(QLatin1String("folder"));
+      QIcon icn = QIcon::fromTheme(QStringLiteral("folder"));
       if (!icn.isNull()) return icn;
       else break;
     }
     case SP_DirOpenIcon : {
-      QIcon icn = QIcon::fromTheme(QLatin1String("folder-open"));
+      QIcon icn = QIcon::fromTheme(QStringLiteral("folder-open"));
       if (!icn.isNull()) return icn;
       else break;
     }
 
     /* arrow icons */
     case SP_ArrowUp : {
-      QIcon icn = QIcon::fromTheme(QLatin1String("go-up"));
+      QIcon icn = QIcon::fromTheme(QStringLiteral("go-up"));
       if (!icn.isNull()) return icn;
       else break;
     }
     case SP_ArrowDown : {
-      QIcon icn = QIcon::fromTheme(QLatin1String("go-down"));
+      QIcon icn = QIcon::fromTheme(QStringLiteral("go-down"));
       if (!icn.isNull()) return icn;
       else break;
     }
     case SP_ArrowRight : {
-      QIcon icn = QIcon::fromTheme(QLatin1String("go-next"));
+      QIcon icn = QIcon::fromTheme(QStringLiteral("go-next"));
       if (!icn.isNull()) return icn;
       else break;
     }
     case SP_ArrowLeft : {
-      QIcon icn = QIcon::fromTheme(QLatin1String("go-previous"));
+      QIcon icn = QIcon::fromTheme(QStringLiteral("go-previous"));
       if (!icn.isNull()) return icn;
       else break;
     }
 
     /* process icons */
     case SP_BrowserReload : {
-      QIcon icn = QIcon::fromTheme(QLatin1String("view-refresh"));
+      QIcon icn = QIcon::fromTheme(QStringLiteral("view-refresh"));
       if (!icn.isNull()) return icn;
       else break;
     }
     case SP_BrowserStop : {
-      QIcon icn = QIcon::fromTheme(QLatin1String("process-stop"));
+      QIcon icn = QIcon::fromTheme(QStringLiteral("process-stop"));
       if (!icn.isNull()) return icn;
       else break;
     }
 
     /* media icons */
     case SP_MediaPlay : {
-      QIcon icn = QIcon::fromTheme(QLatin1String("media-playback-start"));
+      QIcon icn = QIcon::fromTheme(QStringLiteral("media-playback-start"));
       if (!icn.isNull()) return icn;
       else break;
     }
     case SP_MediaPause : {
-      QIcon icn = QIcon::fromTheme(QLatin1String("media-playback-pause"));
+      QIcon icn = QIcon::fromTheme(QStringLiteral("media-playback-pause"));
       if (!icn.isNull()) return icn;
       else break;
     }
     case SP_MediaStop : {
-      QIcon icn = QIcon::fromTheme(QLatin1String("media-playback-stop"));
+      QIcon icn = QIcon::fromTheme(QStringLiteral("media-playback-stop"));
       if (!icn.isNull()) return icn;
       else break;
     }
     case SP_MediaSeekForward : {
-      QIcon icn = QIcon::fromTheme(QLatin1String("media-seek-forward"));
+      QIcon icn = QIcon::fromTheme(QStringLiteral("media-seek-forward"));
       if (!icn.isNull()) return icn;
       else break;
     }
     case SP_MediaSeekBackward : {
-      QIcon icn = QIcon::fromTheme(QLatin1String("media-seek-backward"));
+      QIcon icn = QIcon::fromTheme(QStringLiteral("media-seek-backward"));
       if (!icn.isNull()) return icn;
       else break;
     }
     case SP_MediaSkipForward : {
-      QIcon icn = QIcon::fromTheme(QLatin1String("media-skip-forward"));
+      QIcon icn = QIcon::fromTheme(QStringLiteral("media-skip-forward"));
       if (!icn.isNull()) return icn;
       else break;
     }
     case SP_MediaSkipBackward : {
-      QIcon icn = QIcon::fromTheme(QLatin1String("media-skip-backward"));
+      QIcon icn = QIcon::fromTheme(QStringLiteral("media-skip-backward"));
       if (!icn.isNull()) return icn;
       else break;
     }
     case SP_MediaVolume : {
-      QIcon icn = QIcon::fromTheme(QLatin1String("audio-volume-medium"));
+      QIcon icn = QIcon::fromTheme(QStringLiteral("audio-volume-medium"));
       if (!icn.isNull()) return icn;
       else break;
     }
     case SP_MediaVolumeMuted : {
-      QIcon icn = QIcon::fromTheme(QLatin1String("audio-volume-muted"));
+      QIcon icn = QIcon::fromTheme(QStringLiteral("audio-volume-muted"));
       if (!icn.isNull()) return icn;
       else break;
     }
@@ -429,7 +429,7 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
 
     /* link icons */
     case SP_FileLinkIcon : {;
-      QIcon icn = QIcon::fromTheme(QLatin1String("emblem-symbolic-link"));
+      QIcon icn = QIcon::fromTheme(QStringLiteral("emblem-symbolic-link"));
       if (!icn.isNull())
       {
         QIcon baseIcon = QCommonStyle::standardIcon(SP_FileIcon, option, widget);
@@ -453,7 +453,7 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
       break;
     }
     case SP_DirLinkIcon : {;
-      QIcon icn = QIcon::fromTheme(QLatin1String("emblem-symbolic-link"));
+      QIcon icn = QIcon::fromTheme(QStringLiteral("emblem-symbolic-link"));
       if (!icn.isNull())
       {
         QIcon baseIcon = QCommonStyle::standardIcon(SP_DirIcon, option, widget);
@@ -485,7 +485,7 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
       else break;
     }
     case SP_DialogOpenButton : {
-      QIcon icn = QIcon::fromTheme(QLatin1String("document-open"));
+      QIcon icn = QIcon::fromTheme(QStringLiteral("document-open"));
       if (!icn.isNull()) return icn;
       else break;
     }
@@ -498,7 +498,7 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
     case SP_DialogYesToAllButton :
     case SP_DialogYesButton :
     case SP_DialogOkButton : {
-      QIcon icn = QIcon::fromTheme(QLatin1String("dialog-ok"));
+      QIcon icn = QIcon::fromTheme(QStringLiteral("dialog-ok"));
       if (!icn.isNull()) return icn;
       else break;
     }

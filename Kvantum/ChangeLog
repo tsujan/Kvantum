@@ -1,6 +1,7 @@
 V1.1.3
 ---------
  * Draw dragged tabs of Qt ≥ 6.6 as single tabs (like they were drawn with Qt < 6.6).
+ * Cleaned up the code and removed some old codes about GTK DEs.
 
 V1.1.2
 ---------

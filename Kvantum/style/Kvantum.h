@@ -510,11 +510,9 @@ class Style : public QCommonStyle {
     QList<int> realMenuShadow_;
     QList<qreal> tooltipShadow_;
 
-    /* Is this DE GTK-based? Currently Gnome, Unity and Pantheon are supported. */
+    /* Is this DE GTK-based? Currently Gnome and Pantheon are supported. */
     bool gtkDesktop_;
-    /* Under Gnome and Unity, we disable compositing because otherwise, DE shadows
-       would be drawn around Kvantum's menu shadows. Other DEs have their own ways
-       of preventing that or the user could disable compositing with Kvantum Manager. */
+    /* This will be useful if we want to disable compositing under some DEs. */
     bool noComposite_;
     /* For correct updating on mouseover with active tab overlapping */
     QRect tabHoverRect_;

@@ -46,71 +46,6 @@
 namespace Kvantum
 {
 
-static QString readDconfSetting(const QString &setting) // by Craig Drummond
-{
-  // For some reason, dconf does not seem to terminate correctly when run under some desktops (e.g. KDE)
-  // Destroying the QProcess seems to block, causing the app to appear to hang before starting.
-  // So, create QProcess on the heap - and only wait 1.5s for response. Connect finished to deleteLater
-  // so that the object is destroyed.
-  QString schemeToUse = QLatin1String("/org/gnome/desktop/interface/");
-  QProcess *process = new QProcess();
-  process->start(QLatin1String("dconf"), QStringList() << QLatin1String("read") << schemeToUse + setting);
-  QObject::connect(process, static_cast<void(QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished),
-                   [=](int /*exitCode*/, QProcess::ExitStatus /*exitStatus*/){ process->deleteLater(); });
-
-  if (process->waitForFinished(1500))
-  {
-    QString resp = process->readAllStandardOutput();
-    resp = resp.trimmed();
-    resp.remove('\'');
-
-    if (resp.isEmpty())
-    { // Probably set to the default, and dconf does not store defaults! Therefore, need to read via gsettings...
-      schemeToUse=schemeToUse.mid(1, schemeToUse.length()-2).replace("/", ".");
-      QProcess *gsettingsProc = new QProcess();
-      gsettingsProc->start(QLatin1String("gsettings"), QStringList() << QLatin1String("get") << schemeToUse << setting);
-      QObject::connect(gsettingsProc, static_cast<void(QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished),
-                       [=](int /*exitCode*/, QProcess::ExitStatus /*exitStatus*/){ process->deleteLater(); });
-      if (gsettingsProc->waitForFinished(1500))
-      {
-        resp = gsettingsProc->readAllStandardOutput();
-        resp = resp.trimmed();
-        resp.remove('\'');
-      }
-      else
-        gsettingsProc->kill();
-    }
-    return resp;
-  }
-  process->kill();
-  return QString();
-}
-
-static void setAppFont()
-{
-  // First check platform theme.
-  QByteArray qpa = qgetenv("QT_QPA_PLATFORMTHEME");
-
-  // QGnomePlatform already sets from from Gtk settings, so no need to repeat this!
-  if (qpa == "gnome")
-    return;
-
-  QString fontName = readDconfSetting("font-name");
-  if (!fontName.isEmpty())
-  {
-    QStringList parts = fontName.split(' ', Qt::SkipEmptyParts);
-    if (parts.length()>1)
-    {
-      uint size = parts.takeLast().toUInt();
-      if (size > 5 && size < 20)
-      {
-        QFont f(parts.join(" "), size);
-        QApplication::setFont(f);
-      }
-    }
-  }
-}
-
 /* WARNING: For easily distinguishing animated widgets (-> "eventFiltering.cpp")
             from others that also have event filter, event filters should be
             installed with care. */
@@ -1054,10 +989,7 @@ void Style::polish(QApplication *app)
   if (tspec_.opaque.contains(appName, Qt::CaseInsensitive))
     isOpaque_ = true;
 
-  /* general colors
-     FIXME Is this needed? Can't polish(QPalette&) alone do the job?
-     The documentation for QApplication::setPalette() is ambiguous
-     but, at least outside KDE and with Qt4, it was sometimes needed. */
+  /* force our palette */
   QPalette palette = app->palette();
   polish(palette);
   app->setPalette(palette);
@@ -1065,9 +997,6 @@ void Style::polish(QApplication *app)
   QCommonStyle::polish(app);
   if (itsShortcutHandler_)
     app->installEventFilter(itsShortcutHandler_);
-
-  if (gtkDesktop_) // under gtk DEs, always use their font
-    setAppFont();
 }
 
 void Style::polish(QPalette &palette)

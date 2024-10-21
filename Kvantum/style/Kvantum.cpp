@@ -221,7 +221,7 @@ Style::Style(bool useDark) : QCommonStyle()
 
   QList<QByteArray> desktopList = qgetenv("XDG_CURRENT_DESKTOP").toLower().split(':');
   QSet<QByteArray> desktop(desktopList.begin(), desktopList.end());
-  QSet<QByteArray> gtkDesktops = QSet<QByteArray>() << "gnome" << "unity" << "pantheon";
+  QSet<QByteArray> gtkDesktops = QSet<QByteArray>() << "gnome" << "pantheon";
   gtkDesktop_ = gtkDesktops.intersects(desktop);
 
   if (tspec_.respect_DE)
@@ -230,15 +230,8 @@ Style::Style(bool useDark) : QCommonStyle()
     {
       hspec_.iconless_pushbutton = true;
       hspec_.iconless_menu = true;
+      tspec_.blurring = false;
       //tspec_.x11drag = WindowManager::DRAG_MENUBAR_AND_PRIMARY_TOOLBAR;
-      if (desktop.contains("unity"))
-      {
-        // Link 'respect_DE' and composite settings only for Unity. Issue #128
-        noComposite_ = true;
-        // without compositing, these keys should be corrected
-        tspec_.translucent_windows = false;
-        tspec_.blurring = false;
-      }
     }
     else if (desktop.contains("kde"))
     {
@@ -1389,8 +1382,8 @@ static inline QString spinMaxText(const QAbstractSpinBox *sp)
     maxTxt = sb->displayFormat();
 
     /* take into account leading zeros */
-    maxTxt.replace(QRegularExpression(QLatin1String("hh|HH|mm|ss")), twoDigits);
-    maxTxt.replace(QRegularExpression(QLatin1String("h|H|m|s")), twoDigits);
+    maxTxt.replace(QRegularExpression(QStringLiteral("hh|HH|mm|ss")), twoDigits);
+    maxTxt.replace(QRegularExpression(QStringLiteral("h|H|m|s")), twoDigits);
     maxTxt.replace(QLatin1String("zzz"), threeDigits);
     maxTxt.replace(QLatin1String("z"), threeDigits);
     /* year */
@@ -1406,8 +1399,8 @@ static inline QString spinMaxText(const QAbstractSpinBox *sp)
     maxTxt.replace(QLatin1String("ddd"), QLatin1String("eee"));
     maxTxt.replace(QLatin1String("MMM"), QLatin1String("fff"));
     /* leading zeros */
-    maxTxt.replace(QRegularExpression(QLatin1String("dd|MM")), twoDigits);
-    maxTxt.replace(QRegularExpression(QLatin1String("d|M")), twoDigits);
+    maxTxt.replace(QRegularExpression(QStringLiteral("dd|MM")), twoDigits);
+    maxTxt.replace(QRegularExpression(QStringLiteral("d|M")), twoDigits);
     /* time zone */
     maxTxt.replace(QLatin1String("t"), sb->dateTime().toString("t"));
     /* full day/month name */
@@ -13529,12 +13522,12 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
 
 /*
   To make Qt windows translucent, we should set the surface format of
-  their native handles BEFORE they're created but Qt5 windows are
-  often polished AFTER they're created, so that setting the attribute
+  their native handles BEFORE they are created, but Qt5 windows are
+  often polished AFTER they are created, such that setting the attribute
   "WA_TranslucentBackground" in "Style::polish()" would have no effect.
 
   Early creation of native handles could have unpredictable side effects,
-  especially for menus. However, it seems that setting of the attribute
+  especially for menus. However, it seems that setting the attribute
   "WA_TranslucentBackground" in an early stage -- before the widget is
   created -- sets the alpha buffer size to 8 safely and automatically.
 */
@@ -13550,7 +13543,7 @@ void Style::setSurfaceFormat(QWidget *widget) const
 
   /* The widget style may change while the app style is still Kvantum
      (as in Qt Designer), in which case, we should remove our forced
-     translucency. It'll be up to the new style to restore
+     translucency. It will be up to the new style to restore
      translucency if it supports translucent windows. */
   QStyle *ws = widget->style();
   if (qobject_cast<QProxyStyle *>(ws)) // qt5ct uses QProxyStyle
@@ -13577,7 +13570,7 @@ void Style::setSurfaceFormat(QWidget *widget) const
   if (widget->inherits("QTipLabel") || qobject_cast<QMenu*>(widget))
   {
     /* we want translucency and/or shadow for menus and
-       tooltips even if the main window isn't translucent */
+       tooltips even if the main window is not translucent */
     realWindow = false;
   }
   else
@@ -13610,7 +13603,7 @@ void Style::setSurfaceFormat(QWidget *widget) const
     }
     if (QMainWindow *mw = qobject_cast<QMainWindow*>(widget))
     {
-      /* it's possible that a main window is inside another one
+      /* it is possible that a main window is inside another one
          (like FormPreviewView in linguist), in which case,
          translucency could cause weird effects */
       if (p) return;

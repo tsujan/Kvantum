@@ -224,15 +224,14 @@ comment                           String              Obvious.
 respect_DE                        true/false          Should some settings of the current
                                                       DE be respected? True by default.
 
-                                                      KDE, Unity, Gnome and Pantheon are
-                                                      supported. Under KDE, the keys
-                                                      "small_icon_size" and "large_icon_size"
-                                                      are overridden by KDE settings. Under
-                                                      Unity, Gnome and Pantheon,
-                                                      "iconless_pushbutton" and "iconless_menu"
-                                                      are set to true, "composite" is set to
-                                                      false, and "x11drag" is set to
-                                                      "menubar_and_primary_toolbar".
+                                                      KDE, Gnome and Pantheon are supported.
+                                                      Under KDE, the keys "small_icon_size"
+                                                      and "large_icon_size" are overridden
+                                                      by KDE settings. Under Gnome and
+                                                      Pantheon, "iconless_pushbutton" and
+                                                      "iconless_menu" are set to true, and
+                                                      "blurring" and "popup_blurring" are set
+                                                      to false.
 
 x11drag                           String              Drag windows from contents? Values:
                                                         none
