@@ -15,7 +15,7 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "Kvantum.h"
+#include "Kvantum5.h"
 
 #include <QApplication>
 #include <QPainter>
@@ -33,6 +33,9 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
                           const QStyleOption *option,
                           const QWidget *widget) const
 {
+  bool hdpi(false);
+  if (qApp->testAttribute(Qt::AA_UseHighDpiPixmaps))
+    hdpi = true;
   QWindow *win = widget ? widget->window()->windowHandle() : nullptr;
   qreal pixelRatio = win ? win->devicePixelRatio() : qApp->devicePixelRatio();
   pixelRatio = qMax(pixelRatio, static_cast<qreal>(1));
@@ -41,7 +44,11 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
   switch (standardIcon) {
     case SP_ToolBarHorizontalExtensionButton : {
       indicator_spec dspec = getIndicatorSpec(QStringLiteral("IndicatorArrow"));
-      int s = qRound(pixelRatio*pixelRatio*static_cast<qreal>(dspec.size));
+      int s;
+      if (hdpi)
+        s = qRound(pixelRatio*pixelRatio*static_cast<qreal>(dspec.size));
+      else
+        s = qRound(pixelRatio*static_cast<qreal>(dspec.size));
       QPixmap pm(QSize(s,s));
       pm.fill(Qt::transparent);
 
@@ -80,7 +87,11 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
     }
     case SP_ToolBarVerticalExtensionButton : {
       indicator_spec dspec = getIndicatorSpec(QStringLiteral("IndicatorArrow"));
-      int s = qRound(pixelRatio*pixelRatio*static_cast<qreal>(dspec.size));
+      int s;
+      if (hdpi)
+        s = qRound(pixelRatio*pixelRatio*static_cast<qreal>(dspec.size));
+      else
+        s = qRound(pixelRatio*static_cast<qreal>(dspec.size));
       QPixmap pm(QSize(s,s));
       pm.fill(Qt::transparent);
 
@@ -131,7 +142,11 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
       else break;
     }
     case SP_TitleBarMinButton : {
-      int s = qRound(pixelMetric(PM_TitleBarButtonIconSize, option, widget)*pixelRatio*pixelRatio);
+      int s;
+      if (hdpi)
+        s = qRound(pixelMetric(PM_TitleBarButtonIconSize, option, widget)*pixelRatio*pixelRatio);
+      else
+        s = qRound(pixelMetric(PM_TitleBarButtonIconSize, option, widget)*pixelRatio);
       QPixmap pm(QSize(s,s));
       pm.fill(Qt::transparent);
 
@@ -157,7 +172,11 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
       else break;
     }
     case SP_TitleBarMaxButton : {
-      int s = qRound(pixelMetric(PM_TitleBarButtonIconSize, option, widget)*pixelRatio*pixelRatio);
+      int s;
+      if (hdpi)
+        s = qRound(pixelMetric(PM_TitleBarButtonIconSize, option, widget)*pixelRatio*pixelRatio);
+      else
+        s = qRound(pixelMetric(PM_TitleBarButtonIconSize, option, widget)*pixelRatio);
       QPixmap pm(QSize(s,s));
       pm.fill(Qt::transparent);
 
@@ -174,7 +193,11 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
     }
     case SP_DockWidgetCloseButton :
     case SP_TitleBarCloseButton : {
-      int s = qRound(pixelMetric(PM_TitleBarButtonIconSize, option, widget)*pixelRatio*pixelRatio);
+      int s;
+      if (hdpi)
+        s = qRound(pixelMetric(PM_TitleBarButtonIconSize, option, widget)*pixelRatio*pixelRatio);
+      else
+        s = qRound(pixelMetric(PM_TitleBarButtonIconSize, option, widget)*pixelRatio);
       QPixmap pm(QSize(s,s));
       pm.fill(Qt::transparent);
 
@@ -211,7 +234,11 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
       else break;
     }
     case SP_TitleBarMenuButton : {
-      int s = qRound(pixelMetric(PM_TitleBarButtonIconSize, option, widget)*pixelRatio*pixelRatio);
+      int s;
+      if (hdpi)
+        s = qRound(pixelMetric(PM_TitleBarButtonIconSize, option, widget)*pixelRatio*pixelRatio);
+      else
+        s = qRound(pixelMetric(PM_TitleBarButtonIconSize, option, widget)*pixelRatio);
       QPixmap pm(QSize(s,s));
       pm.fill(Qt::transparent);
 
@@ -222,7 +249,11 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
       else break;
     }
     case SP_TitleBarNormalButton : {
-      int s = qRound(pixelMetric(PM_TitleBarButtonIconSize, option, widget)*pixelRatio*pixelRatio);
+      int s;
+      if (hdpi)
+        s = qRound(pixelMetric(PM_TitleBarButtonIconSize, option, widget)*pixelRatio*pixelRatio);
+      else
+        s = qRound(pixelMetric(PM_TitleBarButtonIconSize, option, widget)*pixelRatio);
       QPixmap pm(QSize(s,s));
       pm.fill(Qt::transparent);
 
@@ -402,8 +433,8 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
         for (int i = 0 ; i < sizes.size() ; ++i)
         {
           int size = sizes[i].width();
-          QPixmap basePixmap = baseIcon.pixmap(QSize(size, size), pixelRatio);
-          QPixmap linkPixmap = icn.pixmap(QSize(size / 2, size / 2), pixelRatio);
+          QPixmap basePixmap = baseIcon.pixmap(win, QSize(size, size));
+          QPixmap linkPixmap = icn.pixmap(win, QSize(size / 2, size / 2));
           QPainter painter(&basePixmap);
           painter.drawPixmap(size/2, size/2, linkPixmap);
           icn.addPixmap(basePixmap);
@@ -421,8 +452,8 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
         for (int i = 0 ; i < sizes.size() ; ++i)
         {
           int size = sizes[i].width();
-          QPixmap basePixmap = baseIcon.pixmap(QSize(size, size), pixelRatio);
-          QPixmap linkPixmap = icn.pixmap(QSize(size / 2, size / 2), pixelRatio);
+          QPixmap basePixmap = baseIcon.pixmap(win, QSize(size, size));
+          QPixmap linkPixmap = icn.pixmap(win, QSize(size / 2, size / 2));
           QPainter painter(&basePixmap);
           painter.drawPixmap(size/2, size/2, linkPixmap);
           icn.addPixmap(basePixmap);
@@ -525,13 +556,6 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
     }
     case SP_FileDialogContentsView : {
       QIcon icn = QIcon::fromTheme(QStringLiteral("view-list-icons"));
-      if (!icn.isNull()) return icn;
-      else break;
-    }
-
-    case SP_TabCloseButton : {
-      QIcon icn = QIcon::fromTheme(QStringLiteral("tab-close"),
-                                   QIcon::fromTheme(QStringLiteral("window-close")));
       if (!icn.isNull()) return icn;
       else break;
     }

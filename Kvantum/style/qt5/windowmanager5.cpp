@@ -34,7 +34,7 @@
 #include <QDockWidget>
 #include <QMdiArea>
 #include <QMdiSubWindow>
-#include "windowmanager.h"
+#include "windowmanager5.h"
 
 namespace Kvantum {
 
@@ -88,8 +88,6 @@ WindowManager::WindowManager (QObject *parent, Drag drag, bool dragFromBtns) :
                dragDelay_ (qMax (QApplication::startDragTime(), 500)),
                doubleClickInterval_ (QApplication::doubleClickInterval()),
                isDelayed_ (false),
-               DblClickSent_ (false),
-               preventDbClick_ (false),
                dragAboutToStart_ (false),
                dragInProgress_ (false),
                locked_ (false),
@@ -255,17 +253,8 @@ void WindowManager::timerEvent (QTimerEvent *event)
                    possible to drag from button-like widgets safely (as in GTK). */
           QMouseEvent e (QEvent::MouseButtonRelease,
                          QPoint (-1, -1),
-                         QCursor::pos(),
                          Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
           qApp->sendEvent (widgetTarget_.data(), &e);
-          /* NOTE: With Qt5, a leave event will be sent automatically if the drag is
-                   finished and the cursor moves inside the window but outside the widget.
-                   That doesn't happen with Qt6, and the widget stays in the hover state,
-                   unless the cursor enters and leaves it. So, we send a leave event here.
-                   Fortunately, if the widget is under the cursor after the drag is finished,
-                   an enter event will be sent to it automatically, restoring its hover state. */
-          QEvent e1 (QEvent::Leave);
-          qApp->sendEvent (widgetTarget_.data(), &e1);
         }
         if (!_WMExists) return; // see mousePressEvent for the reason
         if (winTarget_)
@@ -289,6 +278,19 @@ bool WindowManager::mousePressEvent (QObject *object, QEvent *event)
   if (!w) return false;
   QPoint winDragPoint = mouseEvent->pos();
 
+  if (doubleClickTimer_.isActive())
+  {
+    doubleClickTimer_.stop();
+    if (lastWin_.data() == w
+        && QPoint (winDragPoint - lastWinDragPoint_).manhattanLength() < dragDistance_)
+    { // don't drag by double clicking
+      resetDrag();
+      unlock();
+      return false;
+    }
+  }
+  doubleClickTimer_.start (doubleClickInterval_, this);
+
   if (qApp->activePopupWidget())
   { // -> the workaround in timerEvent()
     resetDrag();
@@ -305,6 +307,10 @@ bool WindowManager::mousePressEvent (QObject *object, QEvent *event)
       return false;
     /* if the window is changed, start a new drag */
   }
+
+  /* remember the window and its drag point */
+  lastWin_ = w;
+  lastWinDragPoint_ = winDragPoint;
 
   /* find the widget */
   QWidget *widget = nullptr;
@@ -328,68 +334,11 @@ bool WindowManager::mousePressEvent (QObject *object, QEvent *event)
     }
   }
   if (!topLevelWidget) return false;
-  widget = topLevelWidget->childAt (topLevelWidget->mapFromGlobal (mouseEvent->globalPosition()).toPoint());
+  widget = topLevelWidget->childAt (topLevelWidget->mapFromGlobal (mouseEvent->globalPos()));
   if (!widget)
     widget = topLevelWidget;
 
-  widgetDragPoint_ = widget->mapFromGlobal (mouseEvent->globalPosition().toPoint()); // needed by canDrag()
-
-  preventDbClick_ = false;
-  if (doubleClickTimer_.isActive())
-  {
-    /* NOTE: With Qt6, the double click event isn't sent automatically after this press event.
-             As a workaround, a double click event is sent explicitly here. Unfortunately,
-             a third mouse press might also create a double click event if it happens shortly
-             afterward, but we handle that too. */
-    if (lastWin_.data() == w
-        && QPoint (winDragPoint - lastWinDragPoint_).manhattanLength() < dragDistance_)
-    { // don't drag by double (or triple) clicking
-      if (clickedWidget_.data() == widget)
-      {
-        if (mouseEvent->flags() & Qt::MouseEventCreatedDoubleClick)
-        { // Qt6's problem doesn't exist anymore
-          clickedWidget_.clear();
-          DblClickSent_ = false;
-        }
-        else
-        { // send a double click event
-          DblClickSent_ = true;
-          auto e = new QMouseEvent (QEvent::MouseButtonDblClick, widgetDragPoint_,
-                                    QCursor::pos(),
-                                    Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
-          qApp->postEvent (widget, e);
-        }
-      }
-      else
-      {
-        if (DblClickSent_
-            && (mouseEvent->flags() & Qt::MouseEventCreatedDoubleClick))
-        {
-          /* Qt6 sends a double click event with the third mouse press. We prevent
-             that and send a normal press event instead. We also set "clickedWidget_",
-             to send a double click event with the fourth mouse press, etc. */
-          preventDbClick_ = true;
-          clickedWidget_ = widget;
-          auto e = new QMouseEvent (QEvent::MouseButtonPress, widgetDragPoint_,
-                                    QCursor::pos(),
-                                    Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
-          qApp->postEvent (widget, e);
-        }
-        DblClickSent_ = false;
-      }
-      resetDrag();
-      unlock();
-      lastWinDragPoint_ = winDragPoint;
-      /* restart the timer for checking the next click */
-      doubleClickTimer_.start (doubleClickInterval_, this);
-      return false;
-    }
-  }
-  doubleClickTimer_.start (doubleClickInterval_, this);
-  clickedWidget_.clear();
-  /* remember the window and its drag point */
-  lastWin_ = w;
-  lastWinDragPoint_ = winDragPoint;
+  widgetDragPoint_ = widget->mapFromGlobal (mouseEvent->globalPos()); // needed by canDrag()
 
   /* check if the widget can be dragged */
   dragDistance_ = qMax (QApplication::startDragDistance(), 10);
@@ -400,7 +349,7 @@ bool WindowManager::mousePressEvent (QObject *object, QEvent *event)
   /* save some targets and drag points */
   winTarget_ = w;
   widgetTarget_ = widget;
-  globalDragPoint_ = mouseEvent->globalPosition().toPoint();
+  globalDragPoint_ = mouseEvent->globalPos();
   dragAboutToStart_ = true;
 
   /* clear the info about pressing the mouse button */
@@ -412,7 +361,6 @@ bool WindowManager::mousePressEvent (QObject *object, QEvent *event)
   /* Because the widget may react to mouse press events,
      we first send a press event to it. */
   QMouseEvent mousePress (QEvent::MouseButtonPress, widgetDragPoint_,
-                          QCursor::pos(),
                           Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
   qApp->sendEvent (widget, &mousePress);
 
@@ -457,7 +405,6 @@ bool WindowManager::mousePressEvent (QObject *object, QEvent *event)
   /* Send a move event to the target window with the same position.
      If received, it is caught to actually start the drag. */
   QMouseEvent mouseMove (QEvent::MouseMove, winDragPoint,
-                         QCursor::pos(),
                          Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
   qApp->sendEvent (w, &mouseMove);
 
@@ -480,7 +427,7 @@ bool WindowManager::mouseMoveEvent (QEvent *event)
       dragAboutToStart_ = false;
       if (dragTimer_.isActive())
         dragTimer_.stop();
-      if (QPoint (mouseEvent->globalPosition().toPoint() - globalDragPoint_).manhattanLength() < dragDistance_)
+      if (QPoint (mouseEvent->globalPos() - globalDragPoint_).manhattanLength() < dragDistance_)
       {
         isDelayed_ = true;
         dragTimer_.start (dragDelay_, this);
@@ -494,7 +441,7 @@ bool WindowManager::mouseMoveEvent (QEvent *event)
       }
     }
     else if (!dragTimer_.isActive() // drag timeout
-             || QPoint (mouseEvent->globalPosition().toPoint() - globalDragPoint_).manhattanLength() >= dragDistance_)
+             || QPoint (mouseEvent->globalPos() - globalDragPoint_).manhattanLength() >= dragDistance_)
     {
       if (dragTimer_.isActive())
         dragTimer_.stop();
@@ -516,10 +463,8 @@ bool WindowManager::mouseReleaseEvent (QEvent *event)
     QMouseEvent *mouseEvent = static_cast<QMouseEvent*>(event);
     if (mouseEvent->button() == Qt::LeftButton)
     {
-      clickedWidget_ = widgetTarget_.data(); // needed by a workaround for double clicking
       auto e = new QMouseEvent (QEvent::MouseButtonRelease,
                                 widgetDragPoint_,
-                                QCursor::pos(),
                                 Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
       qApp->postEvent (widgetTarget_.data(), e);
       resetDrag();
@@ -907,21 +852,7 @@ bool WindowManager::AppEventFilter::eventFilter (QObject *object, QEvent *event)
           parent_->lastPressedWidget_ = widget;
       }
     }
-    else if (object == parent_->clickedWidget_.data()
-             // ensure that a double click shouldn't be consumed instead
-             && !parent_->preventDbClick_)
-    { // consume this extra press event created by our enforced double click
-      parent_->clickedWidget_.clear();
-      return true;
-    }
     return false;
-  }
-
-  if (parent_->preventDbClick_ && !parent_->isLocked()
-      && event->type() == QEvent::MouseButtonDblClick
-      && object == parent_->clickedWidget_.data())
-  {
-    return true;
   }
 
   /* If a drag is in progress, no event will be received. Therefore,

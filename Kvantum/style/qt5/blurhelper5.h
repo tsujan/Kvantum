@@ -79,7 +79,7 @@ class BlurHelper: public QObject
     }
     void update()
     {
-      for (const WidgetPointer& widget : std::as_const(pendingWidgets_))
+      for (const WidgetPointer& widget : qAsConst(pendingWidgets_))
       {
         if (widget)
           update (widget.data());

@@ -15,7 +15,7 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "Kvantum.h"
+#include "Kvantum5.h"
 
 #include <QDir>
 #include <QPainter>
@@ -5455,9 +5455,6 @@ Style::KvIconMode Style::getIconMode(int state, bool isInactive, const label_spe
          are two tabs and a new active tab is created after the first one. */
 static inline QStyleOptionTab::TabPosition tabPosition(const QStyleOptionTab *opt, const QWidget *widget)
 {
-  if (opt->position == QStyleOptionTab::Moving)
-    return QStyleOptionTab::OnlyOneTab;
-
   const QTabBar *tb = qobject_cast<const QTabBar*>(widget);
   if (tb == nullptr
       /* making an exception in the case of a dragged tab */
@@ -8278,7 +8275,7 @@ void Style::drawControl(QStyle::ControlElement element,
         QFont f(painter->font());
         if (lspec.boldFont) f.setWeight(lspec.boldness);
         const QProgressBar *pb = qobject_cast<const QProgressBar*>(widget);
-        bool isVertical(pb && pb->orientation() == Qt::Vertical);
+        bool isVertical(opt->orientation == Qt::Vertical);
         bool inverted(pb && pb->invertedAppearance());
         if ((!isVertical && !isKisSlider_ && option->direction == Qt::RightToLeft) // -> CE_ProgressBarGroove
             || (isVertical && opt->bottomToTop))
@@ -13505,9 +13502,6 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
 
     case PM_TreeViewIndentation : return 20;
 
-    case PM_LineEditIconSize : return pixelMetric(PM_SmallIconSize);
-    case PM_LineEditIconMargin : return pixelMetric(PM_SmallIconSize) / 4;
-
     default : return QCommonStyle::pixelMetric(metric,option,widget);
   }
 }
@@ -13721,10 +13715,6 @@ int Style::styleHint(QStyle::StyleHint hint,
 
     case SH_TabBar_ElideMode : return Qt::ElideNone; // don't interfere with CE_TabBarTabLabel
 
-    case SH_TabBar_AllowWheelScrolling : return true;
-
-    case SH_Table_AlwaysDrawLeftTopGridLines : return false;
-
     //case SH_ScrollBar_BackgroundMode : return Qt::OpaqueMode;
 
     case SH_ScrollBar_ContextMenu : return !tspec_.transient_scrollbar; // because of the hover bug
@@ -13838,7 +13828,6 @@ int Style::styleHint(QStyle::StyleHint hint,
 
     case SH_SpinControls_DisableOnBounds: return true;
     case SH_SpinBox_ButtonsInsideFrame : return true;
-    case SH_SpinBox_SelectOnStep : return true;
 
     /* forms */
     case SH_FormLayoutFieldGrowthPolicy : {
@@ -16757,7 +16746,7 @@ void Style::drawItemPixmap(QPainter *painter, const QRect &rect,
                            int alignment, const QPixmap &pixmap) const
 {
   qreal scale = 1;
-  if (!pixmap.isNull())
+  if (qApp->testAttribute(Qt::AA_UseHighDpiPixmaps) && !pixmap.isNull())
     scale = pixmap.devicePixelRatio();
   scale = qMax(scale, static_cast<qreal>(1));
 

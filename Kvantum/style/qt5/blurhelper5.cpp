@@ -15,7 +15,7 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "blurhelper.h"
+#include "blurhelper5.h"
 
 #include <QEvent>
 #include <QMenu>
@@ -23,6 +23,8 @@
 #include <QWindow>
 
 #ifdef NO_KF
+#include <QVector>
+#include <QX11Info>
 #include <QApplication>
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
@@ -39,12 +41,7 @@ BlurHelper::BlurHelper (QObject* parent, QList<qreal> menuS, QList<qreal> toolti
 #ifdef NO_KF
   isX11_ = (QString::compare(QGuiApplication::platformName(), "xcb", Qt::CaseInsensitive) == 0);
   if (isX11_)
-  {
-    if (auto x11NativeInterfce = qApp->nativeInterface<QNativeInterface::QX11Application>())
-      atom_blur_ = XInternAtom (x11NativeInterfce->display(), "_KDE_NET_WM_BLUR_BEHIND_REGION", False);
-    else
-      atom_blur_ = None;
-  }
+    atom_blur_ = XInternAtom (QX11Info::display(), "_KDE_NET_WM_BLUR_BEHIND_REGION", False);
   else
     atom_blur_ = None;
 #endif
@@ -269,12 +266,10 @@ void BlurHelper::update (QWidget* widget) const
 #ifdef NO_KF
     if (!widget->internalWinId())
       return;
-    Display *display = nullptr;
-    if (auto x11NativeInterfce = qApp->nativeInterface<QNativeInterface::QX11Application>())
-      display = x11NativeInterfce->display();
+    Display *display = QX11Info::display();
     if (display == nullptr)
       return;
-    QList<unsigned long> data;
+    QVector<unsigned long> data;
     for (QRegion::const_iterator it = region.begin(); it != region.end(); ++ it)
     {
       data << (*it).x() << (*it).y() << (*it).width() << (*it).height();
@@ -311,9 +306,7 @@ void BlurHelper::clear (QWidget* widget) const
 #ifdef NO_KF
   if (!isX11_)
     return;
-  Display *display = nullptr;
-  if (auto x11NativeInterfce = qApp->nativeInterface<QNativeInterface::QX11Application>())
-    display = x11NativeInterfce->display();
+  Display *display = QX11Info::display();
   if (display && widget->internalWinId())
     XDeleteProperty (display, widget->internalWinId(), atom_blur_);
 #else

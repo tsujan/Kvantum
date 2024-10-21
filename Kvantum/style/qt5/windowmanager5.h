@@ -141,12 +141,6 @@ private:
   QPointer<QWindow> lastWin_;
   QPointer<QWidget> widgetTarget_;
   QPointer<QWidget> pressedWidget_;
-
-  /* used by a workaround */
-  QPointer<QWidget> clickedWidget_;
-  bool DblClickSent_;
-  bool preventDbClick_;
-
   QPointer<QWidget> lastPressedWidget_;
   bool dragAboutToStart_;
   bool dragInProgress_;

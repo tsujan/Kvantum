@@ -18,7 +18,7 @@
 #ifndef THEMECONFIG_H
 #define THEMECONFIG_H
 
-#include "specs.h"
+#include "specs5.h"
 
 class QSettings;
 

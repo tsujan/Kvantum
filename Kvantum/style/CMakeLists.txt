@@ -1,5 +1,5 @@
 set(QT5_MINIMUM_VERSION "5.15.0")
-set(QT6_MINIMUM_VERSION "6.2.0")
+set(QT6_MINIMUM_VERSION "6.6.0")
 set(KF5_MINIMUM_VERSION "5.82.0")
 set(KF6_MINIMUM_VERSION "6.0.0")
 
@@ -13,9 +13,6 @@ if(NOT ENABLE_QT4)
   else()
     set(QT_VERSION_MAJOR 5)
     find_package(Qt5 "${QT5_MINIMUM_VERSION}" REQUIRED COMPONENTS Core Gui Widgets Svg X11Extras)
-    if(NOT WITHOUT_KF)
-      find_package(KF5WindowSystem "${KF5_MINIMUM_VERSION}" REQUIRED)
-    endif()
   endif()
 else()
   set(QT_VERSION_MAJOR 4)
@@ -62,6 +59,7 @@ elseif(QT_VERSION_MAJOR EQUAL 5)
                       ${Qt5Gui_INCLUDE_DIRS} ${Qt5Svg_INCLUDE_DIRS}
                       ${Qt5X11Extras_INCLUDE_DIRS}
                       ${X11_INCLUDE_DIR})
+  add_definitions(-DNO_KF)
 else()
   set(KVANTUM_STYLE_DIR "${QT_PLUGINS_DIR}/styles/")
 
@@ -76,7 +74,7 @@ if(WITHOUT_KF)
   add_definitions(-DNO_KF)
 endif()
 
-if(QT_VERSION_MAJOR GREATER 4)
+if(QT_VERSION_MAJOR EQUAL 6)
   set(kvantum_SOURCES
       Kvantum.cpp
       eventFiltering.cpp
@@ -90,6 +88,20 @@ if(QT_VERSION_MAJOR GREATER 4)
       drag/windowmanager.cpp
       themeconfig/ThemeConfig.cpp
       animation/animation.cpp)
+elseif(QT_VERSION_MAJOR EQUAL 5)
+  set(kvantum_SOURCES
+      qt5/Kvantum5.cpp
+      qt5/eventFiltering5.cpp
+      qt5/polishing5.cpp
+      qt5/rendering5.cpp
+      qt5/standardIcons5.cpp
+      qt5/viewItems5.cpp
+      qt5/KvantumPlugin5.cpp
+      qt5/shortcuthandler5.cpp
+      qt5/blurhelper5.cpp
+      qt5/windowmanager5.cpp
+      qt5/ThemeConfig5.cpp
+      qt5/animation5.cpp)
 else()
   set(kvantum_SOURCES
       qt4/Kvantum4.cpp
@@ -127,22 +139,12 @@ if(QT_VERSION_MAJOR EQUAL 6)
                                   KF6::WindowSystem)
   endif()
 elseif(QT_VERSION_MAJOR EQUAL 5)
-  if(WITHOUT_KF)
-    target_link_libraries(kvantum ${Qt5Core_LIBRARIES}
-                                  ${Qt5Gui_LIBRARIES}
-                                  ${Qt5Widgets_LIBRARIES}
-                                  ${Qt5Svg_LIBRARIES}
-                                  ${Qt5X11Extras_LIBRARIES}
-                                  ${X11_LIBRARIES})
-  else()
-    target_link_libraries(kvantum ${Qt5Core_LIBRARIES}
-                                  ${Qt5Gui_LIBRARIES}
-                                  ${Qt5Widgets_LIBRARIES}
-                                  ${Qt5Svg_LIBRARIES}
-                                  ${Qt5X11Extras_LIBRARIES}
-                                  ${X11_LIBRARIES}
-                                  KF5::WindowSystem)
-  endif()
+  target_link_libraries(kvantum ${Qt5Core_LIBRARIES}
+                                ${Qt5Gui_LIBRARIES}
+                                ${Qt5Widgets_LIBRARIES}
+                                ${Qt5Svg_LIBRARIES}
+                                ${Qt5X11Extras_LIBRARIES}
+                                ${X11_LIBRARIES})
 else()
   target_link_libraries(kvantum ${QT_QTCORE_LIBRARY}
                                 ${QT_QTGUI_LIBRARY}

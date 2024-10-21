@@ -18,9 +18,10 @@
 #include <QSettings>
 #include <QFile>
 #include <QApplication>
-#include "ThemeConfig.h"
+#include "ThemeConfig5.h"
 
 #if defined Q_WS_X11 || defined Q_OS_LINUX || defined Q_OS_FREEBSD || defined Q_OS_OPENBSD || defined Q_OS_NETBSD || defined Q_OS_HURD
+#include <QX11Info>
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
 #endif
@@ -584,12 +585,9 @@ theme_spec ThemeConfig::getCompositeSpec()
 #if defined Q_WS_X11 || defined Q_OS_LINUX || defined Q_OS_FREEBSD || defined Q_OS_OPENBSD || defined Q_OS_NETBSD || defined Q_OS_HURD
   if (isX11_)
   {
-    if (auto x11NativeInterfce = qApp->nativeInterface<QNativeInterface::QX11Application>())
-    {
-      Atom atom = XInternAtom(x11NativeInterfce->display(), "_NET_WM_CM_S0", False);
-      if (XGetSelectionOwner(x11NativeInterfce->display(), atom))
-        compositing = true;
-    }
+    Atom atom = XInternAtom(QX11Info::display(), "_NET_WM_CM_S0", False);
+    if (XGetSelectionOwner(QX11Info::display(), atom))
+      compositing = true;
   }
   else if (QString::compare(QGuiApplication::platformName(), "wayland", Qt::CaseInsensitive) == 0)
   {

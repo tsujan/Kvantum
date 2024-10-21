@@ -95,40 +95,24 @@ int main (int argc, char *argv[])
         }
     }
 
-#if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
-    a.setAttribute (Qt::AA_UseHighDpiPixmaps, true);
-#endif
-
     QStringList langs (QLocale::system().uiLanguages());
     QString lang; // bcp47Name() doesn't work under vbox
     if (!langs.isEmpty())
         lang = langs.first().replace ('-', '_');
 
     QTranslator qtTranslator;
-#if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
-    if (!qtTranslator.load ("qt_" + lang, QLibraryInfo::location (QLibraryInfo::TranslationsPath)))
-#else
     if (!qtTranslator.load ("qt_" + lang, QLibraryInfo::path (QLibraryInfo::TranslationsPath)))
-#endif
     { // shouldn't be needed
         if (!langs.isEmpty())
         {
             lang = langs.first().split (QLatin1Char ('_')).first();
-#if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
-            qtTranslator.load ("qt_" + lang, QLibraryInfo::location (QLibraryInfo::TranslationsPath));
-#else
             (void)qtTranslator.load ("qt_" + lang, QLibraryInfo::path (QLibraryInfo::TranslationsPath));
-#endif
         }
     }
     a.installTranslator (&qtTranslator);
 
     QTranslator KMTranslator;
-#if (QT_VERSION < QT_VERSION_CHECK(6,0,0))
-    KMTranslator.load ("kvantummanager_" + lang, QStringLiteral (DATADIR) + "/kvantummanager/translations");
-#else
     (void)KMTranslator.load ("kvantummanager_" + lang, QStringLiteral (DATADIR) + "/kvantummanager/translations");
-#endif
     a.installTranslator (&KMTranslator);
 
     /* for Kvantum Manager to do its job, it should by styled by Kvantum */

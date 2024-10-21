@@ -13,8 +13,8 @@ greaterThan(QT_MAJOR_VERSION, 4) {
     QT += x11extras
   } else {
     equals(QT_MAJOR_VERSION, 6) {
-      lessThan(QT_MINOR_VERSION, 2) {
-        error("Kvantum needs at least Qt 6.2.0.")
+      lessThan(QT_MINOR_VERSION, 6) {
+        error("Kvantum needs at least Qt 6.6.0.")
       } else {
         QT += widgets
       }
@@ -30,7 +30,7 @@ CONFIG += c++11
 
 VERSION = 0.1
 
-greaterThan(QT_MAJOR_VERSION, 4) {
+equals(QT_MAJOR_VERSION, 6) {
   DEFINES += NO_KF
   message("Compiling without KDE Frameworks...")
 
@@ -56,21 +56,47 @@ greaterThan(QT_MAJOR_VERSION, 4) {
              themeconfig/specs.h
   OTHER_FILES += kvantum.json
 } else {
-  SOURCES += qt4/Kvantum4.cpp \
-             qt4/KvantumPlugin4.cpp \
-             qt4/shortcuthandler4.cpp \
-             qt4/x11wmmove4.cpp \
-             qt4/windowmanager4.cpp \
-             qt4/blurhelper4.cpp \
-             qt4/ThemeConfig4.cpp
-  HEADERS += qt4/Kvantum4.h \
-             qt4/KvantumPlugin4.h \
-             qt4/shortcuthandler4.h \
-             qt4/x11wmmove4.h \
-             qt4/windowmanager4.h \
-             qt4/blurhelper4.h \
-             qt4/ThemeConfig4.h \
-             qt4/specs4.h
+  equals(QT_MAJOR_VERSION, 5) {
+    DEFINES += NO_KF
+
+    SOURCES += qt5/Kvantum5.cpp \
+               qt5/eventFiltering5.cpp \
+               qt5/polishing5.cpp \
+               qt5/rendering5.cpp \
+               qt5/standardIcons5.cpp \
+               qt5/viewItems5.cpp \
+               qt5/KvantumPlugin5.cpp \
+               qt5/shortcuthandler5.cpp \
+               qt5/windowmanager5.cpp \
+               qt5/blurhelper5.cpp \
+               qt5/animation5.cpp \
+               qt5/ThemeConfig5.cpp
+    HEADERS += qt5/Kvantum5.h \
+               qt5/KvantumPlugin5.h \
+               qt5/shortcuthandler5.h \
+               qt5/windowmanager5.h \
+               qt5/blurhelper5.h \
+               qt5/animation5.h \
+               qt5/ThemeConfig5.h \
+               qt5/specs5.h
+    OTHER_FILES += qt5/kvantum5.json
+  } else {
+    SOURCES += qt4/Kvantum4.cpp \
+               qt4/KvantumPlugin4.cpp \
+               qt4/shortcuthandler4.cpp \
+               qt4/x11wmmove4.cpp \
+               qt4/windowmanager4.cpp \
+               qt4/blurhelper4.cpp \
+               qt4/ThemeConfig4.cpp
+    HEADERS += qt4/Kvantum4.h \
+               qt4/KvantumPlugin4.h \
+               qt4/shortcuthandler4.h \
+               qt4/x11wmmove4.h \
+               qt4/windowmanager4.h \
+               qt4/blurhelper4.h \
+               qt4/ThemeConfig4.h \
+               qt4/specs4.h
+    }
 }
 
 RESOURCES += themeconfig/defaulttheme.qrc

@@ -1,19 +1,9 @@
-lessThan(QT_MAJOR_VERSION, 5) {
-  error("Kvantum Manager needs at least Qt 5.15.0.")
-} else {
-  lessThan(QT_MAJOR_VERSION, 6) {
-    lessThan(QT_MINOR_VERSION, 15) {
-      error("Kvantum Manager needs at least Qt 5.15.0.")
-    }
-  } else {
-    equals(QT_MAJOR_VERSION, 6) {
-      lessThan(QT_MINOR_VERSION, 2) {
-        error("Kvantum needs at least Qt 6.2.0.")
-      }
-    } else {
-      error("Kvantum cannot be compiled against this version of Qt.")
-    }
+equals(QT_MAJOR_VERSION, 6) {
+  lessThan(QT_MINOR_VERSION, 6) {
+    error("Kvantum needs at least Qt 6.6.0.")
   }
+} else {
+  error("Kvantum cannot be compiled against this version of Qt.")
 }
 
 QT += core gui widgets \

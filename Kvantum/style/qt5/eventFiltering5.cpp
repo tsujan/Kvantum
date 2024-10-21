@@ -15,7 +15,7 @@
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "Kvantum.h"
+#include "Kvantum5.h"
 
 #include <QPainter>
 #include <QTimer>
@@ -335,7 +335,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
     if (QTabBar *tabbar = qobject_cast<QTabBar*>(o))
     { // see QEvent::HoverEnter below
       QHoverEvent *he = static_cast<QHoverEvent*>(e);
-      int indx = tabbar->tabAt(he->position().toPoint());
+      int indx = tabbar->tabAt(he->pos());
       if (indx > -1)
       {
         int diff = qAbs(indx - tabbar->currentIndex());
@@ -387,7 +387,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
          results in an ugly hover effect with overlapping. So, we update
          the extended tab rect when there's an overlapping. */
       QHoverEvent *he = static_cast<QHoverEvent*>(e);
-      int indx = tabbar->tabAt(he->position().toPoint());
+      int indx = tabbar->tabAt(he->pos());
       if (indx > -1 && qAbs(indx - tabbar->currentIndex()) == 1)
       {
         QRect r = tabbar->tabRect(indx);
@@ -852,28 +852,6 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         //if (isLibreoffice_) break;
         if (w->testAttribute(Qt::WA_X11NetWmWindowTypeMenu)) break; // detached menu
         if (w->testAttribute(Qt::WA_StyleSheetTarget)) break; // not drawn by Kvantum (see PM_MenuHMargin)
-
-        /*
-          This is a workaround for a fixed Qt5 bug (QTBUG-47043) that has reappeared
-          in Qt6 in another form but with almost the same result: _NET_WM_WINDOW_TYPE
-          is set to _NET_WM_WINDOW_TYPE_NORMAL for ordinary menus and combo popup menus.
-          "QXcbWindowFunctions::setWmWindowType()" doesn't exist in Qt6 but the window
-          type can be set by removing and resetting menu/combo attributes.
-        */
-        /*if (tspec_.isX11 && !e->spontaneous() && w->windowHandle() != nullptr)
-        {
-          if (w->testAttribute(Qt::WA_X11NetWmWindowTypeDropDownMenu))
-          {
-            w->setAttribute(Qt::WA_X11NetWmWindowTypeDropDownMenu, false);
-            w->setAttribute(Qt::WA_X11NetWmWindowTypeDropDownMenu, true);
-          }
-          else if (w->testAttribute(Qt::WA_X11NetWmWindowTypePopupMenu))
-          {
-            w->setAttribute(Qt::WA_X11NetWmWindowTypePopupMenu, false);
-            w->setAttribute(Qt::WA_X11NetWmWindowTypePopupMenu, true);
-          }
-        }*/
-
         if (movedMenus_.contains(w)) break; // already moved
         /* "magical" condition for a submenu */
         QPoint parentMenuCorner;
@@ -1173,10 +1151,6 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         }*/
 
         w->move(g.left() + DX, g.top() + DY);
-        /* WARNING: Because of a bug in Qt 6.6, translucent menus -- especially context menus
-                    -- may be drawn with their minimum sizes and without contents after being
-                    moved on a non-primary screen. As a workaround, the menu is resized here. */
-        w->resize(g.size());
         movedMenus_.insert(w);
         connect(w, &QObject::destroyed, this, &Style::forgetMovedMenu);
       }
@@ -1269,17 +1243,6 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         if (_forcePalette)
           forcePalette(w, palette);
       }
-      /* see the case of QMenu above */
-      /*else if (w->inherits("QComboBoxPrivateContainer"))
-      {
-        if (tspec_.combo_menu && tspec_.isX11
-            && !e->spontaneous() && w->windowHandle() != nullptr
-            && w->testAttribute(Qt::WA_X11NetWmWindowTypeCombo))
-        {
-          w->setAttribute(Qt::WA_X11NetWmWindowTypeCombo, false);
-          w->setAttribute(Qt::WA_X11NetWmWindowTypeCombo, true);
-        }
-      }*/
     }
     break;
 
