@@ -1,13 +1,7 @@
-set(QT5_MINIMUM_VERSION "5.15.0")
 set(QT6_MINIMUM_VERSION "6.6.0")
 
-if(NOT ENABLE_QT5)
-  set(QT_VERSION_MAJOR 6)
-  find_package(Qt6 "${QT6_MINIMUM_VERSION}" REQUIRED COMPONENTS Core Gui Widgets)
-else()
-  set(QT_VERSION_MAJOR 5)
-  find_package(Qt5 "${QT5_MINIMUM_VERSION}" REQUIRED COMPONENTS Core Gui Widgets)
-endif()
+set(QT_VERSION_MAJOR 6)
+find_package(Qt6 "${QT6_MINIMUM_VERSION}" REQUIRED COMPONENTS Core Gui Widgets)
 
 find_package(Qt${QT_VERSION_MAJOR} QUIET COMPONENTS LinguistTools)
 
@@ -27,26 +21,13 @@ set(KP_SOURCES main.cpp)
 set(KP_UI KvantumPreviewBase.ui)
 set(KP_RESOURCES KvantumPreviewResources.qrc)
 
-if(QT_VERSION_MAJOR EQUAL 6)
-  qt6_wrap_ui(KP_UIS_H ${KP_UI})
-  set(KP_HEADER KvantumPreview.h)
-else()
-  qt5_wrap_ui(KP_UIS_H ${KP_UI})
-  if (CMAKE_VERSION VERSION_LESS "3.10.0") # CMP0071 in 3.10: Let AUTOMOC and AUTOUIC process GENERATED files
-    qt5_wrap_cpp(KP_HEADER KvantumPreview.h) # needed by "main.cpp"
-  else()
-    set(KP_HEADER KvantumPreview.h)
-  endif()
-endif()
+qt6_wrap_ui(KP_UIS_H ${KP_UI})
+set(KP_HEADER KvantumPreview.h)
 
 # Translations
 if(Qt${QT_VERSION_MAJOR}LinguistTools_FOUND)
   file(GLOB TS_FILES data/translations/kvantumpreview_*.ts)
-  if(QT_VERSION_MAJOR EQUAL 6)
-    qt6_add_translation(QM_FILES ${TS_FILES})
-  else()
-    qt5_add_translation(QM_FILES ${TS_FILES})
-  endif()
+  qt6_add_translation(QM_FILES ${TS_FILES})
   add_executable(kvantumpreview ${KP_SOURCES} ${KP_HEADER} ${KP_RESOURCES} ${KP_UI} ${DESKTOP_FILE} ${QM_FILES})
   install(FILES ${QM_FILES} DESTINATION "${CMAKE_INSTALL_PREFIX}/share/kvantumpreview/translations")
 else(Qt${QT_VERSION_MAJOR}LinguistTools_FOUND)

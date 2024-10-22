@@ -1,13 +1,7 @@
-set(QT5_MINIMUM_VERSION "5.15.0")
 set(QT6_MINIMUM_VERSION "6.6.0")
 
-if(NOT ENABLE_QT5)
-  set(QT_VERSION_MAJOR 6)
-  find_package(Qt6 "${QT6_MINIMUM_VERSION}" REQUIRED COMPONENTS Core Gui Widgets Svg)
-else()
-  set(QT_VERSION_MAJOR 5)
-  find_package(Qt5 "${QT5_MINIMUM_VERSION}" REQUIRED COMPONENTS Core Gui Widgets Svg)
-endif()
+set(QT_VERSION_MAJOR 6)
+find_package(Qt6 "${QT6_MINIMUM_VERSION}" REQUIRED COMPONENTS Core Gui Widgets Svg)
 
 find_package(Qt${QT_VERSION_MAJOR} QUIET COMPONENTS LinguistTools)
 
@@ -37,26 +31,13 @@ set(KM_RESOURCES kvantummanager.qrc)
 
 set(DESKTOP_FILE data/kvantummanager.desktop)
 
-if(QT_VERSION_MAJOR EQUAL 6)
-  #qt6_wrap_ui(KM_UIS_H ${KM_UI})
-  set(COMBO_HEADER combobox.h)
-else()
-   #qt5_wrap_ui(KM_UIS_H ${KM_UI})
-  if(CMAKE_VERSION VERSION_LESS "3.10.0") # CMP0071 in 3.10: Let AUTOMOC and AUTOUIC process GENERATED files
-    qt5_wrap_cpp(COMBO_HEADER combobox.h) # needed by "kvantummanager.ui"
-  else()
-    set(COMBO_HEADER combobox.h)
-  endif()
-endif()
+ #qt6_wrap_ui(KM_UIS_H ${KM_UI})
+ set(COMBO_HEADER combobox.h)
 
 # Translations
 if(Qt${QT_VERSION_MAJOR}LinguistTools_FOUND)
   file(GLOB TS_FILES data/translations/kvantummanager_*.ts)
-  if(QT_VERSION_MAJOR EQUAL 6)
-    qt6_add_translation(QM_FILES ${TS_FILES})
-  else()
-    qt5_add_translation(QM_FILES ${TS_FILES})
-  endif()
+  qt6_add_translation(QM_FILES ${TS_FILES})
   add_executable(kvantummanager ${COMBO_HEADER} ${KM_SOURCES} ${KM_RESOURCES} ${DESKTOP_FILE} ${QM_FILES})
   install(FILES ${QM_FILES} DESTINATION "${CMAKE_INSTALL_PREFIX}/share/kvantummanager/translations")
 else(Qt${QT_VERSION_MAJOR}LinguistTools_FOUND)
