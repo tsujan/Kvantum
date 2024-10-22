@@ -97,7 +97,7 @@ void Style::polish(QWidget *widget)
 
   /* respect the toolbar text color if the widget is shown after
      its parent toolbar and without repainting it (unlike in CE_ToolBar) */
-  const label_spec tLspec = getLabelSpec(QStringLiteral("Toolbar"));
+  const label_spec tLspec = getLabelSpec(KSL("Toolbar"));
   QColor tColor = getFromRGBA(tLspec.normalColor);
   if (enoughContrast(standardPalette().color(QPalette::Active,QPalette::Text), tColor)
       && !qobject_cast<QToolButton*>(widget) // flat toolbuttons are dealt with at CE_ToolButtonLabel
@@ -139,8 +139,8 @@ void Style::polish(QWidget *widget)
 
     if (qobject_cast<QLineEdit*>(widget))
     {
-      if (!getFrameSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty()
-          || !getInteriorSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty())
+      if (!getFrameSpec(KSL("ToolbarLineEdit")).element.isEmpty()
+          || !getInteriorSpec(KSL("ToolbarLineEdit")).element.isEmpty())
       {
         QPalette palette = widget->palette();
         if (palette.color(QPalette::Active, QPalette::Text) != tColor)
@@ -151,16 +151,16 @@ void Style::polish(QWidget *widget)
           palette.setColor(QPalette::PlaceholderText, ptColor);
           forcePalette(widget, palette);
           /* also correct the color of the symbolic clear icon */
-          if (QAction *clearAction = widget->findChild<QAction*>(QLatin1String("_q_qlineeditclearaction")))
+          if (QAction *clearAction = widget->findChild<QAction*>(KL1("_q_qlineeditclearaction")))
             clearAction->setIcon(standardIcon(QStyle::SP_LineEditClearButton, nullptr, widget));
         }
       }
     }
     else if (qobject_cast<QComboBox*>(widget)
-            && (!getFrameSpec(QStringLiteral("ToolbarComboBox")).element.isEmpty()
-                || !getInteriorSpec(QStringLiteral("ToolbarComboBox")).element.isEmpty()))
+            && (!getFrameSpec(KSL("ToolbarComboBox")).element.isEmpty()
+                || !getInteriorSpec(KSL("ToolbarComboBox")).element.isEmpty()))
     {
-      tColor = getFromRGBA(getLabelSpec(QStringLiteral("ToolbarComboBox")).normalColor);
+      tColor = getFromRGBA(getLabelSpec(KSL("ToolbarComboBox")).normalColor);
       if (tColor.isValid())
       {
         QColor disabledCol = tColor;
@@ -193,7 +193,7 @@ void Style::polish(QWidget *widget)
     {
       /* The label may be shown after its parent menu is polished below, in
          "switch (widget->windowFlags()...)". Other widgets are ignored for now. */
-      QColor menuTextColor = getFromRGBA(getLabelSpec(QStringLiteral("MenuItem")).normalColor);
+      QColor menuTextColor = getFromRGBA(getLabelSpec(KSL("MenuItem")).normalColor);
       if (menuTextColor.isValid())
       {
         if (menuTextColor != standardPalette().color(QPalette::Active,QPalette::WindowText))
@@ -264,7 +264,7 @@ void Style::polish(QWidget *widget)
          and a window can have the ToolTip flag (-> LXQtGroupPopup) */
       if (qobject_cast<QMenu*>(widget))
       { // some apps (like QtAV Player) do weird things with menus
-        QColor menuTextColor = getFromRGBA(getLabelSpec(QStringLiteral("MenuItem")).normalColor);
+        QColor menuTextColor = getFromRGBA(getLabelSpec(KSL("MenuItem")).normalColor);
         if (menuTextColor.isValid())
         {
           QPalette palette = widget->palette();
@@ -411,13 +411,13 @@ void Style::polish(QWidget *widget)
               if (blurHelper_ == nullptr)
               {
                 if (tspec_now.menu_shadow_depth > 0)
-                  getShadow(QStringLiteral("Menu"), getMenuMargin(true), getMenuMargin(false));
+                  getShadow(KSL("Menu"), getMenuMargin(true), getMenuMargin(false));
                 if (tspec_now.tooltip_shadow_depth > 0)
                 {
-                  const frame_spec fspec = getFrameSpec(QStringLiteral("ToolTip"));
+                  const frame_spec fspec = getFrameSpec(KSL("ToolTip"));
                   int thickness = qMax(qMax(fspec.top,fspec.bottom), qMax(fspec.left,fspec.right));
                   thickness += tspec_now.tooltip_shadow_depth;
-                  getShadow(QStringLiteral("ToolTip"), thickness);
+                  getShadow(KSL("ToolTip"), thickness);
                 }
                 blurHelper_ = new BlurHelper(this, menuShadow_, tooltipShadow_,
                                              tspec_.menu_blur_radius, tspec_.tooltip_blur_radius,
@@ -538,8 +538,8 @@ void Style::polish(QWidget *widget)
   else if (qobject_cast<QLineEdit*>(widget) || widget->inherits("KCalcDisplay"))
   {
     if (qobject_cast<QLineEdit*>(widget)
-        && (!getFrameSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty()
-            || !getInteriorSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty())
+        && (!getFrameSpec(KSL("ToolbarLineEdit")).element.isEmpty()
+            || !getInteriorSpec(KSL("ToolbarLineEdit")).element.isEmpty())
         && getStylableToolbarContainer(widget, true))
     {
       if (!tspec_.animate_states)
@@ -592,7 +592,7 @@ void Style::polish(QWidget *widget)
             bool baseContrast(false);
             if (itemView->viewport()->findChildren<QWidget*>(QString(), Qt::FindDirectChildrenOnly).isEmpty())
             { // font menus use the palette text color, so we set it to the menu text color when needed
-              menuTextColor = getFromRGBA(getLabelSpec(QStringLiteral("MenuItem")).normalColor);
+              menuTextColor = getFromRGBA(getLabelSpec(KSL("MenuItem")).normalColor);
               baseContrast = enoughContrast(vPalette.color(QPalette::Text), menuTextColor);
             }
 
@@ -601,11 +601,11 @@ void Style::polish(QWidget *widget)
               QString ss;
               if (baseContrast)
               {
-                ss = QStringLiteral("QAbstractItemView{background-color: transparent; color: %1}")
-                     .arg(getLabelSpec(QStringLiteral("MenuItem")).normalColor);
+                ss = KSL("QAbstractItemView{background-color: transparent; color: %1}")
+                     .arg(getLabelSpec(KSL("MenuItem")).normalColor);
               }
               else
-                ss = QStringLiteral("QAbstractItemView{background-color: transparent;}");
+                ss = KSL("QAbstractItemView{background-color: transparent;}");
               itemView->setStyleSheet(ss);
             }
 
@@ -627,10 +627,10 @@ void Style::polish(QWidget *widget)
             QPalette palette = itemView->palette();
             if (palette.color(itemView->backgroundRole()) == QColor(Qt::transparent))
             {
-              if (itemView->styleSheet() == QStringLiteral("QAbstractItemView{background-color: transparent;}")
+              if (itemView->styleSheet() == KSL("QAbstractItemView{background-color: transparent;}")
                   || itemView->styleSheet()
-                       == QStringLiteral("QAbstractItemView{background-color: transparent; color: %1}")
-                          .arg(getLabelSpec(QStringLiteral("MenuItem")).normalColor))
+                       == KSL("QAbstractItemView{background-color: transparent; color: %1}")
+                          .arg(getLabelSpec(KSL("MenuItem")).normalColor))
               {
                 itemView->setStyleSheet(QString());
               }
@@ -812,7 +812,7 @@ void Style::polish(QWidget *widget)
                                           && (!tspec_.combo_menu /*|| isLibreoffice_*/)))
             && vp && vp->autoFillBackground()
             && (!vp->testAttribute(Qt::WA_StyleSheetTarget)
-                || vp->styleSheet().isEmpty() || !vp->styleSheet().contains(QLatin1String("background")))
+                || vp->styleSheet().isEmpty() || !vp->styleSheet().contains(KL1("background")))
             // but not when the combo popup is drawn as a menu
             && !(tspec_.combo_menu /*&& !isLibreoffice_*/ && widget->inherits("QComboBoxListView"))
             // also consider pcmanfm hacking keys
@@ -925,7 +925,7 @@ void Style::polish(QWidget *widget)
     if (tspec_now.composite)
     {
       if (tspec_now.menu_shadow_depth > 0)
-        getShadow(QStringLiteral("Menu"), getMenuMargin(true), getMenuMargin(false));
+        getShadow(KSL("Menu"), getMenuMargin(true), getMenuMargin(false));
       if (qobject_cast<QMenu*>(widget))
       {
         /* On the one hand, RTL submenus aren't positioned correctly by Qt and, since
@@ -948,10 +948,10 @@ void Style::polish(QWidget *widget)
         {
           if (tspec_now.tooltip_shadow_depth > 0)
           {
-            const frame_spec fspec = getFrameSpec(QStringLiteral("ToolTip"));
+            const frame_spec fspec = getFrameSpec(KSL("ToolTip"));
             int thickness = qMax(qMax(fspec.top,fspec.bottom), qMax(fspec.left,fspec.right));
             thickness += tspec_now.tooltip_shadow_depth;
-            getShadow(QStringLiteral("ToolTip"), thickness);
+            getShadow(KSL("ToolTip"), thickness);
           }
           blurHelper_ = new BlurHelper(this, menuShadow_, tooltipShadow_,
                                        tspec_.menu_blur_radius, tspec_.tooltip_blur_radius,

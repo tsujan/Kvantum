@@ -5,6 +5,7 @@ V1.1.3
  * Bumped the minimum required version of Qt6 to 6.6.
  * Separated the source files of Qt5 from those of Qt6.
  * Said goodbye to KF5. Since the current version, the Qt5 plugin is compiled without it.
+ * Replaced `QLatin1String` with `QLatin1StringView`.
 
 V1.1.2
 ---------

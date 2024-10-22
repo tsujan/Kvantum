@@ -40,7 +40,7 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
                                    : QApplication::layoutDirection() == Qt::RightToLeft);
   switch (standardIcon) {
     case SP_ToolBarHorizontalExtensionButton : {
-      indicator_spec dspec = getIndicatorSpec(QStringLiteral("IndicatorArrow"));
+      indicator_spec dspec = getIndicatorSpec(KSL("IndicatorArrow"));
       int s = qRound(pixelRatio*pixelRatio*static_cast<qreal>(dspec.size));
       QPixmap pm(QSize(s,s));
       pm.fill(Qt::transparent);
@@ -57,10 +57,10 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
             || isStylableToolbar(widget) // doesn't happen
             || mergedToolbarHeight(widget) > 0)
         {
-          col = getFromRGBA(getLabelSpec(QStringLiteral("Toolbar")).normalColor);
+          col = getFromRGBA(getLabelSpec(KSL("Toolbar")).normalColor);
         }
         else if (widget)
-          col = getFromRGBA(getLabelSpec(QStringLiteral("MenuBar")).normalColor);
+          col = getFromRGBA(getLabelSpec(KSL("MenuBar")).normalColor);
         if (enoughContrast(col, standardPalette().color(QPalette::Active,QPalette::WindowText))
             && themeRndr_->elementExists("flat-"+dspec.element+"-down-normal"))
         {
@@ -79,7 +79,7 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
       else break;
     }
     case SP_ToolBarVerticalExtensionButton : {
-      indicator_spec dspec = getIndicatorSpec(QStringLiteral("IndicatorArrow"));
+      indicator_spec dspec = getIndicatorSpec(KSL("IndicatorArrow"));
       int s = qRound(pixelRatio*pixelRatio*static_cast<qreal>(dspec.size));
       QPixmap pm(QSize(s,s));
       pm.fill(Qt::transparent);
@@ -88,7 +88,7 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
 
       if (hspec_.style_vertical_toolbars
           && themeRndr_ && themeRndr_->isValid()
-          && enoughContrast(getFromRGBA(getLabelSpec(QStringLiteral("Toolbar")).normalColor),
+          && enoughContrast(getFromRGBA(getLabelSpec(KSL("Toolbar")).normalColor),
                             standardPalette().color(QPalette::Active,QPalette::WindowText)))
       {
         dspec.element = "flat-"+dspec.element;
@@ -138,8 +138,8 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
       /* no menu icon without enough contrast (see Qt ->
          qmdisubwindow.cpp -> QMdiSubWindowPrivate::createSystemMenu) */
       if (option == nullptr && qobject_cast<const QMdiSubWindow*>(widget)
-          && enoughContrast(getFromRGBA(getLabelSpec(QStringLiteral("MenuItem")).normalColor),
-                            getFromRGBA(getLabelSpec(QStringLiteral("TitleBar")).focusColor)))
+          && enoughContrast(getFromRGBA(getLabelSpec(KSL("MenuItem")).normalColor),
+                            getFromRGBA(getLabelSpec(KSL("TitleBar")).focusColor)))
        return QIcon(pm);
 
       QPainter painter(&pm);
@@ -151,7 +151,7 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
                    (option->state & State_MouseOver) ? "focused" : "normal"
                  : "disabled";
       if (renderElement(&painter,
-                        getIndicatorSpec(QStringLiteral("TitleBar")).element+"-minimize-"+status,
+                        getIndicatorSpec(KSL("TitleBar")).element+"-minimize-"+status,
                         QRect(0,0,s,s)))
         return QIcon(pm);
       else break;
@@ -162,13 +162,13 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
       pm.fill(Qt::transparent);
 
       if (option == nullptr && qobject_cast<const QMdiSubWindow*>(widget)
-          && enoughContrast(getFromRGBA(getLabelSpec(QStringLiteral("MenuItem")).normalColor),
-                            getFromRGBA(getLabelSpec(QStringLiteral("TitleBar")).focusColor)))
+          && enoughContrast(getFromRGBA(getLabelSpec(KSL("MenuItem")).normalColor),
+                            getFromRGBA(getLabelSpec(KSL("TitleBar")).focusColor)))
        return QIcon(pm); // no menu icon without enough contrast
 
       QPainter painter(&pm);
 
-      if (renderElement(&painter,getIndicatorSpec(QStringLiteral("TitleBar")).element+"-maximize-normal",QRect(0,0,s,s)))
+      if (renderElement(&painter,getIndicatorSpec(KSL("TitleBar")).element+"-maximize-normal",QRect(0,0,s,s)))
         return QIcon(pm);
       else break;
     }
@@ -180,8 +180,8 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
 
       if (standardIcon == SP_TitleBarCloseButton
           && option == nullptr && qobject_cast<const QMdiSubWindow*>(widget)
-          && enoughContrast(getFromRGBA(getLabelSpec(QStringLiteral("MenuItem")).normalColor),
-                            getFromRGBA(getLabelSpec(QStringLiteral("TitleBar")).focusColor)))
+          && enoughContrast(getFromRGBA(getLabelSpec(KSL("MenuItem")).normalColor),
+                            getFromRGBA(getLabelSpec(KSL("TitleBar")).focusColor)))
        return QIcon(pm); // no menu icon without enough contrast
 
       QPainter painter(&pm);
@@ -199,12 +199,12 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
           || qobject_cast<const QDockWidget*>(widget))
       {
         rendered = renderElement(&painter,
-                                 getIndicatorSpec(QStringLiteral("Dock")).element+"-close",
+                                 getIndicatorSpec(KSL("Dock")).element+"-close",
                                  QRect(0,0,s,s));
       }
       if (!rendered)
         rendered = renderElement(&painter,
-                                 getIndicatorSpec(QStringLiteral("TitleBar")).element+"-close-"+status,
+                                 getIndicatorSpec(KSL("TitleBar")).element+"-close-"+status,
                                  QRect(0,0,s,s));
       if (rendered)
         return QIcon(pm);
@@ -217,7 +217,7 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
 
       QPainter painter(&pm);
 
-      if (renderElement(&painter,getIndicatorSpec(QStringLiteral("TitleBar")).element+"-menu-normal",QRect(0,0,s,s)))
+      if (renderElement(&painter,getIndicatorSpec(KSL("TitleBar")).element+"-menu-normal",QRect(0,0,s,s)))
         return QIcon(pm);
       else break;
     }
@@ -227,8 +227,8 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
       pm.fill(Qt::transparent);
 
       if (option == nullptr && qobject_cast<const QMdiSubWindow*>(widget)
-          && enoughContrast(getFromRGBA(getLabelSpec(QStringLiteral("MenuItem")).normalColor),
-                            getFromRGBA(getLabelSpec(QStringLiteral("TitleBar")).focusColor)))
+          && enoughContrast(getFromRGBA(getLabelSpec(KSL("MenuItem")).normalColor),
+                            getFromRGBA(getLabelSpec(KSL("TitleBar")).focusColor)))
        return QIcon(pm); // no menu icon without enough contrast
 
       QPainter painter(&pm);
@@ -244,11 +244,11 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
       bool rendered(false);
       if (qobject_cast<const QDockWidget*>(widget))
         rendered = renderElement(&painter,
-                                 getIndicatorSpec(QStringLiteral("Dock")).element+"-restore",
+                                 getIndicatorSpec(KSL("Dock")).element+"-restore",
                                  QRect(0,0,s,s));
       if (!rendered)
         rendered = renderElement(&painter,
-                                 getIndicatorSpec(QStringLiteral("TitleBar")).element+"-restore-"+status,
+                                 getIndicatorSpec(KSL("TitleBar")).element+"-restore-"+status,
                                  QRect(0,0,s,s));
       if (rendered)
         return QIcon(pm);
@@ -257,126 +257,126 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
 
     /* file system icons */
     case SP_DriveFDIcon : {
-      QIcon icn = QIcon::fromTheme(QStringLiteral("media-floppy"));
+      QIcon icn = QIcon::fromTheme(KSL("media-floppy"));
       if (!icn.isNull()) return icn;
       else break;
     }
     case SP_DriveHDIcon : {
-      QIcon icn = QIcon::fromTheme(QStringLiteral("drive-harddisk"));
+      QIcon icn = QIcon::fromTheme(KSL("drive-harddisk"));
       if (!icn.isNull()) return icn;
       else break;
     }
     case SP_DriveCDIcon :
     case SP_DriveDVDIcon : {
-      QIcon icn = QIcon::fromTheme(QStringLiteral("media-optical"));
+      QIcon icn = QIcon::fromTheme(KSL("media-optical"));
       if (!icn.isNull()) return icn;
       else break;
     }
     case SP_TrashIcon : {
-      QIcon icn = QIcon::fromTheme(QStringLiteral("user-trash"));
+      QIcon icn = QIcon::fromTheme(KSL("user-trash"));
       if (!icn.isNull()) return icn;
       else break;
     }
     case SP_DesktopIcon : {
-      QIcon icn = QIcon::fromTheme(QStringLiteral("user-desktop"));
+      QIcon icn = QIcon::fromTheme(KSL("user-desktop"));
       if (!icn.isNull()) return icn;
       else break;
     }
     case SP_ComputerIcon : {
-      QIcon icn = QIcon::fromTheme(QStringLiteral("computer"),
-                                   QIcon::fromTheme(QStringLiteral("system")));
+      QIcon icn = QIcon::fromTheme(KSL("computer"),
+                                   QIcon::fromTheme(KSL("system")));
       if (!icn.isNull()) return icn;
       else break;
     }
     case SP_DirClosedIcon :
     case SP_DirIcon : {
-      QIcon icn = QIcon::fromTheme(QStringLiteral("folder"));
+      QIcon icn = QIcon::fromTheme(KSL("folder"));
       if (!icn.isNull()) return icn;
       else break;
     }
     case SP_DirOpenIcon : {
-      QIcon icn = QIcon::fromTheme(QStringLiteral("folder-open"));
+      QIcon icn = QIcon::fromTheme(KSL("folder-open"));
       if (!icn.isNull()) return icn;
       else break;
     }
 
     /* arrow icons */
     case SP_ArrowUp : {
-      QIcon icn = QIcon::fromTheme(QStringLiteral("go-up"));
+      QIcon icn = QIcon::fromTheme(KSL("go-up"));
       if (!icn.isNull()) return icn;
       else break;
     }
     case SP_ArrowDown : {
-      QIcon icn = QIcon::fromTheme(QStringLiteral("go-down"));
+      QIcon icn = QIcon::fromTheme(KSL("go-down"));
       if (!icn.isNull()) return icn;
       else break;
     }
     case SP_ArrowRight : {
-      QIcon icn = QIcon::fromTheme(QStringLiteral("go-next"));
+      QIcon icn = QIcon::fromTheme(KSL("go-next"));
       if (!icn.isNull()) return icn;
       else break;
     }
     case SP_ArrowLeft : {
-      QIcon icn = QIcon::fromTheme(QStringLiteral("go-previous"));
+      QIcon icn = QIcon::fromTheme(KSL("go-previous"));
       if (!icn.isNull()) return icn;
       else break;
     }
 
     /* process icons */
     case SP_BrowserReload : {
-      QIcon icn = QIcon::fromTheme(QStringLiteral("view-refresh"));
+      QIcon icn = QIcon::fromTheme(KSL("view-refresh"));
       if (!icn.isNull()) return icn;
       else break;
     }
     case SP_BrowserStop : {
-      QIcon icn = QIcon::fromTheme(QStringLiteral("process-stop"));
+      QIcon icn = QIcon::fromTheme(KSL("process-stop"));
       if (!icn.isNull()) return icn;
       else break;
     }
 
     /* media icons */
     case SP_MediaPlay : {
-      QIcon icn = QIcon::fromTheme(QStringLiteral("media-playback-start"));
+      QIcon icn = QIcon::fromTheme(KSL("media-playback-start"));
       if (!icn.isNull()) return icn;
       else break;
     }
     case SP_MediaPause : {
-      QIcon icn = QIcon::fromTheme(QStringLiteral("media-playback-pause"));
+      QIcon icn = QIcon::fromTheme(KSL("media-playback-pause"));
       if (!icn.isNull()) return icn;
       else break;
     }
     case SP_MediaStop : {
-      QIcon icn = QIcon::fromTheme(QStringLiteral("media-playback-stop"));
+      QIcon icn = QIcon::fromTheme(KSL("media-playback-stop"));
       if (!icn.isNull()) return icn;
       else break;
     }
     case SP_MediaSeekForward : {
-      QIcon icn = QIcon::fromTheme(QStringLiteral("media-seek-forward"));
+      QIcon icn = QIcon::fromTheme(KSL("media-seek-forward"));
       if (!icn.isNull()) return icn;
       else break;
     }
     case SP_MediaSeekBackward : {
-      QIcon icn = QIcon::fromTheme(QStringLiteral("media-seek-backward"));
+      QIcon icn = QIcon::fromTheme(KSL("media-seek-backward"));
       if (!icn.isNull()) return icn;
       else break;
     }
     case SP_MediaSkipForward : {
-      QIcon icn = QIcon::fromTheme(QStringLiteral("media-skip-forward"));
+      QIcon icn = QIcon::fromTheme(KSL("media-skip-forward"));
       if (!icn.isNull()) return icn;
       else break;
     }
     case SP_MediaSkipBackward : {
-      QIcon icn = QIcon::fromTheme(QStringLiteral("media-skip-backward"));
+      QIcon icn = QIcon::fromTheme(KSL("media-skip-backward"));
       if (!icn.isNull()) return icn;
       else break;
     }
     case SP_MediaVolume : {
-      QIcon icn = QIcon::fromTheme(QStringLiteral("audio-volume-medium"));
+      QIcon icn = QIcon::fromTheme(KSL("audio-volume-medium"));
       if (!icn.isNull()) return icn;
       else break;
     }
     case SP_MediaVolumeMuted : {
-      QIcon icn = QIcon::fromTheme(QStringLiteral("audio-volume-muted"));
+      QIcon icn = QIcon::fromTheme(KSL("audio-volume-muted"));
       if (!icn.isNull()) return icn;
       else break;
     }
@@ -394,7 +394,7 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
 
     /* link icons */
     case SP_FileLinkIcon : {;
-      QIcon icn = QIcon::fromTheme(QStringLiteral("emblem-symbolic-link"));
+      QIcon icn = QIcon::fromTheme(KSL("emblem-symbolic-link"));
       if (!icn.isNull())
       {
         QIcon baseIcon = QCommonStyle::standardIcon(SP_FileIcon, option, widget);
@@ -413,7 +413,7 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
       break;
     }
     case SP_DirLinkIcon : {;
-      QIcon icn = QIcon::fromTheme(QStringLiteral("emblem-symbolic-link"));
+      QIcon icn = QIcon::fromTheme(KSL("emblem-symbolic-link"));
       if (!icn.isNull())
       {
         QIcon baseIcon = QCommonStyle::standardIcon(SP_DirIcon, option, widget);
@@ -434,26 +434,26 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
 
     /* dialog icons */
     case SP_DialogCloseButton : {
-      QIcon icn = QIcon::fromTheme(QStringLiteral("dialog-close"),
-                                   QIcon::fromTheme(QStringLiteral("window-close")));
+      QIcon icn = QIcon::fromTheme(KSL("dialog-close"),
+                                   QIcon::fromTheme(KSL("window-close")));
       if (!icn.isNull()) return icn;
       else break;
     }
     case SP_DialogOpenButton : {
-      QIcon icn = QIcon::fromTheme(QStringLiteral("document-open"));
+      QIcon icn = QIcon::fromTheme(KSL("document-open"));
       if (!icn.isNull()) return icn;
       else break;
     }
     case SP_DialogApplyButton : {
-      QIcon icn = QIcon::fromTheme(QStringLiteral("dialog-ok-apply"),
-                                   QIcon::fromTheme(QStringLiteral("dialog-ok")));
+      QIcon icn = QIcon::fromTheme(KSL("dialog-ok-apply"),
+                                   QIcon::fromTheme(KSL("dialog-ok")));
       if (!icn.isNull()) return icn;
       else break;
     }
     case SP_DialogYesToAllButton :
     case SP_DialogYesButton :
     case SP_DialogOkButton : {
-      QIcon icn = QIcon::fromTheme(QStringLiteral("dialog-ok"));
+      QIcon icn = QIcon::fromTheme(KSL("dialog-ok"));
       if (!icn.isNull()) return icn;
       else break;
     }
@@ -462,76 +462,76 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
     case SP_DialogIgnoreButton :
     case SP_DialogCancelButton :
     case SP_DialogNoButton : {
-      QIcon icn = QIcon::fromTheme(QStringLiteral("dialog-cancel"),
-                                   QIcon::fromTheme(QStringLiteral("process-stop")));
+      QIcon icn = QIcon::fromTheme(KSL("dialog-cancel"),
+                                   QIcon::fromTheme(KSL("process-stop")));
       if (!icn.isNull()) return icn;
       else break;
     }
     case SP_DialogSaveButton : {
-      QIcon icn = QIcon::fromTheme(QStringLiteral("document-save"));
+      QIcon icn = QIcon::fromTheme(KSL("document-save"));
       if (!icn.isNull()) return icn;
       else break;
     }
     case SP_DialogResetButton : {
-      QIcon icn = QIcon::fromTheme(QStringLiteral("edit-clear"));
+      QIcon icn = QIcon::fromTheme(KSL("edit-clear"));
       if (!icn.isNull()) return icn;
       else break;
     }
     case SP_DialogHelpButton : {
-      QIcon icn = QIcon::fromTheme(QStringLiteral("help-contents"));
+      QIcon icn = QIcon::fromTheme(KSL("help-contents"));
       if (!icn.isNull()) return icn;
       else break;
     }
     case SP_FileDialogDetailedView : {
-      QIcon icn = QIcon::fromTheme(QStringLiteral("view-list-details"));
+      QIcon icn = QIcon::fromTheme(KSL("view-list-details"));
       if (!icn.isNull()) return icn;
       else break;
     }
     case SP_FileDialogToParent : {
-      QIcon icn = QIcon::fromTheme(QStringLiteral("go-up"));
+      QIcon icn = QIcon::fromTheme(KSL("go-up"));
       if (!icn.isNull()) return icn;
       else break;
     }
     case SP_FileDialogNewFolder : {
-      QIcon icn = QIcon::fromTheme(QStringLiteral("folder-new"));
+      QIcon icn = QIcon::fromTheme(KSL("folder-new"));
       if (!icn.isNull()) return icn;
       else break;
     }
     case SP_DialogSaveAllButton : {
-      QIcon icn = QIcon::fromTheme(QStringLiteral("document-save-all"));
+      QIcon icn = QIcon::fromTheme(KSL("document-save-all"));
       if (!icn.isNull()) return icn;
       else break;
     }
     case SP_DialogRetryButton : {
-      QIcon icn = QIcon::fromTheme(QStringLiteral("view-refresh"));
+      QIcon icn = QIcon::fromTheme(KSL("view-refresh"));
       if (!icn.isNull()) return icn;
       else break;
     }
     case SP_RestoreDefaultsButton : {
-      QIcon icn = QIcon::fromTheme(QStringLiteral("edit-undo"));
+      QIcon icn = QIcon::fromTheme(KSL("edit-undo"));
       if (!icn.isNull()) return icn;
       else break;
     }
     // these are for LXQt file dialog
     case SP_FileDialogListView : {
-      QIcon icn = QIcon::fromTheme(QStringLiteral("view-list-text"));
+      QIcon icn = QIcon::fromTheme(KSL("view-list-text"));
       if (!icn.isNull()) return icn;
       else break;
     }
     case SP_FileDialogInfoView : {
-      QIcon icn = QIcon::fromTheme(QStringLiteral("dialog-information")); // document-properties
+      QIcon icn = QIcon::fromTheme(KSL("dialog-information")); // document-properties
       if (!icn.isNull()) return icn;
       else break;
     }
     case SP_FileDialogContentsView : {
-      QIcon icn = QIcon::fromTheme(QStringLiteral("view-list-icons"));
+      QIcon icn = QIcon::fromTheme(KSL("view-list-icons"));
       if (!icn.isNull()) return icn;
       else break;
     }
 
     case SP_TabCloseButton : {
-      QIcon icn = QIcon::fromTheme(QStringLiteral("tab-close"),
-                                   QIcon::fromTheme(QStringLiteral("window-close")));
+      QIcon icn = QIcon::fromTheme(KSL("tab-close"),
+                                   QIcon::fromTheme(KSL("window-close")));
       if (!icn.isNull()) return icn;
       else break;
     }

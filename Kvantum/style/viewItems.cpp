@@ -79,7 +79,7 @@ QSize Style::viewItemSize(const QStyleOptionViewItem *option, int role) const
       textLayout.setTextOption(textOption);
       const bool wrapText = option->features & QStyleOptionViewItem::WrapText;
       const int frameHMargin = pixelMetric(QStyle::PM_FocusFrameHMargin, option, widget) + 1;
-      const int textIconSpacing = getLabelSpec(QStringLiteral("ItemView")).tispace;
+      const int textIconSpacing = getLabelSpec(KSL("ItemView")).tispace;
       QRect bounds = option->rect;
       switch (option->decorationPosition) {
         case QStyleOptionViewItem::Left:
@@ -146,7 +146,7 @@ void Style::viewItemLayout(const QStyleOptionViewItem *opt,  QRect *checkRect,
   const int y = opt->rect.top();
   int w = 0, h = 0;
 
-  const int textIconSpacing = getLabelSpec(QStringLiteral("ItemView")).tispace;
+  const int textIconSpacing = getLabelSpec(KSL("ItemView")).tispace;
 
   /* if there is no text, we still want a decent height
      for the size hint and the editor */

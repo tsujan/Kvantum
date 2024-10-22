@@ -48,12 +48,12 @@ void Style::drawBg(QPainter *p, const QWidget *widget) const
   if (widget->palette().color(widget->backgroundRole()) == Qt::transparent)
     return; // Plasma FIXME: needed?
   QRect bgndRect(widget->rect());
-  interior_spec ispec = getInteriorSpec(QStringLiteral("DialogTranslucent"));
-  size_spec sspec = getSizeSpec(QStringLiteral("DialogTranslucent"));
+  interior_spec ispec = getInteriorSpec(KSL("DialogTranslucent"));
+  size_spec sspec = getSizeSpec(KSL("DialogTranslucent"));
   if (ispec.element.isEmpty())
   {
-    ispec = getInteriorSpec(QStringLiteral("Dialog"));
-    sspec = getSizeSpec(QStringLiteral("Dialog"));
+    ispec = getInteriorSpec(KSL("Dialog"));
+    sspec = getSizeSpec(KSL("Dialog"));
   }
   if (!ispec.element.isEmpty()
       && !widget->windowFlags().testFlag(Qt::FramelessWindowHint)) // not a panel
@@ -62,24 +62,24 @@ void Style::drawBg(QPainter *p, const QWidget *widget) const
     { // even dialogs may have menubar or toolbar (as in Qt Designer)
       if (qobject_cast<QMenuBar*>(child) || qobject_cast<QToolBar*>(child))
       {
-        ispec = getInteriorSpec(QStringLiteral("WindowTranslucent"));
-        sspec = getSizeSpec(QStringLiteral("WindowTranslucent"));
+        ispec = getInteriorSpec(KSL("WindowTranslucent"));
+        sspec = getSizeSpec(KSL("WindowTranslucent"));
         if (ispec.element.isEmpty())
         {
-          ispec = getInteriorSpec(QStringLiteral("Window"));
-          sspec = getSizeSpec(QStringLiteral("Window"));
+          ispec = getInteriorSpec(KSL("Window"));
+          sspec = getSizeSpec(KSL("Window"));
         }
       }
     }
   }
   else
   {
-    ispec = getInteriorSpec(QStringLiteral("WindowTranslucent"));
-    sspec = getSizeSpec(QStringLiteral("WindowTranslucent"));
+    ispec = getInteriorSpec(KSL("WindowTranslucent"));
+    sspec = getSizeSpec(KSL("WindowTranslucent"));
     if (ispec.element.isEmpty())
     {
-      ispec = getInteriorSpec(QStringLiteral("Window"));
-      sspec = getSizeSpec(QStringLiteral("Window"));
+      ispec = getInteriorSpec(KSL("Window"));
+      sspec = getSizeSpec(KSL("Window"));
     }
   }
   frame_spec fspec;
@@ -109,7 +109,7 @@ void Style::drawBg(QPainter *p, const QWidget *widget) const
   int dw = sspec.incrementW ? sspec.minW : qMax(sspec.minW - bgndRect.width(), 0);
   if (!renderInterior(p,bgndRect.adjusted(0,0,dw,dh),fspec,ispec,ispec.element+suffix))
   { // no window interior element but with reduced translucency
-    p->fillRect(bgndRect, standardPalette().color(suffix.contains(QLatin1String("-inactive"))
+    p->fillRect(bgndRect, standardPalette().color(suffix.contains(KL1("-inactive"))
                                                     ? QPalette::Inactive
                                                     : QPalette::Active,
                                                   QPalette::Window));
@@ -344,7 +344,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         {
           /* the cursor has moved to a tab adjacent to the active tab */
           QRect r = tabbar->tabRect(indx);
-          const frame_spec fspec = getFrameSpec(QStringLiteral("Tab"));
+          const frame_spec fspec = getFrameSpec(KSL("Tab"));
           int overlap = tspec_.active_tab_overlap;
           int exp = qMin(fspec.expansion, qMin(r.width(), r.height())) / 2 + 1;
           overlap = qMin(overlap, qMax(exp, qMax(fspec.left, fspec.right)));
@@ -391,7 +391,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       if (indx > -1 && qAbs(indx - tabbar->currentIndex()) == 1)
       {
         QRect r = tabbar->tabRect(indx);
-        const frame_spec fspec = getFrameSpec(QStringLiteral("Tab"));
+        const frame_spec fspec = getFrameSpec(KSL("Tab"));
         int overlap = tspec_.active_tab_overlap;
         int exp = qMin(fspec.expansion, qMin(r.width(), r.height())) / 2 + 1;
         overlap = qMin(overlap, qMax(exp, qMax(fspec.left, fspec.right)));
@@ -440,7 +440,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         if (!w->hasFocus())
           animationStartState_ = "normal";
         /* the popup may have been closed (with Qt5) */
-        else if (!(animatedWidget_ == w && animationStartState_.startsWith(QLatin1String("c-toggled"))))
+        else if (!(animatedWidget_ == w && animationStartState_.startsWith(KL1("c-toggled"))))
           animationStartState_ = "pressed";
         if (isWidgetInactive(w))
           animationStartState_.append("-inactive");
@@ -474,8 +474,8 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           animatedWidget_->update();
         }
         if (!(animatedWidget_ == w
-              && (animationStartState_.startsWith(QLatin1String("c-toggled"))
-                  || animationStartState_.startsWith(QLatin1String("normal")))))
+              && (animationStartState_.startsWith(KL1("c-toggled"))
+                  || animationStartState_.startsWith(KL1("normal")))))
         { // it was hidden or another widget was interacted with  -- there's no other possibility
           animationStartState_ = "normal";
           if (isWidgetInactive(w))
@@ -489,7 +489,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       {
         if ((isAnimatedScrollArea(w)
              // no animation without the top focused generic frame
-             && elementExists(getFrameSpec(QStringLiteral("GenericFrame")).element+"-focused-top"))
+             && elementExists(getFrameSpec(KSL("GenericFrame")).element+"-focused-top"))
             || (qobject_cast<QLineEdit*>(o)
                 // this is only needed for Qt5 -- Qt4 combo lineedits don't have FocusIn event
                 && !qobject_cast<QComboBox*>(w->parentWidget()))
@@ -547,7 +547,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         break; // not due to a popup widget
       if ((isAnimatedScrollArea(w)
            // no animation without the top focused generic frame
-           && elementExists(getFrameSpec(QStringLiteral("GenericFrame")).element+"-focused-top"))
+           && elementExists(getFrameSpec(KSL("GenericFrame")).element+"-focused-top"))
           || qobject_cast<QComboBox*>(o)
           || qobject_cast<QLineEdit*>(o)
           || qobject_cast<QAbstractSpinBox*>(o))
@@ -747,7 +747,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         break;
       }
       bool _forcePalette(false);
-      const label_spec lspec = getLabelSpec(QStringLiteral("ItemView"));
+      const label_spec lspec = getLabelSpec(KSL("ItemView"));
       /* set the normal inactive text color to the normal active one
          (needed when the app sets it inactive) */
       QColor col = getFromRGBA(lspec.normalColor);
@@ -799,7 +799,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         break;
       }
       bool _forcePalette(false);
-      const label_spec lspec = getLabelSpec(QStringLiteral("ItemView"));
+      const label_spec lspec = getLabelSpec(KSL("ItemView"));
       /* restore the normal inactive text color (which was changed at QEvent::WindowActivate) */
       QColor col = getFromRGBA(lspec.normalInactiveColor);
       if (!col.isValid())
@@ -1201,7 +1201,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           break;
         }
         bool _forcePalette(false);
-        const label_spec lspec = getLabelSpec(QStringLiteral("ItemView"));
+        const label_spec lspec = getLabelSpec(KSL("ItemView"));
         if (isWidgetInactive(w)) // FIXME: probably not needed with inactive window
         {
           QColor col = getFromRGBA(lspec.normalInactiveColor);
@@ -1303,8 +1303,8 @@ bool Style::eventFilter(QObject *o, QEvent *e)
     }
     /* correct line-edit palettes on stylable toolbars if needed */
     else if (qobject_cast<QLineEdit*>(o)
-             && (!getFrameSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty()
-                 || !getInteriorSpec(QStringLiteral("ToolbarLineEdit")).element.isEmpty())
+             && (!getFrameSpec(KSL("ToolbarLineEdit")).element.isEmpty()
+                 || !getInteriorSpec(KSL("ToolbarLineEdit")).element.isEmpty())
              && getStylableToolbarContainer(w, true))
     {
       const label_spec tlspec = getLabelSpec("Toolbar");
@@ -1327,7 +1327,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         palette.setColor(QPalette::Disabled, QPalette::Text,col);
         forcePalette(w, palette);
         /* also correct the color of the symbolic clear icon (-> CE_ToolBar) */
-        if (QAction *clearAction = w->findChild<QAction*>(QLatin1String("_q_qlineeditclearaction")))
+        if (QAction *clearAction = w->findChild<QAction*>(KL1("_q_qlineeditclearaction")))
           clearAction->setIcon(standardIcon(QStyle::SP_LineEditClearButton, nullptr, w));
       }
     }

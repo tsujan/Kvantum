@@ -20,6 +20,9 @@
 
 #include "specs.h"
 
+#define KSL(x) QStringLiteral(x)
+#define KL1(x) QLatin1StringView(x)
+
 class QSettings;
 
 namespace Kvantum {
