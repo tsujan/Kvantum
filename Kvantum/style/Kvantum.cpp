@@ -3120,6 +3120,17 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
       }
       fspec.top = fspec.bottom = pixelMetric(PM_MenuVMargin,option,widget);
 
+#if (QT_VERSION >= QT_VERSION_CHECK(6,8,0))
+      /* NOTE: This is a workaround for artifacts under Wayland. */
+      if (isTranslucent && !tspec_.isX11)
+      {
+        auto origMode = painter->compositionMode();
+        painter->setCompositionMode(QPainter::CompositionMode_Clear);
+        painter->fillRect(r, Qt::transparent);
+        painter->setCompositionMode(origMode);
+      }
+#endif
+
       if (!tspec_.shadowless_popup
           && isTranslucent && tspec_now.menu_shadow_depth > 0
           && fspec.left >= tspec_now.menu_shadow_depth // otherwise shadow will have no meaning
@@ -3274,6 +3285,18 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           {
             fspec.left = fspec.right = pixelMetric(PM_MenuHMargin,option,widget);
           }
+
+#if (QT_VERSION >= QT_VERSION_CHECK(6,8,0))
+      /* NOTE: This is a workaround for artifacts under Wayland. */
+      if (isTranslucent && !tspec_.isX11)
+      {
+        auto origMode = painter->compositionMode();
+        painter->setCompositionMode(QPainter::CompositionMode_Clear);
+        painter->fillRect(r, Qt::transparent);
+        painter->setCompositionMode(origMode);
+      }
+#endif
+
           if (!tspec_.shadowless_popup
               && isTranslucent && tspec_now.menu_shadow_depth > 0
               && fspec.left >= tspec_now.menu_shadow_depth // otherwise shadow will have no meaning
@@ -5384,11 +5407,22 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
       fspec.expansion = 0;
       const interior_spec ispec = getInteriorSpec(group);
       fspec.left = fspec.right = fspec.top = fspec.bottom = pixelMetric(PM_ToolTipLabelFrameWidth,option,widget);
+      bool isTranslucent(!noComposite_ && widget && translucentWidgets_.contains(widget));
+
+#if (QT_VERSION >= QT_VERSION_CHECK(6,8,0))
+      /* NOTE: This is a workaround for artifacts under Wayland. */
+      if (isTranslucent && !tspec_.isX11)
+      {
+        auto origMode = painter->compositionMode();
+        painter->setCompositionMode(QPainter::CompositionMode_Clear);
+        painter->fillRect(option->rect, Qt::transparent);
+        painter->setCompositionMode(origMode);
+      }
+#endif
 
       theme_spec tspec_now = settings_->getCompositeSpec();
-      if (!tspec_.shadowless_popup && !noComposite_ && tspec_now.tooltip_shadow_depth > 0
-          && fspec.left >= tspec_now.tooltip_shadow_depth
-          && widget && translucentWidgets_.contains(widget))
+      if (!tspec_.shadowless_popup && isTranslucent && tspec_now.tooltip_shadow_depth > 0
+          && fspec.left >= tspec_now.tooltip_shadow_depth)
       {
         renderFrame(painter,option->rect,fspec,fspec.element+"-shadow");
       }
