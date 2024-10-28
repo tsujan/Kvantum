@@ -1,3 +1,7 @@
+V1.1.4
+---------
+ * Exclude the opaque list from blurring of hard-coded translucency.
+
 V1.1.3
 ---------
  * Draw dragged tabs of Qt ≥ 6.6 as single tabs (like they were drawn with Qt < 6.6).

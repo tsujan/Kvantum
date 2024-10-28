@@ -351,7 +351,7 @@ void Style::polish(QWidget *widget)
               hasForcedTranslucency = true;
             }
             /* WARNING:
-               Unlike most Qt5 windows, there are some opaque ones
+               Unlike most Qt>=5 windows, there are some opaque ones
                that are polished BEFORE being created (as in Octopi).
                Also the theme may change from Kvantum and to it again. */
             else if (!isOpaque_ && tspec_now.translucent_windows)
@@ -363,9 +363,9 @@ void Style::polish(QWidget *widget)
               }
               if (makeTranslucent)
               {
-                /* a Qt5 window couldn't be made translucent if it's
+                /* a Qt>=5 window could not be made translucent if it is
                    already created without the alpha channel of its
-                   surface format being set (as in Spectacle) */
+                   surface format being set (as in the old Spectacle) */
                 if (widget->testAttribute(Qt::WA_WState_Created))
                 {
                   if (QWindow *window = widget->windowHandle())
@@ -387,8 +387,9 @@ void Style::polish(QWidget *widget)
             break;
           }
           if (makeTranslucent
-              /* enable blurring for hard-coded translucency */
-              || (tspec_now.composite
+              /* enable blurring for hard-coded window translucency,
+                 but exclude the opaque list */
+              || (!isOpaque_ && tspec_now.composite
                   && (hspec_.blur_translucent
                       /* let unusual tooltips with hard-coded translucency
                          have shadow (like in LXQtGroupPopup or KDE system settings) */
@@ -935,7 +936,7 @@ void Style::polish(QWidget *widget)
       }
 
       if (!widget->testAttribute(Qt::WA_TranslucentBackground))
-        widget->setAttribute(Qt::WA_TranslucentBackground); // Qt5 may need this too
+        widget->setAttribute(Qt::WA_TranslucentBackground); // Qt>=5 may need this too
       else if (!widget->testAttribute(Qt::WA_NoSystemBackground))
         widget->setAttribute(Qt::WA_NoSystemBackground);
 

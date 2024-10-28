@@ -2160,7 +2160,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
 
       QObject *styleObject = option->styleObject;
 
-      /* Due to a Qt5 bug (which I call "the hover bug"), comboboxes and buttons may have
+      /* Due to a Qt>=5 bug (which I call "the hover bug"), comboboxes and buttons may have
          the WA_UnderMouse attribute without being under the cursor after their menus are
          closed or they are enabled. Hence we use the following logic in several places.
          It will be harmless if the bug is fixed (but shouldn't be used with dragging from buttons). */
@@ -3116,7 +3116,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         painter->setCompositionMode(origMode);
       }
 #endif
-      /* detached (Qt5) menus may come here because of setSurfaceFormat() */
+      /* detached (Qt>=5) menus may come here because of setSurfaceFormat() */
       isTranslucent = isTranslucent && !widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu);
 
       if (tspec_.spread_menuitems
@@ -3283,7 +3283,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
             painter->setCompositionMode(origMode);
           }
 #endif
-          /* detached (Qt5) menus may come here because of setSurfaceFormat() */
+          /* detached (Qt>=5) menus may come here because of setSurfaceFormat() */
           isTranslucent = isTranslucent && !widget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu);
 
           if (tspec_.spread_menuitems
@@ -6377,7 +6377,7 @@ void Style::drawControl(QStyle::ControlElement element,
     }
 
     case CE_MenuBarEmptyArea : {
-      /*if (isLibreoffice_ // shouldn't be used with the Qt5 skin
+      /*if (isLibreoffice_ // shouldn't be used with the Qt>=5 skin
           && enoughContrast(getFromRGBA(getLabelSpec(KSL("MenuBarItem")).normalColor),
                             QApplication::palette().color(QPalette::WindowText)))
       {
@@ -8849,10 +8849,10 @@ void Style::drawControl(QStyle::ControlElement element,
       break;
 
     case CE_HeaderSection : {
-      /* WARNING: There is an issue in Qt5, which didn't exist in Qt4: The horizontal
-                  position is always from left to right, so that, for example,
-                  "QStyleOptionHeader::Beginning" is the leftmost section with RTL
-                  too. This isn't logical but simplifies the calculation a lot. */
+      /* WARNING: There is an issue in Qt>=5, which did not exist in Qt4: The horizontal
+                  position is always from left to right, such that, for example,
+                  "QStyleOptionHeader::Beginning" is the leftmost section with RTL too.
+                  This is not logical but simplifies the calculation a lot. */
       const QString group = "HeaderSection";
       frame_spec fspec = getFrameSpec(group);
       const interior_spec ispec = getInteriorSpec(group);
@@ -13113,7 +13113,7 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
         return 0;
       //if (isLibreoffice_) return QCommonStyle::pixelMetric(metric,option,widget);
       if (QApplication::layoutDirection() == Qt::RightToLeft)
-        return 0; // RTL submenu positioning is a mess in Qt5
+        return 0; // RTL submenu positioning is a mess in Qt>=5
       int so = tspec_.submenu_overlap;
       /* Even when PM_SubMenuOverlap is set to zero, there's an overlap
          equal to PM_MenuHMargin. So, we make the overlap accurate here. */
@@ -13547,7 +13547,7 @@ int Style::pixelMetric(QStyle::PixelMetric metric, const QStyleOption *option, c
 
 /*
   To make Qt windows translucent, we should set the surface format of
-  their native handles BEFORE they are created, but Qt5 windows are
+  their native handles BEFORE they are created, but Qt>=5 windows are
   often polished AFTER they are created, such that setting the attribute
   "WA_TranslucentBackground" in "Style::polish()" would have no effect.
 
@@ -13707,7 +13707,7 @@ int Style::styleHint(QStyle::StyleHint hint,
        used when reentering a menuitem with submenu and even
        when SH_Menu_SubMenuPopupDelay is negative. Here, we
        set it to 20s for negative delays as a workaround.
-       NOTE: This has no effect with later versions of Qt5. */
+       NOTE: This had no effect with later versions of Qt5. */
     case SH_Menu_SubMenuSloppyCloseTimeout : {
       return tspec_.submenu_delay < 0 ? 20000 : 1000;
     }
@@ -13997,9 +13997,9 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
     }
 
     case CT_SpinBox : {
-      /* Here we don't use defaultSize because, for Qt4, it was based on spinbox size hint,
+      /* Here we do not use defaultSize because, for Qt4, it was based on spinbox size hint,
          which in turn was based on SC_SpinBoxEditField (Qt4 -> qabstractspinbox.cpp).
-         That's corrected in Qt5 but the following method is always reliable. */
+         That is corrected in Qt>=5 but the following method is always reliable. */
       const QStyleOptionSpinBox *opt = qstyleoption_cast<const QStyleOptionSpinBox*>(option);
       const QAbstractSpinBox *sb = qobject_cast<const QAbstractSpinBox*>(widget);
       bool hasButtons = true;

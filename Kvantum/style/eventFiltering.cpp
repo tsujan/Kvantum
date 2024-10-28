@@ -451,7 +451,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       {
         if (!w->hasFocus())
           animationStartState_ = "normal";
-        /* the popup may have been closed (with Qt5) */
+        /* the popup may have been closed (with Qt>=5) */
         else if (!(animatedWidget_ == w && animationStartState_.startsWith(KL1("c-toggled"))))
           animationStartState_ = "pressed";
         if (isWidgetInactive(w))
@@ -503,7 +503,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
              // no animation without the top focused generic frame
              && elementExists(getFrameSpec(KSL("GenericFrame")).element+"-focused-top"))
             || (qobject_cast<QLineEdit*>(o)
-                // this is only needed for Qt5 -- Qt4 combo lineedits don't have FocusIn event
+                // this is needed for Qt>=5 -- Qt4 combo lineedits did not have FocusIn event
                 && !qobject_cast<QComboBox*>(w->parentWidget()))
             || qobject_cast<QAbstractSpinBox*>(o)
             || ((tspec_.combo_as_lineedit || tspec_.square_combo_button)
