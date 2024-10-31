@@ -892,13 +892,13 @@ some apps may set it themselves.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation type="unfinished">Επηρεάζει τα αντικείμενα των μενού και τις επικεφαλίδες.
+        <translation>Επηρεάζει τα αντικείμενα των μενού και τις επικεφαλίδες.
 
 Η τιμή εξ ορισμού είναι 16 εικ, αλλά
 ορισμένες εφαρμογές καθορίζουν αυτές την τιμή.
 
 Αν είναι απενεργοποιημένο, ανατρέξτε στο:
-Διάφορα → Ρυθμίσεις αν γίνεται από το τρέχον DE</translation>
+Διάφορα → Ρυθμίσεις, αν είναι εφικτό, από το τρέχον γραφικό περιβάλλον</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1276"/>
