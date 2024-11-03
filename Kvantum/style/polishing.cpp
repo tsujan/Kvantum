@@ -407,7 +407,9 @@ void Style::polish(QWidget *widget)
             }
 
             /* enable blurring */
-            if (!makeTranslucent || tspec_now.blurring)
+            if ((!makeTranslucent
+                 && (hspec_.blur_translucent || tspec_now.popup_blurring))
+                || tspec_now.blurring)
             {
               if (blurHelper_ == nullptr)
               {
