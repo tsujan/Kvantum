@@ -391,8 +391,8 @@ void Style::polish(QWidget *widget)
                  but exclude the opaque list */
               || (!isOpaque_ && tspec_now.composite
                   && (hspec_.blur_translucent
-                      /* let unusual tooltips with hard-coded translucency
-                         have shadow (like in LXQtGroupPopup or KDE system settings) */
+                      /* include unusual tooltips with hard-coded translucency (like in
+                         LXQtGroupPopup or KDE system settings) into translucentWidgets_ */
                       || (widget->windowFlags() & Qt::WindowType_Mask) == Qt::ToolTip)
                   && widget->testAttribute(Qt::WA_TranslucentBackground)))
           {
@@ -407,9 +407,7 @@ void Style::polish(QWidget *widget)
             }
 
             /* enable blurring */
-            if ((!makeTranslucent
-                 && (hspec_.blur_translucent || tspec_now.popup_blurring))
-                || tspec_now.blurring)
+            if (makeTranslucent ? tspec_now.blurring : hspec_.blur_translucent)
             {
               if (blurHelper_ == nullptr)
               {

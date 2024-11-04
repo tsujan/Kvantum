@@ -1807,7 +1807,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
       }
       if (widget) // it's NULL with QML
       {
-        if (widget->windowType() == Qt::ToolTip)
+        if (widget->windowType() == Qt::ToolTip && !translucentWidgets_.contains(widget))
         {
           painter->fillRect(option->rect, standardPalette().color(QPalette::Window));
           break;
@@ -1834,24 +1834,65 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
                                                                 QPalette::Window));
       }
 
-      interior_spec ispec = getInteriorSpec(KSL("Dialog"));
-      size_spec sspec = getSizeSpec(KSL("Dialog"));
+      interior_spec ispec;
+      size_spec sspec;
+      if (widget && translucentWidgets_.contains(widget))
+      {
+        ispec = getInteriorSpec(KSL("DialogTranslucent"));
+        sspec = getSizeSpec(KSL("DialogTranslucent"));
+        if (ispec.element.isEmpty())
+        {
+          ispec = getInteriorSpec(KSL("Dialog"));
+          sspec = getSizeSpec(KSL("Dialog"));
+        }
+      }
+      else
+      {
+        ispec = getInteriorSpec(KSL("Dialog"));
+        sspec = getSizeSpec(KSL("Dialog"));
+      }
       if (widget && !ispec.element.isEmpty()
-          && !widget->windowFlags().testFlag(Qt::FramelessWindowHint)) // not a panel)
+          && !widget->windowFlags().testFlag(Qt::FramelessWindowHint)) // not a panel
       {
         if (QWidget *child = widget->childAt(0,0))
         {
           if (qobject_cast<QMenuBar*>(child) || qobject_cast<QToolBar*>(child))
           {
-            ispec = getInteriorSpec(KSL("Window"));
-            sspec = getSizeSpec(KSL("Window"));
+            if (widget && translucentWidgets_.contains(widget))
+            {
+              ispec = getInteriorSpec(KSL("WindowTranslucent"));
+              sspec = getSizeSpec(KSL("WindowTranslucent"));
+              if (ispec.element.isEmpty())
+              {
+                ispec = getInteriorSpec(KSL("Window"));
+                sspec = getSizeSpec(KSL("Window"));
+              }
+            }
+            else
+            {
+              ispec = getInteriorSpec(KSL("Window"));
+              sspec = getSizeSpec(KSL("Window"));
+            }
           }
         }
       }
       else
       {
-        ispec = getInteriorSpec(KSL("Window"));
-        sspec = getSizeSpec(KSL("Window"));
+        if (widget && translucentWidgets_.contains(widget))
+        {
+          ispec = getInteriorSpec(KSL("WindowTranslucent"));
+          sspec = getSizeSpec(KSL("WindowTranslucent"));
+          if (ispec.element.isEmpty())
+          {
+            ispec = getInteriorSpec(KSL("Window"));
+            sspec = getSizeSpec(KSL("Window"));
+          }
+        }
+        else
+        {
+          ispec = getInteriorSpec(KSL("Window"));
+          sspec = getSizeSpec(KSL("Window"));
+        }
       }
       frame_spec fspec;
       default_frame_spec(fspec);

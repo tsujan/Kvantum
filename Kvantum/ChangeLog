@@ -1,6 +1,7 @@
 V1.1.4
 ---------
  * Exclude the opaque list from blurring of hard-coded translucency.
+ * Use a translucent background in "PE_Widget" if needed and existing.
 
 V1.1.3
 ---------
