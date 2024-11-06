@@ -85,10 +85,8 @@ void Style::drawBg(QPainter *p, const QWidget *widget) const
   frame_spec fspec;
   default_frame_spec(fspec);
 
-  QString suffix = "-normal";
   bool isInactive(isWidgetInactive(widget));
-  if (isInactive)
-    suffix = "-normal-inactive";
+  QString suffix(isInactive ? "-normal-inactive" : "-normal");
 
   if (tspec_.no_window_pattern && (ispec.px > 0 || ispec.py > 0))
     ispec.px = -2; // no tiling pattern with translucency
@@ -121,7 +119,7 @@ void Style::drawBg(QPainter *p, const QWidget *widget) const
 
   if (!renderInterior(p,bgndRect.adjusted(0,0,dw,dh),fspec,ispec,ispec.element+suffix))
   { // no window interior element but with reduced translucency
-    p->fillRect(bgndRect, standardPalette().color(suffix.contains(KL1("-inactive"))
+    p->fillRect(bgndRect, standardPalette().color(isInactive
                                                     ? QPalette::Inactive
                                                     : QPalette::Active,
                                                   QPalette::Window));

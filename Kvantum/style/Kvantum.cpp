@@ -1797,9 +1797,12 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
 
   switch(element) {
     case PE_Widget : {
+      bool isInactive(isWidgetInactive(widget));
+      bool isTranslucent(!noComposite_ && widget && translucentWidgets_.contains(widget));
+
       if (qobject_cast<const QMdiSubWindow*>(widget))
       {
-        painter->fillRect(option->rect, standardPalette().color(isWidgetInactive(widget)
+        painter->fillRect(option->rect, standardPalette().color(isInactive
                                                                   ? QPalette::Inactive
                                                                   : QPalette::Active,
                                                                 QPalette::Window));
@@ -1807,7 +1810,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
       }
       if (widget) // it's NULL with QML
       {
-        if (widget->windowType() == Qt::ToolTip && !translucentWidgets_.contains(widget))
+        if (widget->windowType() == Qt::ToolTip && !isTranslucent)
         {
           painter->fillRect(option->rect, standardPalette().color(QPalette::Window));
           break;
@@ -1823,21 +1826,28 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
               && !widget->testAttribute(Qt::WA_TranslucentBackground)
               && !widget->testAttribute(Qt::WA_NoSystemBackground)))
       {
-        if (option->palette.color(QPalette::Window) == option->palette.color(isWidgetInactive(widget)
+        if (option->palette.color(QPalette::Window) == option->palette.color(isInactive
                                                                                ? QPalette::Inactive
                                                                                : QPalette::Active,
                                                                              QPalette::Base))
           break; // ...but make an exception for apps like KNotes
-        painter->fillRect(option->rect, standardPalette().color(isWidgetInactive(widget)
+        painter->fillRect(option->rect, standardPalette().color(isInactive
                                                                   ? QPalette::Inactive
                                                                   : QPalette::Active,
                                                                 QPalette::Window));
       }
 
+      int ro = 0;
       interior_spec ispec;
       size_spec sspec;
-      if (widget && translucentWidgets_.contains(widget))
+      if (isTranslucent)
       {
+        ro = tspec_.reduce_window_opacity;
+        if (ro < 0)
+        {
+          if (isInactive) ro = -ro;
+          else ro = 0;
+        }
         ispec = getInteriorSpec(KSL("DialogTranslucent"));
         sspec = getSizeSpec(KSL("DialogTranslucent"));
         if (ispec.element.isEmpty())
@@ -1858,7 +1868,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         {
           if (qobject_cast<QMenuBar*>(child) || qobject_cast<QToolBar*>(child))
           {
-            if (widget && translucentWidgets_.contains(widget))
+            if (isTranslucent)
             {
               ispec = getInteriorSpec(KSL("WindowTranslucent"));
               sspec = getSizeSpec(KSL("WindowTranslucent"));
@@ -1878,7 +1888,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
       }
       else
       {
-        if (widget && translucentWidgets_.contains(widget))
+        if (isTranslucent)
         {
           ispec = getInteriorSpec(KSL("WindowTranslucent"));
           sspec = getSizeSpec(KSL("WindowTranslucent"));
@@ -1897,9 +1907,22 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
       frame_spec fspec;
       default_frame_spec(fspec);
 
-      QString suffix = "-normal";
-      if (isWidgetInactive(widget))
-        suffix = "-normal-inactive";
+#if (QT_VERSION >= QT_VERSION_CHECK(6,8,0))
+      /* NOTE: This is a workaround for artifacts under Wayland. */
+      if (isTranslucent && !tspec_.isX11)
+      {
+        auto origMode = painter->compositionMode();
+        painter->setCompositionMode(QPainter::CompositionMode_Clear);
+        painter->fillRect(option->rect, Qt::transparent);
+        painter->setCompositionMode(origMode);
+      }
+#endif
+
+      if (ro > 0)
+      {
+        painter->save();
+        painter->setOpacity(1.0 - static_cast<qreal>(ro)/100.0);
+      }
       if (tspec_.no_window_pattern && (ispec.px > 0 || ispec.py > 0))
         ispec.px = -1; // no tiling pattern (without translucency)
       int dh = sspec.incrementH ? sspec.minH : qMax(sspec.minH - h, 0);
@@ -1909,8 +1932,17 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         painter->save();
         painter->setClipRegion(option->rect, Qt::IntersectClip);
       }
-      renderInterior(painter,option->rect.adjusted(0,0,dw,dh),fspec,ispec,ispec.element+suffix);
+      QString suffix(isInactive ? "-normal-inactive" : "-normal");
+      if (!renderInterior(painter,option->rect.adjusted(0,0,dw,dh),fspec,ispec,ispec.element+suffix))
+      {
+        painter->fillRect(option->rect, standardPalette().color(isInactive
+                                                                  ? QPalette::Inactive
+                                                                  : QPalette::Active,
+                                                                QPalette::Window));
+      }
       if (dh > 0 || dw > 0)
+        painter->restore();
+      if (ro > 0)
         painter->restore();
 
       break;
@@ -2316,9 +2348,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
             }
             /* don't accept any state because some themes
                may not have SVG elements suitable for grouping */
-            status = "normal";
-            if (isWidgetInactive(widget))
-              status.append("-inactive");
+            status = isWidgetInactive(widget) ? "normal-inactive" : "normal";
             renderFrame(painter,r,fspec,fspec.element+"-"+status);
             renderInterior(painter,r,fspec,ispec,ispec.element+"-"+status);
             if(painterSaved)
@@ -3529,9 +3559,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
           painter->save();
           painter->setOpacity(DISABLED_OPACITY);
         }
-        QString suffix = "-normal";
-        if (isWidgetInactive(widget))
-          suffix = "-normal-inactive";
+        QString suffix(isWidgetInactive(widget) ? "-normal-inactive" : "-normal");
         renderFrame(painter,option->rect,fspec,fspec.element+suffix,0,0,0,0,0,true);
         if (tspec_.groupbox_top_label
             && widget) // QML anchoring
@@ -3634,9 +3662,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
         painter->save();
         painter->setOpacity(DISABLED_OPACITY);
       }
-      QString suffix = "-normal";
-      if (isWidgetInactive(widget))
-        suffix = "-normal-inactive";
+      QString suffix(isWidgetInactive(widget) ? "-normal-inactive" : "-normal");
       if (widget) // WARNING: QML has anchoring!
       {
         /* The frame SVG elements may have translucency. So, instead of drawing the
@@ -7878,9 +7904,7 @@ void Style::drawControl(QStyle::ControlElement element,
         painter->save();
         painter->setOpacity(DISABLED_OPACITY);
       }
-      QString suffix = "-normal";
-      if (isWidgetInactive(widget))
-        suffix = "-normal-inactive";
+      QString suffix(isWidgetInactive(widget) ? "-normal-inactive" : "-normal");
       renderFrame(painter,r,fspec,fspec.element+suffix,0,0,0,0,0,true);
       renderInterior(painter,r,fspec,ispec,ispec.element+suffix,true);
       if (!(option->state & State_Enabled))
@@ -8755,9 +8779,7 @@ void Style::drawControl(QStyle::ControlElement element,
         const QStyleOptionSlider *opt = qstyleoption_cast<const QStyleOptionSlider*>(option);
         if (opt && opt->activeSubControls != QStyle::SC_ScrollBarSlider)
         {
-          sStatus = "normal";
-          if (isWidgetInactive(widget))
-            sStatus = "normal-inactive";
+          sStatus = isWidgetInactive(widget) ? "normal-inactive" : "normal";
         }
       }
 
@@ -9513,9 +9535,7 @@ void Style::drawControl(QStyle::ControlElement element,
         painter->save();
         painter->setOpacity(DISABLED_OPACITY);
       }*/
-      QString suffix = "-normal";
-      if (isWidgetInactive(widget))
-        suffix = "-normal-inactive";
+      QString suffix(isWidgetInactive(widget) ? "-normal-inactive" : "-normal");
 
       renderFrame(painter,r,fspec,fspec.element+suffix);
       renderInterior(painter,r,fspec,ispec,ispec.element+suffix);
@@ -10133,9 +10153,7 @@ void Style::drawControl(QStyle::ControlElement element,
         if (!(option->state & State_Enabled))
         {
           painter->restore();
-          status = "disabled";
-          if (isWidgetInactive(widget))
-            status.append("-inactive");
+          status = isWidgetInactive(widget) ? "disabled-inactive" : "disabled";
         }
 
         if (opt->features & QStyleOptionButton::HasMenu)
@@ -10643,9 +10661,7 @@ void Style::drawControl(QStyle::ControlElement element,
             /* panel has no status at PE_PanelButtonTool */
             if(option->state & State_Enabled)
             {
-              status = "normal";
-              if (isWidgetInactive(widget))
-                status.append("-inactive");
+              status = isWidgetInactive(widget) ? "normal-inactive" : "normal";
             }
             lspec.left = lspec.right = lspec.top = lspec.bottom = 0;
             /* for apps with bad style codes (like SMPlayer) */
@@ -12188,9 +12204,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
               painter->setOpacity(DISABLED_OPACITY);
             }
 
-            QString suffix = "-normal";
-            if (isWidgetInactive(widget))
-              suffix = "-normal-inactive";
+            QString suffix(isWidgetInactive(widget) ? "-normal-inactive" : "-normal");
             renderFrame(painter,r,fspec,fspec.element+suffix);
             renderInterior(painter,r,fspec,ispec,ispec.element+suffix);
             if (!(option->state & State_Enabled))
@@ -12381,9 +12395,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
           }
 
           /* now draw the groove */
-          QString suffix = "-normal";
-          if (isWidgetInactive(widget))
-            suffix = "-normal-inactive";
+          QString suffix(isWidgetInactive(widget) ? "-normal-inactive" : "-normal");
           if (option->state & State_Enabled)
           {
             if (!opt->upsideDown)
@@ -12456,9 +12468,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
             painter->save();
             painter->setOpacity(0.4);
           }
-          QString suffix = "-normal";
-          if (isWidgetInactive(widget))
-            suffix = "-normal-inactive";
+          QString suffix(isWidgetInactive(widget) ? "-normal-inactive" : "-normal");
           /* since we set the default size for CT_Slider, we use this
              to have no space between the slider's ticks and its handle */
           int extra = (r.width() - pixelMetric(PM_SliderThickness,option,widget))/2;
