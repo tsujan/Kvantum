@@ -77,7 +77,17 @@ void BlurHelper::registerWidget (QWidget* widget)
       && !widget->inherits ("QSplashScreen")
       && !widget->windowFlags().testFlag(Qt::FramelessWindowHint))*/
 
-    widget->installEventFilter (this);
+  widget->installEventFilter (this);
+
+#ifndef NO_KF
+  /* We want to disable blurring with a zero opacity and enable it with full opacity,
+     but there is no QEvent for that. Hence using "QWindow::opacityChanged" here. */
+  if (isNormalWindow (widget))
+  {
+    if (QWindow *win = widget->windowHandle())
+      connect (win, &QWindow::opacityChanged, this, &BlurHelper::onOpacityChange);
+  }
+#endif
 }
 /*************************/
 void BlurHelper::unregisterWidget (QWidget* widget)
@@ -86,8 +96,57 @@ void BlurHelper::unregisterWidget (QWidget* widget)
   {
     widget->removeEventFilter (this);
     clear (widget);
+#ifndef NO_KF
+    if (isNormalWindow (widget))
+    {
+      if (QWindow *win = widget->windowHandle())
+        disconnect (win, &QWindow::opacityChanged, this, &BlurHelper::onOpacityChange);
+    }
+#endif
   }
 }
+/*************************/
+#ifndef NO_KF
+void BlurHelper::onOpacityChange (qreal opacity)
+{
+  if (opacity != static_cast<qreal>(0) && opacity != static_cast<qreal>(1))
+    return;
+  if (QWindow *win = qobject_cast<QWindow*>(QObject::sender()))
+  {
+    if (win->isVisible())
+    {
+      bool enable (opacity == static_cast<qreal>(1)
+                   && (!onlyActiveWindow_
+                       || win->flags().testFlag(Qt::WindowDoesNotAcceptFocus)
+                       || win->flags().testFlag(Qt::X11BypassWindowManagerHint)
+                       || win->isActive()));
+      if (enable)
+      {
+        QRegion wMask = win->mask();
+        if (!wMask.isEmpty() && wMask != QRegion(QRect(QPoint(0, 0), win->geometry().size())))
+          enable = false;
+      }
+
+      KWindowEffects::enableBlurBehind (win, enable);
+
+      if (contrast_ != static_cast<qreal>(1)
+          || intensity_ != static_cast<qreal>(1)
+          || saturation_ != static_cast<qreal>(1))
+      {
+        if (enable)
+        {
+          KWindowEffects::enableBackgroundContrast (win, true,
+                                                    contrast_, intensity_, saturation_);
+        }
+        else
+          KWindowEffects::enableBackgroundContrast (win, false);
+      }
+
+      win->requestUpdate();
+    }
+  }
+}
+#endif
 /*************************/
 bool BlurHelper::isWidgetActive (const QWidget *widget) const
 {
@@ -98,6 +157,16 @@ bool BlurHelper::isWidgetActive (const QWidget *widget) const
           || widget->inherits("QTipLabel")
           || ((widget->windowFlags() & Qt::WindowType_Mask) == Qt::ToolTip
               && !qobject_cast<const QFrame*>(widget)));
+}
+/*************************/
+bool BlurHelper::isNormalWindow (const QWidget *widget) const
+{
+  return (widget->isWindow()
+          && !qobject_cast<const QMenu*>(widget)
+          && !widget->inherits("QComboBoxPrivateContainer")
+          && !widget->inherits("QTipLabel")
+          && ((widget->windowFlags() & Qt::WindowType_Mask) != Qt::ToolTip
+              || qobject_cast<const QFrame*>(widget)));
 }
 /*************************/
 bool BlurHelper::eventFilter (QObject* object, QEvent* event)
@@ -157,6 +226,11 @@ QRegion BlurHelper::blurRegion (QWidget* widget) const
 {
   if (!widget->isVisible())
     return QRegion();
+
+#ifndef NO_KF
+  if (widget->windowOpacity() == 0.0)
+    return QRegion();
+#endif
 
   if (onlyActiveWindow_ && !isWidgetActive (widget))
     return QRegion();
@@ -290,10 +364,7 @@ void BlurHelper::update (QWidget* widget) const
     if ((contrast_ != static_cast<qreal>(1)
          || intensity_ != static_cast<qreal>(1)
          || saturation_ != static_cast<qreal>(1))
-        && !qobject_cast<QMenu*>(widget)
-        && !widget->inherits("QTipLabel")
-        && ((widget->windowFlags() & Qt::WindowType_Mask) != Qt::ToolTip
-            || qobject_cast<QFrame*>(widget)))
+        && isNormalWindow (widget))
     {
       KWindowEffects::enableBackgroundContrast (win, true,
                                                 contrast_, intensity_, saturation_,
@@ -324,10 +395,7 @@ void BlurHelper::clear (QWidget* widget) const
     if ((contrast_ != static_cast<qreal>(1)
          || intensity_ != static_cast<qreal>(1)
          || saturation_ != static_cast<qreal>(1))
-        && !qobject_cast<QMenu*>(widget)
-        && !widget->inherits("QTipLabel")
-        && ((widget->windowFlags() & Qt::WindowType_Mask) != Qt::ToolTip
-            || qobject_cast<QFrame*>(widget)))
+        && isNormalWindow (widget))
     {
       KWindowEffects::enableBackgroundContrast (win, false);
     }

@@ -96,6 +96,11 @@ class BlurHelper: public QObject
   private:
 
     bool isWidgetActive (const QWidget *widget) const;
+    bool isNormalWindow (const QWidget *widget) const;
+
+#ifndef NO_KF
+    void onOpacityChange (qreal opacity);
+#endif
 
     /* List of widgets for which blur region must be updated. */
     typedef QPointer<QWidget> WidgetPointer;
