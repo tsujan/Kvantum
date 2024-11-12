@@ -24,7 +24,7 @@
     <message>
         <location filename="../../kvantummanager.ui" line="44"/>
         <source>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; comes with many themes but external themes can also be installed for being used by it. Here you could choose a theme folder and then press the button below to install it in your Home.&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; prichádza s mnohými témami, ale môžu sa nainštalovať aj externé témy, ktoré ho môžu používať. Tu si môžete vybrať priečinok s témou a potom stlačiť tlačidlo nižšie na jej inštaláciu do vášho domovského adresára.&lt;/center&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="76"/>
@@ -93,7 +93,7 @@ nastaveniam tohto motívu.
     <message>
         <location filename="../../kvantummanager.ui" line="326"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Revert to the default (root) settings of this theme!&lt;/p&gt;&lt;p&gt;When clicked and confirmed, all changes to the configuration will be lost but the probable customized SVG file will remain intact.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Vrátiť sa k predvoleným (root) nastaveniam tejto témy!&lt;/p&gt;&lt;p&gt;Po kliknutí a potvrdení sa všetky zmeny v konfigurácii stratia, ale pravdepodobne prispôsobený SVG súbor zostane neporušený.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="329"/>
@@ -150,17 +150,22 @@ nastaveniam tohto motívu.
 Under LXQt, it needs logging out and in or closing
 PCManFM-qt and then, stopping and starting Desktop
 with LXQt Session Settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>Spojiť bočný panel PCManFM-qt s jeho okolitým prostredím.
+
+
+Pod LXQt je potrebné sa odhlásiť a prihlásiť alebo zavrieť.
+PCManFM-qt a potom zastavenie a spustenie Desktopu.
+v nastaveniach LXQt Session.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="451"/>
         <source>Transparent sidepane for PCManFM-qt</source>
-        <translation type="unfinished"></translation>
+        <translation>Priehľadný bočný panel pre PCManFM-qt</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="466"/>
         <source>Iconless push buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>Tlačidlá bez ikon</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="473"/>
