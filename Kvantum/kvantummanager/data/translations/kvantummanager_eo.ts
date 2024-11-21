@@ -219,7 +219,7 @@ de LXQt.</translation>
         <source>Do not tint selected label icons with
 the highlight color!</source>
         <translation>Neniu emfazkolora tono
-por la elektita elemento.</translation>
+por la elektita elemento!</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="571"/>
@@ -252,7 +252,7 @@ de Plasmo vidu ĉi tiun agordon.)</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="651"/>
         <source>Tint label icons on mouseover by </source>
-        <translation>Ŝveba kolortono por la etiked-ikono</translation>
+        <translation>Ŝveba kolortono por la etiked-ikono </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="665"/>
@@ -307,7 +307,7 @@ as far as possible.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="747"/>
         <source>LXQt main menu icon size:</source>
-        <translation>Grando de la ĉefmenuaj ikonoj de LXQt: </translation>
+        <translation>Grando de la ĉefmenuaj ikonoj de LXQt:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="762"/>
@@ -326,7 +326,7 @@ as far as possible.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="776"/>
         <source>Compositing &amp;&amp; General Look</source>
-        <translation>Komponado &amp;&amp; Ĝenerala Ŝajno </translation>
+        <translation>Komponado &amp;&amp; Ĝenerala Ŝajno</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="975"/>
@@ -694,7 +694,7 @@ La defaŭlto estas 0.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1440"/>
         <source>Submenu overlap: </source>
-        <translation>Submenua surmeto:</translation>
+        <translation>Submenua surmeto: </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1465"/>
@@ -707,7 +707,7 @@ La defaŭlto estas 0.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1469"/>
         <source>Spin button width: </source>
-        <translation>Larĝo de ŝpinbutono:</translation>
+        <translation>Larĝo de ŝpinbutono: </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1843"/>
@@ -997,7 +997,7 @@ If disabled, see Compositing &amp; General Look → Transient scrollbars!</sourc
 Marki ĉi tiun butonon forviŝas la sagojn laŭeble.
 
 Se ĝi estus malvalidigita, vidu:
-Komponado &amp; Ĝenerala Ŝajno → Nedaŭraj rulumskaloj</translation>
+Komponado &amp; Ĝenerala Ŝajno → Nedaŭraj rulumskaloj!</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1667"/>
@@ -1101,7 +1101,7 @@ Defaŭlte, la falmenuo ne kovras la liniredaktilon.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1560"/>
         <source>Tooltip delay:</source>
-        <translation>Ŝpruchelpa prokrasto: </translation>
+        <translation>Ŝpruchelpa prokrasto:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="988"/>
@@ -1177,7 +1177,7 @@ If disabled, see Compositing &amp; General Look → Transient scrollbars!</sourc
 Defaŭlte, la rulumskalo situas ekster la vidkadro.
 
 Se ĉi tiu butono estus malvalidigita, vidu:
-Komponado &amp; Ĝenerala Ŝajno → Nedaŭraj rulumskaloj</translation>
+Komponado &amp; Ĝenerala Ŝajno → Nedaŭraj rulumskaloj!</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1938"/>
@@ -1709,7 +1709,7 @@ aŭ ĝisdatigi ĝian antaŭrigardon.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="777"/>
         <source>Do you really want to delete &lt;i&gt;%1&lt;/i&gt;?</source>
-        <translation>Forviŝi ĉi tiun  etoson: &lt;i&gt;%1&lt;/i&gt;?</translation>
+        <translation>Forviŝi ĉi tiun etoson: &lt;i&gt;%1&lt;/i&gt;?</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="780"/>
