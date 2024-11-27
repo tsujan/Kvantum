@@ -1663,7 +1663,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="613"/>
         <source>Please choose another directory!</source>
-        <translation>다른 디렉토리를 선택하십시오!</translation>
+        <translation>다른 디렉토리를 선택해주세요!</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="623"/>
