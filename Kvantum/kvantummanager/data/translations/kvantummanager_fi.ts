@@ -1076,9 +1076,9 @@ pyöri-alas on yksi rivin-muokkaus.</translation>
         <source>Draw combo popups as menu popups (i.e. like in Gtk)?
 
 By default, combo popups do not cover the combo box.</source>
-        <translation type="unfinished">Piirrä yhdistelmä valikko ponnahdus ikkunoita (kuten gtk)?
+        <translation>Piirrä yhdistelmäponnahdusikkunat valikkoponnahdusikkunoina (eli kuten Gtk:ssä)?
 
-Oletusarvoisesti yhdistelmä ponnahduksia ei peitä yhdistelmä ruutua.</translation>
+Oletusarvoisesti ponnahdusikkunat eivät peitä yhdistelmäruutua.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1808"/>
@@ -1125,11 +1125,11 @@ Ne eivät yleensä vie ylimääräistä tilaa.</translation>
 
 -1 means no popup (opening by clicking),
 while 0 means no delay.</source>
-        <translation type="unfinished">Viive, millisekuntina, odottaa ennen alivalikon avaamista.
-Oletuksena 250ms.
+        <translation>Viive millisekunteina odottaa ennen alivalikon avaamista.
+250 oletuksena.
 
--1 tarkoittaa, ettei ponnahdusikkunaa (avata napsauttamalla),
-kun taas 0 tarkoittaa, ettei viivettä ole.</translation>
+-1 tarkoittaa, että valikko täytyy avataan napsauttamalla,
+kun taas 0 tarkoittaa, että valikko avataan välittömästi.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1574"/>
@@ -1353,7 +1353,7 @@ needed for this key to work.
 
 A negative value means that only the
 opacity of inactive windows is reduced.</source>
-        <translation type="unfinished">Tämä vähentää ikkunan peittävyyttä
+        <translation>Tämä vähentää ikkunan peittävyyttä
 jos ikkunan läpinäkyvyys on käytössä.
 
 Läpikuultavaa SVG-taustaa EI tarvita
