@@ -1803,17 +1803,17 @@ or update its preview.</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../main.cpp" line="139"/>
+        <location filename="../../main.cpp" line="123"/>
         <source>Kvantum</source>
         <translation>Kvantum</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="140"/>
+        <location filename="../../main.cpp" line="124"/>
         <source>Kvantum is not installed on your system.</source>
         <translation>您的系统尚未安装 Kvantum。</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="141"/>
+        <location filename="../../main.cpp" line="125"/>
         <source>Please first install the Kvantum style plugin!</source>
         <translation>请先安装 Kvantum 样式插件！</translation>
     </message>

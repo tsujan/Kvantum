@@ -3223,6 +3223,16 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
 
           painter->save();
           painter->setClipRegion(QRegion(R));
+#if (QT_VERSION >= QT_VERSION_CHECK(6,8,0))
+          /* A workaround for a weird bug that creates gaps between SVG elements
+             when the painter opacity is less than 1. */
+          if ((painter->device() ? painter->device()->devicePixelRatioF()
+                                 : qApp->devicePixelRatio()) > static_cast<qreal>(1))
+          {
+            renderFrame(painter,r,fspec,fspec.element+"-shadow",0,0,0,0,0,false,true);
+          }
+          else
+#endif
           renderFrame(painter,r,fspec,fspec.element+"-shadow");
           painter->restore();
 
@@ -3389,6 +3399,16 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
 
               painter->save();
               painter->setClipRegion(QRegion(R));
+#if (QT_VERSION >= QT_VERSION_CHECK(6,8,0))
+              /* A workaround for a weird bug that creates gaps between SVG elements
+                 when the painter opacity is less than 1. */
+              if ((painter->device() ? painter->device()->devicePixelRatioF()
+                                     : qApp->devicePixelRatio()) > static_cast<qreal>(1))
+              {
+                renderFrame(painter,r,fspec,fspec.element+"-shadow",0,0,0,0,0,false,true);
+              }
+              else
+#endif
               renderFrame(painter,r,fspec,fspec.element+"-shadow");
               painter->restore();
 
@@ -9688,7 +9708,9 @@ void Style::drawControl(QStyle::ControlElement element,
         {
           /* in case there isn't enough space */
           QFont fnt(painter->font());
-          if ((opt->features & QStyleOptionButton::AutoDefaultButton) || lspec.boldFont)
+          if ((opt->features & QStyleOptionButton::AutoDefaultButton)
+              || (opt->features & QStyleOptionButton::DefaultButton)
+              || lspec.boldFont)
             fnt.setWeight(lspec.boldness);
           txtSize = textSize(fnt,txt);
           QSize availableSize = r.size()
@@ -9955,7 +9977,9 @@ void Style::drawControl(QStyle::ControlElement element,
             h = pb->height();
           }
           QFont fnt(painter->font());
-          if ((opt->features & QStyleOptionButton::AutoDefaultButton) || lspec.boldFont)
+          if ((opt->features & QStyleOptionButton::AutoDefaultButton)
+              || (opt->features & QStyleOptionButton::DefaultButton)
+              || lspec.boldFont)
             fnt.setWeight(lspec.boldness);
           QSize txtSize = textSize(fnt,opt->text);
           bool enoughSpace(true);
@@ -14274,7 +14298,9 @@ QSize Style::sizeFromContents(QStyle::ContentsType type,
             s = s + QSize(lspec.tispace, 0);
           /* take into account the boldness of default button text
              and also the possibility of boldness in general */
-          if ((opt->features & QStyleOptionButton::AutoDefaultButton) || lspec.boldFont)
+          if ((opt->features & QStyleOptionButton::AutoDefaultButton)
+              || (opt->features & QStyleOptionButton::DefaultButton)
+              || lspec.boldFont)
           {
             QFont f;
             if (widget) f = widget->font();

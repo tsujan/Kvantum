@@ -219,7 +219,7 @@ de LXQt.</translation>
         <source>Do not tint selected label icons with
 the highlight color!</source>
         <translation>Neniu emfazkolora tono
-por la elektita elemento!</translation>
+por la elektita elemento.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="571"/>
@@ -252,7 +252,7 @@ de Plasmo vidu ĉi tiun agordon.)</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="651"/>
         <source>Tint label icons on mouseover by </source>
-        <translation>Ŝveba kolortono por la etiked-ikono </translation>
+        <translation>Ŝveba kolortono por la etiked-ikono: </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="665"/>
@@ -997,7 +997,7 @@ If disabled, see Compositing &amp; General Look → Transient scrollbars!</sourc
 Marki ĉi tiun butonon forviŝas la sagojn laŭeble.
 
 Se ĝi estus malvalidigita, vidu:
-Komponado &amp; Ĝenerala Ŝajno → Nedaŭraj rulumskaloj!</translation>
+Komponado &amp; Ĝenerala Ŝajno → Nedaŭraj rulumskaloj</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1667"/>
@@ -1177,7 +1177,7 @@ If disabled, see Compositing &amp; General Look → Transient scrollbars!</sourc
 Defaŭlte, la rulumskalo situas ekster la vidkadro.
 
 Se ĉi tiu butono estus malvalidigita, vidu:
-Komponado &amp; Ĝenerala Ŝajno → Nedaŭraj rulumskaloj!</translation>
+Komponado &amp; Ĝenerala Ŝajno → Nedaŭraj rulumskaloj</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1938"/>
@@ -1825,17 +1825,17 @@ aŭ ĝisdatigi ĝian antaŭrigardon.</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../main.cpp" line="139"/>
+        <location filename="../../main.cpp" line="123"/>
         <source>Kvantum</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="140"/>
+        <location filename="../../main.cpp" line="124"/>
         <source>Kvantum is not installed on your system.</source>
         <translation>Kvantum ne estas instalita en via sistemo.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="141"/>
+        <location filename="../../main.cpp" line="125"/>
         <source>Please first install the Kvantum style plugin!</source>
         <translation>Bonvole instalu la stilan kromprogramon Kvantum!</translation>
     </message>

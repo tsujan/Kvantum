@@ -3,6 +3,8 @@ V1.1.4
  * Exclude the opaque list from blurring of hard-coded translucency.
  * Use a translucent background in "PE_Widget" if needed and existing.
  * Disable and re-enable blurring if `windowOpacity` switches between 0 and 1 respectively.
+ * Corrected a minor, old mistake in calculating the text size of a default push-button.
+ * Added a workaround for a weird bug in Qt 6.8 that creates gaps between SVG menu elements when the scale factor is more than 1 and the painter opacity is less than 1.
 
 V1.1.3
 ---------

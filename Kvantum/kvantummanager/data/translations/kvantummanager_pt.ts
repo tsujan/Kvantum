@@ -1817,17 +1817,17 @@ ou atualizar a sua pré-visualização.</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../main.cpp" line="139"/>
+        <location filename="../../main.cpp" line="123"/>
         <source>Kvantum</source>
         <translation>Kvantum</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="140"/>
+        <location filename="../../main.cpp" line="124"/>
         <source>Kvantum is not installed on your system.</source>
         <translation>O Kvantum não está instalado no seu sistema.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="141"/>
+        <location filename="../../main.cpp" line="125"/>
         <source>Please first install the Kvantum style plugin!</source>
         <translation>Primeiro instale o plugin de estilo Kvantum!</translation>
     </message>
