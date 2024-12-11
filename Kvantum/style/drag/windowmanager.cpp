@@ -287,7 +287,7 @@ bool WindowManager::mousePressEvent (QObject *object, QEvent *event)
   /* find the window and its drag point */
   QWindow *w = qobject_cast<QWindow*>(object);
   if (!w) return false;
-  QPoint winDragPoint = mouseEvent->pos();
+  QPoint winDragPoint = mouseEvent->position().toPoint();
 
   if (qApp->activePopupWidget())
   { // -> the workaround in timerEvent()
