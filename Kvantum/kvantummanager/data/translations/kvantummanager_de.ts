@@ -388,7 +388,7 @@ horizontal so weit wie möglich zentriert.</translation>
         <source>You might see annoying artifacts that are caused
 by bugs in Qt&apos;s handling of non-integer scaling
 with window translucency or gradient.</source>
-        <translation>Es könnten störende Artefakte zu sehen sein, die durch Fehler&#xa0;
+        <translation>Es könnten störende Artefakte zu sehen sein, die durch Fehler 
 in Qt&apos;s Umgang von nicht-integer Skalierung 
 mit Fenstertransluzenz oder Farbverlauf auftreten.</translation>
     </message>
@@ -458,17 +458,17 @@ Usually, a value of 2 is enough.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="808"/>
         <source>Blur Corner Radius</source>
-        <translation type="unfinished"></translation>
+        <translation>Radius der Unschärfeecke</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="821"/>
         <source>Menu:</source>
-        <translation type="unfinished"></translation>
+        <translation>Menü:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="828"/>
         <source>Tooltip:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kurzinfo:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="852"/>
@@ -509,7 +509,10 @@ Automatically checked if window blurring is enabled.</source>
 
 This may be useful under DEs that give
 shadow to menus and tooltips.</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine Schatten für Menüs und Kurzinfos zeichnen.
+
+Dies kann unter DEs nützlich sein, die Menüs
+und Kurzinfos mit Schatten versehen.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="968"/>
