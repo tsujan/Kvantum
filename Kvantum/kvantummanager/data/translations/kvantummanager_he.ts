@@ -394,7 +394,7 @@ horizontally centered as far as possible.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="599"/>
         <source>Centered form layouts</source>
-        <translation type="unfinished"></translation>
+        <translation>פריסות בצורה ממורכזת</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="618"/>
@@ -420,7 +420,7 @@ Miscellaneous → Respect current DE if possible</source>
     <message>
         <location filename="../../kvantummanager.ui" line="682"/>
         <source>Scroll jump with middle click</source>
-        <translation type="unfinished"></translation>
+        <translation>קפיצת גלילה עם לחצן אמצעי</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="725"/>
@@ -460,7 +460,7 @@ or through logging out and in again.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="792"/>
         <source>Disable composite effects</source>
-        <translation type="unfinished"></translation>
+        <translation>השבתת אפקטים מרוכבים</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="801"/>
@@ -1596,7 +1596,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="2778"/>
         <source>Do you want to revert to the default (root) settings of this theme?</source>
-        <translation type="unfinished"></translation>
+        <translation>להסיג את הגדרות ברירת המחדל (root) של ערכת הנושא הזאת?</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2781"/>
