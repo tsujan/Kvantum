@@ -415,7 +415,11 @@ when the scrollbar is left clicked.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation type="unfinished"></translation>
+        <translation>כברירת מחדל, מחוון הגלילה קופץ למקום
+בלחיצה שמאלית על פס הגלילה.
+
+אם זה מושבת, אפשר לגשת אל:
+שונות ← כיבוד סביבת העבודה הנוכחית אם אפשר</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="682"/>
@@ -1487,7 +1491,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="549"/>
         <source>The name of an installable themes should not be &quot;Default&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>שמות ערכת עיצוב שניתן להתקין לא יכול להיות „Default/ברירת מחדל”.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="550"/>
@@ -1534,7 +1538,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="659"/>
         <source>This theme is also installed as root in:</source>
-        <translation type="unfinished"></translation>
+        <translation>ערכת העיצוב הזאת מותקנת גם כמשתמש על/root תחת:</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="661"/>
