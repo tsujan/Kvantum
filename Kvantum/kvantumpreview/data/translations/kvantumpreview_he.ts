@@ -109,21 +109,24 @@ with an arrow</source>
         <location filename="../../KvantumPreviewBase.ui" line="597"/>
         <source>Toolbutton with 32px SVG icon
 and text below</source>
-        <translation type="unfinished"></translation>
+        <translation>כפתור כלי עם סמל SVG של 32 פיקסלים
+וטקסט מתחתין</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="618"/>
         <location filename="../../KvantumPreviewBase.ui" line="639"/>
         <source>Toolbutton with text below
 and arrow</source>
-        <translation type="unfinished"></translation>
+        <translation>כפתור כלי עם טקסט מתחתיו
+וחץ</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="657"/>
         <location filename="../../KvantumPreviewBase.ui" line="678"/>
         <source>Toolbutton with icon at the side
 and arrow</source>
-        <translation type="unfinished"></translation>
+        <translation>כפתור כלי עם סמל בצד
+וחץ</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="696"/>
