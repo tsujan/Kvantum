@@ -102,7 +102,8 @@ toolbutton</source>
         <location filename="../../KvantumPreviewBase.ui" line="508"/>
         <source>Toggle toolbutton
 with an arrow</source>
-        <translation type="unfinished"></translation>
+        <translation>כפתור כלי למיתוג
+עם חץ</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="573"/>
@@ -134,19 +135,21 @@ and arrow</source>
         <source>Toggle toolbutton with icon,
 ordinary arrow
 and dropdown menu arrow</source>
-        <translation type="unfinished"></translation>
+        <translation>כפתור כלי למיתוג עם סמל
+חץ רגיל וחץ לתפריט נשלף</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="528"/>
         <location filename="../../KvantumPreviewBase.ui" line="552"/>
         <source>Toolbutton with 32px PNG icon
 beside text</source>
-        <translation type="unfinished"></translation>
+        <translation>כפתור כלי עם סמל PNG בגודל
+32 פיקסלים לצד הטקסט</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="366"/>
         <source>Push button with menu</source>
-        <translation type="unfinished"></translation>
+        <translation>כפתור לחיצה עם תפריט</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="415"/>
