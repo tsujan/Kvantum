@@ -1232,7 +1232,7 @@ This option will hide these.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1791"/>
         <source>Non-checkable combo menu</source>
-        <translation type="unfinished"></translation>
+        <translation>תפריט משולב בלי בחירות</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2003"/>
@@ -1240,7 +1240,10 @@ This option will hide these.</source>
 scroll arrows on their top and/or bottom?
 
 By default, big menus are scrollable.</source>
-        <translation type="unfinished"></translation>
+        <translation>האם תפריטים גדולים יהיו נגללים
+ויהיו להם חיצי גלילה למעלה ו/או למטה?
+
+כברירת מחדל, תפריטים גדולים ניתנים לגלילה.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2016"/>
@@ -1249,17 +1252,21 @@ By default, big menus are scrollable.</source>
 If you have enabled it, you could temporarily disable it
 for a button that can be dragged and dropped by pressing
 the Ctrl key before pressing the button.</source>
-        <translation type="unfinished"></translation>
+        <translation>אזהרה: בהתחלה זה יכול לבלבל קצת.
+
+אם הפעלת את האפשרות, אפשר להשבית אותה זמנית
+לכפתור שאפשר לגרור ולשחרר על ידי לחיצה על מקש
+Ctrl בטרם לחיצה על הכפתור.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2023"/>
         <source>Allow dragging from buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>לאפשר גרירה מהכפתורים</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2046"/>
         <source>Application Themes</source>
-        <translation type="unfinished"></translation>
+        <translation>ערכות עיצוב ליישומים</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2052"/>
