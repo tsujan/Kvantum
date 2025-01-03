@@ -6,7 +6,7 @@
     <message>
         <location filename="../../about.ui" line="171"/>
         <source>License</source>
-        <translation type="unfinished"></translation>
+        <translation>ლიცენზია</translation>
     </message>
 </context>
 <context>
@@ -91,12 +91,12 @@ settings of this theme.
     <message>
         <location filename="../../kvantummanager.ui" line="329"/>
         <source>Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>აღდგენა</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="332"/>
         <source>Ctrl+Z</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Z</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="342"/>
@@ -108,12 +108,12 @@ settings of this theme.
         <location filename="../../kvantummanager.ui" line="346"/>
         <location filename="../../kvantummanager.ui" line="2169"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>შენახვა</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="349"/>
         <source>Ctrl+S</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+S</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="356"/>
@@ -241,7 +241,7 @@ the highlight color!</source>
         <location filename="../../kvantummanager.ui" line="1086"/>
         <location filename="../../kvantummanager.ui" line="1122"/>
         <source> %</source>
-        <translation type="unfinished"></translation>
+        <translation> %</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="611"/>
@@ -300,7 +300,7 @@ as far as possible.</source>
         <location filename="../../kvantummanager.ui" line="1476"/>
         <location filename="../../kvantummanager.ui" line="1511"/>
         <source> px</source>
-        <translation type="unfinished"></translation>
+        <translation> პქს</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="776"/>
@@ -444,12 +444,12 @@ Usually, a value of 2 is enough.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="821"/>
         <source>Menu:</source>
-        <translation type="unfinished"></translation>
+        <translation>მენიუ:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="828"/>
         <source>Tooltip:</source>
-        <translation type="unfinished"></translation>
+        <translation>მინიშნება:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="852"/>
@@ -459,17 +459,17 @@ Usually, a value of 2 is enough.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="858"/>
         <source>Saturation:</source>
-        <translation type="unfinished"></translation>
+        <translation>ჯერადობა:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="865"/>
         <source>Intensity:</source>
-        <translation type="unfinished"></translation>
+        <translation>ინტენსვობა:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="872"/>
         <source>Contrast:</source>
-        <translation type="unfinished"></translation>
+        <translation>კონტრასტი:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="949"/>
@@ -568,7 +568,7 @@ windows if this theme distinguishes between them?</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1228"/>
         <source>Sizes</source>
-        <translation type="unfinished"></translation>
+        <translation>ზომები</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1243"/>
@@ -593,7 +593,7 @@ windows if this theme distinguishes between them?</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1361"/>
         <source>Font size</source>
-        <translation type="unfinished"></translation>
+        <translation>ფონტის ზომა</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1377"/>
@@ -652,7 +652,7 @@ some apps set it themeselves.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1842"/>
         <source>Click behavior:</source>
-        <translation type="unfinished"></translation>
+        <translation>წკაპის ქცევა:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1962"/>
@@ -971,12 +971,12 @@ while 0 means no delay.</source>
         <location filename="../../kvantummanager.ui" line="1584"/>
         <location filename="../../kvantummanager.ui" line="1607"/>
         <source> ms</source>
-        <translation type="unfinished"></translation>
+        <translation> მწმ</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1640"/>
         <source>Miscellaneous</source>
-        <translation type="unfinished"></translation>
+        <translation>სხვადასხვა</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1832"/>
@@ -1205,7 +1205,7 @@ the Ctrl key before pressing the button.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2042"/>
         <source>Application Themes</source>
-        <translation type="unfinished"></translation>
+        <translation>აპლიკაციის თემები</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2048"/>
@@ -1230,7 +1230,7 @@ the Ctrl key before pressing the button.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2156"/>
         <source>Remove List</source>
-        <translation type="unfinished"></translation>
+        <translation>სიის წაშლა</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2163"/>
@@ -1246,12 +1246,12 @@ the Ctrl key before pressing the button.</source>
         <location filename="../../kvantummanager.ui" line="2193"/>
         <location filename="../../kvantummanager.ui" line="2199"/>
         <source>Ctrl+Q</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Q</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2196"/>
         <source>Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>გასვლა</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2209"/>
@@ -1262,17 +1262,17 @@ or update its preview.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2213"/>
         <source>Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>მინიატურა</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2220"/>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>შესახებ</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2243"/>
         <source>What&apos;s This?</source>
-        <translation type="unfinished"></translation>
+        <translation>რა არის ეს?</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2246"/>
@@ -1282,7 +1282,7 @@ or update its preview.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2249"/>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>დახმარება</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="327"/>
@@ -1314,7 +1314,7 @@ or update its preview.</source>
         <location filename="../../KvantumManager.cpp" line="776"/>
         <location filename="../../KvantumManager.cpp" line="2777"/>
         <source>Confirmation</source>
-        <translation type="unfinished"></translation>
+        <translation>დადასტურება</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="737"/>
@@ -1341,37 +1341,37 @@ or update its preview.</source>
         <location filename="../../KvantumManager.cpp" line="108"/>
         <location filename="../../KvantumManager.cpp" line="114"/>
         <source>Follow Style</source>
-        <translation type="unfinished"></translation>
+        <translation>შემდეგი სტილი</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="105"/>
         <source>Single Click</source>
-        <translation type="unfinished"></translation>
+        <translation>ერთი წკაპი</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="106"/>
         <source>Double Click</source>
-        <translation type="unfinished"></translation>
+        <translation>ორმაგი წკაპი</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="109"/>
         <source>Icon Only</source>
-        <translation type="unfinished"></translation>
+        <translation>მხოლოდ ხატულა</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="110"/>
         <source>Text Only</source>
-        <translation type="unfinished"></translation>
+        <translation>მხოლოდ ტექსტი</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="111"/>
         <source>Text Beside Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>ტექსტი ხატულის გვერდით</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="112"/>
         <source>Text Under Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>ტექსტი ხატულის ქვეშ</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="115"/>
@@ -1401,12 +1401,12 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="121"/>
         <source>Titlebar</source>
-        <translation type="unfinished"></translation>
+        <translation>სათაურის ზოლი</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="122"/>
         <source>Menubar</source>
-        <translation type="unfinished"></translation>
+        <translation>მენიუს ზოლი</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="123"/>
@@ -1526,7 +1526,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="1811"/>
         <source>No description</source>
-        <translation type="unfinished"></translation>
+        <translation>აღწერის გარეშე</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2264"/>
@@ -1572,7 +1572,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="2970"/>
         <source>Translators</source>
-        <translation type="unfinished"></translation>
+        <translation>მთარგმნელები</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2968"/>
@@ -1587,12 +1587,12 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="51"/>
         <source>modified</source>
-        <translation type="unfinished"></translation>
+        <translation>შეიცვალა</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="52"/>
         <source>default</source>
-        <translation type="unfinished"></translation>
+        <translation>ნაგულისხმევი</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="527"/>
@@ -1617,7 +1617,7 @@ or update its preview.</source>
     <message>
         <location filename="../../main.cpp" line="139"/>
         <source>Kvantum</source>
-        <translation type="unfinished"></translation>
+        <translation>Kvantum</translation>
     </message>
     <message>
         <location filename="../../main.cpp" line="140"/>
