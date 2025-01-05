@@ -4,7 +4,7 @@
 <context>
     <name>KvManager::AboutDialog</name>
     <message>
-        <location filename="../../about.ui" line="171"/>
+        <location filename="../../about.ui" line="173"/>
         <source>License</source>
         <translation>Lizenz</translation>
     </message>
@@ -153,7 +153,7 @@ with LXQt Session Settings.</source>
         <translation>Führe PCManFM-qt&apos;s Seitenleiste mit seiner Umgebung zusammen.
 
 Unter LXQt muss sich erneut eingeloggt werden oder
-PCManFM-qt schließen und anschließend den Desktop 
+PCManFM-qt schließen und anschließend den Desktop
 mit LXQt Sitzungseinstellungen neu starten.</translation>
     </message>
     <message>
@@ -388,8 +388,8 @@ horizontal so weit wie möglich zentriert.</translation>
         <source>You might see annoying artifacts that are caused
 by bugs in Qt&apos;s handling of non-integer scaling
 with window translucency or gradient.</source>
-        <translation>Es könnten störende Artefakte zu sehen sein, die durch Fehler 
-in Qt&apos;s Umgang von nicht-integer Skalierung 
+        <translation>Es könnten störende Artefakte zu sehen sein, die durch Fehler
+in Qt&apos;s Umgang von nicht-integer Skalierung
 mit Fenstertransluzenz oder Farbverlauf auftreten.</translation>
     </message>
     <message>

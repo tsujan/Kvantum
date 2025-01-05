@@ -1,5 +1,6 @@
 V1.1.4
 ---------
+ * Support regular expressions in application themes.
  * Exclude the opaque list from blurring of hard-coded translucency.
  * Use a translucent background in "PE_Widget" if needed and existing.
  * Disable and re-enable blurring if `windowOpacity` switches between 0 and 1 respectively.

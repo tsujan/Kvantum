@@ -436,7 +436,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2624"/>
         <source>Column 0</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">სვეტი 0</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2632"/>

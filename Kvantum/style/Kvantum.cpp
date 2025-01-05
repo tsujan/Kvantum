@@ -1,5 +1,5 @@
 /*
- * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014-2024 <tsujan2000@gmail.com>
+ * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014-2025 <tsujan2000@gmail.com>
  *
  * Kvantum is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -192,18 +192,34 @@ Style::Style(bool useDark) : QCommonStyle()
     if (themeChooser.status() == QSettings::NoError)
     {
       if (themeChooser.contains(KL1("theme")))
-        theme = themeChooser.value("theme").toString();
+        theme = themeChooser.value(KL1("theme")).toString();
       /* check if this app has a specific theme assigned to it */
-      QString appName = qApp->applicationName();
+      const QString appName = qApp->applicationName();
       if (appName != "kvantummanager" && appName != "kvantumpreview")
       {
-        themeChooser.beginGroup("Applications");
-        QStringList list = themeChooser.childKeys();
-        for (int i = 0; i < list.count(); ++i)
+        const QRegularExpression r("[^\\w\\-]");
+        themeChooser.beginGroup(KL1("Applications"));
+        const QStringList themesList = themeChooser.childKeys();
+        for (const auto &t : themesList)
         {
-          if (themeChooser.value(list.at(i)).toStringList().contains(appName, Qt::CaseInsensitive))
+          const QStringList apps = themeChooser.value(t).toStringList();
+          QString pattern;
+          for (const auto &app : apps)
           {
-            theme = list.at(i);
+            if (app.isEmpty()) continue;
+            if (!app.contains(r)) // an ordinary string
+              pattern.append("\\A" + QRegularExpression::escape(app) + "\\z|");
+            else // a pattern
+              pattern.append(app + "|");
+          }
+          if (pattern.isEmpty()) continue;
+          pattern.removeLast(); // remove the last "|"
+          pattern.append(")");
+          pattern.prepend("(?i)("); // case insensitive
+          QRegularExpression regex(pattern);
+          if (regex.isValid() && regex.match(appName).hasMatch())
+          {
+            theme = t;
             break;
           }
         }
