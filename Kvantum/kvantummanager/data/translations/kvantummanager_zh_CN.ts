@@ -112,7 +112,7 @@ settings of this theme.
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="346"/>
-        <location filename="../../kvantummanager.ui" line="2173"/>
+        <location filename="../../kvantummanager.ui" line="2177"/>
         <source>Save</source>
         <translation>保存</translation>
     </message>
@@ -734,7 +734,7 @@ on focused buttons and other widgets.</source>
         <translation>删除焦点矩形</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2155"/>
+        <location filename="../../kvantummanager.ui" line="2159"/>
         <source>Use the active theme for all apps!
 
 This Needs saving to take effect.</source>
@@ -1411,64 +1411,70 @@ the Ctrl key before pressing the button.</source>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2132"/>
+        <source>Each executable name can be either a
+simple string or a regular expression.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../kvantummanager.ui" line="2136"/>
         <source>app1,app2,app3</source>
         <translation>应用1，应用2，应用3</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2160"/>
+        <location filename="../../kvantummanager.ui" line="2164"/>
         <source>Remove List</source>
         <translation>删除列表项</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2167"/>
+        <location filename="../../kvantummanager.ui" line="2171"/>
         <source>Save the current list of apps</source>
         <translation>保存当前app列表配置</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2170"/>
+        <location filename="../../kvantummanager.ui" line="2174"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Save the current list of applications with their corresponding themes!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;保存使用对应主题的应用程序列表！&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2197"/>
-        <location filename="../../kvantummanager.ui" line="2203"/>
+        <location filename="../../kvantummanager.ui" line="2201"/>
+        <location filename="../../kvantummanager.ui" line="2207"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2200"/>
+        <location filename="../../kvantummanager.ui" line="2204"/>
         <source>Quit</source>
         <translation>退出</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2213"/>
+        <location filename="../../kvantummanager.ui" line="2217"/>
         <source>Preview the active theme
 or update its preview.</source>
         <translation>预览当前主题
 或者刷新预览。</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2217"/>
+        <location filename="../../kvantummanager.ui" line="2221"/>
         <source>Preview</source>
         <translation>预览</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2224"/>
+        <location filename="../../kvantummanager.ui" line="2228"/>
         <source>About</source>
         <translation>关于</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2247"/>
+        <location filename="../../kvantummanager.ui" line="2251"/>
         <source>What&apos;s This?</source>
         <translation>这是什么？</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2250"/>
+        <location filename="../../kvantummanager.ui" line="2254"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click on this button and then click on a GUI element that has &amp;quot;What&apos;s This&amp;quot; tooltip  to get information about what it does.&lt;/p&gt;&lt;p&gt;There are also ordinary tooltips but this kind of tooltip will not disappear until you click somewhere.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;点击此按钮，然后点击 GUI 元素上的&amp;quot;这是什么&amp;quot; 工具提示可以获取解释说明信息。&lt;/p&gt;&lt;p&gt;也同样有普通的提示信息，但是这种提示在您点击别处前不会消失。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2253"/>
+        <location filename="../../kvantummanager.ui" line="2257"/>
         <source>Help</source>
         <translation>帮助</translation>
     </message>

@@ -113,7 +113,7 @@ settings of this theme.
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="346"/>
-        <location filename="../../kvantummanager.ui" line="2173"/>
+        <location filename="../../kvantummanager.ui" line="2177"/>
         <source>Save</source>
         <translation>저장</translation>
     </message>
@@ -741,7 +741,7 @@ on focused buttons and other widgets.</source>
         <translation>초점 사각형 제거</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2155"/>
+        <location filename="../../kvantummanager.ui" line="2159"/>
         <source>Use the active theme for all apps!
 
 This Needs saving to take effect.</source>
@@ -1417,64 +1417,70 @@ Ctrl 키를 눌러 드래그 앤 드롭할 수 있는 버튼에 대해
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2132"/>
+        <source>Each executable name can be either a
+simple string or a regular expression.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../kvantummanager.ui" line="2136"/>
         <source>app1,app2,app3</source>
         <translation>앱1,앱2,앱3</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2160"/>
+        <location filename="../../kvantummanager.ui" line="2164"/>
         <source>Remove List</source>
         <translation>목록 제거</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2167"/>
+        <location filename="../../kvantummanager.ui" line="2171"/>
         <source>Save the current list of apps</source>
         <translation>현재 앱 목록 저장</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2170"/>
+        <location filename="../../kvantummanager.ui" line="2174"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Save the current list of applications with their corresponding themes!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;해당 응용 프로그램과 함께 현재 응용 프로그램 목록을 저장하십시오!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2197"/>
-        <location filename="../../kvantummanager.ui" line="2203"/>
+        <location filename="../../kvantummanager.ui" line="2201"/>
+        <location filename="../../kvantummanager.ui" line="2207"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2200"/>
+        <location filename="../../kvantummanager.ui" line="2204"/>
         <source>Quit</source>
         <translation>종료</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2213"/>
+        <location filename="../../kvantummanager.ui" line="2217"/>
         <source>Preview the active theme
 or update its preview.</source>
         <translation>활성 테마를 미리 보거나
 미리 보기를 업데이트합니다.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2217"/>
+        <location filename="../../kvantummanager.ui" line="2221"/>
         <source>Preview</source>
         <translation>미리보기</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2224"/>
+        <location filename="../../kvantummanager.ui" line="2228"/>
         <source>About</source>
         <translation>프로그램 정보</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2247"/>
+        <location filename="../../kvantummanager.ui" line="2251"/>
         <source>What&apos;s This?</source>
         <translation>이것은 무엇일까요?</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2250"/>
+        <location filename="../../kvantummanager.ui" line="2254"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click on this button and then click on a GUI element that has &amp;quot;What&apos;s This&amp;quot; tooltip  to get information about what it does.&lt;/p&gt;&lt;p&gt;There are also ordinary tooltips but this kind of tooltip will not disappear until you click somewhere.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;이 버튼을 클릭 한 다음 &amp;quot;이것은 무엇일까요&amp;quot; 툴팁이 있는 GUI 요소를 클릭하면 그 기능에 대한 정보를 얻을 수 있습니다.&lt;/p&gt;&lt;p&gt;일반적인 툴팁도 있지만, 어딘가를 클릭할 때까지 이러한 종류의 툴팁은 사라지지 않습니다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2253"/>
+        <location filename="../../kvantummanager.ui" line="2257"/>
         <source>Help</source>
         <translation>도움말</translation>
     </message>

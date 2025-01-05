@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="eo">
+<TS version="2.1" language="eo_001">
 <context>
     <name>KvManager::AboutDialog</name>
     <message>
@@ -114,7 +114,7 @@ agordojn de la etoso.
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="346"/>
-        <location filename="../../kvantummanager.ui" line="2173"/>
+        <location filename="../../kvantummanager.ui" line="2177"/>
         <source>Save</source>
         <translation>Konservi</translation>
     </message>
@@ -747,7 +747,7 @@ aperi sur fokusitaj butonoj aŭ aliaj fenestraĵoj.</translation>
         <translation>Viŝi la fokusajn ortangulojn</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2155"/>
+        <location filename="../../kvantummanager.ui" line="2159"/>
         <source>Use the active theme for all apps!
 
 This Needs saving to take effect.</source>
@@ -1111,7 +1111,7 @@ whose windows should not be translucent.
 
 (Some apps, like video players, may have
 problems with translucency!)</source>
-        <translation>Perkome disigita listo de ekzekveblaĵoj,
+        <translation>Perkome disigita listo de ruleblaĵoj,
 kies fenestroj estu maldiafanaj.
 
 (Iuj aplikaĵoj, kiel spektiloj, povas havi
@@ -1419,7 +1419,7 @@ preminte la Ctrl-klavon antaŭ ol premi la butonon.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="2052"/>
         <source>&lt;center&gt;Here you could assign themes to specific applications.&lt;/center&gt;&lt;br&gt;&lt;center&gt;For each theme, you could add a comma-separated list of executables whose applications should use that theme instead of the active theme. After doing so for all of your chosen themes, save the result by clicking on the &lt;i&gt;Save&lt;/i&gt; button!&lt;/center&gt;</source>
-        <translation>&lt;center&gt;Ĉi tie, vi povas atribui etosojn al iuj aplikaĵoj.&lt;/center&gt;&lt;br&gt;&lt;center&gt;Po ĉiu etoso, vi povas aldoni perkome disigitan liston de ekzekveblaĵoj, kies aplikaĵoj uzu la etoson anstataŭ la aktivan etoson. Farinte tion por ĉiuj viaj elektitaj etosoj, konservu la rezulton per klako al la butono &lt;i&gt;&quot;Konservi&quot;&lt;/i&gt;!&lt;/center&gt;</translation>
+        <translation>&lt;center&gt;Ĉi tie, vi povas atribui etosojn al iuj aplikaĵoj.&lt;/center&gt;&lt;br&gt;&lt;center&gt;Po ĉiu etoso, vi povas aldoni perkome disigitan liston de ruleblaĵoj, kies aplikaĵoj uzu la etoson anstataŭ la aktivan etoson. Farinte tion por ĉiuj viaj elektitaj etosoj, konservu la rezulton per klako al la butono &lt;i&gt;&quot;Konservi&quot;&lt;/i&gt;!&lt;/center&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2087"/>
@@ -1433,64 +1433,71 @@ preminte la Ctrl-klavon antaŭ ol premi la butonon.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2132"/>
+        <source>Each executable name can be either a
+simple string or a regular expression.</source>
+        <translation>Ĉiu ruleblaĵa nomo povas esti aŭ
+simpla signovico aŭ regula esprimo.</translation>
+    </message>
+    <message>
+        <location filename="../../kvantummanager.ui" line="2136"/>
         <source>app1,app2,app3</source>
         <translation>ap1,ap2,ap3</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2160"/>
+        <location filename="../../kvantummanager.ui" line="2164"/>
         <source>Remove List</source>
         <translation>Viŝi Liston</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2167"/>
+        <location filename="../../kvantummanager.ui" line="2171"/>
         <source>Save the current list of apps</source>
         <translation>Konservi la liston de aplikaĵoj</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2170"/>
+        <location filename="../../kvantummanager.ui" line="2174"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Save the current list of applications with their corresponding themes!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Konservi la nunan liston de aplikaĵoj kaj iliaj atribuitaj etosoj.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2197"/>
-        <location filename="../../kvantummanager.ui" line="2203"/>
+        <location filename="../../kvantummanager.ui" line="2201"/>
+        <location filename="../../kvantummanager.ui" line="2207"/>
         <source>Ctrl+Q</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2200"/>
+        <location filename="../../kvantummanager.ui" line="2204"/>
         <source>Quit</source>
         <translation>Eliri</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2213"/>
+        <location filename="../../kvantummanager.ui" line="2217"/>
         <source>Preview the active theme
 or update its preview.</source>
         <translation>Antaŭrigardi la aktivan etoson
 aŭ ĝisdatigi ĝian antaŭrigardon.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2217"/>
+        <location filename="../../kvantummanager.ui" line="2221"/>
         <source>Preview</source>
         <translation>Rigardi</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2224"/>
+        <location filename="../../kvantummanager.ui" line="2228"/>
         <source>About</source>
         <translation>pri</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2247"/>
+        <location filename="../../kvantummanager.ui" line="2251"/>
         <source>What&apos;s This?</source>
         <translation>Kio estas tio?</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2250"/>
+        <location filename="../../kvantummanager.ui" line="2254"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click on this button and then click on a GUI element that has &amp;quot;What&apos;s This&amp;quot; tooltip  to get information about what it does.&lt;/p&gt;&lt;p&gt;There are also ordinary tooltips but this kind of tooltip will not disappear until you click somewhere.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Klaku ĉi tiun butonon kaj poste alklaku grafikan interfaceron, kiu havas la ŝpruchelpilon de &amp;quot;&quot;What&apos;s This&quot;&amp;quot;, por akiri informon pri ĝia funkcio.&lt;/p&gt;&lt;p&gt;Ankaŭ estas kutimaj ŝpruchelpiloj sed ĉi tia helpilo ne malaperas ĝis vi klakas ie.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2253"/>
+        <location filename="../../kvantummanager.ui" line="2257"/>
         <source>Help</source>
         <translation>Helpo</translation>
     </message>

@@ -114,7 +114,7 @@ ayarlarına geri dönün.
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="346"/>
-        <location filename="../../kvantummanager.ui" line="2173"/>
+        <location filename="../../kvantummanager.ui" line="2177"/>
         <source>Save</source>
         <translation>Kaydet</translation>
     </message>
@@ -742,7 +742,7 @@ noktalı dikdörtgenler gibi görünebilirler.</translation>
         <translation>Odak dikdörtgenlerini kaldır</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2155"/>
+        <location filename="../../kvantummanager.ui" line="2159"/>
         <source>Use the active theme for all apps!
 
 This Needs saving to take effect.</source>
@@ -1423,64 +1423,70 @@ düğmeye basmadan önce Ctrl tuşu.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2132"/>
+        <source>Each executable name can be either a
+simple string or a regular expression.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../kvantummanager.ui" line="2136"/>
         <source>app1,app2,app3</source>
         <translation>uyg1,uyg2,uyg3</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2160"/>
+        <location filename="../../kvantummanager.ui" line="2164"/>
         <source>Remove List</source>
         <translation>Listeyi Kaldır</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2167"/>
+        <location filename="../../kvantummanager.ui" line="2171"/>
         <source>Save the current list of apps</source>
         <translation>Geçerli uygulama listesini kaydet</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2170"/>
+        <location filename="../../kvantummanager.ui" line="2174"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Save the current list of applications with their corresponding themes!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Geçerli uygulama listesini ilgili temalarıyla kaydedin!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2197"/>
-        <location filename="../../kvantummanager.ui" line="2203"/>
+        <location filename="../../kvantummanager.ui" line="2201"/>
+        <location filename="../../kvantummanager.ui" line="2207"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2200"/>
+        <location filename="../../kvantummanager.ui" line="2204"/>
         <source>Quit</source>
         <translation>Çık</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2213"/>
+        <location filename="../../kvantummanager.ui" line="2217"/>
         <source>Preview the active theme
 or update its preview.</source>
         <translation>Etkin temayı önizleyin veya
 önizlemesini güncelleyin.</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2217"/>
+        <location filename="../../kvantummanager.ui" line="2221"/>
         <source>Preview</source>
         <translation>Ön izleme</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2224"/>
+        <location filename="../../kvantummanager.ui" line="2228"/>
         <source>About</source>
         <translation>Hakkında</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2247"/>
+        <location filename="../../kvantummanager.ui" line="2251"/>
         <source>What&apos;s This?</source>
         <translation>Bu Nedir?</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2250"/>
+        <location filename="../../kvantummanager.ui" line="2254"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click on this button and then click on a GUI element that has &amp;quot;What&apos;s This&amp;quot; tooltip  to get information about what it does.&lt;/p&gt;&lt;p&gt;There are also ordinary tooltips but this kind of tooltip will not disappear until you click somewhere.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Bu düğmeye tıklayın ve ardından ne yaptığı hakkında bilgi almak için &amp;quot;Bu Nedir&amp;quot; ipucu içeren bir arayüz öğesine tıklayın.&lt;/p&gt;&lt;p&gt;Sıradan araç ipuçları da var, ancak bu tür araç ipucu bir yere tıklayana kadar kaybolmayacak.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../kvantummanager.ui" line="2253"/>
+        <location filename="../../kvantummanager.ui" line="2257"/>
         <source>Help</source>
         <translation>Yardım</translation>
     </message>
