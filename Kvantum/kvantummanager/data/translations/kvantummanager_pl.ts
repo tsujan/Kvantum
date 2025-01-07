@@ -1425,7 +1425,8 @@ naciskając klawisz Ctrl przed naciśnięciem przycisku.</translation>
         <location filename="../../kvantummanager.ui" line="2132"/>
         <source>Each executable name can be either a
 simple string or a regular expression.</source>
-        <translation type="unfinished"></translation>
+        <translation>Każda nazwa pliku wykonywalnego może być prostym
+ciągiem znaków lub wyrażeniem regularnym.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2136"/>

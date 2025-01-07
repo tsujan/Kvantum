@@ -151,7 +151,7 @@ width</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="804"/>
         <source>Auto-raise</source>
-        <translation type="unfinished"></translation>
+        <translation>ავტოამოწევა</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="825"/>
@@ -205,7 +205,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1075"/>
         <source>Combos/Spins/Inputs</source>
-        <translation type="unfinished"></translation>
+        <translation>სიები/მთვლელები/შეყვანისველები</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1188"/>
@@ -361,12 +361,12 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1571"/>
         <location filename="../../KvantumPreviewBase.ui" line="1584"/>
         <source>Line-edit</source>
-        <translation type="unfinished"></translation>
+        <translation>შეყვანის სტრიქონი</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1673"/>
         <source>Sliders/Scrolls/Progress/Dial</source>
-        <translation type="unfinished"></translation>
+        <translation>სლაიდერები/ჩოჩია/მიმდინარეობა/დარეკვა</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2230"/>
@@ -436,7 +436,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2624"/>
         <source>Column 0</source>
-        <translation type="unfinished">სვეტი 0</translation>
+        <translation>სვეტი 0</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2632"/>
@@ -472,7 +472,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2333"/>
         <source>Non-Editable</source>
-        <translation type="unfinished"></translation>
+        <translation>არაჩასწორებადი</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2381"/>
@@ -596,7 +596,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="3031"/>
         <source>toolBar_2</source>
-        <translation type="unfinished"></translation>
+        <translation>toolBar_2</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="3053"/>
@@ -616,7 +616,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="3067"/>
         <source>&amp;Checkbox</source>
-        <translation type="unfinished"></translation>
+        <translation>თო&amp;ლია</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="3080"/>
@@ -651,7 +651,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="3124"/>
         <source>C&amp;heckbox</source>
-        <translation type="unfinished"></translation>
+        <translation>თ&amp;ოლია</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="3132"/>

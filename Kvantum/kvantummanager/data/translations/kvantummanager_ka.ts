@@ -14,12 +14,12 @@
     <message>
         <location filename="../../kvantummanager.ui" line="12"/>
         <source>Kvantum Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>მმართველი Kvantum</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="38"/>
         <source>Install/Update Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>თემის დაყენება/განახლება</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="44"/>
@@ -41,22 +41,22 @@ Kvantum can use in addition to its own themes.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="117"/>
         <source>Install this theme</source>
-        <translation type="unfinished"></translation>
+        <translation>ამ თემის დაყენება</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="138"/>
         <source>Change/Delete Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>თემის წაშლა/შეცვლა</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="144"/>
         <source>Select a theme:</source>
-        <translation type="unfinished"></translation>
+        <translation>აირჩიეთ თემა:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="191"/>
         <source>Delete this theme</source>
-        <translation type="unfinished"></translation>
+        <translation>ამ თემის წაშლა</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="198"/>
@@ -69,12 +69,12 @@ the theme is already used.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="204"/>
         <source>Use this theme</source>
-        <translation type="unfinished"></translation>
+        <translation>ამ თემის გამოყენება</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="257"/>
         <source>Configure Active Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>აქტიური თემის მორგება</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="321"/>
@@ -102,7 +102,8 @@ settings of this theme.
         <location filename="../../kvantummanager.ui" line="342"/>
         <source>Save this configuration
 (Ctrl+S)</source>
-        <translation type="unfinished"></translation>
+        <translation>ამ კონფიგურაციის შენახვა
+(Ctrl+S)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="346"/>
@@ -118,17 +119,17 @@ settings of this theme.
     <message>
         <location filename="../../kvantummanager.ui" line="356"/>
         <source>Safe Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>უსაფრთხო პარამეტრები</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="369"/>
         <source>Hacks</source>
-        <translation type="unfinished"></translation>
+        <translation>სასარგებლო ფუნქციები</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="396"/>
         <source>Transparent Dolphin view</source>
-        <translation type="unfinished"></translation>
+        <translation>Dolphin-ის გამწვირვალე ხედი</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="424"/>
@@ -147,12 +148,12 @@ with LXQt Session Settings.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="451"/>
         <source>Transparent sidepane for PCManFM-qt</source>
-        <translation type="unfinished"></translation>
+        <translation>გამჭვირვალე გვერდითი პანელი PCManFM-qt-სთვის</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="466"/>
         <source>Iconless push buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>უხატულო დაწოლადი ღილაკები</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="473"/>
@@ -166,22 +167,22 @@ with LXQt Session Settings.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="480"/>
         <source>Transparent view for PCManFM-qt</source>
-        <translation type="unfinished"></translation>
+        <translation>გამჭვირვალე ხედი PCManFM-qt-სთვის</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="495"/>
         <source>Iconless menus</source>
-        <translation type="unfinished"></translation>
+        <translation>უხატულო მენიუები</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="510"/>
         <source>Blur explicitly translucent windows</source>
-        <translation type="unfinished"></translation>
+        <translation>მხოლოდ, ნახევრადგამჭვირვალე ფანჯრების გაბუნდოვნება</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="524"/>
         <source>Single top toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>ერთი ზედა პანელი</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="554"/>
@@ -196,7 +197,7 @@ with LXQt Session Settings.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="560"/>
         <source>Transparent KTitle label</source>
-        <translation type="unfinished"></translation>
+        <translation>გამჭვირვალე KTitle-ის ჭდე</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="567"/>
@@ -212,7 +213,7 @@ the highlight color!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="574"/>
         <source>No selection tint</source>
-        <translation type="unfinished"></translation>
+        <translation>მონიშნულის დაჩრდილვის გარეშე</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="581"/>
@@ -228,7 +229,7 @@ the highlight color!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="588"/>
         <source>Transparent menu title</source>
-        <translation type="unfinished"></translation>
+        <translation>გამჭვირვალე მენიუს სათაური</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="651"/>
@@ -246,7 +247,7 @@ the highlight color!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="611"/>
         <source>Respect dark themes</source>
-        <translation type="unfinished"></translation>
+        <translation>ბნელი თემების გათვალისწინება</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="689"/>
@@ -265,7 +266,7 @@ reduced by other means.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="697"/>
         <source>Opacity of disabled icons:</source>
-        <translation type="unfinished"></translation>
+        <translation>გათიშული ხატულების გაუმჭვირვალობა:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="630"/>
@@ -281,7 +282,7 @@ as far as possible.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="637"/>
         <source>Force size grips</source>
-        <translation type="unfinished"></translation>
+        <translation>მართკუთხედის ჩვენება ზომის შეცვლისას</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="747"/>
@@ -305,7 +306,7 @@ as far as possible.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="776"/>
         <source>Compositing &amp;&amp; General Look</source>
-        <translation type="unfinished"></translation>
+        <translation>კომპოზიცია და ზოგადი ხედი</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="975"/>
@@ -316,7 +317,7 @@ for windows or the window opacity is reduced (see below).</source>
     <message>
         <location filename="../../kvantummanager.ui" line="995"/>
         <source>Opaque apps:</source>
-        <translation type="unfinished"></translation>
+        <translation>გაუმჭვირვალე აპები:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="782"/>
@@ -353,7 +354,7 @@ If this is disabled, see the above option.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="547"/>
         <source>Style vertical toolbars</source>
-        <translation type="unfinished"></translation>
+        <translation>ვერტიკალური ჩოჩიების დასტილვა</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="595"/>
@@ -364,7 +365,7 @@ horizontally centered as far as possible.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="599"/>
         <source>Centered form layouts</source>
-        <translation type="unfinished"></translation>
+        <translation>დაცენტრებული ფორმის განლაგებები</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="618"/>
@@ -404,7 +405,7 @@ seriously interfere with other jobs.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="732"/>
         <source>Kinetic scrolling</source>
-        <translation type="unfinished"></translation>
+        <translation>კინეტიკური გადახვევა</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="739"/>
@@ -425,7 +426,7 @@ or through logging out and in again.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="792"/>
         <source>Disable composite effects</source>
-        <translation type="unfinished"></translation>
+        <translation>კომპოზიტური ეფექტების გამორთვა</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="801"/>
@@ -439,7 +440,7 @@ Usually, a value of 2 is enough.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="808"/>
         <source>Blur Corner Radius</source>
-        <translation type="unfinished"></translation>
+        <translation>ბუნდოვნების კუთხის რადიუსი</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="821"/>
@@ -454,7 +455,7 @@ Usually, a value of 2 is enough.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="852"/>
         <source>Contrast Effect</source>
-        <translation type="unfinished"></translation>
+        <translation>კონტრასტის ეფექტი</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="858"/>
@@ -495,17 +496,17 @@ shadow to menus and tooltips.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="968"/>
         <source>Shadowless menus and tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>უჩრდილო მენიუები და მინიშნებები</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="979"/>
         <source>Translucent windows</source>
-        <translation type="unfinished"></translation>
+        <translation>ნახევრადგამჭვირვალე ფანჯრები</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1057"/>
         <source>Reduce window opacity by</source>
-        <translation type="unfinished"></translation>
+        <translation>ფანჯრის გაუმჭვირვალობის შემცირება მნიშვნელობით</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1103"/>
@@ -553,17 +554,17 @@ windows if this theme distinguishes between them?</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1190"/>
         <source>Ignore inactive state</source>
-        <translation type="unfinished"></translation>
+        <translation>არააქტიური მდგომარეობის გამოტოვება</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1204"/>
         <source>Transient scrollbars</source>
-        <translation type="unfinished"></translation>
+        <translation>დროებითი ჩოჩიები</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1226"/>
         <source>Sizes &amp;&amp; Delays</source>
-        <translation type="unfinished"></translation>
+        <translation>ზომა და დაყოვნებები</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1232"/>
@@ -573,22 +574,22 @@ windows if this theme distinguishes between them?</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1247"/>
         <source>Small icon:</source>
-        <translation type="unfinished"></translation>
+        <translation>პატარა ხატულა:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1285"/>
         <source>Large icon:</source>
-        <translation type="unfinished"></translation>
+        <translation>დიდი ხატულა:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1319"/>
         <source>Button icon:</source>
-        <translation type="unfinished"></translation>
+        <translation>ღილაკის ხატულა:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1351"/>
         <source>Toolbar icon:</source>
-        <translation type="unfinished"></translation>
+        <translation>ხელსაწყოების პანელის ხატულა:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1365"/>
@@ -605,7 +606,7 @@ some apps set it themeselves.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1385"/>
         <source>Layout spacing:</source>
-        <translation type="unfinished"></translation>
+        <translation>განლაგების შუალედი:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1409"/>
@@ -616,7 +617,7 @@ some apps set it themeselves.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1412"/>
         <source>Layout margin:</source>
-        <translation type="unfinished"></translation>
+        <translation>განლაგების მინდორი:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1435"/>
@@ -629,7 +630,7 @@ some apps set it themeselves.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1440"/>
         <source>Submenu overlap: </source>
-        <translation type="unfinished"></translation>
+        <translation>ქვემენიუს გადაფარვა: </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1465"/>
@@ -641,7 +642,7 @@ some apps set it themeselves.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1469"/>
         <source>Spin button width: </source>
-        <translation type="unfinished"></translation>
+        <translation>მთვლელის სიგანე: </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1843"/>
@@ -664,7 +665,7 @@ By default, tree branches have indicators but no line.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1945"/>
         <source>Dialog button layout:</source>
-        <translation type="unfinished"></translation>
+        <translation>დიალოგის ღილაკის განლაგება:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1955"/>
@@ -675,7 +676,7 @@ on focused buttons and other widgets.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1959"/>
         <source>Remove focus rectangles</source>
-        <translation type="unfinished"></translation>
+        <translation>ფოკუსის მართკუთხედების მოცილება</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2159"/>
@@ -839,12 +840,12 @@ KDE apps get it from KDE setting.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1502"/>
         <source>Minimum scrollbar length: </source>
-        <translation type="unfinished"></translation>
+        <translation>მინიმალური ჩოჩიის სიგრძე: </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1547"/>
         <source>Delays</source>
-        <translation type="unfinished"></translation>
+        <translation>დაყოვნებები</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1553"/>
@@ -931,7 +932,7 @@ By default, combo popups do not cover the combo box.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1560"/>
         <source>Tooltip delay:</source>
-        <translation type="unfinished"></translation>
+        <translation>მინიშნების დაყოვნება:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="988"/>
@@ -965,7 +966,7 @@ while 0 means no delay.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1574"/>
         <source>Submenu delay: </source>
-        <translation type="unfinished"></translation>
+        <translation>ქვემენიუს დაყოვნება: </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1588"/>
@@ -995,12 +996,12 @@ If disabled, see Compositing &amp; General Look → Transient scrollbars!</sourc
     <message>
         <location filename="../../kvantummanager.ui" line="1938"/>
         <source>Scrollbars inside frames</source>
-        <translation type="unfinished"></translation>
+        <translation>ჩოჩიები ჩარჩოების შიგნით</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1971"/>
         <source>Tree branch lines</source>
-        <translation type="unfinished"></translation>
+        <translation>ხის ტოტის ხაზები</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1667"/>
@@ -1019,7 +1020,7 @@ the frame, so that the frame isn&apos;t cut.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1702"/>
         <source>Fill rubber-band rectangles</source>
-        <translation type="unfinished"></translation>
+        <translation>ცვლადი მართკუთხედების შევსება</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1722"/>
@@ -1051,17 +1052,17 @@ between toolbar separators.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1777"/>
         <source>Group toolbar buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>ხელსაწყოთა პანელის ღილაკების დაჯგუფება</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1985"/>
         <source>Drag from:</source>
-        <translation type="unfinished"></translation>
+        <translation>გადათრევა საიდან:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1895"/>
         <source>Toolbutton style:</source>
-        <translation type="unfinished"></translation>
+        <translation>ხელსაწყოთა პანელის ღილაკის სტილი:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1798"/>
@@ -1076,7 +1077,7 @@ between toolbar separators.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1688"/>
         <source>Inline spin indicators</source>
-        <translation type="unfinished"></translation>
+        <translation>ჩაშენებული მთვლელები</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1736"/>
@@ -1097,7 +1098,7 @@ line-edit with arrow (and icon, if it exists)?</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1715"/>
         <source>Vertical spin indicators</source>
-        <translation type="unfinished"></translation>
+        <translation>ვერტიკალური მთვლელები</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1650"/>
@@ -1121,7 +1122,7 @@ Uncheck it if you want to use those options!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1811"/>
         <source>Left aligned tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>მარცხნივ სწორებული ჩანართები</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1818"/>
@@ -1132,12 +1133,12 @@ i.e., there is no border between them.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1822"/>
         <source>Join inactive tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>არააქტიური ჩანართების შერწყმა</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2009"/>
         <source>Scrollable menus</source>
-        <translation type="unfinished"></translation>
+        <translation>გადახვევადი მენიუები</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1657"/>
@@ -1178,7 +1179,7 @@ This option will hide these.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1791"/>
         <source>Non-checkable combo menu</source>
-        <translation type="unfinished"></translation>
+        <translation>არაჩართვადი ჩამოსაშლელი მენიუ</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2003"/>
@@ -1215,12 +1216,12 @@ the Ctrl key before pressing the button.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2087"/>
         <source>Installed Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>დაყენებული თემა</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2103"/>
         <source>Application(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>აპლიკაციები</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2132"/>
@@ -1231,7 +1232,7 @@ simple string or a regular expression.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2136"/>
         <source>app1,app2,app3</source>
-        <translation type="unfinished"></translation>
+        <translation>აპი1,აპი2,აპი3</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2164"/>
@@ -1308,7 +1309,7 @@ or update its preview.</source>
         <location filename="../../KvantumManager.cpp" line="658"/>
         <location filename="../../KvantumManager.cpp" line="674"/>
         <source>Kvantum</source>
-        <translation type="unfinished">Kvantum</translation>
+        <translation>Kvantum</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="598"/>
@@ -1325,12 +1326,12 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="737"/>
         <source>%1 installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 დაყენებულია.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="907"/>
         <source>%1 deleted.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 წაიშალა.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="967"/>
@@ -1382,27 +1383,27 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="115"/>
         <source>KDE Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>KDE-ის განლაგება</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="116"/>
         <source>Gnome Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>GNOME-ის განლაგება</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="117"/>
         <source>Mac Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Mac-ის განლაგება</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="118"/>
         <source>Windows Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Windows-ის განლაგება</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="119"/>
         <source>Android Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Android-ის განლაგება</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="121"/>
@@ -1422,7 +1423,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="124"/>
         <source>Anywhere possible</source>
-        <translation type="unfinished"></translation>
+        <translation>სადაც შესაძლებელია</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="517"/>
@@ -1547,7 +1548,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="2671"/>
         <source>Configuration saved.</source>
-        <translation type="unfinished"></translation>
+        <translation>კონფიგურაცია შენახულია.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2778"/>
@@ -1567,13 +1568,13 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="2817"/>
         <source>the default theme</source>
-        <translation type="unfinished"></translation>
+        <translation>ნაგულისხმევი თემა</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2970"/>
         <location filename="../../KvantumManager.cpp" line="2971"/>
         <source>About Kvantum Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Kvantum Manager-ის შესახებ</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2970"/>
@@ -1615,7 +1616,7 @@ or update its preview.</source>
         <location filename="../../KvantumManager.cpp" line="2207"/>
         <location filename="../../KvantumManager.cpp" line="2680"/>
         <source>Active theme:</source>
-        <translation type="unfinished"></translation>
+        <translation>აქტიური თემა:</translation>
     </message>
 </context>
 <context>
