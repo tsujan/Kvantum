@@ -1414,7 +1414,8 @@ middels de Ctrl-toets.</translation>
         <location filename="../../kvantummanager.ui" line="2132"/>
         <source>Each executable name can be either a
 simple string or a regular expression.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ieder uitvoerbaar bestand kan worden ingevoerd
+als tekenreeks of reguliere uitdrukking.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2136"/>
@@ -1434,7 +1435,7 @@ simple string or a regular expression.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2174"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Save the current list of applications with their corresponding themes!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Bewaar de huidige programmalijst en hun ingestelde thema&apos;s.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Bewaar de huidige programmalijst en ingestelde thema&apos;s.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2201"/>
