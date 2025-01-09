@@ -19,46 +19,46 @@
     <message>
         <location filename="../../kvantummanager.ui" line="38"/>
         <source>Install/Update Theme</source>
-        <translation>Uuenda/paigalda teema</translation>
+        <translation>Uuenda/paigalda kujundus</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="44"/>
         <source>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; comes with many themes but external themes can also be installed for being used by it. Here you could choose a theme folder and then press the button below to install it in your Home.&lt;/center&gt;</source>
-        <translation>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; sisaldab palju teemasid, kuid neid on võimalik ka ise paigaldada. Siin saad valida teemakataloogi ja allolevat nuppu kasutades selle paigaldada.&lt;/center&gt;</translation>
+        <translation>&lt;center&gt;&lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; sisaldab palju kujundusi, kuid neid on võimalik ka ise paigaldada. Siin saad valida kujunduste kausta ja allolevat nuppu kasutades selle lisada oma kodukausta.&lt;/center&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="76"/>
         <source>Select a Kvantum
 theme folder</source>
-        <translation>Vali Kvantum
-teemakataloog</translation>
+        <translation>Vali Kvantumi
+kujunduste kaust</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="113"/>
         <source>Add this theme to the list of themes that
 Kvantum can use in addition to its own themes.</source>
-        <translation>Lisa see teema nende hulka, mida saab
-Kvantum kasutada lisaks oma teemadele.</translation>
+        <translation>Lisa see kujundus nende hulka, mida saab
+Kvantum kasutada lisaks oma tavakujundustele.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="117"/>
         <source>Install this theme</source>
-        <translation>Paigalda teema</translation>
+        <translation>Paigalda see kujundus</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="138"/>
         <source>Change/Delete Theme</source>
-        <translation>Muuda/kustuta teema</translation>
+        <translation>Muuda kujundust või kustuta ta</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="144"/>
         <source>Select a theme:</source>
-        <translation>Vali teema:</translation>
+        <translation>Vali kujundus:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="191"/>
         <source>Delete this theme</source>
-        <translation>Kustuta teema</translation>
+        <translation>Kustuta see kujundus</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="198"/>
@@ -66,34 +66,34 @@ Kvantum kasutada lisaks oma teemadele.</translation>
 
 A disabled button means that
 the theme is already used.</source>
-        <translation>Pane Kvantum seda teemat kasutama!
+        <translation>Pane Kvantum kasutama seda kujundust!
 
 Keelatud nupp tähendab,
-et teema on juba kasutuses.</translation>
+et kujundus on juba kasutuses.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="204"/>
         <source>Use this theme</source>
-        <translation>Kasuta teemat</translation>
+        <translation>Kasuta seda kujundust</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="257"/>
         <source>Configure Active Theme</source>
-        <translation>Seadista hetkel kasutatavat teemat</translation>
+        <translation>Seadista hetkel kasutatavat kujundust</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="321"/>
         <source>Revert to the default (root)
 settings of this theme.
 (Ctrl+Z)</source>
-        <translation>Taasta teema
+        <translation>Taasta kujunduse
 vaikeväärtused
 (Ctrl+Z)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="326"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Revert to the default (root) settings of this theme!&lt;/p&gt;&lt;p&gt;When clicked and confirmed, all changes to the configuration will be lost but the probable customized SVG file will remain intact.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Taasta teema vaikeväärtused!&lt;/p&gt;&lt;p&gt;Klõpsates ja kinnitades kõik tehtud muudatused kaovad, kuid kohandatud SVG fail jääb tõenäoliselt puutumatuks.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Taasta kujunduse vaikeväärtused!&lt;/p&gt;&lt;p&gt;Klõpsates ja kinnitades kõik tehtud muudatused kaovad, kuid kohandatud SVG fail jääb tõenäoliselt puutumatuks.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="329"/>
@@ -260,7 +260,7 @@ the highlight color!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="611"/>
         <source>Respect dark themes</source>
-        <translation>Austa tumedaid teemasid</translation>
+        <translation>Arvesta tumedate kujundustega</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="689"/>
@@ -397,7 +397,9 @@ rõhtsalt keskele sedavõrd, kui see on võimalik.</translation>
         <source>You might see annoying artifacts that are caused
 by bugs in Qt&apos;s handling of non-integer scaling
 with window translucency or gradient.</source>
-        <translation type="unfinished"></translation>
+        <translation>Akende läbipaistvuse või gradiendi puhul
+võid näha imelikke Qt graafikavigu, mis on põhjustatud
+mittetäisarvulisest mõõtkavafaktorist.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="623"/>
@@ -451,7 +453,7 @@ või logides korraks välja ja tagasi.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="789"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If checked, menus, tooltips and windows will not have translucency or shadow.&lt;/p&gt;&lt;p&gt;When unchecked, translucency and shadow will be available if there are appropriate elements in the theme&apos;s SVG file.&lt;/p&gt;&lt;p&gt;If this is disabled, see Miscellaneous → Respect current DE if possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Kui lubatud, siis menüüdel, kohtspikritel ja akendel puudub läbipaistvus või vari.&lt;/p&gt;&lt;p&gt;Kui märkimata, on läbipaistvus ja vari võimalikud, kui teema SVG failis leiduvad vastavad elemendid.&lt;/p&gt;&lt;p&gt;Kui keelatud: Mitmesugust → Järgi võimalusel aktiivset töölauakeskkonda.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Kui lubatud, siis menüüdel, kohtspikritel ja akendel puudub läbipaistvus või vari.&lt;/p&gt;&lt;p&gt;Kui märkimata, on läbipaistvus ja vari võimalikud, kui kujunduse SVG-failis leiduvad vastavad elemendid.&lt;/p&gt;&lt;p&gt;Kui keelatud: Mitmesugust → Järgi võimalusel aktiivset töölauakeskkonda.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="792"/>
@@ -465,12 +467,16 @@ radii for blurring translucent menus and tooltips
 that have rounded corners.
 
 Usually, a value of 2 is enough.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kui hägustamine on kasutusel, siis need väärtused
+määravad ümarate nurkadega läbipaistvate menüüde
+ja kohtspikrite hägustamise raadiuse.
+
+Tavaliselt piisab väärtusest 2.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="808"/>
         <source>Blur Corner Radius</source>
-        <translation>Hägu nurga raadius</translation>
+        <translation>Hägusta nurga raadiust</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="821"/>
@@ -564,7 +570,7 @@ kui mõne vidina olekut muudetakse, enamasti hiire abil.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1165"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A 200ms fading animation when the state of some widgets is changed, mostly by the mouse.&lt;/p&gt;&lt;p&gt;The CPU usage is negligible because often only one widget is animated. The resulting visual effect depends on the active theme.&lt;/p&gt;&lt;p&gt;These widgets are supported: buttons (including radio buttons and check boxes), combo boxes, spin boxes, slider handles, line-edits and scroll views.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;200 ms tuhmuv animatsioon, kui mõne vidina olekut (enamasti hiirega) muudetakse.&lt;/p&gt;&lt;p&gt;Protsessori kasutus on tühine, kuna sageli animeeritakse ainult ühte vidinat. Saadud visuaalne efekt sõltub aktiivsest teemast.&lt;/p&gt;&lt;p&gt;Toetatakse neid vidinaid: nupud (sh raadionupud ja märkeruudud), liitkastid, keerutamiskastid, liuguri käepidemed, rea redigeerimised ja kerimisvaated.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;200 ms tuhmuv animatsioon, kui mõne vidina olekut (enamasti hiirega) muudetakse.&lt;/p&gt;&lt;p&gt;Protsessori kasutus on tühine, kuna sageli animeeritakse ainult ühte vidinat. Saadud visuaalne efekt sõltub aktiivsest kujundusest.&lt;/p&gt;&lt;p&gt;Toetatakse neid vidinaid: nupud (sh raadionupud ja märkeruudud), liitkastid, keerutamiskastid, liugnupud, rea muutmised ja kerimisvaated.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1168"/>
@@ -580,13 +586,14 @@ Uncheck it if you want those patterns back!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1179"/>
         <source>Remove window/dialog tiling patterns</source>
-        <translation></translation>
+        <translation>Eemalda akna või vaate paanimismustrid</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1186"/>
         <source>Use the same colors and shapes with active and inactive
 windows if this theme distinguishes between them?</source>
-        <translation></translation>
+        <translation>Kui kujundus suudab eristada, siis kas kasutame samu
+värve ja kujusid nii aktiivete kui mitteaktiivsete akende puhul?</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1190"/>
@@ -689,7 +696,7 @@ Vaikeväärtus on 0.</translation>
         <location filename="../../kvantummanager.ui" line="1843"/>
         <location filename="../../kvantummanager.ui" line="1853"/>
         <source>How to activate view items?</source>
-        <translation type="unfinished"></translation>
+        <translation>Kuidas saan aktiveerida vaate objekte?</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1846"/>
@@ -701,9 +708,9 @@ Vaikeväärtus on 0.</translation>
         <source>Draw tree branch lines?
 
 By default, tree branches have indicators but no line.</source>
-        <translation>Kas kuvada puuharude jooned?
+        <translation>Kas kuvame puuharude jooned?
 
-Vaikimisi kuvatakse indikaatorid, mitte jooned.</translation>
+Vaikimisi kuvame indikaatoreid, aga mitte jooni.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1945"/>
@@ -727,9 +734,9 @@ fookuses olevatel nuppudel ja vidinatel.</translation>
         <source>Use the active theme for all apps!
 
 This Needs saving to take effect.</source>
-        <translation>Kasuta aktiivset teemat kõigil rakendustel!
+        <translation>Kasuta aktiivset kujundust kõikides rakendustes!
 
-Jõustamiseks tuleb see salvestada.</translation>
+Jõustamiseks pead ta salvestama.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="183"/>
@@ -739,10 +746,10 @@ from all user installation paths.
 The root installation will still be
 available if present; this button
 only removes user themes.</source>
-        <translation>Eemalda valitud teema kõigist
+        <translation>Eemalda valitud kujundus kõigist
 kasutaja poolt kasutatud asukohtadest.
 
-See eemaldab ainult kasutaja teemad,
+See eemaldab ainult kasutaja kujundused,
 juurkasutaja paigaldatu säilib.</translation>
     </message>
     <message>
@@ -827,8 +834,8 @@ Hard-coded icons/styles may not respect this key.</source>
         <source>Some apps may not respect dark themes.
 Kvantum can try to correct their behavior
 as far as possible.</source>
-        <translation>Mõned rakendused ei pruugi austada tumedaid teemasid.
-Kvantum võib proovida seda võimalikult palju parandada.</translation>
+        <translation>Mõned rakendused ei pruugi arvestada tumedate kujundustega.
+Kvantum võib proovida seda olukorda võimalikult palju parandada.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1136"/>
@@ -1172,7 +1179,7 @@ ja tööriistaribade eraldajate vahel tõstetuna.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1688"/>
         <source>Inline spin indicators</source>
-        <translation></translation>
+        <translation>Sisemised pöörlemisnäidikud</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1736"/>
@@ -1193,7 +1200,7 @@ line-edit with arrow (and icon, if it exists)?</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1715"/>
         <source>Vertical spin indicators</source>
-        <translation></translation>
+        <translation>Püstloodis pöörlemisnäidikud</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1650"/>
@@ -1281,7 +1288,7 @@ This option will hide these.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1791"/>
         <source>Non-checkable combo menu</source>
-        <translation></translation>
+        <translation>Mittevalitav liitmenüü</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2003"/>
@@ -1289,7 +1296,10 @@ This option will hide these.</source>
 scroll arrows on their top and/or bottom?
 
 By default, big menus are scrollable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kas suured müüd peaksid olema keritavad
+ja kasutama kerimisnooli nende üla- ja/või alaääres?
+
+Vaikimisi on suured menüüd keritavad.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2016"/>
@@ -1303,12 +1313,12 @@ the Ctrl key before pressing the button.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2023"/>
         <source>Allow dragging from buttons</source>
-        <translation>Luba lohistanime nuppudest</translation>
+        <translation>Luba lohistamine nuppudest</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2046"/>
         <source>Application Themes</source>
-        <translation>Rakenduse teemad</translation>
+        <translation>Rakenduse kujundused</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2052"/>
@@ -1318,7 +1328,7 @@ the Ctrl key before pressing the button.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2087"/>
         <source>Installed Theme</source>
-        <translation>Paigaldatud teema</translation>
+        <translation>Paigaldatud kujundus</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2103"/>
@@ -1329,7 +1339,8 @@ the Ctrl key before pressing the button.</source>
         <location filename="../../kvantummanager.ui" line="2132"/>
         <source>Each executable name can be either a
 simple string or a regular expression.</source>
-        <translation type="unfinished"></translation>
+        <translation>Iga käivitusfaili nimi võib olla kas
+lihtne sõne või regulaaravaldis.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2136"/>
@@ -1349,7 +1360,7 @@ simple string or a regular expression.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2174"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Save the current list of applications with their corresponding themes!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Salvesta praegune rakenduste loend koos neile vastavate teemadega!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Salvesta praegune rakenduste loend koos neile vastavate kujundustega!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2201"/>
@@ -1366,7 +1377,7 @@ simple string or a regular expression.</source>
         <location filename="../../kvantummanager.ui" line="2217"/>
         <source>Preview the active theme
 or update its preview.</source>
-        <translation>Vaata kasutatava teema eelvaadet
+        <translation>Vaata kasutatava kujunduse eelvaadet
 või uuenda seda.</translation>
     </message>
     <message>
@@ -1397,7 +1408,7 @@ või uuenda seda.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="327"/>
         <source>Open Kvantum Theme Folder...</source>
-        <translation>Ava Kvantum teema kataloog...</translation>
+        <translation>Ava Kvantumi kujunduste kaust...</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="190"/>
@@ -1439,7 +1450,7 @@ või uuenda seda.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="967"/>
         <source>Theme changed to %1.</source>
-        <translation>Teemaks sai %1.</translation>
+        <translation>Uus kujundus on %1.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="515"/>
@@ -1542,12 +1553,12 @@ või uuenda seda.</translation>
         <location filename="../../KvantumManager.cpp" line="548"/>
         <location filename="../../KvantumManager.cpp" line="559"/>
         <source>This is not an installable Kvantum theme!</source>
-        <translation>See ei ole paigaldatav Kvantumi teema!</translation>
+        <translation>See ei ole paigaldatav Kvantumi kujundus!</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="549"/>
         <source>The name of an installable themes should not be &quot;Default&quot;.</source>
-        <translation>Paigaldatava teema nimi ei peaks olema &quot;Vaikimisi&quot;.</translation>
+        <translation>Paigaldatava kujunduse nimi ei peaks olema „Vaikimisi“.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="550"/>
@@ -1559,22 +1570,22 @@ või uuenda seda.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="560"/>
         <source>Installable themes should not have # in their names.</source>
-        <translation>Paigaldatavatel teemadel ei tohi olla # nende nimedes.</translation>
+        <translation>Paigaldatavatel kujundustel ei tohi olla # nende nimedes.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="570"/>
         <source>This is not a Kvantum theme folder!</source>
-        <translation>See ei ole Kvantumi teema kataloog!</translation>
+        <translation>See ei ole Kvantumi kujunduste kaust!</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="597"/>
         <source>The theme already exists in modified form.</source>
-        <translation>Teema on muudetud kujul juba olemas.</translation>
+        <translation>Kujundus on muudetud kujul juba olemas.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="612"/>
         <source>You have selected an installed theme folder.</source>
-        <translation>Valiti paigaldatud teema kataloog.</translation>
+        <translation>Sa oled valinud paigaldatud kujunduse kausta.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="613"/>
@@ -1584,7 +1595,7 @@ või uuenda seda.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="623"/>
         <source>The theme already exists.</source>
-        <translation>Teema on juba olemas.</translation>
+        <translation>See kujundus on juba olemas.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="624"/>
@@ -1594,7 +1605,7 @@ või uuenda seda.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="659"/>
         <source>This theme is also installed as root in:</source>
-        <translation>See teema on paigaldatud ka juurkasutajana kataloogi:</translation>
+        <translation>See kujundus on paigaldatud ka juurkasutaja õigustes kausta:</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="661"/>
@@ -1604,7 +1615,7 @@ või uuenda seda.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="675"/>
         <source>This theme is also installed as user in:</source>
-        <translation>See teema on paigaldatud ka kasutajana kataloogi:</translation>
+        <translation>See kujundus on paigaldatud ka kasutaja õigustes kausta:</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="677"/>
@@ -1656,7 +1667,7 @@ või uuenda seda.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="2778"/>
         <source>Do you want to revert to the default (root) settings of this theme?</source>
-        <translation>Kas taastada kõik teema vaikeväärtused?</translation>
+        <translation>Kas taastame kõik kujunduse vaikeväärtused?</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2781"/>
@@ -1671,7 +1682,7 @@ või uuenda seda.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="2817"/>
         <source>the default theme</source>
-        <translation>vaiketeema</translation>
+        <translation>vaikimisi kujundus</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2970"/>
@@ -1687,7 +1698,7 @@ või uuenda seda.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="2968"/>
         <source>A tool for installing, selecting&lt;br&gt;and configuring &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt; themes</source>
-        <translation>Tööriist, millega saad paigaldada, valida&lt;br&gt;ja hallata &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt;-teemasid</translation>
+        <translation>Tööriist, millega saad paigaldada, valida&lt;br&gt;ja hallata &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantumi&lt;/a&gt; kujundusi</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="2969"/>
@@ -1719,7 +1730,7 @@ või uuenda seda.</translation>
         <location filename="../../KvantumManager.cpp" line="2207"/>
         <location filename="../../KvantumManager.cpp" line="2680"/>
         <source>Active theme:</source>
-        <translation>Aktiivne teema:</translation>
+        <translation>Aktiivne kujundus:</translation>
     </message>
 </context>
 <context>
