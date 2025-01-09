@@ -930,9 +930,9 @@ Diversos → Respeitar a DE atual se possível</translation>
         <source>Affects buttons, tab-bars and list-views.
 
 The default value is 16 px.</source>
-        <translation>Afeta botões, barras de Abas e exibições de lista.
+        <translation>Afeta os botões, barras de separadores e as vistas de lista.
 
-O valor padrão é 16 px.</translation>
+O valor predefinido é 16 px.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1344"/>
@@ -1080,7 +1080,7 @@ Por padrão, os pop-ups de combinação não cobrem a caixa de combinação.</tr
     <message>
         <location filename="../../kvantummanager.ui" line="1808"/>
         <source>In Kvantum, tabs are centered by default.</source>
-        <translation>No Kvantum, as abas são centralizadas por padrão.</translation>
+        <translation>No Kvantum, os separadores são centrados por defeito.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1560"/>
@@ -1299,14 +1299,14 @@ Não selecione se quiser usar essas opções!</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1811"/>
         <source>Left aligned tabs</source>
-        <translation>Abas alinhadas à esquerda</translation>
+        <translation>Separadores alinhados à esquerda</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1818"/>
         <source>Inactive tabs are joined together by default,
 i.e., there is no border between them.</source>
-        <translation>Por padrão, abas inativas são agrupadas,
-ou seja, não existem bordas entre elas.</translation>
+        <translation>Os separadores inativos são agrupados por defeito,
+ou seja, não existe um limite entre eles.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1822"/>
@@ -1427,7 +1427,8 @@ a tecla Ctrl antes de premir o botão.</translation>
         <location filename="../../kvantummanager.ui" line="2132"/>
         <source>Each executable name can be either a
 simple string or a regular expression.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cada nome de executável pode ser uma
+frase simples ou uma expressão regular.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2136"/>
