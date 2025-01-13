@@ -1430,7 +1430,8 @@ už kurio bus tempiama, paspaudę Ctrl klavišą prieš paspausdami tą mygtuką
         <location filename="../../kvantummanager.ui" line="2132"/>
         <source>Each executable name can be either a
 simple string or a regular expression.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kiekvienas vykdomojo pavadinimas gali būti
+paprasta eilutė arba reguliarusis reiškinys.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2136"/>
