@@ -6,12 +6,12 @@
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="14"/>
         <source>Kvantum Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>წინასწარი გადახედვა Kvantum</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="29"/>
         <source>Push buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>ღილაკები</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="77"/>
@@ -67,25 +67,26 @@ push button</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="279"/>
         <source>Button Box</source>
-        <translation type="unfinished"></translation>
+        <translation>ღილაკის ველი</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="374"/>
         <source>Tool buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>ხელსაწყოს ღილაკები</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="382"/>
         <location filename="../../KvantumPreviewBase.ui" line="459"/>
         <source>Simple toolbutton</source>
-        <translation type="unfinished"></translation>
+        <translation>მარტივი ხელსაწყოს ღილაკი</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="466"/>
         <location filename="../../KvantumPreviewBase.ui" line="477"/>
         <source>Multi-line
 toolbutton</source>
-        <translation type="unfinished"></translation>
+        <translation>მრავალხაზიანი
+ხელსაწყოს ღილაკი</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="485"/>
@@ -156,7 +157,7 @@ width</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="825"/>
         <source>Radio/Check buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>გადასართავი/ჩასართავი ღილაკები</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="846"/>
@@ -253,7 +254,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1432"/>
         <location filename="../../KvantumPreviewBase.ui" line="1514"/>
         <source>Frameless 1</source>
-        <translation type="unfinished"></translation>
+        <translation>ჩარჩოს გარეშე 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1206"/>
@@ -261,7 +262,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1441"/>
         <location filename="../../KvantumPreviewBase.ui" line="1523"/>
         <source>Frameless 2</source>
-        <translation type="unfinished"></translation>
+        <translation>ჩარჩოს გარეშე 2</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1211"/>
@@ -269,7 +270,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1446"/>
         <location filename="../../KvantumPreviewBase.ui" line="1528"/>
         <source>Frameless 3</source>
-        <translation type="unfinished"></translation>
+        <translation>ჩარჩოს გარეშე 3</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1216"/>
@@ -277,7 +278,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1451"/>
         <location filename="../../KvantumPreviewBase.ui" line="1533"/>
         <source>Frameless 4</source>
-        <translation type="unfinished"></translation>
+        <translation>ჩარჩოს გარეშე 4</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1221"/>
@@ -285,7 +286,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1456"/>
         <location filename="../../KvantumPreviewBase.ui" line="1538"/>
         <source>Frameless 5</source>
-        <translation type="unfinished"></translation>
+        <translation>ჩარჩოს გარეშე 5</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1226"/>
@@ -293,7 +294,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1461"/>
         <location filename="../../KvantumPreviewBase.ui" line="1543"/>
         <source>Frameless 6</source>
-        <translation type="unfinished"></translation>
+        <translation>ჩარჩოს გარეშე 6</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1231"/>
@@ -301,7 +302,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1466"/>
         <location filename="../../KvantumPreviewBase.ui" line="1548"/>
         <source>Frameless 7</source>
-        <translation type="unfinished"></translation>
+        <translation>ჩარჩოს გარეშე 7</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1236"/>
@@ -309,7 +310,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1471"/>
         <location filename="../../KvantumPreviewBase.ui" line="1553"/>
         <source>Frameless 8</source>
-        <translation type="unfinished"></translation>
+        <translation>ჩარჩოს გარეშე 8</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1241"/>
@@ -317,7 +318,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1476"/>
         <location filename="../../KvantumPreviewBase.ui" line="1558"/>
         <source>Frameless 9</source>
-        <translation type="unfinished"></translation>
+        <translation>ჩარჩოს გარეშე 9</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1246"/>
@@ -325,7 +326,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1481"/>
         <location filename="../../KvantumPreviewBase.ui" line="1563"/>
         <source>Frameless 10</source>
-        <translation type="unfinished"></translation>
+        <translation>ჩარჩოს გარეშე 10</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1331"/>
@@ -392,46 +393,46 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="2273"/>
         <location filename="../../KvantumPreviewBase.ui" line="2371"/>
         <source>3rd Item</source>
-        <translation type="unfinished"></translation>
+        <translation>მესამე ელემენტი</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2281"/>
         <location filename="../../KvantumPreviewBase.ui" line="2359"/>
         <source>2nd Item</source>
-        <translation type="unfinished"></translation>
+        <translation>მეორე ელემენტი</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2285"/>
         <location filename="../../KvantumPreviewBase.ui" line="2321"/>
         <source>2nd Child</source>
-        <translation type="unfinished"></translation>
+        <translation>მეორე შვილი</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2290"/>
         <location filename="../../KvantumPreviewBase.ui" line="2326"/>
         <source>1st Child</source>
-        <translation type="unfinished"></translation>
+        <translation>პირველი შვილი</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2296"/>
         <location filename="../../KvantumPreviewBase.ui" line="2344"/>
         <source>1st Item</source>
-        <translation type="unfinished"></translation>
+        <translation>პირველი ელემენტი</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2316"/>
         <source>3rd Child</source>
-        <translation type="unfinished"></translation>
+        <translation>მესამე შვილი</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2614"/>
         <source>Row 0</source>
-        <translation type="unfinished"></translation>
+        <translation>მწკრივი 0</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2619"/>
         <source>Row 1</source>
-        <translation type="unfinished"></translation>
+        <translation>მწკრივი 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2624"/>
@@ -482,7 +483,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2428"/>
         <source>Panel frame</source>
-        <translation type="unfinished"></translation>
+        <translation>პანელის ჩარჩო</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2447"/>
@@ -526,7 +527,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="2896"/>
         <location filename="../../KvantumPreviewBase.ui" line="2944"/>
         <source>Page 1</source>
-        <translation type="unfinished"></translation>
+        <translation>გვერდი 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2539"/>
@@ -536,7 +537,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="2910"/>
         <location filename="../../KvantumPreviewBase.ui" line="2958"/>
         <source>Page 2</source>
-        <translation type="unfinished"></translation>
+        <translation>გვერდი 2</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2563"/>
@@ -551,12 +552,12 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2594"/>
         <source>Group box</source>
-        <translation type="unfinished"></translation>
+        <translation>ჯგუფის ველი</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2672"/>
         <source>Dock Widget</source>
-        <translation type="unfinished"></translation>
+        <translation>მიმაგრებადი ვიჯეტი</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2689"/>
@@ -576,7 +577,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2857"/>
         <source>Box frame</source>
-        <translation type="unfinished"></translation>
+        <translation>ველის ჩარჩო</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2987"/>
@@ -631,7 +632,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="3095"/>
         <source>&amp;Doc Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>მიმაგრების რე&amp;ჟიმი</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="3098"/>
@@ -641,7 +642,7 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="3110"/>
         <source>Menu Button</source>
-        <translation type="unfinished"></translation>
+        <translation>მენიუს ღილაკი</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="3113"/>
