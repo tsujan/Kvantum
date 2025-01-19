@@ -1181,7 +1181,8 @@ Uncheck it if you want to use those options!</source>
         <location filename="../../kvantummanager.ui" line="1818"/>
         <source>Inactive tabs are joined together by default,
 i.e., there is no border between them.</source>
-        <translation type="unfinished"></translation>
+        <translation>לשוניות בלתי פעילות מצורפות יחד כברירת מחדל,
+כלומר, אין הפרדה ביניהן.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1822"/>
