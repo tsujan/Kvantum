@@ -1419,7 +1419,8 @@ Ctrl 키를 눌러 드래그 앤 드롭할 수 있는 버튼에 대해
         <location filename="../../kvantummanager.ui" line="2132"/>
         <source>Each executable name can be either a
 simple string or a regular expression.</source>
-        <translation type="unfinished"></translation>
+        <translation>각 실행 파일 이름은 단순한 문자열
+이거나 정규 표현식일 수 있습니다.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2136"/>
