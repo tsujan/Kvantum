@@ -1767,9 +1767,7 @@ void Style::drawComboLineEdit(const QStyleOption *option,
           && baseCol.saturation() > 10) // should have enough saturation
       {
         baseCol.setAlpha(255);
-        QStyleOption o(*option);
-        o.rect = lineedit->rect();
-        colorizeRect(painter, baseCol, subElementRect(SE_LineEditContents, &o, lineedit));
+        colorizeRect(painter, baseCol, subElementRect(SE_LineEditContents, option, lineedit));
       }
     }
   }
@@ -11658,7 +11656,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
             }
 
             /* a workaround for bad codes that change line-edit base color */
-            bool colored(cb && cb->lineEdit()
+            bool colored(cb && cb->lineEdit() && drwaAsLineEdit
                          && !isPcmanfm_ && opt->editable && leGroup == "LineEdit"
                          && cb->lineEdit()->palette().color(QPalette::Base)
                             != standardPalette().color(cb->lineEdit()->palette().currentColorGroup(),
@@ -11892,7 +11890,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
               {
                 QColor baseCol = cb->lineEdit()->palette().color(QPalette::Base);
                 baseCol.setAlpha(255);
-                o.rect = cb->lineEdit()->rect();
+                o.rect.adjust(rtl ? 0 : margin, 0, rtl ? -margin : 0, 0); // was removed above
                 colorizeRect(painter, baseCol, subElementRect(SE_LineEditContents, &o, cb->lineEdit()));
               }
 
