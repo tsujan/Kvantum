@@ -271,7 +271,7 @@ den fremhævende farve!</translation>
 when the opacity of disabled icons is not
 reduced by other means.</source>
         <translation>Nyttigt med monokrome ikonsæt og
-når uigennemsigtigheden af deaktiverede 
+når uigennemsigtigheden af deaktiverede
 ikoner ikke er reduceret på anden måde.</translation>
     </message>
     <message>
@@ -629,7 +629,7 @@ some apps set it themeselves.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1409"/>
         <location filename="../../kvantummanager.ui" line="1419"/>
-        <source>The default value is 4 px but some apps set it themeselves.</source>
+        <source>The default value is 6 px but some apps set it themeselves.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

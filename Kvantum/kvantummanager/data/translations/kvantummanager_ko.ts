@@ -666,8 +666,8 @@ some apps set it themeselves.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1409"/>
         <location filename="../../kvantummanager.ui" line="1419"/>
-        <source>The default value is 4 px but some apps set it themeselves.</source>
-        <translation>기본값은 4픽셀 이지만,
+        <source>The default value is 6 px but some apps set it themeselves.</source>
+        <translation>기본값은 6픽셀 이지만,
 일부 앱은 자체적으로 설정합니다.</translation>
     </message>
     <message>

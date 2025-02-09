@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="he">
+<TS version="2.1" language="he_IL">
 <context>
     <name>KvManager::AboutDialog</name>
     <message>
@@ -388,7 +388,7 @@ If this is disabled, see the above option.</source>
         <location filename="../../kvantummanager.ui" line="595"/>
         <source>If checked, the contents of a form will be
 horizontally centered as far as possible.</source>
-        <translation>אם מסומן, התוכן של התבנית 
+        <translation>אם מסומן, התוכן של התבנית
 ימורכז אופקית ככל הניתן.</translation>
     </message>
     <message>
@@ -651,8 +651,8 @@ some apps set it themeselves.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1409"/>
         <location filename="../../kvantummanager.ui" line="1419"/>
-        <source>The default value is 4 px but some apps set it themeselves.</source>
-        <translation>ערך בררת המחדל הוא 4 פיקסלים אבל חלק מהיישומים מגדירים זאת עצמאית.</translation>
+        <source>The default value is 6 px but some apps set it themeselves.</source>
+        <translation>ערך בררת המחדל הוא 6 פיקסלים אבל חלק מהיישומים מגדירים זאת עצמאית.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1412"/>

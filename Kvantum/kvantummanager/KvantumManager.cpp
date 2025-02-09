@@ -1225,7 +1225,7 @@ void KvantumManager::defaultThemeButtons()
     tmp = qMin (qMax (tmp,2), 16);
     ui->spinLayout->setValue (tmp);
 
-    tmp = 4;
+    tmp = 6;
     if (defaultSettings.contains ("layout_margin"))
         tmp = defaultSettings.value ("layout_margin").toInt();
     tmp = qMin (qMax (tmp,2), 16);

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="et">
+<TS version="2.1" language="et_EE">
 <context>
     <name>KvManager::AboutDialog</name>
     <message>
@@ -656,8 +656,8 @@ mõned rakendused määravad selle ise.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1409"/>
         <location filename="../../kvantummanager.ui" line="1419"/>
-        <source>The default value is 4 px but some apps set it themeselves.</source>
-        <translation>Vaikeväärtus on 4 px, kuid mõned rakendused määravad selle ise.</translation>
+        <source>The default value is 6 px but some apps set it themeselves.</source>
+        <translation>Vaikeväärtus on 6 px, kuid mõned rakendused määravad selle ise.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1412"/>
@@ -721,7 +721,7 @@ Vaikimisi kuvame indikaatoreid, aga mitte jooni.</translation>
         <location filename="../../kvantummanager.ui" line="1955"/>
         <source>They may look like dotted rectangles
 on focused buttons and other widgets.</source>
-        <translation>Need võivad näida katkendliku ristkülikuna 
+        <translation>Need võivad näida katkendliku ristkülikuna
 fookuses olevatel nuppudel ja vidinatel.</translation>
     </message>
     <message>

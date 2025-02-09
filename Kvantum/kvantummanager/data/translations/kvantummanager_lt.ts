@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="lt">
+<TS version="2.1" language="lt_LT">
 <context>
     <name>KvManager::AboutDialog</name>
     <message>
@@ -670,8 +670,8 @@ tačiau kai kurios programos juos nustato pačios.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1409"/>
         <location filename="../../kvantummanager.ui" line="1419"/>
-        <source>The default value is 4 px but some apps set it themeselves.</source>
-        <translation>Numatytoji reikšmė yra 4 pikseliai, tačiau kai kurios programos ją nustato pačios.</translation>
+        <source>The default value is 6 px but some apps set it themeselves.</source>
+        <translation>Numatytoji reikšmė yra 6 pikseliai, tačiau kai kurios programos ją nustato pačios.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1412"/>

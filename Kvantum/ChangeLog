@@ -7,6 +7,7 @@ V1.1.4
  * Corrected a minor, old mistake in calculating the text size of a default push-button.
  * Added a workaround for a weird bug in Qt 6.8 that creates gaps between SVG menu elements when the scale factor is more than 1 and the painter opacity is less than 1.
  * Fixed the workaround for forced background colors of editable comboboxes.
+ * Changed the default value of "layout_margin" from 4 to 6.
 
 V1.1.3
 ---------

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="ca">
+<TS version="2.1" language="ca_ES">
 <context>
     <name>KvManager::AboutDialog</name>
     <message>
@@ -669,8 +669,8 @@ aplicacions ho defineixen per si soles.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1409"/>
         <location filename="../../kvantummanager.ui" line="1419"/>
-        <source>The default value is 4 px but some apps set it themeselves.</source>
-        <translation>El valor per defecte és 4 px però algunes aplicacions ho defineixen per si soles.</translation>
+        <source>The default value is 6 px but some apps set it themeselves.</source>
+        <translation>El valor per defecte és 6 px però algunes aplicacions ho defineixen per si soles.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1412"/>
@@ -1380,7 +1380,7 @@ Aquesta opció els ocultarà.</translation>
 scroll arrows on their top and/or bottom?
 
 By default, big menus are scrollable.</source>
-        <translation>Els menús grans haurien de ser desplaçables i tenir 
+        <translation>Els menús grans haurien de ser desplaçables i tenir
 fletxes de desplaçament a la part superior i/o inferior?
 
 Per defecte, els menús grans es poden desplaçar.</translation>
@@ -1394,8 +1394,8 @@ for a button that can be dragged and dropped by pressing
 the Ctrl key before pressing the button.</source>
         <translation>Avís: això pot ser prou confús al principi.
 
-Si l&apos;heu activat, podeu desactivar-lo temporalment 
-per a un botó que pot arrossegar i deixar anar 
+Si l&apos;heu activat, podeu desactivar-lo temporalment
+per a un botó que pot arrossegar i deixar anar
 prement la tecla Ctrl abans de prémer el botó.</translation>
     </message>
     <message>

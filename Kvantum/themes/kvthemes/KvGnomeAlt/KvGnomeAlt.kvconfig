@@ -52,7 +52,6 @@ animate_states=true
 tree_branch_line=true
 groupbox_top_label=false
 joined_inactive_tabs=true
-layout_margin=4
 reduce_window_opacity=0
 respect_DE=true
 scrollbar_in_view=false

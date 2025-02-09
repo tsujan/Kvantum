@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="nl">
+<TS version="2.1" language="nl_NL">
 <context>
     <name>KvManager::AboutDialog</name>
     <message>
@@ -666,8 +666,8 @@ mige programma&apos;s negeren dit.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1409"/>
         <location filename="../../kvantummanager.ui" line="1419"/>
-        <source>The default value is 4 px but some apps set it themeselves.</source>
-        <translation>De standaardwaarde is 4 px, maar sommige programma&apos;s negeren dit.</translation>
+        <source>The default value is 6 px but some apps set it themeselves.</source>
+        <translation>De standaardwaarde is 6 px, maar sommige programma&apos;s negeren dit.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1412"/>

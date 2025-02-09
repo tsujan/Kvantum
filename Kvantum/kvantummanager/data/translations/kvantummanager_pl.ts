@@ -668,8 +668,8 @@ niektóre aplikacje ustawiają ją samodzielnie.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1409"/>
         <location filename="../../kvantummanager.ui" line="1419"/>
-        <source>The default value is 4 px but some apps set it themeselves.</source>
-        <translation>Wartość domyślna to 4 piksele, ale niektóre aplikacje ustawiają ją samodzielnie.</translation>
+        <source>The default value is 6 px but some apps set it themeselves.</source>
+        <translation>Wartość domyślna to 6 piksele, ale niektóre aplikacje ustawiają ją samodzielnie.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1412"/>

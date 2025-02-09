@@ -672,8 +672,8 @@ iuj aplikaĵoj determinas ĝin mem.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1409"/>
         <location filename="../../kvantummanager.ui" line="1419"/>
-        <source>The default value is 4 px but some apps set it themeselves.</source>
-        <translation>La defaŭlta valoro estas 4 px sed
+        <source>The default value is 6 px but some apps set it themeselves.</source>
+        <translation>La defaŭlta valoro estas 6 px sed
 iuj aplikaĵoj determinas ĝin mem.</translation>
     </message>
     <message>

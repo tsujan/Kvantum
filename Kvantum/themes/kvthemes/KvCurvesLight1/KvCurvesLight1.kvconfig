@@ -50,7 +50,6 @@ joined_inactive_tabs=true
 layout_spacing=3
 submenu_overlap=0
 hide_combo_checkboxes=false
-layout_margin=4
 no_window_pattern=false
 reduce_window_opacity=0
 respect_DE=true

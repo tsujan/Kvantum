@@ -59,7 +59,6 @@ dialog_button_layout=2
 groupbox_top_label=false
 intensity=1.00
 joined_inactive_tabs=true
-layout_margin=4
 no_inactiveness=false
 no_window_pattern=false
 reduce_menu_opacity=0

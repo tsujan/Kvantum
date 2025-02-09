@@ -660,8 +660,8 @@ some apps set it themeselves.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1409"/>
         <location filename="../../kvantummanager.ui" line="1419"/>
-        <source>The default value is 4 px but some apps set it themeselves.</source>
-        <translation>默认值是 4px， 但是一些 app 会自行设置。</translation>
+        <source>The default value is 6 px but some apps set it themeselves.</source>
+        <translation>默认值是 6px， 但是一些 app 会自行设置。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1412"/>

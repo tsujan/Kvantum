@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="es">
+<TS version="2.1" language="es_ES">
 <context>
     <name>KvManager::AboutDialog</name>
     <message>
@@ -669,8 +669,8 @@ aplicaciones lo fijan ellas mismas.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1409"/>
         <location filename="../../kvantummanager.ui" line="1419"/>
-        <source>The default value is 4 px but some apps set it themeselves.</source>
-        <translation>El valor por defecto es 4 px, pero algunas aplicaciones lo fijan ellas mismas.</translation>
+        <source>The default value is 6 px but some apps set it themeselves.</source>
+        <translation>El valor por defecto es 6 px, pero algunas aplicaciones lo fijan ellas mismas.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1412"/>
@@ -1358,7 +1358,7 @@ habilitada la translucidez de ventanas.
 No se necesita un fondo SVG translúcido
 para que funcione.
 
-Un valor negativo implica que sólo se 
+Un valor negativo implica que sólo se
 reduce la opacidad de ventanas inactivas.</translation>
     </message>
     <message>

@@ -664,8 +664,8 @@ aplicativos definem temas próprios.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1409"/>
         <location filename="../../kvantummanager.ui" line="1419"/>
-        <source>The default value is 4 px but some apps set it themeselves.</source>
-        <translation>O valor padrão é 4 px, mas alguns aplicativos definem temas próprios.</translation>
+        <source>The default value is 6 px but some apps set it themeselves.</source>
+        <translation>O valor padrão é 6 px, mas alguns aplicativos definem temas próprios.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1412"/>

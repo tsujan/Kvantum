@@ -548,7 +548,7 @@ static inline void default_theme_spec(theme_spec &tspec) {
   tspec.dark_titlebar = false;
   tspec.dialog_button_layout = 0;
   tspec.layout_spacing = 3;
-  tspec.layout_margin = 4;
+  tspec.layout_margin = 6;
   tspec.small_icon_size = 16;
   tspec.large_icon_size = 32;
   tspec.button_icon_size = 16;

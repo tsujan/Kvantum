@@ -668,8 +668,8 @@ bazı uygulamalar bunu kendileri belirler.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1409"/>
         <location filename="../../kvantummanager.ui" line="1419"/>
-        <source>The default value is 4 px but some apps set it themeselves.</source>
-        <translation>Varsayılan değer 4 pikseldir, ancak bazı uygulamalar bunu kendileri belirler.</translation>
+        <source>The default value is 6 px but some apps set it themeselves.</source>
+        <translation>Varsayılan değer 6 pikseldir, ancak bazı uygulamalar bunu kendileri belirler.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1412"/>
@@ -1349,10 +1349,10 @@ opacity of inactive windows is reduced.</source>
         <translation>Bu, pencere yarı saydamlığı etkinleştirilmişse
 pencere opaklığını azaltacaktır.
 
-Bu tuşun çalışması için yarı saydam bir SVG 
+Bu tuşun çalışması için yarı saydam bir SVG
 arka planı gerekli DEĞİLDİR.
 
-Negatif bir değer, yalnızca etkin olmayan 
+Negatif bir değer, yalnızca etkin olmayan
 pencerelerin opaklığının azaltılacağı anlamına gelir.</translation>
     </message>
     <message>

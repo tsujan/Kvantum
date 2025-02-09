@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="id">
+<TS version="2.1" language="id_ID">
 <context>
     <name>KvManager::AboutDialog</name>
     <message>
@@ -652,8 +652,8 @@ beberapa aplikasi mengaturnya sendiri.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1409"/>
         <location filename="../../kvantummanager.ui" line="1419"/>
-        <source>The default value is 4 px but some apps set it themeselves.</source>
-        <translation>Nilai bawaannya adalah 4 px tetapi beberapa aplikasi mengaturnya sendiri.</translation>
+        <source>The default value is 6 px but some apps set it themeselves.</source>
+        <translation>Nilai bawaannya adalah 6 px tetapi beberapa aplikasi mengaturnya sendiri.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1412"/>
