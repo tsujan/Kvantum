@@ -6756,28 +6756,8 @@ void Style::drawControl(QStyle::ControlElement element,
         label_spec lspec = getLabelSpec(group);
         size_spec sspec = getSizeSpec(group);
 
-#if (QT_VERSION >= QT_VERSION_CHECK(6,8,2))
-        /* The left (right with RTL) frame and label spaces are already
-           taken into account in SC_ComboBoxEditField by a workaround. */
-        int origFrame, origLabel;
-        if (opt->direction == Qt::RightToLeft)
-        {
-          origFrame = fspec.right;
-          origLabel = lspec.right;
-          fspec.right = 0;
-          lspec.right = 0;
-        }
-        else
-        {
-          origFrame = fspec.left;
-          origLabel = lspec.left;
-          fspec.left = 0;
-          lspec.left = 0;
-        }
-#endif
-
         /* there's no reason for a variable distance from the arrow
-           because the combobox length doesn't change with it */
+            because the combobox length doesn't change with it */
         if (opt->direction == Qt::RightToLeft)
         {
           fspec.left = 0;
@@ -6820,12 +6800,6 @@ void Style::drawControl(QStyle::ControlElement element,
                         + (sspec.incrementW ? sspec.minW : 0)
             ||*/ cbH < fspec.top+lspec.top+txtSize.height()+fspec.bottom+lspec.bottom)
         {
-#if (QT_VERSION >= QT_VERSION_CHECK(6,8,2))
-          if (opt->direction == Qt::RightToLeft)
-            r.adjust(-1, 0, origFrame+origLabel-qMin(origFrame,3)-qMin(origLabel,2), 0);
-          else
-            r.adjust(-(origFrame+origLabel-qMin(origFrame,3)-qMin(origLabel,2)), 0, 1, 0);
-#endif
           fspec.left = qMin(fspec.left,3);
           fspec.right = qMin(fspec.right,3);
           fspec.top = qMin(fspec.top,3);
@@ -11608,13 +11582,7 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
           {
             margin = rtl ? fspec.right+lspec.right : fspec.left+lspec.left;
           }
-#if (QT_VERSION >= QT_VERSION_CHECK(6,8,2))
-          if (!opt->editable) // see the workaround in SC_ComboBoxEditField
-            margin = rtl ? fspec.right+lspec.right : fspec.left+lspec.left;
-          else if (!opt->currentIcon.isNull())
-#else
           else if (opt->editable && !opt->currentIcon.isNull())
-#endif
           {
             margin = (rtl ? fspec.right+lspec.right : fspec.left+lspec.left) + lspec.tispace - 4;
             margin = qMax(margin, 0);
@@ -16182,27 +16150,14 @@ QRect Style::subControlRect(QStyle::ComplexControl control,
           { // neither CE_ComboBoxLabel nor SE_LineEditContents is consulted
             margin = rtl ? fspec.right+combolspec.right : fspec.left+combolspec.left;
           }
-          else if (opt)
+          else if (opt && opt->editable && !opt->currentIcon.isNull())
           {
-#if (QT_VERSION >= QT_VERSION_CHECK(6,8,2))
-            /* WARNING: Since Qt 6.8.2, even if an applied stylesheet has nothing to do
-                        with comboboxes, the active style's CE_ComboBoxLabel is not called.
-                        As a workaround for this nasty regression, the label and frame spaces
-                        are included here and not in CE_ComboBoxLabel. */
-            if (!opt->editable)
-              margin = rtl ? fspec.right+combolspec.right : fspec.left+combolspec.left;
-            else if (!opt->currentIcon.isNull())
-#else
-            if (opt->editable && !opt->currentIcon.isNull())
-#endif
-            {
-              /* The left icon should respect frame width, text margin
-                 and text-icon spacing in the editable mode too. */
-              margin = (rtl ? fspec.right+combolspec.right : fspec.left+combolspec.left)
-                       + combolspec.tispace
-                       - 4; // it's 4px in qcombobox.cpp -> QComboBoxPrivate::updateLineEditGeometry()
-              margin = qMax(margin, 0);
-            }
+            /* The left icon should respect frame width, text margin
+               and text-icon spacing in the editable mode too. */
+            margin = (rtl ? fspec.right+combolspec.right : fspec.left+combolspec.left)
+                     + combolspec.tispace
+                     - 4; // it's 4px in qcombobox.cpp -> QComboBoxPrivate::updateLineEditGeometry()
+            margin = qMax(margin, 0);
           }
           int combo_arrow_length = tspec_.square_combo_button
                                     ? qMax(COMBO_ARROW_LENGTH, h-arrowFrameSize)

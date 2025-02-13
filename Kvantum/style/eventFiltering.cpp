@@ -338,6 +338,43 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         p.restore();
         return true; // don't let QCommandLinkButton::paintEvent() be called
       }
+#if (QT_VERSION >= QT_VERSION_CHECK(6,8,2))
+      /* NOTE: Since Qt 6.8.2, if an applied stylesheet has nothing to do with comboboxes,
+               the active style will not be called for CE_ComboBoxLabel, and so, text drawing
+               will be disastrous for uneditable comboboxes. As a workaround for this nasty
+               regression, Kvantum's methods are forced here by using an ordinary painter. */
+      else if (QComboBox *combo = qobject_cast<QComboBox*>(o))
+      {
+        if (!combo->style()->inherits("QStyleSheetStyle") || combo->isEditable())
+          break;
+        QPainter p(combo);
+        p.save();
+        QStyleOptionComboBox option;
+        option.initFrom(combo);
+        if (combo->hasFocus())
+          option.state |= State_Selected;
+        if (combo->view() && combo->view()->isVisible())
+          option.state |= State_On;
+        option.direction = combo->layoutDirection();
+        option.subControls = SC_All;
+        option.editable = false;
+        option.currentText = combo->currentText();
+        int curIndex = combo->currentIndex();
+        option.iconSize = combo->iconSize();
+        if (curIndex > -1)
+          option.currentIcon = combo->itemIcon(curIndex);
+        drawComplexControl(QStyle::CC_ComboBox, &option, &p, combo);
+        if (curIndex < 0 && !combo->placeholderText().isEmpty())
+        {
+            option.palette.setBrush(QPalette::ButtonText, option.palette.placeholderText());
+            option.currentText = combo->placeholderText();
+        }
+        drawControl(QStyle::CE_ComboBoxLabel, &option, &p, combo);
+        p.restore();
+        p.end();
+        return true;
+      }
+#endif
     }
     break;
 

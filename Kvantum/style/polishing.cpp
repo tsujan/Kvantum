@@ -576,11 +576,23 @@ void Style::polish(QWidget *widget)
            || qobject_cast<QSlider*>(widget))
   {
     widget->setAttribute(Qt::WA_Hover, true);
+    bool filterInstalled(false);
     if (tspec_.animate_states)
+    {
       widget->installEventFilter(this);
+      filterInstalled = true;
+    }
     /* set an appropriate vertical margin for combo popup items */
     if (QComboBox *combo = qobject_cast<QComboBox*>(widget))
     {
+#if (QT_VERSION >= QT_VERSION_CHECK(6,8,2))
+      if (!filterInstalled
+          && combo->style()->inherits("QStyleSheetStyle")
+          && !combo->testAttribute(Qt::WA_StyleSheetTarget))
+      {
+        widget->installEventFilter(this); // see eventFilter() -> QEvent::Paint
+      }
+#endif
       if(!hasParent(widget, "QWebView"))
       {
         QAbstractItemView *itemView(combo->view());
@@ -681,7 +693,7 @@ void Style::polish(QWidget *widget)
               /* PM_FocusFrameVMargin is used for viewitems */
               itemView->setItemDelegate(new KvComboItemDelegate(pixelMetric(PM_FocusFrameVMargin),
                                                                 itemView));
-              if (!tspec_.animate_states) // see eventFilter() -> QEvent::StyleChange
+              if (!filterInstalled) // see eventFilter() -> QEvent::StyleChange
                 widget->installEventFilter(this);
             }
           }
