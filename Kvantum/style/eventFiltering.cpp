@@ -345,8 +345,12 @@ bool Style::eventFilter(QObject *o, QEvent *e)
                regression, Kvantum's methods are forced here by using an ordinary painter. */
       else if (QComboBox *combo = qobject_cast<QComboBox*>(o))
       {
-        if (!combo->style()->inherits("QStyleSheetStyle") || combo->isEditable())
+        if (!combo->style()->inherits("QStyleSheetStyle")
+            || combo->testAttribute(Qt::WA_StyleSheetTarget)
+            || combo->isEditable())
+        {
           break;
+        }
         QPainter p(combo);
         p.save();
         QStyleOptionComboBox option;
