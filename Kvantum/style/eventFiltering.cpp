@@ -359,8 +359,6 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           option.state |= State_Selected;
         if (combo->view() && combo->view()->isVisible())
           option.state |= State_On;
-        option.direction = combo->layoutDirection();
-        option.subControls = SC_All;
         option.editable = false;
         option.currentText = combo->currentText();
         int curIndex = combo->currentIndex();
