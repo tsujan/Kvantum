@@ -591,6 +591,7 @@ void Style::polish(QWidget *widget)
           && !combo->testAttribute(Qt::WA_StyleSheetTarget))
       {
         widget->installEventFilter(this); // see eventFilter() -> QEvent::Paint
+        filterInstalled = true;
       }
 #endif
       if(!hasParent(widget, "QWebView"))
