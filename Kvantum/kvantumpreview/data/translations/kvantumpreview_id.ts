@@ -152,7 +152,7 @@ disamping teks</translation>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="366"/>
         <source>Push button with menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Tombol push dengan menu</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="415"/>

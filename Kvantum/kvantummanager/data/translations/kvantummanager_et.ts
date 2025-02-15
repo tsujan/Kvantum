@@ -413,7 +413,11 @@ when the scrollbar is left clicked.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation type="unfinished"></translation>
+        <translation>Vaikimisi liugur hüppab soovitud kohta
+kerimisriba klõpsimisel vasaku hiireklahviga.
+
+Kui see ei toimi, siis vaata:
+Mitmesugust → Järgi võimalusel aktiivset töölauakeskkonda</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="682"/>
@@ -427,7 +431,11 @@ with the left mouse button.
 
 Warning: Qt&apos;s kinetic scrolling has bugs and may
 seriously interfere with other jobs.</source>
-        <translation type="unfinished"></translation>
+        <translation>Keritavates vidinates saad kerida
+neid vasaku hiireklahviga nipsutades.
+
+Hoiatus: Qt kineetilisel kerimisel leidub vigu
+ja see võib muid tegevusi korralikult segada.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="732"/>
@@ -1254,7 +1262,11 @@ only to translucent windows that support the blur
 effect (but the KDE blur effect can be disabled).
 
 A value of 1.00 means no change.</source>
-        <translation type="unfinished"></translation>
+        <translation>See eeldab KDE kontrastiefekti olemasolu ja rakendub
+vaid läbipaistvatele akendele, mis toetavad hägustamise
+efekti (aga KDE hägustamise saad välja lülitada).
+
+Väärtus 1.00 tähendab muudatuste puudumist.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1047"/>
@@ -1308,7 +1320,11 @@ Vaikimisi on suured menüüd keritavad.</translation>
 If you have enabled it, you could temporarily disable it
 for a button that can be dragged and dropped by pressing
 the Ctrl key before pressing the button.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoiatus: see võib esmapilgul tunduda segane.
+
+Kui sa oled ta sisse lülitanud, siis võid ta ajutiselt
+sellise nupu jaoks välja lülitada, mida saab lohistada
+uude kohta Ctrl klhavi vajutusega enne nupuvajutust.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2023"/>
