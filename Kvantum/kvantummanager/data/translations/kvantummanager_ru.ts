@@ -1463,7 +1463,7 @@ the Ctrl key before pressing the button.</source>
         <location filename="../../kvantummanager.ui" line="2132"/>
         <source>Each executable name can be either a
 simple string or a regular expression.</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя любого исполняемого файла может быть либо обычной строкой, либо регулярным выражением.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2136"/>
