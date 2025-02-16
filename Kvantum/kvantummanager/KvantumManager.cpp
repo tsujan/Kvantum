@@ -36,6 +36,7 @@
 #include <QGraphicsDropShadowEffect>
 #include <QUrl>
 #include <QDesktopServices>
+#include <QRandomGenerator>
 
 namespace KvManager {
 
@@ -132,8 +133,8 @@ KvantumManager::KvantumManager (const QString& lang, QWidget *parent) : QMainWin
     /* set kvconfigTheme_ and connect to combobox signals */
     updateThemeList();
 
-    effect_ = new QGraphicsOpacityEffect();
-    animation_ = new QPropertyAnimation (effect_, "opacity");
+    effect_ = new QGraphicsOpacityEffect;
+    animation_ = new QPropertyAnimation;
 
     setAttribute (Qt::WA_AlwaysShowToolTips);
     /* set tooltip as "whatsthis" if the latter doesn't exist */
@@ -148,7 +149,7 @@ KvantumManager::KvantumManager (const QString& lang, QWidget *parent) : QMainWin
         /* sadly, Qt 5.12 sees most tooltip texts as rich texts */
         w->setToolTip ("<p style='white-space:pre'>" + tip + "</p>");
     }
-    showAnimated (ui->installLabel, 1500);
+    showAnimated (ui->installLabel, 0, 1500);
 
     connect (ui->quit, &QAbstractButton::clicked, this, &KvantumManager::close);
     connect (ui->openTheme, &QAbstractButton::clicked, this, &KvantumManager::openTheme);
@@ -267,7 +268,6 @@ KvantumManager::~KvantumManager()
 {
     delete ui;
     delete animation_;
-    delete effect_;
 }
 /*************************/
 void KvantumManager::closeEvent (QCloseEvent *event)
@@ -920,14 +920,44 @@ void KvantumManager::deleteTheme()
     writeOrigAppLists();
 }
 /*************************/
-void KvantumManager::showAnimated (QWidget *w, int duration)
+void KvantumManager::showAnimated (QWidget *w, int type, int duration)
 {
+    if (animation_->state() != QAbstractAnimation::Stopped)
+    {
+        if (animation_->targetObject())
+        {
+            animation_->targetObject()->setProperty (animation_->propertyName().constData(),
+                                                     animation_->endValue());
+        }
+        animation_->stop();
+    }
     w->show();
-    w->setGraphicsEffect (effect_);
-    animation_->stop();
-    animation_->setDuration (duration);
-    animation_->setStartValue (0.0);
-    animation_->setEndValue (1.0);
+    if (type < 0)
+    {
+        static int lastInt = QRandomGenerator::global()->bounded(1, 3);
+        type = lastInt == 1 ? 2 : 1;
+        lastInt = type;
+    }
+    if (type == 0)
+    {
+        w->setGraphicsEffect (effect_);
+        animation_->setDuration (duration > 0 ? duration : 1000);
+        animation_->setTargetObject (effect_);
+        animation_->setPropertyName ("opacity");
+        animation_->setEasingCurve (QEasingCurve::OutQuad);
+        animation_->setStartValue (0.0);
+        animation_->setEndValue (1.0);
+    }
+    else
+    {
+        animation_->setTargetObject (w);
+        animation_->setDuration (duration > 0 ? duration : 700);
+        animation_->setPropertyName ("pos");
+        animation_->setEasingCurve (QEasingCurve::OutExpo);
+        animation_->setStartValue (QPoint (w->x() + (type == 1 ? 1 : -1) * w->rect().width() / 2,
+                                   w->y()));
+        animation_->setEndValue (w->pos());
+    }
     animation_->start();
 
     /* Qt has a scroll bug that shows up with SH_UnderlineShortcut set to
@@ -965,7 +995,7 @@ void KvantumManager::useTheme()
     QLabel *statusLabel = ui->statusBar->findChild<QLabel *>();
     statusLabel->setText ("<b>" + tr ("Active theme:") + QString ("</b> %1").arg (theme));
     ui->statusBar->showMessage (tr ("Theme changed to %1.").arg (theme), 10000);
-    showAnimated (ui->usageLabel, 1000);
+    showAnimated (ui->usageLabel);
 
     ui->useTheme->setEnabled (false);
 
@@ -1349,7 +1379,7 @@ void KvantumManager::tabChanged (int index)
     ui->statusBar->clearMessage();
     if (index == 0)
     {
-        showAnimated (ui->installLabel, 1000);
+        showAnimated (ui->installLabel, 0);
         ui->openTheme->setFocus();
     }
     else if (index == 1 || index == 3)
@@ -1368,7 +1398,7 @@ void KvantumManager::tabChanged (int index)
             else
                 activeTheme = kvconfigTheme_;
             if (ui->comboBox->currentText() == activeTheme)
-                showAnimated (ui->usageLabel, 1000);
+                showAnimated (ui->usageLabel);
             else
             { // WARNING: QComboBox::setCurrentText() doesn't set the current index.
                 int index = ui->comboBox->findText (activeTheme);
@@ -1378,7 +1408,7 @@ void KvantumManager::tabChanged (int index)
         }
         else
         {
-            showAnimated (ui->appLabel, 1000);
+            showAnimated (ui->appLabel);
             ui->appCombo->setFocus();
         }
     }
@@ -1392,7 +1422,7 @@ void KvantumManager::tabChanged (int index)
         {
             ui->configLabel->setText (tr ("These are the settings that can be safely changed.<br>For the others, click <i>Save</i> and then edit this file:")
                                       + "<br><i>~/.config/Kvantum/Default#/<b>Default#.kvconfig</b></i>");
-            showAnimated (ui->configLabel, 1000);
+            showAnimated (ui->configLabel);
             ui->checkBoxPattern->setEnabled (false);
         }
         else
@@ -1413,7 +1443,7 @@ void KvantumManager::tabChanged (int index)
                 ui->configLabel->setText (tr ("These are the settings that can be safely changed.<br>For the others, click <i>Save</i> and then edit this file:")
                                           + QString ("<br><i>~/.config/Kvantum/%1#/<b>%1#.kvconfig</b></i>").arg (kvconfigTheme_));
             }
-            showAnimated (ui->configLabel, 1000);
+            showAnimated (ui->configLabel);
 
             if (kvconfigTheme_.endsWith ("#"))
                 ui->restoreButton->show();
@@ -1833,7 +1863,7 @@ void KvantumManager::selectionChanged (int /*index*/)
     if (txt == theme)
     {
         ui->useTheme->setEnabled (false);
-        showAnimated (ui->usageLabel, 1000);
+        showAnimated (ui->usageLabel);
     }
     else
     {
@@ -2684,7 +2714,7 @@ void KvantumManager::writeConfig()
             ui->restoreButton->show();
             ui->configLabel->setText (tr ("These are the settings that can be safely changed.<br>For the others, edit this file:")
                                       + QString ("<a href='%2'><br><i>~/.config/Kvantum/%1/<b>%1.kvconfig</b></i></a>").arg (kvconfigTheme_).arg (userConfigFile_));
-            showAnimated (ui->configLabel, 1000);
+            showAnimated (ui->configLabel);
         }
 
         QCoreApplication::processEvents();
@@ -2927,7 +2957,7 @@ void KvantumManager::aboutDialog()
             aboutUi.setupUi (this);
             aboutUi.textLabel->setOpenExternalLinks (true);
 
-            QGraphicsOpacityEffect *opacity = new QGraphicsOpacityEffect();
+            QGraphicsOpacityEffect *opacity = new QGraphicsOpacityEffect;
             aboutUi.titleLabel->setGraphicsEffect (opacity);
             QPropertyAnimation *animation = new QPropertyAnimation (opacity, "opacity", this);
             animation->stop();

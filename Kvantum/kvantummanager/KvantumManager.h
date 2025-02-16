@@ -80,7 +80,7 @@ private:
     QString rootThemeDir (const QString &themeName) const;
     bool isLightWithDarkDir (const QString &folderPath) const;
     void updateThemeList (bool updateAppThemes = true);
-    void showAnimated (QWidget *w, int duration);
+    void showAnimated (QWidget *w, int type = -1, int duration = 0);
     void defaultThemeButtons();
     void restyleWindow();
     void writeOrigAppLists();

@@ -1483,8 +1483,8 @@ or update its preview.</source>
         <translation>Άνοιγμα φακέλου θέματος Kvantum...</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="190"/>
-        <location filename="../../KvantumManager.cpp" line="201"/>
+        <location filename="../../KvantumManager.cpp" line="191"/>
+        <location filename="../../KvantumManager.cpp" line="202"/>
         <location filename="../../KvantumManager.cpp" line="514"/>
         <location filename="../../KvantumManager.cpp" line="531"/>
         <location filename="../../KvantumManager.cpp" line="547"/>
@@ -1505,7 +1505,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="622"/>
         <location filename="../../KvantumManager.cpp" line="776"/>
-        <location filename="../../KvantumManager.cpp" line="2777"/>
+        <location filename="../../KvantumManager.cpp" line="2807"/>
         <source>Confirmation</source>
         <translation>Επιβεβαίωση</translation>
     </message>
@@ -1520,7 +1520,7 @@ or update its preview.</source>
         <translation>%1 διαγράφηκε.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="967"/>
+        <location filename="../../KvantumManager.cpp" line="997"/>
         <source>Theme changed to %1.</source>
         <translation>Το θέμα άλλαξε σε %1.</translation>
     </message>
@@ -1530,84 +1530,84 @@ or update its preview.</source>
         <translation>Δεν έχετε άδεια εγγραφής εδώ:</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="104"/>
-        <location filename="../../KvantumManager.cpp" line="108"/>
-        <location filename="../../KvantumManager.cpp" line="114"/>
+        <location filename="../../KvantumManager.cpp" line="105"/>
+        <location filename="../../KvantumManager.cpp" line="109"/>
+        <location filename="../../KvantumManager.cpp" line="115"/>
         <source>Follow Style</source>
         <translation>Βάσει τεχνοτροπίας</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="105"/>
+        <location filename="../../KvantumManager.cpp" line="106"/>
         <source>Single Click</source>
         <translation>Απλό κλικ</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="106"/>
+        <location filename="../../KvantumManager.cpp" line="107"/>
         <source>Double Click</source>
         <translation>Διπλό κλικ</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="109"/>
+        <location filename="../../KvantumManager.cpp" line="110"/>
         <source>Icon Only</source>
         <translation>Μόνο εικονίδιο</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="110"/>
+        <location filename="../../KvantumManager.cpp" line="111"/>
         <source>Text Only</source>
         <translation>Μόνο κείμενο</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="111"/>
+        <location filename="../../KvantumManager.cpp" line="112"/>
         <source>Text Beside Icon</source>
         <translation>Κείμενο δίπλα στο εικονίδιο</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="112"/>
+        <location filename="../../KvantumManager.cpp" line="113"/>
         <source>Text Under Icon</source>
         <translation>Κείμενο κάτω από το εικονίδιο</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="115"/>
+        <location filename="../../KvantumManager.cpp" line="116"/>
         <source>KDE Layout</source>
         <translation>Διάταξη KDE</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="116"/>
+        <location filename="../../KvantumManager.cpp" line="117"/>
         <source>Gnome Layout</source>
         <translation>Διάταξη Gnome</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="117"/>
+        <location filename="../../KvantumManager.cpp" line="118"/>
         <source>Mac Layout</source>
         <translation>Διάταξη Mac</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="118"/>
+        <location filename="../../KvantumManager.cpp" line="119"/>
         <source>Windows Layout</source>
         <translation>Διάταξη Windows</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="119"/>
+        <location filename="../../KvantumManager.cpp" line="120"/>
         <source>Android Layout</source>
         <translation>Διάταξη Android</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="121"/>
+        <location filename="../../KvantumManager.cpp" line="122"/>
         <source>Titlebar</source>
         <translation>Γραμμή τίτλου</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="122"/>
+        <location filename="../../KvantumManager.cpp" line="123"/>
         <source>Menubar</source>
         <translation>Γραμμή μενού</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="123"/>
+        <location filename="../../KvantumManager.cpp" line="124"/>
         <source>Menubar and primary toolbar</source>
         <translation>Γραμμή μενού και πρωτεύουσα γραμμή εργαλείων</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="124"/>
+        <location filename="../../KvantumManager.cpp" line="125"/>
         <source>Anywhere possible</source>
         <translation>Οπουδήποτε είναι δυνατόν</translation>
     </message>
@@ -1705,85 +1705,85 @@ or update its preview.</source>
         <translation>Αδυναμία επαναφοράς εκτός αν έχετε αντίγραφο από αυτό.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1393"/>
-        <location filename="../../KvantumManager.cpp" line="1413"/>
+        <location filename="../../KvantumManager.cpp" line="1423"/>
+        <location filename="../../KvantumManager.cpp" line="1443"/>
         <source>These are the settings that can be safely changed.&lt;br&gt;For the others, click &lt;i&gt;Save&lt;/i&gt; and then edit this file:</source>
         <translation>Αυτές είναι οι ρυθμίσεις που μπορούν να αλλαχθούν με ασφάλεια.&lt;br&gt;Για τις υπόλοιπες, κάνετε κλικ στο &lt;i&gt;Αποθήκευση&lt;/i&gt; και κατόπιν επεξεργαστείτε αυτό το αρχείο:</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1409"/>
-        <location filename="../../KvantumManager.cpp" line="2685"/>
+        <location filename="../../KvantumManager.cpp" line="1439"/>
+        <location filename="../../KvantumManager.cpp" line="2715"/>
         <source>These are the settings that can be safely changed.&lt;br&gt;For the others, edit this file:</source>
         <translation>Αυτές είναι οι ρυθμίσεις που μπορούν να αλλαχθούν με ασφάλεια.&lt;br&gt;Για τις υπόλοιπες, επεξεργαστείτε αυτό το αρχείο:</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1811"/>
+        <location filename="../../KvantumManager.cpp" line="1841"/>
         <source>No description</source>
         <translation>Χωρίς περιγραφή</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2264"/>
+        <location filename="../../KvantumManager.cpp" line="2294"/>
         <source>A copy of the root config is created.</source>
         <translation>Δημιουργήθηκε αντίγραφο της διαμόρφωσης διαχειριστή.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2275"/>
+        <location filename="../../KvantumManager.cpp" line="2305"/>
         <source>A copy was already created.</source>
         <translation>Αντίγραφο είχε ήδη δημιουργηθεί.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2671"/>
+        <location filename="../../KvantumManager.cpp" line="2701"/>
         <source>Configuration saved.</source>
         <translation>Αποθήκευση διαμόρφωσης.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2778"/>
+        <location filename="../../KvantumManager.cpp" line="2808"/>
         <source>Do you want to revert to the default (root) settings of this theme?</source>
         <translation>Θέλετε να επανέλθετε στις προεπιλεγμένες (ρίζα) ρυθμίσεις αυτού του θέματος;</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2781"/>
+        <location filename="../../KvantumManager.cpp" line="2811"/>
         <source>You will lose the changes you might have made.</source>
         <translation>Θα χάσετε τις αλλαγές που μπορεί να έχετε κάνει.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2816"/>
+        <location filename="../../KvantumManager.cpp" line="2846"/>
         <source>Restored the root default settings of %1</source>
         <translation>Έγινε επαναφορά των προεπιλεγμένων ρυθμίσεων διαχειριστή του %1</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2817"/>
+        <location filename="../../KvantumManager.cpp" line="2847"/>
         <source>the default theme</source>
         <translation>το προεπιλεγμένο θέμα</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2970"/>
-        <location filename="../../KvantumManager.cpp" line="2971"/>
+        <location filename="../../KvantumManager.cpp" line="3000"/>
+        <location filename="../../KvantumManager.cpp" line="3001"/>
         <source>About Kvantum Manager</source>
         <translation>Σχετικά με τον Διαχειριστή Kvantum</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2970"/>
+        <location filename="../../KvantumManager.cpp" line="3000"/>
         <source>Translators</source>
         <translation>Μεταφραστές</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2968"/>
+        <location filename="../../KvantumManager.cpp" line="2998"/>
         <source>A tool for installing, selecting&lt;br&gt;and configuring &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt; themes</source>
         <translation>Ένα εργαλείο για εγκατάσταση, επιλογή&lt;br&gt;και διαμόρφωση θεμάτων &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2969"/>
+        <location filename="../../KvantumManager.cpp" line="2999"/>
         <source>Author: &lt;a href=&apos;mailto:tsujan2000@gmail.com?Subject=My%20Subject&apos;&gt;Pedram Pourang (aka. Tsu Jan)&lt;/a&gt; &lt;/center&gt;&lt;br&gt;</source>
         <translation>Συντάκτης: &lt;a href=&apos;mailto:tsujan2000@gmail.com?Subject=My%20Subject&apos;&gt;Pedram Pourang (aka. Tsu Jan)&lt;/a&gt; &lt;/center&gt;&lt;br&gt;</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="51"/>
+        <location filename="../../KvantumManager.cpp" line="52"/>
         <source>modified</source>
         <translation type="unfinished">τροποποιημένος</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="52"/>
+        <location filename="../../KvantumManager.cpp" line="53"/>
         <source>default</source>
         <translation>προκαθορισμένο</translation>
     </message>
@@ -1798,9 +1798,9 @@ or update its preview.</source>
         <translation>Ίσως να θέλετε να διερευνήσετε την αιτία.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="966"/>
-        <location filename="../../KvantumManager.cpp" line="2207"/>
-        <location filename="../../KvantumManager.cpp" line="2680"/>
+        <location filename="../../KvantumManager.cpp" line="996"/>
+        <location filename="../../KvantumManager.cpp" line="2237"/>
+        <location filename="../../KvantumManager.cpp" line="2710"/>
         <source>Active theme:</source>
         <translation>Ενεργό θέμα:</translation>
     </message>
