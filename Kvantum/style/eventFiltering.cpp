@@ -344,7 +344,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
                will be disastrous for uneditable comboboxes. As a workaround for this nasty
                regression, Kvantum's methods are forced here by using an ordinary painter. */
       else if (QComboBox *combo = qobject_cast<QComboBox*>(o))
-      {
+      { // -> QComboBox::initStyleOption
         if (!combo->style()->inherits("QStyleSheetStyle")
             || combo->testAttribute(Qt::WA_StyleSheetTarget)
             || combo->isEditable())
@@ -361,8 +361,8 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           option.state |= State_On;
         option.editable = false;
         option.currentText = combo->currentText();
-        int curIndex = combo->currentIndex();
         option.iconSize = combo->iconSize();
+        int curIndex = combo->currentIndex();
         if (curIndex > -1)
           option.currentIcon = combo->itemIcon(curIndex);
         drawComplexControl(QStyle::CC_ComboBox, &option, &p, combo);
@@ -372,6 +372,59 @@ bool Style::eventFilter(QObject *o, QEvent *e)
             option.currentText = combo->placeholderText();
         }
         drawControl(QStyle::CE_ComboBoxLabel, &option, &p, combo);
+        p.restore();
+        p.end();
+        return true;
+      }
+      else if (QToolButton *tb = qobject_cast<QToolButton*>(o))
+      { // Like the case of combobox, above, but more complex (-> QToolButton::initStyleOption).
+        if (!tb->style()->inherits("QStyleSheetStyle")
+            || tb->testAttribute(Qt::WA_StyleSheetTarget)
+            || tb->arrowType() == Qt::NoArrow)
+        {
+          break;
+        }
+        QPainter p(tb);
+        p.save();
+        QStyleOptionToolButton option;
+        option.initFrom(tb);
+        if (tb->isChecked())
+          option.state |= State_On;
+        if (tb->autoRaise())
+          option.state |= State_AutoRaise;
+        if (tb->isDown())
+          option.state |= State_Sunken; // sadly, this doesn't cover the menu arrow, if any
+        else if (!tb->isChecked())
+          option.state |= State_Raised; // not used by Kvantum
+        option.features = QStyleOptionToolButton::Arrow;
+        if (tb->popupMode() == QToolButton::MenuButtonPopup)
+          option.features |= QStyleOptionToolButton::MenuButtonPopup;
+        if (tb->popupMode() == QToolButton::DelayedPopup)
+          option.features |= QStyleOptionToolButton::PopupDelay;
+        if (tb->menu())
+          option.features |= QStyleOptionToolButton::HasMenu;
+        if (tb->toolButtonStyle() == Qt::ToolButtonFollowStyle)
+          option.toolButtonStyle = Qt::ToolButtonStyle(styleHint(QStyle::SH_ToolButtonStyle, &option, tb));
+        else
+          option.toolButtonStyle = tb->toolButtonStyle();
+        if (option.toolButtonStyle == Qt::ToolButtonTextBesideIcon)
+        {
+          if (tb->defaultAction() && tb->defaultAction()->priority() < QAction::NormalPriority)
+            option.toolButtonStyle = Qt::ToolButtonIconOnly;
+        }
+        if (tb->icon().isNull() && tb->arrowType() == Qt::NoArrow)
+        {
+          if (!tb->text().isEmpty())
+            option.toolButtonStyle = Qt::ToolButtonTextOnly;
+          else if (option.toolButtonStyle != Qt::ToolButtonTextOnly)
+            option.toolButtonStyle = Qt::ToolButtonIconOnly;
+        }
+        option.text = tb->text();
+        option.iconSize = tb->iconSize();
+        option.icon = tb->icon();
+        option.pos = tb->pos();
+        option.font = tb->font();
+        drawComplexControl(QStyle::CC_ToolButton, &option, &p, tb);
         p.restore();
         p.end();
         return true;

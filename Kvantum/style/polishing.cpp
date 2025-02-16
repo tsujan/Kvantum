@@ -563,6 +563,20 @@ void Style::polish(QWidget *widget)
       }
     }
 
+#if (QT_VERSION >= QT_VERSION_CHECK(6,8,2))
+    if (QLineEdit *le = qobject_cast<QLineEdit*>(widget))
+    {
+      if (le->style()->inherits("QStyleSheetStyle")
+          && !le->testAttribute(Qt::WA_StyleSheetTarget))
+      {
+        /* Due to a regression in Qt 6.8.2, frameless lineedits are drawn by QStyleSheetStyle
+           in this case. As Kvantum draws them like framed lineedits, this is a workaround. */
+        le->setFrame(true);
+      }
+      if (tspec_.animate_states)
+        widget->installEventFilter(this);
+    }
+#else
     if (qobject_cast<QLineEdit*>(widget)
         && (tspec_.animate_states
             /* a workaround for bad codes that change line-edit base color */
@@ -571,6 +585,7 @@ void Style::polish(QWidget *widget)
     {
       widget->installEventFilter(this);
     }
+#endif
   }
   else if (qobject_cast<QComboBox*>(widget)
            || qobject_cast<QSlider*>(widget))
@@ -911,6 +926,24 @@ void Style::polish(QWidget *widget)
       }
     }
   }
+#if (QT_VERSION >= QT_VERSION_CHECK(6,8,2))
+  else if (!tspec_.animate_states && qobject_cast<QToolButton*>(widget))
+  {
+    if (widget->style()->inherits("QStyleSheetStyle")
+        && !widget->testAttribute(Qt::WA_StyleSheetTarget))
+    {
+      widget->installEventFilter(this); // see eventFilter() -> QEvent::Paint
+    }
+    else if (tspec_.group_toolbar_buttons)
+    {
+      if (QToolBar *toolBar = qobject_cast<QToolBar*>(pw))
+      {
+        if (toolBar->orientation() != Qt::Vertical)
+          widget->installEventFilter(this);
+      }
+    }
+  }
+#else
   // update grouped toolbar buttons when one of them is shown/hidden
   else if (!tspec_.animate_states // otherwise it already has event filter installed on it
            && tspec_.group_toolbar_buttons && qobject_cast<QToolButton*>(widget))
@@ -921,6 +954,7 @@ void Style::polish(QWidget *widget)
         widget->installEventFilter(this);
     }
   }
+#endif
 
   bool isMenuOrTooltip(!noComposite_
                        && !subApp_
