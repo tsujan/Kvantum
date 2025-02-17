@@ -117,12 +117,17 @@ private:
     QString lastPath_;
     /* For running Kvantum Preview */
     QProcess *process_;
+    /* The user condig directory */
     QString xdg_config_home;
     /* Theme name in the kvconfig file */
     QString kvconfigTheme_;
+    /* Animations */
     QGraphicsOpacityEffect *effect_;
     QPropertyAnimation *animation_;
+    QSet<QString> animatedWidgets_;
+    /* For DE-specific settings */
     QByteArray desktop_;
+
     QHash<QString, QStringList> appThemes_, origAppThemes_;
     bool confPageVisited_;
     QString lang_;

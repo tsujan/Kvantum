@@ -1487,54 +1487,54 @@ or update its preview.</source>
         <translation>Nápověda</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="327"/>
+        <location filename="../../KvantumManager.cpp" line="328"/>
         <source>Open Kvantum Theme Folder...</source>
         <translation>Otevřete umístění pro motiv Kvantum…</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="191"/>
         <location filename="../../KvantumManager.cpp" line="202"/>
-        <location filename="../../KvantumManager.cpp" line="514"/>
-        <location filename="../../KvantumManager.cpp" line="531"/>
-        <location filename="../../KvantumManager.cpp" line="547"/>
-        <location filename="../../KvantumManager.cpp" line="558"/>
-        <location filename="../../KvantumManager.cpp" line="569"/>
-        <location filename="../../KvantumManager.cpp" line="596"/>
-        <location filename="../../KvantumManager.cpp" line="611"/>
-        <location filename="../../KvantumManager.cpp" line="658"/>
-        <location filename="../../KvantumManager.cpp" line="674"/>
+        <location filename="../../KvantumManager.cpp" line="515"/>
+        <location filename="../../KvantumManager.cpp" line="532"/>
+        <location filename="../../KvantumManager.cpp" line="548"/>
+        <location filename="../../KvantumManager.cpp" line="559"/>
+        <location filename="../../KvantumManager.cpp" line="570"/>
+        <location filename="../../KvantumManager.cpp" line="597"/>
+        <location filename="../../KvantumManager.cpp" line="612"/>
+        <location filename="../../KvantumManager.cpp" line="659"/>
+        <location filename="../../KvantumManager.cpp" line="675"/>
         <source>Kvantum</source>
         <translation>Kvantum</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="598"/>
+        <location filename="../../KvantumManager.cpp" line="599"/>
         <source>First you have to delete its modified version!</source>
         <translation>Nejprve je třeba smazat jeho upravenou verzi!</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="622"/>
-        <location filename="../../KvantumManager.cpp" line="776"/>
-        <location filename="../../KvantumManager.cpp" line="2807"/>
+        <location filename="../../KvantumManager.cpp" line="623"/>
+        <location filename="../../KvantumManager.cpp" line="777"/>
+        <location filename="../../KvantumManager.cpp" line="2814"/>
         <source>Confirmation</source>
         <translation>Potvrzení</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="737"/>
+        <location filename="../../KvantumManager.cpp" line="738"/>
         <source>%1 installed.</source>
         <translation>%1 nainstalován.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="907"/>
+        <location filename="../../KvantumManager.cpp" line="908"/>
         <source>%1 deleted.</source>
         <translation>%1 byl odstraněn.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="997"/>
+        <location filename="../../KvantumManager.cpp" line="1004"/>
         <source>Theme changed to %1.</source>
         <translation>Motiv změněn na %1.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="515"/>
+        <location filename="../../KvantumManager.cpp" line="516"/>
         <source>You have no permission to write here:</source>
         <translation>Nemáte oprávnění sem zapisovat:</translation>
     </message>
@@ -1621,168 +1621,168 @@ or update its preview.</source>
         <translation>Kdekoli je to možné</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="517"/>
+        <location filename="../../KvantumManager.cpp" line="518"/>
         <source>Please fix that first!</source>
         <translation>Nejprve je třeba to opravit!</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="529"/>
+        <location filename="../../KvantumManager.cpp" line="530"/>
         <source>This file cannot be removed:</source>
         <translation>Tento soubor není možné odebrat:</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="548"/>
-        <location filename="../../KvantumManager.cpp" line="559"/>
+        <location filename="../../KvantumManager.cpp" line="549"/>
+        <location filename="../../KvantumManager.cpp" line="560"/>
         <source>This is not an installable Kvantum theme!</source>
         <translation>Toto není Kvantum motiv, který by bylo možné nainstalovat!</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="549"/>
+        <location filename="../../KvantumManager.cpp" line="550"/>
         <source>The name of an installable themes should not be &quot;Default&quot;.</source>
         <translation>Název motivů, které je možné instalovat, nemůže být „Default“ (výchozí).</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="550"/>
-        <location filename="../../KvantumManager.cpp" line="561"/>
-        <location filename="../../KvantumManager.cpp" line="571"/>
+        <location filename="../../KvantumManager.cpp" line="551"/>
+        <location filename="../../KvantumManager.cpp" line="562"/>
+        <location filename="../../KvantumManager.cpp" line="572"/>
         <source>Please select another directory!</source>
         <translation>Vyberte jinou složku!</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="560"/>
+        <location filename="../../KvantumManager.cpp" line="561"/>
         <source>Installable themes should not have # in their names.</source>
         <translation>Motivy, které je možné instalovat, nemohou mít v názvu # (mřížka).</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="570"/>
+        <location filename="../../KvantumManager.cpp" line="571"/>
         <source>This is not a Kvantum theme folder!</source>
         <translation>Toto není složka s Kvantum motivem!</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="597"/>
+        <location filename="../../KvantumManager.cpp" line="598"/>
         <source>The theme already exists in modified form.</source>
         <translation>Tento motiv už ve změněné podobě existuje.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="612"/>
+        <location filename="../../KvantumManager.cpp" line="613"/>
         <source>You have selected an installed theme folder.</source>
         <translation>Zvolili jste složku s nainstalovaným motivem.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="613"/>
+        <location filename="../../KvantumManager.cpp" line="614"/>
         <source>Please choose another directory!</source>
         <translation>Zvolte jinou složku!</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="623"/>
+        <location filename="../../KvantumManager.cpp" line="624"/>
         <source>The theme already exists.</source>
         <translation>Motiv vzhledu už existuje.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="624"/>
+        <location filename="../../KvantumManager.cpp" line="625"/>
         <source>Do you want to overwrite it?</source>
         <translation>Chcete ho přebít?</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="659"/>
+        <location filename="../../KvantumManager.cpp" line="660"/>
         <source>This theme is also installed as root in:</source>
         <translation>Tento motiv je také nainstalován pod správcem v:</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="661"/>
+        <location filename="../../KvantumManager.cpp" line="662"/>
         <source>The user installation will take priority.</source>
         <translation>Uživatelova instalace bude mít přednost.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="675"/>
+        <location filename="../../KvantumManager.cpp" line="676"/>
         <source>This theme is also installed as user in:</source>
         <translation>Tento motiv je také nainstalován pod uživatelem v:</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="677"/>
+        <location filename="../../KvantumManager.cpp" line="678"/>
         <source>This installation will take priority.</source>
         <translation>Tato instalace bude mít přednost.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="777"/>
+        <location filename="../../KvantumManager.cpp" line="778"/>
         <source>Do you really want to delete &lt;i&gt;%1&lt;/i&gt;?</source>
         <translation>Opravdu chcete &lt;i&gt;%1&lt;/i&gt; smazat?</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="780"/>
+        <location filename="../../KvantumManager.cpp" line="781"/>
         <source>It could not be restored unless you have a copy of it.</source>
         <translation>Nelze jej obnovit, pokud nemáte jeho kopii.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1423"/>
-        <location filename="../../KvantumManager.cpp" line="1443"/>
+        <location filename="../../KvantumManager.cpp" line="1430"/>
+        <location filename="../../KvantumManager.cpp" line="1450"/>
         <source>These are the settings that can be safely changed.&lt;br&gt;For the others, click &lt;i&gt;Save&lt;/i&gt; and then edit this file:</source>
         <translation>Toto jsou nastavení, která lze bezpečně změnit.&lt;br&gt;U ostatních klikněte na &lt;i&gt;Uložit&lt;/i&gt; a poté upravte tento soubor:</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1439"/>
-        <location filename="../../KvantumManager.cpp" line="2715"/>
+        <location filename="../../KvantumManager.cpp" line="1446"/>
+        <location filename="../../KvantumManager.cpp" line="2722"/>
         <source>These are the settings that can be safely changed.&lt;br&gt;For the others, edit this file:</source>
         <translation>Toto jsou nastavení, která je možné bezpečně měnit.&lt;br&gt;Pokud potřebujete změnit nějaké další, upravte tento soubor:</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1841"/>
+        <location filename="../../KvantumManager.cpp" line="1848"/>
         <source>No description</source>
         <translation>Žádný popis</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2294"/>
+        <location filename="../../KvantumManager.cpp" line="2301"/>
         <source>A copy of the root config is created.</source>
         <translation>Kopie nastavení uživatele root je vytvořena.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2305"/>
+        <location filename="../../KvantumManager.cpp" line="2312"/>
         <source>A copy was already created.</source>
         <translation>Kopie už byla vytvořena.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2701"/>
+        <location filename="../../KvantumManager.cpp" line="2708"/>
         <source>Configuration saved.</source>
         <translation>Nastavení uložena.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2808"/>
+        <location filename="../../KvantumManager.cpp" line="2815"/>
         <source>Do you want to revert to the default (root) settings of this theme?</source>
         <translation>Chcete se vrátit k výchozím (kořenovým) nastavením tohoto motivu?</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2811"/>
+        <location filename="../../KvantumManager.cpp" line="2818"/>
         <source>You will lose the changes you might have made.</source>
         <translation>Ztratíte veškeré případné změny.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2846"/>
+        <location filename="../../KvantumManager.cpp" line="2853"/>
         <source>Restored the root default settings of %1</source>
         <translation>Obnovena výchozí kořenová nastavení %1</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2847"/>
+        <location filename="../../KvantumManager.cpp" line="2854"/>
         <source>the default theme</source>
         <translation>výchozí motiv vzhledu</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="3000"/>
-        <location filename="../../KvantumManager.cpp" line="3001"/>
+        <location filename="../../KvantumManager.cpp" line="3007"/>
+        <location filename="../../KvantumManager.cpp" line="3008"/>
         <source>About Kvantum Manager</source>
         <translation>O aplikaci</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="3000"/>
+        <location filename="../../KvantumManager.cpp" line="3007"/>
         <source>Translators</source>
         <translation>Překlady</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2998"/>
+        <location filename="../../KvantumManager.cpp" line="3005"/>
         <source>A tool for installing, selecting&lt;br&gt;and configuring &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt; themes</source>
         <translation>Nástroj pro instalaci &lt;br&gt;a úpravu &lt;a&gt;&lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt; motivů</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2999"/>
+        <location filename="../../KvantumManager.cpp" line="3006"/>
         <source>Author: &lt;a href=&apos;mailto:tsujan2000@gmail.com?Subject=My%20Subject&apos;&gt;Pedram Pourang (aka. Tsu Jan)&lt;/a&gt; &lt;/center&gt;&lt;br&gt;</source>
         <translation>Autorem je &lt;a href=&apos;mailto:tsujan2000@gmail.com?Subject=My%20Subject&apos;&gt;Pedram Pourang (alias Tsu Jan)&lt;/a&gt; &lt;/center&gt;&lt;br&gt;</translation>
     </message>
@@ -1797,19 +1797,19 @@ or update its preview.</source>
         <translation>výchozí</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="527"/>
+        <location filename="../../KvantumManager.cpp" line="528"/>
         <source>This directory cannot be removed:</source>
         <translation>Toto umíštění nelze odstranit:</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="534"/>
+        <location filename="../../KvantumManager.cpp" line="535"/>
         <source>You might want to investigate the cause.</source>
         <translation>Možná chcete prozkoumat příčinu.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="996"/>
-        <location filename="../../KvantumManager.cpp" line="2237"/>
-        <location filename="../../KvantumManager.cpp" line="2710"/>
+        <location filename="../../KvantumManager.cpp" line="1003"/>
+        <location filename="../../KvantumManager.cpp" line="2244"/>
+        <location filename="../../KvantumManager.cpp" line="2717"/>
         <source>Active theme:</source>
         <translation>Aktivní motiv:</translation>
     </message>

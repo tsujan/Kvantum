@@ -266,8 +266,9 @@ KvantumManager::KvantumManager (const QString& lang, QWidget *parent) : QMainWin
 /*************************/
 KvantumManager::~KvantumManager()
 {
-    delete ui;
+    animatedWidgets_.clear();
     delete animation_;
+    delete ui;
 }
 /*************************/
 void KvantumManager::closeEvent (QCloseEvent *event)
@@ -923,7 +924,7 @@ void KvantumManager::deleteTheme()
 void KvantumManager::showAnimated (QWidget *w, int type, int duration)
 {
     if (animation_->state() != QAbstractAnimation::Stopped)
-    {
+    { // end the previous animation
         if (animation_->targetObject())
         {
             animation_->targetObject()->setProperty (animation_->propertyName().constData(),
@@ -933,23 +934,29 @@ void KvantumManager::showAnimated (QWidget *w, int type, int duration)
     }
     w->show();
     if (type < 0)
-    {
-        static int lastInt = QRandomGenerator::global()->bounded(1, 3);
-        type = lastInt == 1 ? 2 : 1;
-        lastInt = type;
+    { // decide on the animation type
+        static int lastType = QRandomGenerator::global()->bounded(1, 3);
+        if (animatedWidgets_.contains (w->objectName()))
+            type = 0; // only one position animation for each widget
+        else
+        {
+            animatedWidgets_.insert (w->objectName());
+            type = lastType == 1 ? 2 : 1;
+            lastType = type;
+        }
     }
     if (type == 0)
-    {
+    { // opacity animation
         w->setGraphicsEffect (effect_);
-        animation_->setDuration (duration > 0 ? duration : 1000);
         animation_->setTargetObject (effect_);
+        animation_->setDuration (duration > 0 ? duration : 1000);
         animation_->setPropertyName ("opacity");
         animation_->setEasingCurve (QEasingCurve::OutQuad);
         animation_->setStartValue (0.0);
         animation_->setEndValue (1.0);
     }
     else
-    {
+    { // position animation
         animation_->setTargetObject (w);
         animation_->setDuration (duration > 0 ? duration : 700);
         animation_->setPropertyName ("pos");
