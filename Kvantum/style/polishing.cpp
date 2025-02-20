@@ -567,10 +567,11 @@ void Style::polish(QWidget *widget)
     if (QLineEdit *le = qobject_cast<QLineEdit*>(widget))
     {
       if (le->style()->inherits("QStyleSheetStyle")
-          && !le->testAttribute(Qt::WA_StyleSheetTarget))
+          && !le->testAttribute(Qt::WA_StyleSheetTarget)
+          && !le->hasFrame())
       {
         /* Due to a regression in Qt 6.8.2, frameless lineedits are drawn by QStyleSheetStyle
-           in this case. As Kvantum draws them like framed lineedits, this is a workaround. */
+           in this case. As Kvantum always draws frames for lineedits, this is a workaround. */
         le->setFrame(true);
       }
       if (tspec_.animate_states)
