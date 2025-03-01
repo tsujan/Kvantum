@@ -1,5 +1,5 @@
 /*
- * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014-2024 <tsujan2000@gmail.com>
+ * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014-2025 <tsujan2000@gmail.com>
  *
  * Kvantum is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -339,10 +339,10 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         return true; // don't let QCommandLinkButton::paintEvent() be called
       }
 #if (QT_VERSION >= QT_VERSION_CHECK(6,8,2))
-      /* NOTE: Since Qt 6.8.2, if an applied stylesheet has nothing to do with comboboxes,
-               the active style will not be called for CE_ComboBoxLabel, and so, text drawing
-               will be disastrous for uneditable comboboxes. As a workaround for this nasty
-               regression, Kvantum's methods are forced here by using an ordinary painter. */
+      /* NOTE: Since Qt 6.8.2, if an applied (app) stylesheet has nothing to do with some widgets,
+               it might ruin their drawing by interfering with the widget style (I reported it to
+               the Qt bug tracker, but to no avail, as usual). As a workaround for this nasty
+               regression, Kvantum's methods are forced here by using ordinary painters. */
       else if (QComboBox *combo = qobject_cast<QComboBox*>(o))
       { // -> QComboBox::initStyleOption
         if (!combo->style()->inherits("QStyleSheetStyle")
@@ -412,18 +412,19 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           if (tb->defaultAction() && tb->defaultAction()->priority() < QAction::NormalPriority)
             option.toolButtonStyle = Qt::ToolButtonIconOnly;
         }
-        if (tb->icon().isNull() && tb->arrowType() == Qt::NoArrow)
+        /*if (tb->icon().isNull() && tb->arrowType() == Qt::NoArrow)
         {
           if (!tb->text().isEmpty())
             option.toolButtonStyle = Qt::ToolButtonTextOnly;
           else if (option.toolButtonStyle != Qt::ToolButtonTextOnly)
             option.toolButtonStyle = Qt::ToolButtonIconOnly;
-        }
+        }*/
         option.text = tb->text();
         option.iconSize = tb->iconSize();
         option.icon = tb->icon();
         option.pos = tb->pos();
         option.font = tb->font();
+        option.arrowType = tb->arrowType();
         drawComplexControl(QStyle::CC_ToolButton, &option, &p, tb);
         p.restore();
         p.end();
