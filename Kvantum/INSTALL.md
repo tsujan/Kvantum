@@ -71,9 +71,7 @@ In Ubuntu, you can install Kvantum directly with:
 
     sudo add-apt-repository ppa:papirus/papirus
     sudo apt update
-    sudo apt install qt6-style-kvantum qt6-style-kvantum-themes
-
-Since the PPA splits the package into `qt6-style-kvantum` and `qt6-style-kvantum-themes`, both of them should be installed.
+    sudo apt install qt6-style-kvantum
 
 ### Gentoo-based distributions
 
