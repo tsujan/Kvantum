@@ -24,7 +24,15 @@ height
 greater
 than
 width</source>
-        <translation type="unfinished"></translation>
+        <translation>დასაწოლი
+ღილაკის
+გადართვა
+
+უფრო
+დიდი
+სიმაღლით
+ვიდრე
+სიგანით</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="95"/>
