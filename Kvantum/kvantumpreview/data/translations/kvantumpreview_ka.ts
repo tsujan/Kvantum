@@ -144,7 +144,7 @@ beside text</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="366"/>
         <source>Push button with menu</source>
-        <translation type="unfinished"></translation>
+        <translation>დასაჭერი ღილაკი მენიუთი</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="415"/>
@@ -213,7 +213,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1005"/>
         <location filename="../../KvantumPreviewBase.ui" line="1019"/>
         <source>Check box with icon</source>
-        <translation type="unfinished"></translation>
+        <translation>თოლია ხატულათი</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1075"/>
@@ -240,25 +240,25 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1119"/>
         <location filename="../../KvantumPreviewBase.ui" line="1158"/>
         <source>Standard combo box 1</source>
-        <translation type="unfinished"></translation>
+        <translation>სტანდარტული ჩამოსაშლელი სია 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1127"/>
         <location filename="../../KvantumPreviewBase.ui" line="1166"/>
         <source>Standard combo box 2</source>
-        <translation type="unfinished"></translation>
+        <translation>სტანდარტული ჩამოსაშლელი სია 2</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1132"/>
         <location filename="../../KvantumPreviewBase.ui" line="1171"/>
         <source>Standard combo box 3</source>
-        <translation type="unfinished"></translation>
+        <translation>სტანდარტული ჩამოსაშლელი სია 3</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1137"/>
         <location filename="../../KvantumPreviewBase.ui" line="1176"/>
         <source>Standard combo box 4</source>
-        <translation type="unfinished"></translation>
+        <translation>სტანდარტული ჩამოსაშლელი სია 4</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1197"/>
@@ -350,25 +350,25 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="1340"/>
         <location filename="../../KvantumPreviewBase.ui" line="1383"/>
         <source>Editable combo box 1</source>
-        <translation type="unfinished"></translation>
+        <translation>ჩასწორებადი ჩამოსაშლელი სია 1</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1349"/>
         <location filename="../../KvantumPreviewBase.ui" line="1392"/>
         <source>Editable combo box 2</source>
-        <translation type="unfinished"></translation>
+        <translation>ჩასწორებადი ჩამოსაშლელი სია 2</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1354"/>
         <location filename="../../KvantumPreviewBase.ui" line="1397"/>
         <source>Editable combo box 3</source>
-        <translation type="unfinished"></translation>
+        <translation>ჩასწორებადი ჩამოსაშლელი სია 3</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1359"/>
         <location filename="../../KvantumPreviewBase.ui" line="1402"/>
         <source>Editable combo box 4</source>
-        <translation type="unfinished"></translation>
+        <translation>ჩასწორებადი ჩამოსაშლელი სია 4</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="1571"/>

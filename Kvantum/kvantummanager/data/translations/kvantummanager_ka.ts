@@ -30,7 +30,8 @@
         <location filename="../../kvantummanager.ui" line="76"/>
         <source>Select a Kvantum
 theme folder</source>
-        <translation type="unfinished"></translation>
+        <translation>აირჩიეთ Kvantum-ის
+თემის საქაღალდე</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="113"/>
