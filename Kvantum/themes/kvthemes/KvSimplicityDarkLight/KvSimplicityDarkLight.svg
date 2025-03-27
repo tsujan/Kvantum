@@ -201,7 +201,7 @@
 <stop offset="1" style="stop-opacity:.19"/>
 </linearGradient>
 <linearGradient id="linearGradient6741-8">
-<stop offset="0" style="stop-color:#8c8c8c"/>
+<stop offset="0" style="stop-color:#808080"/>
 <stop offset="0.69" style="stop-color:#494949"/>
 <stop offset="0.69" style="stop-color:#535353"/>
 <stop offset="1" style="stop-color:#585858"/>
@@ -229,9 +229,9 @@
 <linearGradient gradientTransform="matrix(0,0.75,-1,0,476.25158,58.4375)" xlink:href="#linearGradient3837" id="linearGradient5100" y1="81.251602" x1="20.749475" y2="81.251602" gradientUnits="userSpaceOnUse" x2="28.5"/>
 <linearGradient id="linearGradient6741">
 <stop offset="0" style="stop-color:#dedede"/>
-<stop offset="0.69" style="stop-color:#8c8c8c"/>
-<stop offset="0.69" style="stop-color:#999"/>
-<stop offset="1" style="stop-color:#a6a6a6"/>
+<stop offset="0.69" style="stop-color:#949494"/>
+<stop offset="0.69" style="stop-color:#a1a1a1"/>
+<stop offset="1" style="stop-color:#adadad"/>
 </linearGradient>
 <linearGradient id="linearGradient5094">
 <stop offset="0" style="stop-color:#1e1e1e"/>
@@ -560,7 +560,7 @@
 <g id="button-toggled-top" transform="matrix(0,0.8,-0.98461538,0,303.00154,-3)">
 <path style="fill:url(#linearGradient5090);fill-rule:evenodd" d="m 23.75,81.2516 5,0 0,-32.5 -5,0 0,32.5 z "/>
 <path style="opacity:.2;fill:#061a36;color:#000" d="m 21.25,48.7516 0,32.5 2.5,0 0,-32.5 z"/>
-<path style="opacity:.3;fill:#fff;fill-rule:evenodd;stroke-width:.707" d="m 23.75,81.2516 h 2.5 v -32.5 h -2.5 z "/>
+<path style="opacity:.35;fill:#fff;fill-rule:evenodd;stroke-width:.707" d="m 23.75,81.2516 h 2.5 v -32.5 h -2.5 z "/>
 </g>
 <g id="button-toggled-bottom" transform="matrix(0,-0.8,0.98461538,0,174.99842,75)">
 <path style="fill:url(#linearGradient5096);fill-rule:evenodd" d="m 28.75,48.7516 -5,0 0,32.5 5,0 0,-32.5 z"/>
@@ -575,7 +575,7 @@
 <g id="button-toggled-topright" transform="matrix(0.6,0,0,0.6,220.79988,8)">
 <path style="fill:url(#linearGradient5105);fill-rule:evenodd" d="m 57,13.3334 v 6.66664 h 6.66665 c 0,-4.16667 -2.5,-6.66667 -6.66664,-6.66664 z "/>
 <path style="opacity:.2;fill:#05162d;color:#000" d="m 57,10 c 6.25,0 10,3.75 10,10 h -3.33332 c 0,-4.16667 -2.5,-6.66667 -6.66664,-6.66664 z "/>
-<path style="opacity:.3;fill:#f9f9f9;fill-rule:evenodd" d="m 57,13.3334 v 3.33331 c 4.16687,0 6.66687,0.833333 6.66665,3.33333 0,-4.16667 -2.5,-6.66667 -6.66664,-6.66664 z "/>
+<path style="opacity:.35;fill:#f9f9f9;fill-rule:evenodd" d="m 57,13.3334 v 3.33331 c 4.16687,0 6.66687,0.833333 6.66665,3.33333 0,-4.16667 -2.5,-6.66667 -6.66664,-6.66664 z "/>
 <path style="opacity:.1;fill:url(#linearGradient5109);fill-rule:evenodd" d="m 57,13.3334 v 6.66664 h 6.66665 c 0,-4.16667 -2.5,-6.66667 -6.66664,-6.66664 z "/>
 </g>
 <g id="button-toggled-bottomright" transform="matrix(0.6,0,0,0.6,220.79974,20.799744)">
@@ -586,12 +586,12 @@
 <g id="button-toggled-left" transform="matrix(0.6,0,0,1,208,0)">
 <path style="fill:url(#linearGradient5119);fill-rule:evenodd" d="m 18.3333,20 0,32 h 6.66665 v -32 h -6.66665 Z "/>
 <path style="opacity:.2;fill:#041224;color:#000" d="m 15,20 0,32 3.3333,0 0,-32 z "/>
-<path style="opacity:.3;fill:url(#linearGradient1632);fill-rule:evenodd" d="m 18.3333,20 v 32 h 3.33333 v -32 Z "/>
+<path style="opacity:.35;fill:url(#linearGradient1632);fill-rule:evenodd" d="m 18.3333,20 v 32 h 3.33333 v -32 Z "/>
 </g>
 <g id="button-toggled-topleft" transform="matrix(0.6,0,0,0.6,208,8)">
 <path style="fill:url(#linearGradient5123);fill-rule:evenodd" d="m 25,13.3334 c -4.16674,0 -6.66673,2.5 -6.66662,6.66664 l 6.6666,-0 Z "/>
 <path style="opacity:.2;fill:#05162d;color:#000" d="m 25,10 c -6.25,0 -10,3.75 -10,10 h 3.33332 c 0,-4.16667 2.5,-6.66667 6.66662,-6.66676 z "/>
-<path style="opacity:.3;fill:#fff;fill-rule:evenodd" d="m 25,13.3334 c -4.16674,0 -6.66673,2.5 -6.66664,6.66676 h 3.33325 c -1.3e-05,-2.08346 1.66665,-3.33346 3.33339,-3.33346 Z "/>
+<path style="opacity:.35;fill:#fff;fill-rule:evenodd" d="m 25,13.3334 c -4.16674,0 -6.66673,2.5 -6.66664,6.66676 h 3.33325 c -1.3e-05,-2.08346 1.66665,-3.33346 3.33339,-3.33346 Z "/>
 </g>
 <g id="button-toggled-bottomleft" transform="matrix(0.6,0,0,0.6,208,20.79977)">
 <path style="fill:url(#linearGradient5129);fill-rule:evenodd" d="m 18.333381,52 c 0,4.16705 2.5,6.66705 6.666617,6.666617 L 25,52 Z"/>
