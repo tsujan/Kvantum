@@ -187,8 +187,8 @@ frame.element=lineedit
 interior.element=lineedit
 text.margin.top=3
 text.margin.bottom=3
-text.margin.left=1
-text.margin.right=1
+text.margin.left=3
+text.margin.right=3
 frame.expansion=12
 
 [DropDownButton]
@@ -395,6 +395,8 @@ frame.expansion=0
 
 [ComboBox]
 inherits=PanelButtonCommand
+text.margin.left=6
+text.margin.right=6
 
 [Menu]
 inherits=PanelButtonCommand
