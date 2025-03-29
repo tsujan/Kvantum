@@ -1428,7 +1428,8 @@ Després de fer-ho amb tots els temes que hagi triat, guardi el resultat fent cl
         <location filename="../../kvantummanager.ui" line="2132"/>
         <source>Each executable name can be either a
 simple string or a regular expression.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cada nom executable pot ser una
+cadena simple o una expressió regular.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2136"/>
