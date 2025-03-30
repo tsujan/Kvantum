@@ -512,7 +512,7 @@ shadow to menus and tooltips.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1103"/>
         <source>Reduce menu opacity by</source>
-        <translation type="unfinished"></translation>
+        <translation>მენიუს გაუმჭვირვალობის შემცირება</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1141"/>
