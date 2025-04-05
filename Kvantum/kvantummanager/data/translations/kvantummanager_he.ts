@@ -478,7 +478,7 @@ Usually, a value of 2 is enough.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="808"/>
         <source>Blur Corner Radius</source>
-        <translation type="unfinished"></translation>
+        <translation>טשטוש רדיוס פינה</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="821"/>
@@ -534,7 +534,7 @@ shadow to menus and tooltips.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="968"/>
         <source>Shadowless menus and tooltips</source>
-        <translation type="unfinished"></translation>
+        <translation>תפריטים וחלוניות עצה ללא צלליות</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="979"/>
@@ -544,7 +544,7 @@ shadow to menus and tooltips.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1057"/>
         <source>Reduce window opacity by</source>
-        <translation type="unfinished"></translation>
+        <translation>הפחתת אטימות החלון ב־</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1103"/>
@@ -721,7 +721,7 @@ on focused buttons and other widgets.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1959"/>
         <source>Remove focus rectangles</source>
-        <translation type="unfinished"></translation>
+        <translation>הסרת מרובעי מיקוד</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2159"/>
@@ -1073,7 +1073,7 @@ the frame, so that the frame isn&apos;t cut.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1702"/>
         <source>Fill rubber-band rectangles</source>
-        <translation type="unfinished"></translation>
+        <translation>מילוי מרובעי גומייה</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1722"/>
@@ -1110,7 +1110,7 @@ between toolbar separators.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1985"/>
         <source>Drag from:</source>
-        <translation type="unfinished"></translation>
+        <translation>גרירה מתוך:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1895"/>
@@ -1130,7 +1130,7 @@ between toolbar separators.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1688"/>
         <source>Inline spin indicators</source>
-        <translation type="unfinished"></translation>
+        <translation>מחווני טווח פנימיים</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1736"/>
@@ -1151,7 +1151,7 @@ line-edit with arrow (and icon, if it exists)?</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1715"/>
         <source>Vertical spin indicators</source>
-        <translation type="unfinished"></translation>
+        <translation>מחווני טווח אנכיים</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1650"/>

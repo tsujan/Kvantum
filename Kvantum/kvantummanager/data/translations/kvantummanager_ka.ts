@@ -517,7 +517,7 @@ shadow to menus and tooltips.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1141"/>
         <source>Blurring for translucent windows</source>
-        <translation type="unfinished"></translation>
+        <translation>გადღაბნა გამჭვირვალე ფანჯრებისთვის</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1161"/>
@@ -983,7 +983,7 @@ while 0 means no delay.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1836"/>
         <source>No arrows for scrollbars</source>
-        <translation type="unfinished"></translation>
+        <translation>ჩოჩიები ისრების გარეშე</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1931"/>

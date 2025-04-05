@@ -477,22 +477,26 @@ radii for blurring translucent menus and tooltips
 that have rounded corners.
 
 Usually, a value of 2 is enough.</source>
-        <translation type="unfinished"></translation>
+        <translation>Se a desfocagem estiver ativada, estes valores definem os
+raios dos cantos para desfocar menus translúcidos e dicas
+de ferramentas que têm cantos arredondados.
+
+Normalmente, um valor de 2 é suficiente.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="808"/>
         <source>Blur Corner Radius</source>
-        <translation type="unfinished"></translation>
+        <translation>Desfocar raios dos cantos</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="821"/>
         <source>Menu:</source>
-        <translation type="unfinished"></translation>
+        <translation>Menu:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="828"/>
         <source>Tooltip:</source>
-        <translation type="unfinished"></translation>
+        <translation>Dica de ferramenta:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="852"/>
@@ -1341,11 +1345,14 @@ needed for this key to work.
 
 A negative value means that only the
 opacity of inactive windows is reduced.</source>
-        <translation type="unfinished">Isso reduzirá a opacidade da janela se
-a translucidez da janela estiver habilitada.
+        <translation>Isso reduzirá a opacidade da janela se
+a translucidez de janela estiver habilitada.
 
 Um fundo SVG translúcido NÃO é necessário
-para que esta chave funcione.</translation>
+para que esta chave funcione.
+
+Um valor negativo faz com que a opacidade
+de janelas inativas seja reduzida.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1784"/>
@@ -1418,7 +1425,8 @@ a tecla Ctrl antes de pressionar o botão.</translation>
         <location filename="../../kvantummanager.ui" line="2132"/>
         <source>Each executable name can be either a
 simple string or a regular expression.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cada nome de executável pode ser uma
+frase simples ou uma expressão regular.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2136"/>
