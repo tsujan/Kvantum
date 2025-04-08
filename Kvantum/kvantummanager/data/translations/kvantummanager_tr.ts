@@ -1425,7 +1425,8 @@ düğmeye basmadan önce Ctrl tuşu.</translation>
         <location filename="../../kvantummanager.ui" line="2132"/>
         <source>Each executable name can be either a
 simple string or a regular expression.</source>
-        <translation type="unfinished"></translation>
+        <translation>Her yürütülebilir dosya adı basit bir dize
+ya da düzenli bir ifade olabilir.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2136"/>
