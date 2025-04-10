@@ -1,4 +1,4 @@
-// Taken from QtCurve (C) Craig Drummond, 2007 - 2010
+// Taken from QtCurve (C) Craig Drummond, 2007 - 2025
 
 /*
  * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014-2021 <tsujan2000@gmail.com>
@@ -25,9 +25,7 @@
 #include <QList>
 
 QT_BEGIN_NAMESPACE
-
 class QWidget;
-
 QT_END_NAMESPACE
 
 namespace Kvantum {

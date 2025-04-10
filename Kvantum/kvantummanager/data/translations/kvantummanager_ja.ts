@@ -1323,7 +1323,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="623"/>
         <location filename="../../KvantumManager.cpp" line="777"/>
-        <location filename="../../KvantumManager.cpp" line="2814"/>
+        <location filename="../../KvantumManager.cpp" line="2819"/>
         <source>Confirmation</source>
         <translation>確認</translation>
     </message>
@@ -1338,7 +1338,7 @@ or update its preview.</source>
         <translation>%1 が削除されました。</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1004"/>
+        <location filename="../../KvantumManager.cpp" line="1009"/>
         <source>Theme changed to %1.</source>
         <translation>テーマが %1 へ変更されました。</translation>
     </message>
@@ -1523,75 +1523,75 @@ or update its preview.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1430"/>
-        <location filename="../../KvantumManager.cpp" line="1450"/>
+        <location filename="../../KvantumManager.cpp" line="1435"/>
+        <location filename="../../KvantumManager.cpp" line="1455"/>
         <source>These are the settings that can be safely changed.&lt;br&gt;For the others, click &lt;i&gt;Save&lt;/i&gt; and then edit this file:</source>
         <translation>これらは安全に変更できる設定です。&lt;br&gt;その他は、&lt;i&gt;保存&lt;/i&gt; をクリックしてから次のファイルを編集します:</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1446"/>
-        <location filename="../../KvantumManager.cpp" line="2722"/>
+        <location filename="../../KvantumManager.cpp" line="1451"/>
+        <location filename="../../KvantumManager.cpp" line="2727"/>
         <source>These are the settings that can be safely changed.&lt;br&gt;For the others, edit this file:</source>
         <translation>これらは安全に変更できる設定です。&lt;br&gt;その他の場合は、このファイルを編集します。</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1848"/>
+        <location filename="../../KvantumManager.cpp" line="1853"/>
         <source>No description</source>
         <translation>説明がありません</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2301"/>
+        <location filename="../../KvantumManager.cpp" line="2306"/>
         <source>A copy of the root config is created.</source>
         <translation>root の設定のコピーが作成されます。</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2312"/>
+        <location filename="../../KvantumManager.cpp" line="2317"/>
         <source>A copy was already created.</source>
         <translation>コピーが既に作成されています。</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2708"/>
+        <location filename="../../KvantumManager.cpp" line="2713"/>
         <source>Configuration saved.</source>
         <translation>設定が保存されました。</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2815"/>
+        <location filename="../../KvantumManager.cpp" line="2820"/>
         <source>Do you want to revert to the default (root) settings of this theme?</source>
         <translation>このテーマの標準 (root) 設定に戻しますか？</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2818"/>
+        <location filename="../../KvantumManager.cpp" line="2823"/>
         <source>You will lose the changes you might have made.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2853"/>
+        <location filename="../../KvantumManager.cpp" line="2858"/>
         <source>Restored the root default settings of %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2854"/>
+        <location filename="../../KvantumManager.cpp" line="2859"/>
         <source>the default theme</source>
         <translation>標準のテーマ</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="3007"/>
-        <location filename="../../KvantumManager.cpp" line="3008"/>
+        <location filename="../../KvantumManager.cpp" line="3012"/>
+        <location filename="../../KvantumManager.cpp" line="3013"/>
         <source>About Kvantum Manager</source>
         <translation>Kvantum マネージャーについて</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="3007"/>
+        <location filename="../../KvantumManager.cpp" line="3012"/>
         <source>Translators</source>
         <translation>翻訳者</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="3005"/>
+        <location filename="../../KvantumManager.cpp" line="3010"/>
         <source>A tool for installing, selecting&lt;br&gt;and configuring &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt; themes</source>
         <translation>&lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt; テーマを&lt;br&gt;インストール・選択・設定するツールです</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="3006"/>
+        <location filename="../../KvantumManager.cpp" line="3011"/>
         <source>Author: &lt;a href=&apos;mailto:tsujan2000@gmail.com?Subject=My%20Subject&apos;&gt;Pedram Pourang (aka. Tsu Jan)&lt;/a&gt; &lt;/center&gt;&lt;br&gt;</source>
         <translation>作者: &lt;a href=&apos;mailto:tsujan2000@gmail.com?Subject=My%20Subject&apos;&gt;Pedram Pourang (別名 Tsu Jan)&lt;/a&gt; &lt;/center&gt;&lt;br&gt;</translation>
     </message>
@@ -1616,9 +1616,9 @@ or update its preview.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1003"/>
-        <location filename="../../KvantumManager.cpp" line="2244"/>
-        <location filename="../../KvantumManager.cpp" line="2717"/>
+        <location filename="../../KvantumManager.cpp" line="1008"/>
+        <location filename="../../KvantumManager.cpp" line="2249"/>
+        <location filename="../../KvantumManager.cpp" line="2722"/>
         <source>Active theme:</source>
         <translation>アクティブなテーマ:</translation>
     </message>

@@ -1514,7 +1514,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="623"/>
         <location filename="../../KvantumManager.cpp" line="777"/>
-        <location filename="../../KvantumManager.cpp" line="2814"/>
+        <location filename="../../KvantumManager.cpp" line="2819"/>
         <source>Confirmation</source>
         <translation>Potvrzení</translation>
     </message>
@@ -1529,7 +1529,7 @@ or update its preview.</source>
         <translation>%1 byl odstraněn.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1004"/>
+        <location filename="../../KvantumManager.cpp" line="1009"/>
         <source>Theme changed to %1.</source>
         <translation>Motiv změněn na %1.</translation>
     </message>
@@ -1714,75 +1714,75 @@ or update its preview.</source>
         <translation>Nelze jej obnovit, pokud nemáte jeho kopii.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1430"/>
-        <location filename="../../KvantumManager.cpp" line="1450"/>
+        <location filename="../../KvantumManager.cpp" line="1435"/>
+        <location filename="../../KvantumManager.cpp" line="1455"/>
         <source>These are the settings that can be safely changed.&lt;br&gt;For the others, click &lt;i&gt;Save&lt;/i&gt; and then edit this file:</source>
         <translation>Toto jsou nastavení, která lze bezpečně změnit.&lt;br&gt;U ostatních klikněte na &lt;i&gt;Uložit&lt;/i&gt; a poté upravte tento soubor:</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1446"/>
-        <location filename="../../KvantumManager.cpp" line="2722"/>
+        <location filename="../../KvantumManager.cpp" line="1451"/>
+        <location filename="../../KvantumManager.cpp" line="2727"/>
         <source>These are the settings that can be safely changed.&lt;br&gt;For the others, edit this file:</source>
         <translation>Toto jsou nastavení, která je možné bezpečně měnit.&lt;br&gt;Pokud potřebujete změnit nějaké další, upravte tento soubor:</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1848"/>
+        <location filename="../../KvantumManager.cpp" line="1853"/>
         <source>No description</source>
         <translation>Žádný popis</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2301"/>
+        <location filename="../../KvantumManager.cpp" line="2306"/>
         <source>A copy of the root config is created.</source>
         <translation>Kopie nastavení uživatele root je vytvořena.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2312"/>
+        <location filename="../../KvantumManager.cpp" line="2317"/>
         <source>A copy was already created.</source>
         <translation>Kopie už byla vytvořena.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2708"/>
+        <location filename="../../KvantumManager.cpp" line="2713"/>
         <source>Configuration saved.</source>
         <translation>Nastavení uložena.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2815"/>
+        <location filename="../../KvantumManager.cpp" line="2820"/>
         <source>Do you want to revert to the default (root) settings of this theme?</source>
         <translation>Chcete se vrátit k výchozím (kořenovým) nastavením tohoto motivu?</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2818"/>
+        <location filename="../../KvantumManager.cpp" line="2823"/>
         <source>You will lose the changes you might have made.</source>
         <translation>Ztratíte veškeré případné změny.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2853"/>
+        <location filename="../../KvantumManager.cpp" line="2858"/>
         <source>Restored the root default settings of %1</source>
         <translation>Obnovena výchozí kořenová nastavení %1</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2854"/>
+        <location filename="../../KvantumManager.cpp" line="2859"/>
         <source>the default theme</source>
         <translation>výchozí motiv vzhledu</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="3007"/>
-        <location filename="../../KvantumManager.cpp" line="3008"/>
+        <location filename="../../KvantumManager.cpp" line="3012"/>
+        <location filename="../../KvantumManager.cpp" line="3013"/>
         <source>About Kvantum Manager</source>
         <translation>O aplikaci</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="3007"/>
+        <location filename="../../KvantumManager.cpp" line="3012"/>
         <source>Translators</source>
         <translation>Překlady</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="3005"/>
+        <location filename="../../KvantumManager.cpp" line="3010"/>
         <source>A tool for installing, selecting&lt;br&gt;and configuring &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt; themes</source>
         <translation>Nástroj pro instalaci &lt;br&gt;a úpravu &lt;a&gt;&lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt; motivů</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="3006"/>
+        <location filename="../../KvantumManager.cpp" line="3011"/>
         <source>Author: &lt;a href=&apos;mailto:tsujan2000@gmail.com?Subject=My%20Subject&apos;&gt;Pedram Pourang (aka. Tsu Jan)&lt;/a&gt; &lt;/center&gt;&lt;br&gt;</source>
         <translation>Autorem je &lt;a href=&apos;mailto:tsujan2000@gmail.com?Subject=My%20Subject&apos;&gt;Pedram Pourang (alias Tsu Jan)&lt;/a&gt; &lt;/center&gt;&lt;br&gt;</translation>
     </message>
@@ -1807,9 +1807,9 @@ or update its preview.</source>
         <translation>Možná chcete prozkoumat příčinu.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1003"/>
-        <location filename="../../KvantumManager.cpp" line="2244"/>
-        <location filename="../../KvantumManager.cpp" line="2717"/>
+        <location filename="../../KvantumManager.cpp" line="1008"/>
+        <location filename="../../KvantumManager.cpp" line="2249"/>
+        <location filename="../../KvantumManager.cpp" line="2722"/>
         <source>Active theme:</source>
         <translation>Aktivní motiv:</translation>
     </message>

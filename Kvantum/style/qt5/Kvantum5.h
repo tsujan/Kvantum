@@ -36,9 +36,7 @@
 #define ANIMATION_FRAME 40 // in ms
 
 QT_BEGIN_NAMESPACE
-
 class QSvgRenderer;
-
 QT_END_NAMESPACE
 
 namespace Kvantum {

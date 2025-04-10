@@ -21,9 +21,7 @@
 #include "specs4.h"
 
 QT_BEGIN_NAMESPACE
-
 class QSettings;
-
 QT_END_NAMESPACE
 
 namespace Kvantum {

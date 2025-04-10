@@ -25,9 +25,7 @@
 #include <QList>
 
 QT_BEGIN_NAMESPACE
-
 class QWidget;
-
 QT_END_NAMESPACE
 
 namespace Kvantum {

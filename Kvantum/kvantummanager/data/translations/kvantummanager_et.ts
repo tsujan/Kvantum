@@ -1449,7 +1449,7 @@ või uuenda seda.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="623"/>
         <location filename="../../KvantumManager.cpp" line="777"/>
-        <location filename="../../KvantumManager.cpp" line="2814"/>
+        <location filename="../../KvantumManager.cpp" line="2819"/>
         <source>Confirmation</source>
         <translation>Kinnitus</translation>
     </message>
@@ -1464,7 +1464,7 @@ või uuenda seda.</translation>
         <translation>%1 kustutati.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1004"/>
+        <location filename="../../KvantumManager.cpp" line="1009"/>
         <source>Theme changed to %1.</source>
         <translation>Uus kujundus on %1.</translation>
     </message>
@@ -1649,75 +1649,75 @@ või uuenda seda.</translation>
         <translation>Seda ei saa taastada, kui puudub varukoopia.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1430"/>
-        <location filename="../../KvantumManager.cpp" line="1450"/>
+        <location filename="../../KvantumManager.cpp" line="1435"/>
+        <location filename="../../KvantumManager.cpp" line="1455"/>
         <source>These are the settings that can be safely changed.&lt;br&gt;For the others, click &lt;i&gt;Save&lt;/i&gt; and then edit this file:</source>
         <translation>Need on sätted, mida sa võid ohutult muuta.&lt;br&gt;Ülejäänute puhul klõpsa &lt;i&gt;Salvesta&lt;/i&gt; ja muuda siis faili:</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1446"/>
-        <location filename="../../KvantumManager.cpp" line="2722"/>
+        <location filename="../../KvantumManager.cpp" line="1451"/>
+        <location filename="../../KvantumManager.cpp" line="2727"/>
         <source>These are the settings that can be safely changed.&lt;br&gt;For the others, edit this file:</source>
         <translation>Need on sätted, mida sa võid ohutult muuta.&lt;br&gt;Ülejäänute puhul muuda faili:</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1848"/>
+        <location filename="../../KvantumManager.cpp" line="1853"/>
         <source>No description</source>
         <translation>Kirjeldust pole</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2301"/>
+        <location filename="../../KvantumManager.cpp" line="2306"/>
         <source>A copy of the root config is created.</source>
         <translation>Loodi koopia vaikeväärtustest.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2312"/>
+        <location filename="../../KvantumManager.cpp" line="2317"/>
         <source>A copy was already created.</source>
         <translation>Koopia on juba loodud.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2708"/>
+        <location filename="../../KvantumManager.cpp" line="2713"/>
         <source>Configuration saved.</source>
         <translation>Seadistus on salvestatud.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2815"/>
+        <location filename="../../KvantumManager.cpp" line="2820"/>
         <source>Do you want to revert to the default (root) settings of this theme?</source>
         <translation>Kas taastame kõik kujunduse vaikeväärtused?</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2818"/>
+        <location filename="../../KvantumManager.cpp" line="2823"/>
         <source>You will lose the changes you might have made.</source>
         <translation>Kaotad kõik tehtud muudatused.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2853"/>
+        <location filename="../../KvantumManager.cpp" line="2858"/>
         <source>Restored the root default settings of %1</source>
         <translation>Taastasime %1 teema vaikeväärtused</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="2854"/>
+        <location filename="../../KvantumManager.cpp" line="2859"/>
         <source>the default theme</source>
         <translation>vaikimisi kujundus</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="3007"/>
-        <location filename="../../KvantumManager.cpp" line="3008"/>
+        <location filename="../../KvantumManager.cpp" line="3012"/>
+        <location filename="../../KvantumManager.cpp" line="3013"/>
         <source>About Kvantum Manager</source>
         <translation>Kvantum halduri kohta</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="3007"/>
+        <location filename="../../KvantumManager.cpp" line="3012"/>
         <source>Translators</source>
         <translation>Tõlkijad</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="3005"/>
+        <location filename="../../KvantumManager.cpp" line="3010"/>
         <source>A tool for installing, selecting&lt;br&gt;and configuring &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantum&lt;/a&gt; themes</source>
         <translation>Tööriist, millega saad paigaldada, valida&lt;br&gt;ja hallata &lt;a href=&apos;https://github.com/tsujan/Kvantum&apos;&gt;Kvantumi&lt;/a&gt; kujundusi</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="3006"/>
+        <location filename="../../KvantumManager.cpp" line="3011"/>
         <source>Author: &lt;a href=&apos;mailto:tsujan2000@gmail.com?Subject=My%20Subject&apos;&gt;Pedram Pourang (aka. Tsu Jan)&lt;/a&gt; &lt;/center&gt;&lt;br&gt;</source>
         <translation>Autor: &lt;a href=&apos;mailto:tsujan2000@gmail.com?Subject=My%20Subject&apos;&gt;Pedram Pourang (aka. Tsu Jan)&lt;/a&gt; &lt;/center&gt;&lt;br&gt;</translation>
     </message>
@@ -1742,9 +1742,9 @@ või uuenda seda.</translation>
         <translation>Põhjuse võiks välja selgitada.</translation>
     </message>
     <message>
-        <location filename="../../KvantumManager.cpp" line="1003"/>
-        <location filename="../../KvantumManager.cpp" line="2244"/>
-        <location filename="../../KvantumManager.cpp" line="2717"/>
+        <location filename="../../KvantumManager.cpp" line="1008"/>
+        <location filename="../../KvantumManager.cpp" line="2249"/>
+        <location filename="../../KvantumManager.cpp" line="2722"/>
         <source>Active theme:</source>
         <translation>Aktiivne kujundus:</translation>
     </message>

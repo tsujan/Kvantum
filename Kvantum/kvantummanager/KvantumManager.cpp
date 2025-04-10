@@ -1,5 +1,5 @@
 /*
- * Copyright (C) Pedram Pourang (aka Tsu Jan) 2018-2024 <tsujan2000@gmail.com>
+ * Copyright (C) Pedram Pourang (aka Tsu Jan) 2018-2025 <tsujan2000@gmail.com>
  *
  * Kvantum is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -945,6 +945,11 @@ void KvantumManager::showAnimated (QWidget *w, int type, int duration)
             lastType = type;
         }
     }
+
+    /* First silence Qt's debug messages "QPropertyAnimation: you're trying to animate
+       a non-existing property X of your QObject". */
+    animation_->setPropertyName (QByteArray());
+
     if (type == 0)
     { // opacity animation
         w->setGraphicsEffect (effect_);

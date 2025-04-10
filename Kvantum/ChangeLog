@@ -1,3 +1,8 @@
+V1.1.5
+---------
+ * Wrapped forward declarations within `QT_NAMESPACE` (→ https://wiki.qt.io/Qt_In_Namespace).
+ * Silenced Qt's debug messages about the animations of Kvantum Manager.
+
 V1.1.4
 ---------
  * Support regular expressions in Kvantum Manager's Application Themes.
