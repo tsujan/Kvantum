@@ -26,24 +26,13 @@ int main (int argc, char *argv[])
   QApplication viewer (argc, argv);
   viewer.setApplicationName ("Kvantum Preview");
 
-  QStringList langs (QLocale::system().uiLanguages());
-  QString lang; // bcp47Name() doesn't work under vbox
-  if (!langs.isEmpty())
-    lang = langs.first().replace ('-', '_');
   QTranslator qtTranslator;
-  if (!qtTranslator.load ("qt_" + lang, QLibraryInfo::path (QLibraryInfo::TranslationsPath)))
-  { // shouldn't be needed
-    if (!langs.isEmpty())
-    {
-      lang = langs.first().split (QLatin1Char ('_')).first();
-      (void)qtTranslator.load ("qt_" + lang, QLibraryInfo::path (QLibraryInfo::TranslationsPath));
-    }
-  }
-  viewer.installTranslator (&qtTranslator);
+  if (qtTranslator.load ("qt_" + QLocale::system().name(), QLibraryInfo::path (QLibraryInfo::TranslationsPath)))
+    viewer.installTranslator (&qtTranslator);
 
   QTranslator KPTranslator;
-  (void)KPTranslator.load ("kvantumpreview_" + lang, QStringLiteral (DATADIR) + "/kvantumpreview/translations");
-  viewer.installTranslator (&KPTranslator);
+  if (KPTranslator.load ("kvantumpreview_" + QLocale::system().name(), QStringLiteral (DATADIR) + "/kvantumpreview/translations"))
+    viewer.installTranslator (&KPTranslator);
 
   KvantumPreview k (nullptr);
   k.show();

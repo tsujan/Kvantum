@@ -1816,17 +1816,17 @@ or update its preview.</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../main.cpp" line="123"/>
+        <location filename="../../main.cpp" line="111"/>
         <source>Kvantum</source>
         <translation>Kvantum</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="124"/>
+        <location filename="../../main.cpp" line="112"/>
         <source>Kvantum is not installed on your system.</source>
         <translation>Kvantum이 시스템에 설치되어 있지 않습니다.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="125"/>
+        <location filename="../../main.cpp" line="113"/>
         <source>Please first install the Kvantum style plugin!</source>
         <translation>먼저 Kvantum 스타일 플러그인을 설치하십시오!</translation>
     </message>

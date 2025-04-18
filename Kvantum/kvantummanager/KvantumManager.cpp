@@ -37,15 +37,15 @@
 #include <QUrl>
 #include <QDesktopServices>
 #include <QRandomGenerator>
+#include <QLocale>
 
 namespace KvManager {
 
 static const QStringList windowGroups = (QStringList() << "Window" << "WindowTranslucent"
                                                        << "Dialog" << "DialogTranslucent");
 
-KvantumManager::KvantumManager (const QString& lang, QWidget *parent) : QMainWindow (parent), ui (new Ui::KvantumManager)
+KvantumManager::KvantumManager (QWidget *parent) : QMainWindow (parent), ui (new Ui::KvantumManager)
 {
-    lang_ = lang;
     ui->setupUi (this);
 
     confPageVisited_ = false;
@@ -1833,9 +1833,9 @@ QString KvantumManager::getComment (const QString &comboText, bool setState)
         QSettings themeSettings (themeConfig, QSettings::NativeFormat);
         themeSettings.beginGroup ("General");
         QString commentStr ("comment");
-        if (!lang_.isEmpty())
+        if (!QLocale::system().name().isEmpty())
         {
-            const QString lang = "[" + lang_ + "]";
+            const QString lang = "[" + QLocale::system().name() + "]";
             if (themeSettings.contains ("comment" + lang))
                 commentStr += lang;
         }

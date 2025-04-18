@@ -95,25 +95,13 @@ int main (int argc, char *argv[])
         }
     }
 
-    QStringList langs (QLocale::system().uiLanguages());
-    QString lang; // bcp47Name() doesn't work under vbox
-    if (!langs.isEmpty())
-        lang = langs.first().replace ('-', '_');
-
     QTranslator qtTranslator;
-    if (!qtTranslator.load ("qt_" + lang, QLibraryInfo::path (QLibraryInfo::TranslationsPath)))
-    { // shouldn't be needed
-        if (!langs.isEmpty())
-        {
-            lang = langs.first().split (QLatin1Char ('_')).first();
-            (void)qtTranslator.load ("qt_" + lang, QLibraryInfo::path (QLibraryInfo::TranslationsPath));
-        }
-    }
-    a.installTranslator (&qtTranslator);
+    if (qtTranslator.load ("qt_" + QLocale::system().name(), QLibraryInfo::path (QLibraryInfo::TranslationsPath)))
+        a.installTranslator (&qtTranslator);
 
     QTranslator KMTranslator;
-    (void)KMTranslator.load ("kvantummanager_" + lang, QStringLiteral (DATADIR) + "/kvantummanager/translations");
-    a.installTranslator (&KMTranslator);
+    if (KMTranslator.load ("kvantummanager_" + QLocale::system().name(), QStringLiteral (DATADIR) + "/kvantummanager/translations"))
+        a.installTranslator (&KMTranslator);
 
     /* for Kvantum Manager to do its job, it should by styled by Kvantum */
     a.setAttribute (Qt::AA_DontCreateNativeWidgetSiblings, true); // for translucency
@@ -129,7 +117,7 @@ int main (int argc, char *argv[])
     }
     if (QApplication::style()->objectName() != "kvantum")
         QApplication::setStyle (QStyleFactory::create ("kvantum"));
-    KvManager::KvantumManager km (lang, nullptr);
+    KvManager::KvantumManager km (nullptr);
 
     return a.exec();
 }

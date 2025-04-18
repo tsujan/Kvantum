@@ -1645,17 +1645,17 @@ Aktualisierung seiner Vorschau.</translation>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../main.cpp" line="123"/>
+        <location filename="../../main.cpp" line="111"/>
         <source>Kvantum</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="124"/>
+        <location filename="../../main.cpp" line="112"/>
         <source>Kvantum is not installed on your system.</source>
         <translation>Kvantum ist nicht auf Ihrem System installiert.</translation>
     </message>
     <message>
-        <location filename="../../main.cpp" line="125"/>
+        <location filename="../../main.cpp" line="113"/>
         <source>Please first install the Kvantum style plugin!</source>
         <translation></translation>
     </message>

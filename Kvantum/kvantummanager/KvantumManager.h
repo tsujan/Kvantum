@@ -36,7 +36,7 @@ class KvantumManager : public QMainWindow
     Q_OBJECT
 
 public:
-    KvantumManager (const QString& lang = QString(), QWidget *parent = 0);
+    KvantumManager (QWidget *parent = nullptr);
     ~KvantumManager();
 
 protected:
@@ -130,7 +130,6 @@ private:
 
     QHash<QString, QStringList> appThemes_, origAppThemes_;
     bool confPageVisited_;
-    QString lang_;
     QString modifiedSuffix_;
     QString kvDefault_;
     QString userConfigFile_;
