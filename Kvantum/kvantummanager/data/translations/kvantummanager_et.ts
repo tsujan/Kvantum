@@ -589,7 +589,8 @@ kui mõne vidina olekut muudetakse, enamasti hiire abil.</translation>
         <location filename="../../kvantummanager.ui" line="1175"/>
         <source>Check this to remove all window/dialog tiling patterns!
 Uncheck it if you want those patterns back!</source>
-        <translation></translation>
+        <translation>Selle eelistuse valimisel eemalda kõik akende/vaadete paanimismustrid!
+Kui soovid paanimismustreid kasutada, siis jäta valimata!</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1179"/>
