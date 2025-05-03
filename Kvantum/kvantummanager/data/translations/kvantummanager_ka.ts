@@ -544,7 +544,7 @@ Uncheck it if you want those patterns back!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1179"/>
         <source>Remove window/dialog tiling patterns</source>
-        <translation type="unfinished"></translation>
+        <translation>ფანჯრის/დიალოგის ფილის ნიმუშების წაშლა</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1186"/>
@@ -1016,7 +1016,7 @@ the frame, so that the frame isn&apos;t cut.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1674"/>
         <source>Group-box label above frame</source>
-        <translation type="unfinished"></translation>
+        <translation>ჯგუფის ჭდე ჩარჩოს ზემოდან</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1702"/>
@@ -1037,12 +1037,12 @@ for menubars by default.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1729"/>
         <source>Mouse tracking for menubars</source>
-        <translation type="unfinished"></translation>
+        <translation>თაგუნას ტრეკინგი მენიუს ზოლებისთვის</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1754"/>
         <source>Merge menubar with toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>მენიუს პანელის შერწყმა ხელსაწყოების პანელთან</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1773"/>
@@ -1073,7 +1073,7 @@ between toolbar separators.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1801"/>
         <source>Underline shortcuts with Alt</source>
-        <translation type="unfinished"></translation>
+        <translation>მალსახმობების ხაზგასმა, როცა Alt გიჭირავთ</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1688"/>
