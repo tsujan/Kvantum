@@ -721,6 +721,9 @@ reduced by other means.</string>
                </item>
                <item row="10" column="1">
                 <widget class="QCheckBox" name="checkBoxKineticScrolling">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
                  <property name="toolTip">
                   <string>Scroll some scrollable widgets by flicking them
 with the left mouse button.
