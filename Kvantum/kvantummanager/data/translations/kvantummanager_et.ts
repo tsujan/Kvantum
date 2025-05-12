@@ -826,7 +826,11 @@ Konsole, QTerminal and LXQt panel are some examples.</source>
 By default, all toolbars are styled,
 whether they are on the top or at any
 other position.</source>
-        <translation></translation>
+        <translation>Kas vaid ülemine tööriistariba peaks olema kujundatud?
+
+Vaikimisi on kõik tööriistaribad
+kujundatud, olgu nad siis ülal või
+ükspuha muus asukohas.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="644"/>
