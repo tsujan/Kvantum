@@ -998,7 +998,12 @@ toolbars and dock widgets are hollow.
 
 This option fills drop rectangles with
 the highlight color.</source>
-        <translation type="unfinished"></translation>
+        <translation>Από προεπιλογή, τα πλαίσια αποθέσεως
+για μετακινούμενες γραμμές εργαλείων
+και γραφικά στοιχεία αποβάθρας είναι κενά.
+
+Ενεργοποιεί την πλήρωση των πλαισίων
+αποθέσεως με το χρώμα επισήμανσης.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1753"/>
@@ -1083,7 +1088,11 @@ whose windows should not be translucent.
 
 (Some apps, like video players, may have
 problems with translucency!)</source>
-        <translation type="unfinished"></translation>
+        <translation>Λίστα εκτελέσιμων, χωρισμένων με κόμμα,
+των οποίων τα παράθυρα δεν πρέπει να είναι ημιδιαφανή.
+
+(Ορισμένες εφαρμογές, όπως οι αναπαραγωγείς βίντεο, ενδέχεται
+να αντιμετωπίζουν προβλήματα με την ημιδιαφάνεια!)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1200"/>
@@ -1172,12 +1181,12 @@ the frame, so that the frame isn&apos;t cut.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1677"/>
         <source>Group-box label above frame</source>
-        <translation type="unfinished"></translation>
+        <translation>Ετικέτα πλαισίου ομάδας πάνω από το περίγραμμα</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1705"/>
         <source>Fill rubber-band rectangles</source>
-        <translation type="unfinished"></translation>
+        <translation>Πλήρωση των ορθογωνίων επιλογής</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1725"/>
@@ -1242,17 +1251,19 @@ between toolbar separators.</source>
         <location filename="../../kvantummanager.ui" line="1739"/>
         <source>Draw the whole editable combo-box as a
 line-edit with arrow (and icon, if it exists)?</source>
-        <translation type="unfinished"></translation>
+        <translation>Σχεδίαση του επεξεργάσιμου πλαισίου συνδυασμών
+ως γραμμή επεξεργασίας με βέλος (και εικονίδιο, αν υπάρχει);</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1743"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Draw the whole editable combo-box as a line-edit with arrow (and icon, if it exists)?&lt;/p&gt;&lt;p&gt;By default, a combo-box consists of a line-edit, a button with arrow on one side and another button with icon on the other side.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Σχεδίαση του επεξεργάσιμου πλαισίου συνδυασμών
+ως πεδίο εισαγωγής με βέλος (και εικονίδιο, αν υπάρχει);&lt;/p&gt;&lt;p&gt;Από προεπιλογή, ένα συνδυαστικό πλαίσιο αποτελείται από μία γραμμή επεξεργασίας, ένα κουμπί με βέλος στη μία πλευρά και ένα ακόμη κουμπί με εικονίδιο στην άλλη.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1746"/>
         <source>Editable combo as line-edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Επεξεργάσιμο πλαίσιο συνδυασμών ως γραμμή επεξεργασίας</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1718"/>
@@ -1291,12 +1302,13 @@ Uncheck it if you want to use those options!</source>
         <location filename="../../kvantummanager.ui" line="1821"/>
         <source>Inactive tabs are joined together by default,
 i.e., there is no border between them.</source>
-        <translation type="unfinished"></translation>
+        <translation>Από προεπιλογή, οι ανενεργές καρτέλες
+δεν χωρίζονται με περίγραμμα.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1825"/>
         <source>Join inactive tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>Ένωση ανενεργών καρτελών</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2012"/>
@@ -1396,7 +1408,7 @@ the Ctrl key before pressing the button.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2055"/>
         <source>&lt;center&gt;Here you could assign themes to specific applications.&lt;/center&gt;&lt;br&gt;&lt;center&gt;For each theme, you could add a comma-separated list of executables whose applications should use that theme instead of the active theme. After doing so for all of your chosen themes, save the result by clicking on the &lt;i&gt;Save&lt;/i&gt; button!&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;center&gt;Εδώ μπορείτε να αντιστοιχίσετε θέματα σε συγκεκριμένες εφαρμογές.&lt;/center&gt;&lt;br&gt;&lt;center&gt;Για κάθε θέμα, μπορείτε να προσθέσετε μια λίστα εκτελέσιμων (χωρισμένων με κόμμα), των οποίων οι εφαρμογές θα χρησιμοποιούν αυτό το θέμα αντί για το ενεργό. Αφού το κάνετε αυτό για όλα τα θέματα που επιθυμείτε, αποθηκεύστε το αποτέλεσμα κάνοντας κλικ στο κουμπί &lt;i&gt;Αποθήκευση&lt;/i&gt;!&lt;/center&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2090"/>
@@ -1412,7 +1424,8 @@ the Ctrl key before pressing the button.</source>
         <location filename="../../kvantummanager.ui" line="2135"/>
         <source>Each executable name can be either a
 simple string or a regular expression.</source>
-        <translation type="unfinished"></translation>
+        <translation>Κάθε όνομα εκτελέσιμου μπορεί να είναι είτε
+μια απλή συμβολοσειρά είτε μια κανονική έκφραση.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2139"/>
@@ -1470,7 +1483,7 @@ or update its preview.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2257"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click on this button and then click on a GUI element that has &amp;quot;What&apos;s This&amp;quot; tooltip  to get information about what it does.&lt;/p&gt;&lt;p&gt;There are also ordinary tooltips but this kind of tooltip will not disappear until you click somewhere.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Κάντε κλικ σε αυτό το κουμπί και έπειτα σε ένα στοιχείο του γραφικού περιβάλλοντος που διαθέτει υπόδειξη τύπου «Τι είναι αυτό;» για να δείτε πληροφορίες σχετικά με τη λειτουργία του.&lt;/p&gt;&lt;p&gt;Υπάρχουν επίσης και οι συνηθισμένες υποδείξεις, αλλά αυτού του είδους η υπόδειξη δεν εξαφανίζεται μέχρι να κάνετε κλικ κάπου αλλού.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2260"/>
@@ -1780,7 +1793,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="52"/>
         <source>modified</source>
-        <translation type="unfinished">τροποποιημένος</translation>
+        <translation>τροποποιημένος</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="53"/>
