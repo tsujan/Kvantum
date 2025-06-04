@@ -394,7 +394,7 @@ horizontally centered as far as possible.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="599"/>
         <source>Centered form layouts</source>
-        <translation>פריסות בצורה ממורכזת</translation>
+        <translation>פריסות תבנית ממורכזות</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="618"/>
