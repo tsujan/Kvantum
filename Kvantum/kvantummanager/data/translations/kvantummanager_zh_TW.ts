@@ -279,7 +279,7 @@ reduced by other means.</source>
         <location filename="../../kvantummanager.ui" line="694"/>
         <location filename="../../kvantummanager.ui" line="709"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Useful with monochrome icon sets and when the opacity of disabled icons is not reduced by other means.&lt;/p&gt;&lt;p&gt;KDE automatically reduces the opacity of disabled icons. Therefore, this option might be useful rather under other desktop environments.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;對於使用單色圖示集，以及當停用圖示的不透明度無其他方法可以降低時，這會很有用。.&lt;/p&gt;&lt;p&gt;KDE 會自動地降密停用圖示的不透明度。因而，這個選項在其它桌面環境下會較為有用。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;對於使用單色圖示集，以及當停用圖示的不透明度無其他方法可以降低時，這會很有用。.&lt;/p&gt;&lt;p&gt;KDE 會自動地降密停用圖示的不透明度。因而，這個選項在其他桌面環境下會較為有用。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="697"/>
@@ -355,7 +355,7 @@ Miscellaneous → Respect current DE if possible</source>
     <message>
         <location filename="../../kvantummanager.ui" line="227"/>
         <source>&lt;br&gt;&lt;br&gt;Since &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; is independent of all desktop environments, you first need to &lt;i&gt;activate&lt;/i&gt; it with a Qt platform integration program. KDE and LXQt provide simple tools for changing the active Qt style plugin. With other platforms, you need a Qt configuration tool.&lt;br/&gt;&lt;br/&gt;Under KDE, also select and apply the color scheme of this theme because some KDE applications may get their colors directly from the KDE color scheme.&lt;br/&gt;&lt;br/&gt;Running applications will get the new theme after being closed and reopened. Logging out and in would be good for all KDE/LXQt parts to see it completely.</source>
-        <translation>&lt;br&gt;&lt;br&gt;因為 &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; 是不依賴於所有桌面環境，您首先要做的是用 Qt 平台整合程式去 &lt;i&gt;啟用&lt;/i&gt; 它。 KDE 和 LXQt 提供了簡單工具來變更作用中的 Qt 樣式外掛。 在其它的平台，您需要 Qt 設定工具。&lt;br/&gt;&lt;br/&gt;在 KDE 下，也要選擇套用主題的色彩配置方案，因為有些 KDE 應用程式會直接自 KDE 顏色配置取得其顏色。&lt;br/&gt;&lt;br/&gt;運行中的應用程式在關閉重啟之後，會取得新的主題。對於全部的 KDE/LXQt 組件，進行登出登入後，則將會很好地完整呈現。</translation>
+        <translation>&lt;br&gt;&lt;br&gt;因為 &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; 是不依賴於所有桌面環境，您首先要做的是用 Qt 平台整合程式去 &lt;i&gt;啟用&lt;/i&gt; 它。 KDE 和 LXQt 提供了簡單工具來變更作用中的 Qt 樣式外掛。 在其他的平台，您需要 Qt 設定工具。&lt;br/&gt;&lt;br/&gt;在 KDE 下，也要選擇套用主題的色彩配置方案，因為有些 KDE 應用程式會直接自 KDE 顏色配置取得其顏色。&lt;br/&gt;&lt;br/&gt;運行中的應用程式在關閉重啟之後，會取得新的主題。對於全部的 KDE/LXQt 組件，進行登出登入後，則將會很好地完整呈現。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="531"/>
@@ -400,7 +400,9 @@ horizontally centered as far as possible.</source>
         <source>You might see annoying artifacts that are caused
 by bugs in Qt&apos;s handling of non-integer scaling
 with window translucency or gradient.</source>
-        <translation type="unfinished"></translation>
+        <translation>您可能會看到造成的煩人的偽影
+肇因於 QT 處理非整數縮放的錯誤
+於視窗的透明度或梯度。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="623"/>
@@ -414,7 +416,11 @@ when the scrollbar is left clicked.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation type="unfinished"></translation>
+        <translation>依照預設，捲軸滑桿跳往一個位置
+當捲軸列被用滑鼠左鍵點按。
+
+若此取消勾選，請見：
+其他選項 → 遵循目前 DE 若是可行</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="682"/>
@@ -428,7 +434,11 @@ with the left mouse button.
 
 Warning: Qt&apos;s kinetic scrolling has bugs and may
 seriously interfere with other jobs.</source>
-        <translation type="unfinished"></translation>
+        <translation>有些可以滾動的小工具
+可以用滑鼠左鍵彈動來進行滾動。.
+
+警告： Qt 的動力學滾動有些 Bugs
+並可能會嚴重地干擾其他工作。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="735"/>
@@ -444,12 +454,17 @@ Values less than 16 mean the default menu icon size.
 
 Needs LXQt panel to be restarted either by &quot;Session Settings&quot;
 or through logging out and in again.</source>
-        <translation type="unfinished"></translation>
+        <translation>僅在主要選單不是由 LXQt 套用樣式時方有作用。
+
+數值小於 16 表示為預設的選單圖示大小。
+
+需要 LXQt 面板重新啟動，可透過 &quot;工作階段設定&quot;
+或是經由登出登入來進行。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="792"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If checked, menus, tooltips and windows will not have translucency or shadow.&lt;/p&gt;&lt;p&gt;When unchecked, translucency and shadow will be available if there are appropriate elements in the theme&apos;s SVG file.&lt;/p&gt;&lt;p&gt;If this is disabled, see Miscellaneous → Respect current DE if possible.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;若是勾選，選單、工具提示、視窗就不會有半透明或陰影效果。&lt;/p&gt;&lt;p&gt;當未勾選時，半透明及陰影即為可用，如果有適當的元件在主題的 SVG 檔案中。&lt;/p&gt;&lt;p&gt;若是停用，請見其他選項 → 遵循目前 DE 若是可行。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="795"/>
@@ -463,7 +478,11 @@ radii for blurring translucent menus and tooltips
 that have rounded corners.
 
 Usually, a value of 2 is enough.</source>
-        <translation type="unfinished"></translation>
+        <translation>若是啟用模糊處理，這些數值設定圓角半徑
+用於模糊處理半透明選單及工具提示
+其為圖角設計的。
+
+通常，數值 2 是足夠的。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="811"/>
@@ -506,7 +525,10 @@ Usually, a value of 2 is enough.</source>
 and translucent menu/tooltip SVG elements.
 
 Automatically checked if window blurring is enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>需要 KDE 模糊效果、顯示卡有支援、
+及半透明的 選單/工具提示 SVG 元件。
+
+如果視窗模糊處理啟用，即會自動地勾選。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="958"/>
@@ -519,7 +541,10 @@ Automatically checked if window blurring is enabled.</source>
 
 This may be useful under DEs that give
 shadow to menus and tooltips.</source>
-        <translation type="unfinished"></translation>
+        <translation>不要繪出陰影用於選單及工具提示。
+
+在 DE 下給予陰影於選單及工具提示
+這會很有用。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="971"/>
@@ -556,7 +581,7 @@ some widgets is changed, mostly by the mouse.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1168"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A 200ms fading animation when the state of some widgets is changed, mostly by the mouse.&lt;/p&gt;&lt;p&gt;The CPU usage is negligible because often only one widget is animated. The resulting visual effect depends on the active theme.&lt;/p&gt;&lt;p&gt;These widgets are supported: buttons (including radio buttons and check boxes), combo boxes, spin boxes, slider handles, line-edits and scroll views.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;呈現 200ms 的淡出動畫，當某些小工具變更時，大多經由滑鼠。&lt;/p&gt;&lt;p&gt;此時 CPU 耗用可以不計，因為常常只有一個小工具是動畫效果的。最終視覺效果是依賴作用的主題。&lt;/p&gt;&lt;p&gt;這些小工具是支援的：buttons (包含單選圓鈕及勾選框)、combo boxes, spin boxes, slider handles, line-edits and scroll views.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1171"/>
@@ -567,7 +592,8 @@ some widgets is changed, mostly by the mouse.</source>
         <location filename="../../kvantummanager.ui" line="1178"/>
         <source>Check this to remove all window/dialog tiling patterns!
 Uncheck it if you want those patterns back!</source>
-        <translation type="unfinished"></translation>
+        <translation>勾選這項，來移除 全部視窗/對話框 平鋪型式！
+不去勾選它，若您想要這些型式重現！</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1182"/>
@@ -578,7 +604,8 @@ Uncheck it if you want those patterns back!</source>
         <location filename="../../kvantummanager.ui" line="1189"/>
         <source>Use the same colors and shapes with active and inactive
 windows if this theme distinguishes between them?</source>
-        <translation type="unfinished"></translation>
+        <translation>如果這個主題在作用與非作用視窗間有所差別
+是否使用相的顏色及形狀？</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1193"/>
@@ -655,19 +682,22 @@ some apps set it themeselves.</source>
         <source>The horizontal overlap between a submenu and its parent.
 
 0 by default.</source>
-        <translation type="unfinished"></translation>
+        <translation>水平重疊位置於下層選單與其上層之間。
+
+依照預設為 0 。.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1443"/>
         <source>Submenu overlap: </source>
-        <translation>下層選單疊位： </translation>
+        <translation>下層選單重疊位置： </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1468"/>
         <location filename="../../kvantummanager.ui" line="1479"/>
         <source>The width of horizontal spin buttons.
 (Has no effect when spin indicators are vertical.)</source>
-        <translation type="unfinished"></translation>
+        <translation>水平旋鈕的寬度。
+(當旋鈕指示器是垂直的即無作用。)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1472"/>
@@ -690,7 +720,9 @@ some apps set it themeselves.</source>
         <source>Draw tree branch lines?
 
 By default, tree branches have indicators but no line.</source>
-        <translation type="unfinished"></translation>
+        <translation>繪出樹分支線條？
+
+依照預設，樹分支有指示符號，但沒有線條。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1948"/>
@@ -701,7 +733,8 @@ By default, tree branches have indicators but no line.</source>
         <location filename="../../kvantummanager.ui" line="1958"/>
         <source>They may look like dotted rectangles
 on focused buttons and other widgets.</source>
-        <translation type="unfinished"></translation>
+        <translation>在焦點按鈕及其他小工具上，
+他們看起來像是虛點的矩形。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1962"/>
@@ -713,7 +746,9 @@ on focused buttons and other widgets.</source>
         <source>Use the active theme for all apps!
 
 This Needs saving to take effect.</source>
-        <translation type="unfinished"></translation>
+        <translation>使用作用的主題於全部應用程式！
+
+這需要儲存方能生效。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="183"/>
@@ -723,21 +758,29 @@ from all user installation paths.
 The root installation will still be
 available if present; this button
 only removes user themes.</source>
-        <translation type="unfinished"></translation>
+        <translation>移除所選的主題
+來自使用者安裝路徑。
+
+而 root 安裝將仍為可用，若有呈現；
+此按鈕僅會移除使用者主題。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="391"/>
         <source>Merge Dolphin&apos;s view with its surroundings?
 
 By default, it has the base background.</source>
-        <translation type="unfinished"></translation>
+        <translation>合併 Dolphin 的檢視及其週遭摙物？
+
+依照預設，它有基本背景。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="419"/>
         <source>No bold font for default push buttons?
 
 Such push buttons have bold text by default.</source>
-        <translation type="unfinished"></translation>
+        <translation>沒有粗體字型用於預設按鈕？
+
+如此按鈕依照預設是有粗體文字的。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="458"/>
@@ -747,7 +790,12 @@ By default, most push buttons have icon.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation type="unfinished"></translation>
+        <translation>沒有圖示用於帶有文字的按鈕？
+
+依照預設，大多數按鈕都有圖示。
+
+若是此為停用，請見：
+其他選項 → 遵循目前 DE 若是可行</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="487"/>
@@ -757,7 +805,12 @@ By default, some of them may have icon.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation type="unfinished"></translation>
+        <translation>沒有圖示用於選項項目？
+
+依照預設，有些主題會帶有圖示。
+
+若是此項停用，請見：
+其他選項 → 遵循目前 DE 若是可行</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="502"/>
@@ -767,7 +820,12 @@ translucent by their apps explicitly if possible.
 This needs the KDE blur effect.
 
 Konsole, QTerminal and LXQt panel are some examples.</source>
-        <translation type="unfinished"></translation>
+        <translation>模糊處理視窗背後區域
+可以明確地透由其應用程序做成半透明，若是可行。
+
+這個需要 KDE 模糊處理效果。.
+
+Konsole, QTerminal 及 LXQt panel 即為此類。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="517"/>
@@ -776,7 +834,10 @@ Konsole, QTerminal and LXQt panel are some examples.</source>
 By default, all toolbars are styled,
 whether they are on the top or at any
 other position.</source>
-        <translation type="unfinished"></translation>
+        <translation>僅有上方工具列會套用樣式？
+
+依照預設，全部工具都會列套用樣式，
+無論他們是位處上方或是任何其他位置。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="644"/>
@@ -786,32 +847,41 @@ other position.</source>
 This is mostly relevant with monochrome icons.
 
 Hard-coded icons/styles may not respect this key.</source>
-        <translation type="unfinished"></translation>
+        <translation>高亮顏色用來進行著色
+
+這主要是關係著單色圖示。
+
+硬編碼的 圖示/樣式 可能不會遵循此鍵。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="606"/>
         <source>Some apps may not respect dark themes.
 Kvantum can try to correct their behavior
 as far as possible.</source>
-        <translation type="unfinished"></translation>
+        <translation>有些應用程式不會遵循暗色主題。
+Kvantum 可以嘗試去更正其行為
+盡其可能地。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1139"/>
         <source>Needs KDE blur effect, a graphic card
 that supports it, and a translucent
 window SVG background in the theme.</source>
-        <translation type="unfinished"></translation>
+        <translation>需要 KDE 模糊處理效果、
+有支援的顯示卡，以及在主題中
+附有半透明的視窗 SVG 背景。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1217"/>
         <source>Should transient scrollbars have
 semi-transparent grooves when needed?</source>
-        <translation type="unfinished"></translation>
+        <translation>暫現的捲軸在需要之時
+會帶有半透明的滑糟？</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1221"/>
         <source>Transient scrollbar grooves when needed</source>
-        <translation type="unfinished"></translation>
+        <translation>暫現的捲軸出現滑糟，當有需要之時</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1241"/>
@@ -823,7 +893,13 @@ some apps may set it themselves.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation type="unfinished"></translation>
+        <translation>影響選單項目及標題
+
+預設值是 16 px 
+但有些應用程式依其所訂。
+
+若是停用，請見：
+其他選項 → 遵循目前 DE 若是可行</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1279"/>
@@ -835,7 +911,13 @@ some apps set it themselves.
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation type="unfinished"></translation>
+        <translation>olom響圖示檢視。
+
+預設值是 32 px
+但有些應用程式依其所訂。
+
+若是停用，請見：
+其他選項 → 遵循目前 DE 若是可行</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1317"/>
@@ -843,7 +925,9 @@ Miscellaneous → Respect current DE if possible</source>
         <source>Affects buttons, tab-bars and list-views.
 
 The default value is 16 px.</source>
-        <translation type="unfinished"></translation>
+        <translation>影響按鈕、分頁列及清單檢視。
+
+預設值是 16 px 。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1347"/>
@@ -853,7 +937,11 @@ The default value is 16 px.</source>
 The default value is 22 px but
 some apps set it themselves.
 KDE apps get it from KDE setting.</source>
-        <translation type="unfinished"></translation>
+        <translation>影響工具列。
+
+預設值是 22 px
+但有些應用程式有其設定。
+KDE 應用程式則取得自 KDE 設定。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1499"/>
@@ -885,7 +973,11 @@ KDE apps get it from KDE setting.</source>
 Zero means tooltips are shown instantly.
 
 -1 means the default Qt behavior.</source>
-        <translation type="unfinished"></translation>
+        <translation>延遲，毫秒單位，在工具提示顯示之前。
+
+0 表示工具提示為立即顯示。
+
+-1 表示為預設的 Qt 行為。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1832"/>
@@ -894,7 +986,11 @@ Zero means tooltips are shown instantly.
 Checking this box removes arrows as far as possible.
 
 If disabled, see Compositing &amp; General Look → Transient scrollbars!</source>
-        <translation type="unfinished"></translation>
+        <translation>依照預設，捲軸有輔助線和軸線箭頭。
+
+勾選此框會盡可能地移除箭頭。
+
+若是停用，請見 合成及一般外觀 → 暫現捲軸！</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1698"/>
@@ -903,13 +999,17 @@ toolbars and dock widgets are hollow.
 
 This option fills drop rectangles with
 the highlight color.</source>
-        <translation type="unfinished"></translation>
+        <translation>依照預設，拖放矩形於可動式工具列
+及 dock 小工具是空心的。
+
+這個選項會用高亮顏色填充拖放矩形。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1753"/>
         <source>If checked, the menubar and toolbar will be drawn as a whole by
 the toolbar SVG element when they are adjacent to each another.</source>
-        <translation type="unfinished"></translation>
+        <translation>若是勾選，選單列及工具列將會整體繪出
+依照工具列 SVG 元件，當其彼此相鄰時。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1981"/>
@@ -919,7 +1019,11 @@ or anywhere possible (and not only from their title bars)?
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation type="unfinished"></translation>
+        <translation>拖放視窗來自其選單列、主要工具列
+或是其他可能之處(以及不僅來自其標題列)？
+
+若是停用，請見：
+其他選項 → 遵循目前 DE 若是可行</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1892"/>
@@ -928,7 +1032,10 @@ Miscellaneous → Respect current DE if possible</source>
 is not set by the app in its code.
 
 Default is &quot;Follow Style&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>將會發生作用僅在
+應用程式內碼沒有設定套用樣式。
+
+預設是 &quot;跟隨樣式&quot;。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1684"/>
@@ -937,7 +1044,11 @@ two buttons with arrows or plus/minus signs.
 
 Checking this integrates the spin indicators
 into the spin line-edit..</source>
-        <translation type="unfinished"></translation>
+        <translation>依照預設，旋鈕指示器繪成
+兩個按鈕，附有箭頭或 + - 符號。
+
+勾選此項將整合旋鈕指示器
+至旋轉單行編輯..</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1712"/>
@@ -945,14 +1056,19 @@ into the spin line-edit..</source>
 
 Checking this puts the spin-up indicator above the
 spin-down one inside the spin line-edit.</source>
-        <translation type="unfinished"></translation>
+        <translation>依照預設，旋鈕指示器繪成相鄰的按鈕。
+
+勾選此項，會在旋轉單行編輯之中
+將旋轉調上指示器放置旋轉調下的上方。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1764"/>
         <source>Draw combo popups as menu popups (i.e. like in Gtk)?
 
 By default, combo popups do not cover the combo box.</source>
-        <translation type="unfinished"></translation>
+        <translation>繪成組合彈出如同選單彈出(比加像是 GTK 方式)？
+
+依照預設，組合彈出並不會覆蓋組合框。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1811"/>
@@ -962,7 +1078,7 @@ By default, combo popups do not cover the combo box.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1563"/>
         <source>Tooltip delay:</source>
-        <translation type="unfinished"></translation>
+        <translation>工具提示延遲：</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="991"/>
@@ -972,7 +1088,11 @@ whose windows should not be translucent.
 
 (Some apps, like video players, may have
 problems with translucency!)</source>
-        <translation type="unfinished"></translation>
+        <translation>逗號分隔的可執行清單，
+其視窗不會是半透明的。
+
+(有些應用程式，像是影片播放，
+可能會有半透明的問題！)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1200"/>
@@ -981,7 +1101,10 @@ problems with translucency!)</source>
 Transient scrollbars appear on top of
 their scroll views only when needed.
 They usually take no extra space.</source>
-        <translation type="unfinished"></translation>
+        <translation>做成捲軸暫現！
+
+暫現的捲軸出現在捲動區上方，僅當需要時。
+通常不會佔用額外空間。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1570"/>
@@ -991,12 +1114,16 @@ They usually take no extra space.</source>
 
 -1 means no popup (opening by clicking),
 while 0 means no delay.</source>
-        <translation type="unfinished"></translation>
+        <translation>延遲，毫秒單位，在開啟下層選單前停等。
+預設為 250 。
+
+-1 表示沒有彈出(用點按開啟)。
+0 表示沒有延遲。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1577"/>
         <source>Submenu delay: </source>
-        <translation type="unfinished"></translation>
+        <translation>下層選單延遲： </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1591"/>
@@ -1007,7 +1134,7 @@ while 0 means no delay.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1647"/>
         <source>Miscellaneous</source>
-        <translation>其它選項</translation>
+        <translation>其他選項</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1839"/>
@@ -1021,17 +1148,21 @@ while 0 means no delay.</source>
 By default, scrollbars are drawn outide view frames.
 
 If disabled, see Compositing &amp; General Look → Transient scrollbars!</source>
-        <translation type="unfinished"></translation>
+        <translation>繪出捲軸列於檢視框格之中？
+
+依照預設，捲軸列是在檢視框格之外繪出。
+
+若是停用，請見 合成及一般外觀 → 暫現捲軸列！</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1941"/>
         <source>Scrollbars inside frames</source>
-        <translation type="unfinished"></translation>
+        <translation>捲軸位框格之中</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1974"/>
         <source>Tree branch lines</source>
-        <translation type="unfinished"></translation>
+        <translation>樹分支線條</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1670"/>
@@ -1040,95 +1171,102 @@ and the frame is cut to contain it.
 
 Checking this puts the label right above
 the frame, so that the frame isn&apos;t cut.</source>
-        <translation type="unfinished"></translation>
+        <translation>依照預設，標籤位在框格上
+且框格會切開分列包含其中。
+
+勾選此項會將標籤位在框格右上方，
+如此框格不會切開分列。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1677"/>
         <source>Group-box label above frame</source>
-        <translation type="unfinished"></translation>
+        <translation>群組框標籤在框格之上</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1705"/>
         <source>Fill rubber-band rectangles</source>
-        <translation type="unfinished"></translation>
+        <translation>填充彈筋線矩形</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1725"/>
         <source>Mouse tracking is enabled
 for menubars by default.</source>
-        <translation type="unfinished"></translation>
+        <translation>滑鼠追蹤是已經啟用的
+用於選單列，依照預設。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1729"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mouse tracking is enabled for menubars by default, i.e., after a menubar item is clicked and its menu is shown, the menus of the other menubar items will be shown if the cursor is put on them without clicking.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;滑鼠追蹤是已經啟用的用於選單列，依照預設。也就是說，點按選單列項目之後且其選單仍是顯示的，如果游標放置上面，其他選單列項目的選單即會出現，而無需點按。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1732"/>
         <source>Mouse tracking for menubars</source>
-        <translation type="unfinished"></translation>
+        <translation>滑鼠追蹤用於選單列</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1757"/>
         <source>Merge menubar with toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>合併選單列附有工具列</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1776"/>
         <source>If checked, toolbar buttons will be drawn grouped and raised
 between toolbar separators.</source>
-        <translation type="unfinished"></translation>
+        <translation>若是勾選，工具列按鈕將會繪成群組的
+並且提昇工具列分隔符號的間隔。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1780"/>
         <source>Group toolbar buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>群組工具列按鈕</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1988"/>
         <source>Drag from:</source>
-        <translation type="unfinished"></translation>
+        <translation>拖放來自：</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1898"/>
         <source>Toolbutton style:</source>
-        <translation type="unfinished"></translation>
+        <translation>工具按鈕樣式：</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1801"/>
         <source>If unchecked, shortcuts will not be underlined at all.</source>
-        <translation type="unfinished"></translation>
+        <translation>若是不勾選，快速鍵將全部不會有底線。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1804"/>
         <source>Underline shortcuts with Alt</source>
-        <translation type="unfinished"></translation>
+        <translation>用 Alt 的底線快速鍵</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1691"/>
         <source>Inline spin indicators</source>
-        <translation type="unfinished"></translation>
+        <translation>內排的旋鈕指示器</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1739"/>
         <source>Draw the whole editable combo-box as a
 line-edit with arrow (and icon, if it exists)?</source>
-        <translation type="unfinished"></translation>
+        <translation>將整個可編輯組合框繪成單行編輯
+帶有箭號(及圖示，若有存在)？</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1743"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Draw the whole editable combo-box as a line-edit with arrow (and icon, if it exists)?&lt;/p&gt;&lt;p&gt;By default, a combo-box consists of a line-edit, a button with arrow on one side and another button with icon on the other side.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;將整個可編輯組合框繪成單行編輯帶有箭號(及圖示，若有存在)？&lt;/p&gt;&lt;p&gt;依照預設，組合框包含了單行編輯、一端有箭號的按鈕、以及其他按鈕在另一端有圖示&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1746"/>
         <source>Editable combo as line-edit</source>
-        <translation type="unfinished"></translation>
+        <translation>可編輯的組合框於單行編輯</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1718"/>
         <source>Vertical spin indicators</source>
-        <translation type="unfinished"></translation>
+        <translation>垂直的旋鈕指示器</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1653"/>
@@ -1137,43 +1275,48 @@ respect some settings of the current desktop environment.
 
 This checkbox may disable some options.
 Uncheck it if you want to use those options!</source>
-        <translation type="unfinished"></translation>
+        <translation>當此啟用時， Kvantum 將會嘗試遵循
+目前桌面環境的某些設定。
+
+此勾選框會停用某些選項。
+若想使用這些選項就不要勾選！</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1663"/>
         <source>Respect current DE if possible</source>
-        <translation type="unfinished"></translation>
+        <translation>遵循目前 DE 若是可行</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1769"/>
         <source>Combo popup as menu</source>
-        <translation type="unfinished"></translation>
+        <translation>組合彈出如同選單</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1814"/>
         <source>Left aligned tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>靠左對齊分頁</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1821"/>
         <source>Inactive tabs are joined together by default,
 i.e., there is no border between them.</source>
-        <translation type="unfinished"></translation>
+        <translation>依照預設，非作用中的分頁是加入合一的，
+也就是說，他們之間沒有邊界隔線。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1825"/>
         <source>Join inactive tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>加進非作用分頁</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2012"/>
         <source>Scrollable menus</source>
-        <translation type="unfinished"></translation>
+        <translation>可捲動的選單</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1660"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When this is enabled and checked, Kvantum will try to respect some settings of the current desktop environment if it is KDE, Unity, Gnome or Pantheon.&lt;/p&gt;&lt;p&gt;Under KDE, it makes Kvantum read KDE settings for small and large icon sizes and also single or double clicking.&lt;/p&gt;&lt;p&gt;Under Unity, Gnome and Pantheon, it removes icons from menus and push-buttons (even if the corresponding dconf keys are changed) and disables window translucency.&lt;/p&gt;&lt;p&gt;This checkbox may disable some options. Uncheck it if you want to use those options!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;當此項啟用勾選，Kvantum 會嘗試遵循目前桌面環境的某些設定，如果目前桌面環境是 KDE, Unity, Gnome，或 Pantheon 時。&lt;/p&gt;&lt;p&gt;在 KDE 環境下，會使 Kvantum 讀取 KDE 的設定用於大型小型圖示大小、以及單一點按或點按兩下。&lt;/p&gt;&lt;p&gt;在 Unity, Gnome 及 Pantheon 環境下，會從選單及按鈕上移除圖示(即使相對的 dconf key 有所變更)，並且會停用視窗半透明。&lt;/p&gt;&lt;p&gt;這項勾選框會停用某些選項。若您想要使用這些選項，就不要勾選！&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="848"/>
@@ -1182,7 +1325,11 @@ only to translucent windows that support the blur
 effect (but the KDE blur effect can be disabled).
 
 A value of 1.00 means no change.</source>
-        <translation type="unfinished"></translation>
+        <translation>這需要 KDE 對比效果並且是僅套用
+至半透明視窗有支援模糊處理效果
+(但 KDE 模糊處理效果可以被停用)
+
+數值 1.00 則表示沒有變更。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1050"/>
@@ -1195,7 +1342,14 @@ needed for this key to work.
 
 A negative value means that only the
 opacity of inactive windows is reduced.</source>
-        <translation type="unfinished"></translation>
+        <translation>這會降低視窗不透明度
+若是視窗半透明是啟用的。
+
+半透明 SVG 背景是不需要
+用於此項即可作用。
+
+負數值表示僅有非作用視窗的
+不透明度會被降低。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1787"/>
@@ -1204,12 +1358,16 @@ there will be a checkbox next to each entry
 (although Kvantum draws it as a radio button).
 
 This option will hide these.</source>
-        <translation type="unfinished"></translation>
+        <translation>當組合彈出繪成選單時，
+每筆選項都會有個勾選框
+(雖然 Kvantum 是繪成單選按鈕)
+
+這個選項將會隱藏這些。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1794"/>
         <source>Non-checkable combo menu</source>
-        <translation type="unfinished"></translation>
+        <translation>非可勾選的組合選單</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2006"/>
@@ -1217,7 +1375,10 @@ This option will hide these.</source>
 scroll arrows on their top and/or bottom?
 
 By default, big menus are scrollable.</source>
-        <translation type="unfinished"></translation>
+        <translation>是否大型選單可以捲動，
+並有捲動箭號在其上下端？
+
+依照預設，大型選單是可以捲動的。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2019"/>
@@ -1226,12 +1387,16 @@ By default, big menus are scrollable.</source>
 If you have enabled it, you could temporarily disable it
 for a button that can be dragged and dropped by pressing
 the Ctrl key before pressing the button.</source>
-        <translation type="unfinished"></translation>
+        <translation>警告：這個首先會相當混淆。
+
+若已經啟用它，可以暫時將其停用
+對於可以進行拖放的按鈕，
+先按住 Ctrl 鍵，再按住按鈕。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2026"/>
         <source>Allow dragging from buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>允許拖放來自按鈕</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2049"/>
@@ -1241,7 +1406,7 @@ the Ctrl key before pressing the button.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2055"/>
         <source>&lt;center&gt;Here you could assign themes to specific applications.&lt;/center&gt;&lt;br&gt;&lt;center&gt;For each theme, you could add a comma-separated list of executables whose applications should use that theme instead of the active theme. After doing so for all of your chosen themes, save the result by clicking on the &lt;i&gt;Save&lt;/i&gt; button!&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;center&gt;這裡您可以配用主題給特定的應用程式。 &lt;/center&gt;對於每個主題，您可以添加一個逗號分隔的可執行清單，其應用程式應該使用主題，取代作用中的主題。在您所選主題全部如此操作後，儲存結果只要點按 &lt;i&gt;儲存&lt;/i&gt; 按鈕即可！&lt;/center&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2090"/>
@@ -1257,7 +1422,8 @@ the Ctrl key before pressing the button.</source>
         <location filename="../../kvantummanager.ui" line="2135"/>
         <source>Each executable name can be either a
 simple string or a regular expression.</source>
-        <translation type="unfinished"></translation>
+        <translation>每個可執行名稱可以是
+簡單字串或是表達式。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2139"/>
@@ -1315,7 +1481,7 @@ or update its preview.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="2257"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Click on this button and then click on a GUI element that has &amp;quot;What&apos;s This&amp;quot; tooltip  to get information about what it does.&lt;/p&gt;&lt;p&gt;There are also ordinary tooltips but this kind of tooltip will not disappear until you click somewhere.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;點按此按鈕，然後點按 GUI 元件上的 &amp;quot;這是什麼&amp;quot; 工具提示即可取得作用資訊。 &lt;/p&gt;&lt;p&gt;也會有正常的工具提示出現，但是這類工具提示在您點按他處之後才會消失。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2260"/>
@@ -1507,7 +1673,7 @@ or update its preview.</source>
     <message>
         <location filename="../../KvantumManager.cpp" line="614"/>
         <source>Please choose another directory!</source>
-        <translation>請選擇其它字典！</translation>
+        <translation>請選擇其他字典！</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="624"/>
