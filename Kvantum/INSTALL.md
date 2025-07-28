@@ -99,10 +99,13 @@ If you want to compile Kvantum from its source, install these packages:
 see [Compilation](#compilation) on how to compile and install Kvantum.
 
 #### Tumbleweed
-Thanks to [trmdi](https://github.com/trmdi), you can install Kvantum directly, by executing:
 
-    sudo zypper ar obs://home:trmdi trmdi
-    sudo zypper in -r trmdi kvantum
+Kvantum is now available directly in the official openSUSE Tumbleweed repositories (repo-oss):
+
+```bash
+sudo zypper refresh
+sudo zypper install kvantum-manager kvantum-qt6 kvantum-qt5
+```
 
 ### Red Hat based distributions
 
