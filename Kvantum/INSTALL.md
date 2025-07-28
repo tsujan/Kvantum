@@ -104,7 +104,7 @@ Kvantum is now available directly in the official openSUSE Tumbleweed repositori
 
 ```bash
 sudo zypper refresh
-sudo zypper install kvantum-manager kvantum-qt6
+sudo zypper install kvantum-manager kvantum-qt6 kvantum-qt5
 ```
 
 ### Red Hat based distributions
