@@ -100,12 +100,10 @@ see [Compilation](#compilation) on how to compile and install Kvantum.
 
 #### Tumbleweed
 
-Kvantum is now available directly in the official openSUSE Tumbleweed repositories (repo-oss):
+Kvantum is available in the official openSUSE Tumbleweed repositories (repo-oss):
 
-```bash
-sudo zypper refresh
-sudo zypper install kvantum-manager kvantum-qt6 kvantum-qt5
-```
+    sudo zypper refresh
+    sudo zypper install kvantum-manager kvantum-qt6
 
 ### Red Hat based distributions
 
@@ -127,7 +125,7 @@ To install Kvantum directly, execute:
 
 To compile Kvantum from source on Solus, you would need the `system.devel` component installed:
 
-* `sudo eopkg install -c system.devel`
+    sudo eopkg install -c system.devel
 
 There are no pre-built Kvantum eopkg installers avaialble, so proceed to [Compilation](#compilation) to compile Kvantum yourself.
 
