@@ -49,7 +49,6 @@ tooltip_delay=-1
 animate_states=true
 no_window_pattern=false
 remove_extra_frames=true
-dark_titlebar=true
 groupbox_top_label=false
 joined_inactive_tabs=true
 respect_DE=true

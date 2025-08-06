@@ -48,7 +48,6 @@ tooltip_delay=-1
 translucent_windows=false
 tree_branch_line=false
 vertical_spin_indicators=false
-dark_titlebar=true
 
 [GeneralColors]
 window.color=#3D3D3E

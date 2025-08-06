@@ -946,9 +946,6 @@ theme_spec ThemeConfig::getThemeSpec()
   v = getValue(KSL("General"),KSL("no_window_pattern"));
   r.no_window_pattern = v.toBool();
 
-  v = getValue(KSL("General"),KSL("dark_titlebar"));
-  r.dark_titlebar = v.toBool();
-
   return r;
 }
 

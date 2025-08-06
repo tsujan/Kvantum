@@ -23,7 +23,6 @@ slider_handle_width=16
 slider_handle_length=16
 check_size=16
 toolbar_icon_size=16
-dark_titlebar=true
 animate_states=true
 transient_groove=false
 transient_scrollbar=true

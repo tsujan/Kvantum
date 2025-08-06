@@ -43,7 +43,6 @@ transient_groove=true
 layout_spacing=3
 submenu_overlap=0
 tooltip_delay=-1
-dark_titlebar=true
 check_size=16
 
 [GeneralColors]

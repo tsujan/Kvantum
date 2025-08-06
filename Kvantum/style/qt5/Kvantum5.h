@@ -512,8 +512,6 @@ class Style : public QCommonStyle {
     QList<int> realMenuShadow_;
     QList<qreal> tooltipShadow_;
 
-    /* Is this DE GTK-based? Currently Gnome and Pantheon are supported. */
-    bool gtkDesktop_;
     /* This will be useful if we want to disable compositing under some DEs. */
     bool noComposite_;
     /* For correct updating on mouseover with active tab overlapping */

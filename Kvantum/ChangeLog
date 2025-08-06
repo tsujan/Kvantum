@@ -1,3 +1,7 @@
+V1.1.6
+---------
+ * Removed the obsolete variables and keys related to GTK DEs.
+
 V1.1.5
 ---------
  * Wrapped forward declarations within `QT_NAMESPACE` (→ https://wiki.qt.io/Qt_In_Namespace).

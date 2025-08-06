@@ -437,9 +437,6 @@ void Style::polish(QWidget *widget)
         }
       }
 
-      if (gtkDesktop_) // under gtk DEs, set the titlebar according to dark_titlebar
-        widget->installEventFilter(this);
-
       break;
     }
     default:
@@ -1037,8 +1034,6 @@ void Style::unpolish(QWidget *widget)
           widget->removeEventFilter(this);
           widget->setAttribute(Qt::WA_NoSystemBackground, false);
         }
-        if (gtkDesktop_)
-          widget->removeEventFilter(this);
         widget->setAttribute(Qt::WA_StyledBackground, false); // FIXME is this needed?
         /* this is needed with tranlucent windows when
            the theme is changed from Kvantum and to it again */

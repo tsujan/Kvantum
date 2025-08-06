@@ -68,7 +68,6 @@ saturation=1.00
 scrollable_menu=true
 scrollbar_in_view=true
 submenu_delay=250
-dark_titlebar=true
 
 [GeneralColors]
 window.color=#353535

@@ -1017,9 +1017,6 @@ theme_spec ThemeConfig::getThemeSpec()
   v = getValue(KSL("General"),KSL("no_window_pattern"));
   r.no_window_pattern = v.toBool();
 
-  v = getValue(KSL("General"),KSL("dark_titlebar"));
-  r.dark_titlebar = v.toBool();
-
   v = getValue(KSL("General"),KSL("menu_blur_radius"));
   if (v.isValid())
     r.menu_blur_radius = qMin(v.toInt(),10);

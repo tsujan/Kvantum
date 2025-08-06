@@ -49,7 +49,6 @@ tooltip_delay=-1
 animate_states=true
 no_window_pattern=false
 remove_extra_frames=true
-dark_titlebar=true
 
 [GeneralColors]
 window.color=#3D3D3E

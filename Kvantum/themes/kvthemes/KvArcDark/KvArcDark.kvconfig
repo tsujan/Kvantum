@@ -55,7 +55,6 @@ transient_groove=true
 submenu_overlap=3
 tooltip_delay=-1
 tree_branch_line=true
-dark_titlebar=true
 
 [GeneralColors]
 window.color=#383c4a

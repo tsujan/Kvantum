@@ -157,7 +157,6 @@ Style::Style(bool useDark) : QCommonStyle()
   settings_ = defaultSettings_ = themeSettings_ = nullptr;
   defaultRndr_ = themeRndr_ = nullptr;
 
-  gtkDesktop_ = false;
   noComposite_ = false;
 
   QString homeDir = QDir::homePath();
@@ -219,14 +218,12 @@ Style::Style(bool useDark) : QCommonStyle()
   hspec_ = settings_->getHacksSpec();
   cspec_ = settings_->getColorSpec();
 
-  QList<QByteArray> desktopList = qgetenv("XDG_CURRENT_DESKTOP").toLower().split(':');
-  QSet<QByteArray> desktop(desktopList.begin(), desktopList.end());
-  QSet<QByteArray> gtkDesktops = QSet<QByteArray>() << "gnome" << "pantheon";
-  gtkDesktop_ = gtkDesktops.intersects(desktop);
-
   if (tspec_.respect_DE)
   {
-    if (gtkDesktop_)
+    QList<QByteArray> desktopList = qgetenv("XDG_CURRENT_DESKTOP").toLower().split(':');
+    QSet<QByteArray> desktop(desktopList.begin(), desktopList.end());
+    QSet<QByteArray> gtkDesktops = QSet<QByteArray>() << "gnome" << "pantheon";
+    if (gtkDesktops.intersects(desktop))
     {
       hspec_.iconless_pushbutton = true;
       hspec_.iconless_menu = true;

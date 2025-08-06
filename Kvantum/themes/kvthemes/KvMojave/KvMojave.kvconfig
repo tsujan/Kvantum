@@ -51,7 +51,6 @@ layout_spacing=3
 submenu_overlap=0
 tooltip_delay=-1
 animate_states=true
-dark_titlebar=true
 hide_combo_checkboxes=false
 no_window_pattern=false
 reduce_window_opacity=0

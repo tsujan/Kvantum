@@ -66,66 +66,6 @@
 
 namespace Kvantum
 {
-static QString readDconfSetting(const QString &setting) // by Craig Drummond
-{
-  // For some reason, dconf does not seem to terminate correctly when run under some desktops (e.g. KDE)
-  // Destroying the QProcess seems to block, causing the app to appear to hang before starting.
-  // So, create QProcess on the heap - and only wait 1.5s for response. Connect finished to deleteLater
-  // so that the object is destroyed.
-  QString schemeToUse=QLatin1String("/org/gnome/desktop/interface/");
-  QProcess *process=new QProcess();
-  process->start(QLatin1String("dconf"), QStringList() << QLatin1String("read") << schemeToUse+setting);
-  QObject::connect(process, SIGNAL(finished(int)), process, SLOT(deleteLater()));
-
-  if (process->waitForFinished(1500)) {
-    QString resp = process->readAllStandardOutput();
-    resp = resp.trimmed();
-    resp.remove('\'');
-
-    if (resp.isEmpty()) {
-      // Probably set to the default, and dconf does not store defaults! Therefore, need to read via gsettings...
-      schemeToUse=schemeToUse.mid(1, schemeToUse.length()-2).replace("/", ".");
-      QProcess *gsettingsProc=new QProcess();
-      gsettingsProc->start(QLatin1String("gsettings"), QStringList() << QLatin1String("get") << schemeToUse << setting);
-      QObject::connect(gsettingsProc, SIGNAL(finished(int)), process, SLOT(deleteLater()));
-      if (gsettingsProc->waitForFinished(1500)) {
-        resp = gsettingsProc->readAllStandardOutput();
-        resp = resp.trimmed();
-        resp.remove('\'');
-      } else {
-        gsettingsProc->kill();
-      }
-    }
-    return resp;
-  }
-  process->kill();
-  return QString();
-}
-
-static void setAppFont()
-{
-  // First check platform theme.
-  QByteArray qpa = qgetenv("QT_QPA_PLATFORMTHEME");
-
-  // QGnomePlatform already sets from from Gtk settings, so no need to repeat this!
-  if (qpa == "gnome")
-    return;
-
-  QString fontName = readDconfSetting("font-name");
-  if (!fontName.isEmpty())
-  {
-    QStringList parts = fontName.split(' ', QString::SkipEmptyParts);
-    if (parts.length()>1)
-    {
-      uint size = parts.takeLast().toUInt();
-      if (size>5 && size<20)
-      {
-        QFont f(parts.join(" "), size);
-        QApplication::setFont(f);
-      }
-    }
-  }
-}
 
 // Taken from https://www.w3.org/TR/2008/REC-WCAG20-20081211/.
 // It isn't related to HSL lightness.
@@ -189,7 +129,6 @@ Style::Style() : QCommonStyle()
   settings_ = defaultSettings_ = themeSettings_ = NULL;
   defaultRndr_ = themeRndr_ = NULL;
 
-  gtkDesktop_ = false;
   noComposite_ = false;
 
   QString homeDir = QDir::homePath();
@@ -235,14 +174,11 @@ Style::Style() : QCommonStyle()
   hspec_ = settings_->getHacksSpec();
   cspec_ = settings_->getColorSpec();
 
-  QByteArray desktop = qgetenv("XDG_CURRENT_DESKTOP").toLower();
-  QSet<QByteArray> gtkDesktops = QSet<QByteArray>() << "gnome" << "unity" << "pantheon";
-  gtkDesktop_ = gtkDesktops.contains(desktop);
-
-
   if (tspec_.respect_DE)
   {
-    if (gtkDesktop_)
+    QByteArray desktop = qgetenv("XDG_CURRENT_DESKTOP").toLower();
+    QSet<QByteArray> gtkDesktops = QSet<QByteArray>() << "gnome" << "unity" << "pantheon";
+    if (gtkDesktops.contains(desktop))
     {
       hspec_.iconless_pushbutton = true;
       hspec_.iconless_menu = true;
@@ -1606,9 +1542,6 @@ void Style::polish(QApplication *app)
     app->removeEventFilter(itsShortcutHandler_);
     app->installEventFilter(itsShortcutHandler_);
   }
-
-  if (gtkDesktop_) // under gtk DEs, always use their font
-    setAppFont();
 }
 
 void Style::polish(QPalette &palette)

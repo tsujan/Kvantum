@@ -766,11 +766,6 @@ remove_extra_frames               true/false          Some apps may draw extra g
                                                       removed if this key is set to true. Its
                                                       default value is false.
 
-dark_titlebar                     true/false          Should a dark titlebar be requested
-                                                      under Gtk desktops like Gnome? Although
-                                                      the default is "false", it is good to
-                                                      set this key to "true" for dark themes.
-
                        *********************************
                        *** The GeneralColors Section ***
                        *********************************
