@@ -293,6 +293,7 @@ Style::Style(bool useDark) : QCommonStyle()
   isDolphin_ = false;
   isPcmanfm_ = false;
   isKrita_ = false;
+  isKvM_ = false;
   subApp_ = false;
   isOpaque_ = false;
   ticklessSliderHandleSize_ = -1;

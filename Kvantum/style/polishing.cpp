@@ -361,7 +361,7 @@ void Style::polish(QWidget *widget)
               {
                 makeTranslucent = true;
               }
-              if (makeTranslucent)
+              if (makeTranslucent && (!isKvM_ || tspec_.isX11))
               {
                 /* a Qt>=5 window could not be made translucent if it is
                    already created without the alpha channel of its
@@ -1027,6 +1027,8 @@ void Style::polish(QApplication *app)
     isLibreoffice_ = true;
   else if (appName == "krita")
     isKrita_ = true;
+  else if (appName == "kvantummanager" || appName == "Kvantum Manager")
+    isKvM_ = true;
   else if (appName == "plasma" || appName.startsWith("plasma-")
            || appName == "plasmashell" // Plasma5
            || appName == "kded4") // this is for the infamous appmenu

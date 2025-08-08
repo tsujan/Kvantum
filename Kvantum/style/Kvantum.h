@@ -496,6 +496,8 @@ class Style : public QCommonStyle {
 
     bool isKrita_; // Because of bugs in Krita 5.1.0
 
+    bool isKvM_; // To handle translucency in Kvantum Manager on changing the theme
+
     /* The size of the slider handle with no tick mark (if it exists) */
     mutable int ticklessSliderHandleSize_;
 
