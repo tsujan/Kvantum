@@ -490,12 +490,12 @@ Généralement, une valeur de 2 suffit.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="824"/>
         <source>Menu:</source>
-        <translation>Menu :</translation>
+        <translation>Menu&#xa0;:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="831"/>
         <source>Tooltip:</source>
-        <translation>Info-bulle :</translation>
+        <translation>Info-bulle&#xa0;:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="855"/>
@@ -1388,7 +1388,7 @@ Par défaut, les grands menus sont déroulants.</translation>
 If you have enabled it, you could temporarily disable it
 for a button that can be dragged and dropped by pressing
 the Ctrl key before pressing the button.</source>
-        <translation>Attention : cela peut être assez déroutant au début.
+        <translation>Attention&#x202f;: cela peut être assez déroutant au début.
 
 Si vous l&apos;avez activé, vous pouvez le désactiver temporairement
 pour un bouton qui peut être glissé et déposé en appuyant sur
