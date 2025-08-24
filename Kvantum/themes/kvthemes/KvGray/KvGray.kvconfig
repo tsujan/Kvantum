@@ -57,7 +57,7 @@ reduce_window_opacity=0
 [GeneralColors]
 window.color=#ebebed
 base.color=#F0F0F0BE
-alt.base.color=#0000000a
+alt.base.color=#C7C7C782
 button.color=#e6e6e6
 light.color=#FFFFFFBE
 mid.light.color=#FFFFFF96
