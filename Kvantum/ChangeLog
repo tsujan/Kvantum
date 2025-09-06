@@ -2,6 +2,7 @@ V1.1.6
 ---------
  * Workaround for the translucency of Kvantum Manager's window on changing the theme under Wayland.
  * Removed the obsolete variables and keys related to GTK DEs.
+ * Fixed an old issue in KvGnomeDark, and added a workaround to KvGray for Qt6.
 
 V1.1.5
 ---------

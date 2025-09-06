@@ -1,8 +1,5 @@
 <svg width="450" version="1.0" xmlns="http://www.w3.org/2000/svg" height="920" xmlns:xlink="http://www.w3.org/1999/xlink">
 <defs>
-<filter width="1.024" x="-0.012" y="-0.012" height="1.024" style="color-interpolation-filters:sRGB" id="filter1992">
-<feGaussianBlur stdDeviation="0.075"/>
-</filter>
 <linearGradient xlink:href="#linearGradient2155" id="linearGradient2571" y1="94.376846" x1="28.750025" y2="42.501442" gradientUnits="userSpaceOnUse" x2="28.749918"/>
 <linearGradient xlink:href="#linearGradient5116-5" id="linearGradient5687" y1="601" x1="109.25" y2="617" x2="109.25" gradientUnits="userSpaceOnUse"/>
 <linearGradient xlink:href="#linearGradient5116-5" id="linearGradient5669" y1="574" x1="110" y2="592" x2="110" gradientUnits="userSpaceOnUse"/>
@@ -401,7 +398,7 @@
 <path style="fill:#eeeeec;fill-rule:evenodd;color:#000" d="m 374,603.6502 -6.4125,5.4418 -2.4135,-2.866 -1.694,1.6481 3.9345,4.534 6.5855,-5.7098 z "/>
 </g>
 <g id="checkbox-normal">
-<path style="fill:#070707;filter:url(#filter1992);fill-rule:evenodd" d="m 323,601 c -1.662,0 -3,1.338 -3,3 v 9 c 0,1.662 1.338,3 3,3 h 9 c 1.662,0 3,-1.338 3,-3 v -9 c 0,-1.662 -1.338,-3 -3,-3 h -9 z  m .4004,1 h 8.19922 c 1.3296,0 2.40039,1.07079 2.40039,2.40039 v 8.19922 c 0,1.3296 -1.07079,2.40039 -2.40039,2.40039 h -8.19922 c -1.3296,0 -2.40039,-1.07079 -2.40039,-2.40039 v -8.19922 c 0,-1.3296 1.07079,-2.40039 2.40039,-2.40039 z "/>
+<path style="fill:#070707;fill-rule:evenodd" d="m 323,601 c -1.662,0 -3,1.338 -3,3 v 9 c 0,1.662 1.338,3 3,3 h 9 c 1.662,0 3,-1.338 3,-3 v -9 c 0,-1.662 -1.338,-3 -3,-3 h -9 z  m .4004,1 h 8.19922 c 1.3296,0 2.40039,1.07079 2.40039,2.40039 v 8.19922 c 0,1.3296 -1.07079,2.40039 -2.40039,2.40039 h -8.19922 c -1.3296,0 -2.40039,-1.07079 -2.40039,-2.40039 v -8.19922 c 0,-1.3296 1.07079,-2.40039 2.40039,-2.40039 z "/>
 <rect width="13" x="321" y="602" rx="2.4" height="13" style="fill:url(#linearGradient1684);fill-rule:evenodd"/>
 </g>
 <g id="checkbox-focused">
