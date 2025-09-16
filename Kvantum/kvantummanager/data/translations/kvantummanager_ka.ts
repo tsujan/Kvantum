@@ -1118,7 +1118,7 @@ Uncheck it if you want to use those options!</source>
     <message>
         <location filename="../../kvantummanager.ui" line="1769"/>
         <source>Combo popup as menu</source>
-        <translation type="unfinished"></translation>
+        <translation>კომბო მხტუნარა მენიუს სახით</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1814"/>
