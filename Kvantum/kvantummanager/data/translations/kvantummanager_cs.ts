@@ -1345,11 +1345,14 @@ needed for this key to work.
 
 A negative value means that only the
 opacity of inactive windows is reduced.</source>
-        <translation type="unfinished">Tím se sníží neprůhlednost okna
+        <translation>Tot sníží neprůhlednost okna
 pokud je povolena průsvitnost okna.
 
 Průsvitné pozadí SVG NENÍ
-potřebný k tomu, aby tento klíč fungoval.</translation>
+potřebný k tomu, aby tento klíč fungoval.
+
+Záporná hodnota znamená, že je snížena
+pouze průsvitnost neaktivních oken.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1787"/>
@@ -1422,7 +1425,9 @@ před stisknutím tlačítka Ctrl.</translation>
         <location filename="../../kvantummanager.ui" line="2135"/>
         <source>Each executable name can be either a
 simple string or a regular expression.</source>
-        <translation type="unfinished"></translation>
+        <translation>Název každého spustitelného souboru
+může být buď jednoduchý řetězec nebo
+regulární výraz.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2139"/>
