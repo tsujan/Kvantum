@@ -104,14 +104,14 @@ toolbutton</source>
         <location filename="../../KvantumPreviewBase.ui" line="508"/>
         <source>Toggle toolbutton
 with an arrow</source>
-        <translation>Tlačítko &quot;zpět&quot;</translation>
+        <translation>Tlačítko „zpět“</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="573"/>
         <location filename="../../KvantumPreviewBase.ui" line="597"/>
         <source>Toolbutton with 32px SVG icon
 and text below</source>
-        <translation>Nástrojové Tlačítko s 32px
+        <translation>Nástrojové tlačítko s 32px
 SVG ikonou</translation>
     </message>
     <message>
@@ -120,15 +120,15 @@ SVG ikonou</translation>
         <source>Toolbutton with text below
 and arrow</source>
         <translation>Nástrojové tlačítko se
-šipkou a spodním textem</translation>
+šipkou a textem pod</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="657"/>
         <location filename="../../KvantumPreviewBase.ui" line="678"/>
         <source>Toolbutton with icon at the side
 and arrow</source>
-        <translation>Nástrojové tlačítko se šipkou na boku
-s vedlejším textem</translation>
+        <translation>Nástrojové tlačítko s ikonou na
+boku a šipkou</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="696"/>
@@ -137,15 +137,16 @@ s vedlejším textem</translation>
 ordinary arrow
 and dropdown menu arrow</source>
         <translation>Přepínací nástrojové tlačítko s ikonou,
-šipkou zpět a šipkou rozbalovací 
-nabídkou</translation>
+šipkou a šipkou rozbalovací 
+nabídky</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="528"/>
         <location filename="../../KvantumPreviewBase.ui" line="552"/>
         <source>Toolbutton with 32px PNG icon
 beside text</source>
-        <translation>Tlačítko s 32px SVG ikonou a s textem</translation>
+        <translation>Tlačítko s 32px PNG ikonou
+vedle textu</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="366"/>
@@ -163,14 +164,14 @@ height
 greater
 than
 width</source>
-        <translation>Přepínácí
+        <translation>Přepínací
 nástrojové
 tlačítko
 
 s
 větší
 výškou
-a menší
+než
 šířkou</translation>
     </message>
     <message>
@@ -215,7 +216,8 @@ přepínací tlačítko</translation>
         <location filename="../../KvantumPreviewBase.ui" line="974"/>
         <source>Multi-line
 check box</source>
-        <translation>Víceřádkové zaškrtávací políčko</translation>
+        <translation>Víceřádkové zaškrtávací
+políčko</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="982"/>
@@ -443,7 +445,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="2296"/>
         <location filename="../../KvantumPreviewBase.ui" line="2344"/>
         <source>1st Item</source>
-        <translation>1. Položka</translation>
+        <translation>První položka</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2316"/>
@@ -525,12 +527,12 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="2890"/>
         <location filename="../../KvantumPreviewBase.ui" line="2938"/>
         <source>Tab 1</source>
-        <translation>1. Karta</translation>
+        <translation>1. karta</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2473"/>
         <source>Page 1 (disabled)</source>
-        <translation>1. Strana (vypnutá)</translation>
+        <translation>1. strana (vypnutá)</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2485"/>
@@ -539,12 +541,12 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="2904"/>
         <location filename="../../KvantumPreviewBase.ui" line="2952"/>
         <source>Tab 2</source>
-        <translation>2. Karta</translation>
+        <translation>2. karta</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2491"/>
         <source>Page 2 (disabled)</source>
-        <translation>2. Stránka (vypnutá)</translation>
+        <translation>2. stránka (vypnutá)</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2525"/>
@@ -553,7 +555,7 @@ check box</source>
         <location filename="../../KvantumPreviewBase.ui" line="2896"/>
         <location filename="../../KvantumPreviewBase.ui" line="2944"/>
         <source>Page 1</source>
-        <translation>1. Stránka</translation>
+        <translation>1. stránka</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="2539"/>
@@ -685,12 +687,12 @@ check box</source>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="3132"/>
         <source>&amp;Radio button</source>
-        <translation>&amp; Výběrové tlačítko</translation>
+        <translation>Výbě&amp;rové tlačítko</translation>
     </message>
     <message>
         <location filename="../../KvantumPreviewBase.ui" line="3140"/>
         <source>Radio &amp;button</source>
-        <translation>Výběrové &amp; tlačítko</translation>
+        <translation>Vý&amp;běrové tlačítko</translation>
     </message>
 </context>
 </TS>
