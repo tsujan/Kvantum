@@ -87,13 +87,13 @@ téma je již použito.</translation>
 settings of this theme.
 (Ctrl+Z)</source>
         <translation>Vrátit na výchozí (root)
-Nastavení tohoto motivu
+nastavení tohoto motivu
 (Ctrl+Z)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="326"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Revert to the default (root) settings of this theme!&lt;/p&gt;&lt;p&gt;When clicked and confirmed, all changes to the configuration will be lost but the probable customized SVG file will remain intact.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;/head&gt;&lt;body&gt;&lt;p&gt;Vraťte výchozí (kořenové) nastavení tohoto motivu!&lt;/p&gt;&lt;p&gt;Po kliknutí a potvrzení budou všechny změny konfigurace ztraceny, ale pravděpodobný přizpůsobený soubor SVG zůstane nedotčen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;/head&gt;&lt;body&gt;&lt;p&gt;Vrátit výchozí (kořenové) nastavení tohoto motivu!&lt;/p&gt;&lt;p&gt;Po kliknutí a potvrzení budou všechny změny nastavení ztraceny, ale pravděpodobný přizpůsobený soubor SVG zůstane nedotčen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="329"/>
@@ -187,7 +187,7 @@ s nastavením relace LXQt.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="495"/>
         <source>Iconless menus</source>
-        <translation>Nezobrazovat ikony v menu</translation>
+        <translation>Nezobrazovat v nabídce ikony</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="510"/>
