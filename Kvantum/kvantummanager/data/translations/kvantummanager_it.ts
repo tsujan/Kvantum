@@ -1294,7 +1294,7 @@ o aggiorna l&apos;anteprima</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="2260"/>
         <source>Help</source>
-        <translation>Auito</translation>
+        <translation>Aiuto</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="328"/>
