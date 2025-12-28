@@ -1058,7 +1058,7 @@ Default is &quot;Follow Style&quot;.</source>
         <translation>Efikas nur kiam la stilo ne estas
 determinita de la aplikaĵo en ĝia kodo.
 
-La defaŭlto estas &quot;Laŭagu la Stilon&quot;.</translation>
+La defaŭlto estas &quot;Konforma al la Stilo&quot;.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1684"/>
@@ -1241,7 +1241,7 @@ estus grupigitaj altigite inter ilbretaj disigiloj.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1898"/>
         <source>Toolbutton style:</source>
-        <translation>Ilbutona stilo:</translation>
+        <translation>Stilo de ilbutonoj:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1801"/>
@@ -1269,7 +1269,7 @@ liniredaktilon kun sago (kaj ikono se estanta)?</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1743"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Draw the whole editable combo-box as a line-edit with arrow (and icon, if it exists)?&lt;/p&gt;&lt;p&gt;By default, a combo-box consists of a line-edit, a button with arrow on one side and another button with icon on the other side.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Desegni la tutan redakteblan fallistilon kiel liniredaktilon kun sago (kaj ikono se estanta)?&lt;/p&gt;&lt;p&gt;Defaŭlte, la fallistilo konsistas el butono havanta sagon, ĉe unu flanko, kaj alia butono havanta ikonon, ĉe la alia.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Desegni la tutan redakteblan fallistilon kiel liniredaktilon kun sago (kaj ikono se estanta)?&lt;/p&gt;&lt;p&gt;Defaŭlte, la fallistilo konsistas el butono havanta sagon kaj alia butono havanta ikonon.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1746"/>
@@ -1307,7 +1307,7 @@ Malmarku ĝin se vi volus ŝanĝi tiujn agordojn!</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1814"/>
         <source>Left aligned tabs</source>
-        <translation>Maldekstre ĝisrandigitaj folioj</translation>
+        <translation>Maldekstre aranĝitaj folioj</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1821"/>
@@ -1400,7 +1400,7 @@ Defaŭlte, la tro grandaj menuoj estas rulumeblaj.</translation>
 If you have enabled it, you could temporarily disable it
 for a button that can be dragged and dropped by pressing
 the Ctrl key before pressing the button.</source>
-        <translation>Averto: Ĉi tio povas esti konfuzanta unue.
+        <translation>Averto: Ĉi tio povas esti konfuza unue.
 
 Se vi jam ebligis ĝin, vi povas portempe malebligi
 ĝin por butono, kiu povas esti ŝovita kaj demetita,
@@ -1553,7 +1553,7 @@ aŭ ĝisdatigi ĝian antaŭrigardon.</translation>
         <location filename="../../KvantumManager.cpp" line="109"/>
         <location filename="../../KvantumManager.cpp" line="115"/>
         <source>Follow Style</source>
-        <translation>Laŭagu la Stilon</translation>
+        <translation>Konforma al la Stilo</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="106"/>
