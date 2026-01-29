@@ -68,7 +68,7 @@ A disabled button means that
 the theme is already used.</source>
         <translation>Igu Kvantum uzi ĉi tiun etoson!
 
-La malvalidigita butono signifus
+Malvalidigita butono signifus
 tion ke la etoso jam estus uzata.</translation>
     </message>
     <message>
@@ -207,7 +207,7 @@ de LXQt.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="557"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do not draw any background for KTitles?&lt;/p&gt;&lt;p&gt;Ktitles are used by some KDE applications to show different sections in configuration dialogs.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Neniu fono por KTitle?&lt;/p&gt;&lt;p&gt;Ktitle estas uzita de iuj KDE-aplikaĵoj por montri diversajn sekciojn en konfiguraj dialogoj.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Neniu fono por KTitle?&lt;/p&gt;&lt;p&gt;Ktitle estas uzita de iuj KDE-aplikaĵoj por montri malsamajn sekciojn en konfiguraj dialogoj.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="560"/>
@@ -224,7 +224,7 @@ por la elektita elemento.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="571"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;By default, selected label icons are tinted by the highlight color.&lt;/p&gt;&lt;p&gt;Checking this box removes the tint.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Defaŭlte, la elektita etiked-ikono estas koloretigita per la emfazkoloro.&lt;/p&gt;&lt;p&gt;Marki ĉi tun butonon viŝas la kolortonon.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Defaŭlte, iomete da la emfazkoloro estas aldonita al la elektita etiked-ikono.&lt;/p&gt;&lt;p&gt;Marki ĉi tun butonon viŝas tiun kolortonon.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="574"/>
@@ -242,7 +242,7 @@ de Plasmo vidu ĉi tiun agordon.)</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="585"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do not draw any background for (KDE) menu titles?&lt;/p&gt;&lt;p&gt;Menu titles are like menu separators but with icon and text.&lt;/p&gt;&lt;p&gt;This needs Logging out and in for KDE Plasma menus. For LXQt panel, a panel restart with &lt;span style=&quot; font-style:italic;&quot;&gt;Session Settings &lt;/span&gt;is enough.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ne aldonu fonon al la menutitolo de KDE?&lt;/p&gt;&lt;p&gt;La menutitolo similas menudisigilon sed havas ikonon kaj tekston.&lt;/p&gt;&lt;p&gt;La menuoj de Plasmo bezonas elsaluton kaj ensaluton por vidi ĉi tiun agordon. Ĉe LXQt, la panelo povas esti restartigita per &lt;span style=&quot; font-style:italic;&quot;&gt;Seancaj agordoj&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ne aldonu fonon al la menutitolo de KDE?&lt;/p&gt;&lt;p&gt;La menutitolo similas menu-disigilon sed havas ikonon kaj tekston.&lt;/p&gt;&lt;p&gt;La menuoj de Plasmo bezonas elsaluton kaj ensaluton por vidi ĉi tiun agordon. Ĉe LXQt, la panelo povas esti restartigita per &lt;span style=&quot; font-style:italic;&quot;&gt;Seancaj agordoj&lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="588"/>
@@ -265,7 +265,7 @@ de Plasmo vidu ĉi tiun agordon.)</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="611"/>
         <source>Respect dark themes</source>
-        <translation>Konsideru la malluman etoson</translation>
+        <translation>Konsideru la malhelan etoson</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="689"/>
@@ -281,7 +281,7 @@ povas esti malpliigita alimaniere.</translation>
         <location filename="../../kvantummanager.ui" line="694"/>
         <location filename="../../kvantummanager.ui" line="709"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Useful with monochrome icon sets and when the opacity of disabled icons is not reduced by other means.&lt;/p&gt;&lt;p&gt;KDE automatically reduces the opacity of disabled icons. Therefore, this option might be useful rather under other desktop environments.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Utilas ĉe unukoloraj ikonaroj kaj kiam la opakeco de la malvalidigita ikono ne povas esti malpliigita alimaniere.&lt;/p&gt;&lt;p&gt;KDE aŭtomate malpliigas la opakecon de la malvalidigita ikono. Tial, ĉi tiu agordo eble estas utila ĉe aliaj labortablaj medioj.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Utilas ĉe unukoloraj ikonaroj kaj kiam la opakeco de la malvalidigita ikono ne povas esti malpliigita alimaniere.&lt;/p&gt;&lt;p&gt;KDE aŭtomate malpliigas la opakecon de la malvalidigita ikono. Ĉi tiu agordo eble estas pli utila ĉe aliaj medioj labortablaj.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="697"/>
@@ -297,12 +297,12 @@ as far as possible.</source>
     <message>
         <location filename="../../kvantummanager.ui" line="634"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Show size grips of dialogs and statusbars as far as possible?&lt;/p&gt;&lt;p&gt;By default, the application decides whether they should be shown, but this hack could be useful for resizing windows easily when there is no window border.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Montri la grandigajn tenilojn kaj statbretojn laŭeble?&lt;/p&gt;&lt;p&gt;Defaŭlte, la aplikaĵo determinas ĉu ili devas esti videblaj, sed ĉi tiu kodumo povas esti utila por facile regrandigi fenestrojn kiam ne estas fenestrorando.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Montri la grandigajn tenilojn kaj statbretojn laŭeble?&lt;/p&gt;&lt;p&gt;Defaŭlte, la aplikaĵo determinas ĉu ili devas esti videblaj, sed ĉi tiu kodumo povas esti utila por facile regrandigi fenestrojn sen fenestro-rando.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="637"/>
         <source>Force size grips</source>
-        <translation>Devigu la grandigan tenilon</translation>
+        <translation>Trudu la grandigan tenilon</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="750"/>
@@ -357,7 +357,7 @@ Diversaĵoj → Konsideru labortablajn mediojn</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="227"/>
         <source>&lt;br&gt;&lt;br&gt;Since &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; is independent of all desktop environments, you first need to &lt;i&gt;activate&lt;/i&gt; it with a Qt platform integration program. KDE and LXQt provide simple tools for changing the active Qt style plugin. With other platforms, you need a Qt configuration tool.&lt;br/&gt;&lt;br/&gt;Under KDE, also select and apply the color scheme of this theme because some KDE applications may get their colors directly from the KDE color scheme.&lt;br/&gt;&lt;br/&gt;Running applications will get the new theme after being closed and reopened. Logging out and in would be good for all KDE/LXQt parts to see it completely.</source>
-        <translation>&lt;br&gt;&lt;br&gt;Ĉar &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; ne dependas al iu labortabla medio, vi unue bezonas &lt;i&gt;aktivigi&lt;/i&gt; ĝin per platform-integrigilo por Qt. KDE kaj LXQt havigas simplajn ilojn por ŝanĝi la aktivan stilan kromprogramon de Qt. Ĉe la aliaj platformoj, vi bezonas agordilon de Qt.&lt;br/&gt;&lt;br/&gt;En KDE, ankaŭ elektu kaj apliku la kolorskemon de ĉi tiu etoso ĉar iuj KDE-aplikaĵoj eble akiras siajn kolorojn senpere el la KDE-kolorskemo.&lt;br/&gt;&lt;br/&gt;La rulataj aplikaĵoj alprenos la novan etoson post kiam ili estas fermitaj kaj remalfermitaj. Elsaluti kaj ensaluti denove bonas por ke ĉiuj partoj de KDE/LXQt vidu ĝin plene.</translation>
+        <translation>&lt;br&gt;&lt;br&gt;Pro tio ke &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; ne dependas al iu medio labortabla, vi unue bezonas &lt;i&gt;aktivigi&lt;/i&gt; ĝin per platform-integrigilo por Qt. KDE kaj LXQt havigas simplajn ilojn por ŝanĝi la aktivan stilan kromprogramon de Qt. Ĉe la aliaj platformoj, vi bezonas agordilon de Qt.&lt;br/&gt;&lt;br/&gt;En KDE, ankaŭ elektu kaj apliku la kolorskemon de ĉi tiu etoso ĉar iuj KDE-aplikaĵoj eble akiras siajn kolorojn senpere el la KDE-kolorskemo.&lt;br/&gt;&lt;br/&gt;La rulataj aplikaĵoj alprenos la novan etoson post kiam ili estas fermitaj kaj remalfermitaj. Elsaluti kaj ensaluti denove bonas por ke ĉiuj partoj de KDE/LXQt vidu ĝin plene.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="531"/>
@@ -383,7 +383,7 @@ Se ĉi tiu butono estus malvalidigita, vidu la ĉisupran agordon.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="547"/>
         <source>Style vertical toolbars</source>
-        <translation>Stligu vertikalajn ilbretojn</translation>
+        <translation>Stiligu vertikalajn ilbretojn</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="595"/>
@@ -437,7 +437,7 @@ with the left mouse button.
 
 Warning: Qt&apos;s kinetic scrolling has bugs and may
 seriously interfere with other jobs.</source>
-        <translation>Rulumu iujn rulumeblajn fenestraĵojn, pelante ilin
+        <translation>Rulumu iujn fenestraĵojn rulumeblajn, pelante ilin
 per la maldekstra musbutono.
 
 Averto: La kineta rulumado de Qt havas cimojn kaj
@@ -573,19 +573,19 @@ ombrojn al la menuoj kaj ŝpruchelpiloj.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1144"/>
         <source>Blurring for translucent windows</source>
-        <translation>Nebuligitaj tralumeblaj fenestroj</translation>
+        <translation>Nebuligitaj fenestroj tralumeblaj</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1164"/>
         <source>A 200ms fading animation when the state of
 some widgets is changed, mostly by the mouse.</source>
-        <translation>Dissolva animacio daŭranta 200 ms kiam la statoj
-de iuj fenestraĵoj estas ŝanĝitaj, pleje de la muso.</translation>
+        <translation>Dissolva animacio daŭranta 200 ms kiam la statoj de
+iuj fenestraĵoj estas ŝanĝitaj, plejparte per la muso.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1168"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A 200ms fading animation when the state of some widgets is changed, mostly by the mouse.&lt;/p&gt;&lt;p&gt;The CPU usage is negligible because often only one widget is animated. The resulting visual effect depends on the active theme.&lt;/p&gt;&lt;p&gt;These widgets are supported: buttons (including radio buttons and check boxes), combo boxes, spin boxes, slider handles, line-edits and scroll views.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Dissolva animacio daŭranta 200 ms kiam la statoj de iuj fenestraĵoj estas ŝanĝitaj, pleje de la muso.&lt;/p&gt;&lt;p&gt;La CPU-uzado estas neglektinda ĉar ofte nur unu fenestraĵo estas animaciata. La rezultata vida efekto dependas al la aktiva etoso.&lt;/p&gt;&lt;p&gt;La jenaj fenestraĵoj estas subtenitaj: butonoj (inkluzive radiobutonojn kaj markbutonojn), fallistiloj, ŝpinbutonoj, teniloj de ŝoviloj, liniredaktiloj kaj rulumvidoj.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Dissolva animacio daŭranta 200 ms kiam la statoj de iuj fenestraĵoj estas ŝanĝitaj, plejparte per la muso.&lt;/p&gt;&lt;p&gt;La CPU-uzado estas neglektinda ĉar ofte nur unu fenestraĵo estas animaciata. La rezultata vida efekto dependas al la aktiva etoso.&lt;/p&gt;&lt;p&gt;La jenaj fenestraĵoj estas subtenitaj: butonoj (inkluzive radiobutonojn kaj markbutonojn), fallistiloj, ŝpinbutonoj, teniloj de ŝoviloj, liniredaktiloj kaj rulumvidoj.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1171"/>
@@ -608,7 +608,7 @@ Malmarku se vi volas tiujn kahelojn refoje!</translation>
         <location filename="../../kvantummanager.ui" line="1189"/>
         <source>Use the same colors and shapes with active and inactive
 windows if this theme distinguishes between them?</source>
-        <translation>Ĉu uzu la samajn kolorojn kaj formojn ĉe la aktiva kaj neaktiva
+        <translation>Uzi la samajn kolorojn kaj formojn ĉe la aktiva kaj neaktiva
 fenestroj se ĉi tiu etoso distingas ilin unu je la alia?</translation>
     </message>
     <message>
@@ -662,7 +662,7 @@ fenestroj se ĉi tiu etoso distingas ilin unu je la alia?</translation>
         <source>The default value is 3 px but
 some apps set it themeselves.</source>
         <translation>La defaŭlta valoro estas 3 px sed
-iuj aplikaĵoj determinas ĝin mem.</translation>
+iuj aplikaĵoj mem determinas ĝin.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1388"/>
@@ -674,7 +674,7 @@ iuj aplikaĵoj determinas ĝin mem.</translation>
         <location filename="../../kvantummanager.ui" line="1422"/>
         <source>The default value is 6 px but some apps set it themeselves.</source>
         <translation>La defaŭlta valoro estas 6 px sed
-iuj aplikaĵoj determinas ĝin mem.</translation>
+iuj aplikaĵoj mem determinas ĝin.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1415"/>
@@ -702,7 +702,7 @@ La defaŭlto estas 0.</translation>
         <source>The width of horizontal spin buttons.
 (Has no effect when spin indicators are vertical.)</source>
         <translation>La larĝo de la horizontala ŝpinbutono.
-(Ĝi ne efikas ĉe la vertikalaj ŝpinindikiloj.)</translation>
+(Ĝi ne efikas ĉe la vertikalaj ŝpin-indikiloj.)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1472"/>
@@ -769,7 +769,7 @@ only removes user themes.</source>
 
 La radika instalado ankoraŭ estus
 havebla se estanta; ĉi tiu butono
-forviŝas nur la etosojn de la uzanto.</translation>
+forviŝas nur etosojn de la uzanto.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="391"/>
@@ -799,7 +799,7 @@ If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
         <translation>Neniu ikono por la prembutono havanta tekston?
 
-Defaŭlte, la plejparto da prembutonoj havas ikonojn.
+Defaŭlte, plejparto da prembutonoj havas ikonojn.
 
 Se ĉi tiu butono estus malvalidigita, vidu:
 Diversaĵoj → Konsideru labortablajn mediojn</translation>
@@ -856,7 +856,7 @@ This is mostly relevant with monochrome icons.
 Hard-coded icons/styles may not respect this key.</source>
         <translation>La emfazkoloro estas uzita por la koloretigo.
 
-Ĉi tio estas pleje rilata ĉe unukoloraj ikonaroj.
+Ĉi tio estas plejparte laŭtema ĉe unukoloraj ikonoj.
 
 Enkodigitaj ikonoj/stiloj povas ignori ĉi tiun agordon.</translation>
     </message>
@@ -865,7 +865,7 @@ Enkodigitaj ikonoj/stiloj povas ignori ĉi tiun agordon.</translation>
         <source>Some apps may not respect dark themes.
 Kvantum can try to correct their behavior
 as far as possible.</source>
-        <translation>Iuj aplikaĵoj povas kontraŭi mallumajn etosojn.
+        <translation>Iuj aplikaĵoj povas kontraŭi malhelajn etosojn.
 Kvantum povas peni korekti iliajn kondutojn laŭeble.</translation>
     </message>
     <message>
@@ -979,9 +979,9 @@ aplikaĵoj obeas la agordoj de KDE.</translation>
 Zero means tooltips are shown instantly.
 
 -1 means the default Qt behavior.</source>
-        <translation>La prokrasto, laŭ milisekundoj, antaŭ ol la ŝpruchelpilo videblas.
+        <translation>La prokrasto, laŭ milisekundoj, antaŭ ol la ŝpruchelpilo aperas.
 
-Nulo signifas tion ke la ŝpruchelpilo aperas senprokraste.
+Nulo signifas tion, ke la ŝpruchelpilo aperas senprokraste.
 
 -1 signifas la defaŭltan konduton de Qt.</translation>
     </message>
@@ -1009,8 +1009,8 @@ the frame, so that the frame isn&apos;t cut.</source>
         <translation>Defaŭlte, la etikedo situas ĉe la supra flanko de la kadro,
 tiel ke la supra flanko estas tranĉita por enteni ĝin.
 
-Marki ĉi tiun butonon igas la etikedon situi ĝuste
-super la kadro, tiel ke la kadro ne estas tranĉita.</translation>
+Marki ĉi tiun butonon igas la etikedon situi supre
+de la kadro, tiel ke la kadro ne estu tranĉita.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1698"/>
@@ -1019,11 +1019,11 @@ toolbars and dock widgets are hollow.
 
 This option fills drop rectangles with
 the highlight color.</source>
-        <translation>Defaŭlte, la demeta rektangulo por la moviĝantaj
-ilbretoj kaj dokoj estas malplena.
+        <translation>Defaŭlte, la demetaj rektanguloj de la moveblaj
+ilbretoj kaj dokoj estas malplenaj.
 
-Ĉi tiu agordo plenigas la demetan rektangulon per
-la emfazkoloro.</translation>
+Ĉi tiu agordo plenigas la demetajn rektangulojn
+per la emfazkoloro.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1753"/>
@@ -1067,10 +1067,10 @@ two buttons with arrows or plus/minus signs.
 
 Checking this integrates the spin indicators
 into the spin line-edit..</source>
-        <translation>Defaŭlte, la ŝpinbutono estas desegnita kiel du
+        <translation>Defaŭlte, la ŝpin-indikiloj estas desegnita kiel du
 butonoj havantaj sagojn aŭ plusan/minusan signojn.
 
-Marki ĉi tiun butonon metas la ŝpinindikilojn en
+Marki ĉi tiun butonon metas la ŝpin-indikilojn en
 la ŝpinan liniredaktilon kaj eliminas la butonojn.</translation>
     </message>
     <message>
@@ -1079,17 +1079,17 @@ la ŝpinan liniredaktilon kaj eliminas la butonojn.</translation>
 
 Checking this puts the spin-up indicator above the
 spin-down one inside the spin line-edit.</source>
-        <translation>Defaŭlte, la ŝpinindikiloj estas unu apud la alia horizontale.
+        <translation>Defaŭlte, la ŝpin-indikiloj estas unu apud la alia horizontale.
 
-Marki ĉi tiun butonon metas la supreniran indikilon super la
-malsupreniran, interne de la ŝpina liniredaktilon.</translation>
+Marki ĉi tiun butonon metas la suprenan indikilon super
+la malsuprenan, interne de la ŝpina liniredaktilo.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1764"/>
         <source>Draw combo popups as menu popups (i.e. like in Gtk)?
 
 By default, combo popups do not cover the combo box.</source>
-        <translation>Desegni la falmenuon kiel ŝprucmenuon (t.e. kiel ĉe GTK)?
+        <translation>Desegni la falmenuon kiel ŝprucmenuon (simile al GTK)?
 
 Defaŭlte, la falmenuo ne kovras la liniredaktilon.</translation>
     </message>
@@ -1126,9 +1126,9 @@ their scroll views only when needed.
 They usually take no extra space.</source>
         <translation>Igu la rulumskalojn nedaŭraj!
 
-La nedaŭra rulumskalo aperas supre
-de ĝia rulumvido nur kiam bezonata.
-Ĝi kutime ne okupas kroman spacon.</translation>
+La nedaŭra rulumskalo aperas antaŭ
+sia rulumvido nur kiam bezonata kaj
+kutime ne okupas kroman spacon.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1570"/>
@@ -1141,8 +1141,8 @@ while 0 means no delay.</source>
         <translation>La prokrasto, laŭ milisekundoj, antaŭ ol la submenuo
 estas malfermita. La defaŭlto estas 250.
 
--1 signifas ke la submenuo povas esti malfermita nur
-per klako. 0 signifas ke estas neniu prokrasto.</translation>
+-1 signifas tion, ke la submenuo povas esti malfermita
+nur per klako. 0 signifas la mankon de prokrasto.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1577"/>
@@ -1197,7 +1197,7 @@ Komponado &amp; Ĝenerala Ŝajno → Nedaŭraj rulumskaloj</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1705"/>
         <source>Fill rubber-band rectangles</source>
-        <translation>Plenigita rektangula rubando</translation>
+        <translation>Plenigita rubando rektangula</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1725"/>
@@ -1209,7 +1209,7 @@ por la menubreto defaŭlte.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1729"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mouse tracking is enabled for menubars by default, i.e., after a menubar item is clicked and its menu is shown, the menus of the other menubar items will be shown if the cursor is put on them without clicking.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;La musospurado estas aktiva por la menubreto defaŭlte, t.e., post kiam iu menubreta ero estas klakita kaj ĝia menuo estas montrita, la menuoj de la aliaj menubretaj eroj estus montritaj se la kursoro ŝvebus super ili.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;La musospurado estas aktiva por la menubreto defaŭlte, t.e., post kiam iu menubreta ero estas klakita kaj ĝia menuo estas montrita, la menuoj de la aliaj menubretaj eroj estus montritaj se la kursoro ŝvebus super ilin.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1732"/>
@@ -1226,12 +1226,12 @@ por la menubreto defaŭlte.</translation>
         <source>If checked, toolbar buttons will be drawn grouped and raised
 between toolbar separators.</source>
         <translation>Se ĉi tiu butono estus markita, la ilbretaj butonoj
-estus grupigitaj altigite inter ilbretaj disigiloj.</translation>
+estus grupigitaj kaj altigitaj inter ilbretaj disigiloj.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1780"/>
         <source>Group toolbar buttons</source>
-        <translation>Grupigitaj ilbretaj butonoj</translation>
+        <translation>Grupigitaj butonoj ilbretaj</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1988"/>
@@ -1257,7 +1257,7 @@ neniu fulmolitero estus substrekita.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1691"/>
         <source>Inline spin indicators</source>
-        <translation>Interna ŝpinbutona indikilo</translation>
+        <translation>Internaj indikiloj ŝpinbutonaj</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1739"/>
@@ -1279,7 +1279,7 @@ liniredaktilon kun sago (kaj ikono se estanta)?</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1718"/>
         <source>Vertical spin indicators</source>
-        <translation>Vertikala ŝpinbutona indikilo</translation>
+        <translation>Vertikalaj indikiloj ŝpinbutonaj</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1653"/>
@@ -1289,7 +1289,7 @@ respect some settings of the current desktop environment.
 This checkbox may disable some options.
 Uncheck it if you want to use those options!</source>
         <translation>Kiam ĉi tiu butono estas aktiva kaj markita, Kvantum penas
-konsideri agordojn de la nuna labortabla medio.
+konsideri agordojn de la nuna medio labortabla.
 
 Ĉi tiu markbutono eblas malvalidigi iujn agordojn.
 Malmarku ĝin se vi volus ŝanĝi tiujn agordojn!</translation>
@@ -1329,7 +1329,7 @@ alidire, ne estas videblaj limoj inter ili.</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="1660"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When this is enabled and checked, Kvantum will try to respect some settings of the current desktop environment if it is KDE, Unity, Gnome or Pantheon.&lt;/p&gt;&lt;p&gt;Under KDE, it makes Kvantum read KDE settings for small and large icon sizes and also single or double clicking.&lt;/p&gt;&lt;p&gt;Under Unity, Gnome and Pantheon, it removes icons from menus and push-buttons (even if the corresponding dconf keys are changed) and disables window translucency.&lt;/p&gt;&lt;p&gt;This checkbox may disable some options. Uncheck it if you want to use those options!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Kiam ĉi tiu butono estas aktiva kaj markita, Kvantum penus konsideri agordojn de la nuna labortabla medio se ĝi estus KDE, Unity, Gnome aŭ Pantheon.&lt;/p&gt;&lt;p&gt;En KDE, ĉi tiu agordo igas Kvantum legi la KDE-agordojn pri la malgrandaj kaj grandaj ikonoj kaj ankaŭ pri la unuobla aŭ duobla klakado.&lt;/p&gt;&lt;p&gt;En Unity, Gnome kaj Pantheon, ĝi viŝas la ikonojn for la menuoj kaj prembutonoj (eĉ kiam la kongruaj dconf-klavoj estas ŝanĝitaj) kaj malvalidigas la fenestran tralumeblecon.&lt;/p&gt;&lt;p&gt;Ĉi tiu markbutono eblas malvalidigi iujn agordojn. Malmarku ĝin se vi volus ŝanĝi ilin!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Kiam ĉi tiu butono estas aktiva kaj markita, Kvantum penus konsideri agordojn de la nuna medio labortabla se ĝi estus KDE, Unity, Gnome aŭ Pantheon.&lt;/p&gt;&lt;p&gt;En KDE, ĉi tiu agordo igas Kvantum legi la KDE-agordojn pri la malgrandaj kaj grandaj ikonoj kaj ankaŭ pri la unuobla aŭ duobla klakado.&lt;/p&gt;&lt;p&gt;En Unity, Gnome kaj Pantheon, ĝi viŝas la ikonojn for la menuoj kaj prembutonoj (eĉ kiam la kongruaj dconf-klavoj estas ŝanĝitaj) kaj malvalidigas la fenestran tralumeblecon.&lt;/p&gt;&lt;p&gt;Ĉi tiu markbutono eblas malvalidigi iujn agordojn. Malmarku ĝin se vi volus ŝanĝi ilin!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="848"/>
@@ -1361,8 +1361,8 @@ la tralumebleco estus ebligita por la fenestroj.
 Tralumebla fono en la SVG-dosiero NE necesas
 por ke ĉi tio efiku.
 
-Negativa valoro signifas ke nur la opakecon de
-neaktivaj fenestroj estas malpliigita.</translation>
+Negativa valoro signifas tion, ke nur la opakeco
+de neaktivaj fenestroj estas malpliigita.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1787"/>
@@ -1371,11 +1371,11 @@ there will be a checkbox next to each entry
 (although Kvantum draws it as a radio button).
 
 This option will hide these.</source>
-        <translation>Defaŭlte, la falmenuo desegnita kiel ŝprucmenuo
-havas markbutonojn en siaj menueroj (kvankam
-Kvantum desegnas ilin kiel radiobutonojn).
+        <translation>Defaŭlte, la falmenuo, kui eastas desegnita kiel
+ŝprucmenuo, havas markbutonojn en siaj menueroj
+(kvankam Kvantum desegnas ilin kiel radiobutonojn).
 
-Ĉi tiu opcio kaŝas ĉiajn butonojn.</translation>
+Ĉi tiu opcio kaŝas tiajn butonojn.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1794"/>
@@ -1633,7 +1633,7 @@ aŭ ĝisdatigi ĝian antaŭrigardon.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="518"/>
         <source>Please fix that first!</source>
-        <translation>Bonvole senpaneigu tion unuavice!</translation>
+        <translation>Bonvole traktu pri tio unuavice!</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="530"/>
@@ -1805,7 +1805,7 @@ aŭ ĝisdatigi ĝian antaŭrigardon.</translation>
     <message>
         <location filename="../../KvantumManager.cpp" line="2823"/>
         <source>You will lose the changes you might have made.</source>
-        <translation>Vi perdos la ŝanĝoj, kiujn vi eble faris.</translation>
+        <translation>Vi perdos la ŝanĝojn, kiujn vi eble faris.</translation>
     </message>
     <message>
         <location filename="../../KvantumManager.cpp" line="3011"/>
