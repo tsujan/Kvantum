@@ -1067,7 +1067,7 @@ two buttons with arrows or plus/minus signs.
 
 Checking this integrates the spin indicators
 into the spin line-edit..</source>
-        <translation>Defaŭlte, la ŝpin-indikiloj estas desegnita kiel du
+        <translation>Defaŭlte, la ŝpin-indikiloj estas desegnitaj kiel du
 butonoj havantaj sagojn aŭ plusan/minusan signojn.
 
 Marki ĉi tiun butonon metas la ŝpin-indikilojn en
