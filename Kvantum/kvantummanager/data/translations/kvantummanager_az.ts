@@ -960,17 +960,17 @@ KDE tətbiqləri onları KDE ayarından alır.</translation>
         <location filename="../../kvantummanager.ui" line="1502"/>
         <location filename="../../kvantummanager.ui" line="1515"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The minimum height of vertical scrollbars and the minimum width of horizontal scrollbars.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Şaquli sürüşdürmə çubuğunun minimum hündürlüyü və üfüqi sürüşdürmə çubuğunun minimum eni.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1505"/>
         <source>Minimum scrollbar length: </source>
-        <translation type="unfinished"></translation>
+        <translation>Minimum şürüşdürmə çubuğu uzunluğu: </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1550"/>
         <source>Delays</source>
-        <translation type="unfinished"></translation>
+        <translation>Gecikmələr</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1556"/>
@@ -980,7 +980,11 @@ KDE tətbiqləri onları KDE ayarından alır.</translation>
 Zero means tooltips are shown instantly.
 
 -1 means the default Qt behavior.</source>
-        <translation type="unfinished"></translation>
+        <translation>Alət ipucları göstərilmədən öncəki millisaniyə ilə gecikmə.
+
+Sıfır dəyəri ipuclarının dərhal göstəriləcəyini bildirir.
+
+-1 ilkin Qt dəyəri deməkdir.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1832"/>
@@ -989,7 +993,12 @@ Zero means tooltips are shown instantly.
 Checking this box removes arrows as far as possible.
 
 If disabled, see Compositing &amp; General Look → Transient scrollbars!</source>
-        <translation type="unfinished"></translation>
+        <translation>İlkin olaraq sürüşdürmə çubuqlarında oxlar olur.
+
+Bu xananı işarələmək mümkün olduqda oxları silir.
+
+Əgər söndürülübsə, Birləşmələr və əsas görünüş → Müvəqqəti 
+sürüşdürmə çubuqlar bölməsinə baxın!</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1698"/>
@@ -998,13 +1007,20 @@ toolbars and dock widgets are hollow.
 
 This option fills drop rectangles with
 the highlight color.</source>
-        <translation type="unfinished"></translation>
+        <translation>İlkin olaraq, köçürülə bilən alət panelləri 
+və dock paneli vidcetləri üçün yerləşdirmə 
+çərçivələri boş (içi doldurulmamış) olur.
+
+Bu parametri aktiv etmək yerləşdirmə 
+çərçivələrini vurğulama rəngi ilə doldurur.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1753"/>
         <source>If checked, the menubar and toolbar will be drawn as a whole by
 the toolbar SVG element when they are adjacent to each another.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu xana işarələnərsə menyu çubuğu və alətlər paneli bir-birinə
+bitişik olduqda alətlər çubuğu SVG nişanları tərəfindən bötöv
+şəkildə göstərilir.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1981"/>
@@ -1014,7 +1030,12 @@ or anywhere possible (and not only from their title bars)?
 
 If this is disabled, see:
 Miscellaneous → Respect current DE if possible</source>
-        <translation type="unfinished"></translation>
+        <translation>Pəncərələri yalnız başlıq çubuqlarından deyil onların menyu 
+çubuqlarından, birinci alətlər panelindən və ya mümkün olduqda
+istənilən yerdən tutub sürüşdürmək mümkün olsun?
+
+Əgər bu söndürülübsə, baxın:
+Müxtəlif → Mümkünsə hazırkı iş masası mühitinə uyğunlaşdırmaq</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1892"/>
@@ -1023,7 +1044,10 @@ Miscellaneous → Respect current DE if possible</source>
 is not set by the app in its code.
 
 Default is &quot;Follow Style&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Üslub yalnız tətbiq tərəfindən təyin 
+edilmədikdə tətbiq olunacaq.
+
+İlkin variant: &quot;Üslubu izləmək&quot;.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1684"/>
@@ -1032,7 +1056,12 @@ two buttons with arrows or plus/minus signs.
 
 Checking this integrates the spin indicators
 into the spin line-edit..</source>
-        <translation type="unfinished"></translation>
+        <translation>İlkin olaraq döndərmə göstəricisi iki oxdan
+ibarət düymə və ya mənfi/müsbət işarələri
+olan düymələr kimi göstərilir.
+
+Bu xananı işarələmək, döndərmə göstəricisini
+xətti döndərmə cizgisinə inteqrasiya edir.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1712"/>
