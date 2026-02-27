@@ -1069,24 +1069,32 @@ xətti döndərmə cizgisinə inteqrasiya edir.</translation>
 
 Checking this puts the spin-up indicator above the
 spin-down one inside the spin line-edit.</source>
-        <translation type="unfinished"></translation>
+        <translation>İlkin olaraq döndərmə göstəricisi bitiş düymələrdə göstərilir.
+
+Bu xananı işarələmək, döndərməli daxiletmə sahəsində (spin line-edit)
+yuxarı döndərmə göstəricisini aşağı döndərmə göstəricisinin üzərində
+yerləşdirir.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1764"/>
         <source>Draw combo popups as menu popups (i.e. like in Gtk)?
 
 By default, combo popups do not cover the combo box.</source>
-        <translation type="unfinished"></translation>
+        <translation>Açılan siyahı pəncərələri açılan menyular 
+(məs., Gtk-dəki kimi) kimi görünsün?
+
+İlkin olaraq, açılan siyahı pəncərələri açılan siyahı 
+sahəsini ötrmür.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1811"/>
         <source>In Kvantum, tabs are centered by default.</source>
-        <translation type="unfinished"></translation>
+        <translation>İlkin variantda Kvantum-da vərəqlər mərkəzdə yerləşir.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1563"/>
         <source>Tooltip delay:</source>
-        <translation type="unfinished"></translation>
+        <translation>İpucları gecikməsi:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="991"/>
@@ -1096,7 +1104,11 @@ whose windows should not be translucent.
 
 (Some apps, like video players, may have
 problems with translucency!)</source>
-        <translation type="unfinished"></translation>
+        <translation>Pəncərələri şəffaf olmayan icra fayllarının 
+vergüllə ayrılmış siyahısı.
+
+(Video oynadıcılar kimi bəzi tətbiqlərin
+yarımşəffaf olması problem yarada bilər)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1200"/>
@@ -1105,7 +1117,11 @@ problems with translucency!)</source>
 Transient scrollbars appear on top of
 their scroll views only when needed.
 They usually take no extra space.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sürüşdürmə çubuqlarını müvəqqəti edin!
+
+Müvəqqəti sürüşdürmə çubuqları yalnız lazım
+olduqda öz sürüşdürmə sahəsi üzərində 
+görünəcək. Bu adətən çox yer tutmur.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1570"/>
@@ -1115,28 +1131,32 @@ They usually take no extra space.</source>
 
 -1 means no popup (opening by clicking),
 while 0 means no delay.</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt menyu açılana qədərki müddətdə millisaniyələrlə gecikmə.
+İlkin variant 250-dir.
+
+-1 dəyəri (klikləmə ilə) açılan pəncərə olmadığını, 0 dəyəri
+isə gecikmə olmadığını göstərir.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1577"/>
         <source>Submenu delay: </source>
-        <translation type="unfinished"></translation>
+        <translation>Alt menyu gecikməsi: </translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1591"/>
         <location filename="../../kvantummanager.ui" line="1614"/>
         <source> ms</source>
-        <translation type="unfinished"></translation>
+        <translation> msan</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1647"/>
         <source>Miscellaneous</source>
-        <translation type="unfinished"></translation>
+        <translation>Müxtəlif</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1839"/>
         <source>No arrows for scrollbars</source>
-        <translation type="unfinished"></translation>
+        <translation>Sürüşdürmə çubuğunda oxlar olmasın</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1934"/>
@@ -1145,17 +1165,23 @@ while 0 means no delay.</source>
 By default, scrollbars are drawn outide view frames.
 
 If disabled, see Compositing &amp; General Look → Transient scrollbars!</source>
-        <translation type="unfinished"></translation>
+        <translation>Sürüşdürmə çubuğu baxış çərçivəsində göstərilsin?
+
+İlkin variantda sürüşdürmə çubuğu çərçivənin kənarında
+göstərilir.
+
+Əgər xana işarələnməyibsə, Birləşdirici və Əsas görünüş → 
+Müvəqqəti sürüşdürmə çubuqları bölməsinə baxın!</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1941"/>
         <source>Scrollbars inside frames</source>
-        <translation type="unfinished"></translation>
+        <translation>Sürüşdürmə panelləri çərçivə daxilində</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1974"/>
         <source>Tree branch lines</source>
-        <translation type="unfinished"></translation>
+        <translation>Budaqlanma xəttləri</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1670"/>
@@ -1164,95 +1190,104 @@ and the frame is cut to contain it.
 
 Checking this puts the label right above
 the frame, so that the frame isn&apos;t cut.</source>
-        <translation type="unfinished"></translation>
+        <translation>İlkin variantda etket çərçivə daxilində olur
+və çərçivənin ölçüsü tərkibinə uyğunlaşır.
+
+Bu xananı işarələmək etiketi birbaşa şərçivənin
+üzərində yerləşdirir, beləliklə çərçivə bütöv qalır.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1677"/>
         <source>Group-box label above frame</source>
-        <translation type="unfinished"></translation>
+        <translation>Qrupun etiket çərçivə üzərində</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1705"/>
         <source>Fill rubber-band rectangles</source>
-        <translation type="unfinished"></translation>
+        <translation>Elastik çərçivəni doldurmaq</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1725"/>
         <source>Mouse tracking is enabled
 for menubars by default.</source>
-        <translation type="unfinished"></translation>
+        <translation>İlkin variantda siçan izləməsi menyu 
+panelləri üçün aktiv edilib.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1729"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Mouse tracking is enabled for menubars by default, i.e., after a menubar item is clicked and its menu is shown, the menus of the other menubar items will be shown if the cursor is put on them without clicking.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Siçan izləmə standart olaraq menyu panelləri üçün aktivləşdirilir, yəni menyu çubuğunun elementi kliklədikdən və onun menyusu göstərildikdən sonra kursor klikləmədən onların üzərinə dayandırılarsa, digər menyu elementlərinin menyuları görünəcək.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1732"/>
         <source>Mouse tracking for menubars</source>
-        <translation type="unfinished"></translation>
+        <translation>Menyu panelləri üçün siçan izləməsi.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1757"/>
         <source>Merge menubar with toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Menyu panelini alətlər paneli ilə birləşdirin</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1776"/>
         <source>If checked, toolbar buttons will be drawn grouped and raised
 between toolbar separators.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu xana işarələnərsə alətlər paneli düymələri 
+alətlər paneli ayırıcıları arasında yerləşdiriləcək.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1780"/>
         <source>Group toolbar buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>Alətlər paneli düymələrini qruplaşdırın</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1988"/>
         <source>Drag from:</source>
-        <translation type="unfinished"></translation>
+        <translation>Buradan sürükləyin:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1898"/>
         <source>Toolbutton style:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alət düyməsi tərzi:</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1801"/>
         <source>If unchecked, shortcuts will not be underlined at all.</source>
-        <translation type="unfinished"></translation>
+        <translation>Əgər işarələnməzsə qısa yol düymələri 
+altından xətt çəkilməyəcək.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1804"/>
         <source>Underline shortcuts with Alt</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt ilə qısayol düymələri altından xətt çəkmək</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1691"/>
         <source>Inline spin indicators</source>
-        <translation type="unfinished"></translation>
+        <translation>Sətirdaxili döndərmə göstəricisi</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1739"/>
         <source>Draw the whole editable combo-box as a
 line-edit with arrow (and icon, if it exists)?</source>
-        <translation type="unfinished"></translation>
+        <translation>Bütöv düzəliş ediləbilən siyahı sahəsi oxları 
+olan daxiletmə sətri (və əgər varsa nişan)
+kimi göstərilsin?</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1743"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Draw the whole editable combo-box as a line-edit with arrow (and icon, if it exists)?&lt;/p&gt;&lt;p&gt;By default, a combo-box consists of a line-edit, a button with arrow on one side and another button with icon on the other side.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Bütöv düzəliş ediləbilən siyahı sahəsi oxları olan daxiletmə sətri (və əgər varsa nişan) kimi göstərilsin?&lt;/p&gt;&lt;p&gt;İlkin variant olaraq, kombinasiya qutusu sətir redaktəsindən, bir tərəfində ox olan düymədən və digər tərəfində işarəsi olan digər düymədən ibarətdir..&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1746"/>
         <source>Editable combo as line-edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Düzəliş ediləbilən sahə sətir kimi</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1718"/>
         <source>Vertical spin indicators</source>
-        <translation type="unfinished"></translation>
+        <translation>Şaquli döndərmə göstəricisi</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1653"/>
@@ -1261,43 +1296,48 @@ respect some settings of the current desktop environment.
 
 This checkbox may disable some options.
 Uncheck it if you want to use those options!</source>
-        <translation type="unfinished"></translation>
+        <translation>Bu aktiv edilərsə, Kvantum bəzi ayarları cari iş masası
+mühitinə uyğunlaşdırmağa çalışacaq.
+
+Bu xananın işarələnməsi bəzi parametrləri söndürə bilər.
+Bu parametrləri istifadə etmək istəsəniz işarəni qaldırın!</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1663"/>
         <source>Respect current DE if possible</source>
-        <translation type="unfinished"></translation>
+        <translation>Hazırkı iş masası mühitinə uyğun</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1769"/>
         <source>Combo popup as menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Açılan siyahı qutusu menyu şəklində</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1814"/>
         <source>Left aligned tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>Sola düzülmüş vərəqlər</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1821"/>
         <source>Inactive tabs are joined together by default,
 i.e., there is no border between them.</source>
-        <translation type="unfinished"></translation>
+        <translation>İlkin variantda aktiv olmayan vərəqlər birləşik olur,
+yəni, onlar arasında heç bir sərhəd yoxdur.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1825"/>
         <source>Join inactive tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktiv olmayan vərəqləri birləşdirmək</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2012"/>
         <source>Scrollable menus</source>
-        <translation type="unfinished"></translation>
+        <translation>Sürüşdürüləbilən menyu</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1660"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;When this is enabled and checked, Kvantum will try to respect some settings of the current desktop environment if it is KDE, Unity, Gnome or Pantheon.&lt;/p&gt;&lt;p&gt;Under KDE, it makes Kvantum read KDE settings for small and large icon sizes and also single or double clicking.&lt;/p&gt;&lt;p&gt;Under Unity, Gnome and Pantheon, it removes icons from menus and push-buttons (even if the corresponding dconf keys are changed) and disables window translucency.&lt;/p&gt;&lt;p&gt;This checkbox may disable some options. Uncheck it if you want to use those options!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Bu aktivləşdirildikdə və işarələniksə, Kvantum, əgər KDE, Unity, Gnome və ya Pantheondursa, cari iş masası mühitinin bəzi parametrlərinə uyğunlaşmağa çalışacaq..&lt;/p&gt;&lt;p&gt;Bu, KDE mühitində Kvantum-a kiçik və böyük nişan ölçüləri üçün KDE parametrlərini, tək və ya cüt toxunuşla oxumağa imkan verir.&lt;/p&gt;&lt;p&gt;Unity, Gnome və Pantheon mühitində o, menyulardan və düymələrdən nişanları silir (hətta müvafiq dconf düymələri dəyişdirilsə belə) və pəncərə şəffaflığını söndürür..&lt;/p&gt;&lt;p&gt;Bu işarələmə xana bəzi parametrləri deaktiv edə bilər. Bu parametrlərdən istifadə etmək istəyirsinizsə, işarəni silin!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="848"/>
