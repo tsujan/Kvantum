@@ -1346,7 +1346,11 @@ only to translucent windows that support the blur
 effect (but the KDE blur effect can be disabled).
 
 A value of 1.00 means no change.</source>
-        <translation type="unfinished"></translation>
+        <translation>KDE kontrast effekti aktiv edilməlidir və və yalnız
+bulanıqlıq effektini dəstəkləyən yarımşəffaf pəncərələrə
+tətbiq edilir. (KDE bulanıqlıq effektini söndürmək olar).
+
+1.00 dəyəri heç bir dəyişiklik olmadığını göstərir.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1050"/>
@@ -1359,7 +1363,14 @@ needed for this key to work.
 
 A negative value means that only the
 opacity of inactive windows is reduced.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pəncərə yarımşəffaflığının aktiv edilməsi
+pəncərənin qeyri-şəffaflığını azaldır.
+
+Bu parametrin işləməsi üçün SVG fonu
+tələb olunmur.
+
+Mənfi dəyər, yalnız aktiv olmayan pəncərələrin
+qeyri-şəffaflığının azaldılacağını göstərir.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1787"/>
@@ -1368,12 +1379,17 @@ there will be a checkbox next to each entry
 (although Kvantum draws it as a radio button).
 
 This option will hide these.</source>
-        <translation type="unfinished"></translation>
+        <translation>Açılan siyahı qutusu menyu kimi göstərildiyi 
+zaman hər bir girişin yanında işarələmə xanası
+yerləşəcək (baxmayaraq ki, Kvantum bunu
+dəyişdirici düymə kimi göstərəcək).
+
+Bu parametr bu sahələri gizlədəcək.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="1794"/>
         <source>Non-checkable combo menu</source>
-        <translation type="unfinished"></translation>
+        <translation>İşarələnə bilməyən siyahı menyusu</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2006"/>
@@ -1381,7 +1397,10 @@ This option will hide these.</source>
 scroll arrows on their top and/or bottom?
 
 By default, big menus are scrollable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Böyük menyular sürüşdürülə bilən, yuxarısında
+və aşağısında sürüşdürmə oxlarına malik olmalıdır?
+
+İlkin variantda böyük menyular sürüşdürülə bilən olur</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2019"/>
@@ -1390,22 +1409,26 @@ By default, big menus are scrollable.</source>
 If you have enabled it, you could temporarily disable it
 for a button that can be dragged and dropped by pressing
 the Ctrl key before pressing the button.</source>
-        <translation type="unfinished"></translation>
+        <translation>Xəbərdarlıq: Bu ilk baxışda olduqca çaşdırıcı ola bilər.
+
+Əgər aktiv etsəniz, bunu, düyməni basmazdan 
+əvvəl Ctrl düyməsini basaraq yeri dəyişdiriləbilən 
+düymə üçün söndürə bilərsiniz.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2026"/>
         <source>Allow dragging from buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>Düymədən sürükləməyə icazə vermək</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2049"/>
         <source>Application Themes</source>
-        <translation type="unfinished"></translation>
+        <translation>Tətbiq mövzuları</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2055"/>
         <source>&lt;center&gt;Here you could assign themes to specific applications.&lt;/center&gt;&lt;br&gt;&lt;center&gt;For each theme, you could add a comma-separated list of executables whose applications should use that theme instead of the active theme. After doing so for all of your chosen themes, save the result by clicking on the &lt;i&gt;Save&lt;/i&gt; button!&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;center&gt;Burada tətbiqlər üçün ayrıca görünüş tərzi (mövzu) təyin edə bilərsiniz.&lt;/center&gt;&lt;br&gt;&lt;center&gt;Hər görünüş tərzi üçün, tətbiqləri aktiv mövzu əvəzinə həmin mövzudan istifadə etməli olan icra fayllarının vergüllə ayrılmış siyahısını əlavə edə bilərsiniz. Seçdiyiniz bütün mövzular üçün bunu etdikdən sonra, &lt;i&gt;Saxla!&lt;/i&gt; düyməsinə klikləməklə nəticəni yadda saxlayın!&lt;/center&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2090"/>
