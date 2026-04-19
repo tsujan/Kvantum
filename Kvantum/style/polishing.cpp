@@ -220,7 +220,10 @@ void Style::polish(QWidget *widget)
       { // we don't want to give a solid backgeound to LXQt's desktop by accident
         QWidget *win = widget->window();
         if (!win->testAttribute(Qt::WA_X11NetWmWindowTypeDesktop)
-            && win->windowType() != Qt::Desktop)
+#if (QT_VERSION < QT_VERSION_CHECK(6,11,0))
+            && win->windowType() != Qt::Desktop
+#endif
+           )
         {
           changePalette = true;
         }
@@ -306,7 +309,9 @@ void Style::polish(QWidget *widget)
       /* take all precautions */
       if (!isPlasma_ && !subApp_ /*&& !isLibreoffice_*/
           && widget->isWindow()
+#if (QT_VERSION < QT_VERSION_CHECK(6,11,0))
           && widget->windowType() != Qt::Desktop
+#endif
           && !widget->testAttribute(Qt::WA_PaintOnScreen)
           && !widget->testAttribute(Qt::WA_X11NetWmWindowTypeDesktop)
           && !widget->inherits("KScreenSaver")

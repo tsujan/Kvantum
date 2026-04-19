@@ -1,3 +1,8 @@
+V1.1.7
+---------
+ * Enforced "DelayedPopup" on the toolbar button of kvantumpreview (the default has changed to "MenuButtonPopup").
+ * Silenced deprecation warnings with Qt ≥ 6.11.
+
 V1.1.6
 ---------
  * Workaround for the translucency of Kvantum Manager's window on changing the theme under Wayland.

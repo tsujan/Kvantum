@@ -13700,7 +13700,9 @@ void Style::setSurfaceFormat(QWidget *widget) const
         || widget->windowFlags().testFlag(Qt::FramelessWindowHint)
         || widget->windowFlags().testFlag(Qt::X11BypassWindowManagerHint)
         || qobject_cast<QFrame*>(widget) // a floating frame, as in Filelight
+#if (QT_VERSION < QT_VERSION_CHECK(6,11,0))
         || widget->windowType() == Qt::Desktop
+#endif
         || widget->testAttribute(Qt::WA_PaintOnScreen)
         || widget->testAttribute(Qt::WA_X11NetWmWindowTypeDesktop)
         || widget->inherits("KScreenSaver")

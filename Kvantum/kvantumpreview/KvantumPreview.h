@@ -1,5 +1,5 @@
 /*
- * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014-2024 <tsujan2000@gmail.com>
+ * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014-2026 <tsujan2000@gmail.com>
  *
  * Kvantum is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -58,6 +58,8 @@ public:
     actionMenu_radio1->setActionGroup (aGroup);
     pushButton_8->setMenu (menuFile);
     actionMenuButton->setMenu (menuFile);
+    if (auto tb = qobject_cast<QToolButton*>(toolBar_2->widgetForAction (actionMenuButton)))
+      tb->setPopupMode (QToolButton::DelayedPopup); // the default has changed to MenuButtonPopup
     toolButton_8->setMenu (menuFile);
 
     /* set the current time and locale in date-time widgets */

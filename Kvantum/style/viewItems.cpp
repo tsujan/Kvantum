@@ -786,11 +786,13 @@ void Style::drawViewItem(const QStyleOption *option,
         painter->setPen(opt->palette.color(cg, QPalette::HighlightedText));
       else
         painter->setPen(opt->palette.color(cg, QPalette::Text));
+#if (QT_VERSION < QT_VERSION_CHECK(6,11,0))
       if (opt->state & QStyle::State_Editing)
       {
         painter->setPen(opt->palette.color(cg, QPalette::Text));
         painter->drawRect(textRect.adjusted(0, 0, -1, -1));
       }
+#endif
       viewItemDrawText(painter, opt, textRect);
     }
 
