@@ -1,5 +1,5 @@
 /*
- * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014-2025 <tsujan2000@gmail.com>
+ * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014-2026 <tsujan2000@gmail.com>
  *
  * Kvantum is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -827,6 +827,17 @@ void Style::forgetMovedMenu(QObject *o)
     {
         disconnect(w, &QObject::destroyed, this, &Style::forgetMovedMenu);
         movedMenus_.remove(w);
+#if (QT_VERSION >= QT_VERSION_CHECK(6,11,0))
+        /* see "eventFiltering.cpp" -> "isWaylandSubMenu" */
+        if (!tspec_.isX11)
+        {
+          if (QWindow *win = w->windowHandle())
+          {
+            win->setProperty("_q_waylandPopupAnchorRect", QVariant());
+            win->setProperty("_q_waylandPopupConstraintAdjustment", QVariant());
+          }
+        }
+#endif
     }
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014-2025 <tsujan2000@gmail.com>
+ * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014-2026 <tsujan2000@gmail.com>
  *
  * Kvantum is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -1013,6 +1013,15 @@ bool Style::eventFilter(QObject *o, QEvent *e)
             }
           }
         }
+
+        bool isWaylandSubMenu = false;
+#if (QT_VERSION >= QT_VERSION_CHECK(6,11,0))
+        /* For a Workaround that is needed due to a backward incompatible change in Qt 6.11,
+           where submenus cannot be moved anymore on Wayland. */
+        if (parentMenu && !tspec_.isX11)
+          isWaylandSubMenu = true;
+#endif
+
         /* get the available geometry (Qt menus don't
            spread across the available virtual geometry) */
         QRect ag;
@@ -1049,7 +1058,9 @@ bool Style::eventFilter(QObject *o, QEvent *e)
             dX += menuShadow_.at(2);
             if (parentMenu)
             {
-              if (parentMenuCorner.x() < g.left())
+              if (isWaylandSubMenu)
+                dX += menuShadow_.at(0);
+              else if (parentMenuCorner.x() < g.left())
                 dX -= menuShadow_.at(2) + menuShadow_.at(0);
               else
               {
@@ -1085,6 +1096,12 @@ bool Style::eventFilter(QObject *o, QEvent *e)
                          || tBtn->menu() == w
                          || (tBtn->defaultAction() && tBtn->defaultAction()->menu() == w)))
             {
+#if (QT_VERSION >= QT_VERSION_CHECK(6,11,0))
+              if (!tspec_.isX11)
+                dX += menuShadow_.at(0);
+              else
+              {
+#endif
               QPoint wTopLeft = sunkenButton_.data()->mapToGlobal(QPoint(0,0));
               if (wTopLeft.y() >= g.bottom())
                 dY +=  menuShadow_.at(1) + menuShadow_.at(3);
@@ -1098,6 +1115,9 @@ bool Style::eventFilter(QObject *o, QEvent *e)
                 else
                   dX -= qMin(menuShadow_.at(0), -delta);
               }
+#if (QT_VERSION >= QT_VERSION_CHECK(6,11,0))
+              }
+#endif
             }
             else if (!ag.isEmpty())
             {
@@ -1237,7 +1257,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         }
 
         /* compensate for an annoyance in Qt 5.11 -> QMenu::internalDelayedPopup() */
-        if (parentMenu)
+        if (parentMenu && !isWaylandSubMenu)
         {
           QAction *activeAct = parentMenu->activeAction();
           if (activeAct && activeAct == menu->menuAction() && activeAct->isEnabled()
@@ -1259,6 +1279,33 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         int DX = qRound(dX);
         int DY = qRound(dY);
         if (DX == 0 && DY == 0) break;
+
+        if (isWaylandSubMenu)
+        {
+          if (QWindow *win = w->windowHandle())
+          {
+            if (menu->menuAction() && parentMenu->activeAction())
+            {
+              auto geom = menu->actionGeometry(menu->menuAction());
+              geom.setSize(parentMenu->size());
+              auto baseGeom = parentMenu->actionGeometry(parentMenu->activeAction());
+              geom.moveTop(baseGeom.top());
+              win->setProperty("_q_waylandPopupAnchorRect", geom.translated(DX, DY));
+
+              // auto sideEdge = menu->isRightToLeft() ? Qt::LeftEdge : Qt::RightEdge;
+              // Qt::Edges anchor = Qt::TopEdge | sideEdge;
+              // Qt::Edges gravity = Qt::BottomEdge | sideEdge;
+              // win->setProperty("_q_waylandPopupAnchor", QVariant::fromValue(anchor));
+              // win->setProperty("_q_waylandPopupGravity", QVariant::fromValue(gravity));
+
+              /* The enum is { none, slide_x, slide_y, flip_x, flip_y, resize_x, resize_y }.
+                 Using slide_x instead of flip_x is requied because there is no way to know
+                 when a surface goes outside the screen edge and flip_x would result in gaps. */
+              uint constraintAdjustment = 1 | 8;
+              win->setProperty("_q_waylandPopupConstraintAdjustment", constraintAdjustment);
+            }
+          }
+        }
 
         /* This workaround isn't needed anymore. It didn't work with Wayland either. */
         // prevent the menu from switching to another screen
