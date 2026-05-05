@@ -1465,17 +1465,25 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         if (_forcePalette)
           forcePalette(w, palette);
       }
-      /* see the case of QMenu above */
-      /*else if (w->inherits("QComboBoxPrivateContainer"))
-      {
-        if (tspec_.combo_menu && tspec_.isX11
+      else if (w->inherits("QComboBoxPrivateContainer"))
+      { // see the case of QMenu above
+#if (QT_VERSION >= QT_VERSION_CHECK(6,11,0))
+        if (!tspec_.isX11 && tspec_.combo_menu
+            && w->windowHandle()
+            && !w->windowHandle()->property("_q_waylandPopupConstraintAdjustment").isValid())
+        {
+          uint constraintAdjustment = 1 | 2;
+          w->windowHandle()->setProperty("_q_waylandPopupConstraintAdjustment", constraintAdjustment);
+        }
+#endif
+        /*if (tspec_.combo_menu && tspec_.isX11
             && !e->spontaneous() && w->windowHandle() != nullptr
             && w->testAttribute(Qt::WA_X11NetWmWindowTypeCombo))
         {
           w->setAttribute(Qt::WA_X11NetWmWindowTypeCombo, false);
           w->setAttribute(Qt::WA_X11NetWmWindowTypeCombo, true);
-        }
-      }*/
+        }*/
+      }
     }
     break;
 
