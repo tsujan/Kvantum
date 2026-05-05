@@ -1065,7 +1065,10 @@ bool Style::eventFilter(QObject *o, QEvent *e)
             if (parentMenu)
             {
               if (isWaylandSubMenu)
-                dX += menuShadow_.at(0);
+              {
+                if (!parentMenu->testAttribute(Qt::WA_X11NetWmWindowTypeMenu))
+                  dX += menuShadow_.at(0);
+              }
               else if (parentMenuCorner.x() < g.left())
                 dX -= menuShadow_.at(2) + menuShadow_.at(0);
               else
@@ -1170,7 +1173,12 @@ bool Style::eventFilter(QObject *o, QEvent *e)
             dX -= menuShadow_.at(0); // left shadow
             if (parentMenu)
             {
-              if (parentMenuCorner.x() > g.left())
+              if (isWaylandSubMenu)
+              {
+                if (!parentMenu->testAttribute(Qt::WA_X11NetWmWindowTypeMenu))
+                  dX -= menuShadow_.at(2);
+              }
+              else if (parentMenuCorner.x() > g.left())
               { // there wasn't enough space to the right of the parent
                 dX += menuShadow_.at(0) + menuShadow_.at(2);
               }
