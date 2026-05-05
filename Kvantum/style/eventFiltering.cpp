@@ -1015,11 +1015,17 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         }
 
         bool isWaylandSubMenu = false;
+        bool isWaylandMenuBarMenu = false;
 #if (QT_VERSION >= QT_VERSION_CHECK(6,11,0))
         /* For a Workaround that is needed due to a backward incompatible change in Qt 6.11,
            where submenus cannot be moved anymore on Wayland. */
-        if (parentMenu && !tspec_.isX11)
-          isWaylandSubMenu = true;
+        if (!tspec_.isX11)
+        {
+          if (parentMenu)
+            isWaylandSubMenu = true;
+          else if (parentMenubar)
+            isWaylandMenuBarMenu = true;
+        }
 #endif
 
         /* get the available geometry (Qt menus don't
@@ -1071,22 +1077,27 @@ bool Style::eventFilter(QObject *o, QEvent *e)
             else if (parentMenubar)
             {
               QString group = tspec_.merge_menubar_with_toolbar ? "Toolbar" : "MenuBar";
-              if (parentMenubar->mapToGlobal(QPoint(0,0)).y() > g.bottom())
-                dY +=  menuShadow_.at(1) + menuShadow_.at(3) + static_cast<qreal>(getFrameSpec(group).top);
-              else
+              if (isWaylandMenuBarMenu)
                 dY -= static_cast<qreal>(getFrameSpec(group).bottom);
-
-              QRect activeG = parentMenubar->actionGeometry(parentMenubar->activeAction());
-              QPoint activeTopLeft = parentMenubar->mapToGlobal(activeG.topLeft());
-              if (g.right() + 1 > activeTopLeft.x() + activeG.width())
-              { // Qt positions the menu wrongly in this case but we don't add a workaround
-                dX -= menuShadow_.at(2);
-                qreal delta = menuShadow_.at(2)
-                              - static_cast<qreal>(g.right() + 1 - (activeTopLeft.x() + activeG.width()));
-                if (delta > 0)
-                  dX += delta;
+              else
+              {
+                if (parentMenubar->mapToGlobal(QPoint(0,0)).y() > g.bottom())
+                  dY +=  menuShadow_.at(1) + menuShadow_.at(3) + static_cast<qreal>(getFrameSpec(group).top);
                 else
-                  dX -= qMin(menuShadow_.at(0), -delta);
+                  dY -= static_cast<qreal>(getFrameSpec(group).bottom);
+
+                QRect activeG = parentMenubar->actionGeometry(parentMenubar->activeAction());
+                QPoint activeTopLeft = parentMenubar->mapToGlobal(activeG.topLeft());
+                if (g.right() + 1 > activeTopLeft.x() + activeG.width())
+                { // Qt positions the menu wrongly in this case but we don't add a workaround
+                  dX -= menuShadow_.at(2);
+                  qreal delta = menuShadow_.at(2)
+                                - static_cast<qreal>(g.right() + 1 - (activeTopLeft.x() + activeG.width()));
+                  if (delta > 0)
+                    dX += delta;
+                  else
+                    dX -= qMin(menuShadow_.at(0), -delta);
+                }
               }
             }
             else if (!sunkenButton_.isNull()
@@ -1169,22 +1180,27 @@ bool Style::eventFilter(QObject *o, QEvent *e)
             else if (parentMenubar)
             {
               QString group = tspec_.merge_menubar_with_toolbar ? "Toolbar" : "MenuBar";
-              if (parentMenubar->mapToGlobal(QPoint(0,0)).y() > g.bottom()) // menu is above menubar
-                dY +=  menuShadow_.at(1) + menuShadow_.at(3) + static_cast<qreal>(getFrameSpec(group).top);
-              else
+              if (isWaylandMenuBarMenu)
                 dY -= static_cast<qreal>(getFrameSpec(group).bottom);
-
-              QPoint activeTopLeft = parentMenubar->mapToGlobal(parentMenubar->actionGeometry(
-                                                                 parentMenubar->activeAction())
-                                                               .topLeft());
-              if (activeTopLeft.x() > g.left()) // because of the right screen border
+              else
               {
-                dX += menuShadow_.at(0);
-                qreal delta = menuShadow_.at(0) - static_cast<qreal>(activeTopLeft.x() - g.left());
-                if (delta > 0)
-                  dX -= delta;
+                if (parentMenubar->mapToGlobal(QPoint(0,0)).y() > g.bottom()) // menu is above menubar
+                  dY +=  menuShadow_.at(1) + menuShadow_.at(3) + static_cast<qreal>(getFrameSpec(group).top);
                 else
-                  dX += qMin(menuShadow_.at(2), -delta);
+                  dY -= static_cast<qreal>(getFrameSpec(group).bottom);
+
+                QPoint activeTopLeft = parentMenubar->mapToGlobal(parentMenubar->actionGeometry(
+                                                                  parentMenubar->activeAction())
+                                                                 .topLeft());
+                if (activeTopLeft.x() > g.left()) // because of the right screen border
+                {
+                  dX += menuShadow_.at(0);
+                  qreal delta = menuShadow_.at(0) - static_cast<qreal>(activeTopLeft.x() - g.left());
+                  if (delta > 0)
+                    dX -= delta;
+                  else
+                    dX += qMin(menuShadow_.at(2), -delta);
+                }
               }
             }
             else if (!sunkenButton_.isNull()
@@ -1250,7 +1266,9 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         else if (!parentMenu && parentMenubar)
         { // triggered by a menubar, without compositing or shadow
           QString group = tspec_.merge_menubar_with_toolbar ? "Toolbar" : "MenuBar";
-          if (parentMenubar->mapToGlobal(QPoint(0,0)).y() > g.bottom()) // menu is above menubar
+          if (isWaylandMenuBarMenu)
+            dY -= static_cast<qreal>(getFrameSpec(group).bottom);
+          else if (parentMenubar->mapToGlobal(QPoint(0,0)).y() > g.bottom()) // menu is above menubar
             dY += static_cast<qreal>(getFrameSpec(group).top);
           else
             dY -= static_cast<qreal>(getFrameSpec(group).bottom);
@@ -1301,7 +1319,27 @@ bool Style::eventFilter(QObject *o, QEvent *e)
               /* The enum is { none, slide_x, slide_y, flip_x, flip_y, resize_x, resize_y }.
                  Using slide_x instead of flip_x is requied because there is no way to know
                  when a surface goes outside the screen edge and flip_x would result in gaps. */
-              uint constraintAdjustment = 1 | 8;
+              uint constraintAdjustment = 1 | 2;
+              win->setProperty("_q_waylandPopupConstraintAdjustment", constraintAdjustment);
+            }
+          }
+        }
+        else if (isWaylandMenuBarMenu)
+        {
+          if (QWindow *win = w->windowHandle())
+          {
+            if (menu->menuAction() && parentMenubar->activeAction())
+            {
+              auto geom = menu->actionGeometry(menu->menuAction());
+              geom.setSize(parentMenubar->size());
+              auto baseGeom = parentMenubar->actionGeometry(parentMenubar->activeAction());
+              if (menu->isRightToLeft())
+                geom.moveTopRight(baseGeom.topRight());
+              else
+                geom.moveTopLeft(baseGeom.topLeft());
+              win->setProperty("_q_waylandPopupAnchorRect", geom.translated(DX, DY));
+
+              uint constraintAdjustment = 1 | 2;
               win->setProperty("_q_waylandPopupConstraintAdjustment", constraintAdjustment);
             }
           }
