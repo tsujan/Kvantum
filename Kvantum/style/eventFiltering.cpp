@@ -980,6 +980,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         if (movedMenus_.contains(w)) break; // already moved
         /* "magical" condition for a submenu */
         QPoint parentMenuCorner;
+        QMenuBar *parentMenubar = nullptr;
         QMenu *parentMenu = qobject_cast<QMenu*>(QApplication::activePopupWidget());
         /* this is a workaround for KDE global menu */
         if (parentMenu && parentMenu->activeAction() == nullptr) parentMenu = nullptr;
@@ -988,22 +989,39 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           const QWidgetList topLevels = QApplication::topLevelWidgets();
           for (QWidget *topWidget : topLevels)
           {
-            if (topWidget->isVisible()
-                && qobject_cast<QMenu*>(topWidget)
-                && topWidget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu)
-                && qobject_cast<QMenu*>(topWidget)->activeAction())
+            if (!topWidget->isVisible()) continue;
+            if (qobject_cast<QMenu*>(topWidget))
             {
-              parentMenu = qobject_cast<QMenu*>(topWidget);
-              parentMenuCorner = parentMenu->mapToGlobal(QPoint(0,0));
-              break;
+              if (topWidget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu)
+                  && qobject_cast<QMenu*>(topWidget)->activeAction())
+              {
+                parentMenu = qobject_cast<QMenu*>(topWidget);
+                parentMenuCorner = parentMenu->mapToGlobal(QPoint(0,0));
+                break;
+              }
             }
+#if (QT_VERSION >= QT_VERSION_CHECK(6,11,0))
+            /* On Wayland, search for a menubar with an active action inside a window
+               which may not be active itself. The reason is only that some compositors
+               do not activate the window when its menubar item is pressed. */
+            else if (!tspec_.isX11)
+            {
+              if (QMenuBar *mb = qobject_cast<QMenuBar*>(topWidget->childAt(0,0)))
+              {
+                if (mb->activeAction())
+                {
+                  parentMenubar = mb;
+                  break;
+                }
+              }
+            }
+#endif
           }
         }
         else
           parentMenuCorner = parentMenu->mapToGlobal(QPoint(0,0));
-        QMenuBar *parentMenubar = nullptr;
-        if (parentMenu == nullptr)
-        { // search for a menubar with an active action
+        if (parentMenubar == nullptr && parentMenu == nullptr)
+        { // search for a menubar with an active action inside the active main window
           if (QMainWindow *mw = qobject_cast<QMainWindow*>(QApplication::activeWindow()))
           {
             if (QMenuBar *mb = qobject_cast<QMenuBar*>(mw->menuWidget()))
@@ -1014,6 +1032,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           }
         }
 
+        bool isWaylandMenu = false;
         bool isWaylandSubMenu = false;
         bool isWaylandMenuBarMenu = false;
 #if (QT_VERSION >= QT_VERSION_CHECK(6,11,0))
@@ -1110,12 +1129,6 @@ bool Style::eventFilter(QObject *o, QEvent *e)
                          || tBtn->menu() == w
                          || (tBtn->defaultAction() && tBtn->defaultAction()->menu() == w)))
             {
-#if (QT_VERSION >= QT_VERSION_CHECK(6,11,0))
-              if (!tspec_.isX11)
-                dX += menuShadow_.at(0);
-              else
-              {
-#endif
               QPoint wTopLeft = sunkenButton_.data()->mapToGlobal(QPoint(0,0));
               if (wTopLeft.y() >= g.bottom())
                 dY +=  menuShadow_.at(1) + menuShadow_.at(3);
@@ -1129,9 +1142,6 @@ bool Style::eventFilter(QObject *o, QEvent *e)
                 else
                   dX -= qMin(menuShadow_.at(0), -delta);
               }
-#if (QT_VERSION >= QT_VERSION_CHECK(6,11,0))
-              }
-#endif
             }
             else if (!ag.isEmpty())
             {
@@ -1152,6 +1162,9 @@ bool Style::eventFilter(QObject *o, QEvent *e)
               }
               else
               {
+#if (QT_VERSION >= QT_VERSION_CHECK(6,11,0))
+                isWaylandMenu = true;
+#endif
                 QRect pg;
                 if (QWidget *p = w->parentWidget())
                   pg = p->window()->geometry();
@@ -1252,6 +1265,9 @@ bool Style::eventFilter(QObject *o, QEvent *e)
               }
               else // the global position is unknown under Wayland
               {
+#if (QT_VERSION >= QT_VERSION_CHECK(6,11,0))
+                isWaylandMenu = true;
+#endif
                 /* snap to the parent window's top/left side if needed and,
                    as the last resort, consider the cursor position */
                 QRect pg;
@@ -1350,6 +1366,19 @@ bool Style::eventFilter(QObject *o, QEvent *e)
               uint constraintAdjustment = 1 | 2;
               win->setProperty("_q_waylandPopupConstraintAdjustment", constraintAdjustment);
             }
+          }
+        }
+        else if (isWaylandMenu && sc != nullptr && menu->isRightToLeft() && menu->menuAction())
+        { // RTL context menus of Qt 6.11 are terrible
+          if (QWindow *win = w->windowHandle())
+          {
+            auto geom = menu->actionGeometry(menu->menuAction());
+            geom.setSize(QSize(1, 1));
+            geom.moveTopRight(QCursor::pos(sc));
+            win->setProperty("_q_waylandPopupAnchorRect", geom.translated(DX, DY));
+
+            uint constraintAdjustment = 1 | 2;
+            win->setProperty("_q_waylandPopupConstraintAdjustment", constraintAdjustment);
           }
         }
 

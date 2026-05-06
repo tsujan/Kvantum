@@ -1,6 +1,7 @@
 V1.1.7
 ---------
  * Added a workaround for a backward incompatible change in the behavior of submenus of Qt 6.11 on Wayland, because of which `QWidget::move()` doesn't work with them anymore.
+ * Added a (partial) workaround for wrong positions of RTL context menus of Qt 6.11 on Wayland.
  * Enforced "DelayedPopup" on the toolbar button of kvantumpreview (the default has changed to "MenuButtonPopup").
  * Silenced deprecation warnings with Qt ≥ 6.11.
 
