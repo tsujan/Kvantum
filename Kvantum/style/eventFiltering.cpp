@@ -1334,7 +1334,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
               geom.moveTop(baseGeom.top());
               win->setProperty("_q_waylandPopupAnchorRect", geom.translated(DX, DY));
 
-              // auto sideEdge = menu->isRightToLeft() ? Qt::LeftEdge : Qt::RightEdge;
+              // auto sideEdge = w->layoutDirection() == Qt::RightToLeft ? Qt::LeftEdge : Qt::RightEdge;
               // Qt::Edges anchor = Qt::TopEdge | sideEdge;
               // Qt::Edges gravity = Qt::BottomEdge | sideEdge;
               // win->setProperty("_q_waylandPopupAnchor", QVariant::fromValue(anchor));
@@ -1354,10 +1354,9 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           {
             if (menu->menuAction() && parentMenubar->activeAction())
             {
-              auto geom = menu->actionGeometry(menu->menuAction());
-              geom.setSize(parentMenubar->size());
+              auto geom = parentMenubar->rect();
               auto baseGeom = parentMenubar->actionGeometry(parentMenubar->activeAction());
-              if (menu->isRightToLeft())
+              if (w->layoutDirection() == Qt::RightToLeft)
                 geom.moveTopRight(baseGeom.topRight());
               else
                 geom.moveTopLeft(baseGeom.topLeft());
@@ -1368,13 +1367,21 @@ bool Style::eventFilter(QObject *o, QEvent *e)
             }
           }
         }
-        else if (isWaylandMenu && sc != nullptr && menu->isRightToLeft() && menu->menuAction())
+        else if (isWaylandMenu && sc != nullptr && w->layoutDirection() == Qt::RightToLeft
+                 && menu->menuAction())
         { // RTL context menus of Qt 6.11 are terrible
           if (QWindow *win = w->windowHandle())
           {
-            auto geom = menu->actionGeometry(menu->menuAction());
-            geom.setSize(QSize(1, 1));
-            geom.moveTopRight(QCursor::pos(sc));
+            QRect geom(0, 0, 1, 1);
+            QPoint curPos = QCursor::pos(sc);
+            if (curPos.x() == g.left())
+            { // workaround for a weird RTL issue in Qt
+              dX += menuShadow_.at(2) + menuShadow_.at(0);
+              DX = qRound(dX);
+            }
+            if (QWidget *p = w->parentWidget())
+              curPos = p->window()->mapFromGlobal(curPos);
+            geom.moveTopRight(curPos);
             win->setProperty("_q_waylandPopupAnchorRect", geom.translated(DX, DY));
 
             uint constraintAdjustment = 1 | 2;
