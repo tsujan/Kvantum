@@ -978,9 +978,9 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         }*/
 
         if (movedMenus_.contains(w)) break; // already moved
+        QMenuBar *parentMenubar = nullptr;
         /* "magical" condition for a submenu */
         QPoint parentMenuCorner;
-        QMenuBar *parentMenubar = nullptr;
         QMenu *parentMenu = qobject_cast<QMenu*>(QApplication::activePopupWidget());
         /* this is a workaround for KDE global menu */
         if (parentMenu && parentMenu->activeAction() == nullptr) parentMenu = nullptr;
@@ -1008,7 +1008,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
             {
               if (QMenuBar *mb = qobject_cast<QMenuBar*>(topWidget->childAt(0,0)))
               {
-                if (mb->activeAction())
+                if (mb->activeAction() != nullptr &&  mb->activeAction() == menu->menuAction())
                 {
                   parentMenubar = mb;
                   break;
@@ -1026,7 +1026,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           {
             if (QMenuBar *mb = qobject_cast<QMenuBar*>(mw->menuWidget()))
             {
-              if (mb->activeAction())
+              if (mb->activeAction() != nullptr &&  mb->activeAction() == menu->menuAction())
                 parentMenubar = mb;
             }
           }
