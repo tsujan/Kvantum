@@ -163,10 +163,23 @@ Style::Style(bool useDark) : QCommonStyle()
 
   /* this is just for protection against a bad sudo */
   char * _xdg_config_home = getenv("XDG_CONFIG_HOME");
-  if (!_xdg_config_home)
-    xdg_config_home = QString("%1/.config").arg(homeDir);
+
+  char * snap_real_home = getenv("SNAP_REAL_HOME");
+  if (snap_real_home)
+  {
+      xdg_config_home = QString("%1/.config").arg(snap_real_home);
+  }
+  else if (getenv("container") && QString(getenv("container")) == "flatpak")
+  {
+      xdg_config_home = QString("%1/.config").arg(homeDir);
+  }
   else
-    xdg_config_home = QString(_xdg_config_home);
+  {
+      if (!_xdg_config_home)
+          xdg_config_home = QString("%1/.config").arg(homeDir);
+      else
+          xdg_config_home = QString(_xdg_config_home);
+  }
 
   QString theme;
   QString themeChooserFile = QString("%1/Kvantum/kvantum.kvconfig").arg(xdg_config_home);
