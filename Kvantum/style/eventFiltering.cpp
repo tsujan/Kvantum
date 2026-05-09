@@ -990,12 +990,12 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           for (QWidget *topWidget : topLevels)
           {
             if (!topWidget->isVisible()) continue;
-            if (qobject_cast<QMenu*>(topWidget))
+            if (auto topMenu = qobject_cast<QMenu*>(topWidget))
             {
               if (topWidget->testAttribute(Qt::WA_X11NetWmWindowTypeMenu)
-                  && qobject_cast<QMenu*>(topWidget)->activeAction())
+                  && topMenu->activeAction())
               {
-                parentMenu = qobject_cast<QMenu*>(topWidget);
+                parentMenu = topMenu;
                 parentMenuCorner = parentMenu->mapToGlobal(QPoint(0,0));
                 break;
               }
@@ -1008,7 +1008,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
             {
               if (QMenuBar *mb = qobject_cast<QMenuBar*>(topWidget->childAt(0,0)))
               {
-                if (mb->activeAction() != nullptr &&  mb->activeAction() == menu->menuAction())
+                if (mb->activeAction() != nullptr && mb->activeAction()->menu() == menu)
                 {
                   parentMenubar = mb;
                   break;
@@ -1026,7 +1026,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           {
             if (QMenuBar *mb = qobject_cast<QMenuBar*>(mw->menuWidget()))
             {
-              if (mb->activeAction() != nullptr &&  mb->activeAction() == menu->menuAction())
+              if (mb->activeAction() != nullptr && mb->activeAction()->menu() == menu)
                 parentMenubar = mb;
             }
           }
@@ -1354,12 +1354,8 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           {
             if (menu->menuAction() && parentMenubar->activeAction())
             {
-              auto geom = parentMenubar->rect();
-              auto baseGeom = parentMenubar->actionGeometry(parentMenubar->activeAction());
-              if (w->layoutDirection() == Qt::RightToLeft)
-                geom.moveTopRight(baseGeom.topRight());
-              else
-                geom.moveTopLeft(baseGeom.topLeft());
+              auto geom = parentMenubar->actionGeometry(parentMenubar->activeAction());
+              geom.setSize(geom.size().expandedTo(QSize(1, 1)));
               win->setProperty("_q_waylandPopupAnchorRect", geom.translated(DX, DY));
 
               uint constraintAdjustment = 1 | 2;

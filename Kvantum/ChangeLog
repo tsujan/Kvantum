@@ -1,3 +1,7 @@
+V1.1.8
+---------
+ * Covered a rare edge case of finding the parent menubar of a menu.
+
 V1.1.7
 ---------
  * Added a workaround for a backward incompatible change in the behavior of submenus of Qt 6.11 on Wayland, because of which `QWidget::move()` doesn't work with them anymore.
