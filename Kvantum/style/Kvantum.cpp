@@ -3319,7 +3319,7 @@ void Style::drawPrimitive(QStyle::PrimitiveElement element,
       if (!widget // it's NULL with QML
           || sa
           || widget->inherits("QWellArray") // color dialog's color rects
-          || widget->inherits("QComboBoxPrivateContainer")) // frame for combo popups
+          || widget->inherits("QComboBoxPrivateContainer")) // frame for combo popups (called by drawControl(CE_ShapedFrame,...)
       {
         bool pcmanfmInactiveView(false);
         if (widget)
@@ -10997,7 +10997,7 @@ void Style::drawControl(QStyle::ControlElement element,
             painter->restore();
           }
           else
-            QCommonStyle::drawControl(element,option,painter,widget);
+            QCommonStyle::drawControl(element,option,painter,widget); // calls drawPrimitive(PE_Frame,...)
         }
       }
 
