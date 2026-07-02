@@ -1413,7 +1413,8 @@ the Ctrl key before pressing the button.</source>
         <location filename="../../kvantummanager.ui" line="2135"/>
         <source>Each executable name can be either a
 simple string or a regular expression.</source>
-        <translation type="unfinished"></translation>
+        <translation>每个可执行名称可以是
+简单字符串或正则表达式。</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="2139"/>
