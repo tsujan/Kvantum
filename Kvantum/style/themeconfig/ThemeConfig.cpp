@@ -589,7 +589,9 @@ theme_spec ThemeConfig::getCompositeSpec()
         compositing = true;
     }
   }
-  else if (QString::compare(QGuiApplication::platformName(), "wayland", Qt::CaseInsensitive) == 0)
+  else if (QString::compare(QGuiApplication::platformName(), "wayland", Qt::CaseInsensitive) == 0
+           /* KWin runs its internal windows on its own QPA plugin */
+           || QString::compare(QGuiApplication::platformName(), "wayland-org.kde.kwin.qpa", Qt::CaseInsensitive) == 0)
   {
     /* Wayland is always composited.
        NOTE: Even under Linux, there's at least one situation, where the lack of x11
