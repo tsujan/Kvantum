@@ -23,9 +23,11 @@
 #include <QWindow>
 
 #ifdef NO_KF
+#ifndef NO_X11
 #include <QApplication>
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
+#endif
 #else
 #include <KWindowEffects>
 #endif
@@ -37,6 +39,7 @@ BlurHelper::BlurHelper (QObject* parent, QList<qreal> menuS, QList<qreal> toolti
                         bool onlyActiveWindow) : QObject (parent)
 {
 #ifdef NO_KF
+#ifndef NO_X11
   isX11_ = (QString::compare(QGuiApplication::platformName(), "xcb", Qt::CaseInsensitive) == 0);
   if (isX11_)
   {
@@ -47,6 +50,7 @@ BlurHelper::BlurHelper (QObject* parent, QList<qreal> menuS, QList<qreal> toolti
   }
   else
     atom_blur_ = None;
+#endif
 #endif
 
   contrast_ = qBound (static_cast<qreal>(0), contrast, static_cast<qreal>(2));
@@ -240,11 +244,13 @@ QRegion BlurHelper::blurRegion (QWidget* widget) const
 
   qreal dpr = 1;
 #ifdef NO_KF
+#ifndef NO_X11
   if (isX11_)
   {
     QWindow *win = widget->window()->windowHandle();
     dpr = win ? win->devicePixelRatio() : qApp->devicePixelRatio();
   }
+#endif
 #endif
 
   /* blurring may not be suitable when the available
@@ -327,8 +333,12 @@ QRegion BlurHelper::blurRegion (QWidget* widget) const
 void BlurHelper::update (QWidget* widget) const
 {
 #ifdef NO_KF
+#ifdef NO_X11
+ return;
+#else
   if (!isX11_)
     return;
+#endif
 #endif
 
   QWindow *win = widget->windowHandle();
@@ -341,6 +351,7 @@ void BlurHelper::update (QWidget* widget) const
   else
   {
 #ifdef NO_KF
+#ifndef NO_X11
     if (!widget->internalWinId())
       return;
     Display *display = nullptr;
@@ -357,6 +368,7 @@ void BlurHelper::update (QWidget* widget) const
                      atom_blur_, XA_CARDINAL, 32, PropModeReplace,
                      reinterpret_cast<const unsigned char*>(data.constData()),
                      data.size());
+#endif
 #else
     KWindowEffects::enableBlurBehind (win, true, region);
     /* NOTE: The contrast effect isn't used with menus and tooltips
@@ -380,6 +392,10 @@ void BlurHelper::update (QWidget* widget) const
 void BlurHelper::clear (QWidget* widget) const
 {
 #ifdef NO_KF
+#ifdef NO_X11
+  return;
+#endif
+#ifndef NO_X11
   if (!isX11_)
     return;
   Display *display = nullptr;
@@ -387,6 +403,7 @@ void BlurHelper::clear (QWidget* widget) const
     display = x11NativeInterfce->display();
   if (display && widget->internalWinId())
     XDeleteProperty (display, widget->internalWinId(), atom_blur_);
+#endif
 #else
   QWindow *win = widget->windowHandle();
   if (win != nullptr)

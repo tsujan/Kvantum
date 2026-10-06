@@ -10,19 +10,22 @@ if(NOT ENABLE_QT4)
     if(NOT WITHOUT_KF)
       find_package(KF6WindowSystem "${KF6_MINIMUM_VERSION}" REQUIRED)
     endif()
+    if(NOT WITHOUT_X11)
+      find_package(X11 REQUIRED)
+    endif()
   else()
     set(QT_VERSION_MAJOR 5)
+    find_package(X11 REQUIRED)
     find_package(Qt5 "${QT5_MINIMUM_VERSION}" REQUIRED COMPONENTS Core Gui Widgets Svg X11Extras)
   endif()
 else()
   set(QT_VERSION_MAJOR 4)
   find_package(Qt4 4.8.7 REQUIRED)
+  find_package(X11 REQUIRED)
 
   include(${QT_USE_FILE})
   add_definitions(${QT_DEFINITIONS})
 endif()
-
-find_package(X11 REQUIRED)
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
@@ -36,10 +39,16 @@ if(QT_VERSION_MAJOR EQUAL 6)
                   ERROR_QUIET OUTPUT_STRIP_TRAILING_WHITESPACE)
   set(KVANTUM_STYLE_DIR "${_Qt6_PLUGIN_INSTALL_DIR}/styles/")
 
-  include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}
-                      ${Qt6Core_INCLUDE_DIRS} ${Qt6Widgets_INCLUDE_DIRS}
-                      ${Qt6Gui_INCLUDE_DIRS} ${Qt6Svg_INCLUDE_DIRS}
-                      ${X11_INCLUDE_DIR})
+  if(WITHOUT_X11)
+    include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}
+                        ${Qt6Core_INCLUDE_DIRS} ${Qt6Widgets_INCLUDE_DIRS}
+                        ${Qt6Gui_INCLUDE_DIRS} ${Qt6Svg_INCLUDE_DIRS})
+  else()
+    include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}
+                        ${Qt6Core_INCLUDE_DIRS} ${Qt6Widgets_INCLUDE_DIRS}
+                        ${Qt6Gui_INCLUDE_DIRS} ${Qt6Svg_INCLUDE_DIRS}
+                        ${X11_INCLUDE_DIR})
+  endif()
 elseif(QT_VERSION_MAJOR EQUAL 5)
   get_target_property(REAL_QMAKE_EXECUTABLE ${Qt5Core_QMAKE_EXECUTABLE}
                       IMPORTED_LOCATION)
@@ -66,6 +75,10 @@ add_definitions(-DDATADIR="${CMAKE_INSTALL_PREFIX}/share")
 
 if(WITHOUT_KF)
   add_definitions(-DNO_KF)
+endif()
+
+if(WITHOUT_X11)
+  add_definitions(-DNO_X11)
 endif()
 
 if(QT_VERSION_MAJOR EQUAL 6)
@@ -118,19 +131,34 @@ else()
 endif()
 
 if(QT_VERSION_MAJOR EQUAL 6)
-  if(WITHOUT_KF)
-    target_link_libraries(kvantum ${Qt6Core_LIBRARIES}
-                                  ${Qt6Gui_LIBRARIES}
-                                  ${Qt6Widgets_LIBRARIES}
-                                  ${Qt6Svg_LIBRARIES}
-                                  ${X11_LIBRARIES})
+  if(WITHOUT_X11)
+    if(WITHOUT_KF)
+      target_link_libraries(kvantum ${Qt6Core_LIBRARIES}
+                                    ${Qt6Gui_LIBRARIES}
+                                    ${Qt6Widgets_LIBRARIES}
+                                    ${Qt6Svg_LIBRARIES})
+    else()
+      target_link_libraries(kvantum ${Qt6Core_LIBRARIES}
+                                    ${Qt6Gui_LIBRARIES}
+                                    ${Qt6Widgets_LIBRARIES}
+                                    ${Qt6Svg_LIBRARIES}
+                                    KF6::WindowSystem)
+    endif()
   else()
-    target_link_libraries(kvantum ${Qt6Core_LIBRARIES}
-                                  ${Qt6Gui_LIBRARIES}
-                                  ${Qt6Widgets_LIBRARIES}
-                                  ${Qt6Svg_LIBRARIES}
-                                  ${X11_LIBRARIES}
-                                  KF6::WindowSystem)
+    if(WITHOUT_KF)
+      target_link_libraries(kvantum ${Qt6Core_LIBRARIES}
+                                    ${Qt6Gui_LIBRARIES}
+                                    ${Qt6Widgets_LIBRARIES}
+                                    ${Qt6Svg_LIBRARIES}
+                                    ${X11_LIBRARIES})
+    else()
+      target_link_libraries(kvantum ${Qt6Core_LIBRARIES}
+                                    ${Qt6Gui_LIBRARIES}
+                                    ${Qt6Widgets_LIBRARIES}
+                                    ${Qt6Svg_LIBRARIES}
+                                    ${X11_LIBRARIES}
+                                    KF6::WindowSystem)
+    endif()
   endif()
 elseif(QT_VERSION_MAJOR EQUAL 5)
   target_link_libraries(kvantum ${Qt5Core_LIBRARIES}

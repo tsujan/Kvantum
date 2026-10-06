@@ -20,9 +20,11 @@
 #include <QApplication>
 #include "ThemeConfig.h"
 
+#ifndef NO_X11
 #if defined Q_WS_X11 || defined Q_OS_LINUX || defined Q_OS_FREEBSD || defined Q_OS_OPENBSD || defined Q_OS_NETBSD || defined Q_OS_HURD
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
+#endif
 #endif
 
 namespace Kvantum {
@@ -579,6 +581,7 @@ theme_spec ThemeConfig::getCompositeSpec()
 {
   bool compositing(false);
 
+#ifndef NO_X11
 #if defined Q_WS_X11 || defined Q_OS_LINUX || defined Q_OS_FREEBSD || defined Q_OS_OPENBSD || defined Q_OS_NETBSD || defined Q_OS_HURD
   if (isX11_)
   {
@@ -597,6 +600,10 @@ theme_spec ThemeConfig::getCompositeSpec()
              when the platform name isn't set to "wayland". */
     compositing = true;
   }
+#endif
+#else
+  if (QString::compare(QGuiApplication::platformName(), "wayland", Qt::CaseInsensitive) == 0)
+    compositing = true;
 #endif
 
   /* no blurring or window translucency without compositing */

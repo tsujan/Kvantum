@@ -3,6 +3,7 @@ V1.1.9
  * Check genuine mouse events before window dragging.
  * Workaround for a Qt bug that may report a highlighted action in a menu while there is none.
  * Removed the workaround for RTL menus of Qt 6.11 (the problems seem to be fixed in Qt 6.11.2).
+ * Added an option for compiling Kvantum without X11 dependency. If it is enabled, Kvantum will still work on X11 but without compositing. It is only for Qt6.
 
 V1.1.8
 ---------

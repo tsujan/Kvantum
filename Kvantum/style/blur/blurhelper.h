@@ -28,7 +28,9 @@
 #include <QRegion>
 
 #ifdef NO_KF
+#ifndef NO_X11
 #include <X11/Xdefs.h>
+#endif
 #endif
 
 namespace Kvantum {
@@ -123,9 +125,11 @@ class BlurHelper: public QObject
     bool onlyActiveWindow_;
 
 #ifdef NO_KF
+#ifndef NO_X11
     /* The required atom. */
     Atom atom_blur_;
     bool isX11_;
+#endif
 #endif
 };
 }

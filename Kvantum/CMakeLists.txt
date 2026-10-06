@@ -10,6 +10,7 @@ endif()
 option(ENABLE_QT4 "Building Qt4 plugin." OFF)
 option(ENABLE_QT5 "Building Qt5 plugin." OFF)
 option(WITHOUT_KF "Compiling without KDE Frameworks..." OFF)
+option(WITHOUT_X11 "Compiling without X11..." OFF)
 
 add_subdirectory(style)
 if(NOT ENABLE_QT4)

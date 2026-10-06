@@ -21,7 +21,7 @@ Table of contents
        - [LXQt](#in-lxqt)
        - [Other DEs](#in-other-des)
    - [Using other themes](#using-other-themes)
-   - [Blur effect (KWin)](#blur-effect-kwin)
+   - [Blur effect (KWin and some Wayland compositors)](#blur-effect-kwin-and-some-wayland-compositors)
    - [Notes for theme makers](#notes-for-theme-makers)
 - [GTK](#gtk)
 
@@ -44,7 +44,7 @@ If you want to compile Kvantum from its source, install the following packages:
  * `gcc` (or gcc-multilib for multilib systems)
  * `libx11` and `libxext` (for X11)
  * `qt6-base` and `qt6-svg` (for Qt6)
- * `kwindowsystem`
+ * `kwindowsystem` (for blur effect)
  * `qt6-tools` (for localization if you need it)
 
 To install Kvantum directly, you have the choice to install the stable package **or**, preferably, the git package. Respectively, execute:
@@ -64,7 +64,7 @@ If you want to compile Kvantum from its source, install these packages:
  * `g++`
  * `libx11-dev` and `libxext-dev` (for X11)
  * `qt6-base-dev` and `qt6-svg-dev` (for Qt6)
- * `libkf6windowsystem-dev`
+ * `libkf6windowsystem-dev` (for blur effect)
  * `qt6-base-dev-tools` (for localization if you need it)
 
 In Ubuntu, you can install Kvantum directly with:
@@ -150,9 +150,11 @@ Open a terminal inside this folder and issue the following commands:
 
 In some distros, you may need to be more explicit and use `cmake .. -DCMAKE_INSTALL_PREFIX=/usr` for installing Kvantum under `/usr`, in contrast to `/usr/local`. The latter place may not be good in Linux distros and could cause troubles later.
 
-NOTE 1. Kvantum needs `kwindowsystem` only to support some KWin effects (like blur effect). `kwindowsystem` is a small package which does not depend on KDE itself. However, if you do not need those effects, you could use `cmake .. -DWITHOUT_KF=ON`.
+NOTE 1. Kvantum needs `kwindowsystem` only to support the blur effect (under KWin and some Wayland compositors). `kwindowsystem` is a small package which does not depend on KDE itself. However, if you do not need blurring, you could use `cmake .. -DWITHOUT_KF=ON`.
 
-NOTE 2: You can also compile Kvantum's Qt5 plugin by using `cmake .. -DENABLE_QT5=ON`, but you need `qt5-x11extras` (or whatever the name of its dev package is in your distro) in addition to the Qt5 counterparts of the required packages.
+NOTE 2. Kvantum can be compiled without X11 dependency by using `cmake .. -DWITHOUT_X11=ON`. If this option is enabled, Kvantum will still work on X11 but without compositing. By default, Kvantum is compiled with X11 dependency.
+
+NOTE 3. You can also compile Kvantum's Qt5 plugin by using `cmake .. -DENABLE_QT5=ON`, but you need `qt5-x11extras` (or whatever the name of its dev package is in your distro) in addition to the Qt5 counterparts of the required packages.
 
 ## Installation
 
@@ -203,13 +205,13 @@ To select or install (as user) Kvantum themes, use *Kvantum Manager*, which is a
 
 For the running parts of KDE/LXQt to recognize the new Kvantum theme, the easiest way is logging out and in again.
 
-### Blur effect (KWin)
+### Blur effect (KWin and some Wayland compositors)
 
-The blur effect of any compositor can be used with Kvantum when its active theme has translucent backgrounds. However, Kvantum can control KWin's blur effect with translucent menus and tooltips as well as explicitly translucent windows (like those of QTerminal, Konsole or LXQt Panel). Enabling blur options in *Kvantum Manager* has effect only when KWin's blur effect is enabled; otherwise, there will be no blurring or another compositor will control how translucent backgrounds are blurred.
+Kvantum can control the blur effect of KWin and some Wayland compositors (like Niri). *Kvantum Manager* has blur options for translucent windows, menus and tooltips as well as explicitly translucent windows (like LXQt Panel).
 
-In the case of compositors other than KWin, it is preferable that menus and tooltips have neither shadow nor blurring because those compositors cannot distinguish the shadows which Kvantum gives to menus and tooltips. But, if disabling menu/tooltip shadow and blurring is not possible with them, *Kvantum Manager → Configure Active Theme → Compositing & General Look → Shadowless menus and tooltips* could be checked as a workaround.
+In the case of compositors which impose their own blur effect and menu/tooltip shadows, it is preferable to exclude menus/tooltips in their settings, because those compositors cannot distinguish the shadows which Kvantum may give to menus/tooltips. But, if they do not have such settings, *Kvantum Manager → Configure Active Theme → Compositing & General Look → Shadowless menus and tooltips* could be checked as a workaround.
 
-Under X11, make sure that you never have two compositors running together! KWin is highly recommended, whether with KDE or with LXQt. It supports both X11 and Wayland and has a decent blur effect.
+Under X11, make sure that you never have two compositors running together!
 
 ### Notes for theme makers
 
