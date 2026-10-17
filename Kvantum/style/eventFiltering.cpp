@@ -293,7 +293,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
                                                        ? -1 : state,
                                                      isInactive, lspec),
                                          cbtn->isChecked() ? QIcon::On : QIcon::Off,
-                                         cbtn->iconSize()));
+                                         cbtn->iconSize(), w));
 
         int textflags = Qt::TextShowMnemonic;
         if (!styleHint(QStyle::SH_UnderlineShortcut, &option, cbtn))

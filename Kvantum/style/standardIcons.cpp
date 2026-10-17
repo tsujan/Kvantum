@@ -122,7 +122,7 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
             QPixmap px = getPixmapFromIcon(icn,
                                            (option ? (option->state & State_Enabled) : widget->isEnabled())
                                              ? Selected : DisabledSelected,
-                                           QIcon::On, QSize(s,s));
+                                           QIcon::On, QSize(s,s), widget);
             icn = QIcon(px);
           }
         }

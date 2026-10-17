@@ -286,7 +286,8 @@ class Style : public QCommonStyle {
     QPixmap getPixmapFromIcon(const QIcon &icon,
                               const KvIconMode iconmode,
                               const QIcon::State iconstate,
-                              QSize iconSize) const;
+                              QSize iconSize,
+                              const QWidget *w) const;
 
     /* Returns a pixmap tinted by the highlight color. */
     QPixmap tintedPixmap(const QStyleOption *option,
