@@ -113,7 +113,7 @@ QIcon Style::standardIcon(QStyle::StandardPixmap standardIcon,
       if (!icn.isNull())
       {
         if (option || widget)
-        { // also correct the color of the symbolic clear icon  (-> CE_ToolBar)
+        { // also correct the color of the symbolic clear icon (-> CE_ToolBar)
           if (enoughContrast(standardPalette().color(QPalette::Active,QPalette::Text),
                              option ? option->palette.color(QPalette::Active,QPalette::Text)
                                     : widget->palette().color(QPalette::Active,QPalette::Text)))
