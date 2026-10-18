@@ -15056,7 +15056,7 @@ QSize Style::sizeCalculated(const QFont &font,
                             const label_spec &lspec, // label spec
                             const size_spec &sspec, // size spec
                             const QString &text,
-                            const QSize iconSize,
+                            const QSize &iconSize,
                             const Qt::ToolButtonStyle tialign // text-icon alignment
                            ) const
 {
@@ -16912,7 +16912,7 @@ void Style::drawItemPixmap(QPainter *painter, const QRect &rect,
 QPixmap Style::getPixmapFromIcon(const QIcon &icon,
                                  const KvIconMode iconmode,
                                  const QIcon::State iconstate,
-                                 const QSize iconSize,
+                                 const QSize &iconSize,
                                  const QWidget *w,
                                  const QPainter *p) const
 {
@@ -16928,8 +16928,7 @@ QPixmap Style::getPixmapFromIcon(const QIcon &icon,
     icnMode = QIcon::Selected;
 
   /* The window's device pixel ratio is especially needed with multi-screen setups
-     on Wayland. Without it, the maximum ratio of all screens would be used and the
-     resulting pixmap would be that of the icon corresponding to the maximum scaling. */
+     on Wayland. Without it, the maximum ratio of all screens would be used. */
   QWindow *win = w ? w->window()->windowHandle() : nullptr;
   qreal pixelRatio = win ? win->devicePixelRatio()
                          : p && p->device() ? p->device()->devicePixelRatio() // QML

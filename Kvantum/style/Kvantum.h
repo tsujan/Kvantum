@@ -286,7 +286,7 @@ class Style : public QCommonStyle {
     QPixmap getPixmapFromIcon(const QIcon &icon,
                               const KvIconMode iconmode,
                               const QIcon::State iconstate,
-                              const QSize iconSize,
+                              const QSize &iconSize,
                               const QWidget *w,
                               const QPainter *p = nullptr) const;
 
@@ -308,7 +308,7 @@ class Style : public QCommonStyle {
                          const label_spec &lspec,
                          const size_spec &sspec,
                          const QString &text,
-                         const QSize iconSize,
+                         const QSize &iconSize,
                          const Qt::ToolButtonStyle tialign = Qt::ToolButtonTextBesideIcon // text-icon alignment
                         ) const;
 
