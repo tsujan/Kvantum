@@ -1,5 +1,5 @@
 /*
- * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014-2024 <tsujan2000@gmail.com>
+ * Copyright (C) Pedram Pourang (aka Tsu Jan) 2014-2026 <tsujan2000@gmail.com>
  *
  * Kvantum is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -345,7 +345,7 @@ void BlurHelper::update (QWidget* widget) const
   if (win == nullptr)
     return;
 
-  const QRegion region (blurRegion (widget));
+  QRegion region (blurRegion (widget));
   if (region.isEmpty())
     clear (widget);
   else
@@ -370,6 +370,11 @@ void BlurHelper::update (QWidget* widget) const
                      data.size());
 #endif
 #else
+    /* NOTE: This is a workaround for a regression that started with KWin 6.5
+             and rarely resulted in artifacts on resizing, especially on tiling. */
+    if (region == widget->rect())
+      region = QRegion();
+
     KWindowEffects::enableBlurBehind (win, true, region);
     /* NOTE: The contrast effect isn't used with menus and tooltips
              because their borders may be anti-aliased. */
