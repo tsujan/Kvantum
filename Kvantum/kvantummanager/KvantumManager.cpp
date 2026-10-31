@@ -1779,10 +1779,10 @@ void KvantumManager::openUserConfigFile (const QString& /*link*/)
 {
     if (userConfigFile_.isEmpty()) return;
     QUrl url (userConfigFile_);
-    /* QDesktopServices::openUrl() may resort to "xdg-open", which isn't
-       the best choice. "gio" is always reliable, so we check it first. */
+    /* "gio" is always reliable, so we check it first. */
     if (!QProcess::startDetached ("gio", QStringList() << "open" << url.toString()))
-        QDesktopServices::openUrl (url);
+        QDesktopServices::openUrl (url.scheme().isEmpty() ? QUrl::fromLocalFile(userConfigFile_) // workaround for Qt 6.12
+                                                          : url);
 }
 /*************************/
 /* Gets the comment and sets the state of the "deleteTheme" button. */

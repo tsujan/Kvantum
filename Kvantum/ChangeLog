@@ -6,6 +6,7 @@ V1.1.9
  * Added an option for compiling Kvantum without X11 dependency. If it is enabled, Kvantum will still work on X11 but without compositing. It is only for Qt6.
  * Consider the window's device pixel ratio when getting pixmap from icon (in `getPixmapFromIcon()`).
  * Added a workaround for a regression that started with the blur effect of KWin 6.5 and rarely resulted in artifacts on resizing, especially on tiling.
+ * Added a workaround to Kvantum Manager for local URLs in Qt 6.12, which could not open them without a scheme.
 
 V1.1.8
 ---------
