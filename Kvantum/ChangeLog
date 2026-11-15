@@ -1,3 +1,7 @@
+V1.1.10
+---------
+ * Applied LibreOffice's "SC_SpinBoxEditField" workaround to QML too.
+
 V1.1.9
 ---------
  * Check genuine mouse events before window dragging.

@@ -11217,10 +11217,11 @@ void Style::drawComplexControl(QStyle::ComplexControl control,
         if (/*isLibreoffice_
             ||*/ ((!widget || isKisSlider1) && opt->frame && (opt->subControls & SC_SpinBoxFrame)))
         {
-          if (isLibreoffice_ && widget == nullptr)
+          if (/*isLibreoffice_ && */widget == nullptr)
           {
             editRect.adjust(-3,0,0,0); // see subControlRect() -> CC_SpinBox
-            o.state = (o.state & ~QStyle::State_HasFocus); // LibreOffice doesn't allow a correct focused state
+            if (isLibreoffice_) // LibreOffice doesn't allow a correct focused state
+              o.state = (o.state & ~QStyle::State_HasFocus);
           }
           o.rect = editRect;
           drawPrimitive(PE_PanelLineEdit,&o,painter,widget);
@@ -16100,7 +16101,7 @@ QRect Style::subControlRect(QStyle::ComplexControl control,
           /* LibreOffice sets a too small left margin for the text and doesn't
              consult SE_LineEditContents. As a workaround, we move the field to
              right here but draw it correctly in drawComplexControl() -> CC_SpinBox. */
-          if (isLibreoffice_ && widget == nullptr)
+          if (/*isLibreoffice_ && */widget == nullptr)
             margin = 3;
           return QRect(x + margin,
                        y,
