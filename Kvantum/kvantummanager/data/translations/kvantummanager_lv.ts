@@ -152,7 +152,7 @@ PCManFM-qt and then, stopping and starting Desktop
 with LXQt Session Settings.</source>
         <translation>Sapludināt PCManFM-qt sānu rūti ar apkārtni.
 
-Zem LXQt tam nepieciešams atteikties un pieteikties vai aizvērt
+Zem LXQt tam nepieciešams izrakstīties un pieteikties vai aizvērt
 PCManFM-qt un pēc tam ar LXQt sesijas iestatījumiem
 apturēt un palaist darbvirsmu.</translation>
     </message>
@@ -175,7 +175,7 @@ PCManFM-qt and then, stopping and starting Desktop
 with LXQt Session Settings.</source>
         <translation>Sapludināt PCManFM-qt skatu ar apkārtni.
 
-Zem LXQt tam nepieciešams atteikties un pieteikties vai aizvērt
+Zem LXQt tam nepieciešams izrakstīties un pieteikties vai aizvērt
 PCManFM-qt un pēc tam ar LXQt sesijas iestatījumiem
 apturēt un palaist darbvirsmu.</translation>
     </message>
@@ -236,12 +236,12 @@ ar izcelšanas krāsu!</translation>
         <source>Do not draw any background for (KDE) menu titles.
 (Needs Logging out and in for Plasma menus.)</source>
         <translation>Nezīmēt (KDE) izvēļņu virsrakstu fonu.
-(Plasma izvēlnēm jāatsakās un jāpiesakās.)</translation>
+(Plasma izvēlnēm jāizrakstās un jāpiesakās.)</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="585"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do not draw any background for (KDE) menu titles?&lt;/p&gt;&lt;p&gt;Menu titles are like menu separators but with icon and text.&lt;/p&gt;&lt;p&gt;This needs Logging out and in for KDE Plasma menus. For LXQt panel, a panel restart with &lt;span style=&quot; font-style:italic;&quot;&gt;Session Settings &lt;/span&gt;is enough.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Vai nezīmēt (KDE) izvēļņu virsrakstu fonu?&lt;/p&gt;&lt;p&gt;Izvēļņu virsraksti ir kā izvēļņu atdalītāji, bet ar ikonu un tekstu.&lt;/p&gt;&lt;p&gt;KDE Plasma izvēlnēm tam jāatsakās un jāpiesakās. LXQt panelim pietiek ar paneļa pārstartēšanu, izmantojot &lt;span style=&quot; font-style:italic;&quot;&gt;Sesijas iestatījumi &lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Vai nezīmēt (KDE) izvēļņu virsrakstu fonu?&lt;/p&gt;&lt;p&gt;Izvēļņu virsraksti ir kā izvēļņu atdalītāji, bet ar ikonu un tekstu.&lt;/p&gt;&lt;p&gt;KDE Plasma izvēlnēm tam jāizrakstās un jāpiesakās. LXQt panelim pietiek ar paneļa pārstartēšanu, izmantojot &lt;span style=&quot; font-style:italic;&quot;&gt;Sesijas iestatījumi &lt;/span&gt;.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="588"/>
@@ -356,7 +356,7 @@ Dažādi → Ievērot pašreizējo darbvirsmas vidi, ja iespējams</translation>
     <message>
         <location filename="../../kvantummanager.ui" line="227"/>
         <source>&lt;br&gt;&lt;br&gt;Since &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; is independent of all desktop environments, you first need to &lt;i&gt;activate&lt;/i&gt; it with a Qt platform integration program. KDE and LXQt provide simple tools for changing the active Qt style plugin. With other platforms, you need a Qt configuration tool.&lt;br/&gt;&lt;br/&gt;Under KDE, also select and apply the color scheme of this theme because some KDE applications may get their colors directly from the KDE color scheme.&lt;br/&gt;&lt;br/&gt;Running applications will get the new theme after being closed and reopened. Logging out and in would be good for all KDE/LXQt parts to see it completely.</source>
-        <translation>&lt;br&gt;&lt;br&gt;Tā kā &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; nav atkarīgs no darbvirsmas vidēm, vispirms tas jā&lt;i&gt;aktivizē&lt;/i&gt; ar Qt platformas integrācijas programmu. KDE un LXQt nodrošina vienkāršus rīkus aktīvā Qt stila spraudņa maiņai. Citās platformās nepieciešams Qt konfigurācijas rīks.&lt;br/&gt;&lt;br/&gt;KDE vidē izvēlieties un lietojiet arī šī motīva krāsu shēmu, jo dažas KDE lietotnes var iegūt krāsas tieši no KDE krāsu shēmas.&lt;br/&gt;&lt;br/&gt;Darbojošās lietotnes jauno motīvu iegūs pēc aizvēršanas un atkārtotas atvēršanas. Lai to pilnībā redzētu visas KDE/LXQt daļas, ieteicams atteikties un pieteikties vēlreiz.</translation>
+        <translation>&lt;br&gt;&lt;br&gt;Tā kā &lt;b&gt;&lt;i&gt;Kvantum&lt;/i&gt;&lt;/b&gt; nav atkarīgs no darbvirsmas vidēm, vispirms tas jā&lt;i&gt;aktivizē&lt;/i&gt; ar Qt platformas integrācijas programmu. KDE un LXQt nodrošina vienkāršus rīkus aktīvā Qt stila spraudņa maiņai. Citās platformās nepieciešams Qt konfigurācijas rīks.&lt;br/&gt;&lt;br/&gt;KDE vidē izvēlieties un lietojiet arī šī motīva krāsu shēmu, jo dažas KDE lietotnes var iegūt krāsas tieši no KDE krāsu shēmas.&lt;br/&gt;&lt;br/&gt;Darbojošās lietotnes jauno motīvu iegūs pēc aizvēršanas un atkārtotas atvēršanas. Lai to pilnībā redzētu visas KDE/LXQt daļas, ieteicams izrakstīties un pieteikties vēlreiz.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="531"/>
@@ -460,7 +460,7 @@ or through logging out and in again.</source>
 Vērtības, kas mazākas par 16, nozīmē noklusējuma izvēlnes ikonu izmēru.
 
 LXQt panelis jāpārstartē vai nu ar „Sesijas iestatījumi”,
-vai atsakoties un piesakoties vēlreiz.</translation>
+vai izrakstoties un piesakoties vēlreiz.</translation>
     </message>
     <message>
         <location filename="../../kvantummanager.ui" line="792"/>
